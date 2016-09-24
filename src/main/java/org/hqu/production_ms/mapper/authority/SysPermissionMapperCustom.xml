@@ -4,7 +4,7 @@
   
   
   <!-- 根据用户id查询url -->
-  <select id="findPermissionListByUserId" parameterType="string" resultType="org.hqu.production_ms.domain.SysPermission">
+  <select id="findPermissionListByUserId" parameterType="string" resultType="org.hqu.production_ms.domain.authority.SysPermission">
 	  SELECT 
 	  * 
 	FROM
@@ -24,7 +24,7 @@
   </select>
   
    <!-- 根据用户id查询菜单 -->
-  <select id="findMenuListByUserId"  parameterType="string" resultType="org.hqu.production_ms.domain.SysPermission">
+  <select id="findMenuListByUserId"  parameterType="string" resultType="org.hqu.production_ms.domain.authority.SysPermission">
   		SELECT 
 	  * 
 	FROM

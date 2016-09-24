@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.authority.SysUserRoleMapper" >
-  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.SysUserRole" >
+  <resultMap id="BaseResultMap" type="sysUserRole" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="sys_user_id" property="sysUserId" jdbcType="VARCHAR" />
     <result column="sys_role_id" property="sysRoleId" jdbcType="VARCHAR" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     id, sys_user_id, sys_role_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.SysUserRoleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="sysUserRoleExample" >
     select
     <if test="distinct" >
       distinct
@@ -91,19 +91,19 @@
     delete from sys_user_role
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.SysUserRoleExample" >
+  <delete id="deleteByExample" parameterType="sysUserRoleExample" >
     delete from sys_user_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.hqu.production_ms.domain.SysUserRole" >
+  <insert id="insert" parameterType="sysUserRole" >
     insert into sys_user_role (id, sys_user_id, sys_role_id
       )
     values (#{id,jdbcType=VARCHAR}, #{sysUserId,jdbcType=VARCHAR}, #{sysRoleId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.SysUserRole" >
+  <insert id="insertSelective" parameterType="sysUserRole" >
     insert into sys_user_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -128,7 +128,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.hqu.production_ms.domain.SysUserRoleExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="sysUserRoleExample" resultType="java.lang.Integer" >
     select count(*) from sys_user_role
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -160,7 +160,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.SysUserRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="sysUserRole" >
     update sys_user_role
     <set >
       <if test="sysUserId != null" >
@@ -172,7 +172,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.SysUserRole" >
+  <update id="updateByPrimaryKey" parameterType="sysUserRole" >
     update sys_user_role
     set sys_user_id = #{sysUserId,jdbcType=VARCHAR},
       sys_role_id = #{sysRoleId,jdbcType=VARCHAR}

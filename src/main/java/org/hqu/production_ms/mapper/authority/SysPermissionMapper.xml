@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.authority.SysPermissionMapper" >
-  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.SysPermission" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.authority.SysPermission" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
@@ -73,7 +73,7 @@
   <sql id="Base_Column_List" >
     id, name, type, url, percode, parentid, parentids, sortstring, available
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.SysPermissionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.authority.SysPermissionExample" >
     select
     <if test="distinct" >
       distinct
@@ -97,13 +97,13 @@
     delete from sys_permission
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.SysPermissionExample" >
+  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.authority.SysPermissionExample" >
     delete from sys_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.hqu.production_ms.domain.SysPermission" >
+  <insert id="insert" parameterType="org.hqu.production_ms.domain.authority.SysPermission" >
     insert into sys_permission (id, name, type, 
       url, percode, parentid, 
       parentids, sortstring, available
@@ -113,7 +113,7 @@
       #{parentids,jdbcType=VARCHAR}, #{sortstring,jdbcType=VARCHAR}, #{available,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.SysPermission" >
+  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.authority.SysPermission" >
     insert into sys_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.hqu.production_ms.domain.SysPermissionExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="org.hqu.production_ms.domain.authority.SysPermissionExample" resultType="java.lang.Integer" >
     select count(*) from sys_permission
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -230,7 +230,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.SysPermission" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.authority.SysPermission" >
     update sys_permission
     <set >
       <if test="name != null" >
@@ -260,7 +260,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.SysPermission" >
+  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.authority.SysPermission" >
     update sys_permission
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
