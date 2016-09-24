@@ -3,6 +3,8 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.COrderExample;
+import org.hqu.production_ms.domain.COrderExample.Criteria;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.mapper.COrderMapper;
@@ -22,9 +24,11 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public EUDataGridResult getOrderList(int page, int rows, COrder cOrder) {
 		
+		//查询商品列表
+		COrderExample example = new COrderExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<COrder> list = cOrderMapper.find(cOrder);
+		List<COrder> list = cOrderMapper.selectByExample(example);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -35,19 +39,23 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public COrder get(String string) {
-		return cOrderMapper.get(string);
+	public COrder get(String id) {
+		
+		return cOrderMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public CustomResult delete(String string) {
-		cOrderMapper.delete(string);
+	public CustomResult delete(String id) {
+		cOrderMapper.deleteByPrimaryKey(id);
 		return null;
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
-		cOrderMapper.deleteBatch(ids);
+		/*COrderExample example = new COrderExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andOrderI;
+		cOrderMapper.deleteBatch(ids);*/
 		return null;
 	}
 
@@ -59,13 +67,13 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public CustomResult update(COrder cOrder) {
-		cOrderMapper.update(cOrder);
+		//cOrderMapper.update(cOrder);
 		return null;
 	}
 
 	@Override
 	public CustomResult changeStatus(String[] ids) {
-		cOrderMapper.changeStatus(ids);
+		//cOrderMapper.changeStatus(ids);
 		return null;
 	}
 
