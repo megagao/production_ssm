@@ -26,6 +26,18 @@
 	            <div>
 	            	<span id="passsword_span"></span>
 	            </div>
+	            <div style="margin-bottom:20px">
+	            <div>
+	            	验证码：<input id="randomcode" name="randomcode" size="8" /> <img
+								id="randomcode_img" src="${baseurl}validatecode.jsp" alt=""
+								width="56" height="20" align='absMiddle' /> <a
+								href=javascript: >刷新</a>
+	            </div>
+	            <div>
+	            	<span id="randomcode_span"></span>
+	            </div>
+							
+	        	</div>
 	        </div>
 	        <div>
 	            <a id="login" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:32px;margin-left: 50px">登录</a>
@@ -77,6 +89,7 @@
     			}); 
 			}
     	});
+    	
     </script>
 </body>
 </html>
