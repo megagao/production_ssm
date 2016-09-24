@@ -18,9 +18,16 @@ public class FirstController {
 		return "login";
 	}
 	
+	//跳转登录
+	@RequestMapping("/")
+	public String welcome(Model model)throws Exception{
+		
+		return "home";
+	}
+	
 	//首页
 	@RequestMapping("/home")
-	public String welcome(HttpSession session, Model model)throws Exception{
+	public String home(HttpSession session, Model model)throws Exception{
 		
 		Object obj = session.getAttribute("activeUser");
 		
