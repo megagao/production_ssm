@@ -6,18 +6,18 @@ import java.util.Date;
 public class Repair {
     private String repairId;
 
+    private String failureId;
+
     private Date repairDate;
+
+    private String empId;
 
     private BigDecimal repairCost;
 
     private String repairResult;
 
     private String comment;
-    
-    private EquipmentFailure failure;
-    
-    private Employee employee;
-    
+
     public String getRepairId() {
         return repairId;
     }
@@ -26,12 +26,28 @@ public class Repair {
         this.repairId = repairId == null ? null : repairId.trim();
     }
 
+    public String getFailureId() {
+        return failureId;
+    }
+
+    public void setFailureId(String failureId) {
+        this.failureId = failureId == null ? null : failureId.trim();
+    }
+
     public Date getRepairDate() {
         return repairDate;
     }
 
     public void setRepairDate(Date repairDate) {
         this.repairDate = repairDate;
+    }
+
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
     }
 
     public BigDecimal getRepairCost() {
@@ -57,20 +73,4 @@ public class Repair {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
-
-	public EquipmentFailure getFailure() {
-		return failure;
-	}
-
-	public void setFailure(EquipmentFailure failure) {
-		this.failure = failure;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 }

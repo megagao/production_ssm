@@ -5,8 +5,6 @@ import java.util.Date;
 public class EquipmentFailure {
     private String failureId;
 
-    private String equitmentId;
-
     private String equipmentId;
 
     private String reason;
@@ -21,14 +19,6 @@ public class EquipmentFailure {
 
     public void setFailureId(String failureId) {
         this.failureId = failureId == null ? null : failureId.trim();
-    }
-
-    public String getEquitmentId() {
-        return equitmentId;
-    }
-
-    public void setEquitmentId(String equitmentId) {
-        this.equitmentId = equitmentId == null ? null : equitmentId.trim();
     }
 
     public String getEquipmentId() {

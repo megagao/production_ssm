@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Equipment {
-    private String equitmentId;
+    private String equipmentId;
 
     private Date outDate;
 
@@ -20,14 +20,14 @@ public class Equipment {
 
     private String empId;
 
-    private EquipmentTypes types;
+    private String typesId;
 
-    public String getEquitmentId() {
-        return equitmentId;
+    public String getEquipmentId() {
+        return equipmentId;
     }
 
-    public void setEquitmentId(String equitmentId) {
-        this.equitmentId = equitmentId == null ? null : equitmentId.trim();
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId == null ? null : equipmentId.trim();
     }
 
     public Date getOutDate() {
@@ -86,12 +86,11 @@ public class Equipment {
         this.empId = empId == null ? null : empId.trim();
     }
 
-	public EquipmentTypes getTypes() {
-		return types;
-	}
+    public String getTypesId() {
+        return typesId;
+    }
 
-	public void setTypes(EquipmentTypes types) {
-		this.types = types;
-	}
-
+    public void setTypesId(String typesId) {
+        this.typesId = typesId == null ? null : typesId.trim();
+    }
 }

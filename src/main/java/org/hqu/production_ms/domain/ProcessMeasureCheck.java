@@ -5,19 +5,19 @@ import java.util.Date;
 public class ProcessMeasureCheck {
     private String pMeasureCheckId;
 
+    private String processId;
+
     private String checkItem;
 
     private Date date;
 
     private String measureData;
 
+    private String empId;
+
     private String result;
 
     private String comment;
-    
-    private Employee employee;
-    
-    private Process process;
 
     public String getpMeasureCheckId() {
         return pMeasureCheckId;
@@ -25,6 +25,14 @@ public class ProcessMeasureCheck {
 
     public void setpMeasureCheckId(String pMeasureCheckId) {
         this.pMeasureCheckId = pMeasureCheckId == null ? null : pMeasureCheckId.trim();
+    }
+
+    public String getProcessId() {
+        return processId;
+    }
+
+    public void setProcessId(String processId) {
+        this.processId = processId == null ? null : processId.trim();
     }
 
     public String getCheckItem() {
@@ -51,6 +59,14 @@ public class ProcessMeasureCheck {
         this.measureData = measureData == null ? null : measureData.trim();
     }
 
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
+    }
+
     public String getResult() {
         return result;
     }
@@ -66,20 +82,4 @@ public class ProcessMeasureCheck {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public Process getProcess() {
-		return process;
-	}
-
-	public void setProcess(Process process) {
-		this.process = process;
-	}
 }

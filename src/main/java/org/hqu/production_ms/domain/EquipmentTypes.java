@@ -19,8 +19,6 @@ public class EquipmentTypes {
 
     private Integer typesCount;
 
-    private String typeId;
-
     public String getTypesId() {
         return typesId;
     }
@@ -83,13 +81,5 @@ public class EquipmentTypes {
 
     public void setTypesCount(Integer typesCount) {
         this.typesCount = typesCount;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(String typeId) {
-        this.typeId = typeId == null ? null : typeId.trim();
     }
 }

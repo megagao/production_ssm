@@ -3,13 +3,13 @@ package org.hqu.production_ms.domain;
 public class Task {
     private String taskId;
 
+    private String manufactureId;
+
+    private String workId;
+
     private Integer taskQuantity;
 
     private Long workingHours;
-    
-    private Manufacture manufacture;
-
-    private Work work;
 
     public String getTaskId() {
         return taskId;
@@ -17,6 +17,22 @@ public class Task {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId == null ? null : taskId.trim();
+    }
+
+    public String getManufactureId() {
+        return manufactureId;
+    }
+
+    public void setManufactureId(String manufactureId) {
+        this.manufactureId = manufactureId == null ? null : manufactureId.trim();
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId == null ? null : workId.trim();
     }
 
     public Integer getTaskQuantity() {
@@ -34,20 +50,4 @@ public class Task {
     public void setWorkingHours(Long workingHours) {
         this.workingHours = workingHours;
     }
-
-	public Manufacture getManufacture() {
-		return manufacture;
-	}
-
-	public void setManufacture(Manufacture manufacture) {
-		this.manufacture = manufacture;
-	}
-
-	public Work getWork() {
-		return work;
-	}
-
-	public void setWork(Work work) {
-		this.work = work;
-	}
 }

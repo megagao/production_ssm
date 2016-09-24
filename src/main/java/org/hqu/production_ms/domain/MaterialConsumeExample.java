@@ -1,6 +1,7 @@
 package org.hqu.production_ms.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MaterialConsumeExample {
@@ -104,146 +105,6 @@ public class MaterialConsumeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andMaterialIdIsNull() {
-            addCriterion("material_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdIsNotNull() {
-            addCriterion("material_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdEqualTo(String value) {
-            addCriterion("material_id =", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdNotEqualTo(String value) {
-            addCriterion("material_id <>", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdGreaterThan(String value) {
-            addCriterion("material_id >", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdGreaterThanOrEqualTo(String value) {
-            addCriterion("material_id >=", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdLessThan(String value) {
-            addCriterion("material_id <", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdLessThanOrEqualTo(String value) {
-            addCriterion("material_id <=", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdLike(String value) {
-            addCriterion("material_id like", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdNotLike(String value) {
-            addCriterion("material_id not like", value, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdIn(List<String> values) {
-            addCriterion("material_id in", values, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdNotIn(List<String> values) {
-            addCriterion("material_id not in", values, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdBetween(String value1, String value2) {
-            addCriterion("material_id between", value1, value2, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMaterialIdNotBetween(String value1, String value2) {
-            addCriterion("material_id not between", value1, value2, "materialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdIsNull() {
-            addCriterion("mat_material_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdIsNotNull() {
-            addCriterion("mat_material_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdEqualTo(String value) {
-            addCriterion("mat_material_id =", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdNotEqualTo(String value) {
-            addCriterion("mat_material_id <>", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdGreaterThan(String value) {
-            addCriterion("mat_material_id >", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdGreaterThanOrEqualTo(String value) {
-            addCriterion("mat_material_id >=", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdLessThan(String value) {
-            addCriterion("mat_material_id <", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdLessThanOrEqualTo(String value) {
-            addCriterion("mat_material_id <=", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdLike(String value) {
-            addCriterion("mat_material_id like", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdNotLike(String value) {
-            addCriterion("mat_material_id not like", value, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdIn(List<String> values) {
-            addCriterion("mat_material_id in", values, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdNotIn(List<String> values) {
-            addCriterion("mat_material_id not in", values, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdBetween(String value1, String value2) {
-            addCriterion("mat_material_id between", value1, value2, "matMaterialId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMatMaterialIdNotBetween(String value1, String value2) {
-            addCriterion("mat_material_id not between", value1, value2, "matMaterialId");
-            return (Criteria) this;
-        }
-
         public Criteria andConsumeIdIsNull() {
             addCriterion("consume_id is null");
             return (Criteria) this;
@@ -314,6 +175,76 @@ public class MaterialConsumeExample {
             return (Criteria) this;
         }
 
+        public Criteria andMaterialIdIsNull() {
+            addCriterion("material_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdIsNotNull() {
+            addCriterion("material_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdEqualTo(String value) {
+            addCriterion("material_id =", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdNotEqualTo(String value) {
+            addCriterion("material_id <>", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdGreaterThan(String value) {
+            addCriterion("material_id >", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdGreaterThanOrEqualTo(String value) {
+            addCriterion("material_id >=", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdLessThan(String value) {
+            addCriterion("material_id <", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdLessThanOrEqualTo(String value) {
+            addCriterion("material_id <=", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdLike(String value) {
+            addCriterion("material_id like", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdNotLike(String value) {
+            addCriterion("material_id not like", value, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdIn(List<String> values) {
+            addCriterion("material_id in", values, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdNotIn(List<String> values) {
+            addCriterion("material_id not in", values, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdBetween(String value1, String value2) {
+            addCriterion("material_id between", value1, value2, "materialId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterialIdNotBetween(String value1, String value2) {
+            addCriterion("material_id not between", value1, value2, "materialId");
+            return (Criteria) this;
+        }
+
         public Criteria andConsumeAmountIsNull() {
             addCriterion("consume_amount is null");
             return (Criteria) this;
@@ -324,62 +255,52 @@ public class MaterialConsumeExample {
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountEqualTo(String value) {
+        public Criteria andConsumeAmountEqualTo(Integer value) {
             addCriterion("consume_amount =", value, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountNotEqualTo(String value) {
+        public Criteria andConsumeAmountNotEqualTo(Integer value) {
             addCriterion("consume_amount <>", value, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountGreaterThan(String value) {
+        public Criteria andConsumeAmountGreaterThan(Integer value) {
             addCriterion("consume_amount >", value, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountGreaterThanOrEqualTo(String value) {
+        public Criteria andConsumeAmountGreaterThanOrEqualTo(Integer value) {
             addCriterion("consume_amount >=", value, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountLessThan(String value) {
+        public Criteria andConsumeAmountLessThan(Integer value) {
             addCriterion("consume_amount <", value, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountLessThanOrEqualTo(String value) {
+        public Criteria andConsumeAmountLessThanOrEqualTo(Integer value) {
             addCriterion("consume_amount <=", value, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountLike(String value) {
-            addCriterion("consume_amount like", value, "consumeAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andConsumeAmountNotLike(String value) {
-            addCriterion("consume_amount not like", value, "consumeAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andConsumeAmountIn(List<String> values) {
+        public Criteria andConsumeAmountIn(List<Integer> values) {
             addCriterion("consume_amount in", values, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountNotIn(List<String> values) {
+        public Criteria andConsumeAmountNotIn(List<Integer> values) {
             addCriterion("consume_amount not in", values, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountBetween(String value1, String value2) {
+        public Criteria andConsumeAmountBetween(Integer value1, Integer value2) {
             addCriterion("consume_amount between", value1, value2, "consumeAmount");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeAmountNotBetween(String value1, String value2) {
+        public Criteria andConsumeAmountNotBetween(Integer value1, Integer value2) {
             addCriterion("consume_amount not between", value1, value2, "consumeAmount");
             return (Criteria) this;
         }
@@ -394,62 +315,52 @@ public class MaterialConsumeExample {
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateEqualTo(String value) {
+        public Criteria andConsumeDateEqualTo(Date value) {
             addCriterion("consume_date =", value, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateNotEqualTo(String value) {
+        public Criteria andConsumeDateNotEqualTo(Date value) {
             addCriterion("consume_date <>", value, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateGreaterThan(String value) {
+        public Criteria andConsumeDateGreaterThan(Date value) {
             addCriterion("consume_date >", value, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateGreaterThanOrEqualTo(String value) {
+        public Criteria andConsumeDateGreaterThanOrEqualTo(Date value) {
             addCriterion("consume_date >=", value, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateLessThan(String value) {
+        public Criteria andConsumeDateLessThan(Date value) {
             addCriterion("consume_date <", value, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateLessThanOrEqualTo(String value) {
+        public Criteria andConsumeDateLessThanOrEqualTo(Date value) {
             addCriterion("consume_date <=", value, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateLike(String value) {
-            addCriterion("consume_date like", value, "consumeDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andConsumeDateNotLike(String value) {
-            addCriterion("consume_date not like", value, "consumeDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andConsumeDateIn(List<String> values) {
+        public Criteria andConsumeDateIn(List<Date> values) {
             addCriterion("consume_date in", values, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateNotIn(List<String> values) {
+        public Criteria andConsumeDateNotIn(List<Date> values) {
             addCriterion("consume_date not in", values, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateBetween(String value1, String value2) {
+        public Criteria andConsumeDateBetween(Date value1, Date value2) {
             addCriterion("consume_date between", value1, value2, "consumeDate");
             return (Criteria) this;
         }
 
-        public Criteria andConsumeDateNotBetween(String value1, String value2) {
+        public Criteria andConsumeDateNotBetween(Date value1, Date value2) {
             addCriterion("consume_date not between", value1, value2, "consumeDate");
             return (Criteria) this;
         }

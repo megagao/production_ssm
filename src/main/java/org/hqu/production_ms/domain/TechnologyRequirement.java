@@ -5,13 +5,13 @@ import java.util.Date;
 public class TechnologyRequirement {
     private String technologyRequirementId;
 
+    private String technologyId;
+
     private String requirement;
 
     private Date addTime;
 
     private Date reviseTime;
-    
-    private Technology technology;
 
     public String getTechnologyRequirementId() {
         return technologyRequirementId;
@@ -19,6 +19,14 @@ public class TechnologyRequirement {
 
     public void setTechnologyRequirementId(String technologyRequirementId) {
         this.technologyRequirementId = technologyRequirementId == null ? null : technologyRequirementId.trim();
+    }
+
+    public String getTechnologyId() {
+        return technologyId;
+    }
+
+    public void setTechnologyId(String technologyId) {
+        this.technologyId = technologyId == null ? null : technologyId.trim();
     }
 
     public String getRequirement() {
@@ -44,12 +52,4 @@ public class TechnologyRequirement {
     public void setReviseTime(Date reviseTime) {
         this.reviseTime = reviseTime;
     }
-
-	public Technology getTechnology() {
-		return technology;
-	}
-
-	public void setTechnology(Technology technology) {
-		this.technology = technology;
-	}
 }

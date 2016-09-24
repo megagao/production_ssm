@@ -6,6 +6,8 @@ import java.util.Date;
 public class FinalCountCheck {
     private String fCountCheckId;
 
+    private String orderId;
+
     private String checkItem;
 
     private Integer sample;
@@ -20,13 +22,11 @@ public class FinalCountCheck {
 
     private String measureData;
 
+    private String empId;
+
     private String result;
 
     private String comment;
-    
-    private COrder order;
-    
-    private Employee employee;
 
     public String getfCountCheckId() {
         return fCountCheckId;
@@ -34,6 +34,14 @@ public class FinalCountCheck {
 
     public void setfCountCheckId(String fCountCheckId) {
         this.fCountCheckId = fCountCheckId == null ? null : fCountCheckId.trim();
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId == null ? null : orderId.trim();
     }
 
     public String getCheckItem() {
@@ -92,6 +100,14 @@ public class FinalCountCheck {
         this.measureData = measureData == null ? null : measureData.trim();
     }
 
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
+    }
+
     public String getResult() {
         return result;
     }
@@ -107,21 +123,4 @@ public class FinalCountCheck {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
-
-	public COrder getOrder() {
-		return order;
-	}
-
-	public void setOrder(COrder order) {
-		this.order = order;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-    
 }

@@ -5,15 +5,15 @@ import java.util.Date;
 public class ECheck {
     private String checkId;
 
+    private String equipmentId;
+
+    private String empId;
+
     private Date date;
 
     private String result;
 
     private String equipmentFailureId;
-    
-    private Equipment equipment;
-
-    private Employee employee;
 
     public String getCheckId() {
         return checkId;
@@ -21,6 +21,22 @@ public class ECheck {
 
     public void setCheckId(String checkId) {
         this.checkId = checkId == null ? null : checkId.trim();
+    }
+
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId == null ? null : equipmentId.trim();
+    }
+
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
     }
 
     public Date getDate() {
@@ -46,21 +62,4 @@ public class ECheck {
     public void setEquipmentFailureId(String equipmentFailureId) {
         this.equipmentFailureId = equipmentFailureId == null ? null : equipmentFailureId.trim();
     }
-
-	public Equipment getEquipment() {
-		return equipment;
-	}
-
-	public void setEquipment(Equipment equipment) {
-		this.equipment = equipment;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-    
 }

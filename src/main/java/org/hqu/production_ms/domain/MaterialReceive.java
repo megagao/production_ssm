@@ -5,17 +5,17 @@ import java.util.Date;
 public class MaterialReceive {
     private String receiveId;
 
+    private String materialId;
+
     private Integer ammount;
 
     private Date receiveDate;
 
     private String sender;
-    
-    private String comment;
 
-    private Employee employee;
-    
-    private Material material;
+    private String empId;
+
+    private String comment;
 
     public String getReceiveId() {
         return receiveId;
@@ -23,6 +23,14 @@ public class MaterialReceive {
 
     public void setReceiveId(String receiveId) {
         this.receiveId = receiveId == null ? null : receiveId.trim();
+    }
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId == null ? null : materialId.trim();
     }
 
     public Integer getAmmount() {
@@ -49,6 +57,14 @@ public class MaterialReceive {
         this.sender = sender == null ? null : sender.trim();
     }
 
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
+    }
+
     public String getComment() {
         return comment;
     }
@@ -56,20 +72,4 @@ public class MaterialReceive {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public Material getMaterial() {
-		return material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
-	}
 }

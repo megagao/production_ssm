@@ -8,8 +8,6 @@ public class Process {
     private Integer sequence;
 
     private Integer quota;
-    
-    private Technology technology;
 
     public String getProcessId() {
         return processId;
@@ -42,12 +40,4 @@ public class Process {
     public void setQuota(Integer quota) {
         this.quota = quota;
     }
-
-	public Technology getTechnology() {
-		return technology;
-	}
-
-	public void setTechnology(Technology technology) {
-		this.technology = technology;
-	}
 }

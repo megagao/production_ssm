@@ -5,6 +5,8 @@ import java.util.Date;
 public class TechnologyPlan {
     private String technologyPlanId;
 
+    private String technologyId;
+
     private Integer batchAmount;
 
     private Date startPlan;
@@ -23,6 +25,14 @@ public class TechnologyPlan {
 
     public void setTechnologyPlanId(String technologyPlanId) {
         this.technologyPlanId = technologyPlanId == null ? null : technologyPlanId.trim();
+    }
+
+    public String getTechnologyId() {
+        return technologyId;
+    }
+
+    public void setTechnologyId(String technologyId) {
+        this.technologyId = technologyId == null ? null : technologyId.trim();
     }
 
     public Integer getBatchAmount() {

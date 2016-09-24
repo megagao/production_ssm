@@ -106,73 +106,73 @@ public class EquipmentExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andEquitmentIdIsNull() {
-            addCriterion("equitment_id is null");
+        public Criteria andEquipmentIdIsNull() {
+            addCriterion("equipment_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdIsNotNull() {
-            addCriterion("equitment_id is not null");
+        public Criteria andEquipmentIdIsNotNull() {
+            addCriterion("equipment_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdEqualTo(String value) {
-            addCriterion("equitment_id =", value, "equitmentId");
+        public Criteria andEquipmentIdEqualTo(String value) {
+            addCriterion("equipment_id =", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdNotEqualTo(String value) {
-            addCriterion("equitment_id <>", value, "equitmentId");
+        public Criteria andEquipmentIdNotEqualTo(String value) {
+            addCriterion("equipment_id <>", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdGreaterThan(String value) {
-            addCriterion("equitment_id >", value, "equitmentId");
+        public Criteria andEquipmentIdGreaterThan(String value) {
+            addCriterion("equipment_id >", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdGreaterThanOrEqualTo(String value) {
-            addCriterion("equitment_id >=", value, "equitmentId");
+        public Criteria andEquipmentIdGreaterThanOrEqualTo(String value) {
+            addCriterion("equipment_id >=", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdLessThan(String value) {
-            addCriterion("equitment_id <", value, "equitmentId");
+        public Criteria andEquipmentIdLessThan(String value) {
+            addCriterion("equipment_id <", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdLessThanOrEqualTo(String value) {
-            addCriterion("equitment_id <=", value, "equitmentId");
+        public Criteria andEquipmentIdLessThanOrEqualTo(String value) {
+            addCriterion("equipment_id <=", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdLike(String value) {
-            addCriterion("equitment_id like", value, "equitmentId");
+        public Criteria andEquipmentIdLike(String value) {
+            addCriterion("equipment_id like", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdNotLike(String value) {
-            addCriterion("equitment_id not like", value, "equitmentId");
+        public Criteria andEquipmentIdNotLike(String value) {
+            addCriterion("equipment_id not like", value, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdIn(List<String> values) {
-            addCriterion("equitment_id in", values, "equitmentId");
+        public Criteria andEquipmentIdIn(List<String> values) {
+            addCriterion("equipment_id in", values, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdNotIn(List<String> values) {
-            addCriterion("equitment_id not in", values, "equitmentId");
+        public Criteria andEquipmentIdNotIn(List<String> values) {
+            addCriterion("equipment_id not in", values, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdBetween(String value1, String value2) {
-            addCriterion("equitment_id between", value1, value2, "equitmentId");
+        public Criteria andEquipmentIdBetween(String value1, String value2) {
+            addCriterion("equipment_id between", value1, value2, "equipmentId");
             return (Criteria) this;
         }
 
-        public Criteria andEquitmentIdNotBetween(String value1, String value2) {
-            addCriterion("equitment_id not between", value1, value2, "equitmentId");
+        public Criteria andEquipmentIdNotBetween(String value1, String value2) {
+            addCriterion("equipment_id not between", value1, value2, "equipmentId");
             return (Criteria) this;
         }
 

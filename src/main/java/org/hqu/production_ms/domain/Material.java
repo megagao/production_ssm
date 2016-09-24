@@ -3,6 +3,8 @@ package org.hqu.production_ms.domain;
 public class Material {
     private String materialId;
 
+    private String workId;
+
     private String materialType;
 
     private String state;
@@ -10,8 +12,6 @@ public class Material {
     private Integer remaining;
 
     private String comment;
-    
-    private Work work;
 
     public String getMaterialId() {
         return materialId;
@@ -19,6 +19,14 @@ public class Material {
 
     public void setMaterialId(String materialId) {
         this.materialId = materialId == null ? null : materialId.trim();
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId == null ? null : workId.trim();
     }
 
     public String getMaterialType() {
@@ -52,12 +60,4 @@ public class Material {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
-
-	public Work getWork() {
-		return work;
-	}
-
-	public void setWork(Work work) {
-		this.work = work;
-	}
 }

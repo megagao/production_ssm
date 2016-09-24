@@ -6,11 +6,15 @@ import java.util.Date;
 public class COrder {
     private String orderId;
 
+    private String customId;
+
+    private String productId;
+
     private Date orderDate;
 
     private Date requestDate;
 
-    private String note;
+    private String comment;
 
     private Integer quantity;
 
@@ -20,11 +24,7 @@ public class COrder {
 
     private String file;
 
-    private Integer status;
-    
-    private Custom custom;
-
-    private Product product;
+    private Integer state;
 
     public String getOrderId() {
         return orderId;
@@ -34,23 +34,23 @@ public class COrder {
         this.orderId = orderId == null ? null : orderId.trim();
     }
 
-    public Custom getCustom() {
-		return custom;
-	}
+    public String getCustomId() {
+        return customId;
+    }
 
-	public void setCustom(Custom custom) {
-		this.custom = custom;
-	}
+    public void setCustomId(String customId) {
+        this.customId = customId == null ? null : customId.trim();
+    }
 
-	public Product getProduct() {
-		return product;
-	}
+    public String getProductId() {
+        return productId;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public void setProductId(String productId) {
+        this.productId = productId == null ? null : productId.trim();
+    }
 
-	public Date getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
@@ -66,12 +66,12 @@ public class COrder {
         this.requestDate = requestDate;
     }
 
-    public String getNote() {
-        return note;
+    public String getComment() {
+        return comment;
     }
 
-    public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+    public void setComment(String comment) {
+        this.comment = comment == null ? null : comment.trim();
     }
 
     public Integer getQuantity() {
@@ -106,11 +106,11 @@ public class COrder {
         this.file = file == null ? null : file.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getState() {
+        return state;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

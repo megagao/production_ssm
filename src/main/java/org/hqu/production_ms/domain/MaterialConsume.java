@@ -1,19 +1,21 @@
 package org.hqu.production_ms.domain;
 
+import java.util.Date;
+
 public class MaterialConsume {
     private String consumeId;
 
-    private String consumeAmount;
+    private String materialId;
 
-    private String consumeDate;
-    
+    private Integer consumeAmount;
+
+    private Date consumeDate;
+
+    private String sender;
+
+    private String receiver;
+
     private String comment;
-    
-    private Material material;
-
-    private Employee sender;
-
-    private Employee receiver;
 
     public String getConsumeId() {
         return consumeId;
@@ -23,52 +25,51 @@ public class MaterialConsume {
         this.consumeId = consumeId == null ? null : consumeId.trim();
     }
 
-    public String getConsumeAmount() {
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId == null ? null : materialId.trim();
+    }
+
+    public Integer getConsumeAmount() {
         return consumeAmount;
     }
 
-    public void setConsumeAmount(String consumeAmount) {
-        this.consumeAmount = consumeAmount == null ? null : consumeAmount.trim();
+    public void setConsumeAmount(Integer consumeAmount) {
+        this.consumeAmount = consumeAmount;
     }
 
-    public String getConsumeDate() {
+    public Date getConsumeDate() {
         return consumeDate;
     }
 
-    public void setConsumeDate(String consumeDate) {
-        this.consumeDate = consumeDate == null ? null : consumeDate.trim();
+    public void setConsumeDate(Date consumeDate) {
+        this.consumeDate = consumeDate;
     }
 
-	public String getComment() {
-		return comment;
-	}
+    public String getSender() {
+        return sender;
+    }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public void setSender(String sender) {
+        this.sender = sender == null ? null : sender.trim();
+    }
 
-	public Material getMaterial() {
-		return material;
-	}
+    public String getReceiver() {
+        return receiver;
+    }
 
-	public void setMaterial(Material material) {
-		this.material = material;
-	}
+    public void setReceiver(String receiver) {
+        this.receiver = receiver == null ? null : receiver.trim();
+    }
 
-	public Employee getSender() {
-		return sender;
-	}
+    public String getComment() {
+        return comment;
+    }
 
-	public void setSender(Employee sender) {
-		this.sender = sender;
-	}
-
-	public Employee getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(Employee receiver) {
-		this.receiver = receiver;
-	}
-
+    public void setComment(String comment) {
+        this.comment = comment == null ? null : comment.trim();
+    }
 }

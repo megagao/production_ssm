@@ -6,6 +6,8 @@ import java.util.Date;
 public class ProcessCountCheck {
     private String pCountCheckId;
 
+    private String processId;
+
     private String checkItem;
 
     private Integer sample;
@@ -20,13 +22,11 @@ public class ProcessCountCheck {
 
     private String measureData;
 
+    private String empId;
+
     private String result;
 
     private String comment;
-    
-    private Employee employee;
-    
-    private Process process;
 
     public String getpCountCheckId() {
         return pCountCheckId;
@@ -34,6 +34,14 @@ public class ProcessCountCheck {
 
     public void setpCountCheckId(String pCountCheckId) {
         this.pCountCheckId = pCountCheckId == null ? null : pCountCheckId.trim();
+    }
+
+    public String getProcessId() {
+        return processId;
+    }
+
+    public void setProcessId(String processId) {
+        this.processId = processId == null ? null : processId.trim();
     }
 
     public String getCheckItem() {
@@ -92,6 +100,14 @@ public class ProcessCountCheck {
         this.measureData = measureData == null ? null : measureData.trim();
     }
 
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
+    }
+
     public String getResult() {
         return result;
     }
@@ -107,21 +123,4 @@ public class ProcessCountCheck {
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
     }
-
-	public Process getProcess() {
-		return process;
-	}
-
-	public void setProcess(Process process) {
-		this.process = process;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-	
 }
