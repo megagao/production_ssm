@@ -11,6 +11,7 @@
       	也可在javabean 加上注解@Alias 来自定义别名， 例如： @Alias(user) 
       	-->
       	<package name="org.hqu.production_ms.domain"/>
+      	<package name="org.hqu.production_ms.domain.authority"/>
   	</typeAliases>
   	
 </configuration>
