@@ -90,6 +90,13 @@
 			}
     	});
     	
+    	//刷新验证码
+   	   	//实现思路，重新给图片的src赋值，后边加时间，防止缓存
+   	   	function randomcode_refresh() {
+   	      	$("#randomcode_img").attr('src',
+   	      			'${baseurl}validatecode.jsp?time' +new Date().getTime());
+   	   	}
+    	
     </script>
 </body>
 </html>
