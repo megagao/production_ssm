@@ -2,7 +2,7 @@ package org.hqu.production_ms.mapper.authority;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.SysPermission;
+import org.hqu.production_ms.domain.authority.SysPermission;
 
 /**
  * 

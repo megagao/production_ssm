@@ -1,9 +1,10 @@
 package org.hqu.production_ms.mapper.authority;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.SysUser;
-import org.hqu.production_ms.domain.SysUserExample;
+import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.authority.SysUserExample;
 
 public interface SysUserMapper {
     int countByExample(SysUserExample example);

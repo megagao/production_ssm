@@ -1,4 +1,4 @@
-package org.hqu.production_ms.domain;
+package org.hqu.production_ms.domain.authority;
 
 import java.util.ArrayList;
 import java.util.List;

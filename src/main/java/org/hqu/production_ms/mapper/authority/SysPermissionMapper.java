@@ -1,9 +1,10 @@
 package org.hqu.production_ms.mapper.authority;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.SysPermission;
-import org.hqu.production_ms.domain.SysPermissionExample;
+import org.hqu.production_ms.domain.authority.SysPermission;
+import org.hqu.production_ms.domain.authority.SysPermissionExample;
 
 public interface SysPermissionMapper {
     int countByExample(SysPermissionExample example);

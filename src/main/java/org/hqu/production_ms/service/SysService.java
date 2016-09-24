@@ -3,8 +3,8 @@ package org.hqu.production_ms.service;
 import java.util.List;
 
 import org.hqu.production_ms.domain.ActiveUser;
-import org.hqu.production_ms.domain.SysPermission;
-import org.hqu.production_ms.domain.SysUser;
+import org.hqu.production_ms.domain.authority.SysPermission;
+import org.hqu.production_ms.domain.authority.SysUser;
 
 /**
  * created on 2016年9月6日 

@@ -17,8 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.hqu.production_ms.domain.ActiveUser;
-import org.hqu.production_ms.domain.SysPermission;
-import org.hqu.production_ms.domain.SysUser;
+import org.hqu.production_ms.domain.authority.SysPermission;
+import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.service.SysService;
 
 /**

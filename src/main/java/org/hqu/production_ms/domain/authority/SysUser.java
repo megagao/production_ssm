@@ -1,4 +1,4 @@
-package org.hqu.production_ms.domain;
+package org.hqu.production_ms.domain.authority;
 
 public class SysUser {
     private String id;

@@ -1,9 +1,10 @@
 package org.hqu.production_ms.mapper.authority;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.SysUserRole;
-import org.hqu.production_ms.domain.SysUserRoleExample;
+import org.hqu.production_ms.domain.authority.SysUserRole;
+import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 
 public interface SysUserRoleMapper {
     int countByExample(SysUserRoleExample example);

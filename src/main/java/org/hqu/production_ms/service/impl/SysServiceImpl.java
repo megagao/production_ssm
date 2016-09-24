@@ -4,15 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.hqu.production_ms.domain.SysPermission;
-import org.hqu.production_ms.domain.SysUser;
 import org.hqu.production_ms.service.SysService;
 import org.hqu.production_ms.mapper.authority.SysUserMapper;
-import org.hqu.production_ms.domain.SysUserExample;
 import org.hqu.production_ms.mapper.authority.SysPermissionMapperCustom;
-
 import org.hqu.production_ms.exception.CustomException;
 import org.hqu.production_ms.domain.ActiveUser;
+import org.hqu.production_ms.domain.authority.SysPermission;
+import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.authority.SysUserExample;
 
 /**
  * created on 2016年9月6日 

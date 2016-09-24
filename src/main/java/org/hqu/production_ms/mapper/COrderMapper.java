@@ -1,23 +1,30 @@
 package org.hqu.production_ms.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.COrderExample;
 
 public interface COrderMapper {
-	
-	List<COrder> find(COrder cOrder);
-	
-	COrder get(String string);
-	
-    int delete(String string);
+    int countByExample(COrderExample example);
 
-    int deleteBatch(String[] ids);
+    int deleteByExample(COrderExample example);
 
-    int insert(COrder cOrder);
+    int deleteByPrimaryKey(String orderId);
+
+    int insert(COrder record);
+
+    int insertSelective(COrder record);
+
+    List<COrder> selectByExample(COrderExample example);
 
     COrder selectByPrimaryKey(String orderId);
 
-    int update(COrder cOrder);
+    int updateByExampleSelective(@Param("record") COrder record, @Param("example") COrderExample example);
 
-    int changeStatus(String[] ids);
+    int updateByExample(@Param("record") COrder record, @Param("example") COrderExample example);
+
+    int updateByPrimaryKeySelective(COrder record);
+
+    int updateByPrimaryKey(COrder record);
 }
