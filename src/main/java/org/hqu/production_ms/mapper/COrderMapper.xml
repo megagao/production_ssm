@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hqu.production_ms.mapper.COrderMapper" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.COrder" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="request_date" property="requestDate" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="file" property="file" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+	<association property="custom" javaType="custom">
+		<id column="custom_id" property="customId" jdbcType="VARCHAR" />
+		<result column="custom_name" property="customName" jdbcType="VARCHAR" />
+    	<result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    	<result column="address" property="address" jdbcType="VARCHAR" />
+    	<result column="fax" property="fax" jdbcType="VARCHAR" />
+    	<result column="email" property="email" jdbcType="VARCHAR" />
+    	<result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    	<result column="owner_tel" property="ownerTel" jdbcType="VARCHAR" />
+    	<result column="c_state" property="state" jdbcType="INTEGER" />
+    	<result column="manager_tel" property="managerTel" jdbcType="VARCHAR" />
+    	<result column="c_note" property="note" jdbcType="VARCHAR" />
+	</association>
+	<association property="product" javaType="product">
+		<id column="product_id" property="productId" jdbcType="VARCHAR" />
+	    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+	    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+	    <result column="drawing" property="drawing" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="cOrder" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			note,
+			quantity,
+			unit_price,
+			unit,
+			file,
+			status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order,
+			custom,
+			product
+		WHERE
+			c_order.custom_id = custom.custom_id
+		AND c_order.product_id = product.product_id
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+		order by c_order.order_date
+	</select>
+	
+	<!-- 厂家下拉框 ，只显示启用的厂家 -->
+	<select id="combo" resultType="cOrder">
+		select order_id, request_date from c_order where status=1
+	</select>
+	
+	<!-- 查询一个 -->
+	<select id="get" parameterType="string" resultType="cOrder">
+		SELECT
+			c_order.*, custom_id,
+			custom_name,
+			product_id,
+			product_name
+		FROM
+			c_order,
+			custom,
+			product
+		WHERE
+			order_id = #{id}
+		AND	c_order.custom_id = custom.custom_id
+		AND c_order.product_id = product.product_id
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="cOrder">
+		INSERT INTO c_order (
+			order_id,
+			custom_id,
+			product_id,
+			order_date,
+			request_date,
+			note,
+			quantity,
+			unit_price,
+			unit,
+			file,
+			status
+		)
+		VALUES(
+			#{orderId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+			#{orderDate,jdbcType=TIMESTAMP}, #{requestDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, 
+			#{quantity,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{unit,jdbcType=VARCHAR}, 
+			#{file,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="cOrder" >
+	    UPDATE 
+	    	c_order
+	    <set>
+	      <if test="customId != null" >
+	        custom_id = #{customId},
+	      </if>
+	      <if test="productId != null" >
+	        product_id = #{productId},
+	      </if>
+	      <if test="orderDate != null" >
+	        order_date = #{orderDate},
+	      </if>
+	      <if test="requestDate != null" >
+	        request_date = #{requestDate},
+	      </if>
+	      <if test="note != null" >
+	        note = #{note},
+	      </if>
+	      <if test="record.quantity != null" >
+	        quantity = #{quantity},
+	      </if>
+	      <if test="unitPrice != null" >
+	        unit_price = #{unitPrice},
+	      </if>
+	      <if test="unit != null" >
+	        unit = #{unit},
+	      </if>
+	      <if test="file != null" >
+	        file = #{file},
+	      </if>
+	      <if test="status != null" >
+	        status = #{status},
+	      </if>
+	    </set>
+	    WHERE 
+	    	order_id = #{orderId}
+	  </update>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		DELETE
+		FROM
+			c_order
+		WHERE
+			order_id = #{id}
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			c_order
+		WHERE
+			order_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE c_order
+		SET status = #{status}
+		WHERE
+			order_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+	
+</mapper>
