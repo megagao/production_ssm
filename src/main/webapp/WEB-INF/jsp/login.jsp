@@ -27,7 +27,7 @@
 	            	<span id="passsword_span"></span>
 	            </div>
 	            <div style="margin-bottom:20px">
-	            <div>
+	            <div id="randiv" style="display: none">
 	            	验证码：<input id="randomcode" name="randomcode"  size="8" /> <img
 								id="randomcode_img" src="${baseurl}validatecode.jsp" alt=""
 								width="56" height="20" align='absMiddle' /> <a
@@ -52,11 +52,11 @@
     	$("#login").click(function(){
     		
     		var uname = $("#username");  
-        	var pwd = $("#password");  
-        	var rcode_flag = false;
+        	var pwd = $("#password"); 
+        	var display =$("#randiv").css('display');
         	var rcode = $("#randomcode");
         	
-        	if(!rcode_flag){
+        	if(display == 'none'){
 	        	if ($.trim(uname.val()) == ""){ 
 	        		$("#passsword_span").html("");
 	               	$("#userspan").html("<font color='red'>用户名不能为空！</font>");
@@ -73,7 +73,6 @@
 	                	data:{  
 	                		username : uname.val(),
 	         	            password : pwd.val(),
-	         	           	rcode_flag : rcode_flag,
 	                	},  
 	                	type:'post',  
 	                	cache:false,  
@@ -81,13 +80,16 @@
 	                	success:function(data) {  
 	                		if(data.msg == 'account_error'){  
 	                			$("#error_span").html("<font color='red'> 用户不存在！</font>");
-	                			rcode_flag = true;
+	                			rcode_flag = 1;
+	                			$("#randiv").show();
 	                	  	}else if(data.msg == 'password_error'){  
 	                	  		$("#error_span").html("<font color='red'> 密码错误！</font>");
-	                	  		rcode_flag = true;
-	                	  	}else if(data.msg == 'password_error'){  
+	                	  		rcode_flag = 1;
+	                	  		$("#randiv").show();
+	                	  	}else if(data.msg == 'authentication_error'){  
 	                	  		$("#error_span").html("<font color='red'> 您没有授权！</font>");
-	                	  		rcode_flag = true;
+	                	  		rcode_flag = 1;
+	                	  		$("#randiv").show();
 	                	  	}else{
 	                	  		location.href="${baseurl}home";  
 	                	    }  
@@ -99,6 +101,7 @@
 	    			}); 
 				}
         	}else{
+        		$("#error_span").html("");
         		if ($.trim(uname.val()) == ""){ 
 	        		$("#passsword_span").html("");
 	               	$("#userspan").html("<font color='red'>用户名不能为空！</font>");
@@ -120,7 +123,7 @@
 	                	data:{  
 	                		username : uname.val(),
 	         	            password : pwd.val(),
-	         	           	rcode_flag : rcode_flag,
+	         	           	randomcode : rcode.val(),
 	                	},  
 	                	type:'post',  
 	                	cache:false,  
@@ -132,7 +135,10 @@
 	                	  	}else if(data.msg == 'password_error'){  
 	                	  		$("#error_span").html("<font color='red'> 密码错误！</font>");
 	                	  		rcode_flag = true;
-	                	  	}else if(data.msg == 'password_error'){  
+	                	  	}else if(data.msg == 'randomcode_error'){  
+	                	  		$("#error_span").html("<font color='red'> 验证码错误！</font>");
+	                	  		rcode_flag = true;
+	                	  	}else if(data.msg == 'authentication_error'){  
 	                	  		$("#error_span").html("<font color='red'> 您没有授权！</font>");
 	                	  		rcode_flag = true;
 	                	  	}else{
