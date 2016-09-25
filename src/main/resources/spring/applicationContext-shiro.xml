@@ -42,6 +42,7 @@
 				<!-- /items/queryItems.action = perms[item:query]
 				/items/editItems.action = perms[item:edit] -->
 				<!-- 配置记住我或认证通过可以访问的地址 -->
+				/home = user
 				/index.jsp  = user
 				/first.action = user
 				/welcome.jsp = user
