@@ -28,10 +28,10 @@
 	            </div>
 	            <div style="margin-bottom:20px">
 	            <div>
-	            	验证码：<input id="randomcode" name="randomcode" size="8" /> <img
+	            	验证码：<input id="randomcode" name="randomcode"  size="8" /> <img
 								id="randomcode_img" src="${baseurl}validatecode.jsp" alt=""
 								width="56" height="20" align='absMiddle' /> <a
-								href=javascript: >刷新</a>
+								href=javascript:randomcode_refresh()>刷新</a>
 	            </div>
 	            <div>
 	            	<span id="randomcode_span"></span>
@@ -53,6 +53,7 @@
     		
     		var uname = $("#username");  
         	var pwd = $("#password");  
+        	var rcode = $("#randomcode");
         
         	if ($.trim(uname.val()) == ""){ 
         		$("#passsword_span").html("");
@@ -62,12 +63,16 @@
         	   	$("#userspan").html("");
                	$("#passsword_span").html("<font color='red'>密码不能为空！</font>");
                	pwd.focus();  
+           	}else if ($.trim(rcode.val()) == ""){  
+        	   	$("#userspan").html("");
+               	$("#randomcode_span").html("<font color='red'>验证码不能为空！</font>");
+               	pwd.focus();  
            	}else{  
            		$("#userspan").html("");
     			$("#passsword_span").html("");
-    			
+    			$("#passsword_span").html("");
                 $.ajax( {  
-                	url:'${baseurl}login',// 跳转到 action  
+                	url:'${baseurl}ajaxLogin',// 跳转到 action  
                 	data:{  
                 		username : uname.val(),
          	            password : pwd.val(),
@@ -76,10 +81,15 @@
                 	cache:false,  
                 	dataType:'json',  
                 	success:function(data) {  
-                		if(data.msg =="success" ){  
-                	        location.href="${baseurl}home";  
-                	  	}else{  
-                	  		$("#error_span").html("<font color='red'>用户名或密码错误！</font>");
+                		
+                		if(data.msg == 'account_error'){  
+                			$("#error_span").html("<font color='red'> 用户不存在！</font>");
+                	  	}else if(data.msg == 'password_error'){  
+                	  		$("#error_span").html("<font color='red'> 密码错误！</font>");
+                	  	}else if(data.msg == 'password_error'){  
+                	  		$("#error_span").html("<font color='red'> 您没有授权！</font>");
+                	  	}else{
+                	  		location.href="${baseurl}home";  
                 	    }  
                 	},  
                 	error : function() {  
