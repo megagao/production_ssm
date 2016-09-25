@@ -2,6 +2,8 @@ package org.hqu.production_ms.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.ActiveUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,19 +24,20 @@ public class FirstController {
 	@RequestMapping("/")
 	public String welcome(Model model)throws Exception{
 		
-		return "home";
+		return "login";
 	}
 	
 	//首页
 	@RequestMapping("/home")
 	public String home(HttpSession session, Model model)throws Exception{
 		
-		Object obj = session.getAttribute("activeUser");
+		//从shiro的session中取activeUser
+		Subject subject = SecurityUtils.getSubject();
+		//取身份信息
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		//通过model传到页面
+		model.addAttribute("activeUser", activeUser);
 		
-		if(obj != null && !obj.equals("")){
-			return "home";
-		}else{
-			return "login";
-		}
+		return "home";
 	}
 }	
