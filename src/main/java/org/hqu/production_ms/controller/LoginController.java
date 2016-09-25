@@ -74,14 +74,27 @@ public class LoginController {
 	}
 	
 	/**
-	 * ajax登录 spring mvc 实现
+	 * shiro ajax登录 
 	 */
 	@RequestMapping(value = "/ajaxLogin")
-	public @ResponseBody Map<String,Object> ajaxLogin(@RequestParam String username, @RequestParam String password){
+	public @ResponseBody Map<String,Object> ajaxLogin(@RequestParam String username, @RequestParam String password,
+			@RequestParam(required=false) String randomcode, HttpSession session){
 	    
 		Subject currentUser = SecurityUtils.getSubject();
 	    
-	    Map<String,Object> map = new HashMap<String,Object>();  
+	    Map<String,Object> map = new HashMap<String,Object>(); 
+	    
+	    if(randomcode !=null && !randomcode.equals("")){
+	    	//取出session的验证码（正确的验证码）
+	    	String validateCode = (String)session.getAttribute("validateCode");
+			//页面中输入的验证和session中的验证进行对比 
+			if(validateCode!=null && !randomcode.equals(validateCode)){
+				//如果校验失败，将验证码错误失败信息放入map中
+				map.put("msg", "randomcode_error");
+				//直接返回，不再校验账号和密码 
+				return map; 
+			}
+	    }
 	    if (!currentUser.isAuthenticated()) {
 	    	
 	    	UsernamePasswordToken token = new UsernamePasswordToken(username, password);
@@ -98,7 +111,7 @@ public class LoginController {
 	    }
 	     
 	    //返回json数据
-	  return map;
+	    return map;
 	}
 	
 	
