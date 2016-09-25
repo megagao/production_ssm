@@ -19,7 +19,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证，请求此地址将由formAuthenticationFilter进行表单认证 -->
-		<!-- <property name="loginUrl" value="/first.action" /> -->
+		<property name="loginUrl" value="/" />
 		<!-- 认证成功统一跳转到first.action，建议不配置，shiro认证成功自动到上一个请求路径 -->
 		<!-- <property name="successUrl" value="/first.action"/> -->
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面-->
