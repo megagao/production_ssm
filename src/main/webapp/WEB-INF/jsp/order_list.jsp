@@ -12,7 +12,7 @@
             <th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatItemStatus">状态</th>
             <th data-options="field:'orderDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">订购日期</th>
             <th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
-            <th data-options="field:'note',width:130,align:'center'">备注</th>
+            <th data-options="field:'note',width:130,align:'center'">订单要求</th>
         </tr>
     </thead>
 </table>
