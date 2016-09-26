@@ -3,17 +3,88 @@
 <mapper namespace="org.hqu.production_ms.mapper.COrderMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.COrder" >
     <id column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <result column="custom_id" property="customId" jdbcType="VARCHAR" />
-    <result column="product_id" property="productId" jdbcType="VARCHAR" />
     <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
     <result column="request_date" property="requestDate" jdbcType="TIMESTAMP" />
-    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
     <result column="unit" property="unit" jdbcType="VARCHAR" />
     <result column="file" property="file" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+	<association property="custom" javaType="custom">
+		<id column="custom_id" property="customId" jdbcType="VARCHAR" />
+		<result column="custom_name" property="customName" jdbcType="VARCHAR" />
+    	<result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    	<result column="address" property="address" jdbcType="VARCHAR" />
+    	<result column="fax" property="fax" jdbcType="VARCHAR" />
+    	<result column="email" property="email" jdbcType="VARCHAR" />
+    	<result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    	<result column="owner_tel" property="ownerTel" jdbcType="VARCHAR" />
+    	<result column="c_state" property="state" jdbcType="INTEGER" />
+    	<result column="manager_tel" property="managerTel" jdbcType="VARCHAR" />
+    	<result column="c_note" property="note" jdbcType="VARCHAR" />
+	</association>
+	<association property="product" javaType="product">
+		<id column="product_id" property="productId" jdbcType="VARCHAR" />
+	    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+	    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+	    <result column="drawing" property="drawing" jdbcType="VARCHAR" />
+	</association>
   </resultMap>
+  
+  <!-- 扩展sql -->
+  <!-- 查询所有记录 -->
+  <select id="find" parameterType="cOrder" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			note,
+			quantity,
+			unit_price,
+			unit,
+			file,
+			status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order,
+			custom,
+			product
+		WHERE
+			c_order.custom_id = custom.custom_id
+		AND c_order.product_id = product.product_id
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+		order by c_order.order_date
+	</select>
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			c_order
+		WHERE
+			order_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE c_order
+		SET status = #{status}
+		WHERE
+			order_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+  
+  <!-- 自动生成的sql -->
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
