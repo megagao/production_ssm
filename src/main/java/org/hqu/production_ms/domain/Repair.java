@@ -16,7 +16,7 @@ public class Repair {
 
     private String repairResult;
 
-    private String comment;
+    private String note;
 
     public String getRepairId() {
         return repairId;
@@ -66,11 +66,11 @@ public class Repair {
         this.repairResult = repairResult == null ? null : repairResult.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }

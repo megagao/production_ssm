@@ -14,9 +14,9 @@ public class Equipment {
 
     private Date lifetime;
 
-    private String state;
+    private String status;
 
-    private String comment;
+    private String note;
 
     private String empId;
 
@@ -62,20 +62,20 @@ public class Equipment {
         this.lifetime = lifetime;
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 
     public String getEmpId() {

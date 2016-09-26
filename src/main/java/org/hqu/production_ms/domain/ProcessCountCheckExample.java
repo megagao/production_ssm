@@ -556,63 +556,63 @@ public class ProcessCountCheckExample {
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNull() {
-            addCriterion("date is null");
+        public Criteria andCdateIsNull() {
+            addCriterion("cdate is null");
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNotNull() {
-            addCriterion("date is not null");
+        public Criteria andCdateIsNotNull() {
+            addCriterion("cdate is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDateEqualTo(Date value) {
-            addCriterion("date =", value, "date");
+        public Criteria andCdateEqualTo(Date value) {
+            addCriterion("cdate =", value, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotEqualTo(Date value) {
-            addCriterion("date <>", value, "date");
+        public Criteria andCdateNotEqualTo(Date value) {
+            addCriterion("cdate <>", value, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThan(Date value) {
-            addCriterion("date >", value, "date");
+        public Criteria andCdateGreaterThan(Date value) {
+            addCriterion("cdate >", value, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("date >=", value, "date");
+        public Criteria andCdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("cdate >=", value, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThan(Date value) {
-            addCriterion("date <", value, "date");
+        public Criteria andCdateLessThan(Date value) {
+            addCriterion("cdate <", value, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateLessThanOrEqualTo(Date value) {
-            addCriterion("date <=", value, "date");
+        public Criteria andCdateLessThanOrEqualTo(Date value) {
+            addCriterion("cdate <=", value, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateIn(List<Date> values) {
-            addCriterion("date in", values, "date");
+        public Criteria andCdateIn(List<Date> values) {
+            addCriterion("cdate in", values, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotIn(List<Date> values) {
-            addCriterion("date not in", values, "date");
+        public Criteria andCdateNotIn(List<Date> values) {
+            addCriterion("cdate not in", values, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateBetween(Date value1, Date value2) {
-            addCriterion("date between", value1, value2, "date");
+        public Criteria andCdateBetween(Date value1, Date value2) {
+            addCriterion("cdate between", value1, value2, "cdate");
             return (Criteria) this;
         }
 
-        public Criteria andDateNotBetween(Date value1, Date value2) {
-            addCriterion("date not between", value1, value2, "date");
+        public Criteria andCdateNotBetween(Date value1, Date value2) {
+            addCriterion("cdate not between", value1, value2, "cdate");
             return (Criteria) this;
         }
 
@@ -826,73 +826,73 @@ public class ProcessCountCheckExample {
             return (Criteria) this;
         }
 
-        public Criteria andCommentIsNull() {
-            addCriterion("comment is null");
+        public Criteria andNoteIsNull() {
+            addCriterion("note is null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentIsNotNull() {
-            addCriterion("comment is not null");
+        public Criteria andNoteIsNotNull() {
+            addCriterion("note is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentEqualTo(String value) {
-            addCriterion("comment =", value, "comment");
+        public Criteria andNoteEqualTo(String value) {
+            addCriterion("note =", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotEqualTo(String value) {
-            addCriterion("comment <>", value, "comment");
+        public Criteria andNoteNotEqualTo(String value) {
+            addCriterion("note <>", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentGreaterThan(String value) {
-            addCriterion("comment >", value, "comment");
+        public Criteria andNoteGreaterThan(String value) {
+            addCriterion("note >", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentGreaterThanOrEqualTo(String value) {
-            addCriterion("comment >=", value, "comment");
+        public Criteria andNoteGreaterThanOrEqualTo(String value) {
+            addCriterion("note >=", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLessThan(String value) {
-            addCriterion("comment <", value, "comment");
+        public Criteria andNoteLessThan(String value) {
+            addCriterion("note <", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLessThanOrEqualTo(String value) {
-            addCriterion("comment <=", value, "comment");
+        public Criteria andNoteLessThanOrEqualTo(String value) {
+            addCriterion("note <=", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLike(String value) {
-            addCriterion("comment like", value, "comment");
+        public Criteria andNoteLike(String value) {
+            addCriterion("note like", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotLike(String value) {
-            addCriterion("comment not like", value, "comment");
+        public Criteria andNoteNotLike(String value) {
+            addCriterion("note not like", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentIn(List<String> values) {
-            addCriterion("comment in", values, "comment");
+        public Criteria andNoteIn(List<String> values) {
+            addCriterion("note in", values, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotIn(List<String> values) {
-            addCriterion("comment not in", values, "comment");
+        public Criteria andNoteNotIn(List<String> values) {
+            addCriterion("note not in", values, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentBetween(String value1, String value2) {
-            addCriterion("comment between", value1, value2, "comment");
+        public Criteria andNoteBetween(String value1, String value2) {
+            addCriterion("note between", value1, value2, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotBetween(String value1, String value2) {
-            addCriterion("comment not between", value1, value2, "comment");
+        public Criteria andNoteNotBetween(String value1, String value2) {
+            addCriterion("note not between", value1, value2, "note");
             return (Criteria) this;
         }
     }

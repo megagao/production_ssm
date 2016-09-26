@@ -19,7 +19,7 @@ public class UnqualifyApply {
 
     private Date applyDate;
 
-    private String comment;
+    private String note;
 
     public String getUnqualifyApplyId() {
         return unqualifyApplyId;
@@ -85,11 +85,11 @@ public class UnqualifyApply {
         this.applyDate = applyDate;
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }

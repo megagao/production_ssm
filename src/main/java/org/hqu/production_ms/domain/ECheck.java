@@ -9,7 +9,7 @@ public class ECheck {
 
     private String empId;
 
-    private Date date;
+    private Date cdate;
 
     private String result;
 
@@ -39,12 +39,12 @@ public class ECheck {
         this.empId = empId == null ? null : empId.trim();
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCdate() {
+        return cdate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCdate(Date cdate) {
+        this.cdate = cdate;
     }
 
     public String getResult() {

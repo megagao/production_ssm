@@ -314,73 +314,73 @@ public class DepartmentExample {
             return (Criteria) this;
         }
 
-        public Criteria andCommentIsNull() {
-            addCriterion("comment is null");
+        public Criteria andNoteIsNull() {
+            addCriterion("note is null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentIsNotNull() {
-            addCriterion("comment is not null");
+        public Criteria andNoteIsNotNull() {
+            addCriterion("note is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentEqualTo(String value) {
-            addCriterion("comment =", value, "comment");
+        public Criteria andNoteEqualTo(String value) {
+            addCriterion("note =", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotEqualTo(String value) {
-            addCriterion("comment <>", value, "comment");
+        public Criteria andNoteNotEqualTo(String value) {
+            addCriterion("note <>", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentGreaterThan(String value) {
-            addCriterion("comment >", value, "comment");
+        public Criteria andNoteGreaterThan(String value) {
+            addCriterion("note >", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentGreaterThanOrEqualTo(String value) {
-            addCriterion("comment >=", value, "comment");
+        public Criteria andNoteGreaterThanOrEqualTo(String value) {
+            addCriterion("note >=", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLessThan(String value) {
-            addCriterion("comment <", value, "comment");
+        public Criteria andNoteLessThan(String value) {
+            addCriterion("note <", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLessThanOrEqualTo(String value) {
-            addCriterion("comment <=", value, "comment");
+        public Criteria andNoteLessThanOrEqualTo(String value) {
+            addCriterion("note <=", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentLike(String value) {
-            addCriterion("comment like", value, "comment");
+        public Criteria andNoteLike(String value) {
+            addCriterion("note like", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotLike(String value) {
-            addCriterion("comment not like", value, "comment");
+        public Criteria andNoteNotLike(String value) {
+            addCriterion("note not like", value, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentIn(List<String> values) {
-            addCriterion("comment in", values, "comment");
+        public Criteria andNoteIn(List<String> values) {
+            addCriterion("note in", values, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotIn(List<String> values) {
-            addCriterion("comment not in", values, "comment");
+        public Criteria andNoteNotIn(List<String> values) {
+            addCriterion("note not in", values, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentBetween(String value1, String value2) {
-            addCriterion("comment between", value1, value2, "comment");
+        public Criteria andNoteBetween(String value1, String value2) {
+            addCriterion("note between", value1, value2, "note");
             return (Criteria) this;
         }
 
-        public Criteria andCommentNotBetween(String value1, String value2) {
-            addCriterion("comment not between", value1, value2, "comment");
+        public Criteria andNoteNotBetween(String value1, String value2) {
+            addCriterion("note not between", value1, value2, "note");
             return (Criteria) this;
         }
     }

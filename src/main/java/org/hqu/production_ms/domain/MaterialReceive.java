@@ -15,7 +15,7 @@ public class MaterialReceive {
 
     private String empId;
 
-    private String comment;
+    private String note;
 
     public String getReceiveId() {
         return receiveId;
@@ -65,11 +65,11 @@ public class MaterialReceive {
         this.empId = empId == null ? null : empId.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }

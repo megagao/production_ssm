@@ -10,9 +10,9 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
     <result column="owner_tel" property="ownerTel" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="manager_tel" property="managerTel" jdbcType="VARCHAR" />
-    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, state, 
-    manager_tel, comment
+    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, status, 
+    manager_tel, note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.CustomExample" >
     select
@@ -109,12 +109,12 @@
   <insert id="insert" parameterType="org.hqu.production_ms.domain.Custom" >
     insert into custom (custom_id, custom_name, full_name, 
       address, fax, email, 
-      owner_name, owner_tel, state, 
-      manager_tel, comment)
+      owner_name, owner_tel, status, 
+      manager_tel, note)
     values (#{customId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{ownerName,jdbcType=VARCHAR}, #{ownerTel,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{managerTel,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR})
+      #{ownerName,jdbcType=VARCHAR}, #{ownerTel,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{managerTel,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Custom" >
     insert into custom
@@ -143,14 +143,14 @@
       <if test="ownerTel != null" >
         owner_tel,
       </if>
-      <if test="state != null" >
-        state,
+      <if test="status != null" >
+        status,
       </if>
       <if test="managerTel != null" >
         manager_tel,
       </if>
-      <if test="comment != null" >
-        comment,
+      <if test="note != null" >
+        note,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -178,14 +178,14 @@
       <if test="ownerTel != null" >
         #{ownerTel,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        #{state,jdbcType=INTEGER},
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="managerTel != null" >
         #{managerTel,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null" >
-        #{comment,jdbcType=VARCHAR},
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -222,14 +222,14 @@
       <if test="record.ownerTel != null" >
         owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
       </if>
-      <if test="record.state != null" >
-        state = #{record.state,jdbcType=INTEGER},
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.managerTel != null" >
         manager_tel = #{record.managerTel,jdbcType=VARCHAR},
       </if>
-      <if test="record.comment != null" >
-        comment = #{record.comment,jdbcType=VARCHAR},
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -246,9 +246,9 @@
       email = #{record.email,jdbcType=VARCHAR},
       owner_name = #{record.ownerName,jdbcType=VARCHAR},
       owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
-      state = #{record.state,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       manager_tel = #{record.managerTel,jdbcType=VARCHAR},
-      comment = #{record.comment,jdbcType=VARCHAR}
+      note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -277,14 +277,14 @@
       <if test="ownerTel != null" >
         owner_tel = #{ownerTel,jdbcType=VARCHAR},
       </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=INTEGER},
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="managerTel != null" >
         manager_tel = #{managerTel,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null" >
-        comment = #{comment,jdbcType=VARCHAR},
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
       </if>
     </set>
     where custom_id = #{customId,jdbcType=VARCHAR}
@@ -298,9 +298,9 @@
       email = #{email,jdbcType=VARCHAR},
       owner_name = #{ownerName,jdbcType=VARCHAR},
       owner_tel = #{ownerTel,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       manager_tel = #{managerTel,jdbcType=VARCHAR},
-      comment = #{comment,jdbcType=VARCHAR}
+      note = #{note,jdbcType=VARCHAR}
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
 </mapper>

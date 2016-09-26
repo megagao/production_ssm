@@ -10,7 +10,7 @@ public class COrder {
 
     private Date requestDate;
 
-    private String comment;
+    private String note;
 
     private Integer quantity;
 
@@ -20,8 +20,8 @@ public class COrder {
 
     private String file;
 
-    private Integer state;
-    
+    private Integer status;
+
     private Custom custom;
 
     private Product product;
@@ -50,12 +50,12 @@ public class COrder {
         this.requestDate = requestDate;
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 
     public Integer getQuantity() {
@@ -90,12 +90,12 @@ public class COrder {
         this.file = file == null ? null : file.trim();
     }
 
-    public Integer getState() {
-        return state;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 	public Custom getCustom() {

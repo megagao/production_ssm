@@ -15,7 +15,7 @@ public class MaterialConsume {
 
     private String receiver;
 
-    private String comment;
+    private String note;
 
     public String getConsumeId() {
         return consumeId;
@@ -65,11 +65,11 @@ public class MaterialConsume {
         this.receiver = receiver == null ? null : receiver.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }

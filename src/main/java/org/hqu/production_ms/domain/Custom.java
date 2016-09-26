@@ -17,11 +17,11 @@ public class Custom {
 
     private String ownerTel;
 
-    private Integer state;
+    private Integer status;
 
     private String managerTel;
 
-    private String comment;
+    private String note;
 
     public String getCustomId() {
         return customId;
@@ -87,12 +87,12 @@ public class Custom {
         this.ownerTel = ownerTel == null ? null : ownerTel.trim();
     }
 
-    public Integer getState() {
-        return state;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getManagerTel() {
@@ -103,11 +103,11 @@ public class Custom {
         this.managerTel = managerTel == null ? null : managerTel.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }

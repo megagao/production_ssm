@@ -15,7 +15,7 @@ public class Employee {
 
     private Date joinDate;
 
-    private String state;
+    private String status;
 
     private String education;
 
@@ -77,12 +77,12 @@ public class Employee {
         this.joinDate = joinDate;
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getEducation() {

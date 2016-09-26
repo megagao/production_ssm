@@ -7,7 +7,7 @@ public class Department {
 
     private String departmentDuty;
 
-    private String comment;
+    private String note;
 
     public String getDepartmentId() {
         return departmentId;
@@ -33,11 +33,11 @@ public class Department {
         this.departmentDuty = departmentDuty == null ? null : departmentDuty.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }

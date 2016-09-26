@@ -18,7 +18,7 @@ public class ProcessCountCheck {
 
     private BigDecimal qualify;
 
-    private Date date;
+    private Date cdate;
 
     private String measureData;
 
@@ -26,7 +26,7 @@ public class ProcessCountCheck {
 
     private String result;
 
-    private String comment;
+    private String note;
 
     public String getpCountCheckId() {
         return pCountCheckId;
@@ -84,12 +84,12 @@ public class ProcessCountCheck {
         this.qualify = qualify;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCdate() {
+        return cdate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCdate(Date cdate) {
+        this.cdate = cdate;
     }
 
     public String getMeasureData() {
@@ -116,11 +116,11 @@ public class ProcessCountCheck {
         this.result = result == null ? null : result.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getNote() {
+        return note;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
     }
 }
