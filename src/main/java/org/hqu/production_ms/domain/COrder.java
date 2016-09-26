@@ -6,10 +6,6 @@ import java.util.Date;
 public class COrder {
     private String orderId;
 
-    private String customId;
-
-    private String productId;
-
     private Date orderDate;
 
     private Date requestDate;
@@ -25,6 +21,10 @@ public class COrder {
     private String file;
 
     private Integer state;
+    
+    private Custom custom;
+
+    private Product product;
 
     public String getOrderId() {
         return orderId;
@@ -32,22 +32,6 @@ public class COrder {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId == null ? null : orderId.trim();
-    }
-
-    public String getCustomId() {
-        return customId;
-    }
-
-    public void setCustomId(String customId) {
-        this.customId = customId == null ? null : customId.trim();
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId == null ? null : productId.trim();
     }
 
     public Date getOrderDate() {
@@ -113,4 +97,20 @@ public class COrder {
     public void setState(Integer state) {
         this.state = state;
     }
+
+	public Custom getCustom() {
+		return custom;
+	}
+
+	public void setCustom(Custom custom) {
+		this.custom = custom;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 }
