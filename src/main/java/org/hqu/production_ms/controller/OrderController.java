@@ -28,7 +28,6 @@ public class OrderController {
 	
 	@RequestMapping("/find")
 	public String find() {
-		
 		return "order_list";
 	}
 	

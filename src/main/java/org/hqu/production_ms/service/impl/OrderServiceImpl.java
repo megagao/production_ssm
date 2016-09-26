@@ -24,11 +24,9 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public EUDataGridResult getOrderList(int page, int rows, COrder cOrder) {
 		
-		//查询商品列表
-		COrderExample example = new COrderExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<COrder> list = cOrderMapper.selectByExample(example);
+		List<COrder> list = cOrderMapper.find(cOrder);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -46,16 +44,13 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public CustomResult delete(String id) {
-		cOrderMapper.deleteByPrimaryKey(id);
+		int i = cOrderMapper.deleteByPrimaryKey(id);
 		return null;
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
-		/*COrderExample example = new COrderExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andOrderI;
-		cOrderMapper.deleteBatch(ids);*/
+		cOrderMapper.deleteBatch(ids);
 		return null;
 	}
 
@@ -67,13 +62,13 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public CustomResult update(COrder cOrder) {
-		//cOrderMapper.update(cOrder);
+		cOrderMapper.updateByPrimaryKeySelective(cOrder);
 		return null;
 	}
 
 	@Override
 	public CustomResult changeStatus(String[] ids) {
-		//cOrderMapper.changeStatus(ids);
+		cOrderMapper.changeStatus(ids);
 		return null;
 	}
 
