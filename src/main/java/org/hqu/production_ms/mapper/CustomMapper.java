@@ -1,11 +1,20 @@
 package org.hqu.production_ms.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.CustomExample;
 
 public interface CustomMapper {
+	
+	//扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+	
+	int changeStatus(String[] ids);
+	
+	
     int countByExample(CustomExample example);
 
     int deleteByExample(CustomExample example);
