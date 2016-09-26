@@ -44,32 +44,32 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public CustomResult delete(String id) {
-		int i = cOrderMapper.deleteByPrimaryKey(id);
-		return null;
+		cOrderMapper.deleteByPrimaryKey(id);
+		return CustomResult.ok();
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
 		cOrderMapper.deleteBatch(ids);
-		return null;
+		return CustomResult.ok();
 	}
 
 	@Override
 	public CustomResult insert(COrder cOrder) {
 		cOrderMapper.insert(cOrder);
-		return null;
+		return CustomResult.ok();
 	}
 
 	@Override
 	public CustomResult update(COrder cOrder) {
 		cOrderMapper.updateByPrimaryKeySelective(cOrder);
-		return null;
+		return CustomResult.ok();
 	}
 
 	@Override
 	public CustomResult changeStatus(String[] ids) {
 		cOrderMapper.changeStatus(ids);
-		return null;
+		return CustomResult.ok();
 	}
 
 }
