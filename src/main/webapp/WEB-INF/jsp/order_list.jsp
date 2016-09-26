@@ -42,7 +42,7 @@
         text:'新增',
         iconCls:'icon-add',
         handler:function(){
-        	$(".tree-title:contains('新增商品')").parent().click();
+        	$(".tree-title:contains('新增订单')").parent().click();
         }
     },{
         text:'编辑',
@@ -123,7 +123,7 @@
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/delete",params, function(data){
+                	$.post("/order/delete_batch",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除商品成功!',undefined,function(){
             					$("#orderList").datagrid("reload");
