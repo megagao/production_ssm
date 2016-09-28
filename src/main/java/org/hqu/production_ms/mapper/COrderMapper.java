@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.COrderExample;
+import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface COrderMapper {
 	
@@ -22,7 +23,7 @@ public interface COrderMapper {
 
     int deleteByPrimaryKey(String orderId);
 
-    int insert(COrder record);
+    int insert(COrderPO record);
 
     int insertSelective(COrder record);
 

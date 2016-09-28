@@ -3,6 +3,7 @@ package org.hqu.production_ms.controller;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
+import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(COrder cOrder) throws Exception {
+	private CustomResult insert(COrderPO cOrder) throws Exception {
 		CustomResult result = orderService.insert(cOrder);
 		return result;
 	}

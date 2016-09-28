@@ -3,6 +3,7 @@ package org.hqu.production_ms.service;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
+import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface OrderService {
 	
@@ -14,7 +15,7 @@ public interface OrderService {
 
 	CustomResult deleteBatch(String[] ids);
 
-	CustomResult insert(COrder cOrder);
+	CustomResult insert(COrderPO cOrder);
 
     CustomResult update(COrder cOrder);
 

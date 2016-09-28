@@ -45,14 +45,18 @@ var TT = TAOTAO = {
 	formatPrice : function(val,row){
 		return (val/1000).toFixed(2);
 	},
-	// 格式化商品的状态
-	formatItemStatus : function formatStatus(val,row){
+	// 格式化订单的状态
+	formatOrderStatus : function formatStatus(val,row){
         if (val == 1){
-            return '正常';
-        } else if(val == 2){
-        	return '<span style="color:red;">下架</span>';
-        } else {
-        	return '未知';
+            return '未开始';
+        }else if(val == 2){
+        	return '已开始';
+        } else if(val == 3){
+        	return '<span style="color:green;">已完成</span>';
+        } else if(val == 4){
+        	return '<span style="color:red;">已取消</span>';
+        }else {
+        	return '<span style="color:yellow;">未知</span>';
         }
     },
     

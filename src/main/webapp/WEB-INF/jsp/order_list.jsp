@@ -9,14 +9,14 @@
             <th data-options="field:'quantity',width:100">订购数量</th>
             <th data-options="field:'unitPrice',width:70,align:'right',formatter:TAOTAO.formatPrice">税前单价</th>
             <th data-options="field:'quantity',width:70,align:'right'">单位</th>
-            <th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatItemStatus">状态</th>
+            <th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatOrderStatus">状态</th>
             <th data-options="field:'orderDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">订购日期</th>
             <th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
             <th data-options="field:'note',width:130,align:'center'">订单要求</th>
         </tr>
     </thead>
 </table>
-<div id="itemEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">
+<div id="itemEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/order/edit'" style="width:80%;height:80%;padding:10px;">
 </div>
 <script>
 
@@ -34,7 +34,7 @@
     	for(var i in sels){
     		ids.push(sels[i].id);
     	}
-    	ids = ids.join(",");
+    	/* ids = ids.join(","); */
     	return ids;
     }
     
@@ -53,7 +53,7 @@
         		$.messager.alert('提示','必须选择一个商品才能编辑!');
         		return ;
         	}
-        	if(ids.indexOf(',') > 0){
+        	if(ids.length >= 2){
         		$.messager.alert('提示','只能选择一个商品!');
         		return ;
         	}

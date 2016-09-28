@@ -18,10 +18,12 @@ public class COrder {
 
     private String unit;
 
+    private String image;
+
     private String file;
 
     private Integer status;
-
+    
     private Custom custom;
 
     private Product product;
@@ -80,6 +82,14 @@ public class COrder {
 
     public void setUnit(String unit) {
         this.unit = unit == null ? null : unit.trim();
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
     }
 
     public String getFile() {

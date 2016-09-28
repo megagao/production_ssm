@@ -13,7 +13,7 @@
        	<div style="margin-left: 50px;margin-top: 50px;">
        		<div style="margin-bottom:20px;">
 	            <div>
-	            	用户名: <input id="username" class="easyui-textbox" data-options="required:true" style="width:200px;height:32px"/>
+	            	用户名: <input id="username" class="easyui-textbox" data-options="required:true" style="width:200px;height:32px" value="22"/>
 	            </div>
 	            <div>
 	            	<span id="userspan"></span>
@@ -21,7 +21,7 @@
 	        </div>
 	        <div style="margin-bottom:20px">
 	            <div>
-	            	密&nbsp;&nbsp;码: <input id="password" class="easyui-textbox" type="password" style="width:200px;height:32px" />
+	            	密&nbsp;&nbsp;码: <input id="password" class="easyui-textbox" type="password" style="width:200px;height:32px" value="22"/>
 	            </div>
 	            <div>
 	            	<span id="passsword_span"></span>

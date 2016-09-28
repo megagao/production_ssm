@@ -7,8 +7,10 @@ import org.hqu.production_ms.domain.COrderExample;
 import org.hqu.production_ms.domain.COrderExample.Criteria;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
+import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.mapper.COrderMapper;
 import org.hqu.production_ms.service.OrderService;
+import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +57,10 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public CustomResult insert(COrder cOrder) {
+	public CustomResult insert(COrderPO cOrder) {
+		//order补全
+		String orderId = IDUtils.genStringId();
+		cOrder.setOrderId(orderId);
 		cOrderMapper.insert(cOrder);
 		return CustomResult.ok();
 	}
