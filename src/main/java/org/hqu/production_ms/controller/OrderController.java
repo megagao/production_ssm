@@ -18,7 +18,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@RequestMapping("/{orderId}")
+	@RequestMapping("/get/{orderId}")
 	@ResponseBody
 	public COrder getItemById(@PathVariable String orderId) {
 		COrder cOrder = orderService.get(orderId);
@@ -29,6 +29,11 @@ public class OrderController {
 	@RequestMapping("/find")
 	public String find() {
 		return "order_list";
+	}
+	
+	@RequestMapping("/add")
+	public String add() {
+		return "order_add";
 	}
 	
 	@RequestMapping("/list")
