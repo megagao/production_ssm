@@ -22,7 +22,7 @@
 	         		<li>
 	         			<span>订单管理</span>
 	         			<ul>
-			         		<li data-options="attributes:{'url':'content-category'}">新增订单</li>
+			         		<li data-options="attributes:{'url':'order/add'}">新增订单</li>
 			         		<li data-options="attributes:{'url':'order/find'}">订单查询</li>
 	         			</ul>
 	         		</li>

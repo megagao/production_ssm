@@ -1,5 +1,7 @@
 package org.hqu.production_ms.controller;
 
+import java.util.List;
+
 import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
@@ -18,7 +20,7 @@ public class CustomController {
 	@Autowired
 	private CustomService customService;
 	
-	@RequestMapping("/{customId}")
+	@RequestMapping("/get/{customId}")
 	@ResponseBody
 	public Custom getItemById(@PathVariable String customId) {
 		Custom custom = customService.get(customId);
@@ -29,6 +31,13 @@ public class CustomController {
 	@RequestMapping("/find")
 	public String find() {
 		return "custom_list";
+	}
+	
+	@RequestMapping("/get_data")
+	@ResponseBody
+	public List<Custom> getData() {
+		 List<Custom> list = customService.find();
+		return list;
 	}
 	
 	@RequestMapping("/list")
