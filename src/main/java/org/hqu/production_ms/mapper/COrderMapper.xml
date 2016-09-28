@@ -9,9 +9,10 @@
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
     <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="file" property="file" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
-	<association property="custom" javaType="custom">
+  	<association property="custom" javaType="custom">
 		<id column="custom_id" property="customId" jdbcType="VARCHAR" />
 		<result column="custom_name" property="customName" jdbcType="VARCHAR" />
     	<result column="full_name" property="fullName" jdbcType="VARCHAR" />
@@ -43,6 +44,7 @@
 			quantity,
 			unit_price,
 			unit,
+			image,
 			file,
 			c_order.status,
 			custom.custom_id,
@@ -84,8 +86,6 @@
 			#{id}
 		</foreach>
 	</update>
-	
-	
 	
   <sql id="Example_Where_Clause" >
     <where >
@@ -147,7 +147,7 @@
   </sql>
   <sql id="Base_Column_List" >
     order_id, custom_id, product_id, order_date, request_date, note, quantity, unit_price, 
-    unit, file, status
+    unit, image, file, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.COrderExample" >
     select
@@ -183,11 +183,13 @@
     insert into c_order (order_id, custom_id, product_id, 
       order_date, request_date, note, 
       quantity, unit_price, unit, 
-      file, status)
+      image, file, status
+      )
     values (#{orderId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
       #{orderDate,jdbcType=TIMESTAMP}, #{requestDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, 
       #{quantity,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{unit,jdbcType=VARCHAR}, 
-      #{file,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+      #{image,jdbcType=VARCHAR}, #{file,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.COrder" >
     insert into c_order
@@ -218,6 +220,9 @@
       </if>
       <if test="unit != null" >
         unit,
+      </if>
+      <if test="image != null" >
+        image,
       </if>
       <if test="file != null" >
         file,
@@ -253,6 +258,9 @@
       </if>
       <if test="unit != null" >
         #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
       </if>
       <if test="file != null" >
         #{file,jdbcType=VARCHAR},
@@ -298,6 +306,9 @@
       <if test="record.unit != null" >
         unit = #{record.unit,jdbcType=VARCHAR},
       </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
       <if test="record.file != null" >
         file = #{record.file,jdbcType=VARCHAR},
       </if>
@@ -320,6 +331,7 @@
       quantity = #{record.quantity,jdbcType=INTEGER},
       unit_price = #{record.unitPrice,jdbcType=DECIMAL},
       unit = #{record.unit,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
       file = #{record.file,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -353,6 +365,9 @@
       <if test="unit != null" >
         unit = #{unit,jdbcType=VARCHAR},
       </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
       <if test="file != null" >
         file = #{file,jdbcType=VARCHAR},
       </if>
@@ -372,6 +387,7 @@
       quantity = #{quantity,jdbcType=INTEGER},
       unit_price = #{unitPrice,jdbcType=DECIMAL},
       unit = #{unit,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
       file = #{file,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=VARCHAR}
