@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hqu.production_ms.mapper.EquipmentMapper" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Equipment" >
+    <id column="equipment_id" property="equipmentId" jdbcType="VARCHAR" />
+    <result column="out_date" property="outDate" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="buy_date" property="buyDate" jdbcType="INTEGER" />
+    <result column="lifetime" property="lifetime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="types_id" property="typesId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    equipment_id, out_date, price, buy_date, lifetime, status, note, emp_id, types_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.EquipmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from equipment
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from equipment
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.EquipmentExample" >
+    delete from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.hqu.production_ms.domain.Equipment" >
+    insert into equipment (equipment_id, out_date, price, 
+      buy_date, lifetime, status, 
+      note, emp_id, types_id
+      )
+    values (#{equipmentId,jdbcType=VARCHAR}, #{outDate,jdbcType=TIMESTAMP}, #{price,jdbcType=DECIMAL}, 
+      #{buyDate,jdbcType=INTEGER}, #{lifetime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{typesId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Equipment" >
+    insert into equipment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="outDate != null" >
+        out_date,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="buyDate != null" >
+        buy_date,
+      </if>
+      <if test="lifetime != null" >
+        lifetime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="typesId != null" >
+        types_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="equipmentId != null" >
+        #{equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="outDate != null" >
+        #{outDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="buyDate != null" >
+        #{buyDate,jdbcType=INTEGER},
+      </if>
+      <if test="lifetime != null" >
+        #{lifetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="typesId != null" >
+        #{typesId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.hqu.production_ms.domain.EquipmentExample" resultType="java.lang.Integer" >
+    select count(*) from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update equipment
+    <set >
+      <if test="record.equipmentId != null" >
+        equipment_id = #{record.equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outDate != null" >
+        out_date = #{record.outDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buyDate != null" >
+        buy_date = #{record.buyDate,jdbcType=INTEGER},
+      </if>
+      <if test="record.lifetime != null" >
+        lifetime = #{record.lifetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesId != null" >
+        types_id = #{record.typesId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update equipment
+    set equipment_id = #{record.equipmentId,jdbcType=VARCHAR},
+      out_date = #{record.outDate,jdbcType=TIMESTAMP},
+      price = #{record.price,jdbcType=DECIMAL},
+      buy_date = #{record.buyDate,jdbcType=INTEGER},
+      lifetime = #{record.lifetime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      types_id = #{record.typesId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.Equipment" >
+    update equipment
+    <set >
+      <if test="outDate != null" >
+        out_date = #{outDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="buyDate != null" >
+        buy_date = #{buyDate,jdbcType=INTEGER},
+      </if>
+      <if test="lifetime != null" >
+        lifetime = #{lifetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="typesId != null" >
+        types_id = #{typesId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.Equipment" >
+    update equipment
+    set out_date = #{outDate,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DECIMAL},
+      buy_date = #{buyDate,jdbcType=INTEGER},
+      lifetime = #{lifetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      types_id = #{typesId,jdbcType=VARCHAR}
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

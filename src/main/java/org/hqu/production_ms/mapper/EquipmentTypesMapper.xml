@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hqu.production_ms.mapper.EquipmentTypesMapper" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.EquipmentTypes" >
+    <id column="types_id" property="typesId" jdbcType="VARCHAR" />
+    <result column="types_name" property="typesName" jdbcType="VARCHAR" />
+    <result column="types_standard" property="typesStandard" jdbcType="VARCHAR" />
+    <result column="types_version" property="typesVersion" jdbcType="VARCHAR" />
+    <result column="types_supplier" property="typesSupplier" jdbcType="VARCHAR" />
+    <result column="types_provider" property="typesProvider" jdbcType="VARCHAR" />
+    <result column="types_period" property="typesPeriod" jdbcType="TIMESTAMP" />
+    <result column="types_count" property="typesCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    types_id, types_name, types_standard, types_version, types_supplier, types_provider, 
+    types_period, types_count
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.EquipmentTypesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from equipment_types
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from equipment_types
+    where types_id = #{typesId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from equipment_types
+    where types_id = #{typesId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.EquipmentTypesExample" >
+    delete from equipment_types
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.hqu.production_ms.domain.EquipmentTypes" >
+    insert into equipment_types (types_id, types_name, types_standard, 
+      types_version, types_supplier, types_provider, 
+      types_period, types_count)
+    values (#{typesId,jdbcType=VARCHAR}, #{typesName,jdbcType=VARCHAR}, #{typesStandard,jdbcType=VARCHAR}, 
+      #{typesVersion,jdbcType=VARCHAR}, #{typesSupplier,jdbcType=VARCHAR}, #{typesProvider,jdbcType=VARCHAR}, 
+      #{typesPeriod,jdbcType=TIMESTAMP}, #{typesCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.EquipmentTypes" >
+    insert into equipment_types
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typesId != null" >
+        types_id,
+      </if>
+      <if test="typesName != null" >
+        types_name,
+      </if>
+      <if test="typesStandard != null" >
+        types_standard,
+      </if>
+      <if test="typesVersion != null" >
+        types_version,
+      </if>
+      <if test="typesSupplier != null" >
+        types_supplier,
+      </if>
+      <if test="typesProvider != null" >
+        types_provider,
+      </if>
+      <if test="typesPeriod != null" >
+        types_period,
+      </if>
+      <if test="typesCount != null" >
+        types_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typesId != null" >
+        #{typesId,jdbcType=VARCHAR},
+      </if>
+      <if test="typesName != null" >
+        #{typesName,jdbcType=VARCHAR},
+      </if>
+      <if test="typesStandard != null" >
+        #{typesStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="typesVersion != null" >
+        #{typesVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="typesSupplier != null" >
+        #{typesSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="typesProvider != null" >
+        #{typesProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="typesPeriod != null" >
+        #{typesPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typesCount != null" >
+        #{typesCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.hqu.production_ms.domain.EquipmentTypesExample" resultType="java.lang.Integer" >
+    select count(*) from equipment_types
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update equipment_types
+    <set >
+      <if test="record.typesId != null" >
+        types_id = #{record.typesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesName != null" >
+        types_name = #{record.typesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesStandard != null" >
+        types_standard = #{record.typesStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesVersion != null" >
+        types_version = #{record.typesVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesSupplier != null" >
+        types_supplier = #{record.typesSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesProvider != null" >
+        types_provider = #{record.typesProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typesPeriod != null" >
+        types_period = #{record.typesPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.typesCount != null" >
+        types_count = #{record.typesCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update equipment_types
+    set types_id = #{record.typesId,jdbcType=VARCHAR},
+      types_name = #{record.typesName,jdbcType=VARCHAR},
+      types_standard = #{record.typesStandard,jdbcType=VARCHAR},
+      types_version = #{record.typesVersion,jdbcType=VARCHAR},
+      types_supplier = #{record.typesSupplier,jdbcType=VARCHAR},
+      types_provider = #{record.typesProvider,jdbcType=VARCHAR},
+      types_period = #{record.typesPeriod,jdbcType=TIMESTAMP},
+      types_count = #{record.typesCount,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.EquipmentTypes" >
+    update equipment_types
+    <set >
+      <if test="typesName != null" >
+        types_name = #{typesName,jdbcType=VARCHAR},
+      </if>
+      <if test="typesStandard != null" >
+        types_standard = #{typesStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="typesVersion != null" >
+        types_version = #{typesVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="typesSupplier != null" >
+        types_supplier = #{typesSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="typesProvider != null" >
+        types_provider = #{typesProvider,jdbcType=VARCHAR},
+      </if>
+      <if test="typesPeriod != null" >
+        types_period = #{typesPeriod,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typesCount != null" >
+        types_count = #{typesCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where types_id = #{typesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.EquipmentTypes" >
+    update equipment_types
+    set types_name = #{typesName,jdbcType=VARCHAR},
+      types_standard = #{typesStandard,jdbcType=VARCHAR},
+      types_version = #{typesVersion,jdbcType=VARCHAR},
+      types_supplier = #{typesSupplier,jdbcType=VARCHAR},
+      types_provider = #{typesProvider,jdbcType=VARCHAR},
+      types_period = #{typesPeriod,jdbcType=TIMESTAMP},
+      types_count = #{typesCount,jdbcType=INTEGER}
+    where types_id = #{typesId,jdbcType=VARCHAR}
+  </update>
+</mapper>

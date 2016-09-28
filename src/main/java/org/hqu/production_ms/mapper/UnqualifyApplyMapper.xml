@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hqu.production_ms.mapper.UnqualifyApplyMapper" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.UnqualifyApply" >
+    <id column="unqualify_apply_id" property="unqualifyApplyId" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="unqualify_item" property="unqualifyItem" jdbcType="VARCHAR" />
+    <result column="unqualify_count" property="unqualifyCount" jdbcType="INTEGER" />
+    <result column="equipment_id" property="equipmentId" jdbcType="VARCHAR" />
+    <result column="assembly_date" property="assemblyDate" jdbcType="TIMESTAMP" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    unqualify_apply_id, product_id, unqualify_item, unqualify_count, equipment_id, assembly_date, 
+    emp_id, apply_date, note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.UnqualifyApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from unqualify_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from unqualify_apply
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from unqualify_apply
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.UnqualifyApplyExample" >
+    delete from unqualify_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.hqu.production_ms.domain.UnqualifyApply" >
+    insert into unqualify_apply (unqualify_apply_id, product_id, unqualify_item, 
+      unqualify_count, equipment_id, assembly_date, 
+      emp_id, apply_date, note
+      )
+    values (#{unqualifyApplyId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{unqualifyItem,jdbcType=VARCHAR}, 
+      #{unqualifyCount,jdbcType=INTEGER}, #{equipmentId,jdbcType=VARCHAR}, #{assemblyDate,jdbcType=TIMESTAMP}, 
+      #{empId,jdbcType=VARCHAR}, #{applyDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.UnqualifyApply" >
+    insert into unqualify_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unqualifyApplyId != null" >
+        unqualify_apply_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="unqualifyItem != null" >
+        unqualify_item,
+      </if>
+      <if test="unqualifyCount != null" >
+        unqualify_count,
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="assemblyDate != null" >
+        assembly_date,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unqualifyApplyId != null" >
+        #{unqualifyApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyItem != null" >
+        #{unqualifyItem,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyCount != null" >
+        #{unqualifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="assemblyDate != null" >
+        #{assemblyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.hqu.production_ms.domain.UnqualifyApplyExample" resultType="java.lang.Integer" >
+    select count(*) from unqualify_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update unqualify_apply
+    <set >
+      <if test="record.unqualifyApplyId != null" >
+        unqualify_apply_id = #{record.unqualifyApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unqualifyItem != null" >
+        unqualify_item = #{record.unqualifyItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unqualifyCount != null" >
+        unqualify_count = #{record.unqualifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.equipmentId != null" >
+        equipment_id = #{record.equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assemblyDate != null" >
+        assembly_date = #{record.assemblyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyDate != null" >
+        apply_date = #{record.applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update unqualify_apply
+    set unqualify_apply_id = #{record.unqualifyApplyId,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      unqualify_item = #{record.unqualifyItem,jdbcType=VARCHAR},
+      unqualify_count = #{record.unqualifyCount,jdbcType=INTEGER},
+      equipment_id = #{record.equipmentId,jdbcType=VARCHAR},
+      assembly_date = #{record.assemblyDate,jdbcType=TIMESTAMP},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      apply_date = #{record.applyDate,jdbcType=TIMESTAMP},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.UnqualifyApply" >
+    update unqualify_apply
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyItem != null" >
+        unqualify_item = #{unqualifyItem,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyCount != null" >
+        unqualify_count = #{unqualifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="assemblyDate != null" >
+        assembly_date = #{assemblyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.UnqualifyApply" >
+    update unqualify_apply
+    set product_id = #{productId,jdbcType=VARCHAR},
+      unqualify_item = #{unqualifyItem,jdbcType=VARCHAR},
+      unqualify_count = #{unqualifyCount,jdbcType=INTEGER},
+      equipment_id = #{equipmentId,jdbcType=VARCHAR},
+      assembly_date = #{assemblyDate,jdbcType=TIMESTAMP},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </update>
+</mapper>
