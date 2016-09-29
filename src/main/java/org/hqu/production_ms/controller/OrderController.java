@@ -26,7 +26,6 @@ public class OrderController {
 		return cOrder;
 	}
 	
-	
 	@RequestMapping("/find")
 	public String find() {
 		return "order_list";
@@ -35,6 +34,11 @@ public class OrderController {
 	@RequestMapping("/add")
 	public String add() {
 		return "order_add";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit() {
+		return "order_edit";
 	}
 	
 	@RequestMapping("/list")
@@ -48,6 +52,13 @@ public class OrderController {
 	@ResponseBody
 	private CustomResult insert(COrderPO cOrder) throws Exception {
 		CustomResult result = orderService.insert(cOrder);
+		return result;
+	}
+	
+	@RequestMapping(value="/update")
+	@ResponseBody
+	private CustomResult update(COrderPO cOrder) throws Exception {
+		CustomResult result = orderService.update(cOrder);
 		return result;
 	}
 	
