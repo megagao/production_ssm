@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public CustomResult update(COrder cOrder) {
+	public CustomResult update(COrderPO cOrder) {
 		cOrderMapper.updateByPrimaryKeySelective(cOrder);
 		return CustomResult.ok();
 	}

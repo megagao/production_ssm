@@ -25,7 +25,7 @@ public interface COrderMapper {
 
     int insert(COrderPO record);
 
-    int insertSelective(COrder record);
+    int insertSelective(COrderPO record);
 
     List<COrder> selectByExample(COrderExample example);
 
@@ -35,7 +35,7 @@ public interface COrderMapper {
 
     int updateByExample(@Param("record") COrder record, @Param("example") COrderExample example);
 
-    int updateByPrimaryKeySelective(COrder record);
+    int updateByPrimaryKeySelective(COrderPO record);
 
     int updateByPrimaryKey(COrder record);
 }

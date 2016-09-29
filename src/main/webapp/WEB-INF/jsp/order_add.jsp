@@ -3,8 +3,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
-	<form id="itemAddForm" class="itemForm" method="post">
-	    <table cellpadding="5">
+	<form id="orderAddForm" class="orderForm" method="post">
+	    <table cellpadding="5" >
 	        <tr>
 	            <td>订购客户:</td>
 	            <td>
@@ -68,7 +68,7 @@
 	            </td>
 	        </tr>
 	    </table>
-	    <input type="hidden" name="itemParams"/>
+	    <input type="hidden" name="orderParams"/>
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
@@ -78,32 +78,32 @@
 <script type="text/javascript">
 	
 	
-	var itemAddEditor ;
+	var orderAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
 		//创建富文本编辑器
-		//itemAddEditor = TAOTAO.createEditor("#itemAddForm [name=file]");
-		itemAddEditor = KindEditor.create("#itemAddForm [name=note]", TT.kingEditorParams);
+		//orderAddEditor = TAOTAO.createEditor("#orderAddForm [name=file]");
+		orderAddEditor = KindEditor.create("#orderAddForm [name=note]", TT.kingEditorParams);
 		//初始化类目选择和图片上传器
 		TAOTAO.init({fun:function(node){
 			//根据商品的分类id取商品 的规格模板，生成规格信息。第四天内容。
-			TAOTAO.changeItemParam(node, "itemAddForm");
+			TAOTAO.changeItemParam(node, "orderAddForm");
 		}});
 	});
 	//提交表单
 	function submitForm(){
 		//有效性验证
-		if(!$('#itemAddForm').form('validate')){
+		if(!$('#orderAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
 		//取商品价格，单位为“分”
-		$("#itemAddForm [name=price]").val(eval($("#itemAddForm [name=priceView]").val()) * 100);
+		$("#orderAddForm [name=price]").val(eval($("#orderAddForm [name=priceView]").val()) * 100);
 		//同步文本框中的商品描述
-		itemAddEditor.sync();
+		orderAddEditor.sync();
 		//取商品的规格
 		var paramJson = [];
-		$("#itemAddForm .params li").each(function(i,e){
+		$("#orderAddForm .params li").each(function(i,e){
 			var trs = $(e).find("tr");
 			var group = trs.eq(0).text();
 			var ps = [];
@@ -121,11 +121,11 @@
 		});
 		//把json对象转换成字符串
 		paramJson = JSON.stringify(paramJson);
-		$("#itemAddForm [name=itemParams]").val(paramJson);
+		$("#orderAddForm [name=orderParams]").val(paramJson);
 		
 		//ajax的post方式提交表单
-		//$("#itemAddForm").serialize()将表单序列号为key-value形式的字符串
-		$.post("order/insert",$("#itemAddForm").serialize(), function(data){
+		//$("#orderAddForm").serialize()将表单序列号为key-value形式的字符串
+		$.post("order/insert",$("#orderAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增商品成功!');
 				clearForm()
@@ -134,8 +134,8 @@
 	}
 	
 	function clearForm(){
-		$('#itemAddForm').form('reset');
-		itemAddEditor.html('');
+		$('#orderAddForm').form('reset');
+		orderAddEditor.html('');
 	}
 	$('#cc').combo({    
 	    required:true,    
