@@ -59,6 +59,16 @@ var TT = TAOTAO = {
         	return '<span style="color:yellow;">未知</span>';
         }
     },
+    // 格式化客户的状态
+    formatCustomStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '有效客户';
+        }else if(val == 2){
+        	return '<span style="color:red;">无效客户</span>';
+        }else {
+        	return '<span style="color:yellow;">未知</span>';
+        }
+    },
     
     init : function(data){
     	// 初始化图片上传组件
