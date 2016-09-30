@@ -17,7 +17,7 @@
         </tr>
     </thead>
 </table>
-<div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'order/edit'" style="width:80%;height:80%;padding:10px;">
+<div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,iconCls:'icon-save',href:'order/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 <script>
 
@@ -35,7 +35,7 @@
     	for(var i in sels){
     		ids.push(sels[i].orderId);
     	}
-    	/* ids = ids.join(","); */
+    	ids = ids.join(","); 
     	
     	return ids;
     }
@@ -56,7 +56,7 @@
         		$.messager.alert('提示','必须选择一个商品才能编辑!');
         		return ;
         	}
-        	if(ids.length >= 2){
+        	if(ids.indexOf(',') > 0){
         		$.messager.alert('提示','只能选择一个商品!');
         		return ;
         	}
@@ -69,8 +69,6 @@
         			data.productId = data.product.productId; 
         			data.orderDate = TAOTAO.formatDateTime(data.orderDate);
         			data.requestDate = TAOTAO.formatDateTime(data.requestDate);
-        			alert(data.orderDate)
-        			alert(data.note)
         			$("#orderEditForm").form("load", data);
         			
         			
@@ -95,7 +93,7 @@
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/order/delete_batch",params, function(data){
+                	$.post("order/delete_batch",params, function(data){
             			if(data.status == 200){
             				$.messager.alert('提示','删除商品成功!',undefined,function(){
             					$("#orderList").datagrid("reload");
@@ -128,26 +126,10 @@
         	});
         }
     },{
-        text:'上架',
-        iconCls:'icon-remove',
+        text:'刷新',
+        iconCls:'icon-reload',
         handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','未选中商品!');
-        		return ;
-        	}
-        	$.messager.confirm('确认','确定上架ID为 '+ids+' 的商品吗？',function(r){
-        	    if (r){
-        	    	var params = {"ids":ids};
-                	$.post("/rest/order/reshelf",params, function(data){
-            			if(data.status == 200){
-            				$.messager.alert('提示','上架商品成功!',undefined,function(){
-            					$("#orderList").datagrid("reload");
-            				});
-            			}
-            		});
-        	    }
-        	});
+        	$("#orderList").datagrid("reload");
         }
     }];
 </script>
