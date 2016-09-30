@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ include file="/WEB-INF/jsp/tag.jsp"%>
 <%@ include file="/WEB-INF/jsp/common_js.jsp"%>
 <%@ include file="/WEB-INF/jsp/common_css.jsp"%>
 <html>
@@ -24,6 +23,15 @@
 	         			<ul>
 			         		<li data-options="attributes:{'url':'order/add'}">新增订单</li>
 			         		<li data-options="attributes:{'url':'order/find'}">订单查询</li>
+	         			</ul>
+	         		</li>
+	         	</ul>
+	         	<ul>
+	         		<li>
+	         			<span>客户管理</span>
+	         			<ul>
+			         		<li data-options="attributes:{'url':'custom/add'}">新增客户</li>
+			         		<li data-options="attributes:{'url':'custom/find'}">客户查询</li>
 	         			</ul>
 	         		</li>
 	         	</ul>
