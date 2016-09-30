@@ -31,7 +31,7 @@
 	        </tr>
 	        <tr>
 	            <td>单位:</td>
-	            <td><input class="easyui-textbox" type="text" name="unit" data-options="required:true" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="unit"></input></td>
 	        </tr>
 	        <tr>
 	            <td>订单状态:</td>
@@ -62,7 +62,7 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>商品描述:</td>
+	            <td>订单要求:</td>
 	            <td>
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
 	            </td>
@@ -128,7 +128,7 @@
 		$.post("order/insert",$("#orderAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增商品成功!');
-				clearForm()
+				clearForm();
 			}
 		});
 	}
