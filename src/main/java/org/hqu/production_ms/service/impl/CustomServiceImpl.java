@@ -8,6 +8,7 @@ import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.mapper.CustomMapper;
 import org.hqu.production_ms.service.CustomService;
+import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,9 @@ public class CustomServiceImpl implements CustomService{
 
 	@Override
 	public CustomResult insert(Custom custom) {
+		//custom补全
+		String customId = IDUtils.genStringId();
+		custom.setCustomId(customId);
 		customMapper.insert(custom);
 		return CustomResult.ok();
 	}
