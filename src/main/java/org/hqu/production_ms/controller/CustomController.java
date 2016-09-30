@@ -33,6 +33,16 @@ public class CustomController {
 		return "custom_list";
 	}
 	
+	@RequestMapping("/add")
+	public String add() {
+		return "custom_add";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit() {
+		return "custom_edit";
+	}
+	
 	@RequestMapping("/get_data")
 	@ResponseBody
 	public List<Custom> getData() {
