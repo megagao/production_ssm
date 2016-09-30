@@ -72,6 +72,7 @@ public class OrderController {
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
+		System.out.println(ids);
 		CustomResult result = orderService.deleteBatch(ids);
 		return result;
 	}
