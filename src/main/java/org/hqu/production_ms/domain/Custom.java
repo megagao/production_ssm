@@ -19,8 +19,6 @@ public class Custom {
 
     private Integer status;
 
-    private String managerTel;
-
     private String note;
 
     public String getCustomId() {
@@ -93,14 +91,6 @@ public class Custom {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getManagerTel() {
-        return managerTel;
-    }
-
-    public void setManagerTel(String managerTel) {
-        this.managerTel = managerTel == null ? null : managerTel.trim();
     }
 
     public String getNote() {

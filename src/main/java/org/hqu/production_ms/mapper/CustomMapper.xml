@@ -11,7 +11,6 @@
     <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
     <result column="owner_tel" property="ownerTel" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="manager_tel" property="managerTel" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
   
@@ -38,6 +37,7 @@
 			#{id}
 		</foreach>
 	</update>
+	
 	
 	
   <sql id="Example_Where_Clause" >
@@ -100,7 +100,7 @@
   </sql>
   <sql id="Base_Column_List" >
     custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, status, 
-    manager_tel, note
+    note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.CustomExample" >
     select
@@ -136,11 +136,11 @@
     insert into custom (custom_id, custom_name, full_name, 
       address, fax, email, 
       owner_name, owner_tel, status, 
-      manager_tel, note)
+      note)
     values (#{customId,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{ownerName,jdbcType=VARCHAR}, #{ownerTel,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{managerTel,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+      #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Custom" >
     insert into custom
@@ -171,9 +171,6 @@
       </if>
       <if test="status != null" >
         status,
-      </if>
-      <if test="managerTel != null" >
-        manager_tel,
       </if>
       <if test="note != null" >
         note,
@@ -206,9 +203,6 @@
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
-      </if>
-      <if test="managerTel != null" >
-        #{managerTel,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
@@ -251,9 +245,6 @@
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.managerTel != null" >
-        manager_tel = #{record.managerTel,jdbcType=VARCHAR},
-      </if>
       <if test="record.note != null" >
         note = #{record.note,jdbcType=VARCHAR},
       </if>
@@ -273,7 +264,6 @@
       owner_name = #{record.ownerName,jdbcType=VARCHAR},
       owner_tel = #{record.ownerTel,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
-      manager_tel = #{record.managerTel,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -306,9 +296,6 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="managerTel != null" >
-        manager_tel = #{managerTel,jdbcType=VARCHAR},
-      </if>
       <if test="note != null" >
         note = #{note,jdbcType=VARCHAR},
       </if>
@@ -325,7 +312,6 @@
       owner_name = #{ownerName,jdbcType=VARCHAR},
       owner_tel = #{ownerTel,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      manager_tel = #{managerTel,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR}
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
