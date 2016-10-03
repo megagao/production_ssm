@@ -57,9 +57,6 @@ public class CustomServiceImpl implements CustomService{
 
 	@Override
 	public CustomResult insert(Custom custom) {
-		//custom补全
-		String customId = IDUtils.genStringId();
-		custom.setCustomId(customId);
 		customMapper.insert(custom);
 		return CustomResult.ok();
 	}
