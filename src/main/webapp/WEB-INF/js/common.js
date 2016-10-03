@@ -66,7 +66,7 @@ var TT = TAOTAO = {
         }else if(val == 2){
         	return '<span style="color:red;">无效客户</span>';
         }else {
-        	return '<span style="color:yellow;">未知</span>';
+        	return '<span style="color:yellow;">未知状态</span>';
         }
     },
     
