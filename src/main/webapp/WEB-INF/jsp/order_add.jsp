@@ -6,6 +6,12 @@
 	<form id="orderAddForm" class="orderForm" method="post">
 	    <table cellpadding="5" >
 	        <tr>
+	            <td>订单编号:</td>
+	            <td>
+	            	<input class="easyui-textbox" type="text" name="orderId" data-options="required:true"></input>
+	            </td>
+	        </tr>
+	        <tr>
 	            <td>订购客户:</td>
 	            <td>
 	            	<input id="custom" class="easyui-combobox" name="customId"   
@@ -21,11 +27,11 @@
 	        </tr>
 	        <tr>
 	            <td>订购数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
+	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0" /></td>
 	        </tr>
 	        <tr>
 	            <td>税前单价:</td>
-	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
