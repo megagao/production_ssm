@@ -58,9 +58,6 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public CustomResult insert(COrderPO cOrder) {
-		//order补全
-		String orderId = IDUtils.genStringId();
-		cOrder.setOrderId(orderId);
 		cOrderMapper.insert(cOrder);
 		return CustomResult.ok();
 	}
