@@ -18,7 +18,7 @@
             <th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
             <th data-options="field:'note',width:100,align:'center', formatter:formatNote">订单要求</th>
             <th data-options="field:'image',width:100,align:'center', formatter:formatImg">相关图片</th>
-            <th data-options="field:'note',width:100,align:'center', formatter:formatNote">订单附件</th>
+            <th data-options="field:'note',width:100,align:'center', formatter:formatFile">订单附件</th>
         </tr>
     </thead>
 </table>
@@ -63,6 +63,10 @@
 	}
 	
 	function formatImg(value, row, index){ 
+		return "<a href="+value+" target='_blank'>"+"<img src="+value+" width='50px' height='50px' )/>"+"</a>";
+	}
+	
+	function formatFile(value, row, index){ 
 		return "<a href="+value+" target='_blank'>"+"<img src="+value+" width='50px' height='50px' )/>"+"</a>";
 	}
 	
