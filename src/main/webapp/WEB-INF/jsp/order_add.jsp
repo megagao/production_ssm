@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
+
+<link href="css/uploadfile.css" rel="stylesheet"> 
+<script src="js/jquery.uploadfile.min.js"></script>
+
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
 <div style="padding:10px 10px 10px 10px">
 	<form id="orderAddForm" class="orderForm" method="post">
 	    <table cellpadding="5" >
@@ -68,6 +73,18 @@
 	            </td>
 	        </tr>
 	        <tr>
+	            <td>附件:</td>
+	            <td>
+	            	 <!--<a href="javascript:void(0)" class="easyui-linkbutton fileUpload">附件</a>  -->
+	                 <!-- <input type="file" name="choosefile" value="选择文件"/>
+	                 <input type="hidden" name="file"/>
+	                 <button onclick="uploadFile()">上传</button> -->
+	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
+	                 <div id="fileuploader">Upload</div>
+	                 <input type="hidden" name="file"/>
+	            </td>
+	        </tr>
+	        <tr>
 	            <td>订单要求:</td>
 	            <td>
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
@@ -83,6 +100,50 @@
 </div>
 <script type="text/javascript">
 	
+$(document).ready(function() {
+	$("#fileuploader").uploadFile({
+		url:"file/upload",
+		maxFileCount: 2,                //上传文件个数（多个时修改此处
+	    returnType: 'json',              //服务返回数据
+	    allowedTypes: 'word,sql,txt,ppt',  //允许上传的文件式
+	    showDone: false,                     //是否显示"Done"(完成)按钮
+	    showDelete: true,                  //是否显示"Delete"(删除)按钮
+	    deleteCallback: function(data,pd)
+	    {
+	        //文件删除时的回调方法。
+	        //如：以下ajax方法为调用服务器端删除方法删除服务器端的文件
+	        $.ajax({
+	            cache: false,
+	            url: "file/delete",
+	            dataType: "json",
+	            data: {fileName:data.url},
+	            success: function(data) 
+	            {
+	                if(data.data=="success"){
+	                    pd.statusbar.hide();        //删除成功后隐藏进度条等
+	                    $('#image').val('');
+	                 }else{
+	                        console.log(data.message);  //打印服务器返回的错误信息
+	                 }
+	              }
+	        }); 
+	    },
+	    onSuccess: function(files,data,xhr,pd)
+	    {
+	        //上传成功后的回调方法。本例中是将返回的文件名保到一个hidden类开的input中，以便后期数据处理
+	        if(data&&data.error==0){
+	        	$.messager.alert('提示','上传完成!');
+	        	if( $('#orderAddForm [name=file]').val() != null && $('#orderAddForm [name=file]').val() != ''){
+	        		/* alert($('#orderAddForm [name=file]').val()); */
+	        		$('#orderAddForm [name=file]').val($('#orderAddForm [name=file]').val()+","+data.url);
+	        		alert($('#orderAddForm [name=file]').val());
+	        	}else{
+	            	$('#orderAddForm [name=file]').val(data.url);
+	        	}
+	        }
+	    }
+	});
+});
 	
 	var orderAddEditor ;
 	//页面初始化完毕后执行此方法
@@ -96,6 +157,15 @@
 			TAOTAO.changeItemParam(node, "orderAddForm");
 		}});
 	});
+	
+ 	function uploadFile(){
+		$.post("file/upload",$("#orderAddForm [name=choosefile]"), function(data){
+			if(data.error == 0){
+				$.messager.alert('提示','新增商品成功!');
+			}
+		});
+	} 
+	
 	//提交表单
 	function submitForm(){
 		//有效性验证
