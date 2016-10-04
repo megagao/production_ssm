@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.hqu.production_ms.service.FileService;
 import org.hqu.production_ms.service.PictureService;
+import org.hqu.production_ms.util.FileUtil;
 import org.hqu.production_ms.util.IDUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -62,8 +63,8 @@ public class FileServiceImpl implements FileService{
 
 	@Override
 	public boolean deleteFile(String filename) {
-		
-		return false;
+		FileUtil.deleteFile(filename);
+		return true;
 	}
 
 }
