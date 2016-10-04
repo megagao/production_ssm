@@ -205,6 +205,17 @@ public class FileUtil {
     f2 = null;
   }
   
+  
+  /*public boolean deleteFile(String sPath) {  
+	    File file = new File(sPath);  
+	    // 路径为文件且不为空则进行删除  
+	    if (file.isFile() && file.exists()) {  
+	        file.delete();  
+	    }  
+	    return true;  
+	}  */
+  
+  
 /*
  *删除目录下的所有文件
  **/
