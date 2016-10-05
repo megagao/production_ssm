@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.hqu.production_ms.service.FileService;
-import org.hqu.production_ms.service.PictureService;
 import org.hqu.production_ms.util.FileUtil;
-import org.hqu.production_ms.util.IDUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,14 +24,12 @@ public class FileServiceImpl implements FileService{
 					//生成一个新的文件名
 					//取原始文件名
 					String oldName = uploadFile.getOriginalFilename();
+					
+					String date = new DateTime().toString("yyyy-MM-dd");
+
 					//生成新文件名
 					//UUID.randomUUID();
-					String newName = IDUtils.genImageName();
-					
-					newName = newName + oldName.substring(oldName.lastIndexOf("."));
-					
-					//图片上传
-					String imagePath = new DateTime().toString("/yyyy/MM/dd");
+					 String newName = oldName.substring(0,oldName.lastIndexOf("."))+"("+date+")"+oldName.substring(oldName.lastIndexOf("."));
 					
 					String filePath = "F:\\upload\\temp\\file\\";
 					
@@ -63,6 +59,11 @@ public class FileServiceImpl implements FileService{
 
 	@Override
 	public boolean deleteFile(String filename) {
+		
+		filename = filename.substring(filename.lastIndexOf("/")+1);
+		
+		filename = "F:\\upload\\temp\\file\\"+filename;
+		
 		FileUtil.deleteFile(filename);
 		return true;
 	}
