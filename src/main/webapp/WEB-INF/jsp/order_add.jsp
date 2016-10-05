@@ -2,7 +2,7 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 
 <link href="css/uploadfile.css" rel="stylesheet"> 
-<script src="js/jquery.uploadfile.min.js"></script>
+<script src="js/jquery.uploadfile.js"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
@@ -80,7 +80,7 @@
 	                 <input type="hidden" name="file"/>
 	                 <button onclick="uploadFile()">上传</button> -->
 	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
-	                 <div id="fileuploader">Upload</div>
+	                 <div id="fileuploader">上传文件</div>
 	                 <input type="hidden" name="file"/>
 	            </td>
 	        </tr>
@@ -103,15 +103,16 @@
 $(document).ready(function() {
 	$("#fileuploader").uploadFile({
 		url:"file/upload",
-		maxFileCount: 2,                //上传文件个数（多个时修改此处
+		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
-	    allowedTypes: 'word,sql,txt,ppt',  //允许上传的文件式
+	    allowedTypes: 'word,sql,txt,ppt,pdf',  //允许上传的文件式
 	    showDone: false,                     //是否显示"Done"(完成)按钮
 	    showDelete: true,                  //是否显示"Delete"(删除)按钮
 	    deleteCallback: function(data,pd)
 	    {
 	        //文件删除时的回调方法。
 	        //如：以下ajax方法为调用服务器端删除方法删除服务器端的文件
+	        var fileUrl = data.url;
 	        $.ajax({
 	            cache: false,
 	            url: "file/delete",
@@ -122,6 +123,15 @@ $(document).ready(function() {
 	                if(data.data=="success"){
 	                    pd.statusbar.hide();        //删除成功后隐藏进度条等
 	                    $('#image').val('');
+	                    var urls = $('#orderAddForm [name=file]').val().split(",");  //将删除的文件url从urls中移除
+	                    var deletedUrls = [];
+	                	for(var i in urls){
+	                		if(urls[i] != fileUrl){
+	                			deletedUrls.push(urls[i]);
+	                		}
+	                	}
+	                	deletedUrls = deletedUrls.join(",");
+	                	$('#orderAddForm [name=file]').val(deletedUrls);
 	                 }else{
 	                        console.log(data.message);  //打印服务器返回的错误信息
 	                 }
@@ -136,7 +146,6 @@ $(document).ready(function() {
 	        	if( $('#orderAddForm [name=file]').val() != null && $('#orderAddForm [name=file]').val() != ''){
 	        		/* alert($('#orderAddForm [name=file]').val()); */
 	        		$('#orderAddForm [name=file]').val($('#orderAddForm [name=file]').val()+","+data.url);
-	        		alert($('#orderAddForm [name=file]').val());
 	        	}else{
 	            	$('#orderAddForm [name=file]').val(data.url);
 	        	}
