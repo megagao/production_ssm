@@ -263,29 +263,4 @@ var TT = TAOTAO = {
 		});
     },
     
-    fileParams : {
-		//指定上传文件参数名称
-		filePostName  : "uploadFile",
-		//指定上传文件请求的url。
-		uploadJson : 'file/upload',
-		//上传类型，分别为image、flash、media、file
-		dir : "file"
-	},
-	
-    fileUpload : function(){
-    	$(".fileUpload").click(function(){
-			var _self = $(this);
-			KindEditor.editor(TT.fileParams).loadPlugin('insertfile', function() {
-				this.plugin.fileDialog({
-					clickFn : function(url, title, width, height, border, align) {
-						var input = _self.siblings("input");
-						input.parent().find("img").remove();
-						input.val(url);
-						input.after("<a href='"+url+"' target='_blank'><img src='../image/file.jpg' width='80' height='50'/></a>");
-						this.hideDialog();
-					}
-				});
-			});
-		});
-    }
 };
