@@ -8,5 +8,5 @@ public interface FileService {
 	
 	Map uploadFile(MultipartFile uploadFile);
 	
-	boolean deleteFile(String filename);
+	boolean deleteFile(String fileName);
 }
