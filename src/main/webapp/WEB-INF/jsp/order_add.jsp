@@ -75,10 +75,6 @@
 	        <tr>
 	            <td>附件:</td>
 	            <td>
-	            	 <!--<a href="javascript:void(0)" class="easyui-linkbutton fileUpload">附件</a>  -->
-	                 <!-- <input type="file" name="choosefile" value="选择文件"/>
-	                 <input type="hidden" name="file"/>
-	                 <button onclick="uploadFile()">上传</button> -->
 	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
 	                 <div id="fileuploader">上传文件</div>
 	                 <input type="hidden" name="file"/>
