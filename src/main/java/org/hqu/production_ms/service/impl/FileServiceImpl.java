@@ -58,13 +58,14 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public boolean deleteFile(String filename) {
+	public boolean deleteFile(String fileName) {
 		
-		filename = filename.substring(filename.lastIndexOf("/")+1);
+		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		
-		filename = "F:\\upload\\temp\\file\\"+filename;
+		fileName = "F:\\upload\\temp\\file\\"+fileName;
 		
-		FileUtil.deleteFile(filename);
+		FileUtil.deleteFile(fileName);
+		
 		return true;
 	}
 
