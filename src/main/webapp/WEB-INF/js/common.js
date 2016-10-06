@@ -90,11 +90,12 @@ var TT = TAOTAO = {
         		var imgs = data.pics.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
-        				_ele.siblings(".pics").find("ul").append("<li><a href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"' width='80' height='50' /></a></li>");
+        				alert(i);
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"' width='80' height='50' /></a> <a id='del"+i+"' href='javascript:removeImg("+i+");'><span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 20px'>删除</span></a></li>");
         			}
         		}
         	}
-        	//给“上传图片按钮”绑定click事件
+        	//给“上传图片按钮”绑定click事件.
         	$(e).click(function(){
         		var form = $(this).parentsUntil("form").parent("form");
         		//打开图片上传窗口
@@ -115,6 +116,8 @@ var TT = TAOTAO = {
         	});
     	});
     },
+    
+
     
     // 初始化选择类目组件
     initItemCat : function(data){
@@ -264,3 +267,31 @@ var TT = TAOTAO = {
     },
     
 };
+
+function removeImg(i){
+	var picName = $('#img'+i).attr("href");
+	$.ajax({
+        cache: false,
+        url: "pic/delete",
+        dataType: "json",
+        data: {picName:picName},
+        success: function(data) 
+        {
+            if(data.data=="success"){
+            	$('#img'+i).remove();		//删除成功后删除该文件的显示
+            	$('#del'+i).remove();        
+                var urls = $('#image').val().split(",");  //将删除的文件url从urls中移除
+                var deletedUrls = [];
+            	for(var i in urls){
+            		if(urls[i] != picName){
+            			deletedUrls.push(urls[i]);
+            		}
+            	}
+            	deletedUrls = deletedUrls.join(",");
+            	$('#image').val(deletedUrls);
+             }else{
+                    console.log(data.message);  //打印服务器返回的错误信息
+             }
+          }
+    }); 
+}
