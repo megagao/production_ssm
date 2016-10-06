@@ -34,7 +34,7 @@
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
-	    </table>
+	    </table><span style="color:green;font-size: 12;font-family: Microsoft YaHei;margin-left: 20px">已完成</span>
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateNote()">保存</a>
