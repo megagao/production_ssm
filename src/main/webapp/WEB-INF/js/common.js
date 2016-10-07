@@ -50,11 +50,11 @@ var TT = TAOTAO = {
         if (val == 1){
             return '未开始';
         }else if(val == 2){
-        	return '已开始';
+        	return '<span style="font-weight:bold;">已开始</span>';
         } else if(val == 3){
         	return '<span style="color:green;">已完成</span>';
         } else if(val == 4){
-        	return '<span style="color:red;">已取消</span>';
+        	return '<span style="color:red;">订单取消</span>';
         }else {
         	return '<span style="color:yellow;">未知</span>';
         }
@@ -73,8 +73,6 @@ var TT = TAOTAO = {
     init : function(data){
     	// 初始化图片上传组件
     	this.initPicUpload(data);
-    	// 初始化选择类目组件
-    	this.initItemCat(data);
     },
     // 初始化图片上传组件
     initPicUpload : function(data){
@@ -93,7 +91,7 @@ var TT = TAOTAO = {
         				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
         						"<img src='"+imgs[i]+"' width='80' height='50' /></a> " +
         							"<a id='del"+i+"' href='javascript:removeImg("+i+");'>" +
-        								"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 20px'>" +
+        								"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 16px'>" +
         								"删除</span></a></li>");
         			}
         		}
@@ -112,7 +110,7 @@ var TT = TAOTAO = {
 								form.find(".pics ul").append("<li><a id='img"+i+"' href='"+data.url+"' target='_blank'>" +
 										"<img src='"+data.url+"' width='80' height='50' /></a>" +
 											"<a id='del"+i+"' href='javascript:removeImg("+i+");'>" +
-												"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 20px'>" +
+												"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 16px'>" +
 												"删除</span></a></li>");
 							});
 							form.find("[name=image]").val(imgArray.join(","));
@@ -121,52 +119,6 @@ var TT = TAOTAO = {
 					});
         		});
         	});
-    	});
-    },
-    
-
-    
-    // 初始化选择类目组件
-    initItemCat : function(data){
-    	$(".selectItemCat").each(function(i,e){
-    		var _ele = $(e);
-    		if(data && data.cid){
-    			_ele.after("<span style='margin-left:10px;'>"+data.cid+"</span>");
-    		}else{
-    			_ele.after("<span style='margin-left:10px;'></span>");
-    		}
-    		_ele.unbind('click').click(function(){
-    			$("<div>").css({padding:"5px"}).html("<ul>")
-    			.window({
-    				width:'500',
-    			    height:"450",
-    			    modal:true,
-    			    closed:true,
-    			    iconCls:'icon-save',
-    			    title:'选择类目',
-    			    onOpen : function(){
-    			    	var _win = this;
-    			    	$("ul",_win).tree({
-    			    		url:'/item/cat/list',
-    			    		animate:true,
-    			    		onClick : function(node){
-    			    			if($(this).tree("isLeaf",node.target)){
-    			    				// 填写到cid中
-    			    				_ele.parent().find("[name=cid]").val(node.id);
-    			    				_ele.next().text(node.text).attr("cid",node.id);
-    			    				$(_win).window('close');
-    			    				if(data && data.fun){
-    			    					data.fun.call(this,node);
-    			    				}
-    			    			}
-    			    		}
-    			    	});
-    			    },
-    			    onClose : function(){
-    			    	$(this).window("destroy");
-    			    }
-    			}).window('open');
-    		});
     	});
     },
     
@@ -213,32 +165,6 @@ var TT = TAOTAO = {
     	$(".panel-tool-close").click();
     },
     
-    changeItemParam : function(node,formId){
-    	$.getJSON("/item/param/query/itemcatid/" + node.id,function(data){
-			  if(data.status == 200 && data.data){
-				 $("#"+formId+" .params").show();
-				 var paramData = JSON.parse(data.data.paramData);
-				 var html = "<ul>";
-				 for(var i in paramData){
-					 var pd = paramData[i];
-					 html+="<li><table>";
-					 html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
-					 
-					 for(var j in pd.params){
-						 var ps = pd.params[j];
-						 html+="<tr><td class=\"param\"><span>"+ps+"</span>: </td><td><input autocomplete=\"off\" type=\"text\"/></td></tr>";
-					 }
-					 
-					 html+="</li></table>";
-				 }
-				 html+= "</ul>";
-				 $("#"+formId+" .params td").eq(1).html(html);
-			  }else{
-				 $("#"+formId+" .params").hide();
-				 $("#"+formId+" .params td").eq(1).empty();
-			  }
-		  });
-    },
     getSelectionsIds : function (select){
     	var list = $(select);
     	var sels = list.datagrid("getSelections");
@@ -274,6 +200,21 @@ var TT = TAOTAO = {
     },
     
 };
+
+//格式化图片
+function formatImg(value, row, index){ 
+	
+	if(value !=null && value != ''){
+		var urls = value.split(",");  
+		var resultStr = '';
+		for(var i in urls){
+			resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
+		}
+		return resultStr;
+	}else{
+		return "无";
+	}
+}
 
 //删除图片并删除图片在页面的显示
 function removeImg(i){
@@ -371,18 +312,55 @@ function initFileUpload(){
 	});
 }	
 
-//格式化图片
-function formatImg(value, row, index){ 
-	
-	if(value !=null && value != ''){
-		var urls = value.split(",");  
-		var resultStr = '';
-		for(var i in urls){
-			resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
-		}
-		return resultStr;
-	}else{
-		return "无";
-	}
+
+
+//删除文件并删除文件在页面的显示
+function removeFile(i){
+	var fileName = $('#file'+i).attr("href");
+	$.ajax({
+        cache: false,
+        url: "file/delete",
+        dataType: "json",
+        data: {fileName:fileName},
+        success: function(data) 
+        {
+            if(data.data=="success"){
+            	$('#img'+i)
+            	$('#file'+i).remove();		//删除成功后在页面上删除该文件的显示
+            	$('#delFile'+i).remove();        
+                var urls = $('#file').val().split(",");  //将删除的文件url从urls中移除
+                var deletedUrls = [];
+                tempDelFileName = fileName.substring(0,fileName.lastIndexOf("/"));
+                delFileName = tempDelFileName.substring(tempDelFileName.lastIndexOf("/"))+fileName.substring(fileName.lastIndexOf("/"));
+                for(var k in urls){
+            		if(urls[k] != delFileName){
+            			deletedUrls.push(urls[k]);
+            		}
+            	}
+            	deletedUrls = deletedUrls.join(",");
+            	$('#file').val(deletedUrls);
+            	alert($('#file').val());
+             }else{
+                    console.log(data.message);  //打印服务器返回的错误信息
+             }
+          }
+    }); 
 }
 
+//加载上传过的文件
+function initUploadedFile(){
+	var _ele = $("#fileuploader");
+	_ele.after('\
+			<table class="file">\
+			</table>');
+	alert($('#file').val());
+	var files = $('#file').val().split(","); 
+	for(var i in files){
+		_ele.siblings(".file").append("<tr><td><a id='file"+i+"' href='file/download?fileName="+files[i]+"'>" +
+				"<span style='font-size: 16px;font-family: Microsoft YaHei;'>"
+				+ files[i].substring(files[i].lastIndexOf("/")+1) + "</span></td><td></a> " 
+					+"<a id='delFile"+i+"' href='javascript:removeFile("+i+");'>" 
+					+"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 30px'>"+"删除</span></a></td></tr>");
+	}
+	
+}
