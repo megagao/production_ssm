@@ -41,11 +41,11 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
-						<option value="3">订单取消</option>
-						<option value="4">已完成</option>
+						<option value="3">已完成</option>
+						<option value="4">订单取消</option>
 					</select>
 				</td>
 	        </tr>
@@ -70,7 +70,7 @@
 	            <td>附件:</td>
 	            <td>
 	            	 <div id="fileuploader">上传文件</div>
-	                 <input type="hidden" name="file"/>
+	                 <input id="file" type="hidden" name="file"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -89,47 +89,29 @@
 	
 	var orderEditEditor ;
 	$(function(){
-		//加载文件上传插件
-		initFileUpload();
 		//实例化富文本编辑器
 		orderEditEditor = TAOTAO.createEditor("#orderEditForm [name=note]");
 	});
-	/* orderEditEditor.insertHtml('textarea[name="note"]'); */
+	//同步kindeditor中的内容
 	orderEditEditor.sync();
+	
 	function submitForm(){
 		if(!$('#orderEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		
-		var paramJson = [];
-		$("#orderEditForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		paramJson = JSON.stringify(paramJson);
-		
-		$("#orderEditForm [name=orderParams]").val(paramJson);
+		orderEditEditor.sync();
 		
 		$.post("order/update",$("#orderEditForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','修改商品成功!','info',function(){
+				$.messager.alert('提示','修改订单成功!','info',function(){
 					$("#orderEditWindow").window('close');
 					$("#orderList").datagrid("reload");
 				});
+			}else{
+				$.messager.alert('错误','修改订单失败!');
 			}
 		});
 	}
+	
 </script>
