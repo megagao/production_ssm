@@ -6,17 +6,11 @@
 
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-
 <div style="padding:10px 10px 10px 10px">
-	<form id="orderAddForm" class="orderForm" method="post">
-	    <table cellpadding="5" >
-	        <tr>
-	            <td>订单编号:</td>
-	            <td>
-	            	<input class="easyui-textbox" type="text" name="orderId" data-options="required:true"></input>
-	            </td>
-	        </tr>
-	        <tr>
+	<form id="orderEditForm" class="orderForm" method="post">
+		<input type="hidden" name="orderId"/>
+	    <table cellpadding="5">
+	         <tr>
 	            <td>订购客户:</td>
 	            <td>
 	            	<input id="custom" class="easyui-combobox" name="customId"   
@@ -32,17 +26,17 @@
 	        </tr>
 	        <tr>
 	            <td>订购数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0" /></td>
+	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
 	        </tr>
 	        <tr>
 	            <td>税前单价:</td>
-	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2" />
+	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,required:true" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>单位:</td>
-	            <td><input class="easyui-textbox" type="text" name="unit"></input></td>
+	            <td><input  class="easyui-textbox" type="text" name="unit"></input></td>
 	        </tr>
 	        <tr>
 	            <td>订单状态:</td>
@@ -69,62 +63,47 @@
 	            <td>合同扫描件:</td>
 	            <td>
 	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" name="image"/>
+	                 <input type="hidden" id="image" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>附件:</td>
 	            <td>
-	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
-	                 <div id="fileuploader">上传文件</div>
+	            	 <div id="fileuploader">上传文件</div>
 	                 <input type="hidden" name="file"/>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>订单要求:</td>
+	            <td>商品描述:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:300px;visibility:visible;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
-	    <input type="hidden" name="orderParams"/>
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
 	
-	var orderAddEditor ;
-	//页面初始化完毕后执行此方法
+	var orderEditEditor ;
 	$(function(){
 		//加载文件上传插件
 		initFileUpload();
-		//创建富文本编辑器
-		//orderAddEditor = TAOTAO.createEditor("#orderAddForm [name=file]");
-		orderAddEditor = KindEditor.create("#orderAddForm [name=note]", TT.kingEditorParams);
-		//初始化类目选择和图片上传器
-		TAOTAO.init({fun:function(node){
-			//根据订单的分类id取订单 的规格模板，生成规格信息。第四天内容。
-			TAOTAO.changeItemParam(node, "orderAddForm");
-		}});
+		//实例化富文本编辑器
+		orderEditEditor = TAOTAO.createEditor("#orderEditForm [name=note]");
 	});
-	
-	//提交表单
+	/* orderEditEditor.insertHtml('textarea[name="note"]'); */
+	orderEditEditor.sync();
 	function submitForm(){
-		//有效性验证
-		if(!$('#orderAddForm').form('validate')){
+		if(!$('#orderEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		//取订单价格，单位为“分”
-		$("#orderAddForm [name=price]").val(eval($("#orderAddForm [name=priceView]").val()) * 100);
-		//同步文本框中的订单描述
-		orderAddEditor.sync();
-		//取订单的规格
+		
 		var paramJson = [];
-		$("#orderAddForm .params li").each(function(i,e){
+		$("#orderEditForm .params li").each(function(i,e){
 			var trs = $(e).find("tr");
 			var group = trs.eq(0).text();
 			var ps = [];
@@ -140,26 +119,17 @@
 				"params": ps
 			});
 		});
-		//把json对象转换成字符串
 		paramJson = JSON.stringify(paramJson);
-		$("#orderAddForm [name=orderParams]").val(paramJson);
 		
-		//ajax的post方式提交表单
-		//$("#orderAddForm").serialize()将表单序列号为key-value形式的字符串
-		$.post("order/insert",$("#orderAddForm").serialize(), function(data){
+		$("#orderEditForm [name=orderParams]").val(paramJson);
+		
+		$.post("order/update",$("#orderEditForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增订单成功!');
-				clearForm();
+				$.messager.alert('提示','修改商品成功!','info',function(){
+					$("#orderEditWindow").window('close');
+					$("#orderList").datagrid("reload");
+				});
 			}
 		});
 	}
-	
-	function clearForm(){
-		$('#orderAddForm').form('reset');
-		orderAddEditor.html('');
-	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>

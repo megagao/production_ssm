@@ -18,7 +18,7 @@
             <th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
             <th data-options="field:'note',width:100,align:'center', formatter:formatNote">订单要求</th>
             <th data-options="field:'image',width:100,align:'center', formatter:formatImg">相关图片</th>
-            <th data-options="field:'note',width:100,align:'center', formatter:formatFile">订单附件</th>
+            <th data-options="field:'file',width:150,align:'center', formatter:formatFile">订单附件</th>
         </tr>
     </thead>
 </table>
@@ -43,35 +43,35 @@
 <script>
 
 	var noteEditor ;
-
+	
+	//格式化客户信息
 	function formatCus(value){ 
 	    return value.customName;
 	};  
 	
+	//格式化产品信息
 	function  formatPro(value){ 
 	    return value.productName;
 	};
+	
+	//格式化订单要求
+	function formatNote(value, row, index){ 
+		if(value !=null && value != ''){
+			return "<a href=javascript:openNote("+index+")>"+"订单要求"+"</a>";
+		}else{
+			return "无";
+		}
+	}
 
+	//根据index拿到该行值
 	function onClickRow(index) {
 		var rows = $('#orderList').datagrid('getRows');
 		return rows[index];
 		
 	}
 	
-	function formatNote(value, row, index){ 
-		return "<a href=javascript:openNote("+index+")>"+"订单要求"+"</a>";
-	}
-	
-	function formatImg(value, row, index){ 
-		return "<a href="+value+" target='_blank'>"+"<img src="+value+" width='50px' height='50px' )/>"+"</a>";
-	}
-	
-	function formatFile(value, row, index){ 
-		return "<a href="+value+" target='_blank'>"+"<img src="+value+" width='50px' height='50px' )/>"+"</a>";
-	}
-	
+	//打开订单要求富文本编辑器对话框
 	function  openNote(index){ 
-		
 		var row = onClickRow(index);
 		$("#noteDialog").dialog({
     		onOpen :function(){
@@ -88,6 +88,7 @@
 		
 	};
 	
+	//更新订单要求
 	function updateNote(){
 		noteEditor.sync();
 		$.post("order/update",$("#noteForm").serialize(), function(data){

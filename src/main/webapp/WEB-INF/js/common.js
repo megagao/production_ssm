@@ -90,8 +90,11 @@ var TT = TAOTAO = {
         		var imgs = data.pics.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
-        				alert(i);
-        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"' width='80' height='50' /></a> <a id='del"+i+"' href='javascript:removeImg("+i+");'><span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 20px'>删除</span></a></li>");
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
+        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> " +
+        							"<a id='del"+i+"' href='javascript:removeImg("+i+");'>" +
+        								"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 20px'>" +
+        								"删除</span></a></li>");
         			}
         		}
         	}
@@ -106,7 +109,11 @@ var TT = TAOTAO = {
 							var imgArray = [];
 							KindEditor.each(urlList, function(i, data) {
 								imgArray.push(data.url);
-								form.find(".pics ul").append("<li><a href='"+data.url+"' target='_blank'><img src='"+data.url+"' width='80' height='50' /></a></li>");
+								form.find(".pics ul").append("<li><a id='img"+i+"' href='"+data.url+"' target='_blank'>" +
+										"<img src='"+data.url+"' width='80' height='50' /></a>" +
+											"<a id='del"+i+"' href='javascript:removeImg("+i+");'>" +
+												"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 20px'>" +
+												"删除</span></a></li>");
 							});
 							form.find("[name=image]").val(imgArray.join(","));
 							editor.hideDialog();
@@ -268,8 +275,10 @@ var TT = TAOTAO = {
     
 };
 
+//删除图片并删除图片在页面的显示
 function removeImg(i){
 	var picName = $('#img'+i).attr("href");
+	//alert($('#image').val());
 	$.ajax({
         cache: false,
         url: "pic/delete",
@@ -278,7 +287,7 @@ function removeImg(i){
         success: function(data) 
         {
             if(data.data=="success"){
-            	$('#img'+i).remove();		//删除成功后删除该文件的显示
+            	$('#img'+i).remove();		//删除成功后在页面上删除该图片的显示
             	$('#del'+i).remove();        
                 var urls = $('#image').val().split(",");  //将删除的文件url从urls中移除
                 var deletedUrls = [];
@@ -289,9 +298,90 @@ function removeImg(i){
             	}
             	deletedUrls = deletedUrls.join(",");
             	$('#image').val(deletedUrls);
+            	//alert($('#image').val());
              }else{
                     console.log(data.message);  //打印服务器返回的错误信息
              }
           }
     }); 
+}
+
+//格式化文件在datagrid中的显示
+function formatFile(value, row, index){ 
+	var urls = value.split(",");  
+	var resultStr ='';
+	for(var i in urls){
+		resultStr +="<a href='file/download?fileName="+urls[i]+"'>"+urls[i].substring(urls[i].lastIndexOf("/")+1)+"</a></br></br>";
+	}
+	return resultStr;
+}
+
+//加载文件上传插件
+function initFileUpload(){
+	$("#fileuploader").uploadFile({
+		url:"file/upload",
+		maxFileCount: 5,                //上传文件个数（多个时修改此处
+	    returnType: 'json',              //服务返回数据
+	    allowedTypes: 'word,sql,txt,ppt,pdf',  //允许上传的文件式
+	    showDone: false,                     //是否显示"Done"(完成)按钮
+	    showDelete: true,                  //是否显示"Delete"(删除)按钮
+	    deleteCallback: function(data,pd)
+	    {
+	        //文件删除时的回调方法。
+	        //如：以下ajax方法为调用服务器端删除方法删除服务器端的文件
+	        var fileUrl = data.url;
+	        $.ajax({
+	            cache: false,
+	            url: "file/delete",
+	            dataType: "json",
+	            data: {fileName:data.url},
+	            success: function(data) 
+	            {
+	                if(data.data=="success"){
+	                    pd.statusbar.hide();        //删除成功后隐藏进度条等
+	                    $('#image').val('');
+	                    var urls = $('#orderAddForm [name=file]').val().split(",");  //将删除的文件url从urls中移除
+	                    var deletedUrls = [];
+	                	for(var i in urls){
+	                		if(urls[i] != fileUrl){
+	                			deletedUrls.push(urls[i]);
+	                		}
+	                	}
+	                	deletedUrls = deletedUrls.join(",");
+	                	$('#orderAddForm [name=file]').val(deletedUrls);
+	                 }else{
+	                        console.log(data.message);  //打印服务器返回的错误信息
+	                 }
+	              }
+	        }); 
+	    },
+	    onSuccess: function(files,data,xhr,pd)
+	    {
+	        //上传成功后的回调方法。本例中是将返回的文件名保到一个hidden类开的input中，以便后期数据处理
+	        if(data&&data.error==0){
+	        	$.messager.alert('提示','上传完成!');
+	        	if( $('#orderAddForm [name=file]').val() != null && $('#orderAddForm [name=file]').val() != ''){
+	        		/* alert($('#orderAddForm [name=file]').val()); */
+	        		$('#orderAddForm [name=file]').val($('#orderAddForm [name=file]').val()+","+data.url);
+	        	}else{
+	            	$('#orderAddForm [name=file]').val(data.url);
+	        	}
+	        }
+	    }
+	});
+	
+	//格式化图片
+	function formatImg(value, row, index){ 
+		
+		if(value !=null && value != ''){
+			var urls = value.split(",");  
+			var resultStr = '';
+			for(var i in urls){
+				resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
+			}
+			return resultStr;
+		}else{
+			return "无";
+		}
+	}
 }

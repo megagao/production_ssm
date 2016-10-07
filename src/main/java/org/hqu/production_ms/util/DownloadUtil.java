@@ -16,7 +16,7 @@ public class DownloadUtil {
 	 * @param response HttpServletResponse
 	 * @param delFlag 是否删除文件
 	 */
-	protected void download(String filePath,String returnName,HttpServletResponse response,boolean delFlag){
+	public void download(String filePath,String returnName,HttpServletResponse response,boolean delFlag){
 		this.prototypeDownload(new File(filePath), returnName, response, delFlag);
 	}
 

@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.hqu.production_ms.service.FileService;
+import org.hqu.production_ms.util.DownloadUtil;
 import org.hqu.production_ms.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
 /**
  * 
@@ -68,5 +72,17 @@ public class FileController {
 		result.put("data", "success");
 		String json = JsonUtils.objectToJson(result);
 		return json;
+	}
+	
+	@RequestMapping(value="/file/download")
+	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response){
+		
+		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
+		
+		String filePath = "F:\\upload\\temp\\file\\"+fileName;
+		
+		DownloadUtil du = new DownloadUtil();
+		
+		du.download(filePath, fileName, response, false);
 	}
 }
