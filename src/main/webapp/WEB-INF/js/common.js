@@ -369,19 +369,20 @@ function initFileUpload(){
 	        }
 	    }
 	});
+}	
+
+//格式化图片
+function formatImg(value, row, index){ 
 	
-	//格式化图片
-	function formatImg(value, row, index){ 
-		
-		if(value !=null && value != ''){
-			var urls = value.split(",");  
-			var resultStr = '';
-			for(var i in urls){
-				resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
-			}
-			return resultStr;
-		}else{
-			return "无";
+	if(value !=null && value != ''){
+		var urls = value.split(",");  
+		var resultStr = '';
+		for(var i in urls){
+			resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
 		}
+		return resultStr;
+	}else{
+		return "无";
 	}
 }
+
