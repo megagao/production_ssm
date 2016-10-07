@@ -18,7 +18,7 @@
             <th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
             <th data-options="field:'note',width:100,align:'center', formatter:formatNote">订单要求</th>
             <th data-options="field:'image',width:100,align:'center', formatter:formatImg">相关图片</th>
-            <th data-options="field:'file',width:150,align:'center', formatter:formatFile">订单附件</th>
+            <th data-options="field:'file',width:180,align:'center', formatter:formatFile">订单附件</th>
         </tr>
     </thead>
 </table>
@@ -95,8 +95,9 @@
 			if(data.status == 200){
 				$("#noteDialog").dialog("close");
 				$("#orderList").datagrid("reload");
+				$.messager.alert("操作提示", "更新订单要求成功！");
 			}else{
-				$.messager.alert("操作提示", "更新备注失败！","error");
+				$.messager.alert("操作提示", "更新订单要求失败！");
 			}
 		});
 	}
@@ -145,13 +146,14 @@
         			$("#orderEditForm").form("load", data);
         			orderEditEditor.html(data.note);
         			
-        			
         			TAOTAO.init({
         				"pics" : data.image,
-        				fun:function(node){
-        					TAOTAO.changeItemParam(node, "orderEditForm");
-        				}
         			});
+        			
+        			//加载文件上传插件
+        			initFileUpload();
+        			//加载上传过的文件
+        			initUploadedFile();
         		}
         	}).window("open");
         }
