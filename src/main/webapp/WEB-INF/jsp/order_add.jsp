@@ -47,11 +47,11 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
-						<option value="3">订单取消</option>
-						<option value="4">已完成</option>
+						<option value="3">已完成</option>
+						<option value="4">订单取消</option>
 					</select>
 				</td>
 	        </tr>
