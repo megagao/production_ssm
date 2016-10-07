@@ -322,7 +322,7 @@ function initFileUpload(){
 		url:"file/upload",
 		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
-	    allowedTypes: 'word,sql,txt,ppt,pdf',  //允许上传的文件式
+	    allowedTypes: 'doc,docx,excel,sql,txt,ppt,pdf',  //允许上传的文件式
 	    showDone: false,                     //是否显示"Done"(完成)按钮
 	    showDelete: true,                  //是否显示"Delete"(删除)按钮
 	    deleteCallback: function(data,pd)
