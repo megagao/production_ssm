@@ -46,32 +46,52 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public CustomResult delete(String id) {
-		cOrderMapper.deleteByPrimaryKey(id);
-		return CustomResult.ok();
+		int i = cOrderMapper.deleteByPrimaryKey(id);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
-		cOrderMapper.deleteBatch(ids);
-		return CustomResult.ok();
+		int i = cOrderMapper.deleteBatch(ids);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult insert(COrderPO cOrder) {
-		cOrderMapper.insert(cOrder);
-		return CustomResult.ok();
+		int i = cOrderMapper.insert(cOrder);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult update(COrderPO cOrder) {
-		cOrderMapper.updateByPrimaryKeySelective(cOrder);
-		return CustomResult.ok();
+		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult changeStatus(String[] ids) {
-		cOrderMapper.changeStatus(ids);
-		return CustomResult.ok();
+		int i = cOrderMapper.changeStatus(ids);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 }
