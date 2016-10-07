@@ -339,7 +339,6 @@ function removeFile(i){
             	}
             	deletedUrls = deletedUrls.join(",");
             	$('#file').val(deletedUrls);
-            	alert($('#file').val());
              }else{
                     console.log(data.message);  //打印服务器返回的错误信息
              }
