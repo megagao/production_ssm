@@ -69,7 +69,7 @@
 	            <td>合同扫描件:</td>
 	            <td>
 	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" name="image"/>
+	                 <input type="hidden" id="image" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -77,7 +77,7 @@
 	            <td>
 	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
 	                 <div id="fileuploader">上传文件</div>
-	                 <input type="hidden" name="file"/>
+	                 <input type="hidden" id="file" name="file"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -118,38 +118,15 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		//取订单价格，单位为“分”
-		$("#orderAddForm [name=price]").val(eval($("#orderAddForm [name=priceView]").val()) * 100);
-		//同步文本框中的订单描述
+		//同步文本框中的订单要求
 		orderAddEditor.sync();
-		//取订单的规格
-		var paramJson = [];
-		$("#orderAddForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		//把json对象转换成字符串
-		paramJson = JSON.stringify(paramJson);
-		$("#orderAddForm [name=orderParams]").val(paramJson);
 		
 		//ajax的post方式提交表单
 		//$("#orderAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("order/insert",$("#orderAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增订单成功!');
-				clearForm();
+				location.reload();
 			}
 		});
 	}
