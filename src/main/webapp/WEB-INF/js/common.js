@@ -228,13 +228,16 @@ function removeImg(i){
         success: function(data) 
         {
             if(data.data=="success"){
+            	alert('#img'+i)
             	$('#img'+i).remove();		//删除成功后在页面上删除该图片的显示
             	$('#del'+i).remove();        
                 var urls = $('#image').val().split(",");  //将删除的文件url从urls中移除
                 var deletedUrls = [];
-            	for(var i in urls){
-            		if(urls[i] != picName){
-            			deletedUrls.push(urls[i]);
+                alert(picName)
+                alert($('#image').val())
+            	for(var k in urls){
+            		if(urls[k] != picName){
+            			deletedUrls.push(urls[k]);
             		}
             	}
             	deletedUrls = deletedUrls.join(",");
