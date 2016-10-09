@@ -5,7 +5,6 @@ import java.util.List;
 import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.service.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +68,20 @@ public class CustomController {
 	@ResponseBody
 	private CustomResult update(Custom custom) throws Exception {
 		CustomResult result = customService.update(custom);
+		return result;
+	}
+	
+	@RequestMapping(value="/update_all")
+	@ResponseBody
+	private CustomResult updateAll(Custom custom) throws Exception {
+		CustomResult result = customService.updateAll(custom);
+		return result;
+	}
+	
+	@RequestMapping(value="/update_note")
+	@ResponseBody
+	private CustomResult updateNote(Custom custom) throws Exception {
+		CustomResult result = customService.updateNote(custom);
 		return result;
 	}
 	
