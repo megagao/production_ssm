@@ -91,7 +91,7 @@
 	//更新订单要求
 	function updateNote(){
 		noteEditor.sync();
-		$.post("order/update",$("#noteForm").serialize(), function(data){
+		$.post("order/update_note",$("#noteForm").serialize(), function(data){
 			if(data.status == 200){
 				$("#noteDialog").dialog("close");
 				$("#orderList").datagrid("reload");

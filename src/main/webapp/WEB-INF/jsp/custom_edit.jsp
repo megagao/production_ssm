@@ -82,29 +82,9 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		
-		var paramJson = [];
-		$("#customEditForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		paramJson = JSON.stringify(paramJson);
-		
-		$("#customEditForm [name=customParams]").val(paramJson);
-		
-		$.post("custom/update",$("#customEditForm").serialize(), function(data){
+		//同步文本框中的备注
+		customEditEditor.sync();
+		$.post("custom/update_all",$("#customEditForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','修改客户成功!','info',function(){
 					$("#customEditWindow").window('close');
