@@ -8,7 +8,6 @@ import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.mapper.CustomMapper;
 import org.hqu.production_ms.service.CustomService;
-import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,32 +38,67 @@ public class CustomServiceImpl implements CustomService{
 
 	@Override
 	public Custom get(String string) {
-		
 		return customMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
 	public CustomResult delete(String string) {
-		customMapper.deleteByPrimaryKey(string);
-		return CustomResult.ok();
+		int i = customMapper.deleteByPrimaryKey(string);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
-		customMapper.deleteBatch(ids);
-		return CustomResult.ok();
+		int i = customMapper.deleteBatch(ids);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult insert(Custom custom) {
-		customMapper.insert(custom);
-		return CustomResult.ok();
+		int i = customMapper.insert(custom);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult update(Custom custom) {
-		customMapper.updateByPrimaryKeySelective(custom);
-		return CustomResult.ok();
+		int i = customMapper.updateByPrimaryKeySelective(custom);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
+	}
+	
+	@Override
+	public CustomResult updateAll(Custom custom) {
+		int i = customMapper.updateByPrimaryKey(custom);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public CustomResult updateNote(Custom custom) {
+		int i = customMapper.updateNote(custom);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
@@ -78,5 +112,4 @@ public class CustomServiceImpl implements CustomService{
 		CustomExample example = new CustomExample();
 		return customMapper.selectByExample(example);
 	}
-
 }

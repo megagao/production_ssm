@@ -84,10 +84,19 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 
-
 	@Override
 	public CustomResult updateAll(COrderPO cOrder) {
 		int i = cOrderMapper.updateByPrimaryKey(cOrder);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public CustomResult updateNote(COrderPO cOrder) {
+		int i = cOrderMapper.updateNote(cOrder);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
@@ -104,5 +113,4 @@ public class OrderServiceImpl implements OrderService{
 			return null;
 		}
 	}
-
 }

@@ -22,6 +22,8 @@ public interface OrderService {
     
     //更新全部字段，不判断非空，直接进行更新
     CustomResult updateAll(COrderPO cOrder);
+    
+    CustomResult updateNote(COrderPO cOrder);
 
     CustomResult changeStatus(String[] ids);
 }
