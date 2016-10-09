@@ -126,7 +126,10 @@
 		$.post("order/insert",$("#orderAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增订单成功!');
-				location.reload();
+				clearForm();
+				$(".picFileUpload").siblings("div.pics").find("ul > li").remove();
+				$(".ajax-file-upload-container > .ajax-file-upload-statusbar").remove();
+				
 			}
 		});
 	}

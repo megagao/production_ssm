@@ -37,5 +37,5 @@ public interface COrderMapper {
 
     int updateByPrimaryKeySelective(COrderPO record);
 
-    int updateByPrimaryKey(COrder record);
+    int updateByPrimaryKey(COrderPO cOrder);
 }

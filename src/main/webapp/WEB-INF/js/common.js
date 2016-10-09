@@ -228,7 +228,6 @@ function removeImg(i){
         success: function(data) 
         {
             if(data.data=="success"){
-            	alert('#img'+i)
             	$('#img'+i).remove();		//删除成功后在页面上删除该图片的显示
             	$('#del'+i).remove();        
                 var urls = $('#image').val().split(",");  //将删除的文件url从urls中移除
@@ -241,8 +240,12 @@ function removeImg(i){
             		}
             	}
             	deletedUrls = deletedUrls.join(",");
-            	$('#image').val(deletedUrls);
-            	//alert($('#image').val());
+            	if(deletedUrls !=null && deletedUrls != ''){
+            		$('#image').val(deletedUrls);
+            	}else{
+            		$('#image').val('');
+            	}
+            	
              }else{
                     console.log(data.message);  //打印服务器返回的错误信息
              }
@@ -252,12 +255,16 @@ function removeImg(i){
 
 //格式化文件在datagrid中的显示
 function formatFile(value, row, index){ 
-	var urls = value.split(",");  
-	var resultStr ='';
-	for(var i in urls){
-		resultStr +="<a href='file/download?fileName="+urls[i]+"'>"+urls[i].substring(urls[i].lastIndexOf("/")+1)+"</a></br></br>";
+	if(value !=null && value != ''){
+		var urls = value.split(",");  
+		var resultStr ='';
+		for(var i in urls){
+			resultStr +="<a href='file/download?fileName="+urls[i]+"'>"+urls[i].substring(urls[i].lastIndexOf("/")+1)+"</a></br></br>";
+		}
+		return resultStr;
+	}else{
+		return "无";
 	}
-	return resultStr;
 }
 
 //加载文件上传插件
@@ -355,7 +362,6 @@ function initUploadedFile(){
 	_ele.after('\
 			<table class="file">\
 			</table>');
-	alert($('#file').val());
 	var files = $('#file').val().split(","); 
 	for(var i in files){
 		_ele.siblings(".file").append("<tr><td><a id='file"+i+"' href='file/download?fileName="+files[i]+"'>" +

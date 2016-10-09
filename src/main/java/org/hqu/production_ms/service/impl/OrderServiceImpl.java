@@ -84,6 +84,17 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 
+
+	@Override
+	public CustomResult updateAll(COrderPO cOrder) {
+		int i = cOrderMapper.updateByPrimaryKey(cOrder);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
+	}
+	
 	@Override
 	public CustomResult changeStatus(String[] ids) {
 		int i = cOrderMapper.changeStatus(ids);

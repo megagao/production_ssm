@@ -9,6 +9,21 @@ if ($.fn.datagrid){
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;
 }
+
+/*  2016-10-04 Update  */
+if($.fn.datagrid && $.fn.datagrid.defaults && $.fn.datagrid.defaults.operators.nofilter ){
+$.fn.datagrid.defaults.operators.nofilter.text = "全部";
+$.fn.datagrid.defaults.operators.contains.text = "包含";
+$.fn.datagrid.defaults.operators.equal.text = "等于";
+$.fn.datagrid.defaults.operators.notequal.text = "不等于";
+$.fn.datagrid.defaults.operators.beginwith.text = "以*开始";
+$.fn.datagrid.defaults.operators.endwith.text = "以*结束";
+$.fn.datagrid.defaults.operators.less.text = "小于";
+$.fn.datagrid.defaults.operators.lessorequal.text = "小于等于";
+$.fn.datagrid.defaults.operators.greater.text = "大于";
+$.fn.datagrid.defaults.operators.greaterorequal.text = "大于等于";
+}
+
 if ($.messager){
 	$.messager.defaults.ok = '确定';
 	$.messager.defaults.cancel = '取消';

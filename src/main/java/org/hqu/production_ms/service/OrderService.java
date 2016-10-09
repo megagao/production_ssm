@@ -18,6 +18,8 @@ public interface OrderService {
 	CustomResult insert(COrderPO cOrder);
 
     CustomResult update(COrderPO cOrder);
+    
+    CustomResult updateAll(COrderPO cOrder);
 
     CustomResult changeStatus(String[] ids);
 }
