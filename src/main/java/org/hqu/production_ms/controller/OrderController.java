@@ -62,6 +62,20 @@ public class OrderController {
 		return result;
 	}
 	
+	@RequestMapping(value="/update_all")
+	@ResponseBody
+	private CustomResult updateAll(COrderPO cOrder) throws Exception {
+		CustomResult result = orderService.updateAll(cOrder);
+		return result;
+	}
+	
+	@RequestMapping(value="/update_note")
+	@ResponseBody
+	private CustomResult updateNote(COrderPO cOrder) throws Exception {
+		CustomResult result = orderService.updateNote(cOrder);
+		return result;
+	}
+	
 	@RequestMapping(value="/delete")
 	@ResponseBody
 	private CustomResult delete(String id) throws Exception {

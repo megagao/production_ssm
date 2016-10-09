@@ -87,6 +87,14 @@
 		</foreach>
 	</update>
 	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.COrder" >
+		UPDATE c_order
+		SET note = #{note}
+		WHERE
+			order_id = #{orderId,jdbcType=VARCHAR}
+	</update>
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

@@ -16,6 +16,8 @@ public interface COrderMapper {
 	
 	int changeStatus(String[] ids);
 	
+	int updateNote(COrderPO cOrder);
+	
 	//自动生成的mapper接口方法
     int countByExample(COrderExample example);
 
