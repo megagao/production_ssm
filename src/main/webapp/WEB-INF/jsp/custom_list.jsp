@@ -42,14 +42,20 @@
 
 	var noteEditor ;
 	
+	//根据index拿到该行值
 	function onClickRow(index) {
 		var rows = $('#customList').datagrid('getRows');
 		return rows[index];
 		
 	}
 	
+	//格式化客户介绍
 	function formatNote(value, row, index){ 
-		return "<a href=javascript:openNote("+index+")>"+"备注"+"</a>";
+		if(value !=null && value != ''){
+			return "<a href=javascript:openNote("+index+")>"+"客户介绍"+"</a>";
+		}else{
+			return "无";
+		}
 	}
 	
 	function  openNote(index){ 
@@ -72,11 +78,13 @@
 	
 	function updateNote(){
 		noteEditor.sync();
-		$.post("custom/update",$("#noteForm").serialize(), function(data){
+		$.post("custom/update_note",$("#noteForm").serialize(), function(data){
 			if(data.status == 200){
+				$("#noteDialog").dialog("close");
 				$("#customList").datagrid("reload");
+				$.messager.alert("操作提示", "更新客户介绍成功！");
 			}else{
-				$.messager.alert("操作提示", "更新备注失败！","error");
+				$.messager.alert("操作提示", "更新客户介绍失败！","error");
 			}
 		});
 	}
@@ -119,7 +127,7 @@
 	    			//回显数据
 	    			var data = $("#customList").datagrid("getSelections")[0];
 	    			$("#customEditForm").form("load", data);
-	    			customEditEditor.html(data.note);
+	    			noteEditor.html(data.note);
 	    			
 	    		}
 	    	}).window("open");
