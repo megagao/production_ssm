@@ -38,6 +38,13 @@
 		</foreach>
 	</update>
 	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.Custom" >
+		UPDATE custom
+		SET note = #{note}
+		WHERE
+			custom_id = #{customId,jdbcType=VARCHAR}
+	</update>
 	
 	
   <sql id="Example_Where_Clause" >

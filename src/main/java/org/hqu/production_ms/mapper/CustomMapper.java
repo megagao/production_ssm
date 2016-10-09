@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.CustomExample;
+import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface CustomMapper {
 	
@@ -13,6 +14,8 @@ public interface CustomMapper {
 	int deleteBatch(String[] ids);
 	
 	int changeStatus(String[] ids);
+	
+	int updateNote(Custom record);
 	
 	
     int countByExample(CustomExample example);
