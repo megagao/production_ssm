@@ -5,8 +5,8 @@
 <div style="padding:10px 10px 10px 10px">
 	<form id="customAddForm" class="customForm" method="post">
 	    <table cellpadding="5" >
-	    	<tr>
-	            <td>客户名称:</td>
+	        <tr>
+	            <td>客户编号:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="customId" data-options="required:true"></input>
 	            </td>
@@ -56,14 +56,14 @@
 	        <tr>
 	            <td>客户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="width:150">
 						<option value="1">有效客户</option>
 						<option value="2">无效客户</option>
 					</select>
 				</td>
 	        </tr>
 	        <tr>
-	            <td>备注:</td>
+	            <td>客户介绍:</td>
 	            <td>
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
 	            </td>
@@ -85,11 +85,6 @@
 		//创建富文本编辑器
 		//customAddEditor = TAOTAO.createEditor("#customAddForm [name=file]");
 		customAddEditor = KindEditor.create("#customAddForm [name=note]", TT.kingEditorParams);
-		//初始化类目选择和图片上传器
-		TAOTAO.init({fun:function(node){
-			//根据商品的分类id取商品 的规格模板，生成规格信息。第四天内容。
-			TAOTAO.changeItemParam(node, "customAddForm");
-		}});
 	});
 	//提交表单
 	function submitForm(){
@@ -98,35 +93,13 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		//同步文本框中的商品描述
+		//同步文本框中的备注
 		customAddEditor.sync();
-		//取商品的规格
-		var paramJson = [];
-		$("#customAddForm .params li").each(function(i,e){
-			var trs = $(e).find("tr");
-			var group = trs.eq(0).text();
-			var ps = [];
-			for(var i = 1;i<trs.length;i++){
-				var tr = trs.eq(i);
-				ps.push({
-					"k" : $.trim(tr.find("td").eq(0).find("span").text()),
-					"v" : $.trim(tr.find("input").val())
-				});
-			}
-			paramJson.push({
-				"group" : group,
-				"params": ps
-			});
-		});
-		//把json对象转换成字符串
-		paramJson = JSON.stringify(paramJson);
-		$("#customAddForm [name=customParams]").val(paramJson);
-		
 		//ajax的post方式提交表单
 		//$("#customAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("custom/insert",$("#customAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增商品成功!');
+				$.messager.alert('提示','新增客户成功!');
 				clearForm();
 			}
 		});

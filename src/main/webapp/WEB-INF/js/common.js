@@ -240,12 +240,7 @@ function removeImg(i){
             		}
             	}
             	deletedUrls = deletedUrls.join(",");
-            	if(deletedUrls !=null && deletedUrls != ''){
-            		$('#image').val(deletedUrls);
-            	}else{
-            		$('#image').val('');
-            	}
-            	
+            	$('#image').val(deletedUrls);
              }else{
                     console.log(data.message);  //打印服务器返回的错误信息
              }
