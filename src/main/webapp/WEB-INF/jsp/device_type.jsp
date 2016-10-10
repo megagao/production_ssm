@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="GBK"%>
 
-<table id="deviceType" title="设备种类" style="height:auto" 
+<table id="deviceType" title="设备种类" style="height:auto" class="easyui-datagrid"
 	data-options="
 	   rownumbers:true,
 	   toolbar:'#toobar_deviceType',
@@ -10,7 +10,7 @@
 	   pagination:true,
 	   pageSize:10,
 	   pageList:[10, 20, 30], 
-	   onClickRow: onClickRow_deviceType">
+	   onClickRow: onClickRow">
 
 	<thead>
 		<tr>
@@ -21,7 +21,7 @@
 				data-options="field:'deviceTypeID',width:80,align:'center', 
 							type:'text'
 			">ID</th>
-
+ 
 			<th
 				data-options="field:'deviceTypeIDD',width:100,align:'center' ,
 							formatter:function(value,row){
@@ -74,7 +74,7 @@
 
 			<th
 				data-options="field:'deviceTypeWarranty',width:120,align:'center', 
-						editor:'datebox'
+						editor:'datetimebox'
 			">保修期</th>
 
 		</tr>
@@ -110,27 +110,33 @@
 			return true;
 		}
 		if ($('#deviceType').datagrid('validateRow', deviceTypeEditIndex)) {
-
+			
 			/* deviceTypeName */
 			var deviceTypeNameED = $('#deviceType').datagrid('getEditor', {
 				index : deviceTypeEditIndex,
 				field : 'deviceTypeIDD'
 			});
 			var deviceTypeName = $(deviceTypeNameED.target).combobox('getText');
-			$('#deviceType').datagrid('getRows')[deviceTypeEditIndex]['deviceTypeName'] = deviceTypeName;
+			$('#deviceType').datagrid('getRows')[deviceTypeEditIndex]['deviceTypeName'] = deviceTypeName; 
 			 
 			/* End Edit */
+			/* BugBOSS    td  json  format*/
 			$('#deviceType').datagrid('endEdit', deviceTypeEditIndex);
 			deviceTypeEditIndex = undefined;
+var rows = $('#deviceType').datagrid('getChanges','inserted');
+console.log(rows);
 			return true;
 		} else {
 			return false;
 		}
+		
+		
 	}
 	
-	function onClickRow_deviceType(index, row) {
+	function onClickRow(index, row) {
+		
 		if (deviceTypeEditIndex != index) {
-			if (endEditing_deviceType()) {
+			if (endEditing_deviceType()) { 
 				$('#deviceType').datagrid('selectRow', index).datagrid(
 						'beginEdit', index);
 				deviceTypeEditIndex = index;
@@ -140,7 +146,7 @@
 			$('#deviceType').datagrid('clearSelections');
 		}
 	}
- 
+
 	function append_deviceType() {
 		if (endEditing_deviceType()) {
 			var newIDIndex = $('#deviceType').datagrid('getRows').length - 1;
@@ -168,7 +174,9 @@
 					selections[i]);
 			$('#deviceType').datagrid('deleteRow', selectionIndex);
 		}
-		deviceTypeEditIndex = undefined;
+		if(selections.length>0){
+			deviceTypeEditIndex = undefined;
+		}
 	}
 
 	function accept_deviceType() {
@@ -186,7 +194,7 @@
 		var rows = $('#deviceType').datagrid('getChanges');
 		alert(rows.length + ' rows are changed!');
 	}
- 
+
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
@@ -241,7 +249,7 @@
 		}
 	}
 </script>
- 
+
 <%------------------------------------- 语境菜单 ----------------------------------------------%>
 
 <%------------------------------------- JQuery Easy UI Filter -------------------------------------%>

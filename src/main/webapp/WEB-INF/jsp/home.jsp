@@ -50,6 +50,14 @@
 							</ul>
 						</li>
 					</ul>
+					<ul>
+						<li><span>产品管理</span>
+							<ul>
+								<li data-options="attributes:{'url':'product/add'}">新增产品</li>
+								<li data-options="attributes:{'url':'product/find'}">产品查询</li>
+							</ul>
+						</li>
+					</ul>
 				</li>
 			</ul>
 

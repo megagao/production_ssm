@@ -69,7 +69,16 @@ var TT = TAOTAO = {
         	return '<span style="color:yellow;">未知状态</span>';
         }
     },
-    
+    // 格式化产品的状态
+    formatProductStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '有效产品';
+        }else if(val == 2){
+        	return '<span style="color:red;">停产</span>';
+        }else {
+        	return '<span style="color:yellow;">未知状态</span>';
+        }
+    },
     init : function(data){
     	// 初始化图片上传组件
     	this.initPicUpload(data);

@@ -3,6 +3,7 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.ProductExample;
 
@@ -11,7 +12,11 @@ public interface ProductMapper {
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
 	
-		
+	int changeStatus(String[] ids);
+	
+	int updateNote(Product record);
+	
+	
     int countByExample(ProductExample example);
 
     int deleteByExample(ProductExample example);

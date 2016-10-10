@@ -2,12 +2,13 @@
 	pageEncoding="GBK"%>
 
 <!-- 此注解放table_data-options里会导致在IE里显示不正常  -- "IE真的是狠严（ruo）格（zhi）啊" -->
- <!-- singleSelect:true, -->
+<!-- singleSelect:true, -->
 <!-- 此注解放table_data-options里会导致在IE里显示不正常  -- "IE真的是狠严（ruo）格（zhi）啊" -->
+
 
 <!-- =。=   设置了过滤器后就可以自动分页了 -->
 
-<table id="deviceList" title="设备列表" style="height:389px" 
+<table id="deviceList" title="设备列表" style="height:389px"
 	data-options="
 	   rownumbers:true,
 	   toolbar:'#toobar_deviceList',
@@ -89,7 +90,6 @@
 				
 			">状态</th>
 
-
 			<th
 				data-options="field:'devicePurchaseDate',width:190,align:'center', sortable:true,
 						editor:'datetimebox'
@@ -133,10 +133,11 @@
 				data-options="field:'note',width:270,align:'center',
 						editor:'text'
 			">备注</th>
+
 		</tr>
 	</thead>
 </table>
- 
+
 <div style="margin:8px 0;"></div>
 
 <div id="tabs_deviceList" class="easyui-tabs"
@@ -144,17 +145,17 @@
 	<!-- tabPosition="left" -->
 	<div title="关于" style="padding:10px">
 		<p style="font-size:16px">此选项卡包含”设备种类信息“和”设备保管人信息“两个选项卡 --></p>
-			<ul style="font-size:14px">
-				<li >点击每行数据的”种类“字段或”保管人“字段可查看相对应的设备种类或设备保管人的详细信息</li>
-			</ul>
+		<ul style="font-size:14px">
+			<li>点击每行数据的”种类“字段或”保管人“字段可查看相对应的设备种类或设备保管人的详细信息</li>
+		</ul>
 	</div>
 
 	<!-- 
 	Device Type Tab
 	closable:true
 	 -->
-	<div id="tab_deviceType" title="设备种类信息" data-options="iconCls:'icon-tip',closable:true "
-		style="padding:10px">
+	<div id="tab_deviceType" title="设备种类信息"
+		data-options="iconCls:'icon-tip',closable:true " style="padding:10px">
 		<form id="tab_deviceType_form" class="easyui-form" method="post">
 			<table cellpadding="4">
 				<tr>
@@ -219,7 +220,8 @@
 				<tr>
 					<td>编号 :</td>
 					<td><input class="easyui-textbox" type="text"
-						name="empID_form_deviceList" style="width:99px" data-options="editable:false" /></td>
+						name="empID_form_deviceList" style="width:99px"
+						data-options="editable:false" /></td>
 				</tr>
 				<tr>
 					<td>姓名 :</td>
@@ -229,7 +231,8 @@
 
 					<td>性别 :</td>
 					<td><input class="easyui-textbox" type="text"
-						name="empSex_form_deviceList" style="width:99px" data-options="editable:false" /></td>
+						name="empSex_form_deviceList" style="width:99px"
+						data-options="editable:false" /></td>
 				</tr>
 				<tr>
 					<td>出生日期 :</td>
@@ -249,13 +252,15 @@
 						data-options="editable:false" /></td>
 
 					<td>所属部门 :</td>
-					<td><input class="easyui-textbox" type="text" name="empDept_form_deviceList"
-						style="width:99px" data-options="editable:false" /></td>
+					<td><input class="easyui-textbox" type="text"
+						name="empDept_form_deviceList" style="width:99px"
+						data-options="editable:false" /></td>
 				</tr>
 				<tr>
 					<td>员工状态 :</td>
-					<td><input class="easyui-textbox" type="text" name="empStatus_form_deviceList"
-						style="width:99px" data-options="editable:false" /></td>
+					<td><input class="easyui-textbox" type="text"
+						name="empStatus_form_deviceList" style="width:99px"
+						data-options="editable:false" /></td>
 				</tr>
 
 				<tr>
@@ -269,15 +274,20 @@
 
 <div id="toobar_deviceList" style="height:auto">
 	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-add',plain:true" onclick="append_deviceList()">添加</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-remove',plain:true" onclick="remove_deviceList()">移除</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-undo',plain:true" onclick="reject_deviceList()">撤销</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-save',plain:true" onclick="accept_deviceList()">保存</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-search',plain:true,disable:true" onclick="getChanges_deviceList()">查看改变</a>
+		data-options="iconCls:'icon-add',plain:true"
+		onclick="append_deviceList()">添加</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-remove',plain:true"
+		onclick="remove_deviceList()">移除</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-undo',plain:true"
+		onclick="reject_deviceList()">撤销</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-save',plain:true"
+		onclick="accept_deviceList()">保存</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-search',plain:true,disable:true"
+		onclick="getChanges_deviceList()">查看改变</a>
 </div>
 
 <div style="margin:18x 0;"></div>
@@ -291,6 +301,7 @@
 			return true
 		}
 		if ($('#deviceList').datagrid('validateRow', deviceListEditIndex)) {
+		
 			/* deviceName */
 			var deviceNameED_List = $('#deviceList').datagrid('getEditor', {
 				index : deviceListEditIndex,
@@ -299,19 +310,23 @@
 			var deviceName = $(deviceNameED_List.target).combobox('getText');
 			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceName'] = deviceName;
 			/* deviceTypeName */
-			var deviceTypeNameED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceTypeName'
-			});
-			var deviceTypeName = $(deviceTypeNameED_List.target).combobox('getText');
+			var deviceTypeNameED_List = $('#deviceList').datagrid('getEditor',
+					{
+						index : deviceListEditIndex,
+						field : 'deviceTypeName'
+					});
+			var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
+					'getText');
 			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceTypeName'] = deviceTypeName;
 			/* deviceStatus */
 			var deviceStatusED_List = $('#deviceList').datagrid('getEditor', {
 				index : deviceListEditIndex,
 				field : 'deviceStatus'
 			});
-			var deviceStatus = $(deviceStatusED_List.target).combobox('getText');
+			var deviceStatus = $(deviceStatusED_List.target)
+					.combobox('getText');
 			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceStatus'] = deviceStatus;
+		
 			/* End Edit */
 			$('#deviceList').datagrid('endEdit', deviceListEditIndex);
 			deviceListEditIndex = undefined;
@@ -352,14 +367,29 @@
 			detailInfoTab.panel('options').tab.show();
 			tabs_deviceList.tabs("select", "设备保管人信息");
 			loadDataToDeviceKeeperNameInfoForm(row.deviceKeeper);
-		} 
+		}
+		
+var rows = $('#deviceList').datagrid('getChanges');
+console.log(rows.length + ' rows are changed!');
+
 	}
 
 	function append_deviceList() {
-	
+
 		if (endEditing_deviceList()) {
-			var newIDIndex = $('#deviceList').datagrid('getRows').length - 1;
-console.log("newIDIndex : "+newIDIndex);
+<%--  	
+			var options = $('#deviceList').datagrid('getPager').data('pagination').options;
+			//当前页码
+			var currentPage = options.pageNumber;
+			//总条目数
+			var totalRows = options.total;
+			//总页数
+			var totalPages = Math.ceil(totalRows/options.pageSize);
+			$('#deviceList').datagrid({pageNumber: totalPages});
+			/* append_deviceList_assist(); */
+--%>
+	var newIDIndex = $('#deviceList').datagrid('getRows').length - 1;
+			console.log("newIDIndex : " + newIDIndex);
 			var newID_string = $('#deviceList').datagrid('getRows')[newIDIndex].deviceID;
 			var newID_int = parseInt(newID_string) + 1;
 			if (newID_int < 10)
@@ -370,27 +400,26 @@ console.log("newIDIndex : "+newIDIndex);
 			$('#deviceList').datagrid('appendRow', {
 				deviceID : newID_int
 			});
-			
+
 			deviceListEditIndex = $('#deviceList').datagrid('getRows').length - 1;
-			$('#deviceList').datagrid('selectRow', deviceListEditIndex).datagrid(
-					'beginEdit', deviceListEditIndex);
+			$('#deviceList').datagrid('selectRow', deviceListEditIndex)
+					.datagrid('beginEdit', deviceListEditIndex);
 
 			$('#deviceList').datagrid('clearSelections');
 		}
-		
-/* $('#tt').datagrid({pageNumber: max}); */		
 	}
 
 	function remove_deviceList() {
-		var selections = $('#deviceList').datagrid('getSelections');
 
+		var selections = $('#deviceList').datagrid('getSelections');
 		for (var i = 0; i < selections.length; i++) {
 			var selectionIndex = $('#deviceList').datagrid('getRowIndex',
 					selections[i]);
 			$('#deviceList').datagrid('deleteRow', selectionIndex);
 		}
-		deviceListEditIndex = undefined;
-		/* $('#deviceList').datagrid('reload');  */
+		if (selections.length > 0) {
+			deviceListEditIndex = undefined;
+		}
 	}
 
 	function accept_deviceList() {
@@ -406,17 +435,17 @@ console.log("newIDIndex : "+newIDIndex);
 	}
 
 	function getChanges_deviceList() {
-		var rows = $('#deviceList').datagrid('getChanges');
+
+		var rows = $('#deviceList').datagrid('getChanges','updated');
 		alert(rows.length + ' rows are changed!');
 	}
-
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
 
 
 <%------------------------------------- 语境菜单 ----------------------------------------------%>
- 
+
 <script type="text/javascript">
 	$(function() {
 		$('#deviceList').datagrid({
@@ -483,8 +512,8 @@ console.log("newIDIndex : "+newIDIndex);
 		var dg = $('#deviceList').datagrid({
 			filterBtnIconCls : 'icon-filter'
 		});
- 
-	dg.datagrid('enableFilter', [ {
+
+		dg.datagrid('enableFilter', [ {
 			field : 'deviceID',
 			type : 'text',
 			options : {
@@ -594,7 +623,6 @@ console.log("newIDIndex : "+newIDIndex);
 <%-------------------------------------  Tabs  -------------------------------------%>
 
 <script type="text/javascript">
-	
 	/* 静态载入数据，仅为测试，后再动态从数据库载入 */
 	/* Load data_deviceTypeName to tab_tab_deviceType */
 	function loadDataToDeviceTypeNameInfoForm(deviceTypeName) {
@@ -615,7 +643,7 @@ console.log("newIDIndex : "+newIDIndex);
 
 		});
 	}
-</script> 
+</script>
 
 <%------------------------------------- Add or Remove Tabs  -------------------------------------%>
 
@@ -625,23 +653,23 @@ console.log("newIDIndex : "+newIDIndex);
 	$(function() {
 		mouseEnterEvent_deviceList();
 
-		var deviceList_Tab_Type = $('#tabs_deviceList').tabs('getTab', "设备种类信息").panel(
-				'options').tab;
+		var deviceList_Tab_Type = $('#tabs_deviceList')
+				.tabs('getTab', "设备种类信息").panel('options').tab;
 		deviceList_Tab_Type.hide();
-		var deviceList_Tab_Keeper = $('#tabs_deviceList').tabs('getTab', "设备保管人信息").panel(
-				'options').tab;
+		var deviceList_Tab_Keeper = $('#tabs_deviceList').tabs('getTab',
+				"设备保管人信息").panel('options').tab;
 		deviceList_Tab_Keeper.hide();
 	});
 	$('#tabs_deviceList').tabs(
 			{
 				onBeforeClose : function(title, index) {
 					if (title === "设备种类信息") {
-						var deviceList_Tab_Type = $('#tabs_deviceList').tabs('getTab',
-								"设备种类信息").panel('options').tab;
+						var deviceList_Tab_Type = $('#tabs_deviceList').tabs(
+								'getTab', "设备种类信息").panel('options').tab;
 						deviceList_Tab_Type.hide();
 					} else if (title === "设备保管人信息") {
-						var deviceList_Tab_Keeper = $('#tabs_deviceList').tabs('getTab',
-								"设备保管人信息").panel('options').tab;
+						var deviceList_Tab_Keeper = $('#tabs_deviceList').tabs(
+								'getTab', "设备保管人信息").panel('options').tab;
 						deviceList_Tab_Keeper.hide();
 					}
 					/* 手动选择新选项卡，否则被隐藏的选项卡的内容无法隐藏 */
@@ -649,6 +677,7 @@ console.log("newIDIndex : "+newIDIndex);
 
 					return false; // 阻止关闭
 				}
-	});
+			});
 
+	
 <%--------------------------------------------------------------------------%>

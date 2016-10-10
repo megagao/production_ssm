@@ -7,7 +7,11 @@ public class Product {
 
     private String productType;
 
-    private String drawing;
+    private String image;
+
+    private String note;
+
+    private Integer status;
 
     public String getProductId() {
         return productId;
@@ -33,11 +37,27 @@ public class Product {
         this.productType = productType == null ? null : productType.trim();
     }
 
-    public String getDrawing() {
-        return drawing;
+    public String getImage() {
+        return image;
     }
 
-    public void setDrawing(String drawing) {
-        this.drawing = drawing == null ? null : drawing.trim();
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
