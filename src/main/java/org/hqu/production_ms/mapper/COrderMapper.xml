@@ -44,7 +44,7 @@
 			quantity,
 			unit_price,
 			unit,
-			image,
+			c_order.image,
 			file,
 			c_order.status,
 			custom.custom_id,
