@@ -3,14 +3,11 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.COrder;
-import org.hqu.production_ms.domain.COrderExample;
-import org.hqu.production_ms.domain.COrderExample.Criteria;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.mapper.COrderMapper;
 import org.hqu.production_ms.service.OrderService;
-import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +31,7 @@ public class OrderServiceImpl implements OrderService{
 		result.setRows(list);
 		//取记录总条数
 		PageInfo<COrder> pageInfo = new PageInfo<>(list);
+		long a = pageInfo.getTotal();
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
