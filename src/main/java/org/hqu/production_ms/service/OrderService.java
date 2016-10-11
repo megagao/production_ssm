@@ -7,7 +7,7 @@ import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface OrderService {
 	
-	EUDataGridResult getOrderList(int page, int rows, COrder cOrder);
+	EUDataGridResult getList(int page, int rows, COrder cOrder);
 	
 	COrder get(String string);
 	

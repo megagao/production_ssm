@@ -43,8 +43,8 @@ public class OrderController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, COrder cOrder) {
-		EUDataGridResult result = orderService.getOrderList(page, rows, cOrder);
+	public EUDataGridResult getList(Integer page, Integer rows, COrder cOrder) {
+		EUDataGridResult result = orderService.getList(page, rows, cOrder);
 		return result;
 	}
 	

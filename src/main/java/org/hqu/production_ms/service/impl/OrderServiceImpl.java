@@ -21,7 +21,7 @@ public class OrderServiceImpl implements OrderService{
 	COrderMapper cOrderMapper;
 	
 	@Override
-	public EUDataGridResult getOrderList(int page, int rows, COrder cOrder) {
+	public EUDataGridResult getList(int page, int rows, COrder cOrder) {
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -31,7 +31,6 @@ public class OrderServiceImpl implements OrderService{
 		result.setRows(list);
 		//取记录总条数
 		PageInfo<COrder> pageInfo = new PageInfo<>(list);
-		long a = pageInfo.getTotal();
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
