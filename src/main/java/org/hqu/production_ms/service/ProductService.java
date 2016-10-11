@@ -20,5 +20,12 @@ public interface ProductService {
 
 	CustomResult insert(Product product);
 
+	//更新部分字段，用的是updateSelective判断非空的字段进行更新
     CustomResult update(Product product);
+    
+    //更新全部字段，不判断非空，直接进行更新
+    CustomResult updateAll(Product product);
+    
+    //更新备注
+    CustomResult updateNote(Product product);
 }

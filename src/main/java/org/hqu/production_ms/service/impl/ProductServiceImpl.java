@@ -44,33 +44,67 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public CustomResult delete(String string) {
-		productMapper.deleteByPrimaryKey(string);
-		return CustomResult.ok();
+		int i = productMapper.deleteByPrimaryKey(string);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
-		productMapper.deleteBatch(ids);
-		return CustomResult.ok();
+		int i = productMapper.deleteBatch(ids);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult insert(Product product) {
-		productMapper.insert(product);
-		return CustomResult.ok();
+		int i = productMapper.insert(product);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
 	public CustomResult update(Product product) {
-		productMapper.updateByPrimaryKeySelective(product);
-		return CustomResult.ok();
+		int i = productMapper.updateByPrimaryKeySelective(product);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
 	@Override
-	public List<Product> find() {
-		ProductExample example = new ProductExample();
-		
-		return productMapper.selectByExample(example);
+	public CustomResult updateAll(Product product) {
+		int i = productMapper.updateByPrimaryKey(product);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
 	}
 
+	@Override
+	public CustomResult updateNote(Product product) {
+		int i = productMapper.updateNote(product);
+		if(i>=0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
+	}
+	
+	@Override
+	public List<Product> find() {
+		ProductExample example = new ProductExample();
+		return productMapper.selectByExample(example);
+	}
 }
