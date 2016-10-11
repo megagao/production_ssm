@@ -14,4 +14,13 @@
       	<package name="org.hqu.production_ms.domain.authority"/>
   	</typeAliases>
   	
+  	<!-- 配置分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->        
+        	<property name="dialect" value="mysql"/>
+		</plugin>
+	</plugins>
+  	
+  	
 </configuration>
