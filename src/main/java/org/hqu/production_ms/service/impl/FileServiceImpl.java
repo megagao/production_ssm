@@ -30,7 +30,7 @@ public class FileServiceImpl implements FileService{
 					//UUID.randomUUID();
 					//String newName = oldName.substring(0,oldName.lastIndexOf("."))+"("+date+")"+oldName.substring(oldName.lastIndexOf("."));
 					
-					String filePath = "F:\\upload\\temp\\file\\";
+					String filePath = "E:\\upload\\temp\\file\\";
 					
 					//新文件
 					File file = new java.io.File(filePath+fileName);
@@ -61,7 +61,7 @@ public class FileServiceImpl implements FileService{
 		
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		
-		fileName = "F:\\upload\\temp\\file\\"+fileName;
+		fileName = "E:\\upload\\temp\\file\\"+fileName;
 		
 		FileUtil.deleteFile(fileName);
 		

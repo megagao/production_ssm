@@ -3,7 +3,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <table class="easyui-datagrid" id="productList" title="订单列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,url:'product/list',method:'get',pageSize:20,toolbar:toolbar">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'product/list',method:'get',pageSize:20,toolbar:toolbar">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -129,11 +129,6 @@
         			TAOTAO.init({
         				"pics" : data.image,
         			});
-        			
-        			//加载文件上传插件
-        			initFileUpload();
-        			//加载上传过的文件
-        			initUploadedFile();
         		}
         	}).window("open");
         }

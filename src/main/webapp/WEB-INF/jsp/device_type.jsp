@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="GBK"%>
 
-<table id="deviceType" title="设备种类" style="height:auto" class="easyui-datagrid"
+<table id="deviceType" title="设备种类" style="height:auto"
 	data-options="
 	   rownumbers:true,
 	   toolbar:'#toobar_deviceType',
@@ -18,19 +18,19 @@
 			<th data-options="field:'ck',checkbox:true"></th>
 
 			<th
-				data-options="field:'deviceTypeID',width:80,align:'center', 
+				data-options="field:'deviceTypeId',width:80,align:'center', 
 							type:'text'
-			">ID</th>
- 
+			">Id</th>
+
 			<th
-				data-options="field:'deviceTypeIDD',width:100,align:'center' ,
+				data-options="field:'deviceTypeIdd',width:100,align:'center' ,
 							formatter:function(value,row){
 								return row.deviceTypeName;
 							},
 							editor:{
 								type:'combobox',
 								options:{
-									valueField:'deviceTypeIDD',
+									valueField:'deviceTypeIdd',
 									textField:'deviceTypeName',
 									method:'get',
 									url:'json/deviceType_Name.json',
@@ -82,19 +82,26 @@
 </table>
 
 <div style="margin:8px 0;"></div>
- 
+
 <div id="toobar_deviceType" style="height:auto;">
 	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-add',plain:true" onclick="append_deviceType()">添加</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-remove',plain:true" onclick="remove_deviceType()">移除</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-undo',plain:true" onclick="reject_deviceType()">撤销</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-save',plain:true" onclick="accept_deviceType()">保存</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-search',plain:true" onclick="getChanges_deviceType()">查看改变</a>
-	 
+		data-options="iconCls:'icon-edit',plain:true"
+		onclick="edit_deviceType()">编辑</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
+		onclick="append_deviceType()">添加</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-remove',plain:true"
+		onclick="remove_deviceType()">移除</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-undo',plain:true"
+		onclick="reject_deviceType()">撤销</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-save',plain:true"
+		onclick="accept_deviceType()">保存</a> <a href="javascript:void(0)"
+		class="easyui-linkbutton"
+		data-options="iconCls:'icon-search',plain:true"
+		onclick="getChanges_deviceType()">查看改变</a>
+
 </div>
 
 <div style="margin:18x 0;"></div>
@@ -103,64 +110,80 @@
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
 
 <script type="text/javascript">
-
 	var deviceTypeEditIndex = undefined;
 	function endEditing_deviceType() {
 		if (deviceTypeEditIndex == undefined) {
 			return true;
 		}
 		if ($('#deviceType').datagrid('validateRow', deviceTypeEditIndex)) {
-			
+
 			/* deviceTypeName */
 			var deviceTypeNameED = $('#deviceType').datagrid('getEditor', {
 				index : deviceTypeEditIndex,
-				field : 'deviceTypeIDD'
+				field : 'deviceTypeIdd'
 			});
 			var deviceTypeName = $(deviceTypeNameED.target).combobox('getText');
-			$('#deviceType').datagrid('getRows')[deviceTypeEditIndex]['deviceTypeName'] = deviceTypeName; 
-			 
+			$('#deviceType').datagrid('getRows')[deviceTypeEditIndex]['deviceTypeName'] = deviceTypeName;
+
 			/* End Edit */
 			/* BugBOSS    td  json  format*/
 			$('#deviceType').datagrid('endEdit', deviceTypeEditIndex);
 			deviceTypeEditIndex = undefined;
-var rows = $('#deviceType').datagrid('getChanges','inserted');
-console.log(rows);
+			var rows = $('#deviceType').datagrid('getChanges', 'inserted');
 			return true;
 		} else {
 			return false;
 		}
-		
-		
+
+	}
+
+	function onClickRow(index, row) {
+
 	}
 	
-	function onClickRow(index, row) {
+	function edit_deviceType() {
 		
-		if (deviceTypeEditIndex != index) {
-			if (endEditing_deviceType()) { 
-				$('#deviceType').datagrid('selectRow', index).datagrid(
-						'beginEdit', index);
-				deviceTypeEditIndex = index;
+		/* 得到所有选择行的索引 */
+		var rowSelections = $('#deviceType').datagrid('getSelections');
+		if(rowSelections.length==0){
+			return;		
+		}
+		if(rowSelections.length>=2){
+			$.messager.alert('提示','请选择一条记录进入编辑！','warning');
+        	return ;
+		}
+		/* 得到选择行的索引 */
+		var rowSelection = rowSelections[0];
+		var rowSelectionIndex = $('#deviceType').datagrid('getRowIndex',rowSelection);
+
+		/* 进入编辑状态 */
+		if (deviceTypeEditIndex != rowSelectionIndex) {
+			if (endEditing_deviceType()) {
+				$('#deviceType').datagrid('selectRow', rowSelectionIndex).datagrid(
+						'beginEdit', rowSelectionIndex);
+				deviceTypeEditIndex = rowSelectionIndex;
 			} else {
 				$('#deviceType').datagrid('selectRow', deviceTypeEditIndex);
 			}
-			$('#deviceType').datagrid('clearSelections');
 		}
+		
+		$('#deviceType').datagrid('clearSelections');
 	}
 
 	function append_deviceType() {
 		if (endEditing_deviceType()) {
-			var newIDIndex = $('#deviceType').datagrid('getRows').length - 1;
-			var newID_string = $('#deviceType').datagrid('getRows')[newIDIndex].deviceTypeID;
-			var newID_int = parseInt(newID_string) + 1;
-			if (newID_int < 10)
-				newID_int = "0" + newID_int;
+			var newIdIndex = $('#deviceType').datagrid('getRows').length - 1;
+			var newId_string = $('#deviceType').datagrid('getRows')[newIdIndex].deviceTypeId;
+			var newId_int = parseInt(newId_string) + 1;
+			if (newId_int < 10)
+				newId_int = "0" + newId_int;
 
 			$('#deviceType').datagrid('appendRow', {
-				deviceTypeID : newID_int
+				deviceTypeId : newId_int
 			});
 			deviceTypeEditIndex = $('#deviceType').datagrid('getRows').length - 1;
-			$('#deviceType').datagrid('selectRow', deviceTypeEditIndex).datagrid(
-					'beginEdit', deviceTypeEditIndex);
+			$('#deviceType').datagrid('selectRow', deviceTypeEditIndex)
+					.datagrid('beginEdit', deviceTypeEditIndex);
 
 			$('#deviceType').datagrid('clearSelections');
 		}
@@ -174,7 +197,7 @@ console.log(rows);
 					selections[i]);
 			$('#deviceType').datagrid('deleteRow', selectionIndex);
 		}
-		if(selections.length>0){
+		if (selections.length > 0) {
 			deviceTypeEditIndex = undefined;
 		}
 	}
@@ -194,14 +217,13 @@ console.log(rows);
 		var rows = $('#deviceType').datagrid('getChanges');
 		alert(rows.length + ' rows are changed!');
 	}
-
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
 
 
 <%------------------------------------- 语境菜单 ----------------------------------------------%>
-  
+
 <script type="text/javascript">
 	$(function() {
 		$('#deviceType').datagrid({
@@ -265,16 +287,16 @@ console.log(rows);
 <script>
 	$(function() {
 
- 		var deviceTypeForFilter = $('#deviceType').datagrid({
+		var deviceTypeForFilter = $('#deviceType').datagrid({
 			filterBtnIconCls : 'icon-filter'
 		});
-		deviceTypeForFilter.datagrid( 'enableFilter', [ {
-			field : 'deviceTypeID',
+		deviceTypeForFilter.datagrid('enableFilter', [ {
+			field : 'deviceTypeId',
 			type : 'text',
 			options : {
 				precision : -1
 			},
-			op : [ 'contains','equal', 'notequal', 'less', 'greater' ]
+			op : [ 'contains', 'equal', 'notequal', 'less', 'greater' ]
 		}, {
 			field : 'deviceTypeWarranty',
 			type : 'datetimebox',
@@ -286,12 +308,12 @@ console.log(rows);
 			field : 'deviceTypeQuantity',
 			type : 'numberbox',
 			options : {
-				min:0,
-				max:99999,
+				min : 0,
+				max : 99999,
 			},
 			op : [ 'contains', 'equal', 'notequal', 'less', 'greater' ]
-		} ]);  
-});
-</script>	
+		} ]);
+	});
+</script>
 
 <%------------------------------------- JQuery Easy UI Filter -------------------------------------%>

@@ -1,8 +1,8 @@
 {"total":6,"rows":[
-	{"deviceFaultID":"001","deviceID":"001","deviceIDD":"001","deviceName":"空调1","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
-	{"deviceFaultID":"002","deviceID":"002","deviceIDD":"002","deviceName":"空调2","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
-	{"deviceFaultID":"003","deviceID":"003","deviceIDD":"003","deviceName":"空调3","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
-	{"deviceFaultID":"004","deviceID":"004","deviceIDD":"004","deviceName":"空调4","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
-	{"deviceFaultID":"005","deviceID":"005","deviceIDD":"005","deviceName":"空调5","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
-	{"deviceFaultID":"006","deviceID":"006","deviceIDD":"006","deviceName":"空调6","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"}
+	{"deviceFaultId":"001","deviceId":"001","deviceIdd":"001","deviceName":"空调1","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
+	{"deviceFaultId":"002","deviceId":"002","deviceIdd":"002","deviceName":"空调2","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
+	{"deviceFaultId":"003","deviceId":"003","deviceIdd":"003","deviceName":"空调3","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
+	{"deviceFaultId":"004","deviceId":"004","deviceIdd":"004","deviceName":"空调4","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
+	{"deviceFaultId":"005","deviceId":"005","deviceIdd":"005","deviceName":"空调5","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"},
+	{"deviceFaultId":"006","deviceId":"006","deviceIdd":"006","deviceName":"空调6","deviceFaultCause":"台风","deviceFaultDetail":"哼哼哈嘿","deviceFaultDate":"2016-10-01 08:08:08","deviceFaultMaintenance":"人工"}
 ]}

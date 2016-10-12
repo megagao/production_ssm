@@ -43,6 +43,11 @@ public class ProductController {
 		return "product_add";
 	}
 	
+	@RequestMapping("/edit")
+	public String edit() {
+		return "product_edit";
+	}
+	
 	@RequestMapping("/list")
 	@ResponseBody
 	public EUDataGridResult getItemList(Integer page, Integer rows, Product product) {

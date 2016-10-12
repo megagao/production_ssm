@@ -1,6 +1,0 @@
-[
-	{"deviceStatusID":"良好","deviceStatus":"良好"},
-	{"deviceStatusID":"故障","deviceStatus":"故障"},
-	{"deviceStatusID":"维修","deviceStatus":"维修"},
-	{"deviceStatusID":"报废","deviceStatus":"报废"}
-]

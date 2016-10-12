@@ -25,12 +25,12 @@
 			<th data-options="field:'ck',checkbox:true"></th>
 
 			<th
-				data-options="field:'deviceMaintainID',width:80,align:'center',sortable:true,
+				data-options="field:'deviceMaintainId',width:80,align:'center',sortable:true,
 							type:'text'
 			">维修编号</th>
 
 			<th
-				data-options="field:'deviceFaultID',width:80,align:'center',sortable:true,
+				data-options="field:'deviceFaultId',width:80,align:'center',sortable:true,
 							editor:{
 								type:'textbox',
 								options:{
@@ -45,7 +45,7 @@
 			">维修人</th>
 
 			<th
-				data-options="field:'deviceMaintainDate',width:120,align:'center', 
+				data-options="field:'deviceMaintainDate',width:120,align:'center',
 						editor:'datetimebox'
 			">维修日期</th>
 
@@ -77,68 +77,11 @@
 
 <div style="margin:8px 0;"></div>
 
-<div id="tabs_deviceMaintain" class="easyui-tabs"
-	style="width:100%;height:331px">
-	<!-- tabPosition="left" -->
-	<div title="关于" style="padding:10px">
-		<p style="font-size:16px">此选项卡包含“设备故障信息”一个选项卡 --></p>
-		<ul style="font-size:14px">
-			<li>点击每行数据的“故障编号”字段可查看相对应的详细信息</li>
-		</ul>
-	</div>
-
-	<!-- Device Fault Tab
-	closable:true -->
-	<div id="tab_deviceFault_deviceMaintain" title="设备故障信息"
-		data-options="iconCls:'icon-tip',closable:true  " style="padding:10px">
-		<form id="tab_deviceFault_form_deviceMaintain" class="easyui-form"
-			method="post">
-			<table cellpadding="4">
-				<tr>
-					<td>故障编号 :</td>
-					<td><input class="easyui-textbox" type="text"
-						name="faultID_form_deviceCheck" style="width:99px"
-						data-options="editable:false" /></td>
-				</tr>
-				<tr>
-					<td>设备编号 :</td>
-					<td><input class="easyui-textbox" type="text"
-						name="deviceID_form_deviceCheck" style="width:99px"
-						data-options="editable:false" /></td>
-
-					<td>设备名称 :</td>
-					<td><input class="easyui-textbox" type="text"
-						name="deviceName_form_deviceCheck" style="width:99px"
-						data-options="editable:false" /></td>
-				</tr>
-				<tr>
-					<td>故障日期 :</td>
-					<td><input class="easyui-datebox" type="date"
-						name="faultDate_form_deviceCheck" style="width:147px"
-						data-options="editable:false" /></td>
-				</tr>
-				<tr>
-					<td>故障原因 :</td>
-					<td><input class="easyui-textbox" type="text"
-						name="faultCause_form_deviceCheck"
-						style="width:147px;height:147px;" data-options="editable:false" /></td>
-				</tr>
-				<tr>
-					<td>维修方式 :</td>
-					<td><input class="easyui-textbox" type="text"
-						name="maintenance_form_deviceCheck" style="width:147px"
-						data-options="editable:false" /></td>
-				</tr>
-
-			</table>
-		</form>
-	</div>
-
-</div>
-
 <div id="toobar_deviceMaintain" style="height:auto">
 	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-add',plain:true"
+		data-options="iconCls:'icon-edit',plain:true"
+		onclick="edit_deviceMaintain()">编辑</a><a href="javascript:void(0)"
+		class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
 		onclick="append_deviceMaintain()">添加</a> <a href="javascript:void(0)"
 		class="easyui-linkbutton"
 		data-options="iconCls:'icon-remove',plain:true"
@@ -159,6 +102,7 @@
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
 
 <script type="text/javascript">
+	var ifElse = false;
 	var deviceMaintainEditIndex = undefined;
 	function endEditing_deviceMaintain() {
 		if (deviceMaintainEditIndex == undefined) {
@@ -177,46 +121,65 @@
 	}
 
 	var onClickCellFieldValue_deviceMaintain = "";
-	function onClickCell_deviceMaintain(index, field) {
+	function onClickCell_deviceMaintain(index, field, value) {
 		onClickCellFieldValue_deviceMaintain = field;
 	}
 
 	function onClickRow_deviceMaintain(index, row) {
-		if (deviceMaintainEditIndex != index) {
-			if (endEditing_deviceMaintain()) {
-				$('#deviceMaintain').datagrid('selectRow', index).datagrid(
-						'beginEdit', index);
-				deviceMaintainEditIndex = index;
-			} else {
-				$('#deviceMaintain').datagrid('selectRow',
-						deviceMaintainEditIndex);
-			}
-			/* 这里有bug：点击任意行，然后点击移除，再点击其他行时表格编辑状态出现错误，换个思路解决一下。 */
-			$('#deviceMaintain').datagrid('clearSelections');
-		}
-
-		 if (onClickCellFieldValue_deviceMaintain === "deviceFaultID") {
+		console.log(row);
+		if (onClickCellFieldValue_deviceMaintain === "deviceFaultId") {
 			var tabs_deviceMaintain = $("#tabs_deviceMaintain");
 			var detailInfoTab = tabs_deviceMaintain.tabs("getTab", "设备故障信息");
 			detailInfoTab.panel('options').tab.show();
 			tabs_deviceMaintain.tabs("select", "设备故障信息");
-loadData_faultID_form_deviceMaintain(row.deviceFaultID); 	 	
-		} 
+			loadData_faultId_form_deviceMaintain(row.deviceFaultId);
+		}
 
+	}
+
+	function edit_deviceMaintain() {
+
+		/* 得到所有选择行的索引 */
+		var rowSelections = $('#deviceMaintain').datagrid('getSelections');
+		if (rowSelections.length == 0) {
+			return;
+		}
+		if (rowSelections.length >= 2) {
+			$.messager.alert('提示', '请选择一条记录进入编辑！', 'warning');
+			return;
+		}
+		/* 得到选择行的索引 */
+		var rowSelection = rowSelections[0];
+		var rowSelectionIndex = $('#deviceMaintain').datagrid('getRowIndex',
+				rowSelection);
+
+		/* 进入编辑状态 */
+		if (deviceMaintainEditIndex != rowSelectionIndex) {
+			if (endEditing_deviceMaintain()) {
+				$('#deviceMaintain').datagrid('selectRow', rowSelectionIndex)
+						.datagrid('beginEdit', rowSelectionIndex);
+				deviceMaintainEditIndex = rowSelectionIndex;
+			} else {
+				$('#deviceMaintain').datagrid('selectRow',
+						deviceMaintainEditIndex);
+			}
+		}
+
+		$('#deviceMaintain').datagrid('clearSelections');
 	}
 
 	function append_deviceMaintain() {
 		if (endEditing_deviceMaintain()) {
-			var newIDIndex = $('#deviceMaintain').datagrid('getRows').length - 1;
-			var newID_string = $('#deviceMaintain').datagrid('getRows')[newIDIndex].deviceMaintainID;
-			var newID_int = parseInt(newID_string) + 1;
-			if (newID_int < 10)
-				newID_int = "00" + newID_int;
-			else if (newID_int < 100)
-				newID_int = "0" + newID_int;
+			var newIdIndex = $('#deviceMaintain').datagrid('getRows').length - 1;
+			var newId_string = $('#deviceMaintain').datagrid('getRows')[newIdIndex].deviceMaintainId;
+			var newId_int = parseInt(newId_string) + 1;
+			if (newId_int < 10)
+				newId_int = "00" + newId_int;
+			else if (newId_int < 100)
+				newId_int = "0" + newId_int;
 
 			$('#deviceMaintain').datagrid('appendRow', {
-				deviceMaintainID : newID_int
+				deviceMaintainId : newId_int
 			});
 			deviceMaintainEditIndex = $('#deviceMaintain').datagrid('getRows').length - 1;
 			$('#deviceMaintain').datagrid('selectRow', deviceMaintainEditIndex)
@@ -234,13 +197,18 @@ loadData_faultID_form_deviceMaintain(row.deviceFaultID);
 					selections[i]);
 			$('#deviceMaintain').datagrid('deleteRow', selectionIndex);
 		}
-		deviceMaintainEditIndex = undefined;
+		if (selections.length > 0) {
+			deviceMaintainEditIndex = undefined;
+		}
 	}
 
 	function accept_deviceMaintain() {
+
 		if (endEditing_deviceMaintain()) {
 			$('#deviceMaintain').datagrid('acceptChanges');
 		}
+
+		/* $('#deviceMaintain').datagrid('reload'); */
 	}
 
 	function reject_deviceMaintain() {
@@ -252,6 +220,15 @@ loadData_faultID_form_deviceMaintain(row.deviceFaultID);
 		var rows = $('#deviceMaintain').datagrid('getChanges');
 		alert(rows.length + ' rows are changed!');
 	}
+<%--
+	function cellStyler(value, row, index) {
+		//if (value > 30){
+		/* if(ifElse){ */
+			return 'color:red;';
+		/* } */
+	} 
+	--%>
+	
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
@@ -325,14 +302,14 @@ loadData_faultID_form_deviceMaintain(row.deviceFaultID);
 		});
 
 		deviceMaintainForFilter.datagrid('enableFilter', [ {
-			field : 'deviceMaintainID',
+			field : 'deviceMaintainId',
 			type : 'text',
 			options : {
 				precision : -2
 			},
 			op : [ 'equal', 'notequal', 'less', 'greater' ]
 		}, {
-			field : 'deviceFaultID',
+			field : 'deviceFaultId',
 			type : 'text',
 			options : {
 				precision : -2
@@ -350,65 +327,3 @@ loadData_faultID_form_deviceMaintain(row.deviceFaultID);
 </script>
 
 <%------------------------------------- JQuery Easy UI Filter -------------------------------------%>
-
-<%------------------------------------- Tabs Mouseenter Event -------------------------------------%>
-
-<script type="text/javascript">
-	function mouseEnterEvent_deviceMaintain() {
-		var deviceMaintainTabs = $('#tabs_deviceMaintain').tabs().tabs('tabs');
-		for (var i = 0; i < deviceMaintainTabs.length; i++) {
-			deviceMaintainTabs[i].panel('options').tab.unbind().bind('mouseenter', {
-				index : i
-			}, function(e) {
-				$('#tabs_deviceMaintain').tabs('select', e.data.index);
-			});
-		}
-	};
-</script>
-
-<%------------------------------------- Tabs Mouseenter Event -------------------------------------%>
-
-<%-------------------------------------  Tabs  -------------------------------------%>
- 
-<script type="text/javascript">
-	
-	/* 静态载入数据，仅为测试，后再动态从数据库载入 */
-	function loadData_faultID_form_deviceMaintain(deviceFaultID) {
-		$('#tab_deviceFault_form_deviceMaintain').form('load', {
-			faultID_form_deviceCheck : deviceFaultID
-
-		});
-	}
-</script> 
-
-<%------------------------------------- Add or Remove Tabs  -------------------------------------%>
-
-<%--------------------------------------------------------------------------%>
- 
-<script>
-	$(function() {
-
-		mouseEnterEvent_deviceMaintain();
-
-		 var tab_deviceFault_deviceMaintain = $('#tabs_deviceMaintain').tabs('getTab', "设备故障信息").panel(
-				'options').tab;
-		tab_deviceFault_deviceMaintain.hide(); 
-		
-	});
-	$('#tabs_deviceMaintain').tabs(
-			{
-				onBeforeClose : function(title, index) {
-					if (title === "设备故障信息") {
-						var tab_deviceFault_deviceMaintain = $('#tabs_deviceMaintain').tabs('getTab',
-								"设备故障信息").panel('options').tab;
-						tab_deviceFault_deviceMaintain.hide();
-					} 
-					/* 手动选择新选项卡，否则被隐藏的选项卡的内容无法隐藏 */
-					$("#tabs_deviceMaintain").tabs("select", 0);
-
-					return false; // 阻止关闭
-				}
-			});
-</script>
-
-<%--------------------------------------------------------------------------%>

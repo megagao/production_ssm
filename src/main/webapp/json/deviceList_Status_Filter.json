@@ -1,0 +1,7 @@
+[
+	{"deviceStatusId":"ALL","deviceStatus":"ALL"},
+	{"deviceStatusId":"良好","deviceStatus":"良好"},
+	{"deviceStatusId":"故障","deviceStatus":"故障"},
+	{"deviceStatusId":"维修","deviceStatus":"维修"},
+	{"deviceStatusId":"报废","deviceStatus":"报废"}
+]

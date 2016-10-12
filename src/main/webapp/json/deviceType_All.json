@@ -1,10 +1,10 @@
 {"total":6,"rows":[
-	{"deviceTypeID":"01","deviceTypeIDD":"01","deviceTypeName":"冷暖设备1","deviceTypeModel":"大","deviceTypeSpec":"A","deviceTypeSupplier":"供应商1","deviceTypeProducer":"生产商1","deviceTypeQuantity":"11","deviceTypeWarranty":"2018-08-08 08:08:08"},
-	{"deviceTypeID":"02","deviceTypeIDD":"02","deviceTypeName":"冷暖设备2","deviceTypeModel":"中","deviceTypeSpec":"B","deviceTypeSupplier":"供应商2","deviceTypeProducer":"生产商2","deviceTypeQuantity":"12","deviceTypeWarranty":"2018-08-08 08:08:08"},
-	{"deviceTypeID":"03","deviceTypeIDD":"03","deviceTypeName":"冷暖设备3","deviceTypeModel":"小","deviceTypeSpec":"C","deviceTypeSupplier":"供应商3","deviceTypeProducer":"生产商3","deviceTypeQuantity":"13","deviceTypeWarranty":"2018-08-08 08:08:08"},
-	{"deviceTypeID":"04","deviceTypeIDD":"04","deviceTypeName":"冷暖设备4","deviceTypeModel":"小","deviceTypeSpec":"D","deviceTypeSupplier":"供应商4","deviceTypeProducer":"生产商4","deviceTypeQuantity":"14","deviceTypeWarranty":"2018-08-08 08:08:08"},
-	{"deviceTypeID":"05","deviceTypeIDD":"05","deviceTypeName":"冷暖设备5","deviceTypeModel":"中","deviceTypeSpec":"E","deviceTypeSupplier":"供应商5","deviceTypeProducer":"生产商5","deviceTypeQuantity":"15","deviceTypeWarranty":"2018-08-08 08:08:08"},
-	{"deviceTypeID":"06","deviceTypeIDD":"06","deviceTypeName":"冷暖设备6","deviceTypeModel":"大","deviceTypeSpec":"F","deviceTypeSupplier":"供应商6","deviceTypeProducer":"生产商6","deviceTypeQuantity":"16","deviceTypeWarranty":"2018-08-08 08:08:08"}
+	{"deviceTypeId":"01","deviceTypeIdd":"01","deviceTypeName":"冷暖设备1","deviceTypeModel":"大","deviceTypeSpec":"A","deviceTypeSupplier":"供应商1","deviceTypeProducer":"生产商1","deviceTypeQuantity":"11","deviceTypeWarranty":"2018-08-08 08:08:08"},
+	{"deviceTypeId":"02","deviceTypeIdd":"02","deviceTypeName":"冷暖设备2","deviceTypeModel":"中","deviceTypeSpec":"B","deviceTypeSupplier":"供应商2","deviceTypeProducer":"生产商2","deviceTypeQuantity":"12","deviceTypeWarranty":"2018-08-08 08:08:08"},
+	{"deviceTypeId":"03","deviceTypeIdd":"03","deviceTypeName":"冷暖设备3","deviceTypeModel":"小","deviceTypeSpec":"C","deviceTypeSupplier":"供应商3","deviceTypeProducer":"生产商3","deviceTypeQuantity":"13","deviceTypeWarranty":"2018-08-08 08:08:08"},
+	{"deviceTypeId":"04","deviceTypeIdd":"04","deviceTypeName":"冷暖设备4","deviceTypeModel":"小","deviceTypeSpec":"D","deviceTypeSupplier":"供应商4","deviceTypeProducer":"生产商4","deviceTypeQuantity":"14","deviceTypeWarranty":"2018-08-08 08:08:08"},
+	{"deviceTypeId":"05","deviceTypeIdd":"05","deviceTypeName":"冷暖设备5","deviceTypeModel":"中","deviceTypeSpec":"E","deviceTypeSupplier":"供应商5","deviceTypeProducer":"生产商5","deviceTypeQuantity":"15","deviceTypeWarranty":"2018-08-08 08:08:08"},
+	{"deviceTypeId":"06","deviceTypeIdd":"06","deviceTypeName":"冷暖设备6","deviceTypeModel":"大","deviceTypeSpec":"F","deviceTypeSupplier":"供应商6","deviceTypeProducer":"生产商6","deviceTypeQuantity":"16","deviceTypeWarranty":"2018-08-08 08:08:08"}
 ]}
  
  

@@ -1,8 +1,8 @@
 [
-	{"deviceTypeIDD":"01","deviceTypeName":"冷暖设备1"},
-	{"deviceTypeIDD":"02","deviceTypeName":"冷暖设备2"},
-	{"deviceTypeIDD":"03","deviceTypeName":"冷暖设备3"},
-	{"deviceTypeIDD":"04","deviceTypeName":"冷暖设备4"},
-	{"deviceTypeIDD":"05","deviceTypeName":"冷暖设备5"},
-	{"deviceTypeIDD":"06","deviceTypeName":"冷暖设备6"}
+	{"deviceTypeIdd":"01","deviceTypeName":"冷暖设备1"},
+	{"deviceTypeIdd":"02","deviceTypeName":"冷暖设备2"},
+	{"deviceTypeIdd":"03","deviceTypeName":"冷暖设备3"},
+	{"deviceTypeIdd":"04","deviceTypeName":"冷暖设备4"},
+	{"deviceTypeIdd":"05","deviceTypeName":"冷暖设备5"},
+	{"deviceTypeIdd":"06","deviceTypeName":"冷暖设备6"}
 ]
