@@ -56,7 +56,7 @@ var TT = TAOTAO = {
         } else if(val == 4){
         	return '<span style="color:red;">订单取消</span>';
         }else {
-        	return '<span style="color:#f6dda4;">未知</span>';
+        	return '<span style="color:#E5B717;">未知状态</span>';
         }
     },
     // 格式化客户的状态
@@ -66,7 +66,7 @@ var TT = TAOTAO = {
         }else if(val == 2){
         	return '<span style="color:red;">无效客户</span>';
         }else {
-        	return '<span style="color:#f6dda4;">未知状态</span>';
+        	return '<span style="color:#E5B717;">未知状态</span>';
         }
     },
     // 格式化产品的状态
@@ -76,7 +76,7 @@ var TT = TAOTAO = {
         }else if(val == 2){
         	return '<span style="color:red;">停产</span>';
         }else {
-        	return '<span style="color:#f6dda4;">未知状态</span>';
+        	return '<span style="color:#E5B717;">未知状态</span>';
         }
     },
     init : function(data){
