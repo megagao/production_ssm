@@ -32,7 +32,7 @@ public class PictureServiceImpl implements PictureService{
 					
 					newName = newName + oldName.substring(oldName.lastIndexOf("."));
 					
-					String filePath = "E:\\upload\\temp\\img\\";
+					String filePath = "D:\\upload\\temp\\img\\";
 					
 					//新文件
 					File file = new java.io.File(filePath+newName);
@@ -63,7 +63,7 @@ public class PictureServiceImpl implements PictureService{
 		
 		picName = picName.substring(picName.lastIndexOf("/")+1);
 		
-		picName = "E:\\upload\\temp\\img\\"+picName;
+		picName = "D:\\upload\\temp\\img\\"+picName;
 		
 		FileUtil.deleteFile(picName);
 		
