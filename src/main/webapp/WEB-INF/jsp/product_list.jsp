@@ -18,6 +18,8 @@
 </table>
 <div id="productEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
+<div id="productAddWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/add'" style="width:65%;height:80%;padding:10px;">
+</div>
 <div id="noteDialog" class="easyui-dialog" title="产品介绍" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
 	<form id="noteForm" class="itemForm" method="post">
 		<input type="hidden" name="productId"/>
@@ -102,7 +104,7 @@
         text:'新增',
         iconCls:'icon-add',
         handler:function(){
-        	$(".tree-title:contains('新增产品')").parent().click();
+        	$("#productAddWindow").window("open");
         }
     },{
         text:'编辑',
