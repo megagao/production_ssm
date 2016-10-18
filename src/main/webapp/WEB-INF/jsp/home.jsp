@@ -34,29 +34,13 @@
 				data-options="animate:true,lines:true">
 				<li><span>计划进度</span>
 					<ul>
-						<li><span>订单管理</span>
-							<ul>
-								<li data-options="attributes:{'url':'order/add'}">新增订单</li>
-								<li data-options="attributes:{'url':'order/find'}">订单查询</li>
-							</ul>
-						</li>
+						<li data-options="attributes:{'url':'order/find'}">订单管理</li>
 					</ul>
 					<ul>
-						<li>
-							<span>客户管理</span>
-							<ul>
-								<li data-options="attributes:{'url':'custom/add'}">新增客户</li>
-								<li data-options="attributes:{'url':'custom/find'}">客户查询</li>
-							</ul>
-						</li>
+						<li data-options="attributes:{'url':'custom/find'}">客户管理</li>
 					</ul>
 					<ul>
-						<li><span>产品管理</span>
-							<ul>
-								<li data-options="attributes:{'url':'product/add'}">新增产品</li>
-								<li data-options="attributes:{'url':'product/find'}">产品查询</li>
-							</ul>
-						</li>
+						<li data-options="attributes:{'url':'product/find'}">产品管理</li>
 					</ul>
 				</li>
 			</ul>
