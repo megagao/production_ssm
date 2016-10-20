@@ -12,7 +12,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ import org.hqu.production_ms.service.SysService;
 public class CustomRealm extends AuthorizingRealm {
 	
 	/**
-	 * 注入service
+	 * 注入service AuthorizationFilter
 	 */
 	@Autowired
 	private SysService sysService;
@@ -117,6 +116,7 @@ public class CustomRealm extends AuthorizingRealm {
 		//根据身份信息获取权限信息
 		//从数据库获取到权限数据
 		List<SysPermission> permissionList = null;
+		
 		try {
 			permissionList = sysService.findPermissionListByUserId(activeUser.getUserid());
 		} catch (Exception e) {
