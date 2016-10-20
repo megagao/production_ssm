@@ -126,38 +126,44 @@
         text:'编辑',
         iconCls:'icon-edit',
         handler:function(){
-        	var ids = getSelectionsIds();
-        	
-        	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个订单才能编辑!');
-        		return ;
-        	}
-        	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个订单!');
-        		return ;
-        	}
-        	
-        	$("#orderEditWindow").window({
-        		onLoad :function(){
-        			//回显数据
-        			var data = $("#orderList").datagrid("getSelections")[0];
-        			data.customId = data.custom.customId; 
-        			data.productId = data.product.productId; 
-        			data.orderDate = TAOTAO.formatDateTime(data.orderDate);
-        			data.requestDate = TAOTAO.formatDateTime(data.requestDate);
-        			$("#orderEditForm").form("load", data);
-        			orderEditEditor.html(data.note);
-        			
-        			TAOTAO.init({
-        				"pics" : data.image,
-        			});
-        			
-        			//加载文件上传插件
-        			initFileUpload();
-        			//加载上传过的文件
-        			initUploadedFile();
+        	$.get("order/edit_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			var ids = getSelectionsIds();
+                	
+                	if(ids.length == 0){
+                		$.messager.alert('提示','必须选择一个订单才能编辑!');
+                		return ;
+                	}
+                	if(ids.indexOf(',') > 0){
+                		$.messager.alert('提示','只能选择一个订单!');
+                		return ;
+                	}
+                	
+                	$("#orderEditWindow").window({
+                		onLoad :function(){
+                			//回显数据
+                			var data = $("#orderList").datagrid("getSelections")[0];
+                			data.customId = data.custom.customId; 
+                			data.productId = data.product.productId; 
+                			data.orderDate = TAOTAO.formatDateTime(data.orderDate);
+                			data.requestDate = TAOTAO.formatDateTime(data.requestDate);
+                			$("#orderEditForm").form("load", data);
+                			orderEditEditor.html(data.note);
+                			
+                			TAOTAO.init({
+                				"pics" : data.image,
+                			});
+                			
+                			//加载文件上传插件
+                			initFileUpload();
+                			//加载上传过的文件
+                			initUploadedFile();
+                		}
+                	}).window("open");
         		}
-        	}).window("open");
+        	});
         }
     },{
         text:'删除',
