@@ -92,16 +92,22 @@
 	
 	//更新订单要求
 	function updateNote(){
-		noteEditor.sync();
-		$.post("order/update_note",$("#noteForm").serialize(), function(data){
-			if(data.status == 200){
-				$("#noteDialog").dialog("close");
-				$("#orderList").datagrid("reload");
-				$.messager.alert("操作提示", "更新订单要求成功！");
-			}else{
-				$.messager.alert("操作提示", "更新订单要求失败！");
-			}
-		});
+		$.get("order/updateNote_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{
+    			noteEditor.sync();
+    			$.post("order/update_note",$("#noteForm").serialize(), function(data){
+    				if(data.status == 200){
+    					$("#noteDialog").dialog("close");
+    					$("#orderList").datagrid("reload");
+    					$.messager.alert("操作提示", "更新订单要求成功！");
+    				}else{
+    					$.messager.alert("操作提示", "更新订单要求失败！");
+    				}
+    			});
+    		}
+    	});
 	}
 	
     function getSelectionsIds(){
@@ -120,7 +126,13 @@
         text:'新增',
         iconCls:'icon-add',
         handler:function(){
-        	$("#orderAddWindow").window("open");
+        	$.get("order/add_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			$("#orderAddWindow").window("open");
+        		}
+        	});
         }
     },{
         text:'编辑',
@@ -169,22 +181,28 @@
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','未选中订单!');
-        		return ;
-        	}
-        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
-        	    if (r){
-        	    	var params = {"ids":ids};
-                	$.post("order/delete_batch",params, function(data){
-            			if(data.status == 200){
-            				$.messager.alert('提示','删除订单成功!',undefined,function(){
-            					$("#orderList").datagrid("reload");
-            				});
-            			}
-            		});
-        	    }
+         	$.get("order/delete_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			var ids = getSelectionsIds();
+                	if(ids.length == 0){
+                		$.messager.alert('提示','未选中订单!');
+                		return ;
+                	}
+                	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
+                	    if (r){
+                	    	var params = {"ids":ids};
+                        	$.post("order/delete_batch",params, function(data){
+                    			if(data.status == 200){
+                    				$.messager.alert('提示','删除订单成功!',undefined,function(){
+                    					$("#orderList").datagrid("reload");
+                    				});
+                    			}
+                    		});
+                	    }
+                	});
+        		}
         	});
         }
     },'-',{
