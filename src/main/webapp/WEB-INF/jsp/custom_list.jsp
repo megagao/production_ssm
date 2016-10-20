@@ -79,16 +79,22 @@
 	};
 	
 	function updateNote(){
-		noteEditor.sync();
-		$.post("custom/update_note",$("#noteForm").serialize(), function(data){
-			if(data.status == 200){
-				$("#noteDialog").dialog("close");
-				$("#customList").datagrid("reload");
-				$.messager.alert("操作提示", "更新客户介绍成功！");
-			}else{
-				$.messager.alert("操作提示", "更新客户介绍失败！","error");
-			}
-		});
+		$.get("custom/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{
+    			noteEditor.sync();
+    			$.post("custom/update_note",$("#noteForm").serialize(), function(data){
+    				if(data.status == 200){
+    					$("#noteDialog").dialog("close");
+    					$("#customList").datagrid("reload");
+    					$.messager.alert("操作提示", "更新客户介绍成功！");
+    				}else{
+    					$.messager.alert("操作提示", "更新客户介绍失败！","error");
+    				}
+    			});
+    		}
+    	});
 	}
 	
 	function getSelectionsIds(){
@@ -107,54 +113,72 @@
 	    text:'新增',
 	    iconCls:'icon-add',
 	    handler:function(){
-	    	$("#customAddWindow").window("open");
+	    	$.get("custom/add_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			$("#customAddWindow").window("open");
+        		}
+        	});
 	    }
 	},{
 	    text:'编辑',
 	    iconCls:'icon-edit',
 	    handler:function(){
-	    	var ids = getSelectionsIds();
-	    	
-	    	if(ids.length == 0){
-	    		$.messager.alert('提示','必须选择一个客户才能编辑!');
-	    		return ;
-	    	}
-	    	if(ids.indexOf(',') > 0){
-	    		$.messager.alert('提示','只能选择一个客户!');
-	    		return ;
-	    	}
-	    	
-	    	$("#customEditWindow").window({
-	    		onLoad :function(){
-	    			//回显数据
-	    			var data = $("#customList").datagrid("getSelections")[0];
-	    			$("#customEditForm").form("load", data);
-	    			noteEditor.html(data.note);
-	    			
-	    		}
-	    	}).window("open");
+	    	$.get("custom/edit_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			var ids = getSelectionsIds();
+        	    	
+        	    	if(ids.length == 0){
+        	    		$.messager.alert('提示','必须选择一个客户才能编辑!');
+        	    		return ;
+        	    	}
+        	    	if(ids.indexOf(',') > 0){
+        	    		$.messager.alert('提示','只能选择一个客户!');
+        	    		return ;
+        	    	}
+        	    	
+        	    	$("#customEditWindow").window({
+        	    		onLoad :function(){
+        	    			//回显数据
+        	    			var data = $("#customList").datagrid("getSelections")[0];
+        	    			$("#customEditForm").form("load", data);
+        	    			noteEditor.html(data.note);
+        	    			
+        	    		}
+        	    	}).window("open");
+        		}
+        	});
 	    }
 	},{
 	    text:'删除',
 	    iconCls:'icon-cancel',
 	    handler:function(){
-	    	var ids = getSelectionsIds();
-	    	if(ids.length == 0){
-	    		$.messager.alert('提示','未选中客户!');
-	    		return ;
-	    	}
-	    	$.messager.confirm('确认','确定删除ID为 '+ids+' 的客户吗？',function(r){
-	    	    if (r){
-	    	    	var params = {"ids":ids};
-	            	$.post("custom/delete_batch",params, function(data){
-	        			if(data.status == 200){
-	        				$.messager.alert('提示','删除客户成功!',undefined,function(){
-	        					$("#customList").datagrid("reload");
-	        				});
-	        			}
-	        		});
-	    	    }
-	    	});
+	    	$.get("custom/delete_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			var ids = getSelectionsIds();
+        	    	if(ids.length == 0){
+        	    		$.messager.alert('提示','未选中客户!');
+        	    		return ;
+        	    	}
+        	    	$.messager.confirm('确认','确定删除ID为 '+ids+' 的客户吗？',function(r){
+        	    	    if (r){
+        	    	    	var params = {"ids":ids};
+        	            	$.post("custom/delete_batch",params, function(data){
+        	        			if(data.status == 200){
+        	        				$.messager.alert('提示','删除客户成功!',undefined,function(){
+        	        					$("#customList").datagrid("reload");
+        	        				});
+        	        			}
+        	        		});
+        	    	    }
+        	    	});
+        		}
+        	});
 	    }
 	},'-',{
 	    text:'下架',
