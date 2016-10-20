@@ -71,6 +71,20 @@
 		<div title="工艺监控" style="padding:10px">
 			<p>~。~</p>
 		</div>
+		
+		<div title="系统管理" data-options="selected:true" style="padding:10px">
+
+			<ul id="deviceMonitor" class="easyui-tree"
+				data-options="animate:true,lines:true">
+				<li>
+					<span> 系统管理 </span>
+					<ul>
+						<li data-options="attributes:{'url':'user/find'}">用户管理</li>
+					</ul>
+				</li>
+			</ul>
+
+		</div>
 	</div>
 
 	<!-- </div> -->
