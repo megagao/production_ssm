@@ -101,11 +101,33 @@ public class OrderController {
 		return result;
 	}
 	
+	@RequestMapping("/updateAll_judge")
+	@ResponseBody
+	public Map<String,Object> orderUpdateAllJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:update_all")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
+	}
+	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
 	private CustomResult updateAll(COrderPO cOrder) throws Exception {
 		CustomResult result = orderService.updateAll(cOrder);
 		return result;
+	}
+	
+	@RequestMapping("/updateNote_judge")
+	@ResponseBody
+	public Map<String,Object> orderUpdateNoteJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:update_note")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/update_note")
@@ -115,11 +137,33 @@ public class OrderController {
 		return result;
 	}
 	
+	@RequestMapping("/delete_judge")
+	@ResponseBody
+	public Map<String,Object> orderDeleteJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:delete")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
+	}
+	
 	@RequestMapping(value="/delete")
 	@ResponseBody
 	private CustomResult delete(String id) throws Exception {
 		CustomResult result = orderService.delete(id);
 		return result;
+	}
+	
+	@RequestMapping("/deleteBatch_judge")
+	@ResponseBody
+	public Map<String,Object> orderDeleteBatchJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:delete_batch")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/delete_batch")
