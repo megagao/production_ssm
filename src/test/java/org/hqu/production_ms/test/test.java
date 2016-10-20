@@ -1,5 +1,7 @@
 package org.hqu.production_ms.test;
 
+import java.util.List;
+
 import org.hqu.production_ms.util.FileUtil;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -20,4 +22,6 @@ public class test {
 	public void test1(){
 		FileUtil.deleteFile("F:\\upload\\temp\\file\\"+"新建文本文档(2016-10-05).txt");
 	}
+	
+
 }
