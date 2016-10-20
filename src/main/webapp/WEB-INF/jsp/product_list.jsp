@@ -76,16 +76,22 @@
 	
 	//更新订单要求
 	function updateNote(){
-		noteEditor.sync();
-		$.post("product/update_note",$("#noteForm").serialize(), function(data){
-			if(data.status == 200){
-				$("#noteDialog").dialog("close");
-				$("#productList").datagrid("reload");
-				$.messager.alert("操作提示", "更新产品介绍成功！");
-			}else{
-				$.messager.alert("操作提示", "更新产品介绍失败！");
-			}
-		});
+		$.get("product/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{
+    			noteEditor.sync();
+    			$.post("product/update_note",$("#noteForm").serialize(), function(data){
+    				if(data.status == 200){
+    					$("#noteDialog").dialog("close");
+    					$("#productList").datagrid("reload");
+    					$.messager.alert("操作提示", "更新产品介绍成功！");
+    				}else{
+    					$.messager.alert("操作提示", "更新产品介绍失败！");
+    				}
+    			});
+    		}
+    	});
 	}
 	
     function getSelectionsIds(){
@@ -104,56 +110,74 @@
         text:'新增',
         iconCls:'icon-add',
         handler:function(){
-        	$("#productAddWindow").window("open");
+        	$.get("product/add_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			$("#productAddWindow").window("open");
+        		}
+        	});
         }
     },{
         text:'编辑',
         iconCls:'icon-edit',
         handler:function(){
-        	var ids = getSelectionsIds();
-        	
-        	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个产品才能编辑!');
-        		return ;
-        	}
-        	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个产品!');
-        		return ;
-        	}
-        	
-        	$("#productEditWindow").window({
-        		onLoad :function(){
-        			//回显数据
-        			var data = $("#productList").datagrid("getSelections")[0];
-        			$("#productEditForm").form("load", data);
-        			productEditEditor.html(data.note);
-        			
-        			TAOTAO.init({
-        				"pics" : data.image,
-        			});
+        	$.get("product/edit_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			var ids = getSelectionsIds();
+                	
+                	if(ids.length == 0){
+                		$.messager.alert('提示','必须选择一个产品才能编辑!');
+                		return ;
+                	}
+                	if(ids.indexOf(',') > 0){
+                		$.messager.alert('提示','只能选择一个产品!');
+                		return ;
+                	}
+                	
+                	$("#productEditWindow").window({
+                		onLoad :function(){
+                			//回显数据
+                			var data = $("#productList").datagrid("getSelections")[0];
+                			$("#productEditForm").form("load", data);
+                			productEditEditor.html(data.note);
+                			
+                			TAOTAO.init({
+                				"pics" : data.image,
+                			});
+                		}
+                	}).window("open");
         		}
-        	}).window("open");
+        	});
         }
     },{
         text:'删除',
         iconCls:'icon-cancel',
         handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','未选中订单!');
-        		return ;
-        	}
-        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
-        	    if (r){
-        	    	var params = {"ids":ids};
-                	$.post("product/delete_batch",params, function(data){
-            			if(data.status == 200){
-            				$.messager.alert('提示','删除订单成功!',undefined,function(){
-            					$("#productList").datagrid("reload");
-            				});
-            			}
-            		});
-        	    }
+        	$.get("product/delete_judge",'',function(data){
+        		if(data.msg != null){
+        			$.messager.alert('提示', data.msg);
+        		}else{
+        			var ids = getSelectionsIds();
+                	if(ids.length == 0){
+                		$.messager.alert('提示','未选中订单!');
+                		return ;
+                	}
+                	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
+                	    if (r){
+                	    	var params = {"ids":ids};
+                        	$.post("product/delete_batch",params, function(data){
+                    			if(data.status == 200){
+                    				$.messager.alert('提示','删除订单成功!',undefined,function(){
+                    					$("#productList").datagrid("reload");
+                    				});
+                    			}
+                    		});
+                	    }
+                	});
+        		}
         	});
         }
     },'-',{
