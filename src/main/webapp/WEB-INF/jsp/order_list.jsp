@@ -92,7 +92,7 @@
 	
 	//更新订单要求
 	function updateNote(){
-		$.get("order/updateNote_judge",'',function(data){
+		$.get("order/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
