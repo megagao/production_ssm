@@ -1,5 +1,11 @@
 package org.hqu.production_ms.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
@@ -31,9 +37,31 @@ public class OrderController {
 		return "order_list";
 	}
 	
+	@RequestMapping("/add_judge")
+	@ResponseBody
+	public Map<String,Object> orderAddJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:add")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
+	}
+	
 	@RequestMapping("/add")
 	public String add() {
 		return "order_add";
+	}
+	
+	@RequestMapping("/edit_judge")
+	@ResponseBody
+	public Map<String,Object> orderEditJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:edit")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
 	}
 	
 	@RequestMapping("/edit")
@@ -53,6 +81,17 @@ public class OrderController {
 	private CustomResult insert(COrderPO cOrder) throws Exception {
 		CustomResult result = orderService.insert(cOrder);
 		return result;
+	}
+	
+	@RequestMapping("/update_judge")
+	@ResponseBody
+	public Map<String,Object> orderUpdateJudge() {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("order:update")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/update")
