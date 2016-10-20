@@ -14,7 +14,6 @@
 		http://www.springframework.org/schema/util 
 		http://www.springframework.org/schema/util/spring-util-4.0.xsd">
           
-	
     <!-- 指明配置文件存放位置 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>  
     
