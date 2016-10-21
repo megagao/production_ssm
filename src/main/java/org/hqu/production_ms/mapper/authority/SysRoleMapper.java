@@ -3,10 +3,18 @@ package org.hqu.production_ms.mapper.authority;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysRoleExample;
 
 public interface SysRoleMapper {
+	
+	//扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+	
+	int changeStatus(String[] ids);
+	
+	
     int countByExample(SysRoleExample example);
 
     int deleteByExample(SysRoleExample example);
