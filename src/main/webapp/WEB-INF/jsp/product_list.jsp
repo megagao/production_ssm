@@ -16,9 +16,9 @@
         </tr>
     </thead>
 </table>
-<div id="productEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="productEditWindow" class="easyui-window" title="编辑产品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="productAddWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/add'" style="width:65%;height:80%;padding:10px;">
+<div id="productAddWindow" class="easyui-window" title="添加产品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 <div id="noteDialog" class="easyui-dialog" title="产品介绍" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
 	<form id="noteForm" class="itemForm" method="post">
