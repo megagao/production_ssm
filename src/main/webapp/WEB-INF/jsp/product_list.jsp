@@ -2,7 +2,7 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="productList" title="订单列表" 
+<table class="easyui-datagrid" id="productList" title="产品列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'product/list',method:'get',pageSize:20,toolbar:toolbar">
     <thead>
         <tr>
@@ -56,7 +56,7 @@
 		
 	}
 	
-	//打开订单要求富文本编辑器对话框
+	//打开产品要求富文本编辑器对话框
 	function  openNote(index){ 
 		var row = onClickRow(index);
 		$("#noteDialog").dialog({
@@ -74,7 +74,7 @@
 		
 	};
 	
-	//更新订单要求
+	//更新产品要求
 	function updateNote(){
 		$.get("product/edit_judge",'',function(data){
     		if(data.msg != null){
@@ -162,15 +162,15 @@
         		}else{
         			var ids = getSelectionsIds();
                 	if(ids.length == 0){
-                		$.messager.alert('提示','未选中订单!');
+                		$.messager.alert('提示','未选中产品!');
                 		return ;
                 	}
-                	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
+                	$.messager.confirm('确认','确定删除ID为 '+ids+' 的产品吗？',function(r){
                 	    if (r){
                 	    	var params = {"ids":ids};
                         	$.post("product/delete_batch",params, function(data){
                     			if(data.status == 200){
-                    				$.messager.alert('提示','删除订单成功!',undefined,function(){
+                    				$.messager.alert('提示','删除产品成功!',undefined,function(){
                     					$("#productList").datagrid("reload");
                     				});
                     			}
