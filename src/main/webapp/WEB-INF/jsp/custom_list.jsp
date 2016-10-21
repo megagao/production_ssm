@@ -20,9 +20,9 @@
         </tr>
     </thead>
 </table>
-<div id="customEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="customEditWindow" class="easyui-window" title="编辑客户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="customAddWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/add'" style="width:65%;height:80%;padding:10px;">
+<div id="customAddWindow" class="easyui-window" title="添加客户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 <div id="noteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
 	<form id="noteForm" class="itemForm" method="post">
