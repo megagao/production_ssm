@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysRoleExample;
+import org.hqu.production_ms.domain.po.RolePO;
 
 public interface SysRoleMapper {
 	
@@ -21,9 +22,9 @@ public interface SysRoleMapper {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(SysRole record);
+    int insert(RolePO role);
 
-    int insertSelective(SysRole record);
+    int insertSelective(RolePO role);
 
     List<SysRole> selectByExample(SysRoleExample example);
 
@@ -33,7 +34,7 @@ public interface SysRoleMapper {
 
     int updateByExample(@Param("record") SysRole record, @Param("example") SysRoleExample example);
 
-    int updateByPrimaryKeySelective(SysRole record);
+    int updateByPrimaryKeySelective(RolePO role);
 
-    int updateByPrimaryKey(SysRole record);
+    int updateByPrimaryKey(RolePO role);
 }
