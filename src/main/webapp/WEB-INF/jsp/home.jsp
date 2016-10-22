@@ -58,12 +58,14 @@
 						<li data-options="attributes:{'url':'device/deviceCheck'}">设备例检</li>
 						<li data-options="attributes:{'url':'device/deviceFault'}">设备故障</li>
 						<li data-options="attributes:{'url':'device/deviceMaintain'}">设备维修</li>
-					</ul></li>
+					</ul>
+				</li>
 				<li><span> 测试</span>
 					<ul>
 						<li data-options="attributes:{'url':'device/add'}">新增设备</li>
 						<li data-options="attributes:{'url':'device/test'}">测试</li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 
 		</div>
@@ -72,18 +74,20 @@
 			<p>~。~</p>
 		</div>
 		
-		<div title="系统管理" data-options="selected:true" style="padding:10px">
+		
+		<div title="系统管理" style="padding:10px;">
 
-			<ul id="deviceMonitor" class="easyui-tree"
+			<ul id="sysManager" class="easyui-tree"
 				data-options="animate:true,lines:true">
-				<li>
-					<span> 系统管理 </span>
+				<li><span>系统管理</span>
 					<ul>
 						<li data-options="attributes:{'url':'user/find'}">用户管理</li>
 					</ul>
+					<ul>
+						<li data-options="attributes:{'url':'role/find'}">角色管理</li>
+					</ul>
 				</li>
 			</ul>
-
 		</div>
 	</div>
 
@@ -119,6 +123,26 @@
 
 			/* Device Manager Tree onClick Event */
 			$('#deviceMonitor').tree({
+				onClick : function(node) {
+					if ($('#deviceMonitor').tree("isLeaf", node.target)) {
+						var tabs2 = $("#tabs");
+						var tab2 = tabs2.tabs("getTab", node.text);
+						if (tab2) {
+							tabs2.tabs("select", node.text);
+						} else {
+							tabs2.tabs('add', {
+								title : node.text,
+								href : node.attributes.url,
+								closable : true,
+								bodyCls : "content"
+							});
+						}
+					}
+				}
+			});
+			
+			/* user Manager Tree onClick Event */
+			$('#sysManager').tree({
 				onClick : function(node) {
 					if ($('#deviceMonitor').tree("isLeaf", node.target)) {
 						var tabs2 = $("#tabs");
