@@ -1,33 +1,34 @@
 package org.hqu.production_ms.domain.authority;
 
 public class SysRole {
-    private String id;
+    private String roleId;
 
-    private String name;
+    private String roleName;
 
     private String available;
 
-    public String getId() {
-        return id;
-    }
+	public String getRoleId() {
+		return roleId;
+	}
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getRoleName() {
+		return roleName;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-    public String getAvailable() {
-        return available;
-    }
+	public String getAvailable() {
+		return available;
+	}
 
-    public void setAvailable(String available) {
-        this.available = available == null ? null : available.trim();
-    }
+	public void setAvailable(String available) {
+		this.available = available;
+	}
+
 }
