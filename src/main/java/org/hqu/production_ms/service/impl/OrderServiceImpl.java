@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult delete(String id) {
 		int i = cOrderMapper.deleteByPrimaryKey(id);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
 		int i = cOrderMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult insert(COrderPO cOrder) {
 		int i = cOrderMapper.insert(cOrder);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -74,7 +74,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult update(COrderPO cOrder) {
 		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult updateAll(COrderPO cOrder) {
 		int i = cOrderMapper.updateByPrimaryKey(cOrder);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -94,7 +94,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult updateNote(COrderPO cOrder) {
 		int i = cOrderMapper.updateNote(cOrder);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public CustomResult changeStatus(String[] ids) {
 		int i = cOrderMapper.changeStatus(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
