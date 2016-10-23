@@ -2,16 +2,16 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysUser;
-import org.hqu.production_ms.domain.po.COrderPO;
+import org.hqu.production_ms.domain.authority.SysUserRole;
+import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.po.UserPO;
-import org.hqu.production_ms.mapper.COrderMapper;
 import org.hqu.production_ms.mapper.authority.SysUserMapper;
-import org.hqu.production_ms.service.OrderService;
+import org.hqu.production_ms.mapper.authority.SysUserRoleMapper;
 import org.hqu.production_ms.service.UserService;
+import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,9 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	SysUserMapper sysUserMapper;
+	
+	@Autowired
+	SysUserRoleMapper sysUserRoleMapper;
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, SysUser sysUser) {
@@ -38,17 +41,16 @@ public class UserServiceImpl implements UserService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
-/*	@Override
-	public COrder get(String id) {
-		
-		return cOrderMapper.selectByPrimaryKey(id);
+	
+	@Override
+	public SysUser get(String id) {
+		return sysUserMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public CustomResult delete(String id) {
-		int i = cOrderMapper.deleteByPrimaryKey(id);
-		if(i>=0){
+		int i = sysUserMapper.deleteByPrimaryKey(id);
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -57,8 +59,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
-		int i = cOrderMapper.deleteBatch(ids);
-		if(i>=0){
+		//删除用户角色表中的记录
+		int k = sysUserRoleMapper.deleteBatchByUserId(ids);
+		
+		int i = sysUserMapper.deleteBatch(ids);
+		if(i>0 && k>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -66,9 +71,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public CustomResult insert(COrderPO cOrder) {
-		int i = cOrderMapper.insert(cOrder);
-		if(i>=0){
+	public CustomResult insert(UserPO userPO) {
+		//在业务层整合处理
+		SysUserRole sysUserRole = new SysUserRole();
+		//补全字段
+		sysUserRole.setId(IDUtils.genStringId());
+		sysUserRole.setSysUserId(userPO.getId());
+		sysUserRole.setSysRoleId(userPO.getRole());
+		//存用户角色表
+		int k = sysUserRoleMapper.insert(sysUserRole);
+		//存用户表
+		int i = sysUserMapper.insert(userPO);
+		if(i>0 && k>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -76,9 +90,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public CustomResult update(COrderPO cOrder) {
-		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
-		if(i>=0){
+	public CustomResult update(UserPO userPO) {
+		int i = sysUserMapper.updateByPrimaryKeySelective(userPO);
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -86,19 +100,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public CustomResult updateAll(COrderPO cOrder) {
-		int i = cOrderMapper.updateByPrimaryKey(cOrder);
-		if(i>=0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-
-	@Override
-	public CustomResult updateNote(COrderPO cOrder) {
-		int i = cOrderMapper.updateNote(cOrder);
-		if(i>=0){
+	public CustomResult updateAll(UserPO userPO) {
+		//在业务层整合处理
+		SysUserRole sysUserRole = new SysUserRole();
+		//补全字段
+		sysUserRole.setSysRoleId(userPO.getRole());
+		//修改用户角色表
+		SysUserRoleExample example = new SysUserRoleExample();
+		SysUserRoleExample.Criteria criteria = example.createCriteria();
+		criteria.andSysUserIdEqualTo(userPO.getId());
+		int k = sysUserRoleMapper.updateByExampleSelective(sysUserRole, example);
+		
+		int i = sysUserMapper.updateByPrimaryKey(userPO);
+		if(i>0 && k>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -107,53 +121,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public CustomResult changeStatus(String[] ids) {
-		int i = cOrderMapper.changeStatus(ids);
-		if(i>=0){
+		int i = sysUserMapper.changeStatus(ids);
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
 		}
-	}*/
-
-	@Override
-	public CustomResult insert(UserPO userPO) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
-	@Override
-	public CustomResult update(UserPO userPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CustomResult updateAll(UserPO userPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SysUser get(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CustomResult delete(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CustomResult deleteBatch(String[] ids) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CustomResult changeStatus(String[] ids) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
