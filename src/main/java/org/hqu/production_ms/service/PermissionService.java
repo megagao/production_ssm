@@ -14,6 +14,8 @@ public interface PermissionService {
 	
 	SysRolePermission get(String string);
 	
+	SysRolePermission getByRoleId(String string);
+	
 	CustomResult delete(String string);
 
 	CustomResult insert(SysRolePermission sysRolePermission);
