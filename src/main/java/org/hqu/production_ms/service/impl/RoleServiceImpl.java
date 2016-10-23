@@ -8,8 +8,6 @@ import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysRoleExample;
 import org.hqu.production_ms.domain.authority.SysRolePermission;
 import org.hqu.production_ms.domain.authority.SysRolePermissionExample;
-import org.hqu.production_ms.domain.authority.SysUserRole;
-import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.po.RolePO;
 import org.hqu.production_ms.mapper.authority.SysRoleMapper;
 import org.hqu.production_ms.mapper.authority.SysRolePermissionMapper;
