@@ -19,34 +19,34 @@
 	        <tr>
 	            <td>用户名:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="username" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="username" ></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>密码:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="password" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="password" ></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>角色:</td>
 	            <td>
-	            	<input id="custom" class="easyui-combobox" name="role"   
-    					data-options="required:true,valueField:'roleId',textField:'roleName',url:'role/get_data'" />  
+	            	<input class="easyui-combobox" name="role"   
+    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="locked" data-options="width:150">
 						<option value="1">有效用户</option>
 						<option value="2">锁定</option>
 					</select>
 				</td>
 	        </tr>
 	    </table>
-	    <input type="hidden" name="userParams"/>
 	</form>
+	<br><br>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
@@ -66,15 +66,15 @@
 		//$("#userAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("user/insert",$("#userAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增订单成功!');
+				$.messager.alert('提示','新增用户成功!');
 				clearForm();
+				$("#userList").datagrid("reload");
 			}
 		});
 	}
 	
 	function clearForm(){
 		$('#userAddForm').form('reset');
-		userAddEditor.html('');
 	}
 	$('#cc').combo({    
 	    required:true,    
