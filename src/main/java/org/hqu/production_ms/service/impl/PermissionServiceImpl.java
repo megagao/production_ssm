@@ -38,14 +38,21 @@ public class PermissionServiceImpl implements PermissionService{
 
 	@Override
 	public SysRolePermission get(String string) {
-		
 		return sysRolePermissionMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
+	public SysRolePermission getByRoleId(String string) {
+		SysRolePermissionExample example = new SysRolePermissionExample();
+		SysRolePermissionExample.Criteria criteria = example.createCriteria();
+		criteria.andSysRoleIdEqualTo(string);
+		return sysRolePermissionMapper.selectByExample(example).get(0);
+	}
+	
+	@Override
 	public CustomResult delete(String string) {
 		int i = sysRolePermissionMapper.deleteByPrimaryKey(string);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -55,7 +62,7 @@ public class PermissionServiceImpl implements PermissionService{
 	@Override
 	public CustomResult insert(SysRolePermission sysRolePermission) {
 		int i = sysRolePermissionMapper.insert(sysRolePermission);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -65,7 +72,7 @@ public class PermissionServiceImpl implements PermissionService{
 	@Override
 	public CustomResult update(SysRolePermission sysRolePermission) {
 		int i = sysRolePermissionMapper.updateByPrimaryKeySelective(sysRolePermission);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -75,7 +82,7 @@ public class PermissionServiceImpl implements PermissionService{
 	@Override
 	public CustomResult updateAll(SysRolePermission sysRolePermission) {
 		int i = sysRolePermissionMapper.updateByPrimaryKey(sysRolePermission);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;

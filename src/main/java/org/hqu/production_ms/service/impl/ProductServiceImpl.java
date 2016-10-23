@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public CustomResult delete(String string) {
 		int i = productMapper.deleteByPrimaryKey(string);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
 		int i = productMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public CustomResult insert(Product product) {
 		int i = productMapper.insert(product);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public CustomResult update(Product product) {
 		int i = productMapper.updateByPrimaryKeySelective(product);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -85,7 +85,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public CustomResult updateAll(Product product) {
 		int i = productMapper.updateByPrimaryKey(product);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -95,7 +95,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public CustomResult updateNote(Product product) {
 		int i = productMapper.updateNote(product);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;

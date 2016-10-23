@@ -6,9 +6,15 @@ import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysRoleExample;
+import org.hqu.production_ms.domain.authority.SysRolePermission;
+import org.hqu.production_ms.domain.authority.SysRolePermissionExample;
+import org.hqu.production_ms.domain.authority.SysUserRole;
+import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.po.RolePO;
 import org.hqu.production_ms.mapper.authority.SysRoleMapper;
+import org.hqu.production_ms.mapper.authority.SysRolePermissionMapper;
 import org.hqu.production_ms.service.RoleService;
+import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +26,9 @@ public class RoleServiceImpl implements RoleService{
 
 	@Autowired
 	SysRoleMapper sysRoleMapper;
+	
+	@Autowired
+	SysRolePermissionMapper sysRolePermissionMapper;
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, SysRole sysRole) {
@@ -39,14 +48,13 @@ public class RoleServiceImpl implements RoleService{
 
 	@Override
 	public SysRole get(String string) {
-		
 		return sysRoleMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
 	public CustomResult delete(String string) {
 		int i = sysRoleMapper.deleteByPrimaryKey(string);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -65,8 +73,16 @@ public class RoleServiceImpl implements RoleService{
 
 	@Override
 	public CustomResult insert(RolePO role) {
+		//在业务层整合
+		SysRolePermission sysRolePermission = new SysRolePermission();
+		sysRolePermission.setId(IDUtils.genStringId());
+		sysRolePermission.setSysRoleId(role.getRoleId());
+		sysRolePermission.setSysPermissionId(role.getPermission());
+		//存角色权限表
+		int k = sysRolePermissionMapper.insertSelective(sysRolePermission);
+		
 		int i = sysRoleMapper.insert(role);
-		if(i>=0){
+		if(i>0 && k>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -76,7 +92,7 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public CustomResult update(RolePO role) {
 		int i = sysRoleMapper.updateByPrimaryKeySelective(role);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -85,8 +101,17 @@ public class RoleServiceImpl implements RoleService{
 
 	@Override
 	public CustomResult updateAll(RolePO role) {
+		//在业务层整合处理
+		SysRolePermission sysRolePermission = new SysRolePermission();
+		sysRolePermission.setSysPermissionId(role.getPermission());
+		//修改角色权限表
+		SysRolePermissionExample example = new SysRolePermissionExample();
+		SysRolePermissionExample.Criteria criteria = example.createCriteria();
+		criteria.andSysRoleIdEqualTo(role.getRoleId());
+		int k = sysRolePermissionMapper.updateByExampleSelective(sysRolePermission, example);
+		
 		int i = sysRoleMapper.updateByPrimaryKey(role);
-		if(i>=0){
+		if(i>0 && k>0){
 			return CustomResult.ok();
 		}else{
 			return null;
