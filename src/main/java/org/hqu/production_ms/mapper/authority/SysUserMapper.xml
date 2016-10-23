@@ -7,6 +7,50 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="locked" property="locked" jdbcType="CHAR" />
   </resultMap>
+  
+  <resultMap id="UserPORM" type="userPO" >
+    <result column="name" property="role" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="sysUser" resultMap="UserPORM">
+	SELECT
+		sys_user.id,
+		username,
+		password,
+		locked,
+		name
+	FROM
+		sys_user
+	LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
+	LEFT JOIN sys_role ON sys_role_id = sys_role.id
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			c_order
+		WHERE
+			order_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE c_order
+		SET status = #{status}
+		WHERE
+			order_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
