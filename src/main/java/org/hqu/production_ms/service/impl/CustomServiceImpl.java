@@ -44,7 +44,7 @@ public class CustomServiceImpl implements CustomService{
 	@Override
 	public CustomResult delete(String string) {
 		int i = customMapper.deleteByPrimaryKey(string);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -54,7 +54,7 @@ public class CustomServiceImpl implements CustomService{
 	@Override
 	public CustomResult deleteBatch(String[] ids) {
 		int i = customMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -64,7 +64,7 @@ public class CustomServiceImpl implements CustomService{
 	@Override
 	public CustomResult insert(Custom custom) {
 		int i = customMapper.insert(custom);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -74,7 +74,7 @@ public class CustomServiceImpl implements CustomService{
 	@Override
 	public CustomResult update(Custom custom) {
 		int i = customMapper.updateByPrimaryKeySelective(custom);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -84,7 +84,7 @@ public class CustomServiceImpl implements CustomService{
 	@Override
 	public CustomResult updateAll(Custom custom) {
 		int i = customMapper.updateByPrimaryKey(custom);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -94,7 +94,7 @@ public class CustomServiceImpl implements CustomService{
 	@Override
 	public CustomResult updateNote(Custom custom) {
 		int i = customMapper.updateNote(custom);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
