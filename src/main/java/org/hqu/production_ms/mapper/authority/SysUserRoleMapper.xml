@@ -6,6 +6,21 @@
     <result column="sys_user_id" property="sysUserId" jdbcType="VARCHAR" />
     <result column="sys_role_id" property="sysRoleId" jdbcType="VARCHAR" />
   </resultMap>
+  
+  	<!-- 扩展的sql -->
+	<!-- 批量删除 -->
+	<delete id="deleteBatchByUserId">
+		DELETE
+		FROM
+			sys_user_role
+		WHERE
+			sys_user_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
