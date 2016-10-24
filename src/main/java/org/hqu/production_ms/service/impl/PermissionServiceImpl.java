@@ -80,6 +80,22 @@ public class PermissionServiceImpl implements PermissionService{
 	}
 
 	@Override
+	public CustomResult updateByRoleId(String roleId, String permission) {
+		SysRolePermission sysRolePermission = new SysRolePermission();
+		sysRolePermission.setSysPermissionId(permission);
+		//修改角色权限表
+		SysRolePermissionExample example = new SysRolePermissionExample();
+		SysRolePermissionExample.Criteria criteria = example.createCriteria();
+		criteria.andSysRoleIdEqualTo(roleId);
+		int i = sysRolePermissionMapper.updateByExampleSelective(sysRolePermission, example);
+		if(i>0){
+			return CustomResult.ok();
+		}else{
+			return null;
+		}
+	}
+	
+	@Override
 	public CustomResult updateAll(SysRolePermission sysRolePermission) {
 		int i = sysRolePermissionMapper.updateByPrimaryKey(sysRolePermission);
 		if(i>0){
