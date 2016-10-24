@@ -9,7 +9,7 @@
   </resultMap>
   
   <resultMap id="UserPORM" type="userPO" >
-    <result column="name" property="role" jdbcType="VARCHAR" />
+    <result column="roleName" property="role" jdbcType="VARCHAR" />
   </resultMap>
   
   	<!-- 扩展的sql -->
@@ -20,7 +20,7 @@
 		username,
 		password,
 		locked,
-		name
+		roleName
 	FROM
 		sys_user
 	LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
