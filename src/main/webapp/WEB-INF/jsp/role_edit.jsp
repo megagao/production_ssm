@@ -9,56 +9,30 @@
 <div style="padding:10px 10px 10px 10px">
 	<form id="roleEditForm" class="roleForm" method="post">
 		<input id="roleId" type="hidden" name="roleId"/>
-	    <table cellpadding="5">
-	        <tr>
-	            <td><span>角色名:</span></td>
-	            <td>
-	            	<input class="easyui-textbox" type="text" name="roleName" ></input>
-	            </td>
-	        </tr>
-	        <tr>
-	            <td><span >状态:</span></td>
-	            <td>
+	            <span>角色名:</span>
+	            	<input class="easyui-textbox" type="text" name="roleName" ></input><br><br>
+	            <span >状&nbsp态:</span>
 		            <select class="easyui-combobox" name="available" data-options="width:150">
 						<option value="1">有效</option>
 						<option value="2">锁定</option>
-					</select>
-				</td>
-	        </tr>
-	    </table>
-	    <table cellpadding="5">
-	    	<tr>
-	            <td><span >权限:</span></td>
-	            <td>
-	            	<input type="hidden" name="permission" ></input>
-	            </td>
-	        </tr>
-           	<tr>
-	            <td>
-		            <span style="font-weight: bold;">订单管理：</span>
-					<label><input name="permissionOption" type="checkbox" value="11" />订单新增 </label> 
-					<label><input name="permissionOption" type="checkbox" value="12" />订单修改 </label> 
-					<label><input name="permissionOption" type="checkbox" value="13" />订单删除 </label> 
-				</td>
-			</tr>
-			<tr>
-				 <td>
-		            <span style="font-weight: bold;">客户管理：</span>
-					<label><input name="permissionOption" type="checkbox" value="21" />客户新增 </label> 
-					<label><input name="permissionOption" type="checkbox" value="22" />客户修改 </label> 
-					<label><input name="permissionOption" type="checkbox" value="23" />客户删除 </label> 
-				</td>
-			</tr>
-			<tr>
-				 <td>
-		            <span style="font-weight: bold;">产品管理：</span>
-					<label><input name="permissionOption" type="checkbox" value="31" />产品新增 </label> 
-					<label><input name="permissionOption" type="checkbox" value="32" />产品修改 </label> 
-					<label><input name="permissionOption" type="checkbox" value="33" />产品删除 </label> 
-				</td>
-			</tr>
-	    </table>
-	    
+					</select><br><br>
+	        <span >权限:</span><br><br>
+	        <input type="hidden" name="permission" ></input>
+           	<span style="font-weight: bold;">订单管理：</span>
+			<label><input name="permissionOption1" type="checkbox" value="11" />订单新增 </label> 
+			<label><input name="permissionOption1" type="checkbox" value="12" />订单修改 </label> 
+			<label><input name="permissionOption1" type="checkbox" value="13" />订单删除 </label> 
+			<br><br>
+            <span style="font-weight: bold;">客户管理：</span>
+			<label><input name="permissionOption1" type="checkbox" value="21" />客户新增 </label> 
+			<label><input name="permissionOption1" type="checkbox" value="22" />客户修改 </label> 
+			<label><input name="permissionOption1" type="checkbox" value="23" />客户删除 </label> 
+			<br><br>
+            <span style="font-weight: bold;">产品管理：</span>
+			<label><input name="permissionOption1" type="checkbox" value="31" />产品新增 </label> 
+			<label><input name="permissionOption1" type="checkbox" value="32" />产品修改 </label> 
+			<label><input name="permissionOption1" type="checkbox" value="33" />产品删除 </label> 
+			<br><br><br>
 	</form>
 	<br><br>
 	<div style="padding:5px">
@@ -66,28 +40,31 @@
 	</div>
 </div>
 <script type="text/javascript">
+	var checkArray;
 	function permissionInit(){
 		var roleId = $('#roleEditForm [name=roleId]').val();
 		$.get("permission/get_permission", {roleId : roleId}, function(data){
 			//获得所要回显的值，此处为","分割的字符串
 	        var checkeds = data.sysPermissionId;
-			alert(checkeds);
 	        //拆分为字符串数组
-	        var checkArray =checkeds.split(",");
+	        checkArray =checkeds.split(",");
 	    	//获得所有的复选框对象
-		    var checkBoxAll = $("input[name='permissionOption']");
+		    var checkBoxAll = $("input[name='permissionOption1']");
 		    //获得所有复选框的value值，然后，用checkArray中的值和他们比较，如果有，则说明该复选框被选中
-		    for(var i=0;i<checkArray.length;i++){
+		    for(var i=0;i<checkArray.length-1;i++){
 			    //获取所有复选框对象的value属性，然后，用checkArray[i]和他们匹配，如果有，则说明他应被选中
 			    $.each(checkBoxAll,function(j,checkbox){
-			    //获取复选框的value属性
-			    var checkValue=$(checkbox).val();
-			    if(checkArray[i]==checkValue){
-			    	$(checkbox).attr("checked",true);
-			    }
+				    //获取复选框的value属性
+				    var checkValue=$(checkbox).val();
+				    
+				    if(checkArray[i]==checkValue){
+				    	/* alert("checkArray[i] = "+checkArray[i])
+					    alert("checkValue = "+checkValue) */
+				    	$(checkbox).prop("checked",true);
+				    }
 			    });
 		   }
-		});
+		}); 
 	}
 	
 	function submitForm(){
@@ -95,32 +72,21 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		
+		if($("input[name='permissionOption1']:checked").length>0){
+			var permission = '';
+			$("input[name='permissionOption1']:checked").each(function(){
+				permission += $(this).val()+',';
+			}); 
+			$("#roleEditForm [name=permission]").val(permission);
+		}
 		$.post("role/update_all",$("#roleEditForm").serialize(), function(data){
-			if($("input[name='permission']:checkbox:checked").length>0){
-				value = '';
-				$("input[name='permission']:checkbox:checked").each(function(){
-				  value += $(this).val()+',';
-				}); 
-				var roleId = $("#permissionForm [name=roleId]").val();
-				$.post('permission/update', { roleId : roleId, value : value }, function(data){
-					if(data.status == 200){
-						$("#permissionDialog").dialog("close");
-						$("#roleList").datagrid("reload");
-						$.messager.alert("操作提示", "更新权限成功！");
-					}else{
-						$.messager.alert("操作提示", "更新权限失败！","error");
-					}
-				});
-	    	}
-			
 			if(data.status == 200){
-				$.messager.alert('提示','修改订单成功!','info',function(){
+				$.messager.alert('提示','修改角色成功!','info',function(){
 					$("#roleEditWindow").window('close');
 					$("#roleList").datagrid("reload");
 				});
 			}else{
-				$.messager.alert('错误','修改订单失败!');
+				$.messager.alert('错误','修改角色失败!');
 			}
 		});
 	}
