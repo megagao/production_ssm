@@ -16,7 +16,6 @@ public interface SysUserMapper {
 	int changeStatus(String[] ids);
 	
 	
-	
     int countByExample(SysUserExample example);
 
     int deleteByExample(SysUserExample example);
