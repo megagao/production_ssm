@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -73,6 +72,13 @@ public class PermissionController {
 	@ResponseBody
 	private CustomResult update(SysRolePermission sysRolePermission) throws Exception {
 		CustomResult result = permissionService.update(sysRolePermission);
+		return result;
+	}
+	
+	@RequestMapping(value="/update_by_roleid")
+	@ResponseBody
+	private CustomResult updateByRoleId(String roleId, String permission) throws Exception {
+		CustomResult result = permissionService.updateByRoleId(roleId, permission);
 		return result;
 	}
 	
