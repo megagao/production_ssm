@@ -23,6 +23,9 @@ public interface PermissionService {
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
     CustomResult update(SysRolePermission sysRolePermission);
     
+    //根据角色id更新角色权限表
+    CustomResult updateByRoleId(String roleId, String permission);
+    
     //更新全部字段，不判断非空，直接进行更新
     CustomResult updateAll(SysRolePermission sysRolePermission);
 }
