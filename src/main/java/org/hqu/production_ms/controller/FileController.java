@@ -52,7 +52,6 @@ public class FileController {
 				String fileName = iterator.next();
 				MultipartFile multipartFile = request.getFile(fileName);
 				/*byte[] file = multipartFile.getBytes();*/
-				@SuppressWarnings("unchecked")
 				Map<String,Object> result = fileService.uploadFile(multipartFile);
 				
 				json = JsonUtils.objectToJson(result);
