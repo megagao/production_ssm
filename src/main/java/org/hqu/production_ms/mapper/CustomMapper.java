@@ -3,10 +3,8 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.CustomExample;
-import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface CustomMapper {
 	
