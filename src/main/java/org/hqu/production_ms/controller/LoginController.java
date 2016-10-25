@@ -19,7 +19,6 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.ActiveUser;
-import org.hqu.production_ms.exception.CustomException;
 import org.hqu.production_ms.service.SysService;
 
  /**
