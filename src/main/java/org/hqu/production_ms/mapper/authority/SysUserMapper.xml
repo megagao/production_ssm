@@ -7,9 +7,8 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="locked" property="locked" jdbcType="CHAR" />
   </resultMap>
-  
   <resultMap id="UserPORM" type="userPO" >
-    <result column="roleName" property="role" jdbcType="VARCHAR" />
+    <result column="role_name" property="role" jdbcType="VARCHAR" />
   </resultMap>
   
   	<!-- 扩展的sql -->
@@ -20,11 +19,11 @@
 		username,
 		password,
 		locked,
-		roleName
+		role_name
 	FROM
 		sys_user
 	LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
-	LEFT JOIN sys_role ON sys_role_id = sys_role.id
+	LEFT JOIN sys_role ON sys_role_id = sys_role.role_id
 	</select>
 	
 	<!-- 批量删除 -->

@@ -4,6 +4,22 @@
   
   
   <!-- 根据用户id查询url -->
+  <select id="findPermissionByUserId" parameterType="string" resultType="string">
+	SELECT
+		sys_permission_id
+	FROM
+		sys_role_permission
+	WHERE
+		sys_role_id IN (
+			SELECT
+				sys_role_id
+			FROM
+				sys_user_role
+			WHERE
+				sys_user_id = #{id})
+  </select>
+  
+  <!-- 根据用户id查询url -->
   <select id="findPermissionListByUserId" parameterType="string" resultType="org.hqu.production_ms.domain.authority.SysPermission">
 	SELECT
 		*

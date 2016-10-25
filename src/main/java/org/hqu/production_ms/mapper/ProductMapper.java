@@ -3,7 +3,6 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.Custom;
 import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.ProductExample;
 

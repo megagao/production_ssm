@@ -7,6 +7,10 @@ import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysPermissionExample;
 
 public interface SysPermissionMapper {
+	
+	List<SysPermission> findPermission(String ids[]);
+	
+	
     int countByExample(SysPermissionExample example);
 
     int deleteByExample(SysPermissionExample example);
