@@ -103,7 +103,12 @@ public class CustomController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	private CustomResult insert(Custom custom) throws Exception {
-		CustomResult result = customService.insert(custom);
+		CustomResult result;
+		if(customService.get(custom.getCustomId()) != null){
+			result = new CustomResult(0, "该客户编号已经存在，请更换客户编号！", null);
+		}else{
+			result = customService.insert(custom);
+		}
 		return result;
 	}
 	

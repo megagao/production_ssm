@@ -1,7 +1,12 @@
 package org.hqu.production_ms.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.CustomResult;
@@ -38,9 +43,47 @@ public class ProductController {
 		return productService.find();
 	}
 	
+	@RequestMapping("/add_judge")
+	@ResponseBody
+	public Map<String,Object> productAddJudge() {
+		//从shiro的session中取activeUser
+		Subject subject = SecurityUtils.getSubject();
+		//取身份信息
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		if(!activeUser.getUserStatus().equals("1")){
+			map.put("msg", "您的账户已被锁定，请切换账户登录！");
+		}else if(!activeUser.getRoleStatus().equals("1")){
+			map.put("msg", "当前角色已被锁定，请切换账户登录！");
+		}else{
+			if(!subject.isPermitted("product:add")){
+				map.put("msg", "您没有权限，请切换用户登录！");
+			}
+		}
+		return map;
+	}
+	
 	@RequestMapping("/add")
 	public String add() {
 		return "product_add";
+	}
+	
+	@RequestMapping("/edit_judge")
+	@ResponseBody
+	public Map<String,Object> productEditJudge() {
+		Subject subject = SecurityUtils.getSubject();
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!activeUser.getUserStatus().equals("1")){
+			map.put("msg", "您的账户已被锁定，请切换账户登录！");
+		}else if(!activeUser.getRoleStatus().equals("1")){
+			map.put("msg", "当前角色已被锁定，请切换账户登录！");
+		}else{
+			if(!subject.isPermitted("product:edit")){
+				map.put("msg", "您没有权限，请切换用户登录！");
+			}
+		}
+		return map;
 	}
 	
 	@RequestMapping("/edit")
@@ -58,7 +101,12 @@ public class ProductController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	private CustomResult insert(Product product) throws Exception {
-		CustomResult result = productService.insert(product);
+		CustomResult result;
+		if(productService.get(product.getProductId()) != null){
+			result = new CustomResult(0, "该产品编号已经存在，请更换产品编号！", null);
+		}else{
+			result = productService.insert(product);
+		}
 		return result;
 	}
 	
@@ -81,6 +129,24 @@ public class ProductController {
 	private CustomResult updateNote(Product product) throws Exception {
 		CustomResult result = productService.updateNote(product);
 		return result;
+	}
+	
+	@RequestMapping("/delete_judge")
+	@ResponseBody
+	public Map<String,Object> productDeleteJudge() {
+		Subject subject = SecurityUtils.getSubject();
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!activeUser.getUserStatus().equals("1")){
+			map.put("msg", "您的账户已被锁定，请切换账户登录！");
+		}else if(!activeUser.getRoleStatus().equals("1")){
+			map.put("msg", "当前角色已被锁定，请切换账户登录！");
+		}else{
+			if(!subject.isPermitted("product:delete")){
+				map.put("msg", "您没有权限，请切换用户登录！");
+			}
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/delete")

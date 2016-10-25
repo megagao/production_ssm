@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
@@ -40,10 +40,19 @@ public class OrderController {
 	@RequestMapping("/add_judge")
 	@ResponseBody
 	public Map<String,Object> orderAddJudge() {
-		Map<String,Object> map = new HashMap<String,Object>();  
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isPermitted("order:add")){
-			map.put("msg", "您没有权限，请切换用户登录！");
+		//从shiro的session中取activeUser
+		Subject subject = SecurityUtils.getSubject();
+		//取身份信息
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		if(!activeUser.getUserStatus().equals("1")){
+			map.put("msg", "您的账户已被锁定，请切换账户登录！");
+		}else if(!activeUser.getRoleStatus().equals("1")){
+			map.put("msg", "当前角色已被锁定，请切换账户登录！");
+		}else{
+			if(!subject.isPermitted("order:add")){
+				map.put("msg", "您没有权限，请切换用户登录！");
+			}
 		}
 		return map;
 	}
@@ -56,10 +65,17 @@ public class OrderController {
 	@RequestMapping("/edit_judge")
 	@ResponseBody
 	public Map<String,Object> orderEditJudge() {
-		Map<String,Object> map = new HashMap<String,Object>();  
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isPermitted("order:edit")){
-			map.put("msg", "您没有权限，请切换用户登录！");
+		Subject subject = SecurityUtils.getSubject();
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!activeUser.getUserStatus().equals("1")){
+			map.put("msg", "您的账户已被锁定，请切换账户登录！");
+		}else if(!activeUser.getRoleStatus().equals("1")){
+			map.put("msg", "当前角色已被锁定，请切换账户登录！");
+		}else{
+			if(!subject.isPermitted("order:edit")){
+				map.put("msg", "您没有权限，请切换用户登录！");
+			}
 		}
 		return map;
 	}
@@ -79,7 +95,12 @@ public class OrderController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	private CustomResult insert(COrderPO cOrder) throws Exception {
-		CustomResult result = orderService.insert(cOrder);
+		CustomResult result;
+		if(orderService.get(cOrder.getOrderId()) != null){
+			result = new CustomResult(0, "该订单编号已经存在，请更换订单编号！", null);
+		}else{
+			result = orderService.insert(cOrder);
+		}
 		return result;
 	}
 	
@@ -107,10 +128,17 @@ public class OrderController {
 	@RequestMapping("/delete_judge")
 	@ResponseBody
 	public Map<String,Object> orderDeleteJudge() {
-		Map<String,Object> map = new HashMap<String,Object>();  
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isPermitted("order:delete")){
-			map.put("msg", "您没有权限，请切换用户登录！");
+		Subject subject = SecurityUtils.getSubject();
+		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(!activeUser.getUserStatus().equals("1")){
+			map.put("msg", "您的账户已被锁定，请切换账户登录！");
+		}else if(!activeUser.getRoleStatus().equals("1")){
+			map.put("msg", "当前角色已被锁定，请切换账户登录！");
+		}else{
+			if(!subject.isPermitted("order:delete")){
+				map.put("msg", "您没有权限，请切换用户登录！");
+			}
 		}
 		return map;
 	}
