@@ -77,9 +77,25 @@ public class UserController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(UserPO user) throws Exception {
-		CustomResult result = userService.insert(user);
-		return result;
+	private Map<String,Object> insert(UserPO user) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		if(userService.findByUserNameAndId(user.getUsername(), user.getId()).size()>0){
+			map.put("msg", "该用户名已经存在，请更换用户名！");
+			map.put("label", "1");
+		}else if(userService.get(user.getId()) != null){
+			map.put("msg", "该用户编号已经存在，请更换用户编号！");
+			map.put("label", "2");
+		}else{
+			CustomResult result = userService.insert(user);
+			if(result.getStatus() == 200){
+				map.put("msg", "新增用户成功！");
+				map.put("label", "200");
+			}else{
+				map.put("msg", "新增用户失败！");
+				map.put("label", "0");
+			}
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/update")
@@ -91,9 +107,22 @@ public class UserController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(UserPO user) throws Exception {
-		CustomResult result = userService.updateAll(user);
-		return result;
+	private Map<String,Object> updateAll(UserPO user) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		if(userService.findByUserNameAndId(user.getUsername(), user.getId()).size()>0){
+			map.put("msg", "该用户名已经存在，请更换用户名！");
+			map.put("label", "1");
+		}else{
+			CustomResult result = userService.updateAll(user);
+			if(result.getStatus() == 200){
+				map.put("msg", "更新用户成功！");
+				map.put("label", "200");
+			}else{
+				map.put("msg", "更新用户失败！");
+				map.put("label", "0");
+			}
+		}
+		return map;
 	}
 	
 	@RequestMapping("/delete_judge")

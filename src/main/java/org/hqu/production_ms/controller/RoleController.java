@@ -1,6 +1,8 @@
 package org.hqu.production_ms.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.CustomResult;
@@ -58,9 +60,25 @@ public class RoleController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(RolePO role) throws Exception {
-		CustomResult result = roleService.insert(role);
-		return result;
+	private Map<String,Object> insert(RolePO role) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		if(roleService.findByRoleNameAndId(role.getRoleName(), role.getRoleId()).size()>0){
+			map.put("msg", "该角色名已经存在，请更换角色名！");
+			map.put("label", "1");
+		}else if(roleService.get(role.getRoleId()) != null){
+			map.put("msg", "该角色编号已经存在，请更换角色编号！");
+			map.put("label", "2");
+		}else{
+			CustomResult result = roleService.insert(role);
+			if(result.getStatus() == 200){
+				map.put("msg", "新增角色成功！");
+				map.put("label", "200");
+			}else{
+				map.put("msg", "新增角色失败！");
+				map.put("label", "0");
+			}
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/update")
@@ -72,9 +90,22 @@ public class RoleController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(RolePO role) throws Exception {
-		CustomResult result = roleService.updateAll(role);
-		return result;
+	private Map<String,Object> updateAll(RolePO role) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>(); 
+		if(roleService.findByRoleNameAndId(role.getRoleName(), role.getRoleId()).size()>0){
+			map.put("msg", "该角色名已经存在，请更换角色名！");
+			map.put("label", "1");
+		}else{
+			CustomResult result = roleService.updateAll(role);
+			if(result.getStatus() == 200){
+				map.put("msg", "更新角色成功！");
+				map.put("label", "200");
+			}else{
+				map.put("msg", "更新角色失败！");
+				map.put("label", "0");
+			}
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/delete")
