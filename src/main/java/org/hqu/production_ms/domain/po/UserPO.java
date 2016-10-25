@@ -9,7 +9,9 @@ public class UserPO {
     
     private String locked;
     
-    private String role;
+    private String roleName;
+    
+    private String roleId;
 
 	public String getId() {
 		return id;
@@ -43,11 +45,20 @@ public class UserPO {
 		this.locked = locked;
 	}
 
-	public String getRole() {
-		return role;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
+
 }
