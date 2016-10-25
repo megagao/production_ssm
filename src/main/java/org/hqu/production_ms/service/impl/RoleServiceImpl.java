@@ -8,9 +8,12 @@ import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysRoleExample;
 import org.hqu.production_ms.domain.authority.SysRolePermission;
 import org.hqu.production_ms.domain.authority.SysRolePermissionExample;
+import org.hqu.production_ms.domain.authority.SysUserRole;
+import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.po.RolePO;
 import org.hqu.production_ms.mapper.authority.SysRoleMapper;
 import org.hqu.production_ms.mapper.authority.SysRolePermissionMapper;
+import org.hqu.production_ms.mapper.authority.SysUserRoleMapper;
 import org.hqu.production_ms.service.RoleService;
 import org.hqu.production_ms.util.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class RoleServiceImpl implements RoleService{
 
 	@Autowired
 	SysRoleMapper sysRoleMapper;
+	
+	@Autowired
+	SysUserRoleMapper sysUserRoleMapper;
 	
 	@Autowired
 	SysRolePermissionMapper sysRolePermissionMapper;
@@ -44,11 +50,36 @@ public class RoleServiceImpl implements RoleService{
 		return result;
 	}
 
+
+	@Override
+	public List<SysRole> findByRoleNameAndId(String rolename, String id) {
+		SysRoleExample example = new SysRoleExample();
+		SysRoleExample.Criteria criteria = example.createCriteria();
+		criteria.andRoleNameEqualTo(rolename);
+		if(id != null){
+			criteria.andRoleIdNotEqualTo(id);
+		}
+		List<SysRole> sysRoleList = sysRoleMapper.selectByExample(example);
+		return sysRoleList;
+	}
+
+	
 	@Override
 	public SysRole get(String string) {
 		return sysRoleMapper.selectByPrimaryKey(string);
 	}
 
+
+	@Override
+	public SysRole findRoleByUserId(String userId) {
+		SysUserRoleExample example = new SysUserRoleExample();
+		SysUserRoleExample.Criteria criteria = example.createCriteria();
+		criteria.andSysUserIdEqualTo(userId);
+		SysUserRole sysUserRole = sysUserRoleMapper.selectByExample(example).get(0);
+		SysRole sysRole = sysRoleMapper.selectByPrimaryKey(sysUserRole.getSysRoleId());
+		return sysRole;
+	}
+	
 	@Override
 	public CustomResult delete(String string) {
 		int i = sysRoleMapper.deleteByPrimaryKey(string);
@@ -121,4 +152,5 @@ public class RoleServiceImpl implements RoleService{
 		SysRoleExample example = new SysRoleExample();
 		return sysRoleMapper.selectByExample(example);
 	}
+
 }

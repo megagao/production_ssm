@@ -1,15 +1,17 @@
 package org.hqu.production_ms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.hqu.production_ms.service.SysService;
+import org.hqu.production_ms.mapper.authority.SysPermissionMapper;
 import org.hqu.production_ms.mapper.authority.SysUserMapper;
 import org.hqu.production_ms.mapper.authority.SysPermissionMapperCustom;
-import org.hqu.production_ms.exception.CustomException;
 import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.authority.SysPermission;
+import org.hqu.production_ms.domain.authority.SysPermissionExample;
 import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.domain.authority.SysUserExample;
 
@@ -29,6 +31,9 @@ public class SysServiceImpl implements SysService {
 	
 	@Autowired
 	private SysPermissionMapperCustom sysPermissionMapperCustom;
+	
+	@Autowired
+	private SysPermissionMapper sysPermissionMapper;
 	
 	@Override
 	public ActiveUser authenticat(String username, String password)
@@ -94,7 +99,16 @@ public class SysServiceImpl implements SysService {
 	public List<SysPermission> findPermissionListByUserId(String userid)
 			throws Exception {
 		
-		return this.sysPermissionMapperCustom.findPermissionListByUserId(userid);
+		String permission = this.sysPermissionMapperCustom.findPermissionByUserId(userid);
+		String[] permissionIds = permission.split(",");
+		List<Long> ids = new ArrayList<Long>();
+		for(int i=0;i<permissionIds.length;i++){
+			ids.add(Long.valueOf(permissionIds[i]));
+		}
+		SysPermissionExample example = new SysPermissionExample();
+		SysPermissionExample.Criteria criteria = example.createCriteria();
+		criteria.andIdIn(ids);
+		return sysPermissionMapper.selectByExample(example);
 	}
 
 	@Override

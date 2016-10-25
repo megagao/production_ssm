@@ -5,6 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.authority.SysUserExample;
 import org.hqu.production_ms.domain.authority.SysUserRole;
 import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.po.UserPO;
@@ -47,6 +48,18 @@ public class UserServiceImpl implements UserService{
 		return sysUserMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public List<SysUser> findByUserNameAndId(String username, String id) {
+		SysUserExample example = new SysUserExample();
+		SysUserExample.Criteria criteria = example.createCriteria();
+		criteria.andUsernameEqualTo(username);
+		if(id != null){
+			criteria.andIdNotEqualTo(id);
+		}
+		List<SysUser> sysUserList = sysUserMapper.selectByExample(example);
+		return sysUserList;
+	}
+	
 	@Override
 	public CustomResult delete(String id) {
 		int i = sysUserMapper.deleteByPrimaryKey(id);
@@ -128,5 +141,4 @@ public class UserServiceImpl implements UserService{
 			return null;
 		}
 	}
-
 }
