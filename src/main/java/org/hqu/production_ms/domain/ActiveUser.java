@@ -1,6 +1,5 @@
 package org.hqu.production_ms.domain;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hqu.production_ms.domain.authority.SysPermission;
@@ -13,10 +12,15 @@ import org.hqu.production_ms.domain.authority.SysPermission;
  * 
  */
 public class ActiveUser implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String userid;//用户id（主键）
-	private String usercode;// 用户账号
 	private String username;// 用户名称
-
+	private String userStatus;// 用户状态
+	private String rolename;// 角色名称
+	private String roleStatus;// 角色状态
 	private List<SysPermission> menus;// 菜单
 	private List<SysPermission> permissions;// 权限
 
@@ -26,15 +30,6 @@ public class ActiveUser implements java.io.Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-
-	public String getUsercode() {
-		return usercode;
-	}
-
-	public void setUsercode(String usercode) {
-		this.usercode = usercode;
 	}
 
 	public String getUserid() {
@@ -61,5 +56,28 @@ public class ActiveUser implements java.io.Serializable {
 		this.permissions = permissions;
 	}
 
-	
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+
+	public String getRoleStatus() {
+		return roleStatus;
+	}
+
+	public void setRoleStatus(String roleStatus) {
+		this.roleStatus = roleStatus;
+	}
+
 }
