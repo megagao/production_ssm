@@ -1,6 +1,6 @@
 [
-	{"deviceStatusId":"1","deviceStatus":"良好"},
-	{"deviceStatusId":"2","deviceStatus":"故障"},
-	{"deviceStatusId":"3","deviceStatus":"维修"},
-	{"deviceStatusId":"4","deviceStatus":"报废"}
+	{"deviceStatus":"1","StatusName":"良好"},
+	{"deviceStatus":"2","StatusName":"故障"},
+	{"deviceStatus":"3","StatusName":"维修"},
+	{"deviceStatus":"4","StatusName":"报废"}
 ]
