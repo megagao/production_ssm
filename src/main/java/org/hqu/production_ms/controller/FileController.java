@@ -78,7 +78,7 @@ public class FileController {
 		
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		
-		String filePath = "F:\\upload\\temp\\file\\"+fileName;
+		String filePath = "D:\\upload\\temp\\file\\"+fileName;
 		
 		DownloadUtil du = new DownloadUtil();
 		
