@@ -1,0 +1,15 @@
+/* Reset css*/
+*{font-size:12px}
+html{margin:0;padding:0}
+body{background-color:#ededed;color:#b5b5b5;font-family:"宋体",arial;font-size:12px;font-style:normal;margin:0;padding:0}
+/*普通连接*/
+a{color:#b5b5b5;cursor:pointer;text-decoration:none}
+a:hover{color:#c1272d}
+h1,h2,h3,h4,h5,h6,form,div,p,i,img,ul,li,ol,table,tr,td,dl,dt,dd,fieldset,label,legend{margin:0;padding:0}
+ul li{list-style:none}
+fieldset,img,table{border:none}
+td{font-size:12px;line-height:180%}
+form{margin:0px;padding:0px}
+*:focus{outline:none}
+.clear{clear:both}
+.hide{display:block;overflow:hidden;text-indent:-900px}
