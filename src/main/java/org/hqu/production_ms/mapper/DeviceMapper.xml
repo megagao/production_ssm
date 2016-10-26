@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hqu.production_ms.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Device" >
+    <id column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_status" property="deviceStatus" jdbcType="VARCHAR" />
+    <result column="device_purchase_date" property="devicePurchaseDate" jdbcType="TIMESTAMP" />
+    <result column="device_purchase_price" property="devicePurchasePrice" jdbcType="DECIMAL" />
+    <result column="device_manufacture_date" property="deviceManufactureDate" jdbcType="TIMESTAMP" />
+    <result column="device_service_life" property="deviceServiceLife" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <association property="employee" javaType="employee">
+		<id column="emp_id" property="empId" jdbcType="VARCHAR" />
+	    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+	    <result column="sex" property="sex" jdbcType="CHAR" />
+	    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+	    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+	    <result column="join_date" property="joinDate" jdbcType="TIMESTAMP" />
+	    <result column="status" property="status" jdbcType="VARCHAR" />
+	    <result column="education" property="education" jdbcType="VARCHAR" />
+	    <result column="degree" property="degree" jdbcType="VARCHAR" />
+	    <result column="major" property="major" jdbcType="VARCHAR" />
+	    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+	    <result column="education_form" property="educationForm" jdbcType="VARCHAR" />
+	    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+	</association>
+	<association property="deviceType" javaType="deviceType">
+		<id column="device_type_id1" property="deviceTypeId" jdbcType="VARCHAR" />
+	    <result column="device_type_name" property="deviceTypeName" jdbcType="VARCHAR" />
+	    <result column="device_type_model" property="deviceTypeModel" jdbcType="VARCHAR" />
+	    <result column="device_type_spec" property="deviceTypeSpec" jdbcType="VARCHAR" />
+	    <result column="device_type_supplier" property="deviceTypeSupplier" jdbcType="VARCHAR" />
+	    <result column="device_type_producer" property="deviceTypeProducer" jdbcType="VARCHAR" />
+	    <result column="device_type_quantity" property="deviceTypeQuantity" jdbcType="INTEGER" />
+	    <result column="device_type_warranty" property="deviceTypeWarranty" jdbcType="TIMESTAMP" />
+	</association>
+  </resultMap>
+  
+  	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			device,
+			employee,
+			device_type
+		WHERE
+			device_keeper_id = emp_id
+		AND device.device_type_id = device_type.device_type_id
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device
+		WHERE
+			device_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="device" >
+		UPDATE device
+		SET note = #{note}
+		WHERE
+			device_id = #{deviceId,jdbcType=VARCHAR}
+	</update>
+	
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    device_id, device_name, device_type_id, device_status, device_purchase_date, device_purchase_price, 
+    device_manufacture_date, device_service_life, device_keeper_id, note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.DeviceExample" >
+    delete from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.hqu.production_ms.domain.Device" >
+    insert into device (device_id, device_name, device_type_id, 
+      device_status, device_purchase_date, device_purchase_price, 
+      device_manufacture_date, device_service_life, 
+      device_keeper_id, note)
+    values (#{deviceId,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{deviceTypeId,jdbcType=VARCHAR}, 
+      #{deviceStatus,jdbcType=VARCHAR}, #{devicePurchaseDate,jdbcType=TIMESTAMP}, #{devicePurchasePrice,jdbcType=DECIMAL}, 
+      #{deviceManufactureDate,jdbcType=TIMESTAMP}, #{deviceServiceLife,jdbcType=TIMESTAMP}, 
+      #{deviceKeeperId,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Device" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="deviceTypeId != null" >
+        device_type_id,
+      </if>
+      <if test="deviceStatus != null" >
+        device_status,
+      </if>
+      <if test="devicePurchaseDate != null" >
+        device_purchase_date,
+      </if>
+      <if test="devicePurchasePrice != null" >
+        device_purchase_price,
+      </if>
+      <if test="deviceManufactureDate != null" >
+        device_manufacture_date,
+      </if>
+      <if test="deviceServiceLife != null" >
+        device_service_life,
+      </if>
+      <if test="deviceKeeperId != null" >
+        device_keeper_id,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeId != null" >
+        #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null" >
+        #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePurchaseDate != null" >
+        #{devicePurchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicePurchasePrice != null" >
+        #{devicePurchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceManufactureDate != null" >
+        #{deviceManufactureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceServiceLife != null" >
+        #{deviceServiceLife,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceKeeperId != null" >
+        #{deviceKeeperId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.hqu.production_ms.domain.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device
+    <set >
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null" >
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeId != null" >
+        device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceStatus != null" >
+        device_status = #{record.deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicePurchaseDate != null" >
+        device_purchase_date = #{record.devicePurchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.devicePurchasePrice != null" >
+        device_purchase_price = #{record.devicePurchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deviceManufactureDate != null" >
+        device_manufacture_date = #{record.deviceManufactureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceServiceLife != null" >
+        device_service_life = #{record.deviceServiceLife,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceKeeperId != null" >
+        device_keeper_id = #{record.deviceKeeperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device
+    set device_id = #{record.deviceId,jdbcType=VARCHAR},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+      device_status = #{record.deviceStatus,jdbcType=VARCHAR},
+      device_purchase_date = #{record.devicePurchaseDate,jdbcType=TIMESTAMP},
+      device_purchase_price = #{record.devicePurchasePrice,jdbcType=DECIMAL},
+      device_manufacture_date = #{record.deviceManufactureDate,jdbcType=TIMESTAMP},
+      device_service_life = #{record.deviceServiceLife,jdbcType=TIMESTAMP},
+      device_keeper_id = #{record.deviceKeeperId,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.Device" >
+    update device
+    <set >
+      <if test="deviceName != null" >
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeId != null" >
+        device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null" >
+        device_status = #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePurchaseDate != null" >
+        device_purchase_date = #{devicePurchaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicePurchasePrice != null" >
+        device_purchase_price = #{devicePurchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceManufactureDate != null" >
+        device_manufacture_date = #{deviceManufactureDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceServiceLife != null" >
+        device_service_life = #{deviceServiceLife,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceKeeperId != null" >
+        device_keeper_id = #{deviceKeeperId,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.Device" >
+    update device
+    set device_name = #{deviceName,jdbcType=VARCHAR},
+      device_type_id = #{deviceTypeId,jdbcType=VARCHAR},
+      device_status = #{deviceStatus,jdbcType=VARCHAR},
+      device_purchase_date = #{devicePurchaseDate,jdbcType=TIMESTAMP},
+      device_purchase_price = #{devicePurchasePrice,jdbcType=DECIMAL},
+      device_manufacture_date = #{deviceManufactureDate,jdbcType=TIMESTAMP},
+      device_service_life = #{deviceServiceLife,jdbcType=TIMESTAMP},
+      device_keeper_id = #{deviceKeeperId,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>
