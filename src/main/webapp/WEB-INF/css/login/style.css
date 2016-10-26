@@ -1,0 +1,85 @@
+﻿@charset "utf-8";
+@import url("reset.css");
+/*主体部分*/
+.main{
+	background:url("../../image/login/header_bg.png") top repeat-x;
+	min-width:1000px;
+	overflow:hidden;
+	width:100%;
+	height:auto
+}
+.header{
+	background:url("../../image/login/logo_ico.png") no-repeat top left;
+	margin:123px auto 0;
+	width:330px;
+	height:41px
+}
+/*中部内容部分*/
+.content{
+	background:url("../../image/login/login_bg.png") no-repeat top center;
+	margin:69px auto 0;
+	width:423px;
+	height:366px;
+	border:1px solid #ededed
+}
+.title{
+	background:url("../../image/login/member_title.png") no-repeat top left;
+	margin:37px auto 20px;
+	width:229px;
+	height:36px
+}
+.input{
+	margin:0 auto 11px ;
+	width:237px
+}
+.input_all{
+	border:none;
+	color:#555;
+	font-size:14px;
+	line-height:30px;
+	padding:10px 0 10px 46px;
+	vertical-align:middle;
+	width:237px;
+	height:30px
+}
+.name{
+	background:url("../../image/login/input_name.png") no-repeat top left
+}
+.name_now{
+	background:url("../../image/login/input_name_hover.png") no-repeat top left
+}
+.password{
+	background:url("../../image/login/input_password.png") no-repeat top left
+}
+.password_now{
+	background:url("../../image/login/input_password_hover.png") no-repeat top left
+}
+.enter{
+	margin-top:15px
+}
+.button{
+	background:url("../../image/login/button.png") no-repeat center;
+	border:none;
+	cursor:pointer;
+	margin:0 auto;
+	width:150px;
+	height:55px
+}
+.checkbox{
+	font-size:12px;
+	margin:0 auto;
+	width:237px;
+	height:30px
+}
+.checkbox input{
+	display:block;
+	float:left;
+	margin-right:4px
+}
+.checkbox span{
+	display:block;
+	float:left;
+	xheight:20px;
+	line-height:20px;
+	*line-height:22px
+}
