@@ -175,6 +175,76 @@ public class TechnologyExample {
             return (Criteria) this;
         }
 
+        public Criteria andTechnologyNameIsNull() {
+            addCriterion("technology_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameIsNotNull() {
+            addCriterion("technology_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameEqualTo(String value) {
+            addCriterion("technology_name =", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameNotEqualTo(String value) {
+            addCriterion("technology_name <>", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameGreaterThan(String value) {
+            addCriterion("technology_name >", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameGreaterThanOrEqualTo(String value) {
+            addCriterion("technology_name >=", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameLessThan(String value) {
+            addCriterion("technology_name <", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameLessThanOrEqualTo(String value) {
+            addCriterion("technology_name <=", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameLike(String value) {
+            addCriterion("technology_name like", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameNotLike(String value) {
+            addCriterion("technology_name not like", value, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameIn(List<String> values) {
+            addCriterion("technology_name in", values, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameNotIn(List<String> values) {
+            addCriterion("technology_name not in", values, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameBetween(String value1, String value2) {
+            addCriterion("technology_name between", value1, value2, "technologyName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyNameNotBetween(String value1, String value2) {
+            addCriterion("technology_name not between", value1, value2, "technologyName");
+            return (Criteria) this;
+        }
+
         public Criteria andPriceIsNull() {
             addCriterion("price is null");
             return (Criteria) this;

@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 public class Technology {
     private String technologyId;
 
+    private String technologyName;
+
     private BigDecimal price;
 
     private String vitalProcessPeriod;
@@ -19,14 +21,20 @@ public class Technology {
 
     private Integer overfulfilCapacity;
 
-    private byte[] technologyName;
-
     public String getTechnologyId() {
         return technologyId;
     }
 
     public void setTechnologyId(String technologyId) {
         this.technologyId = technologyId == null ? null : technologyId.trim();
+    }
+
+    public String getTechnologyName() {
+        return technologyName;
+    }
+
+    public void setTechnologyName(String technologyName) {
+        this.technologyName = technologyName == null ? null : technologyName.trim();
     }
 
     public BigDecimal getPrice() {
@@ -83,13 +91,5 @@ public class Technology {
 
     public void setOverfulfilCapacity(Integer overfulfilCapacity) {
         this.overfulfilCapacity = overfulfilCapacity;
-    }
-
-    public byte[] getTechnologyName() {
-        return technologyName;
-    }
-
-    public void setTechnologyName(byte[] technologyName) {
-        this.technologyName = technologyName;
     }
 }
