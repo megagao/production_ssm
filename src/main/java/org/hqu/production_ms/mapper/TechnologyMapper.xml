@@ -3,6 +3,7 @@
 <mapper namespace="org.hqu.production_ms.mapper.TechnologyMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Technology" >
     <id column="technology_id" property="technologyId" jdbcType="VARCHAR" />
+    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="vital_process_period" property="vitalProcessPeriod" jdbcType="VARCHAR" />
     <result column="standard_capacity" property="standardCapacity" jdbcType="INTEGER" />
@@ -10,9 +11,6 @@
     <result column="overtime_overfulfil_capacity" property="overtimeOverfulfilCapacity" jdbcType="INTEGER" />
     <result column="double_capacity" property="doubleCapacity" jdbcType="INTEGER" />
     <result column="overfulfil_capacity" property="overfulfilCapacity" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="org.hqu.production_ms.domain.Technology" extends="BaseResultMap" >
-    <result column="technology_name" property="technologyName" jdbcType="VARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,28 +71,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    technology_id, price, vital_process_period, standard_capacity, overtime_standard_capacity, 
+    technology_id, technology_name, price, vital_process_period, standard_capacity, overtime_standard_capacity, 
     overtime_overfulfil_capacity, double_capacity, overfulfil_capacity
   </sql>
-  <sql id="Blob_Column_List" >
-    technology_name
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.hqu.production_ms.domain.TechnologyExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from technology
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.TechnologyExample" >
     select
     <if test="distinct" >
@@ -109,11 +88,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from technology
     where technology_id = #{technologyId,jdbcType=VARCHAR}
   </select>
@@ -128,20 +105,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.Technology" >
-    insert into technology (technology_id, price, vital_process_period, 
-      standard_capacity, overtime_standard_capacity, 
+    insert into technology (technology_id, technology_name, price, 
+      vital_process_period, standard_capacity, overtime_standard_capacity, 
       overtime_overfulfil_capacity, double_capacity, 
-      overfulfil_capacity, technology_name)
-    values (#{technologyId,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{vitalProcessPeriod,jdbcType=VARCHAR}, 
-      #{standardCapacity,jdbcType=INTEGER}, #{overtimeStandardCapacity,jdbcType=INTEGER}, 
+      overfulfil_capacity)
+    values (#{technologyId,jdbcType=VARCHAR}, #{technologyName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{vitalProcessPeriod,jdbcType=VARCHAR}, #{standardCapacity,jdbcType=INTEGER}, #{overtimeStandardCapacity,jdbcType=INTEGER}, 
       #{overtimeOverfulfilCapacity,jdbcType=INTEGER}, #{doubleCapacity,jdbcType=INTEGER}, 
-      #{overfulfilCapacity,jdbcType=INTEGER}, #{technologyName,jdbcType=VARBINARY})
+      #{overfulfilCapacity,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Technology" >
     insert into technology
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="technologyId != null" >
         technology_id,
+      </if>
+      <if test="technologyName != null" >
+        technology_name,
       </if>
       <if test="price != null" >
         price,
@@ -164,13 +144,13 @@
       <if test="overfulfilCapacity != null" >
         overfulfil_capacity,
       </if>
-      <if test="technologyName != null" >
-        technology_name,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="technologyId != null" >
         #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyName != null" >
+        #{technologyName,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         #{price,jdbcType=DECIMAL},
@@ -193,9 +173,6 @@
       <if test="overfulfilCapacity != null" >
         #{overfulfilCapacity,jdbcType=INTEGER},
       </if>
-      <if test="technologyName != null" >
-        #{technologyName,jdbcType=VARBINARY},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.hqu.production_ms.domain.TechnologyExample" resultType="java.lang.Integer" >
@@ -209,6 +186,9 @@
     <set >
       <if test="record.technologyId != null" >
         technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyName != null" >
+        technology_name = #{record.technologyName,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null" >
         price = #{record.price,jdbcType=DECIMAL},
@@ -231,25 +211,7 @@
       <if test="record.overfulfilCapacity != null" >
         overfulfil_capacity = #{record.overfulfilCapacity,jdbcType=INTEGER},
       </if>
-      <if test="record.technologyName != null" >
-        technology_name = #{record.technologyName,jdbcType=VARBINARY},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update technology
-    set technology_id = #{record.technologyId,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
-      vital_process_period = #{record.vitalProcessPeriod,jdbcType=VARCHAR},
-      standard_capacity = #{record.standardCapacity,jdbcType=INTEGER},
-      overtime_standard_capacity = #{record.overtimeStandardCapacity,jdbcType=INTEGER},
-      overtime_overfulfil_capacity = #{record.overtimeOverfulfilCapacity,jdbcType=INTEGER},
-      double_capacity = #{record.doubleCapacity,jdbcType=INTEGER},
-      overfulfil_capacity = #{record.overfulfilCapacity,jdbcType=INTEGER},
-      technology_name = #{record.technologyName,jdbcType=VARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +219,7 @@
   <update id="updateByExample" parameterType="map" >
     update technology
     set technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      technology_name = #{record.technologyName,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
       vital_process_period = #{record.vitalProcessPeriod,jdbcType=VARCHAR},
       standard_capacity = #{record.standardCapacity,jdbcType=INTEGER},
@@ -271,6 +234,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.Technology" >
     update technology
     <set >
+      <if test="technologyName != null" >
+        technology_name = #{technologyName,jdbcType=VARCHAR},
+      </if>
       <if test="price != null" >
         price = #{price,jdbcType=DECIMAL},
       </if>
@@ -292,27 +258,13 @@
       <if test="overfulfilCapacity != null" >
         overfulfil_capacity = #{overfulfilCapacity,jdbcType=INTEGER},
       </if>
-      <if test="technologyName != null" >
-        technology_name = #{technologyName,jdbcType=VARBINARY},
-      </if>
     </set>
-    where technology_id = #{technologyId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.hqu.production_ms.domain.Technology" >
-    update technology
-    set price = #{price,jdbcType=DECIMAL},
-      vital_process_period = #{vitalProcessPeriod,jdbcType=VARCHAR},
-      standard_capacity = #{standardCapacity,jdbcType=INTEGER},
-      overtime_standard_capacity = #{overtimeStandardCapacity,jdbcType=INTEGER},
-      overtime_overfulfil_capacity = #{overtimeOverfulfilCapacity,jdbcType=INTEGER},
-      double_capacity = #{doubleCapacity,jdbcType=INTEGER},
-      overfulfil_capacity = #{overfulfilCapacity,jdbcType=INTEGER},
-      technology_name = #{technologyName,jdbcType=VARBINARY}
     where technology_id = #{technologyId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.Technology" >
     update technology
-    set price = #{price,jdbcType=DECIMAL},
+    set technology_name = #{technologyName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
       vital_process_period = #{vitalProcessPeriod,jdbcType=VARCHAR},
       standard_capacity = #{standardCapacity,jdbcType=INTEGER},
       overtime_standard_capacity = #{overtimeStandardCapacity,jdbcType=INTEGER},

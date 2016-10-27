@@ -16,21 +16,15 @@ public interface TechnologyMapper {
 
     int insertSelective(Technology record);
 
-    List<Technology> selectByExampleWithBLOBs(TechnologyExample example);
-
     List<Technology> selectByExample(TechnologyExample example);
 
     Technology selectByPrimaryKey(String technologyId);
 
     int updateByExampleSelective(@Param("record") Technology record, @Param("example") TechnologyExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Technology record, @Param("example") TechnologyExample example);
-
     int updateByExample(@Param("record") Technology record, @Param("example") TechnologyExample example);
 
     int updateByPrimaryKeySelective(Technology record);
-
-    int updateByPrimaryKeyWithBLOBs(Technology record);
 
     int updateByPrimaryKey(Technology record);
 }

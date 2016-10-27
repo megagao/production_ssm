@@ -3,12 +3,43 @@
 <mapper namespace="org.hqu.production_ms.mapper.ManufactureMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Manufacture" >
     <id column="manufacture_sn" property="manufactureSn" jdbcType="VARCHAR" />
-    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
-    <result column="technology_id" property="technologyId" jdbcType="VARCHAR" />
     <result column="launch_quantity" property="launchQuantity" jdbcType="INTEGER" />
     <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
     <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <association column="order_id1" property="cOrder" select="org.hqu.production_ms.mapper.COrderMapper.selectByPrimaryKey"/>
+	<association column="technology_id" property="technology" select="org.hqu.production_ms.mapper.TechnologyMapper.selectByPrimaryKey"/>
   </resultMap>
+  
+  <!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id order_id1,
+			manufacture.technology_id technology_id1,
+			c_order.*, technology.*
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			manufacture
+		WHERE
+			manufacture_sn IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

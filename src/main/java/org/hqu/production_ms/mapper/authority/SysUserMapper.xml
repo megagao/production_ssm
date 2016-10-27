@@ -7,8 +7,9 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="locked" property="locked" jdbcType="CHAR" />
   </resultMap>
-  <resultMap id="UserPORM" type="userPO" >
-    <result column="role_name" property="role" jdbcType="VARCHAR" />
+  <resultMap id="UserPORM" type="userPO"  extends="BaseResultMap">
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
   </resultMap>
   
   	<!-- 扩展的sql -->
@@ -19,6 +20,7 @@
 		username,
 		password,
 		locked,
+		role_id,
 		role_name
 	FROM
 		sys_user
