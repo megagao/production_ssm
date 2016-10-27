@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
 	
-	Map uploadFile(MultipartFile uploadFile);
+	Map<String,Object> uploadFile(MultipartFile uploadFile);
 	
 	boolean deleteFile(String fileName);
 }
