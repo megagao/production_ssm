@@ -1,6 +1,7 @@
 package org.hqu.production_ms.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -30,6 +31,13 @@ public class OrderController {
 	public COrder getItemById(@PathVariable String orderId) {
 		COrder cOrder = orderService.get(orderId);
 		return cOrder;
+	}
+	
+	@RequestMapping("/get_data")
+	@ResponseBody
+	public List<COrder> getData() {
+		 List<COrder> list = orderService.find();
+		return list;
 	}
 	
 	@RequestMapping("/find")
