@@ -9,9 +9,13 @@ import org.hqu.production_ms.domain.po.RolePO;
 
 public interface RoleService {
 	
-	List<SysRole> find();  
+	List<SysRole> find();
+	
+	SysRole findRoleByUserId(String userId);
 	
 	EUDataGridResult getList(int page, int rows, SysRole sysRole);
+	
+	List<SysRole> findByRoleNameAndId(String rolename, String id);
 	
 	SysRole get(String string);
 	
