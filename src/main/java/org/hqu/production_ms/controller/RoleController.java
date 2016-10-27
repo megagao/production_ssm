@@ -35,6 +35,11 @@ public class RoleController {
 		return "role_list";
 	}
 	
+	@RequestMapping("/permission")
+	public String permission() {
+		return "role_permission";
+	}
+	
 	@RequestMapping("/get_data")
 	@ResponseBody
 	public List<SysRole> getData() {
