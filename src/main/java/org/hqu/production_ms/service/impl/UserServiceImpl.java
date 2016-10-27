@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService{
 		//补全字段
 		sysUserRole.setId(IDUtils.genStringId());
 		sysUserRole.setSysUserId(userPO.getId());
-		sysUserRole.setSysRoleId(userPO.getRole());
+		sysUserRole.setSysRoleId(userPO.getRoleId());
 		//存用户角色表
 		int k = sysUserRoleMapper.insert(sysUserRole);
 		//存用户表
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService{
 		//在业务层整合处理
 		SysUserRole sysUserRole = new SysUserRole();
 		//补全字段
-		sysUserRole.setSysRoleId(userPO.getRole());
+		sysUserRole.setSysRoleId(userPO.getRoleId());
 		//修改用户角色表
 		SysUserRoleExample example = new SysUserRoleExample();
 		SysUserRoleExample.Criteria criteria = example.createCriteria();
