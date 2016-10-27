@@ -3,6 +3,7 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.COrderExample;
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.po.COrderPO;
@@ -19,6 +20,12 @@ public class OrderServiceImpl implements OrderService{
 
 	@Autowired
 	COrderMapper cOrderMapper;
+	
+	@Override
+	public List<COrder> find() {
+		COrderExample example = new COrderExample();
+		return cOrderMapper.selectByExample(example);
+	}
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, COrder cOrder) {
