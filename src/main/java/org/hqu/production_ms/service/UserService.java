@@ -1,5 +1,7 @@
 package org.hqu.production_ms.service;
 
+import java.util.List;
+
 import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysUser;
@@ -10,6 +12,8 @@ public interface UserService {
 	EUDataGridResult getList(int page, int rows, SysUser sysUser);
 	
 	SysUser get(String string);
+	
+	List<SysUser> findByUserNameAndId(String username, String id);
 	
 	CustomResult delete(String string);
 
