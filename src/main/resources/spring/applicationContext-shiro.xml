@@ -46,7 +46,7 @@
 				/login.jsp = anon
 				/ajaxLogin = anon
 				<!-- 请求 logout.action地址，shiro去清除session-->
-				/logout.action = logout
+				/logout = logout
 				<!--商品查询需要商品查询权限 ，取消url拦截配置，使用注解授权方式 -->
 				<!-- /items/queryItems.action = perms[item:query]
 				/items/editItems.action = perms[item:edit] -->
