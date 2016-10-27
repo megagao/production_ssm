@@ -17,7 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.authority.SysPermission;
+import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.service.RoleService;
 import org.hqu.production_ms.service.SysService;
 
 /**
@@ -35,6 +37,10 @@ public class CustomRealm extends AuthorizingRealm {
 	 */
 	@Autowired
 	private SysService sysService;
+	
+	@Autowired
+	private RoleService roleService;
+	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	/**
@@ -56,7 +62,7 @@ public class CustomRealm extends AuthorizingRealm {
 		// 第一步从token中取出用户名
 		String username = (String) token.getPrincipal();
 		
-		// 第二步：根据用户输入的userCode从数据库查询
+		// 第二步：根据用户输入的username从数据库查询
 		SysUser sysUser = null;
 		
 		try {
@@ -79,6 +85,11 @@ public class CustomRealm extends AuthorizingRealm {
 		
 		activeUser.setUserid(sysUser.getId());
 		activeUser.setUsername(sysUser.getUsername());
+		activeUser.setUserStatus(sysUser.getLocked());
+		
+		SysRole sysRole = roleService.findRoleByUserId(sysUser.getId());
+		activeUser.setRolename(sysRole.getRoleName());
+		activeUser.setRoleStatus(sysRole.getAvailable());
 		
 		log.info(activeUser.getUsername());
 		
