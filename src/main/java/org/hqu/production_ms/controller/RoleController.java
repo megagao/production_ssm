@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hqu.production_ms.domain.EUDataGridResult;
-import org.hqu.production_ms.domain.CustomResult;
 import org.hqu.production_ms.domain.authority.SysRole;
+import org.hqu.production_ms.domain.custom.CustomResult;
+import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.RolePO;
 import org.hqu.production_ms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

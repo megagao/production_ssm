@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.hqu.production_ms.domain.CustomResult;
-import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.custom.CustomResult;
+import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.UserPO;
 import org.hqu.production_ms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
