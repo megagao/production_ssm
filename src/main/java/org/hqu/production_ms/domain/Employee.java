@@ -36,12 +36,20 @@ public class Employee {
     public void setEmpId(String empId) {
         this.empId = empId == null ? null : empId.trim();
     }
+    
+    public void setDeviceKeeperId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
+    }
 
     public String getEmpName() {
         return empName;
     }
 
     public void setEmpName(String empName) {
+        this.empName = empName == null ? null : empName.trim();
+    }
+    
+    public void setDeviceKeeper(String empName) {
         this.empName = empName == null ? null : empName.trim();
     }
 

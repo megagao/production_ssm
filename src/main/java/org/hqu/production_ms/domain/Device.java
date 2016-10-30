@@ -8,6 +8,10 @@ public class Device {
 
     private String deviceName;
 
+    private String deviceTypeId;
+
+    private String deviceStatusId;
+
     private String deviceStatus;
 
     private Date devicePurchaseDate;
@@ -18,12 +22,10 @@ public class Device {
 
     private Date deviceServiceLife;
 
+    private String deviceKeeperId;
+
     private String note;
 
-    private Employee employee;
-
-    private DeviceType deviceType;
-    
     public String getDeviceId() {
         return deviceId;
     }
@@ -38,6 +40,22 @@ public class Device {
 
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName == null ? null : deviceName.trim();
+    }
+
+    public String getDeviceTypeId() {
+        return deviceTypeId;
+    }
+
+    public void setDeviceTypeId(String deviceTypeId) {
+        this.deviceTypeId = deviceTypeId == null ? null : deviceTypeId.trim();
+    }
+
+    public String getDeviceStatusId() {
+        return deviceStatusId;
+    }
+
+    public void setDeviceStatusId(String deviceStatusId) {
+        this.deviceStatusId = deviceStatusId == null ? null : deviceStatusId.trim();
     }
 
     public String getDeviceStatus() {
@@ -80,6 +98,14 @@ public class Device {
         this.deviceServiceLife = deviceServiceLife;
     }
 
+    public String getDeviceKeeperId() {
+        return deviceKeeperId;
+    }
+
+    public void setDeviceKeeperId(String deviceKeeperId) {
+        this.deviceKeeperId = deviceKeeperId == null ? null : deviceKeeperId.trim();
+    }
+
     public String getNote() {
         return note;
     }
@@ -87,20 +113,4 @@ public class Device {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public DeviceType getDeviceType() {
-		return deviceType;
-	}
-
-	public void setDeviceType(DeviceType deviceType) {
-		this.deviceType = deviceType;
-	}
 }
