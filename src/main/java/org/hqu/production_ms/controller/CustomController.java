@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.Custom;
-import org.hqu.production_ms.domain.CustomResult;
-import org.hqu.production_ms.domain.EUDataGridResult;
+import org.hqu.production_ms.domain.custom.ActiveUser;
+import org.hqu.production_ms.domain.custom.CustomResult;
+import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
