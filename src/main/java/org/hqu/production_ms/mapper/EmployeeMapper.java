@@ -1,11 +1,18 @@
 package org.hqu.production_ms.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.Employee;
 import org.hqu.production_ms.domain.EmployeeExample;
 
 public interface EmployeeMapper {
+	//扩展的mapper接口方法
+	List<Employee> listKeeper();
+	
+	List<Employee> listMaintainEmp();
+	
+	//自动生成的mapper接口方法
     int countByExample(EmployeeExample example);
 
     int deleteByExample(EmployeeExample example);

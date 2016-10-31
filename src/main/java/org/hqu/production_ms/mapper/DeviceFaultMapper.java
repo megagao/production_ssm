@@ -1,11 +1,20 @@
 package org.hqu.production_ms.mapper;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.DeviceFault;
 import org.hqu.production_ms.domain.DeviceFaultExample;
 
 public interface DeviceFaultMapper {
+	//扩展的mapper接口方法
+	List<DeviceFault> find(DeviceFault deviceFault);
+	
+	List<DeviceFault> listFaultId();
+	
+	int deleteBatch(String[] deviceFaultIds);
+    
+	//自动生成的mapper接口方法
     int countByExample(DeviceFaultExample example);
 
     int deleteByExample(DeviceFaultExample example);
