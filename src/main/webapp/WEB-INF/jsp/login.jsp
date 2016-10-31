@@ -2,69 +2,88 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="/WEB-INF/jsp/common_js.jsp"%>
-<%@ include file="/WEB-INF/jsp/common_css.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>生产管理系统</title>
+<meta name="copyright" content="Copyright 2016" />
+<meta name="Author" content="华侨大学计算机科学与技术学院" />
+<meta name="keywords" content="生产管理系统--生产进度,设备管理,工艺监控,物料监控,人员监控,质量监控" />
+<meta name="description" content="制造装备物联及生产管理中间件/系统登陆页面" />
+<title>制造装备物联及生产管理系统登录页</title>
+<link rel="stylesheet" type="text/css" href="css/login/style.css" />
+<style type="text/css">
+	.download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#e6e6e6;border:1px dashed #df0031;font-size:14px;font-family:Comic Sans MS;font-weight:bolder;color:#555}
+	.download a{padding-left:5px;font-size:14px;font-weight:normal;color:#555;text-decoration:none;letter-spacing:1px}
+	.download a:hover{text-decoration:underline;color:#36F}
+	.download span{float:right}
+</style>
 </head>
-<body style="background-color: #F3F3F3">
-	<div class="easyui-window" title="用户登录"
-		data-options="closable:false,draggable:false"
-		style="width:400px;padding:1px 40px 30px 10px">
-		<div style="margin-left: 38px;margin-top: 38px;">
 
-			<div style="margin-bottom:10px">
-				<input id="username" class="easyui-textbox"
-					style="width:100%;height:40px;padding:12px"
-					data-options="required:true,prompt:'用户名',iconCls:'icon-man',iconWidth:38" value="22">
-			</div>
-			<div>
-				<span id="userspan"></span>
-			</div>
-
-
-			<div style="margin-bottom:20px">
-
-				<div style="margin-bottom:10px">
-					<input id="password" class="easyui-textbox" type="password"
-						style="width:100%;height:40px;padding:12px"
-						data-options="prompt:'密码',iconCls:'icon-lock',iconWidth:38" value="22">
-				</div>
-				<div>
-					<span id="passsword_span"></span>
-				</div>
-
-				<div style="margin-bottom:30px">
-					<div id="randiv" style="display: none">
-						验证码：<input id="randomcode" name="randomcode" size="8" /> <img
-							id="randomcode_img" src="${baseurl}validatecode.jsp" alt=""
-							width="56" height="20" align='absMiddle' /> <a
-							href=javascript:randomcode_refresh()>刷新</a>
-					</div>
+<body>
+	<div class="main">
+		<div class="header hide"> 管理系统  </div>
+		<div class="content">
+			<div class="title hide">管理系统登录</div>
+			<form name="login" action="#" method="post">
+				<fieldset>
+				
+					<!--USERNAME -->
 					<div>
-						<span id="randomcode_span"></span>
+						<div class="input">
+							<input class="input_all name" name="name" id="username" placeholder="用户名" type="text" onFocus="this.className='input_all name_now';" onBlur="this.className='input_all name'" maxLength="24" />
+						</div>
+						<div id="username_span"style="display:none;padding-bottom:7px;">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="userspan"></span>
+						</div>
+							
+					</div>
+					
+					<!-- PASSWORD -->
+					<div>
+						<div class="input">
+							<input class="input_all password" name="password" id="password" type="password" placeholder="密码" onFocus="this.className='input_all password_now';" onBlur="this.className='input_all password'" maxLength="24" />
+						</div>
+						
+						<div id="password_span"style="display:none;margin:0 0 0 0;padding:0 0 0 0;">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="passwordspan"></span>
+						</div>
+	
+						<div style="margin-bottom:12px">
+							<div id="randiv" style="display:none;margin-left:98px;">
+							
+								验证码：<input id="randomcode" name="randomcode" size="8" /> <img
+									id="randomcode_img" src="${baseurl}validatecode.jsp" alt=""
+									width="56" height="20" align='absMiddle' /> <a
+									href=javascript:randomcode_refresh()>刷新</a>
+							</div>
+							<div style="margin-left:98px;">
+								<span id="randomcode_span"></span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- REMEMBERME -->					
+					<div class="checkbox">
+						<input type="checkbox" name="remember" id="remember" checked="checked"/><label for="remember"><span>记住密码</span></label>
+						<span id="errorspan" style="margin-left:88px;"></span>
 					</div>
 
-				</div>
-			</div>
-			<div style="margin-bottom:20px">
-				<input type="checkbox" checked="checked"> <span>记住我</span>
-			</div>
-			<div>
-				<a href="#" id="login" class="easyui-linkbutton"
-					data-options="iconCls:'icon-ok'"
-					style="padding:5px 0px;width:100%;"> <span
-					style="font-size:14px;">登录</span>
-				</a>
-			</div>
-			<div>
-				<span id="error_span"></span>
-			</div>
+					<!-- LOGIN -->
+					<!-- 
+						<div class="enter">
+							<input class="button hide" name="submit" type="submit" value="登录" />
+						</div> 
+					-->
+					<div>
+						<a href="#" id="login" class="button hide">登录</a>
+					</div>
+					
+				</fieldset>
+			</form>
 		</div>
 	</div>
-
-	<script type="text/javascript">
+<script type="text/javascript" src="js/login/placeholder.js"></script>
+<script type="text/javascript">
 		$("#login")
 				.click(
 						function() {
@@ -76,19 +95,23 @@
 
 							if (display == 'none') {
 								if ($.trim(uname.val()) == "") {
-									$("#passsword_span").html("");
+									$('#username_span').css('display','block');
+									$("#passwordspan").html("");
 									$("#userspan")
 											.html(
 													"<font color='red'>用户名不能为空！</font>");
 									uname.focus();
 								} else if ($.trim(pwd.val()) == "") {
+									$('#username_span').css('display','none');
+									$('#password_span').css('display','block');
 									$("#userspan").html("");
-									$("#passsword_span").html(
+									$("#passwordspan").html(
 											"<font color='red'>密码不能为空！</font>");
 									pwd.focus();
 								} else {
+									$('#password_span').css('display','none');
 									$("#userspan").html("");
-									$("#passsword_span").html("");
+									$("#passwordspan").html("");
 									$
 											.ajax({
 												url : '${baseurl}ajaxLogin',// 跳转到 action  
@@ -101,19 +124,20 @@
 												dataType : 'json',
 												success : function(data) {
 													if (data.msg == 'account_error') {
-														$("#error_span")
+												console.log("account_erroe.");
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 用户不存在！</font>");
 														rcode_flag = 1;
 														$("#randiv").show();
 													} else if (data.msg == 'password_error') {
-														$("#error_span")
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 密码错误！</font>");
 														rcode_flag = 1;
 														$("#randiv").show();
 													} else if (data.msg == 'authentication_error') {
-														$("#error_span")
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 您没有授权！</font>");
 														rcode_flag = 1;
@@ -129,16 +153,16 @@
 											});
 								}
 							} else {
-								$("#error_span").html("");
+								$("#errorspan").html("");
 								if ($.trim(uname.val()) == "") {
-									$("#passsword_span").html("");
+									$("#passwordspan").html("");
 									$("#userspan")
 											.html(
 													"<font color='red'>用户名不能为空！</font>");
 									uname.focus();
 								} else if ($.trim(pwd.val()) == "") {
 									$("#userspan").html("");
-									$("#passsword_span").html(
+									$("#passwordspan").html(
 											"<font color='red'>密码不能为空！</font>");
 									pwd.focus();
 								} else if ($.trim(rcode.val()) == "") {
@@ -149,7 +173,7 @@
 									rcode.focus();
 								} else {
 									$("#userspan").html("");
-									$("#passsword_span").html("");
+									$("#passwordspan").html("");
 									$("#randomcode_span").html("");
 									$
 											.ajax({
@@ -164,25 +188,29 @@
 												dataType : 'json',
 												success : function(data) {
 													if (data.msg == 'account_error') {
-														$("#error_span")
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 用户不存在！</font>");
 														rcode_flag = true;
+														randomcode_refresh();
 													} else if (data.msg == 'password_error') {
-														$("#error_span")
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 密码错误！</font>");
 														rcode_flag = true;
+														randomcode_refresh();
 													} else if (data.msg == 'randomcode_error') {
-														$("#error_span")
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 验证码错误！</font>");
 														rcode_flag = true;
+														randomcode_refresh();
 													} else if (data.msg == 'authentication_error') {
-														$("#error_span")
+														$("#errorspan")
 																.html(
 																		"<font color='red'> 您没有授权！</font>");
 														rcode_flag = true;
+														randomcode_refresh();
 													} else {
 														location.href = "${baseurl}home";
 													}
@@ -203,5 +231,10 @@
 					'${baseurl}validatecode.jsp?time' + new Date().getTime());
 		}
 	</script>
-</body>
+<!--[if IE 6]>
+<script type="text/javascript" src="js/login/belatedpng.js" ></script>
+<script type="text/javascript">
+	DD_belatedPNG.fix("*");
+</script>
+<![endif]--></body>
 </html>
