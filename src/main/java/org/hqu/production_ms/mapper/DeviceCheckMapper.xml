@@ -2,13 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.DeviceCheckMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.DeviceCheck" >
-    <result column="device_check_id" property="deviceCheckId" jdbcType="VARCHAR" />
+    <id column="device_check_id" property="deviceCheckId" jdbcType="VARCHAR" />
     <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
     <result column="device_check_emp_id" property="deviceCheckEmpId" jdbcType="VARCHAR" />
     <result column="device_check_date" property="deviceCheckDate" jdbcType="TIMESTAMP" />
     <result column="device_check_result" property="deviceCheckResult" jdbcType="VARCHAR" />
     <result column="device_check_fault_id" property="deviceCheckFaultId" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.DeviceCheckPO" extends="BaseResultMap">
+    <result column="device_idd" property="deviceIdd" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_check_emp" property="deviceCheckEmp" jdbcType="VARCHAR" />
+    <result column="device_check_fault_idd" property="deviceCheckFaultIdd" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="deviceCheck" resultMap="AddResultMap">
+	SELECT
+		device_check_id,
+		device_check.device_id,
+		device_check.device_id as device_idd,
+		device.device_name,
+		emp_name as device_check_emp,
+		device_check_date,
+		device_check_result,
+		device_check_fault_id,
+		device_check_fault_id as device_check_fault_idd
+	FROM
+		device_check,
+		device,
+		employee
+	WHERE
+		device_check.device_id = device.device_id
+	AND device_check_emp_id = employee.emp_id
+	
+	order by device_check_id ASC
+</select>
+
+<!-- 批量删除 -->
+<delete id="deleteBatch">
+	DELETE
+	FROM
+		device_check
+	WHERE
+		device_check_id IN
+	<foreach collection="array" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+</delete>
+
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -85,6 +130,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_check
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device_check
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="org.hqu.production_ms.domain.DeviceCheckExample" >
     delete from device_check
     <if test="_parameter != null" >
@@ -185,5 +240,35 @@
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.DeviceCheck" >
+    update device_check
+    <set >
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckEmpId != null" >
+        device_check_emp_id = #{deviceCheckEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckDate != null" >
+        device_check_date = #{deviceCheckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceCheckResult != null" >
+        device_check_result = #{deviceCheckResult,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckFaultId != null" >
+        device_check_fault_id = #{deviceCheckFaultId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.DeviceCheck" >
+    update device_check
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      device_check_emp_id = #{deviceCheckEmpId,jdbcType=VARCHAR},
+      device_check_date = #{deviceCheckDate,jdbcType=TIMESTAMP},
+      device_check_result = #{deviceCheckResult,jdbcType=VARCHAR},
+      device_check_fault_id = #{deviceCheckFaultId,jdbcType=VARCHAR}
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -11,6 +11,57 @@
     <result column="device_type_quantity" property="deviceTypeQuantity" jdbcType="INTEGER" />
     <result column="device_type_warranty" property="deviceTypeWarranty" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.DeviceTypePO" extends="BaseResultMap">
+    <result column="device_type_idd" property="deviceTypeIdd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="deviceType" resultMap="AddResultMap">
+	SELECT
+		device_type_id,
+		device_type_id as device_type_idd,
+		device_type_name,
+		device_type_model,
+		device_type_spec,
+		device_type_supplier,
+		device_type_producer,
+		device_type_quantity,
+		device_type_warranty
+	FROM
+		device_type
+	order by device_type_id ASC
+</select>
+
+<!-- 查询所有种类记录 -->
+ <!-- parameterType=""  -->
+  
+<select id="listType" resultMap="AddResultMap">
+	SELECT
+		device_type_id as device_type_idd,
+		device_type_name
+	FROM
+		device_type
+	
+	order by device_type_id ASC
+</select>
+   
+
+<!-- 批量删除 -->
+<delete id="deleteBatch">
+	DELETE
+	FROM
+		device_type
+	WHERE
+		device_type_id IN
+	<foreach collection="array" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+</delete>
+
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

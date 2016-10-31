@@ -9,6 +9,62 @@
     <result column="device_fault_date" property="deviceFaultDate" jdbcType="TIMESTAMP" />
     <result column="device_fault_maintenance" property="deviceFaultMaintenance" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.DeviceFaultPO" extends="BaseResultMap">
+    <result column="device_idd" property="deviceIdd" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_check_fault_id" property="deviceCheckFaultId" jdbcType="VARCHAR" />
+    <result column="device_check_fault_idd" property="deviceCheckFaultIdd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="deviceFault" resultMap="AddResultMap">
+	SELECT
+		device_fault_id,
+		device_fault.device_id,
+		device_fault.device_id as device_idd,
+		device_name,
+		device_fault_cause,
+		device_fault_detail,
+		device_fault_date,
+		device_fault_maintenance
+	FROM
+		device_fault,
+		device
+	WHERE
+		device_fault.device_id = device.device_id
+		
+	order by device_fault_id ASC
+</select>
+
+<!-- 查询所有种类记录 -->
+ <!-- parameterType=""  -->
+  
+<select id="listFaultId" resultMap="AddResultMap">
+	SELECT
+		device_fault_id as device_check_fault_id,
+		device_fault_id as device_check_fault_idd
+	FROM
+		device_fault
+	
+	order by device_fault_id ASC
+</select>
+   
+
+<!-- 批量删除 -->
+<delete id="deleteBatch">
+	DELETE
+	FROM
+		device_fault
+	WHERE
+		device_fault_id IN
+	<foreach collection="array" item="id" open="(" close=")" separator=",">
+		#{id}
+	</foreach>
+</delete>
+
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
