@@ -36,11 +36,10 @@
 	</form>
 	<br><br>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitRoleEditForm()">提交</a>
 	</div>
 </div>
 <script type="text/javascript">
-	var checkArray;
 	function permissionInit(){
 		var roleId = $('#roleEditForm [name=roleId]').val();
 		$.get("permission/get_permission", {roleId : roleId}, function(data){
@@ -67,26 +66,26 @@
 		}); 
 	}
 	
-	function submitForm(){
+	function submitRoleEditForm(){
 		if(!$('#roleEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		if($("input[name='permissionOption1']:checked").length>0){
-			var permission = '';
-			$("input[name='permissionOption1']:checked").each(function(){
-				permission += $(this).val()+',';
-			}); 
-			$("#roleEditForm [name=permission]").val(permission);
-		}
+	
 		$.post("role/update_all",$("#roleEditForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','修改角色成功!','info',function(){
-					$("#roleEditWindow").window('close');
-					$("#roleList").datagrid("reload");
-				});
+			if(data.label == 200){
+				if($("input[name='permissionOption1']:checked").length>0){
+					var permission = '';
+					$("input[name='permissionOption1']:checked").each(function(){
+						permission += $(this).val()+',';
+					}); 
+					$("#roleEditForm [name=permission]").val(permission);
+				}
+				$.messager.alert('提示', data.msg);
+				$("#roleEditWindow").window('close');
+				$("#roleList").datagrid("reload");
 			}else{
-				$.messager.alert('错误','修改角色失败!');
+				$.messager.alert('提示', data.msg);
 			}
 		});
 	}
