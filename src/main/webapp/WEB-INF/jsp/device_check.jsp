@@ -4,117 +4,7 @@
 <!-- 此注解放table_data-options里会导致在IE里显示不正常  -- "IE真的是狠严（ruo）格（zhi）啊" -->
 <!-- singleSelect:true, -->
 <!-- 此注解放table_data-options里会导致在IE里显示不正常  -- "IE真的是狠严（ruo）格（zhi）啊" -->
-<table id="deviceCheck" title="设备例检" style="height:389px"
-	data-options="
-	   rownumbers:true,
-	   toolbar:'#toobar_deviceCheck',
-	   url:'json/deviceCheck_All.json',
-	   method:'get',
-	   pagination:true,
-	   pageSize:10,
-	   pageList:[10, 20, 30], 
-	   remoteSort:false,
-	   multiSort:true,
-	   onClickRow: onClickRow_deviceCheck
-	   ">
-
-	<thead>
-		<tr>
-
-			<th data-options="field:'ck',checkbox:true"></th>
-
-			<th
-				data-options="field:'deviceCheckId',width:80,align:'center',sortable:true,
-							type:'text'
-			">例检编号</th>
-
-			<th
-				data-options="field:'deviceId',width:80,align:'center',sortable:true,
-							editor:{
-								type:'textbox',
-								options:{
-									required:true									
-								}
-							}
-			">设备编号</th>
-
-			<th
-				data-options="field:'deviceIdd',width:100,align:'center',sortable:true,
-							formatter:function(value,row){
-								return row.deviceName;
-							},
-							editor:{
-								type:'combobox',
-								options:{
-									valueField:'deviceIdd',
-									textField:'deviceName',
-									method:'get',
-									url:'json/deviceCheck_Name.json',
-									panelHeight:'auto' 
-								}
-							}
-			
-			">设备名称</th>
-
-			<th
-				data-options="field:'deviceCheckEmp',width:120,align:'center', 
-						editor:'text'
-			">例检人</th>
-
-			<th
-				data-options="field:'deviceCheckDate',width:190,align:'center', sortable:true,
-						editor:'datetimebox'
-			">例检时间</th>
-
-			<th
-				data-options="field:'deviceCheckResult',width:120,align:'center', 
-						editor:'text'
-			">例检结果</th>
-
-			<th
-				data-options="field:'deviceCheckFaultIdd',width:100,align:'center',sortable:true,
-							formatter:function(value,row){
-								return row.deviceCheckFaultId;
-							},
-							editor:{
-								type:'combobox',
-								options:{
-									valueField:'deviceCheckFaultIdd',
-									textField:'deviceCheckFaultId',
-									method:'get',
-									url:'json/deviceCheck_FaultId.json',
-									panelHeight:'auto' 
-								}
-							}
-			
-			">设备故障编号</th>
-
-
-		</tr>
-	</thead>
-</table>
-
-<div style="margin:8px 0;"></div>
-
-<div id="toobar_deviceCheck" style="height:auto">
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-edit',plain:true"
-		onclick="edit_deviceCheck()">编辑</a><a href="javascript:void(0)"
-		class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
-		onclick="append_deviceCheck()">添加</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-remove',plain:true"
-		onclick="remove_deviceCheck()">移除</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-undo',plain:true"
-		onclick="reject_deviceCheck()">撤销</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-save',plain:true"
-		onclick="accept_deviceCheck()">保存</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-search',plain:true"
-		onclick="getChanges_deviceCheck()">查看改变</a>
-</div>
+<table id="deviceCheck" title="设备例检" style="height:389px"></table>
 
 <div style="margin:18x 0;"></div>
 
@@ -155,31 +45,37 @@
 		}
 	}
 
-	var onClickCellFieldValue_deviceCheck = "";
-	function onClickCell_deviceCheck(index, field) {
-		onClickCellFieldValue_deviceCheck = field;
-	}
-
 	function onClickRow_deviceCheck(index, row) {
 
-		if (onClickCellFieldValue_deviceCheck === "deviceId") {
-			var tabs_deviceCheck = $("#tabs_deviceCheck");
-			var detailInfoTab = tabs_deviceCheck.tabs("getTab", "设备信息");
-			detailInfoTab.panel('options').tab.show();
-			tabs_deviceCheck.tabs("select", "设备信息");
-			loadData_name_form_deviceCheck(row.deviceId);
-		} else if (onClickCellFieldValue_deviceCheck === "deviceCheckEmp") {
-			var tabs_deviceCheck = $("#tabs_deviceCheck");
-			var detailInfoTab = tabs_deviceCheck.tabs("getTab", "设备例检人信息");
-			detailInfoTab.panel('options').tab.show();
-			tabs_deviceCheck.tabs("select", "设备例检人信息");
-			loadData_empName_form_deviceCheck(row.deviceCheckEmp);
-		} else if (onClickCellFieldValue_deviceCheck === "deviceCheckFaultIdd") {
-			var tabs_deviceCheck = $("#tabs_deviceCheck");
-			var detailInfoTab = tabs_deviceCheck.tabs("getTab", "设备故障信息");
-			detailInfoTab.panel('options').tab.show();
-			tabs_deviceCheck.tabs("select", "设备故障信息");
-			loadData_faultId_form_deviceCheck(row.deviceCheckFaultIdd);
+		var selections = $('#deviceCheck').datagrid('getSelections');
+		if(selections.length >=2){
+			$('#deviceCheck').datagrid('unselectAll');
+			$('#deviceCheck').datagrid('selectRow',index);
+		}
+		
+		if(index != deviceCheckEditIndex && deviceCheckEditIndex != undefined){
+			/* deviceName */
+			var deviceNameED_List = $('#deviceCheck').datagrid('getEditor',{
+				index : deviceCheckEditIndex,
+				field : 'deviceIdd'
+			});
+			var deviceName = $(deviceNameED_List.target).combobox(
+					'getText');
+			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceName'] = deviceName;
+			
+			/* deviceCheckFaultId */
+			var deviceCheckFaultIdED = $('#deviceCheck').datagrid('getEditor',
+					{
+						index : deviceCheckEditIndex,
+						field : 'deviceCheckFaultIdd'
+					});
+			var deviceCheckFaultId = $(deviceCheckFaultIdED.target).combobox(
+					'getText');
+			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceCheckFaultId'] = deviceCheckFaultId;
+			
+
+			$('#deviceCheck').datagrid('endEdit', deviceCheckEditIndex);
+			deviceCheckEditIndex = undefined;
 		}
 	}
 
@@ -236,6 +132,10 @@
 
 	function remove_deviceCheck() {
 		var selections = $('#deviceCheck').datagrid('getSelections');
+		if(selections.length==0){
+			$.messager.alert('提示','请至少选择一条设备例检信息进行移除！','warning');
+        	return ;
+		}
 
 		for (var i = 0; i < selections.length; i++) {
 			var selectionIndex = $('#deviceCheck').datagrid('getRowIndex',
@@ -248,6 +148,68 @@
 	}
 
 	function accept_deviceCheck() {
+	
+		if(deviceCheckEditIndex != undefined){
+			/* deviceName */
+			var deviceNameED_List = $('#deviceCheck').datagrid('getEditor',{
+				index : deviceCheckEditIndex,
+				field : 'deviceIdd'
+			});
+			var deviceName = $(deviceNameED_List.target).combobox(
+					'getText');
+			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceName'] = deviceName;
+			
+			/* deviceCheckFaultId */
+			var deviceCheckFaultIdED = $('#deviceCheck').datagrid('getEditor',
+					{
+						index : deviceCheckEditIndex,
+						field : 'deviceCheckFaultIdd'
+					});
+			var deviceCheckFaultId = $(deviceCheckFaultIdED.target).combobox(
+					'getText');
+			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceCheckFaultId'] = deviceCheckFaultId;
+
+			$('#deviceCheck').datagrid('endEdit', deviceCheckEditIndex);
+			deviceCheckEditIndex = undefined;
+		}
+	
+		//sync with database before accept
+		var rowsInserted = $('#deviceCheck').datagrid('getChanges', 'inserted');
+		var rowsDeleted = $('#deviceCheck').datagrid('getChanges', 'deleted');
+		var rowsUpdated = $('#deviceCheck').datagrid('getChanges', 'updated');
+
+		//sync
+		//Inserted
+		for (var i = 0; i < rowsInserted.length; i++) {
+			$.post("deviceCheck/insert",rowsInserted[i], function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('添加成功!');
+				}
+			});
+		}
+		
+		//Deleted
+		for (var i = 0; i < rowsDeleted.length; i++) {
+			$.post("deviceCheck/delete",{"deviceCheckId":rowsDeleted[i].deviceCheckId}, function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('删除成功!');
+				}
+			});
+		}
+		 
+		//Updated
+		for (var i = 0; i < rowsUpdated.length; i++) {
+			$.post("deviceCheck/update",rowsUpdated[i], function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('更新成功!');
+				}
+			});
+		}
+	 	
+	
 		if (endEditing_deviceCheck()) {
 			$('#deviceCheck').datagrid('acceptChanges');
 		}
@@ -265,6 +227,186 @@
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
+
+<%------------------------------------- $.datagrid----------------------------------------------%>
+
+<script type="text/javascript">
+	$(function() {
+		  	var list_name;
+		  	var list_faultid;
+			$.ajax({    
+			      url:'deviceList/list_name',    
+			      dataType : 'json',    
+			      type : 'GET',    
+			      async:false,  
+			      success: function (data){    
+			      	list_name = data; 
+			      }    
+			});
+			$.ajax({    
+			      url:'deviceFault/list_faultid',    
+			      dataType : 'json',    
+			      type : 'GET',    
+			      async:false,  
+			      success: function (data){    
+			      	list_faultid = data; 
+			      }    
+			}); 
+			/* debugger;  */  
+			$('#deviceCheck').datagrid(  
+                    {  
+					   toolbar:'##toobar_deviceCheck',
+					   url:'deviceCheck/list',
+					   method:'get',
+					   pagination:true,
+					   pageSize:10,
+					   pageList:[10, 20, 30], 
+					   remoteSort:false,
+					   multiSort:true,
+					   onClickRow: onClickRow_deviceCheck,
+                       columns : [ [  
+                                {  
+                                    field : 'ck',  
+                                    checkbox : true  
+                                },  
+                                {  
+                                    field : 'deviceCheckId',  
+                                    title : '例检编号',  
+                                    width : 80,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    type:'text'
+                                },  
+                                {  
+                                    field : 'deviceId',  
+                                    title : '设备编号',  
+                                    width : 80,  
+                                    align : 'center',
+                                    sortable:true, 
+                                    editor:{
+										 type:'textbox',
+										 options:{
+										 	 required:true									
+										 }
+									}
+                                },  
+                                {  
+                                    field : 'deviceIdd',  
+                                    title : '设备名称',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true, 
+                                    formatter:function(value,row){
+										return row.deviceName;
+									},
+									editor:{
+										type:'combobox',
+										options:{
+											data:list_name,
+											valueField:'deviceIdd',
+											textField:'deviceName',
+											panelHeight:'auto' 
+										}
+									}
+                                },  
+                                {  
+                                    field : 'deviceCheckEmp',  
+                                    title : '例检人',  
+                                    width : 120,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceCheckDate',  
+                                    title : '例检时间',  
+                                    width : 190,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'datetimebox'
+                                },
+                                {  
+                                    field : 'deviceCheckResult',  
+                                    title : '例检结果',  
+                                    width : 120,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceCheckFaultIdd',  
+                                    title : '例检故障编号',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    formatter:function(value,row){
+										return row.deviceCheckFaultId;
+									},
+									editor:{
+										type:'combobox',
+										options:{
+											data:list_faultid,
+											valueField:'deviceCheckFaultIdd',
+											textField:'deviceCheckFaultId',
+											panelHeight:'auto' 
+										}
+									}
+                                }
+                                 ] ],  
+                        toolbar : [  
+                                {  
+                                    id : "deviceCheckEdit",
+                                    class:"easyui-linkbutton",  
+                                    text : '编辑',  
+                                    iconCls : 'icon-edit',
+                                    plain:true,  
+                                    handler : edit_deviceCheck
+                                },  
+                                {  
+                                    id : "deviceCheckAdd",
+                                    class:"easyui-linkbutton",  
+                                    text : '添加',
+                                    iconCls:'icon-add',
+                                    plain:true,  
+                                    handler : append_deviceCheck
+                                },  
+                                {  
+                                    id : "deviceCheckRemove",
+                                    class:"easyui-linkbutton",  
+                                    text : '移除',
+                                    iconCls:'icon-remove',
+                                    plain:true,  
+                                    handler : remove_deviceCheck
+                                },  
+                                {  
+                                    id : "deviceCheckReject",
+                                    class:"easyui-linkbutton",  
+                                    text : '撤销',
+                                    iconCls:'icon-undo',
+                                    plain:true,  
+                                    handler : reject_deviceCheck
+                                },  
+                                {  
+                                    id : "deviceCheckSave",
+                                    class:"easyui-linkbutton",  
+                                    text : '保存',
+                                    iconCls:'icon-save',
+                                    plain:true,  
+                                    handler : accept_deviceCheck
+                                },  
+                                {  
+                                    id : "deviceCheckGetChanged",
+                                    class:"easyui-linkbutton",  
+                                    text : '查看改变',
+                                    iconCls:'icon-search', 
+                                    plain:true, 
+                                    handler : getChanges_deviceCheck
+                                } ]  
+                    }); 		
+	});
+</script>
+
+<%------------------------------------- $.datagrid----------------------------------------------%>
 
 
 <%------------------------------------- 语境菜单 ----------------------------------------------%>
@@ -320,7 +462,7 @@
 <%------------------------------------- 语境菜单 ----------------------------------------------%>
 
 <%------------------------------------- JQuery Easy UI Filter -------------------------------------%>
-
+ 
 <style>
 .icon-filter {
 	background: url('image/filter.png') no-repeat center center;

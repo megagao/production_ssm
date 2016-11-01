@@ -1,108 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="GBK"%>
 
-<table id="deviceType" title="设备种类" style="height:auto"
-	data-options="
-	   rownumbers:true,
-	   toolbar:'#toobar_deviceType',
-	   url:'json/deviceType_All.json',
-	   method:'get',
-	   pagination:true,
-	   pageSize:10,
-	   pageList:[10, 20, 30], 
-	   onClickRow: onClickRow">
-
-	<thead>
-		<tr>
-
-			<th data-options="field:'ck',checkbox:true"></th>
-
-			<th
-				data-options="field:'deviceTypeId',width:80,align:'center', 
-							type:'text'
-			">Id</th>
-
-			<th
-				data-options="field:'deviceTypeIdd',width:100,align:'center' ,
-							formatter:function(value,row){
-								return row.deviceTypeName;
-							},
-							editor:{
-								type:'combobox',
-								options:{
-									valueField:'deviceTypeIdd',
-									textField:'deviceTypeName',
-									method:'get',
-									url:'json/deviceType_Name.json',
-									panelHeight:'auto',
-									required:true
-								}
-							}
-			">名称</th>
-
-			<th
-				data-options="field:'deviceTypeModel',width:100,align:'center', 
-						editor:'text'
-			">型号</th>
-
-
-			<th
-				data-options="field:'deviceTypeSpec',width:190,align:'center', 
-						editor:'text'
-			">规格</th>
-
-			<th
-				data-options="field:'deviceTypeSupplier',width:100,align:'center',
-						editor:'text'
-			">供应商</th>
-
-			<th
-				data-options="field:'deviceTypeProducer',width:190,align:'center', 
-							editor:'text'
-			">生产商</th>
-
-			<th
-				data-options="field:'deviceTypeQuantity',width:100,align:'center', 
-						editor:{ 
-							type:'numberbox',
-							options:{
-								min:0,
-								max:99999
-							}
-						}
-				">台数</th>
-
-			<th
-				data-options="field:'deviceTypeWarranty',width:120,align:'center', 
-						editor:'datetimebox'
-			">保修期</th>
-
-		</tr>
-	</thead>
-</table>
-
-<div style="margin:8px 0;"></div>
-
-<div id="toobar_deviceType" style="height:auto;">
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-edit',plain:true"
-		onclick="edit_deviceType()">编辑</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
-		onclick="append_deviceType()">添加</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-remove',plain:true"
-		onclick="remove_deviceType()">移除</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-undo',plain:true"
-		onclick="reject_deviceType()">撤销</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-save',plain:true"
-		onclick="accept_deviceType()">保存</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-search',plain:true"
-		onclick="getChanges_deviceType()">查看改变</a>
-
-</div>
+<table id="deviceType" title="设备种类" style="height:auto"></table>
 
 <div style="margin:18x 0;"></div>
 
@@ -137,8 +36,27 @@
 
 	}
 
-	function onClickRow(index, row) {
+	function onClickRow_deviceType(index, row) {
+		var selections = $('#deviceType').datagrid('getSelections');
+		if(selections.length >=2){
+			$('#deviceType').datagrid('unselectAll');
+			$('#deviceType').datagrid('selectRow',index);
+		}
+		
+		if(index != deviceTypeEditIndex && deviceTypeEditIndex != undefined){
+console.log("=.=")
+			/* deviceTypeName */
+			var deviceTypeNameED_List = $('#deviceType').datagrid('getEditor',{
+				index : deviceTypeEditIndex,
+				field : 'deviceTypeIdd'
+			});
+			var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
+					'getText');
+			$('#deviceType').datagrid('getRows')[deviceTypeEditIndex]['deviceTypeName'] = deviceTypeName;
 
+			$('#deviceType').datagrid('endEdit', deviceTypeEditIndex);
+			deviceTypeEditIndex = undefined;
+		}
 	}
 	
 	function edit_deviceType() {
@@ -191,6 +109,10 @@
 
 	function remove_deviceType() {
 		var selections = $('#deviceType').datagrid('getSelections');
+		if(selections.length==0){
+			$.messager.alert('提示','请至少选择一条设备类型信息进行移除！','warning');
+        	return ;
+		}
 
 		for (var i = 0; i < selections.length; i++) {
 			var selectionIndex = $('#deviceType').datagrid('getRowIndex',
@@ -203,6 +125,58 @@
 	}
 
 	function accept_deviceType() {
+	
+		if(deviceTypeEditIndex != undefined){
+			/* deviceTypeName */
+			var deviceTypeNameED_List = $('#deviceType').datagrid('getEditor',{
+				index : deviceTypeEditIndex,
+				field : 'deviceTypeIdd'
+			});
+			var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
+					'getText');
+			$('#deviceType').datagrid('getRows')[deviceTypeEditIndex]['deviceTypeName'] = deviceTypeName;
+
+			$('#deviceType').datagrid('endEdit', deviceTypeEditIndex);
+			deviceTypeEditIndex = undefined;
+		}
+	
+		//sync with database before accept
+		var rowsInserted = $('#deviceType').datagrid('getChanges', 'inserted');
+		var rowsDeleted = $('#deviceType').datagrid('getChanges', 'deleted');
+		var rowsUpdated = $('#deviceType').datagrid('getChanges', 'updated');
+
+		//sync
+		//Inserted
+		for (var i = 0; i < rowsInserted.length; i++) {
+			$.post("deviceType/insert",rowsInserted[i], function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('添加成功!');
+				}
+			});
+		}
+		
+		//Deleted
+		for (var i = 0; i < rowsDeleted.length; i++) {
+			$.post("deviceType/delete",{"deviceTypeId":rowsDeleted[i].deviceTypeId}, function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('删除成功!');
+				}
+			});
+		}
+		 
+		//Updated
+		for (var i = 0; i < rowsUpdated.length; i++) {
+			$.post("deviceType/update",rowsUpdated[i], function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('更新成功!');
+				}
+			});
+		}
+	 	
+		
 		if (endEditing_deviceType()) {
 			$('#deviceType').datagrid('acceptChanges');
 		}
@@ -220,6 +194,177 @@
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
+
+
+<%------------------------------------- $.datagrid----------------------------------------------%>
+
+<script type="text/javascript">
+	$(function() {
+		  	var list_type;
+			$.ajax({    
+			      url:'deviceType/list_type',    
+			      dataType : 'json',    
+			      type : 'GET',    
+			      async:false,  
+			      success: function (data){    
+			      	list_type = data; 
+			      }    
+			}); 
+			/* debugger;    */
+			$('#deviceType').datagrid(  
+                    {  
+					   toolbar:'##toobar_deviceType',
+					   url:'deviceType/list',
+					   method:'get',
+					   pagination:true,
+					   pageSize:10,
+					   pageList:[10, 20, 30], 
+					   remoteSort:false,
+					   multiSort:true,
+					   onClickRow: onClickRow_deviceType,
+                       columns : [ [  
+                                {  
+                                    field : 'ck',  
+                                    checkbox : true  
+                                },  
+                                {  
+                                    field : 'deviceTypeId',  
+                                    title : 'ID',  
+                                    width : 80,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    type:'text'
+                                },  
+                                {  
+                                    field : 'deviceTypeIdd',  
+                                    title : '名称',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true, 
+                                    formatter:function(value,row){
+										return row.deviceTypeName;
+									},
+									editor:{
+										type:'combobox',
+										options:{
+											data:list_type,
+											valueField:'deviceTypeIdd',
+											textField:'deviceTypeName',
+											panelHeight:'auto',
+											required:true
+										}
+									}
+                                },  
+                                {  
+                                    field : 'deviceTypeModel',  
+                                    title : '型号',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true, 
+                                    editor:'text'
+                                },  
+                                {  
+                                    field : 'deviceTypeSpec',  
+                                    title : '规格',  
+                                    width : 190,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceTypeSupplier',  
+                                    title : '供应商',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceTypeProducer',  
+                                    title : '生产商',  
+                                    width : 190,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceTypeQuantity',  
+                                    title : '台数',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:{ 
+										type:'numberbox',
+										options:{
+											min:0,
+											max:99999
+										}
+									}
+                                },
+                                {  
+                                    field : 'deviceTypeWarranty',  
+                                    title : '保修期',  
+                                    width : 120,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'datetimebox',
+                                    formatter:TAOTAO.formatDateTime
+                                }
+                                 ] ],  
+                        toolbar : [  
+                                {  
+                                    id : "deviceTypeEdit",
+                                    class:"easyui-linkbutton",  
+                                    text : '编辑',  
+                                    iconCls : 'icon-edit',
+                                    plain:true,  
+                                    handler : edit_deviceType
+                                },  
+                                {  
+                                    id : "deviceTypeAdd",
+                                    class:"easyui-linkbutton",  
+                                    text : '添加',
+                                    iconCls:'icon-add',
+                                    plain:true,  
+                                    handler : append_deviceType
+                                },  
+                                {  
+                                    id : "deviceTypeRemove",
+                                    class:"easyui-linkbutton",  
+                                    text : '移除',
+                                    iconCls:'icon-remove',
+                                    plain:true,  
+                                    handler : remove_deviceType
+                                },  
+                                {  
+                                    id : "deviceTypeReject",
+                                    class:"easyui-linkbutton",  
+                                    text : '撤销',
+                                    iconCls:'icon-undo',
+                                    plain:true,  
+                                    handler : reject_deviceType
+                                },  
+                                {  
+                                    id : "deviceTypeSave",
+                                    class:"easyui-linkbutton",  
+                                    text : '保存',
+                                    iconCls:'icon-save',
+                                    plain:true,  
+                                    handler : accept_deviceType
+                                },  
+                                {  
+                                    id : "deviceTypeGetChanged",
+                                    class:"easyui-linkbutton",  
+                                    text : '查看改变',
+                                    iconCls:'icon-search', 
+                                    plain:true, 
+                                    handler : getChanges_deviceType
+                                } ]  
+                    }); 		
+	});
+</script>
+
+<%------------------------------------- $.datagrid----------------------------------------------%>
 
 
 <%------------------------------------- 语境菜单 ----------------------------------------------%>

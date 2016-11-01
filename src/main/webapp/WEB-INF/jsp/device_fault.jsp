@@ -4,104 +4,7 @@
 <!-- 此注解放table_data-options里会导致在IE里显示不正常  -- "IE真的是狠严（ruo）格（zhi）啊" -->
 <!-- singleSelect:true, -->
 <!-- 此注解放table_data-options里会导致在IE里显示不正常  -- "IE真的是狠严（ruo）格（zhi）啊" -->
-<table id="deviceFault" title="设备故障" style="height:389px"
-	data-options="
-	   rownumbers:true,
-	   toolbar:'#toobar_deviceFault',
-	   url:'json/deviceFault_All.json',
-	   method:'get',
-	   pagination:true,
-	   pageSize:10,
-	   pageList:[10, 20, 30], 
-	   remoteSort:false,
-	   multiSort:true,
-	   onClickRow: onClickRow_deviceFault,
-	   onClickCell:onClickCell_deviceFault
-	   ">
-
-	<thead>
-		<tr>
-
-			<th data-options="field:'ck',checkbox:true"></th>
-
-			<th
-				data-options="field:'deviceFaultId',width:80,align:'center',sortable:true,
-							type:'text'
-			">故障编号</th>
-
-			<th
-				data-options="field:'deviceId',width:80,align:'center',sortable:true,
-							editor:{
-								type:'textbox',
-								options:{
-									required:true									
-								}
-							}
-			">设备编号</th>
-
-			<th
-				data-options="field:'deviceIdd',width:100,align:'center',sortable:true,
-							formatter:function(value,row){
-								return row.deviceName;
-							},
-							editor:{
-								type:'combobox',
-								options:{
-									valueField:'deviceIdd',
-									textField:'deviceName',
-									method:'get',
-									url:'json/deviceFault_Name.json',
-									panelHeight:'auto' 
-								}
-							}
-			
-			">设备名称</th>
-
-			<th
-				data-options="field:'deviceFaultCause',width:120,align:'center', 
-						editor:'text'
-			">故障原因</th>
-
-			<th
-				data-options="field:'deviceFaultDetail',width:200,align:'center', 
-						editor:'text'
-			">故障描述</th>
-
-			<th
-				data-options="field:'deviceFaultDate',width:190,align:'center', sortable:true,
-						editor:'datetimebox'
-			">故障日期</th>
-
-			<th
-				data-options="field:'deviceFaultMaintenance',width:120,align:'center', 
-						editor:'text'
-			">维修方式</th>
-
-		</tr>
-	</thead>
-</table>
-
-<div style="margin:8px 0;"></div>
-
-<div id="toobar_deviceFault" style="height:auto">
-	<a href="javascript:void(0)" class="easyui-linkbutton"
-		data-options="iconCls:'icon-edit',plain:true"
-		onclick="edit_deviceFault()">编辑</a><a href="javascript:void(0)"
-		class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
-		onclick="append_deviceFault()">添加</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-remove',plain:true"
-		onclick="remove_deviceFault()">移除</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-undo',plain:true"
-		onclick="reject_deviceFault()">撤销</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-save',plain:true"
-		onclick="accept_deviceFault()">保存</a> <a href="javascript:void(0)"
-		class="easyui-linkbutton"
-		data-options="iconCls:'icon-search',plain:true"
-		onclick="getChanges_deviceFault()">查看改变</a>
-</div>
+<table id="deviceFault" title="设备故障" style="height:389px"></table>
 
 <div style="margin:18x 0;"></div>
 
@@ -131,19 +34,27 @@
 		}
 	}
 
-	var onClickCellFieldValue_deviceFault = "";
-	function onClickCell_deviceFault(index, field) {
-		onClickCellFieldValue_deviceFault = field;
-	}
 
 	function onClickRow_deviceFault(index, row) {
 
-		if (onClickCellFieldValue_deviceFault === "deviceId") {
-			var tabs_deviceFault = $("#tabs_deviceFault");
-			var detailInfoTab = tabs_deviceFault.tabs("getTab", "设备信息");
-			detailInfoTab.panel('options').tab.show();
-			tabs_deviceFault.tabs("select", "设备信息");
-			loadData_name_form_deviceFault(row.deviceName);
+		var selections = $('#deviceFault').datagrid('getSelections');
+		if(selections.length >=2){
+			$('#deviceFault').datagrid('unselectAll');
+			$('#deviceFault').datagrid('selectRow',index);
+		}
+		
+		if(index != deviceFaultEditIndex && deviceFaultEditIndex != undefined){
+			/* deviceName */
+			var deviceNameED_List = $('#deviceFault').datagrid('getEditor',{
+				index : deviceFaultEditIndex,
+				field : 'deviceIdd'
+			});
+			var deviceName = $(deviceNameED_List.target).combobox(
+					'getText');
+			$('#deviceFault').datagrid('getRows')[deviceFaultEditIndex]['deviceName'] = deviceName;
+			
+			$('#deviceFault').datagrid('endEdit', deviceFaultEditIndex);
+			deviceFaultEditIndex = undefined;
 		}
 
 	}
@@ -201,7 +112,11 @@
 
 	function remove_deviceFault() {
 		var selections = $('#deviceFault').datagrid('getSelections');
-
+		if(selections.length==0){
+			$.messager.alert('提示','请至少选择一条设备故障信息进行移除！','warning');
+        	return ;
+		}
+		
 		for (var i = 0; i < selections.length; i++) {
 			var selectionIndex = $('#deviceFault').datagrid('getRowIndex',
 					selections[i]);
@@ -213,6 +128,58 @@
 	}
 
 	function accept_deviceFault() {
+	
+		if(deviceFaultEditIndex != undefined){
+			/* deviceName */
+			var deviceNameED_List = $('#deviceFault').datagrid('getEditor',{
+				index : deviceFaultEditIndex,
+				field : 'deviceIdd'
+			});
+			var deviceName = $(deviceNameED_List.target).combobox(
+					'getText');
+			$('#deviceFault').datagrid('getRows')[deviceFaultEditIndex]['deviceName'] = deviceName;
+			
+			$('#deviceFault').datagrid('endEdit', deviceFaultEditIndex);
+			deviceFaultEditIndex = undefined;
+		}
+	
+		//sync with database before accept
+		var rowsInserted = $('#deviceFault').datagrid('getChanges', 'inserted');
+		var rowsDeleted = $('#deviceFault').datagrid('getChanges', 'deleted');
+		var rowsUpdated = $('#deviceFault').datagrid('getChanges', 'updated');
+
+		//sync
+		//Inserted
+		for (var i = 0; i < rowsInserted.length; i++) {
+			$.post("deviceFault/insert",rowsInserted[i], function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('添加成功!');
+				}
+			});
+		}
+		
+		//Deleted
+		for (var i = 0; i < rowsDeleted.length; i++) {
+			$.post("deviceFault/delete",{"deviceFaultId":rowsDeleted[i].deviceFaultId}, function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('删除成功!');
+				}
+			});
+		}
+		 
+		//Updated
+		for (var i = 0; i < rowsUpdated.length; i++) {
+			$.post("deviceFault/update",rowsUpdated[i], function(data){
+			console.log(data.status);
+				if(data.status == 200){
+					console.log('更新成功!');
+				}
+			});
+		}
+	 	
+		
 		if (endEditing_deviceFault()) {
 			$('#deviceFault').datagrid('acceptChanges');
 		}
@@ -230,6 +197,166 @@
 </script>
 
 <%------------------------------------- ADD DELETE UPDATE SEARCH -------------------------------------%>
+
+
+<%------------------------------------- $.datagrid----------------------------------------------%>
+
+<script type="text/javascript">
+	$(function() {
+		  	var list_name;
+			$.ajax({    
+			      url:'deviceList/list_name',    
+			      dataType : 'json',    
+			      type : 'GET',    
+			      async:false,  
+			      success: function (data){    
+			      	list_name = data; 
+			      }    
+			});
+			/* debugger;  */  
+			$('#deviceFault').datagrid(  
+                    {  
+					   toolbar:'##toobar_deviceFault',
+					   url:'deviceFault/list',
+					   method:'get',
+					   pagination:true,
+					   pageSize:10,
+					   pageList:[10, 20, 30], 
+					   remoteSort:false,
+					   multiSort:true,
+					   onClickRow: onClickRow_deviceFault,
+                       columns : [ [  
+                                {  
+                                    field : 'ck',  
+                                    checkbox : true  
+                                },  
+                                {  
+                                    field : 'deviceFaultId',  
+                                    title : '故障编号',  
+                                    width : 80,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    type:'text'
+                                },  
+                                {  
+                                    field : 'deviceId',  
+                                    title : '设备编号',  
+                                    width : 80,  
+                                    align : 'center',
+                                    sortable:true, 
+                                    editor:{
+										 type:'textbox',
+										 options:{
+										 	 required:true									
+										 }
+									}
+                                },  
+                                {  
+                                    field : 'deviceIdd',  
+                                    title : '设备名称',  
+                                    width : 100,  
+                                    align : 'center',
+                                    sortable:true, 
+                                    formatter:function(value,row){
+										return row.deviceName;
+									},
+									editor:{
+										type:'combobox',
+										options:{
+											data:list_name,
+											valueField:'deviceIdd',
+											textField:'deviceName',
+											panelHeight:'auto' 
+										}
+									}
+                                },  
+                                {  
+                                    field : 'deviceFaultCause',  
+                                    title : '故障原因',  
+                                    width : 120,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceFaultDetail',  
+                                    title : '故障描述',  
+                                    width : 200,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'text'
+                                },
+                                {  
+                                    field : 'deviceFaultDate',  
+                                    title : '故障日期',  
+                                    width : 190,  
+                                    align : 'center',
+                                    sortable:true,  
+                                    editor:'datetimebox'
+                                },
+                                {  
+                                    field : 'deviceFaultMaintenance',  
+                                    title : '维修方式',  
+                                    width : 120,  
+                                    align : 'center',
+                                    sortable:true,  
+                                   editor:'text'
+                                }
+                                 ] ],  
+                        toolbar : [  
+                                {  
+                                    id : "deviceFaultEdit",
+                                    class:"easyui-linkbutton",  
+                                    text : '编辑',  
+                                    iconCls : 'icon-edit',
+                                    plain:true,  
+                                    handler : edit_deviceFault
+                                },  
+                                {  
+                                    id : "deviceFaultAdd",
+                                    class:"easyui-linkbutton",  
+                                    text : '添加',
+                                    iconCls:'icon-add',
+                                    plain:true,  
+                                    handler : append_deviceFault
+                                },  
+                                {  
+                                    id : "deviceFaultRemove",
+                                    class:"easyui-linkbutton",  
+                                    text : '移除',
+                                    iconCls:'icon-remove',
+                                    plain:true,  
+                                    handler : remove_deviceFault
+                                },  
+                                {  
+                                    id : "deviceFaultReject",
+                                    class:"easyui-linkbutton",  
+                                    text : '撤销',
+                                    iconCls:'icon-undo',
+                                    plain:true,  
+                                    handler : reject_deviceFault
+                                },  
+                                {  
+                                    id : "deviceFaultSave",
+                                    class:"easyui-linkbutton",  
+                                    text : '保存',
+                                    iconCls:'icon-save',
+                                    plain:true,  
+                                    handler : accept_deviceFault
+                                },  
+                                {  
+                                    id : "deviceFaultGetChanged",
+                                    class:"easyui-linkbutton",  
+                                    text : '查看改变',
+                                    iconCls:'icon-search', 
+                                    plain:true, 
+                                    handler : getChanges_deviceFault
+                                } ]  
+                    }); 		
+	});
+</script>
+
+<%------------------------------------- $.datagrid----------------------------------------------%>
 
 
 <%------------------------------------- 语境菜单 ----------------------------------------------%>
