@@ -1,8 +1,8 @@
 package org.hqu.production_ms.service;
 
-import org.hqu.production_ms.domain.CustomResult;
-import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.Manufacture;
+import org.hqu.production_ms.domain.custom.CustomResult;
+import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.ManufacturePO;
 
 public interface ManufactureService {
