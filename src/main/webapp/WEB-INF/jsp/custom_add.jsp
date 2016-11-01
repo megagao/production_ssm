@@ -72,7 +72,7 @@
 	    <input type="hidden" name="customParams"/>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitCustomAddForm()">提交</a>
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
@@ -87,7 +87,7 @@
 		customAddEditor = KindEditor.create("#customAddForm [name=note]", TT.kingEditorParams);
 	});
 	//提交表单
-	function submitForm(){
+	function submitCustomAddForm(){
 		//有效性验证
 		if(!$('#customAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
@@ -101,6 +101,8 @@
 			if(data.status == 200){
 				$.messager.alert('提示','新增客户成功!');
 				clearForm();
+			}else{
+				$.messager.alert('提示',data.msg);
 			}
 		});
 	}

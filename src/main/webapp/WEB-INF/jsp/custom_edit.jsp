@@ -6,12 +6,11 @@
 	<form id="customEditForm" class="customForm" method="post">
 		<input type="hidden" name="customId"/>
 	    <table cellpadding="5">
-	          <tr>
+	        <tr>
 	            <td>客户名称:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="customName" data-options="required:true"></input>
 	            </td>
-	            
 	        </tr>
 	        <tr>
 	            <td>客户全称:</td>
@@ -67,7 +66,7 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitCustomEditForm()">提交</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -77,20 +76,28 @@
 		customEditEditor = TAOTAO.createEditor("#customEditForm [name=note]");
 	});
 	
-	function submitForm(){
-		if(!$('#customEditForm').form('validate')){
-			$.messager.alert('提示','表单还未填写完成!');
-			return ;
-		}
-		//同步文本框中的备注
-		customEditEditor.sync();
-		$.post("custom/update_all",$("#customEditForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','修改客户成功!','info',function(){
-					$("#customEditWindow").window('close');
-					$("#customList").datagrid("reload");
-				});
-			}
-		});
+	function submitCustomEditForm(){
+		$.get("custom/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{
+    			if(!$('#customEditForm').form('validate')){
+    				$.messager.alert('提示','表单还未填写完成!');
+    				return ;
+    			}
+    			//同步文本框中的备注
+    			customEditEditor.sync();
+    			$.post("custom/update_all",$("#customEditForm").serialize(), function(data){
+    				if(data.status == 200){
+    					$.messager.alert('提示','修改客户成功!','info',function(){
+    						$("#customEditWindow").window('close');
+    						$("#customList").datagrid("reload");
+    						$("#customInfoWindow").window('close');
+    					});
+    				}
+    			});
+    		}
+    	});
+		
 	}
 </script>
