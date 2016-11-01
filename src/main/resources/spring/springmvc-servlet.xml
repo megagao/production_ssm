@@ -14,6 +14,24 @@
 
 	<!-- 注解驱动 -->
 	<mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
+
+	
+	<!-- <mvc:annotation-driven  validator="validator"> -->
+        <!--json解析时间格式设置-->
+       <!--  <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters> -->
+    <!-- </mvc:annotation-driven> -->
 	
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
@@ -32,6 +50,7 @@
 	<!-- 资源映射 -->
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/> 
+	<mvc:resources location="/WEB-INF/image/" mapping="/image/**"/> 
 
 	<!-- 定义文件上传解析器 -->
 	<bean id="multipartResolver"
