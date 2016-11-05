@@ -9,7 +9,6 @@
 - SpringMVC（支持Restful风格）
 - Hibernate Validate（参数校验）
 - Mybatis（最少配置方案）
-- Quartz时间调度
 - [Druid（数据源配置 sql防注入 sql性能监控)](http://wosyingjun.iteye.com/blog/2306139)
 - 统一的异常处理
 - JSP JSTL JavaScript
