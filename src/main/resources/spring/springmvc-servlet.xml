@@ -32,7 +32,7 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-	
+    
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
 	
