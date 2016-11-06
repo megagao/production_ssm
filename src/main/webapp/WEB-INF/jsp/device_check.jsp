@@ -12,33 +12,37 @@
 
 <script type="text/javascript">
 	var deviceCheckEditIndex = undefined;
+	
+	function ENDEDITWHENBLUR_DEVICECHECK(){
+		/* deviceName */
+		var deviceNameED = $('#deviceCheck').datagrid('getEditor', {
+			index : deviceCheckEditIndex,
+			field : 'deviceIdd'
+		});
+		var deviceName = $(deviceNameED.target).combobox('getText');
+		$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceName'] = deviceName;
+
+		/* deviceCheckFaultId */
+		var deviceCheckFaultIdED = $('#deviceCheck').datagrid('getEditor',
+				{
+					index : deviceCheckEditIndex,
+					field : 'deviceCheckFaultIdd'
+				});
+		var deviceCheckFaultId = $(deviceCheckFaultIdED.target).combobox(
+				'getText');
+		$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceCheckFaultId'] = deviceCheckFaultId;
+
+		/* End Edit */
+		$('#deviceCheck').datagrid('endEdit', deviceCheckEditIndex);
+		deviceCheckEditIndex = undefined;
+	}
+	
 	function endEditing_deviceCheck() {
 		if (deviceCheckEditIndex == undefined) {
 			return true
 		}
 		if ($('#deviceCheck').datagrid('validateRow', deviceCheckEditIndex)) {
-
-			/* deviceName */
-			var deviceNameED = $('#deviceCheck').datagrid('getEditor', {
-				index : deviceCheckEditIndex,
-				field : 'deviceIdd'
-			});
-			var deviceName = $(deviceNameED.target).combobox('getText');
-			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceName'] = deviceName;
-
-			/* deviceCheckFaultId */
-			var deviceCheckFaultIdED = $('#deviceCheck').datagrid('getEditor',
-					{
-						index : deviceCheckEditIndex,
-						field : 'deviceCheckFaultIdd'
-					});
-			var deviceCheckFaultId = $(deviceCheckFaultIdED.target).combobox(
-					'getText');
-			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceCheckFaultId'] = deviceCheckFaultId;
-
-			/* End Edit */
-			$('#deviceCheck').datagrid('endEdit', deviceCheckEditIndex);
-			deviceCheckEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICECHECK();			
 			return true;
 		} else {
 			return false;
@@ -54,29 +58,12 @@
 		}
 		
 		if(index != deviceCheckEditIndex && deviceCheckEditIndex != undefined){
-			/* deviceName */
-			var deviceNameED_List = $('#deviceCheck').datagrid('getEditor',{
-				index : deviceCheckEditIndex,
-				field : 'deviceIdd'
-			});
-			var deviceName = $(deviceNameED_List.target).combobox(
-					'getText');
-			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceName'] = deviceName;
-			
-			/* deviceCheckFaultId */
-			var deviceCheckFaultIdED = $('#deviceCheck').datagrid('getEditor',
-					{
-						index : deviceCheckEditIndex,
-						field : 'deviceCheckFaultIdd'
-					});
-			var deviceCheckFaultId = $(deviceCheckFaultIdED.target).combobox(
-					'getText');
-			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceCheckFaultId'] = deviceCheckFaultId;
-			
-
-			$('#deviceCheck').datagrid('endEdit', deviceCheckEditIndex);
-			deviceCheckEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICECHECK();
 		}
+	}
+	
+	function onBeforeLoad_deviceCheck() {
+		deviceCheckEditIndex = undefined;
 	}
 
 	function edit_deviceCheck() {
@@ -119,8 +106,11 @@
 			else if (newId_int < 100)
 				newId_int = "0" + newId_int;
 
+			var Nowadays = new Date();
+			
 			$('#deviceCheck').datagrid('appendRow', {
-				deviceCheckId : newId_int
+				deviceCheckId : newId_int,
+				deviceCheckDate : Nowadays.format("yyyy-MM-dd hh:mm:ss")
 			});
 			deviceCheckEditIndex = $('#deviceCheck').datagrid('getRows').length - 1;
 			$('#deviceCheck').datagrid('selectRow', deviceCheckEditIndex)
@@ -150,27 +140,7 @@
 	function accept_deviceCheck() {
 	
 		if(deviceCheckEditIndex != undefined){
-			/* deviceName */
-			var deviceNameED_List = $('#deviceCheck').datagrid('getEditor',{
-				index : deviceCheckEditIndex,
-				field : 'deviceIdd'
-			});
-			var deviceName = $(deviceNameED_List.target).combobox(
-					'getText');
-			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceName'] = deviceName;
-			
-			/* deviceCheckFaultId */
-			var deviceCheckFaultIdED = $('#deviceCheck').datagrid('getEditor',
-					{
-						index : deviceCheckEditIndex,
-						field : 'deviceCheckFaultIdd'
-					});
-			var deviceCheckFaultId = $(deviceCheckFaultIdED.target).combobox(
-					'getText');
-			$('#deviceCheck').datagrid('getRows')[deviceCheckEditIndex]['deviceCheckFaultId'] = deviceCheckFaultId;
-
-			$('#deviceCheck').datagrid('endEdit', deviceCheckEditIndex);
-			deviceCheckEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICECHECK();
 		}
 	
 		//sync with database before accept
@@ -180,34 +150,67 @@
 
 		//sync
 		//Inserted
+		var iI = 0;
 		for (var i = 0; i < rowsInserted.length; i++) {
 			$.post("deviceCheck/insert",rowsInserted[i], function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iI++;
+				}
+				if(iI==rowsInserted.length && iI>0){
 					console.log('添加成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'添加成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
 		
+		
 		//Deleted
+		var iD = 0;
 		for (var i = 0; i < rowsDeleted.length; i++) {
 			$.post("deviceCheck/delete",{"deviceCheckId":rowsDeleted[i].deviceCheckId}, function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iD++;
+				}
+				if(iD==rowsDeleted.length && iD>0){
 					console.log('删除成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'删除成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
+		
 		 
 		//Updated
+		var iU = 0;
 		for (var i = 0; i < rowsUpdated.length; i++) {
 			$.post("deviceCheck/update",rowsUpdated[i], function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iU++;
+				}
+				if(iU==rowsUpdated.length && iU>0){
 					console.log('更新成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'更新成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
+		
 	 	
 	
 		if (endEditing_deviceCheck()) {
@@ -264,6 +267,7 @@
 					   remoteSort:false,
 					   multiSort:true,
 					   onClickRow: onClickRow_deviceCheck,
+					   onBeforeLoad:onBeforeLoad_deviceCheck,
                        columns : [ [  
                                 {  
                                     field : 'ck',  
