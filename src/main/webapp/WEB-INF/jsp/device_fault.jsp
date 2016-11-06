@@ -12,22 +12,27 @@
 
 <script type="text/javascript">
 	var deviceFaultEditIndex = undefined;
+	
+	function ENDEDITWHENBLUR_DEVICEFAULT(){
+		/* deviceName */
+		var deviceNameED = $('#deviceFault').datagrid('getEditor', {
+			index : deviceFaultEditIndex,
+			field : 'deviceIdd'
+		});
+		var deviceName = $(deviceNameED.target).combobox('getText');
+		$('#deviceFault').datagrid('getRows')[deviceFaultEditIndex]['deviceName'] = deviceName;
+
+		/* End Edit */
+		$('#deviceFault').datagrid('endEdit', deviceFaultEditIndex);
+		deviceFaultEditIndex = undefined;
+	}
+	
 	function endEditing_deviceFault() {
 		if (deviceFaultEditIndex == undefined) {
 			return true
 		}
 		if ($('#deviceFault').datagrid('validateRow', deviceFaultEditIndex)) {
-			/* deviceName */
-			var deviceNameED = $('#deviceFault').datagrid('getEditor', {
-				index : deviceFaultEditIndex,
-				field : 'deviceIdd'
-			});
-			var deviceName = $(deviceNameED.target).combobox('getText');
-			$('#deviceFault').datagrid('getRows')[deviceFaultEditIndex]['deviceName'] = deviceName;
-
-			/* End Edit */
-			$('#deviceFault').datagrid('endEdit', deviceFaultEditIndex);
-			deviceFaultEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICEFAULT();
 			return true;
 		} else {
 			return false;
@@ -44,19 +49,13 @@
 		}
 		
 		if(index != deviceFaultEditIndex && deviceFaultEditIndex != undefined){
-			/* deviceName */
-			var deviceNameED_List = $('#deviceFault').datagrid('getEditor',{
-				index : deviceFaultEditIndex,
-				field : 'deviceIdd'
-			});
-			var deviceName = $(deviceNameED_List.target).combobox(
-					'getText');
-			$('#deviceFault').datagrid('getRows')[deviceFaultEditIndex]['deviceName'] = deviceName;
-			
-			$('#deviceFault').datagrid('endEdit', deviceFaultEditIndex);
-			deviceFaultEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICEFAULT();
 		}
 
+	}
+	
+	function onBeforeLoad_deviceFault() {
+		deviceFaultEditIndex = undefined;
 	}
 
 	function edit_deviceFault() {
@@ -98,9 +97,12 @@
 				newId_int = "00" + newId_int;
 			else if (newId_int < 100)
 				newId_int = "0" + newId_int;
-
+			
+			var Nowadays = new Date();
+			
 			$('#deviceFault').datagrid('appendRow', {
-				deviceFaultId : newId_int
+				deviceFaultId : newId_int,
+				deviceFaultDate : Nowadays.format("yyyy-MM-dd hh:mm:ss")
 			});
 			deviceFaultEditIndex = $('#deviceFault').datagrid('getRows').length - 1;
 			$('#deviceFault').datagrid('selectRow', deviceFaultEditIndex)
@@ -130,17 +132,7 @@
 	function accept_deviceFault() {
 	
 		if(deviceFaultEditIndex != undefined){
-			/* deviceName */
-			var deviceNameED_List = $('#deviceFault').datagrid('getEditor',{
-				index : deviceFaultEditIndex,
-				field : 'deviceIdd'
-			});
-			var deviceName = $(deviceNameED_List.target).combobox(
-					'getText');
-			$('#deviceFault').datagrid('getRows')[deviceFaultEditIndex]['deviceName'] = deviceName;
-			
-			$('#deviceFault').datagrid('endEdit', deviceFaultEditIndex);
-			deviceFaultEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICEFAULT();
 		}
 	
 		//sync with database before accept
@@ -150,35 +142,66 @@
 
 		//sync
 		//Inserted
+		var iI = 0;
 		for (var i = 0; i < rowsInserted.length; i++) {
 			$.post("deviceFault/insert",rowsInserted[i], function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iI++;
+				}
+				if(iI==rowsInserted.length && iI>0){
 					console.log('添加成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'添加成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
 		
+		
 		//Deleted
+		var iD = 0;
 		for (var i = 0; i < rowsDeleted.length; i++) {
 			$.post("deviceFault/delete",{"deviceFaultId":rowsDeleted[i].deviceFaultId}, function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iD++;
+				}
+				if(iD==rowsDeleted.length && iD>0){
 					console.log('删除成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'删除成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
+		
 		 
 		//Updated
+		var iU = 0;
 		for (var i = 0; i < rowsUpdated.length; i++) {
 			$.post("deviceFault/update",rowsUpdated[i], function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iU++;
+				}
+				if(iU==rowsUpdated.length && iU>0){
 					console.log('更新成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'更新成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
-	 	
 		
 		if (endEditing_deviceFault()) {
 			$('#deviceFault').datagrid('acceptChanges');
@@ -225,6 +248,7 @@
 					   remoteSort:false,
 					   multiSort:true,
 					   onClickRow: onClickRow_deviceFault,
+					   onBeforeLoad:onBeforeLoad_deviceFault,
                        columns : [ [  
                                 {  
                                     field : 'ck',  
@@ -300,7 +324,7 @@
                                     width : 120,  
                                     align : 'center',
                                     sortable:true,  
-                                   editor:'text'
+                                    editor:'text'
                                 }
                                  ] ],  
                         toolbar : [  
