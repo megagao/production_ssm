@@ -6,7 +6,7 @@
  * http://hayageek.com/
  */
 (function ($) {
-    if($.fn.ajaxForm == undefined) {
+	if($.fn.ajaxForm == undefined) {
         $.getScript(("https:" == document.location.protocol ? "https://" : "http://") + "malsup.github.io/jquery.form.js");
     }
     var feature = {};
