@@ -18,54 +18,51 @@
 <script type="text/javascript">
 
 	var deviceListEditIndex = undefined;
+	
+	function ENDEDITWHENBLUR_DEVICELIST() {
+		/* deviceTypeName */
+		var deviceTypeNameED_List = $('#deviceList').datagrid('getEditor',
+				{
+					index : deviceListEditIndex,
+					field : 'deviceTypeId'
+				});
+		var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
+				'getText');
+		$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceTypeName'] = deviceTypeName;
+
+		/* deviceStatus */
+		var deviceStatusED_List = $('#deviceList').datagrid('getEditor', {
+			index : deviceListEditIndex,
+			field : 'deviceStatusId'
+		});
+		var deviceStatus = $(deviceStatusED_List.target)
+				.combobox('getText');
+		$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceStatus'] = deviceStatus;
+		
+		/* deviceKeeper */
+		var deviceKeeperED_List = $('#deviceList').datagrid('getEditor', {
+			index : deviceListEditIndex,
+			field : 'deviceKeeperId'
+		});
+		var deviceKeeper = $(deviceKeeperED_List.target)
+				.combobox('getText');
+		$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceKeeper'] = deviceKeeper;
+
+		/* End Edit */
+		$('#deviceList').datagrid('endEdit', deviceListEditIndex);
+		deviceListEditIndex = undefined;
+	}
+	
 	function endEditing_deviceList() {
 		if (deviceListEditIndex == undefined) {
-console.log("endEditing_deviceList  undefined true");
 			return true
 		}
 		if ($('#deviceList').datagrid('validateRow', deviceListEditIndex)) {
-			
-			/* deviceTypeName */
-			var deviceTypeNameED_List = $('#deviceList').datagrid('getEditor',
-					{
-						index : deviceListEditIndex,
-						field : 'deviceTypeId'
-					});
-			var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
-					'getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceTypeName'] = deviceTypeName;
-
-			/* deviceStatus */
-			var deviceStatusED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceStatusId'
-			});
-			var deviceStatus = $(deviceStatusED_List.target)
-					.combobox('getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceStatus'] = deviceStatus;
-			
-			/* deviceKeeper */
-			var deviceKeeperED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceKeeperId'
-			});
-			var deviceKeeper = $(deviceKeeperED_List.target)
-					.combobox('getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceKeeper'] = deviceKeeper;
-
-			/* End Edit */
-			$('#deviceList').datagrid('endEdit', deviceListEditIndex);
-			deviceListEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICELIST();			
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-	var onClickCellFieldValue_deviceList = "";
-
-	function onClickCell_deviceList(index, field) {
-		onClickCellFieldValue_deviceList = field;
 	}
 
 	function onClickRow_deviceList(index, row) {
@@ -77,39 +74,12 @@ console.log("endEditing_deviceList  undefined true");
 		}
 		
 		if(index != deviceListEditIndex && deviceListEditIndex != undefined){
-			/* deviceTypeName */
-			var deviceTypeNameED_List = $('#deviceList').datagrid('getEditor',
-					{
-						index : deviceListEditIndex,
-						field : 'deviceTypeId'
-					});
-			var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
-					'getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceTypeName'] = deviceTypeName;
-
-			/* deviceStatus */
-			var deviceStatusED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceStatusId'
-			});
-			var deviceStatus = $(deviceStatusED_List.target)
-					.combobox('getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceStatus'] = deviceStatus;
-			
-			/* deviceKeeper */
-			var deviceKeeperED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceKeeperId'
-			});
-			var deviceKeeper = $(deviceKeeperED_List.target)
-					.combobox('getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceKeeper'] = deviceKeeper;
-			
-			
-			$('#deviceList').datagrid('endEdit', deviceListEditIndex);
-			deviceListEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICELIST();
 		}
-console.log(selections);
+	}
+	
+	function onBeforeLoad_deviceList() {
+		deviceMaintainEditIndex = undefined;
 	}
 
 	function edit_deviceList() {
@@ -138,7 +108,6 @@ console.log(selections);
 				$('#deviceList').datagrid('selectRow', deviceListEditIndex);
 			}
 		}
-console.log(rowSelection);
 	
 <%--
 		$('#deviceList').datagrid('selectRow', 0).datagrid(
@@ -166,16 +135,20 @@ console.log(rowSelection);
 --%>
 
 			var newIdIndex = $('#deviceList').datagrid('getRows').length - 1;
-			console.log("newIdIndex : " + newIdIndex);
 			var newId_string = $('#deviceList').datagrid('getRows')[newIdIndex].deviceId;
 			var newId_int = parseInt(newId_string) + 1;
 			if (newId_int < 10)
 				newId_int = "00" + newId_int;
 			else if (newId_int < 100)
 				newId_int = "0" + newId_int;
-
+			
+			var Nowadays = new Date();
+			
 			$('#deviceList').datagrid('appendRow', {
-				deviceId : newId_int
+				deviceId : newId_int,
+				devicePurchaseDate : Nowadays.format("yyyy-MM-dd hh:mm:ss"),
+				deviceManufactureDate : Nowadays.format("yyyy-MM-dd hh:mm:ss"),
+				deviceServiceLife : Nowadays.format("yyyy-MM-dd hh:mm:ss")
 			});
 
 			deviceListEditIndex = $('#deviceList').datagrid('getRows').length - 1;
@@ -207,76 +180,75 @@ console.log(rowSelection);
 	function accept_deviceList() {
 	
 		if(deviceListEditIndex != undefined){
-			/* deviceTypeName */
-			var deviceTypeNameED_List = $('#deviceList').datagrid('getEditor',
-					{
-						index : deviceListEditIndex,
-						field : 'deviceTypeId'
-					});
-			var deviceTypeName = $(deviceTypeNameED_List.target).combobox(
-					'getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceTypeName'] = deviceTypeName;
-
-			/* deviceStatus */
-			var deviceStatusED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceStatusId'
-			});
-			var deviceStatus = $(deviceStatusED_List.target)
-					.combobox('getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceStatus'] = deviceStatus;
-			
-			/* deviceKeeper */
-			var deviceKeeperED_List = $('#deviceList').datagrid('getEditor', {
-				index : deviceListEditIndex,
-				field : 'deviceKeeperId'
-			});
-			var deviceKeeper = $(deviceKeeperED_List.target)
-					.combobox('getText');
-			$('#deviceList').datagrid('getRows')[deviceListEditIndex]['deviceKeeper'] = deviceKeeper;
-			
-			
-			$('#deviceList').datagrid('endEdit', deviceListEditIndex);
-			deviceListEditIndex = undefined;
+			ENDEDITWHENBLUR_DEVICELIST();
 		}
 	 
 		//sync with database before accept
 		var rowsInserted = $('#deviceList').datagrid('getChanges', 'inserted');
 		var rowsDeleted = $('#deviceList').datagrid('getChanges', 'deleted');
 		var rowsUpdated = $('#deviceList').datagrid('getChanges', 'updated');
-		
+
 		//sync
 		//Inserted
+		var iI = 0;
 		for (var i = 0; i < rowsInserted.length; i++) {
 			$.post("deviceList/insert",rowsInserted[i], function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iI++;
+				}
+				if(iI==rowsInserted.length ){
 					console.log('添加成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'添加成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
 		
 		//Deleted
+		var iD = 0;
 		for (var i = 0; i < rowsDeleted.length; i++) {
 			$.post("deviceList/delete",{"deviceId":rowsDeleted[i].deviceId}, function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iD++;
+				}
+				if(iD==rowsDeleted.length && iD>0){
 					console.log('删除成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'删除成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
-		 
+		
 		//Updated
+		var iU = 0;
 		for (var i = 0; i < rowsUpdated.length; i++) {
 			$.post("deviceList/update",rowsUpdated[i], function(data){
 			console.log(data.status);
 				if(data.status == 200){
+					iU++;
+				}
+				if(iU==rowsUpdated.length && iU>0){
 					console.log('更新成功!');
+					$.messager.show({
+						title:'保存状态',
+						msg:'更新成功',
+						timeout:2000,
+						showType:'show'
+					});
 				}
 			});
 		}
-	 	 
-		 
+		
 		if (endEditing_deviceList()) {
 			$('#deviceList').datagrid('acceptChanges');
 		}
@@ -290,12 +262,9 @@ console.log(rowSelection);
 	}
 
 	function getChanges_deviceList() {
-/* $('#deviceList').datagrid('endEdit', 6);
-deviceListEditIndex = undefined; */
 		var rowsInserted = $('#deviceList').datagrid('getChanges', 'inserted');
 		var rowsDeleted = $('#deviceList').datagrid('getChanges', 'deleted');
 		var rowsUpdated = $('#deviceList').datagrid('getChanges', 'updated');
-		/* alert(rows.length + ' rows are changed!'); */
 		console.log(rowsInserted.length + ' rows are inserted changed!');
 		console.log(rowsDeleted.length + ' rows are deleted changed!');
 		console.log(rowsUpdated.length + ' rows are updated changed!');
@@ -345,7 +314,7 @@ deviceListEditIndex = undefined; */
 					   remoteSort:false,
 					   multiSort:true,
 					   onClickRow: onClickRow_deviceList,
-					   onClickCell: onClickCell_deviceList,  
+					   onBeforeLoad:onBeforeLoad_deviceList,
                        columns : [ [  
                                 {  
                                     field : 'ck',  
@@ -428,8 +397,7 @@ deviceListEditIndex = undefined; */
                                     width : 170,  
                                     align : 'center',
                                     sortable:true,  
-                                    editor:'datetimebox',
-                                    formatter:TAOTAO.formatDateTime
+                                    editor:'datetimebox'
                                 },
                                 {  
                                     field : 'devicePurchasePrice',  
@@ -452,8 +420,7 @@ deviceListEditIndex = undefined; */
                                     width : 170,  
                                     align : 'center',
                                     sortable:true,  
-                                    editor:'datetimebox',
-                                    formatter:TAOTAO.formatDateTime
+                                    editor:'datetimebox'
                                 },
                                 {  
                                     field : 'deviceServiceLife',  
@@ -461,8 +428,7 @@ deviceListEditIndex = undefined; */
                                     width : 170,  
                                     align : 'center',
                                     sortable:true,  
-                                    editor:'datetimebox',
-                                    formatter:TAOTAO.formatDateTime
+                                    editor:'datetimebox'
                                 },
                                 {  
                                     field : 'deviceKeeperId',  
@@ -539,7 +505,7 @@ deviceListEditIndex = undefined; */
                                     iconCls:'icon-search', 
                                     plain:true, 
                                     handler : getChanges_deviceList
-                                } ]  
+                                }]  
                     }); 		
 	});
 </script>
