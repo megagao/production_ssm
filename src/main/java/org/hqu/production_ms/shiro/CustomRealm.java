@@ -12,15 +12,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.service.RoleService;
 import org.hqu.production_ms.service.SysService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * created on 2016年9月6日 
