@@ -1,48 +1,135 @@
 package org.hqu.production_ms.domain.po;
 
-import org.hqu.production_ms.domain.Device;
+import java.util.Date;
 
-public class EmployeePO extends Device{
-	
-	private String deviceKeeperId;
-	
-	private String deviceKeeper;
-	
-	private String deviceMaintainEmpId;
-	
-	private String deviceMaintainEmp;
+public class EmployeePO {
+    private String empId;
 
-	public String getDeviceKeeperId() {
-		return deviceKeeperId;
-	}
+    private String empName;
 
-	public void setDeviceKeeperId(String deviceKeeperId) {
-		this.deviceKeeperId = deviceKeeperId;
-	}
+    private String sex;
 
-	public String getDeviceKeeper() {
-		return deviceKeeper;
-	}
+    private String idCode;
 
-	public void setDeviceKeeper(String deviceKeeper) {
-		this.deviceKeeper = deviceKeeper;
-	}
+    private Date birthday;
 
-	public String getDeviceMaintainEmpId() {
-		return deviceMaintainEmpId;
-	}
+    private Date joinDate;
 
-	public void setDeviceMaintainEmpId(String deviceMaintainEmpId) {
-		this.deviceMaintainEmpId = deviceMaintainEmpId;
-	}
+    private String status;
 
-	public String getDeviceMaintainEmp() {
-		return deviceMaintainEmp;
-	}
+    private String education;
 
-	public void setDeviceMaintainEmp(String deviceMaintainEmp) {
-		this.deviceMaintainEmp = deviceMaintainEmp;
-	}
+    private String degree;
 
-	
+    private String major;
+
+    private String graduateSchool;
+
+    private String educationForm;
+
+    private String departmentId;
+
+    public String getEmpId() {
+        return empId;
+    }
+
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName == null ? null : empName.trim();
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getIdCode() {
+        return idCode;
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode == null ? null : idCode.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education == null ? null : education.trim();
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree == null ? null : degree.trim();
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major == null ? null : major.trim();
+    }
+
+    public String getGraduateSchool() {
+        return graduateSchool;
+    }
+
+    public void setGraduateSchool(String graduateSchool) {
+        this.graduateSchool = graduateSchool == null ? null : graduateSchool.trim();
+    }
+
+    public String getEducationForm() {
+        return educationForm;
+    }
+
+    public void setEducationForm(String educationForm) {
+        this.educationForm = educationForm == null ? null : educationForm.trim();
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId == null ? null : departmentId.trim();
+    }
 }

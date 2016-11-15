@@ -1,8 +1,0 @@
-{"total":6,"rows":[
-	{"deviceCheckId":"001","deviceId":"001","deviceIdd":"001","deviceName":"空调1","deviceCheckEmp":"Mr.Wu","deviceCheckDate":"2016-08-08 08:08:08","deviceCheckResult":"Ok","deviceCheckFaultIdd":"01","deviceCheckFaultId":"01"},
-	{"deviceCheckId":"002","deviceId":"002","deviceIdd":"002","deviceName":"空调2","deviceCheckEmp":"Mr.Wu","deviceCheckDate":"2016-08-08 08:08:08","deviceCheckResult":"Ok","deviceCheckFaultIdd":"01","deviceCheckFaultId":"01"},
-	{"deviceCheckId":"003","deviceId":"003","deviceIdd":"003","deviceName":"空调3","deviceCheckEmp":"Mr.Wu","deviceCheckDate":"2016-08-08 08:08:08","deviceCheckResult":"Ok","deviceCheckFaultIdd":"01","deviceCheckFaultId":"01"},
-	{"deviceCheckId":"004","deviceId":"004","deviceIdd":"004","deviceName":"空调4","deviceCheckEmp":"Mr.Wu","deviceCheckDate":"2016-08-08 08:08:08","deviceCheckResult":"Ok","deviceCheckFaultIdd":"01","deviceCheckFaultId":"01"},
-	{"deviceCheckId":"005","deviceId":"005","deviceIdd":"005","deviceName":"空调5","deviceCheckEmp":"Mr.Wu","deviceCheckDate":"2016-08-08 08:08:08","deviceCheckResult":"Ok","deviceCheckFaultIdd":"01","deviceCheckFaultId":"01"},
-	{"deviceCheckId":"006","deviceId":"006","deviceIdd":"006","deviceName":"空调6","deviceCheckEmp":"Mr.Wu","deviceCheckDate":"2016-08-08 08:08:08","deviceCheckResult":"Ok","deviceCheckFaultIdd":"01","deviceCheckFaultId":"01"}
-]}

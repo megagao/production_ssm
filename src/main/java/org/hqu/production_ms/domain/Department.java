@@ -5,8 +5,6 @@ public class Department {
 
     private String departmentName;
 
-    private String departmentDuty;
-
     private String note;
 
     public String getDepartmentId() {
@@ -23,14 +21,6 @@ public class Department {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName == null ? null : departmentName.trim();
-    }
-
-    public String getDepartmentDuty() {
-        return departmentDuty;
-    }
-
-    public void setDepartmentDuty(String departmentDuty) {
-        this.departmentDuty = departmentDuty == null ? null : departmentDuty.trim();
     }
 
     public String getNote() {

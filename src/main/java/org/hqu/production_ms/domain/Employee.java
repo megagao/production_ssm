@@ -2,8 +2,12 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
-public class Employee {
-    private String empId;
+import org.hqu.production_ms.domain.Department;
+import org.hqu.production_ms.domain.Device;
+
+public class Employee extends Device{
+	
+	private String empId;
 
     private String empName;
 
@@ -27,117 +31,110 @@ public class Employee {
 
     private String educationForm;
 
-    private String departmentId;
+    private Department department;
 
-    public String getEmpId() {
-        return empId;
-    }
+	public String getEmpId() {
+		return empId;
+	}
 
-    public void setEmpId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
-    }
-    
-    public void setDeviceKeeperId(String empId) {
-        this.empId = empId == null ? null : empId.trim();
-    }
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
 
-    public String getEmpName() {
-        return empName;
-    }
+	public String getEmpName() {
+		return empName;
+	}
 
-    public void setEmpName(String empName) {
-        this.empName = empName == null ? null : empName.trim();
-    }
-    
-    public void setDeviceKeeper(String empName) {
-        this.empName = empName == null ? null : empName.trim();
-    }
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public String getIdCode() {
-        return idCode;
-    }
+	public String getIdCode() {
+		return idCode;
+	}
 
-    public void setIdCode(String idCode) {
-        this.idCode = idCode == null ? null : idCode.trim();
-    }
+	public void setIdCode(String idCode) {
+		this.idCode = idCode;
+	}
 
-    public Date getBirthday() {
-        return birthday;
-    }
+	public Date getBirthday() {
+		return birthday;
+	}
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
-    public Date getJoinDate() {
-        return joinDate;
-    }
+	public Date getJoinDate() {
+		return joinDate;
+	}
 
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public String getEducation() {
-        return education;
-    }
+	public String getEducation() {
+		return education;
+	}
 
-    public void setEducation(String education) {
-        this.education = education == null ? null : education.trim();
-    }
+	public void setEducation(String education) {
+		this.education = education;
+	}
 
-    public String getDegree() {
-        return degree;
-    }
+	public String getDegree() {
+		return degree;
+	}
 
-    public void setDegree(String degree) {
-        this.degree = degree == null ? null : degree.trim();
-    }
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
 
-    public String getMajor() {
-        return major;
-    }
+	public String getMajor() {
+		return major;
+	}
 
-    public void setMajor(String major) {
-        this.major = major == null ? null : major.trim();
-    }
+	public void setMajor(String major) {
+		this.major = major;
+	}
 
-    public String getGraduateSchool() {
-        return graduateSchool;
-    }
+	public String getGraduateSchool() {
+		return graduateSchool;
+	}
 
-    public void setGraduateSchool(String graduateSchool) {
-        this.graduateSchool = graduateSchool == null ? null : graduateSchool.trim();
-    }
+	public void setGraduateSchool(String graduateSchool) {
+		this.graduateSchool = graduateSchool;
+	}
 
-    public String getEducationForm() {
-        return educationForm;
-    }
+	public String getEducationForm() {
+		return educationForm;
+	}
 
-    public void setEducationForm(String educationForm) {
-        this.educationForm = educationForm == null ? null : educationForm.trim();
-    }
+	public void setEducationForm(String educationForm) {
+		this.educationForm = educationForm;
+	}
 
-    public String getDepartmentId() {
-        return departmentId;
-    }
+	public Department getDepartment() {
+		return department;
+	}
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
-    }
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	
 }

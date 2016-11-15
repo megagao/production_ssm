@@ -3,15 +3,15 @@ package org.hqu.production_ms.domain;
 public class Work {
     private String workId;
 
-    private String processId;
+    private String processNumber;
 
-    private String equipmentId;
+    private Product product;
+
+    private Process process;
+
+    private Device device;
 
     private Integer rating;
-    
-    private Process process;
-    
-    private Product product;
 
     public String getWorkId() {
         return workId;
@@ -21,21 +21,12 @@ public class Work {
         this.workId = workId == null ? null : workId.trim();
     }
 
-
-    public String getProcessId() {
-        return processId;
+    public String getProcessNumber() {
+        return processNumber;
     }
 
-    public void setProcessId(String processId) {
-        this.processId = processId == null ? null : processId.trim();
-    }
-
-    public String getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId == null ? null : equipmentId.trim();
+    public void setProcessNumber(String processNumber) {
+        this.processNumber = processNumber == null ? null : processNumber.trim();
     }
 
     public Integer getRating() {
@@ -46,6 +37,14 @@ public class Work {
         this.rating = rating;
     }
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	public Process getProcess() {
 		return process;
 	}
@@ -54,11 +53,11 @@ public class Work {
 		this.process = process;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Device getDevice() {
+		return device;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setDevice(Device device) {
+		this.device = device;
 	}
 }
