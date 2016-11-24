@@ -5,17 +5,38 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.MaterialConsume;
 import org.hqu.production_ms.domain.MaterialConsumeExample;
+import org.hqu.production_ms.domain.po.MaterialConsumePO;
 
 public interface MaterialConsumeMapper {
+	
+	//扩展的mapper接口方法
+	
+	List<MaterialConsume> find(MaterialConsume materialConsume);
+	
+    List<MaterialConsume> searchMaterialConsumeByConsumeId(String consumeId);
+	
+	List<MaterialConsume> searchMaterialConsumeByMaterialId(String materialId);
+	
+	List<MaterialConsume> searchMaterialConsumeByWorkId(String workId);
+		
+		
+	int deleteBatch(String[] ids);
+		
+	int changeStatus(String[] ids);
+		
+	int updateNote(MaterialConsumePO materialConsume);
+	
+	//逆向工程生成的mapper接口
+	
     int countByExample(MaterialConsumeExample example);
 
     int deleteByExample(MaterialConsumeExample example);
 
     int deleteByPrimaryKey(String consumeId);
 
-    int insert(MaterialConsume record);
+    int insert(MaterialConsumePO record);
 
-    int insertSelective(MaterialConsume record);
+    int insertSelective(MaterialConsumePO record);
 
     List<MaterialConsume> selectByExample(MaterialConsumeExample example);
 
@@ -25,7 +46,7 @@ public interface MaterialConsumeMapper {
 
     int updateByExample(@Param("record") MaterialConsume record, @Param("example") MaterialConsumeExample example);
 
-    int updateByPrimaryKeySelective(MaterialConsume record);
+    int updateByPrimaryKeySelective(MaterialConsumePO record);
 
-    int updateByPrimaryKey(MaterialConsume record);
+    int updateByPrimaryKey(MaterialConsumePO record);
 }
