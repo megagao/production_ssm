@@ -7,6 +7,16 @@ import org.hqu.production_ms.domain.Material;
 import org.hqu.production_ms.domain.MaterialExample;
 
 public interface MaterialMapper {
+	
+	 //扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+			
+	int changeStatus(String[] ids);
+			
+	int updateNote(Material record);
+		
+	List<Material> searchMaterialByMaterialId(String materialId);
+	
     int countByExample(MaterialExample example);
 
     int deleteByExample(MaterialExample example);
@@ -28,4 +38,6 @@ public interface MaterialMapper {
     int updateByPrimaryKeySelective(Material record);
 
     int updateByPrimaryKey(Material record);
+
+	List<Material> searchMaterialByMaterialType(String materialName);
 }
