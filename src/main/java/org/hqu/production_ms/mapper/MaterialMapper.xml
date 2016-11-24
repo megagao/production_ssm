@@ -3,12 +3,66 @@
 <mapper namespace="org.hqu.production_ms.mapper.MaterialMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Material" >
     <id column="material_id" property="materialId" jdbcType="VARCHAR" />
-    <result column="work_id" property="workId" jdbcType="VARCHAR" />
     <result column="material_type" property="materialType" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="remaining" property="remaining" jdbcType="INTEGER" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			material
+		WHERE
+			material_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE material
+		SET status = #{status}
+		WHERE
+			material_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.Material" >
+		UPDATE material
+		SET note = #{note}
+		WHERE
+			material_id = #{materialId,jdbcType=VARCHAR}
+	</update>
+    
+    <select id="searchMaterialByMaterialId" parameterType="string" resultMap="BaseResultMap">
+       SELECT
+			*
+		FROM
+			material
+		WHERE
+			material_id LIKE CONCAT(
+				'%',
+				#{materialId},'%' ) 
+    </select>
+    
+    <select id="searchMaterialByMaterialType" parameterType="string" resultMap="BaseResultMap">
+    	SELECT
+			*
+		FROM
+			material
+		WHERE
+			material_type LIKE CONCAT(
+				'%',
+				#{materialType},'%' ) 
+    </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -68,7 +122,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    material_id, work_id, material_type, status, remaining, note
+    material_id, material_type, status, remaining, note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.MaterialExample" >
     select
@@ -101,21 +155,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.Material" >
-    insert into material (material_id, work_id, material_type, 
-      status, remaining, note
-      )
-    values (#{materialId,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{remaining,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}
-      )
+    insert into material (material_id, material_type, status, 
+      remaining, note)
+    values (#{materialId,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remaining,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Material" >
     insert into material
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="materialId != null" >
         material_id,
-      </if>
-      <if test="workId != null" >
-        work_id,
       </if>
       <if test="materialType != null" >
         material_type,
@@ -133,9 +182,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="materialId != null" >
         #{materialId,jdbcType=VARCHAR},
-      </if>
-      <if test="workId != null" >
-        #{workId,jdbcType=VARCHAR},
       </if>
       <if test="materialType != null" >
         #{materialType,jdbcType=VARCHAR},
@@ -163,9 +209,6 @@
       <if test="record.materialId != null" >
         material_id = #{record.materialId,jdbcType=VARCHAR},
       </if>
-      <if test="record.workId != null" >
-        work_id = #{record.workId,jdbcType=VARCHAR},
-      </if>
       <if test="record.materialType != null" >
         material_type = #{record.materialType,jdbcType=VARCHAR},
       </if>
@@ -186,7 +229,6 @@
   <update id="updateByExample" parameterType="map" >
     update material
     set material_id = #{record.materialId,jdbcType=VARCHAR},
-      work_id = #{record.workId,jdbcType=VARCHAR},
       material_type = #{record.materialType,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       remaining = #{record.remaining,jdbcType=INTEGER},
@@ -198,9 +240,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.Material" >
     update material
     <set >
-      <if test="workId != null" >
-        work_id = #{workId,jdbcType=VARCHAR},
-      </if>
       <if test="materialType != null" >
         material_type = #{materialType,jdbcType=VARCHAR},
       </if>
@@ -218,8 +257,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.Material" >
     update material
-    set work_id = #{workId,jdbcType=VARCHAR},
-      material_type = #{materialType,jdbcType=VARCHAR},
+    set material_type = #{materialType,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       remaining = #{remaining,jdbcType=INTEGER},
       note = #{note,jdbcType=VARCHAR}
