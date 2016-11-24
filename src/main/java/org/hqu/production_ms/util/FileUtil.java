@@ -17,9 +17,6 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hqu.production_ms.util.FormatStyle;
-import org.hqu.production_ms.util.UtilFuns;
-
 public class FileUtil {
 
   /* ======================================== *
