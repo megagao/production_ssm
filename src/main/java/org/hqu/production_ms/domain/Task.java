@@ -3,7 +3,7 @@ package org.hqu.production_ms.domain;
 public class Task {
     private String taskId;
 
-    private String manufactureId;
+    private String manufactureSn;
 
     private String workId;
 
@@ -19,12 +19,12 @@ public class Task {
         this.taskId = taskId == null ? null : taskId.trim();
     }
 
-    public String getManufactureId() {
-        return manufactureId;
+    public String getManufactureSn() {
+        return manufactureSn;
     }
 
-    public void setManufactureId(String manufactureId) {
-        this.manufactureId = manufactureId == null ? null : manufactureId.trim();
+    public void setManufactureSn(String manufactureSn) {
+        this.manufactureSn = manufactureSn == null ? null : manufactureSn.trim();
     }
 
     public String getWorkId() {
