@@ -174,73 +174,73 @@ public class TaskExample {
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdIsNull() {
-            addCriterion("manufacture_id is null");
+        public Criteria andManufactureSnIsNull() {
+            addCriterion("manufacture_sn is null");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdIsNotNull() {
-            addCriterion("manufacture_id is not null");
+        public Criteria andManufactureSnIsNotNull() {
+            addCriterion("manufacture_sn is not null");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdEqualTo(String value) {
-            addCriterion("manufacture_id =", value, "manufactureId");
+        public Criteria andManufactureSnEqualTo(String value) {
+            addCriterion("manufacture_sn =", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdNotEqualTo(String value) {
-            addCriterion("manufacture_id <>", value, "manufactureId");
+        public Criteria andManufactureSnNotEqualTo(String value) {
+            addCriterion("manufacture_sn <>", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdGreaterThan(String value) {
-            addCriterion("manufacture_id >", value, "manufactureId");
+        public Criteria andManufactureSnGreaterThan(String value) {
+            addCriterion("manufacture_sn >", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdGreaterThanOrEqualTo(String value) {
-            addCriterion("manufacture_id >=", value, "manufactureId");
+        public Criteria andManufactureSnGreaterThanOrEqualTo(String value) {
+            addCriterion("manufacture_sn >=", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdLessThan(String value) {
-            addCriterion("manufacture_id <", value, "manufactureId");
+        public Criteria andManufactureSnLessThan(String value) {
+            addCriterion("manufacture_sn <", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdLessThanOrEqualTo(String value) {
-            addCriterion("manufacture_id <=", value, "manufactureId");
+        public Criteria andManufactureSnLessThanOrEqualTo(String value) {
+            addCriterion("manufacture_sn <=", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdLike(String value) {
-            addCriterion("manufacture_id like", value, "manufactureId");
+        public Criteria andManufactureSnLike(String value) {
+            addCriterion("manufacture_sn like", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdNotLike(String value) {
-            addCriterion("manufacture_id not like", value, "manufactureId");
+        public Criteria andManufactureSnNotLike(String value) {
+            addCriterion("manufacture_sn not like", value, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdIn(List<String> values) {
-            addCriterion("manufacture_id in", values, "manufactureId");
+        public Criteria andManufactureSnIn(List<String> values) {
+            addCriterion("manufacture_sn in", values, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdNotIn(List<String> values) {
-            addCriterion("manufacture_id not in", values, "manufactureId");
+        public Criteria andManufactureSnNotIn(List<String> values) {
+            addCriterion("manufacture_sn not in", values, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdBetween(String value1, String value2) {
-            addCriterion("manufacture_id between", value1, value2, "manufactureId");
+        public Criteria andManufactureSnBetween(String value1, String value2) {
+            addCriterion("manufacture_sn between", value1, value2, "manufactureSn");
             return (Criteria) this;
         }
 
-        public Criteria andManufactureIdNotBetween(String value1, String value2) {
-            addCriterion("manufacture_id not between", value1, value2, "manufactureId");
+        public Criteria andManufactureSnNotBetween(String value1, String value2) {
+            addCriterion("manufacture_sn not between", value1, value2, "manufactureSn");
             return (Criteria) this;
         }
 
