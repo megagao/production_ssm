@@ -2,9 +2,9 @@ package org.hqu.production_ms.service;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.CustomResult;
-import org.hqu.production_ms.domain.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysRole;
+import org.hqu.production_ms.domain.custom.CustomResult;
+import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.RolePO;
 
 public interface RoleService {
@@ -30,4 +30,14 @@ public interface RoleService {
     
     //更新全部字段，不判断非空，直接进行更新
     CustomResult updateAll(RolePO role);
+    
+    List<SysRole> searchSysRoleBySysRoleName(String sysRoleName);
+
+	List<SysRole> searchSysRoleBySysRoleId(String sysRoleId);
+
+	EUDataGridResult searchRoleByRoleId(Integer page, Integer rows,
+			String roleId);
+
+	EUDataGridResult searchRoleByRoleName(Integer page, Integer rows,
+			String roleName);
 }
