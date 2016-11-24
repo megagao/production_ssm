@@ -5,7 +5,9 @@ import java.util.Date;
 public class MaterialConsume {
     private String consumeId;
 
-    private String materialId;
+    private Work work;
+
+    private Material material;
 
     private Integer consumeAmount;
 
@@ -25,12 +27,20 @@ public class MaterialConsume {
         this.consumeId = consumeId == null ? null : consumeId.trim();
     }
 
-    public String getMaterialId() {
-        return materialId;
+    public Work getWork() {
+        return work;
     }
 
-    public void setMaterialId(String materialId) {
-        this.materialId = materialId == null ? null : materialId.trim();
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Integer getConsumeAmount() {
