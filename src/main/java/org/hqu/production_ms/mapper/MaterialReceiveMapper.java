@@ -5,17 +5,32 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.MaterialReceive;
 import org.hqu.production_ms.domain.MaterialReceiveExample;
+import org.hqu.production_ms.domain.po.MaterialReceivePO;
 
 public interface MaterialReceiveMapper {
-    int countByExample(MaterialReceiveExample example);
+    
+	//扩展的mapper接口方法
+    List<MaterialReceive> find();
+    
+	int deleteBatch(String[] ids);
+			
+	int changeStatus(String[] ids);
+			
+	int updateNote(MaterialReceivePO record);
+	
+    List<MaterialReceive> searchMaterialReceiveByReceiveId(String receiveId);
+	
+	List<MaterialReceive> searchMaterialReceiveByMaterialId(String materialId);
+	
+	int countByExample(MaterialReceiveExample example);
 
     int deleteByExample(MaterialReceiveExample example);
 
     int deleteByPrimaryKey(String receiveId);
 
-    int insert(MaterialReceive record);
+    int insert(MaterialReceivePO record);
 
-    int insertSelective(MaterialReceive record);
+    int insertSelective(MaterialReceivePO record);
 
     List<MaterialReceive> selectByExample(MaterialReceiveExample example);
 
@@ -25,7 +40,7 @@ public interface MaterialReceiveMapper {
 
     int updateByExample(@Param("record") MaterialReceive record, @Param("example") MaterialReceiveExample example);
 
-    int updateByPrimaryKeySelective(MaterialReceive record);
+    int updateByPrimaryKeySelective(MaterialReceivePO record);
 
-    int updateByPrimaryKey(MaterialReceive record);
+    int updateByPrimaryKey(MaterialReceivePO record);
 }
