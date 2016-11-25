@@ -13,13 +13,13 @@
 	        <tr>
 	            <td>用户编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="id" data-options="required:true"></input>
+	            	<input id="id" class="easyui-textbox" type="text" name="id" data-options="required:true"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户名:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="username" ></input>
+	            	<input id="username" class="easyui-textbox" type="text" name="username" data-options="required:true"></input>
 	            </td>
 	        </tr>
 	        <tr>
@@ -31,7 +31,7 @@
 	        <tr>
 	            <td>角色:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="role"   
+	            	<input class="easyui-combobox" name="roleId"   
     					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true" />  
 	            </td>
 	        </tr>
@@ -48,14 +48,14 @@
 	</form>
 	<br><br>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitUserAddForm()">提交</a>
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
 	
 	//提交表单
-	function submitForm(){
+	function submitUserAddForm(){
 		//有效性验证
 		if(!$('#userAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
@@ -65,10 +65,12 @@
 		//ajax的post方式提交表单
 		//$("#userAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("user/insert",$("#userAddForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','新增用户成功!');
+			if(data.label == 200){
+				$.messager.alert('提示', data.msg);
 				clearForm();
 				$("#userList").datagrid("reload");
+			}else{
+				$.messager.alert('提示', data.msg);
 			}
 		});
 	}
