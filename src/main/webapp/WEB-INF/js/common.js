@@ -29,10 +29,25 @@ var TT = TAOTAO = {
 		//上传类型，分别为image、flash、media、file
 		dir : "image"
 	},
+	// 格式化日期
+	formatDate : function(val,row){
+		var now = new Date(val);
+    	return now.format("yyyy-MM-dd");
+	},
 	// 格式化时间
 	formatDateTime : function(val,row){
 		var now = new Date(val);
     	return now.format("yyyy-MM-dd hh:mm:ss");
+	},
+	// 格式化性别
+	formatSex : function(val,row){
+		if (val == 1){
+            return '男';
+        }else if(val == 2){
+        	return '女';
+        }else {
+        	return '<span style="color:#E5B717;">未知</span>';
+        }
 	},
 	// 格式化连接
 	formatUrl : function(val,row){
@@ -122,6 +137,13 @@ var TT = TAOTAO = {
 												"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 16px'>" +
 												"删除</span></a></li>");
 							});
+							var origin = form.find("[name=image]").val();
+							if(origin != null){
+								var originUrls = origin.split(",");  
+								for(var i in originUrls){
+									imgArray.push(originUrls[i]);
+								}
+							}
 							form.find("[name=image]").val(imgArray.join(","));
 							editor.hideDialog();
 						}
@@ -217,7 +239,9 @@ function formatImg(value, row, index){
 		var urls = value.split(",");  
 		var resultStr = '';
 		for(var i in urls){
-			resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
+			if(urls[i] != null && urls[i] != ''){
+				resultStr +="<a href="+urls[i]+" target='_blank'>"+"<img src="+urls[i]+" width='50px' height='50px' )/>"+"</a></br></br>";
+			}
 		}
 		return resultStr;
 	}else{
@@ -261,7 +285,9 @@ function formatFile(value, row, index){
 		var urls = value.split(",");  
 		var resultStr ='';
 		for(var i in urls){
+			if(urls[i] !=null && urls[i] != ''){
 			resultStr +="<a href='file/download?fileName="+urls[i]+"'>"+urls[i].substring(urls[i].lastIndexOf("/")+1)+"</a></br></br>";
+			}
 		}
 		return resultStr;
 	}else{
@@ -275,7 +301,7 @@ function initOrderAddFileUpload(){
 		url:"file/upload",
 		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
-	    allowedTypes: 'doc,docx,excel,sql,txt,ppt,pdf,xls,xlsx',  //允许上传的文件式
+	    allowedTypes: 'doc,docx,excel,sql,txt,ppt,pdf',  //允许上传的文件式
 	    showDone: false,                     //是否显示"Done"(完成)按钮
 	    showDelete: true,                  //是否显示"Delete"(删除)按钮
 	    deleteCallback: function(data,pd)
@@ -330,7 +356,7 @@ function initOrderEditFileUpload(){
 		url:"file/upload",
 		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
-	    allowedTypes: 'doc,docx,excel,sql,txt,ppt,pdf,xls,xlsx',  //允许上传的文件式
+	    allowedTypes: 'doc,docx,excel,sql,txt,ppt,pdf',  //允许上传的文件式
 	    showDone: false,                     //是否显示"Done"(完成)按钮
 	    showDelete: true,                  //是否显示"Delete"(删除)按钮
 	    deleteCallback: function(data,pd)
@@ -369,7 +395,7 @@ function initOrderEditFileUpload(){
 	        if(data&&data.error==0){
 	        	$.messager.alert('提示','上传完成!');
 	        	if( $('#orderEditForm [name=file]').val() != null && $('#orderEditForm [name=file]').val() != ''){
-	        		/* alert($('#orderAddForm [name=file]').val()); */
+	        		/*alert($('#orderEditForm [name=file]').val()); */
 	        		$('#orderEditForm [name=file]').val($('#orderEditForm [name=file]').val()+","+data.url);
 	        	}else{
 	            	$('#orderEditForm [name=file]').val(data.url);
@@ -378,7 +404,6 @@ function initOrderEditFileUpload(){
 	    }
 	});
 }	
-
 
 
 //删除文件并删除文件在页面的显示
@@ -392,7 +417,7 @@ function removeFile(i){
         success: function(data) 
         {
             if(data.data=="success"){
-            	$('#img'+i)
+            	$('#img'+i);
             	$('#file'+i).remove();		//删除成功后在页面上删除该文件的显示
             	$('#delFile'+i).remove();        
                 var urls = $('#file').val().split(",");  //将删除的文件url从urls中移除
@@ -421,7 +446,7 @@ function initUploadedFile(){
 			</table>');
 	var files = $('#file').val().split(","); 
 	for(var i in files){
-		if(files[i] != null && files[i] !=''){
+		if(files[i] !=null && files[i] != ''){
 			_ele.siblings(".file").append("<tr><td><a id='file"+i+"' href='file/download?fileName="+files[i]+"'>" +
 					"<span style='font-size: 16px;font-family: Microsoft YaHei;'>"
 					+ files[i].substring(files[i].lastIndexOf("/")+1) + "</span></td><td></a> " 
