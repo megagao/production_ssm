@@ -74,11 +74,6 @@
 		<artifactId>mybatis-paginator</artifactId>
 		<version>1.2.15</version>
 	</dependency>
-	<dependency>
-		<groupId>com.github.pagehelper</groupId>
-		<artifactId>pagehelper</artifactId>
-		<version>4.0.0</version>
-	</dependency>
 	<!-- Mybatis缓存 -->
 	<dependency>
         <groupId>org.mybatis.caches</groupId>
@@ -89,7 +84,7 @@
     <dependency>
 		<groupId>com.github.pagehelper</groupId>
 		<artifactId>pagehelper</artifactId>
-		<version>3.4.2</version>
+		<version>4.0.0</version>
 	</dependency>
 	<!-- MySql -->
 	<dependency>
