@@ -3,12 +3,26 @@
 <mapper namespace="org.hqu.production_ms.mapper.MaterialConsumeMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.MaterialConsume" >
     <id column="consume_id" property="consumeId" jdbcType="VARCHAR" />
-    <result column="material_id" property="materialId" jdbcType="VARCHAR" />
     <result column="consume_amount" property="consumeAmount" jdbcType="INTEGER" />
     <result column="consume_date" property="consumeDate" jdbcType="TIMESTAMP" />
     <result column="sender" property="sender" jdbcType="VARCHAR" />
     <result column="receiver" property="receiver" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
+    <association property="work" javaType="work">
+		<id column="work_id" property="workId" jdbcType="VARCHAR" />
+	    <result column="process_number" property="processNumber" jdbcType="VARCHAR" />
+	    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+	    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+	    <result column="equipment_id" property="equipmentId" jdbcType="VARCHAR" />
+	    <result column="rating" property="rating" jdbcType="INTEGER" />
+	</association>
+	<association property="material" javaType="material">
+		<id column="material_id" property="materialId" jdbcType="VARCHAR" />
+	    <result column="material_type" property="materialType" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="VARCHAR" />
+	    <result column="remaining" property="remaining" jdbcType="INTEGER" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	</association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,8 +82,115 @@
       </foreach>
     </where>
   </sql>
+  
+   <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			material_consume
+		WHERE
+			consume_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+<!-- 查询所有记录 -->
+<select id="find" parameterType="MaterialConsume" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume
+		LEFT JOIN material ON material_consume.material_id = material.material_id
+		LEFT JOIN work ON material_consume.work_id = work.work_id
+	</select>
+<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE material_consume
+		SET status = #{status}
+		WHERE
+			consume_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
+		UPDATE material_consume
+		SET note = #{note}
+		WHERE
+			consume_id = #{consumeId,jdbcType=VARCHAR}
+	</update>
+	<!-- 依据consumeID查询 -->
+	<select id="searchMaterialConsumeByConsumeId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume		
+	LEFT JOIN  material
+		ON	 material_consume.material_id=material.material_id
+	LEFT JOIN  work
+	    ON   material_consume.work_id=work.work_id
+	WHERE  consume_id like CONCAT('%',#{consumeId},'%' ) 
+	</select>
+	<!-- 依据materialID查询 -->
+	<select id="searchMaterialConsumeByMaterialId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume		
+	LEFT JOIN  material
+		ON	 material_consume.material_id=material.material_id
+	LEFT JOIN  work
+	    ON   material_consume.work_id=work.work_id
+	  where  material_consume.material_id like CONCAT('%',#{materialId},'%' ) 
+	  </select>
+	<!-- 依据workID查询 -->
+	<select id="searchMaterialConsumeByWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+				consume_id,
+				consume_amount,
+				consume_date,
+				sender,
+				receiver,
+				material_consume.note,
+				material.material_id,
+				work.work_id
+		FROM
+				material_consume		
+		LEFT JOIN  material
+			ON	 material_consume.material_id=material.material_id
+		LEFT JOIN  work
+		    ON   material_consume.work_id=work.work_id
+		WHERE material_consume.work_id like CONCAT('%',#{workId},'%' ) 
+   </select>
+   
+   
   <sql id="Base_Column_List" >
-    consume_id, material_id, consume_amount, consume_date, sender, receiver, note
+    consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, 
+    note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.MaterialConsumeExample" >
     select
@@ -102,18 +223,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
-    insert into material_consume (consume_id, material_id, consume_amount, 
-      consume_date, sender, receiver, 
-      note)
-    values (#{consumeId,jdbcType=VARCHAR}, #{materialId,jdbcType=VARCHAR}, #{consumeAmount,jdbcType=INTEGER}, 
-      #{consumeDate,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR})
+    insert into material_consume (consume_id, work_id, material_id, 
+      consume_amount, consume_date, sender, 
+      receiver, note)
+    values (#{consumeId,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, #{materialId,jdbcType=VARCHAR}, 
+      #{consumeAmount,jdbcType=INTEGER}, #{consumeDate,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR}, 
+      #{receiver,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
     insert into material_consume
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="consumeId != null" >
         consume_id,
+      </if>
+      <if test="workId != null" >
+        work_id,
       </if>
       <if test="materialId != null" >
         material_id,
@@ -137,6 +261,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="consumeId != null" >
         #{consumeId,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        #{workId,jdbcType=VARCHAR},
       </if>
       <if test="materialId != null" >
         #{materialId,jdbcType=VARCHAR},
@@ -170,6 +297,9 @@
       <if test="record.consumeId != null" >
         consume_id = #{record.consumeId,jdbcType=VARCHAR},
       </if>
+      <if test="record.workId != null" >
+        work_id = #{record.workId,jdbcType=VARCHAR},
+      </if>
       <if test="record.materialId != null" >
         material_id = #{record.materialId,jdbcType=VARCHAR},
       </if>
@@ -196,6 +326,7 @@
   <update id="updateByExample" parameterType="map" >
     update material_consume
     set consume_id = #{record.consumeId,jdbcType=VARCHAR},
+      work_id = #{record.workId,jdbcType=VARCHAR},
       material_id = #{record.materialId,jdbcType=VARCHAR},
       consume_amount = #{record.consumeAmount,jdbcType=INTEGER},
       consume_date = #{record.consumeDate,jdbcType=TIMESTAMP},
@@ -209,6 +340,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
     update material_consume
     <set >
+      <if test="workId != null" >
+        work_id = #{workId,jdbcType=VARCHAR},
+      </if>
       <if test="materialId != null" >
         material_id = #{materialId,jdbcType=VARCHAR},
       </if>
@@ -232,7 +366,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
     update material_consume
-    set material_id = #{materialId,jdbcType=VARCHAR},
+    set work_id = #{workId,jdbcType=VARCHAR},
+      material_id = #{materialId,jdbcType=VARCHAR},
       consume_amount = #{consumeAmount,jdbcType=INTEGER},
       consume_date = #{consumeDate,jdbcType=TIMESTAMP},
       sender = #{sender,jdbcType=VARCHAR},
