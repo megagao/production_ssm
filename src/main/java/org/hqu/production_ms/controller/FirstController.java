@@ -1,10 +1,16 @@
 package org.hqu.production_ms.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.custom.ActiveUser;
+import org.hqu.production_ms.service.SysService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FirstController {
+	
+	@Autowired
+	private SysService sysService;
 	
 	//跳转登录
 	@RequestMapping("/first")
@@ -35,8 +44,29 @@ public class FirstController {
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+		
+		List<SysPermission> permissionList = null;
+		
+		try {
+			permissionList = sysService.findPermissionListByUserId(activeUser.getUserid());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		List<String> sysPermissionList = new ArrayList<String>();
+		for(int i=0;i<permissionList.size();i++){
+			sysPermissionList.add(permissionList.get(i).getPercode());
+		}
+
+		/*String sysPermissionsList = JsonUtils.objectToJson(sysPermissionList);*/
+
 		//通过model传到页面
 		model.addAttribute("activeUser", activeUser);
+		/*model.addAttribute("sysPermissionsList", sysPermissionsList);*/
+		
+		//session
+		session.setAttribute("sysPermissionList", sysPermissionList);
 		
 		return "home";
 	}
