@@ -36,4 +36,12 @@ public interface ManufactureMapper {
     int updateByPrimaryKeySelective(ManufacturePO record);
 
     int updateByPrimaryKey(ManufacturePO record);
+
+	List<Manufacture> searchManufactureByManufactureSn(String manufactureSn);
+
+	List<Manufacture> searchManufactureByManufactureOrderId(
+			String manufactureOrderId);
+
+	List<Manufacture> searchManufactureByManufactureTechnologyName(
+			String manufactureTechnologyName);
 }
