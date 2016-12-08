@@ -52,15 +52,84 @@
 			product.product_id,
 			product_name
 		FROM
-			c_order,
-			custom,
-			product
-		WHERE
-			c_order.custom_id = custom.custom_id
-		AND c_order.product_id = product.product_id
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
 		<if test="status!=null">
 			and status=#{status}
 		</if>
+		order by c_order.order_date
+	</select>
+	
+	<select id="searchOrderByOrderId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		where order_id like CONCAT('%',#{orderId},'%' ) 
+		order by c_order.order_date
+	</select>
+	
+	<select id="searchOrderByCustomName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		where custom_name like CONCAT('%',#{customName},'%' ) 
+		order by c_order.order_date
+	</select>
+	
+	<select id="searchOrderByProductName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		where product_name like CONCAT('%',#{productName},'%' ) 
 		order by c_order.order_date
 	</select>
 	
