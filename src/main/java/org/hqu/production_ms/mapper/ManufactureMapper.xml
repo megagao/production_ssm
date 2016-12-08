@@ -6,8 +6,12 @@
     <result column="launch_quantity" property="launchQuantity" jdbcType="INTEGER" />
     <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
     <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
-    <association column="order_id1" property="cOrder" select="org.hqu.production_ms.mapper.COrderMapper.selectByPrimaryKey"/>
-	<association column="technology_id" property="technology" select="org.hqu.production_ms.mapper.TechnologyMapper.selectByPrimaryKey"/>
+    <association property="cOrder" javaType="cOrder">
+		<id column="order_id" property="orderId" jdbcType="VARCHAR" />
+	</association>
+	<association property="technology" javaType="technology">
+		<id column="technology_id" property="technologyId" jdbcType="VARCHAR" />
+	</association>
   </resultMap>
   
   <!-- 扩展的sql -->
@@ -38,6 +42,63 @@
 			#{id}
 		</foreach>
 	</delete>
+	
+	<select id="searchManufactureByManufactureSn" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id order_id1,
+			manufacture.technology_id technology_id1,
+			c_order.*, technology.*
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+		WHERE
+			manufacture_sn LIKE CONCAT(
+				'%',
+				#{manufactureSn},'%' ) 
+	</select>
+	
+	<select id="searchManufactureByManufactureOrderId" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id order_id1,
+			manufacture.technology_id technology_id1,
+			c_order.*, technology.*
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+		WHERE
+			c_order.order_id LIKE CONCAT(
+				'%',
+				#{orderId},'%' ) 
+	</select>
+	
+	<select id="searchManufactureByManufactureTechnologyName" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id order_id1,
+			manufacture.technology_id technology_id1,
+			c_order.*, technology.*
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+	</select>
 	
 	
   <sql id="Example_Where_Clause" >
