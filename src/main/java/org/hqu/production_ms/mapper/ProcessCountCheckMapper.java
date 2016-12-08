@@ -7,6 +7,14 @@ import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.ProcessCountCheckExample;
 
 public interface ProcessCountCheckMapper {
+	int updateNote(ProcessCountCheck processCountCheck);
+	
+	List<ProcessCountCheck> searchPCountCheckByPCountCheckId(String pCountCheckId);
+	
+	List<ProcessCountCheck> find(ProcessCountCheck processCountCheck);
+	
+	int deleteBatch(String[] ids);
+	
     int countByExample(ProcessCountCheckExample example);
 
     int deleteByExample(ProcessCountCheckExample example);
