@@ -7,6 +7,13 @@ import org.hqu.production_ms.domain.FinalCountCheck;
 import org.hqu.production_ms.domain.FinalCountCheckExample;
 
 public interface FinalCountCheckMapper {
+	//扩展的mapper接口方法
+	List<FinalCountCheck> find(FinalCountCheck finalCountCheck);
+	
+	int updateNote(FinalCountCheck finalCountCheck);
+	
+	int deleteBatch(String[] ids);
+	
     int countByExample(FinalCountCheckExample example);
 
     int deleteByExample(FinalCountCheckExample example);
@@ -28,4 +35,8 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKeySelective(FinalCountCheck record);
 
     int updateByPrimaryKey(FinalCountCheck record);
+
+    List<FinalCountCheck> searchFCountCheckByFCountCheckId(String fCountCheckId);
+    
+	List<FinalCountCheck> searchFCountCheckByOrderId(String orderId);
 }
