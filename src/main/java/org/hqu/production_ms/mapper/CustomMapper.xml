@@ -46,6 +46,28 @@
 			custom_id = #{customId,jdbcType=VARCHAR}
 	</update>
 	
+	<select id="searchCustomByCustomId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			custom
+		WHERE
+			custom_id LIKE CONCAT(
+				'%',
+				#{customId},'%' ) 
+	</select>
+	
+	<select id="searchCustomByCustomName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			custom
+		WHERE
+			custom_name LIKE CONCAT(
+				'%',
+				#{customName},'%' ) 
+	</select>
+	
 	
   <sql id="Example_Where_Clause" >
     <where >
