@@ -4,9 +4,53 @@
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Department" >
     <id column="department_id" property="departmentId" jdbcType="VARCHAR" />
     <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
-    <result column="department_duty" property="departmentDuty" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			department
+		WHERE
+			department_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.Department" >
+		UPDATE department
+		SET note = #{note}
+		WHERE
+			department_id = #{departmentId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="searchDepartmentByDepartmentId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			department
+		WHERE
+			department_id LIKE CONCAT(
+				'%',
+				#{departmentId},'%' ) 
+	</select>
+	
+	<select id="searchDepartmentByDepartmentName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			department
+		WHERE
+			department_name LIKE CONCAT(
+				'%',
+				#{departmentName},'%' ) 
+	</select>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -66,7 +110,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    department_id, department_name, department_duty, note
+    department_id, department_name, note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.DepartmentExample" >
     select
@@ -99,10 +143,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.Department" >
-    insert into department (department_id, department_name, department_duty, 
-      note)
-    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{departmentDuty,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR})
+    insert into department (department_id, department_name, note
+      )
+    values (#{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Department" >
     insert into department
@@ -112,9 +156,6 @@
       </if>
       <if test="departmentName != null" >
         department_name,
-      </if>
-      <if test="departmentDuty != null" >
-        department_duty,
       </if>
       <if test="note != null" >
         note,
@@ -126,9 +167,6 @@
       </if>
       <if test="departmentName != null" >
         #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentDuty != null" >
-        #{departmentDuty,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
@@ -150,9 +188,6 @@
       <if test="record.departmentName != null" >
         department_name = #{record.departmentName,jdbcType=VARCHAR},
       </if>
-      <if test="record.departmentDuty != null" >
-        department_duty = #{record.departmentDuty,jdbcType=VARCHAR},
-      </if>
       <if test="record.note != null" >
         note = #{record.note,jdbcType=VARCHAR},
       </if>
@@ -165,7 +200,6 @@
     update department
     set department_id = #{record.departmentId,jdbcType=VARCHAR},
       department_name = #{record.departmentName,jdbcType=VARCHAR},
-      department_duty = #{record.departmentDuty,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,9 +211,6 @@
       <if test="departmentName != null" >
         department_name = #{departmentName,jdbcType=VARCHAR},
       </if>
-      <if test="departmentDuty != null" >
-        department_duty = #{departmentDuty,jdbcType=VARCHAR},
-      </if>
       <if test="note != null" >
         note = #{note,jdbcType=VARCHAR},
       </if>
@@ -189,7 +220,6 @@
   <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.Department" >
     update department
     set department_name = #{departmentName,jdbcType=VARCHAR},
-      department_duty = #{departmentDuty,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR}
     where department_id = #{departmentId,jdbcType=VARCHAR}
   </update>
