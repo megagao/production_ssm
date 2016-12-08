@@ -7,6 +7,14 @@ import org.hqu.production_ms.domain.FinalMeasuretCheck;
 import org.hqu.production_ms.domain.FinalMeasuretCheckExample;
 
 public interface FinalMeasuretCheckMapper {
+	
+	//扩展的mapper接口方法
+	List<FinalMeasuretCheck> find(FinalMeasuretCheck finalMeasuretCheck);
+	
+	int updateNote(FinalMeasuretCheck finalMeasuretCheck);
+	
+	int deleteBatch(String[] ids);
+		
     int countByExample(FinalMeasuretCheckExample example);
 
     int deleteByExample(FinalMeasuretCheckExample example);
@@ -28,4 +36,8 @@ public interface FinalMeasuretCheckMapper {
     int updateByPrimaryKeySelective(FinalMeasuretCheck record);
 
     int updateByPrimaryKey(FinalMeasuretCheck record);
+
+	List<FinalMeasuretCheck> searchFMeasureCheckByOrderId(String orderId);
+	
+	List<FinalMeasuretCheck> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
 }
