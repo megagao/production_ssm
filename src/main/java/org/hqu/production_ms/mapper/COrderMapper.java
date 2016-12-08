@@ -12,6 +12,12 @@ public interface COrderMapper {
 	//扩展的mapper接口方法
 	List<COrder> find(COrder cOrder);
 	
+	List<COrder> searchOrderByOrderId(String orderId);
+	
+	List<COrder> searchOrderByCustomName(String customName);
+	
+	List<COrder> searchOrderByProductName(String productName);
+	
 	int deleteBatch(String[] ids);
 	
 	int changeStatus(String[] ids);
