@@ -15,6 +15,10 @@ public interface CustomMapper {
 	
 	int updateNote(Custom record);
 	
+	List<Custom> searchCustomByCustomName(String customName);
+	
+	List<Custom> searchCustomByCustomId(String customId);
+	
 	
     int countByExample(CustomExample example);
 
