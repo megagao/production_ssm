@@ -11,6 +11,85 @@
     <result column="result" property="result" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  
+  
+  <!-- 修改备注-->
+	<update id="updateNote" parameterType="finalMeasuretCheck" >
+		UPDATE final_measuret_check
+		SET note = #{note}
+		WHERE
+			f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+	</update>
+  
+    <select id="searchFMeasureCheckByFMeasureCheckId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check
+		where f_measure_check_id like CONCAT('%',#{fMeasureCheckId},'%' ) 
+	</select>
+  
+  	<select id="searchFMeasureCheckByOrderId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check
+		where final_measuret_check.order_id like CONCAT('%',#{orderId},'%' ) 
+	</select>
+  
+   <!-- 查询所有记录 -->
+	<select id="find" parameterType="finalMeasuretCheck" resultMap="BaseResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check,
+			c_order
+		WHERE
+			final_measuret_check.order_id = c_order.order_id
+		
+		
+	</select>
+  
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			final_measuret_check
+		WHERE
+			f_measure_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
