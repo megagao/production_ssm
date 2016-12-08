@@ -15,6 +15,102 @@
     <result column="result" property="result" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  
+  <!-- 修改备注-->
+	<update id="updateNote" parameterType="finalCountCheck" >
+		UPDATE final_count_check
+		SET note = #{note}
+		WHERE
+			f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
+	</update>
+  
+  
+  
+    <select id="searchFCountCheckByFCountCheckId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			f_count_check_id ,
+			final_count_check.order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check
+		
+		where f_count_check_id like CONCAT('%',#{fCountCheckId},'%' ) 
+		
+	</select>
+  
+  	<select id="searchFCountCheckByOrderId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			f_count_check_id ,
+			final_count_check.order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check
+		
+		where final_count_check.order_id like CONCAT('%',#{orderId},'%' ) 
+		
+	</select>
+  
+  
+   <!-- 查询所有记录 -->
+	<select id="find" parameterType="finalCountCheck" resultMap="BaseResultMap">
+		SELECT
+			f_count_check_id ,
+			final_count_check.order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check,
+			c_order
+		WHERE
+			final_count_check.order_id = c_order.order_id
+		
+		
+	</select>
+	
+	
+	  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			final_count_check
+		WHERE
+			f_count_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
