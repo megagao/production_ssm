@@ -10,7 +10,7 @@ public class WorkPO {
 
     private String processId;
 
-    private String equipmentId;
+    private String deviceId;
 
     private Integer rating;
 
@@ -46,15 +46,15 @@ public class WorkPO {
         this.processId = processId == null ? null : processId.trim();
     }
 
-    public String getEquipmentId() {
-        return equipmentId;
-    }
+    public String getDeviceId() {
+		return deviceId;
+	}
 
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId == null ? null : equipmentId.trim();
-    }
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
 
-    public Integer getRating() {
+	public Integer getRating() {
         return rating;
     }
 
