@@ -22,41 +22,42 @@ public class PermissionController {
 	
 	@RequestMapping("/get/{permissionId}")
 	@ResponseBody
-	public SysRolePermission getItemById(@PathVariable String permissionId) {
+	public SysRolePermission getItemById(@PathVariable String permissionId) throws Exception{
 		SysRolePermission sysRolePermission = permissionService.get(permissionId);
 		return sysRolePermission;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "permission_list";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<SysRolePermission> getData() {
+	public List<SysRolePermission> getData() throws Exception{
 		return permissionService.find();
 	}
 	
 	@RequestMapping("/get_permission")
 	@ResponseBody
-	public SysRolePermission getPermission(String roleId) {
+	public SysRolePermission getPermission(String roleId) throws Exception{
 		return permissionService.getByRoleId(roleId);
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "permission_add";
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "permission_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, SysRolePermission sysRolePermission) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, SysRolePermission sysRolePermission) 
+			throws Exception{
 		EUDataGridResult result = permissionService.getList(page, rows, sysRolePermission);
 		return result;
 	}
