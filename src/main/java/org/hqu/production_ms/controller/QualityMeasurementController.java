@@ -43,24 +43,24 @@ public class QualityMeasurementController {
 	 */
 	@RequestMapping("/get/{finalMeasuretCheckId}")
 	@ResponseBody
-	public FinalMeasuretCheck getItemById(@PathVariable String finalMeasuretCheckId) {
+	public FinalMeasuretCheck getItemById(@PathVariable String finalMeasuretCheckId) throws Exception{
 		FinalMeasuretCheck finalMeasuretCheck = measureService.get(finalMeasuretCheckId);
 		return finalMeasuretCheck;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "measurement_list";
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "measurement_add";
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> fMeasureCheckAddJudge() {
+	public Map<String,Object> fMeasureCheckAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -81,14 +81,14 @@ public class QualityMeasurementController {
 	
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "measurement_edit";
 	}
 	
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> fMeasureCheckEditJudge() {
+	public Map<String,Object> fMeasureCheckEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -108,7 +108,7 @@ public class QualityMeasurementController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> fMeasureCheckDeleteJudge() {
+	public Map<String,Object> fMeasureCheckDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -128,7 +128,8 @@ public class QualityMeasurementController {
 	//搜索
 	@RequestMapping("/search_fMeasureCheck_by_fMeasureCheckId")
 	@ResponseBody
-	public EUDataGridResult searchFMeasureCheckByFMeasureCheckId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchFMeasureCheckByFMeasureCheckId(Integer page, Integer rows, String searchValue)
+			throws Exception{
 		EUDataGridResult result = measureService.searchFMeasureCheckByFMeasureCheckId(page, rows, searchValue);
 		return result;
 	}
@@ -136,14 +137,16 @@ public class QualityMeasurementController {
 	//搜索
 	@RequestMapping("/search_fMeasureCheck_by_orderId")
 	@ResponseBody
-	public EUDataGridResult searchFMeasureCheckByOrderId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchFMeasureCheckByOrderId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = measureService.searchFMeasureCheckByOrderId(page, rows, searchValue);
 		return result;
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, FinalMeasuretCheck finalMeasuretCheck) {
+	public EUDataGridResult getList(Integer page, Integer rows, FinalMeasuretCheck finalMeasuretCheck) 
+			throws Exception{
 		
 		EUDataGridResult result = measureService.getList(page, rows, finalMeasuretCheck);
 		return result;
