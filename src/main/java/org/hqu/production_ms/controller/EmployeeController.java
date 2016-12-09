@@ -28,25 +28,25 @@ public class EmployeeController {
 	
 	@RequestMapping("/get/{empId}")
 	@ResponseBody
-	public Employee getItemById(@PathVariable String empId) {
-		Employee cEmployee = employeeService.get(empId);
-		return cEmployee;
+	public Employee getItemById(@PathVariable String empId) throws Exception{
+		Employee employee = employeeService.get(empId);
+		return employee;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "employee_list";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Employee> getData() {
+	public List<Employee> getData() throws Exception{
 		return employeeService.find();
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> employeeAddJudge() {
+	public Map<String,Object> employeeAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -65,13 +65,13 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "employee_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> employeeEditJudge() {
+	public Map<String,Object> employeeEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -88,13 +88,13 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "employee_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Employee employee) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Employee employee) throws Exception{
 		EUDataGridResult result = employeeService.getList(page, rows, employee);
 		return result;
 	}
@@ -127,7 +127,7 @@ public class EmployeeController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> employeeDeleteJudge() {
+	public Map<String,Object> employeeDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -157,4 +157,30 @@ public class EmployeeController {
 		return result;
 	}
 	
+	//搜索
+	@RequestMapping("/search_employee_by_employeeId")
+	@ResponseBody
+	public EUDataGridResult searchEmployeeByEmployeeId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = employeeService.searchEmployeeByEmployeeId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_employee_by_employeeName")
+	@ResponseBody
+	public EUDataGridResult searchEmployeeByEmployeeName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = employeeService.searchEmployeeByEmployeeName(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_employee_by_departmentName")
+	@ResponseBody
+	public EUDataGridResult searchEmployeeByDepartmentName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = employeeService.searchEmployeeByDepartmentName(page, rows, searchValue);
+		return result;
+	}
 }
