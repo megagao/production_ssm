@@ -28,25 +28,25 @@ public class WorkController {
 	
 	@RequestMapping("/get/{workId}")
 	@ResponseBody
-	public Work getItemById(@PathVariable String workId) {
+	public Work getItemById(@PathVariable String workId) throws Exception{
 		Work work = workService.get(workId);
 		return work;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "work_list";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Work> getData() {
+	public List<Work> getData() throws Exception{
 		return workService.find();
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> workAddJudge() {
+	public Map<String,Object> workAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -65,13 +65,13 @@ public class WorkController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "work_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> workEditJudge() {
+	public Map<String,Object> workEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -88,13 +88,13 @@ public class WorkController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "work_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Work work) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Work work) throws Exception{
 		EUDataGridResult result = workService.getList(page, rows, work);
 		return result;
 	}
@@ -127,7 +127,7 @@ public class WorkController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> workDeleteJudge() {
+	public Map<String,Object> workDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -160,7 +160,8 @@ public class WorkController {
 	//搜索
 	@RequestMapping("/search_work_by_workId")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchWorkByWorkId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkId(page, rows, searchValue);
 		return result;
 	}
@@ -168,7 +169,8 @@ public class WorkController {
 	//搜索
 	@RequestMapping("/search_work_by_workProduct")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkProduct(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchWorkByWorkProduct(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkProduct(page, rows, searchValue);
 		return result;
 	}
@@ -176,7 +178,8 @@ public class WorkController {
 	//搜索
 	@RequestMapping("/search_work_by_workDevice")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkDevice(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchWorkByWorkDevice(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkDevice(page, rows, searchValue);
 		return result;
 	}
@@ -184,7 +187,8 @@ public class WorkController {
 	//搜索
 	@RequestMapping("/search_work_by_workProcess")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkProcess(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchWorkByWorkProcess(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkProcess(page, rows, searchValue);
 		return result;
 	}
