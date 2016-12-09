@@ -29,20 +29,20 @@ public class TechnologyRequirementController {
 	
 	@RequestMapping("/get/{technologyRequirementId}")
 	@ResponseBody
-	public TechnologyRequirement getItemById(@PathVariable String technologyRequirementId) {
+	public TechnologyRequirement getItemById(@PathVariable String technologyRequirementId) throws Exception{
 		TechnologyRequirement technologyRequirement = technologyRequirementService.get(technologyRequirementId);
 		return technologyRequirement;
 	}
 	
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "technologyRequirement_list";
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> technologyRequirementAddJudge() {
+	public Map<String,Object> technologyRequirementAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -61,13 +61,13 @@ public class TechnologyRequirementController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "technologyRequirement_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> technologyRequirementEditJudge() {
+	public Map<String,Object> technologyRequirementEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -84,13 +84,13 @@ public class TechnologyRequirementController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "technologyRequirement_edit";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Technology> getData() {
+	public List<Technology> getData() throws Exception{
 		List<Technology> list = technologyRequirementService.find();
 		return list;
 	}
@@ -98,7 +98,8 @@ public class TechnologyRequirementController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, TechnologyRequirementPO technologyRequirementPO) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, TechnologyRequirementPO technologyRequirementPO) 
+			throws Exception{
 		EUDataGridResult result = technologyRequirementService.getList(page, rows, technologyRequirementPO);
 System.out.println(result);
 		return result;
@@ -142,7 +143,7 @@ System.out.println(technologyRequirement.getRequirement());
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> technologyRequirementDeleteJudge() {
+	public Map<String,Object> technologyRequirementDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -174,7 +175,8 @@ System.out.println(technologyRequirement.getRequirement());
 	//搜索
 	@RequestMapping("/search_technologyRequirement_by_technologyRequirementId")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = technologyRequirementService.searchTechnologyRequirementByTechnologyRequirementId(page, rows, searchValue);
 		return result;
 	}
@@ -182,7 +184,8 @@ System.out.println(technologyRequirement.getRequirement());
 	//搜索
 	@RequestMapping("/search_technologyRequirement_by_technologyName")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyRequirementByTechnologyName(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTechnologyRequirementByTechnologyName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = technologyRequirementService.searchTechnologyRequirementByTechnologyName(page, rows, searchValue);
 		return result;
 	}
