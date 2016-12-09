@@ -3,26 +3,22 @@ package org.hqu.production_ms.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
-//import org.hqu.production_ms.service.unqualifyService;
 import org.hqu.production_ms.service.UnqualifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,7 +35,7 @@ public class UnqualifyProductController {
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> unqualifyAddJudge() {
+	public Map<String,Object> unqualifyAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -62,7 +58,7 @@ public class UnqualifyProductController {
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> unqualifyEditJudge() {
+	public Map<String,Object> unqualifyEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -81,7 +77,7 @@ public class UnqualifyProductController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> unqualifyDeleteJudge() {
+	public Map<String,Object> unqualifyDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -101,7 +97,8 @@ public class UnqualifyProductController {
 	
 	@RequestMapping("/search_unqualify_by_unqualifyId")
 	@ResponseBody
-	public EUDataGridResult searchUnqualifyByUnqualifyId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchUnqualifyByUnqualifyId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = unqualifyService.searchUnqualifyByUnqualifyId(page, rows, searchValue);
 		return result;
 	}
@@ -156,7 +153,7 @@ public class UnqualifyProductController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, UnqualifyApply unqualifyApply) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, UnqualifyApply unqualifyApply) throws Exception{
 		EUDataGridResult result = unqualifyService.getList(page, rows, unqualifyApply);
 		return result;
 	}
