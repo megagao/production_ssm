@@ -28,25 +28,25 @@ public class MaterialController {
 	
 	@RequestMapping("/get/{materialId}")
 	@ResponseBody
-	public Material getItemById(@PathVariable String materialId) {
+	public Material getItemById(@PathVariable String materialId) throws Exception{
 		Material cmaterial = materialService.get(materialId);
 		return cmaterial;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "material_list";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Material> getData() {
+	public List<Material> getData() throws Exception{
 		return materialService.find();
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> materialAddJudge() {
+	public Map<String,Object> materialAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -65,13 +65,13 @@ public class MaterialController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "material_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> materialEditJudge() {
+	public Map<String,Object> materialEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -88,13 +88,13 @@ public class MaterialController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "material_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Material material) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Material material) throws Exception{
 		EUDataGridResult result = materialService.getList(page, rows, material);
 		return result;
 	}
@@ -134,7 +134,7 @@ public class MaterialController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> materialDeleteJudge() {
+	public Map<String,Object> materialDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -167,7 +167,8 @@ public class MaterialController {
 	//搜索
 	@RequestMapping("/search_material_by_materialId")
 	@ResponseBody
-	public EUDataGridResult searchMaterialByMaterialId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchMaterialByMaterialId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = materialService.searchMaterialByMaterialId(page, rows, searchValue);
 		return result;
 	}
@@ -175,7 +176,8 @@ public class MaterialController {
 	//搜索
 	@RequestMapping("/search_material_by_materialType")
 	@ResponseBody
-	public EUDataGridResult searchMaterialByMaterialType(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchMaterialByMaterialType(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = materialService.searchMaterialByMaterialType(page, rows, searchValue);
 		return result;
 	}
