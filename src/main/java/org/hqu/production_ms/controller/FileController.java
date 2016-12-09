@@ -45,7 +45,7 @@ public class FileController {
 	}*/
 	@RequestMapping(value="/file/upload", method=RequestMethod.POST)
 	@ResponseBody
-	public String handleFileUpload(MultipartHttpServletRequest request){
+	public String handleFileUpload(MultipartHttpServletRequest request) throws Exception{
 		Iterator<String> iterator = request.getFileNames();
 		String json = null;
 		while (iterator.hasNext()) {
@@ -64,7 +64,7 @@ public class FileController {
 	
 	@RequestMapping(value="/file/delete")
 	@ResponseBody
-	public String handleFileDelete(@RequestParam String fileName){
+	public String handleFileDelete(@RequestParam String fileName) throws Exception{
 		
 		fileService.deleteFile(fileName);
 		Map<String,Object> result = new HashMap<String,Object>();	
@@ -74,7 +74,7 @@ public class FileController {
 	}
 	
 	@RequestMapping(value="/file/download")
-	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response){
+	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response) throws Exception{
 		
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		
