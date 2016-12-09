@@ -27,25 +27,25 @@ public class ProductController {
 	
 	@RequestMapping("/get/{productId}")
 	@ResponseBody
-	public Product getItemById(@PathVariable String productId) {
+	public Product getItemById(@PathVariable String productId) throws Exception{
 		Product cProduct = productService.get(productId);
 		return cProduct;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "product_list";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Product> getData() {
+	public List<Product> getData() throws Exception{
 		return productService.find();
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> productAddJudge() {
+	public Map<String,Object> productAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -64,13 +64,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "product_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> productEditJudge() {
+	public Map<String,Object> productEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -87,13 +87,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "product_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Product product) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Product product) throws Exception{
 		EUDataGridResult result = productService.getList(page, rows, product);
 		return result;
 	}
@@ -133,7 +133,7 @@ public class ProductController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> productDeleteJudge() {
+	public Map<String,Object> productDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -163,4 +163,30 @@ public class ProductController {
 		return result;
 	}
 	
+	//搜索
+	@RequestMapping("/search_product_by_productId")
+	@ResponseBody
+	public EUDataGridResult searchProductByProductId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = productService.searchProductByProductId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_product_by_productName")
+	@ResponseBody
+	public EUDataGridResult searchProductByProductName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = productService.searchProductByProductName(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_product_by_productType")
+	@ResponseBody
+	public EUDataGridResult searchProductByProductType(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = productService.searchProductByProductType(page, rows, searchValue);
+		return result;
+	}
 }
