@@ -26,19 +26,24 @@ public class UserController {
 	
 	@RequestMapping("/get/{userId}")
 	@ResponseBody
-	public SysUser getItemById(@PathVariable String userId) {
+	public SysUser getItemById(@PathVariable String userId) throws Exception{
 		SysUser sysUser = userService.get(userId);
 		return sysUser;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "user_list";
+	}
+	
+	@RequestMapping("/role")
+	public String userRole() throws Exception{
+		return "user_role_edit";
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> userAddJudge() {
+	public Map<String,Object> userAddJudge() throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();  
 		Subject currentUser = SecurityUtils.getSubject();
 		if(!currentUser.isPermitted("user:add")){
@@ -48,13 +53,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "user_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> userEditJudge() {
+	public Map<String,Object> userEditJudge() throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();  
 		Subject currentUser = SecurityUtils.getSubject();
 		if(!currentUser.isPermitted("user:edit")){
@@ -64,13 +69,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "user_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, SysUser sysUser) {
+	public EUDataGridResult getList(Integer page, Integer rows, SysUser sysUser) throws Exception{
 		EUDataGridResult result = userService.getList(page, rows, sysUser);
 		return result;
 	}
@@ -127,7 +132,7 @@ public class UserController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> userDeleteJudge() {
+	public Map<String,Object> userDeleteJudge() throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();  
 		Subject currentUser = SecurityUtils.getSubject();
 		if(!currentUser.isPermitted("user:delete")){
@@ -153,8 +158,35 @@ public class UserController {
 	
 	@RequestMapping(value="/change_status")
 	@ResponseBody
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		CustomResult result = userService.changeStatus(ids);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_user_by_userId")
+	@ResponseBody
+	public EUDataGridResult searchUserByUserId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = userService.searchUserByUserId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_user_by_userName")
+	@ResponseBody
+	public EUDataGridResult searchUserByUserName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = userService.searchUserByUserName(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_user_by_roleName")
+	@ResponseBody
+	public EUDataGridResult searchUserByRoleName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = userService.searchUserByRoleName(page, rows, searchValue);
 		return result;
 	}
 }
