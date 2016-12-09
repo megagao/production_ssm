@@ -28,26 +28,26 @@ public class MaterialConsumeController {
 	
 	@RequestMapping("/get/{consumeId}")
 	@ResponseBody
-	public MaterialConsume getItemById(@PathVariable String orderId) {
+	public MaterialConsume getItemById(@PathVariable String orderId) throws Exception{
 		MaterialConsume materialConsume = materialConsumeService.get(orderId);
 		return materialConsume;
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<MaterialConsume> getData() {
+	public List<MaterialConsume> getData() throws Exception{
 		 List<MaterialConsume> list = materialConsumeService.find();
 		return list;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "materialConsume_list";
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> orderAddJudge() {
+	public Map<String,Object> orderAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -66,13 +66,13 @@ public class MaterialConsumeController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "materialConsume_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> orderEditJudge() {
+	public Map<String,Object> orderEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -89,13 +89,14 @@ public class MaterialConsumeController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "materialConsume_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, MaterialConsume materialConsume) {
+	public EUDataGridResult getList(Integer page, Integer rows, MaterialConsume materialConsume) 
+			throws Exception{
 		EUDataGridResult result = materialConsumeService.getList(page, rows, materialConsume);
 		return result;
 	}
@@ -135,7 +136,7 @@ public class MaterialConsumeController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> orderDeleteJudge() {
+	public Map<String,Object> orderDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -168,7 +169,7 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/change_status")
 	@ResponseBody
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		CustomResult result = materialConsumeService.changeStatus(ids);
 		return result;
 	}
@@ -176,7 +177,8 @@ public class MaterialConsumeController {
 	//搜索
 		@RequestMapping("/search_materialConsume_by_consumeId")
 		@ResponseBody
-		public EUDataGridResult searchMaterialConsumeByConsumeId(Integer page, Integer rows, String searchValue) {
+		public EUDataGridResult searchMaterialConsumeByConsumeId(Integer page, Integer rows, String searchValue) 
+				throws Exception{
 			EUDataGridResult result = materialConsumeService.searchMaterialConsumeByConsumeId(page, rows, searchValue);
 			return result;
 		}
@@ -184,7 +186,8 @@ public class MaterialConsumeController {
 		//搜索
 		@RequestMapping("/search_materialConsume_by_materialId")
 		@ResponseBody
-		public EUDataGridResult searchMaterialConsumeByMaterialId(Integer page, Integer rows, String searchValue) {
+		public EUDataGridResult searchMaterialConsumeByMaterialId(Integer page, Integer rows, String searchValue) 
+				throws Exception{
 			EUDataGridResult result = materialConsumeService.searchMaterialConsumeByMaterialId(page, rows, searchValue);
 			return result;
 		}
@@ -192,7 +195,8 @@ public class MaterialConsumeController {
 		//搜索
 		@RequestMapping("/search_materialConsume_by_workId")
 		@ResponseBody
-		public EUDataGridResult searchMaterialConsumeByWorkId(Integer page, Integer rows, String searchValue) {
+		public EUDataGridResult searchMaterialConsumeByWorkId(Integer page, Integer rows, String searchValue)
+				throws Exception{
 			EUDataGridResult result = materialConsumeService.searchMaterialConsumeByWorkId(page, rows, searchValue);
 			return result;
 		}
