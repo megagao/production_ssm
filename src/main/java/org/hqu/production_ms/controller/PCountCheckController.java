@@ -7,12 +7,10 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.ProcessCountCheck;
-import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.COrderPO;
-import org.hqu.production_ms.service.OrderService;
 import org.hqu.production_ms.service.PCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,19 +45,19 @@ public class PCountCheckController {
 	 */
 	@RequestMapping("/get/{orderId}")
 	@ResponseBody
-	public COrder getItemById(@PathVariable String orderId) {
+	public COrder getItemById(@PathVariable String orderId) throws Exception{
 		return null;
 //		COrder cOrder = orderService.get(orderId);
 //		return cOrder;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "p_count_check_list";
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "p_count_check_add";
 	}
 	
@@ -67,7 +65,8 @@ public class PCountCheckController {
 	//搜索
 		@RequestMapping("/search_pCountCheck_by_pCountCheckId")
 		@ResponseBody
-		public EUDataGridResult searchpCountCheckBypCountCheckId(Integer page, Integer rows, String searchValue) {
+		public EUDataGridResult searchpCountCheckBypCountCheckId(Integer page, Integer rows, String searchValue)
+				throws Exception{
 			EUDataGridResult result = pCountCheckService.searchPCountCheckByPCountCheckId(page, rows, searchValue);
 			return result;
 		}
@@ -75,7 +74,8 @@ public class PCountCheckController {
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> pCountCheckAddJudge() {
+	public Map<String,Object> pCountCheckAddJudge() 
+			throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -95,13 +95,13 @@ public class PCountCheckController {
 	
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "p_count_check_edit";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> pCountCheckEditJudge() {
+	public Map<String,Object> pCountCheckEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -120,7 +120,7 @@ public class PCountCheckController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> pCountCheckDeleteJudge() {
+	public Map<String,Object> pCountCheckDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -140,7 +140,8 @@ public class PCountCheckController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, ProcessCountCheck processCountCheck) {
+	public EUDataGridResult getList(Integer page, Integer rows, ProcessCountCheck processCountCheck) 
+			throws Exception{
 		
 		EUDataGridResult result = pCountCheckService.getList(page, rows, processCountCheck);
 		return result;
@@ -199,7 +200,7 @@ public class PCountCheckController {
 	
 	@RequestMapping(value="/change_status")
 	@ResponseBody
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		return null;
 //		CustomResult result = orderService.changeStatus(ids);
 //		return result;
