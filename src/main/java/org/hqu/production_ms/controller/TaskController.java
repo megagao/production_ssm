@@ -27,25 +27,25 @@ public class TaskController {
 	
 	@RequestMapping("/get/{empId}")
 	@ResponseBody
-	public Task getItemById(@PathVariable String empId) {
+	public Task getItemById(@PathVariable String empId) throws Exception{
 		Task task = taskService.get(empId);
 		return task;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "task_list";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Task> getData() {
+	public List<Task> getData() throws Exception{
 		return taskService.find();
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> taskAddJudge() {
+	public Map<String,Object> taskAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -64,13 +64,13 @@ public class TaskController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "task_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> taskEditJudge() {
+	public Map<String,Object> taskEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -87,20 +87,20 @@ public class TaskController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "task_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Task task) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Task task) throws Exception{
 		EUDataGridResult result = taskService.getList(page, rows, task);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(Task task) throws Exception {
+	private CustomResult insert(Task task) throws Exception{
 		CustomResult result;
 		if(taskService.get(task.getTaskId()) != null){
 			result = new CustomResult(0, "该生产派工编号已经存在，请更换生产派工编号！", null);
@@ -126,7 +126,7 @@ public class TaskController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> taskDeleteJudge() {
+	public Map<String,Object> taskDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -159,7 +159,8 @@ public class TaskController {
 	//搜索
 	@RequestMapping("/search_task_by_taskId")
 	@ResponseBody
-	public EUDataGridResult searchTaskByTaskId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTaskByTaskId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = taskService.searchTaskByTaskId(page, rows, searchValue);
 		return result;
 	}
@@ -167,7 +168,8 @@ public class TaskController {
 	//搜索
 	@RequestMapping("/search_task_by_taskWorkId")
 	@ResponseBody
-	public EUDataGridResult searchTaskByTaskWorkId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTaskByTaskWorkId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = taskService.searchTaskByTaskWorkId(page, rows, searchValue);
 		return result;
 	}
@@ -175,7 +177,8 @@ public class TaskController {
 	//搜索
 	@RequestMapping("/search_task_by_taskManufactureSn")
 	@ResponseBody
-	public EUDataGridResult searchTaskByTaskManufactureSn(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTaskByTaskManufactureSn(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = taskService.searchTaskByTaskManufactureSn(page, rows, searchValue);
 		return result;
 	}
