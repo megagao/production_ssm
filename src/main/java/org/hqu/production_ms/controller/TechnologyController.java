@@ -27,20 +27,20 @@ public class TechnologyController {
 	
 	@RequestMapping("/get/{technologyId}")
 	@ResponseBody
-	public Technology getItemById(@PathVariable String technologyId) {
+	public Technology getItemById(@PathVariable String technologyId) throws Exception{
 		Technology technology = technologyService.get(technologyId);
 		return technology;
 	}
 	
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "technology_list";
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> technologyAddJudge() {
+	public Map<String,Object> technologyAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -59,13 +59,13 @@ public class TechnologyController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "technology_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> technologyEditJudge() {
+	public Map<String,Object> technologyEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -82,13 +82,13 @@ public class TechnologyController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "technology_edit";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Technology> getData() {
+	public List<Technology> getData() throws Exception{
 		 List<Technology> list = technologyService.find();
 		return list;
 	}
@@ -96,7 +96,8 @@ public class TechnologyController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Technology technology) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Technology technology) 
+			throws Exception{
 		EUDataGridResult result = technologyService.getList(page, rows, technology);
 		return result;
 	}
@@ -137,7 +138,7 @@ public class TechnologyController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> technologyDeleteJudge() {
+	public Map<String,Object> technologyDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -169,7 +170,7 @@ public class TechnologyController {
 	//搜索
 	@RequestMapping("/search_technology_by_technologyId")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyByTechnologyId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTechnologyByTechnologyId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = technologyService.searchTechnologyByTechnologyId(page, rows, searchValue);
 		return result;
 	}
@@ -177,7 +178,7 @@ public class TechnologyController {
 	//搜索
 	@RequestMapping("/search_technology_by_technologyName")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyByTechnologyName(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchTechnologyByTechnologyName(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = technologyService.searchTechnologyByTechnologyName(page, rows, searchValue);
 		return result;
 	}
