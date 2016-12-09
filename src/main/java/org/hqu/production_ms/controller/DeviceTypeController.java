@@ -1,28 +1,19 @@
 package org.hqu.production_ms.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.DeviceType;
-import org.hqu.production_ms.domain.Process;
 import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.DeviceTypeService;
-import org.hqu.production_ms.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
