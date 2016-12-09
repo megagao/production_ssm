@@ -33,7 +33,7 @@ public class FCountCheckController {
 	
 	@InitBinder
     public void InitBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) {
+            ServletRequestDataBinder binder) throws Exception{
         // 不要删除下行注释!!! 将来"yyyy-MM-dd"将配置到properties文件中
         // SimpleDateFormat dateFormat = new
         // SimpleDateFormat(getText("date.format", request.getLocale()));
@@ -46,13 +46,13 @@ public class FCountCheckController {
 	
 	@RequestMapping("/get/{finalCountCheckId}")
 	@ResponseBody
-	public FinalCountCheck getItemById(@PathVariable String finalCountCheckId) {
+	public FinalCountCheck getItemById(@PathVariable String finalCountCheckId) throws Exception{
 		FinalCountCheck finalCountCheck = fCountCheckService.get(finalCountCheckId);
 		return finalCountCheck;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "f_count_check_list";
 	}
 	
@@ -63,14 +63,14 @@ public class FCountCheckController {
 //	}
 //	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "f_count_check_add";
 	}
 	
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> fCountCheckAddJudge() {
+	public Map<String,Object> fCountCheckAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -81,7 +81,7 @@ public class FCountCheckController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("fCountCheckAddJudge:add")){
+			if(!subject.isPermitted("fCountCheck:add")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -90,14 +90,14 @@ public class FCountCheckController {
 	
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "f_count_check_edit";
 	}
 	
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> fCountCheckEditJudge() {
+	public Map<String,Object> fCountCheckEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -115,7 +115,8 @@ public class FCountCheckController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, FinalCountCheck finalCountCheck) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, FinalCountCheck finalCountCheck) 
+			throws Exception{
 		EUDataGridResult result = fCountCheckService.getList(page, rows, finalCountCheck);
 		return result;
 	}
@@ -158,7 +159,7 @@ public class FCountCheckController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> fCountCheckDeleteJudge() {
+	public Map<String,Object> fCountCheckDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -185,7 +186,8 @@ public class FCountCheckController {
 	//搜索
 	@RequestMapping("/search_fCountCheck_by_fCountCheckId")
 	@ResponseBody
-	public EUDataGridResult searchFCountCheckByFCountCheckId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchFCountCheckByFCountCheckId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = fCountCheckService.searchFCountCheckByFCountCheckId(page, rows, searchValue);
 		return result;
 	}
@@ -193,7 +195,8 @@ public class FCountCheckController {
 	//搜索
 	@RequestMapping("/search_fCountCheck_by_orderId")
 	@ResponseBody
-	public EUDataGridResult searchFCountCheckByOrderId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchFCountCheckByOrderId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = fCountCheckService.searchFCountCheckByOrderId(page, rows, searchValue);
 		return result;
 	}
