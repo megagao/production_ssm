@@ -29,7 +29,7 @@ public class PictureController {
 	
 	@RequestMapping("/pic/upload")
 	@ResponseBody
-	public String pictureUpload(MultipartFile uploadFile) {
+	public String pictureUpload(MultipartFile uploadFile) throws Exception{
 		Map<String,Object> result = pictureService.uploadPicture(uploadFile);
 		//为了保证功能的兼容性，需要把Result转换成json格式的字符串。
 		String json = JsonUtils.objectToJson(result);
@@ -38,7 +38,7 @@ public class PictureController {
 	
 	@RequestMapping("/pic/delete")
 	@ResponseBody
-	public String pictureDelete(@RequestParam String picName) {
+	public String pictureDelete(@RequestParam String picName) throws Exception{
 		
 		pictureService.deleteFile(picName);
 		Map<String,Object> result = new HashMap<String,Object>();	
