@@ -1,6 +1,7 @@
 package org.hqu.production_ms.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -27,19 +28,25 @@ public class ManufactureController {
 	
 	@RequestMapping("/get/{manufactureId}")
 	@ResponseBody
-	public Manufacture getItemById(@PathVariable String manufactureId) {
+	public Manufacture getItemById(@PathVariable String manufactureId) throws Exception{
 		Manufacture manufacture = manufactureService.get(manufactureId);
 		return manufacture;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "manufacture_list";
+	}
+	
+	@RequestMapping("/get_data")
+	@ResponseBody
+	public List<Manufacture> getData() throws Exception{
+		return manufactureService.find();
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> manufactureAddJudge() {
+	public Map<String,Object> manufactureAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -58,13 +65,13 @@ public class ManufactureController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "manufacture_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> manufactureEditJudge() {
+	public Map<String,Object> manufactureEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -81,13 +88,13 @@ public class ManufactureController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "manufacture_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows) {
+	public EUDataGridResult getList(Integer page, Integer rows) throws Exception{
 		EUDataGridResult result = manufactureService.getList(page, rows);
 		return result;
 	}
@@ -120,7 +127,7 @@ public class ManufactureController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> manufactureDeleteJudge() {
+	public Map<String,Object> manufactureDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -148,6 +155,33 @@ public class ManufactureController {
 	private CustomResult deleteBatch(String[] ids) throws Exception {
 		System.out.println(ids);
 		CustomResult result = manufactureService.deleteBatch(ids);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_manufacture_by_manufactureSn")
+	@ResponseBody
+	public EUDataGridResult searchManufactureByManufactureSn(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = manufactureService.searchManufactureByManufactureSn(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_manufacture_by_manufactureOrderId")
+	@ResponseBody
+	public EUDataGridResult searchManufactureByManufactureOrderId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = manufactureService.searchManufactureByManufactureOrderId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_manufacture_by_manufactureTechnologyName")
+	@ResponseBody
+	public EUDataGridResult searchManufactureByManufactureTechnologyName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = manufactureService.searchManufactureByManufactureTechnologyName(page, rows, searchValue);
 		return result;
 	}
 }
