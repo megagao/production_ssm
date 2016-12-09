@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
@@ -25,40 +27,62 @@ public class RoleController {
 	
 	@RequestMapping("/get/{roleId}")
 	@ResponseBody
-	public SysRole getItemById(@PathVariable String roleId) {
+	public SysRole getItemById(@PathVariable String roleId) throws Exception{
 		SysRole sysRole = roleService.get(roleId);
 		return sysRole;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "role_list";
 	}
 	
 	@RequestMapping("/permission")
-	public String permission() {
+	public String permission() throws Exception{
 		return "role_permission";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<SysRole> getData() {
+	public List<SysRole> getData() throws Exception{
 		return roleService.find();
 	}
 	
+	@RequestMapping("/add_judge")
+	@ResponseBody
+	public Map<String,Object> roleAddJudge() throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("role:add")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
+	}
+	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "role_add";
 	}
 	
+	@RequestMapping("/edit_judge")
+	@ResponseBody
+	public Map<String,Object> roleEditJudge() throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("role:edit")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
+	}
+
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "role_edit";
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, SysRole role) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, SysRole role) throws Exception{
 		EUDataGridResult result = roleService.getList(page, rows, role);
 		return result;
 	}
@@ -113,6 +137,17 @@ public class RoleController {
 		return map;
 	}
 	
+	@RequestMapping("/delete_judge")
+	@ResponseBody
+	public Map<String,Object> roleDeleteJudge() throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();  
+		Subject currentUser = SecurityUtils.getSubject();
+		if(!currentUser.isPermitted("role:delete")){
+			map.put("msg", "您没有权限，请切换用户登录！");
+		}
+		return map;
+	}
+	
 	@RequestMapping(value="/delete")
 	@ResponseBody
 	private CustomResult delete(String id) throws Exception {
@@ -127,4 +162,19 @@ public class RoleController {
 		return result;
 	}
 	
+	//搜索
+	@RequestMapping("/search_role_by_roleId")
+	@ResponseBody
+	public EUDataGridResult searchRoleByRoleId(Integer page, Integer rows, String searchValue) throws Exception{
+		EUDataGridResult result = roleService.searchRoleByRoleId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_role_by_roleName")
+	@ResponseBody
+	public EUDataGridResult searchRoleByRoleName(Integer page, Integer rows, String searchValue) throws Exception{
+		EUDataGridResult result = roleService.searchRoleByRoleName(page, rows, searchValue);
+		return result;
+	}
 }
