@@ -50,7 +50,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/login")
 	public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response,
-			HttpSession session)throws Exception{
+			HttpSession session) throws Exception{
 		
 		Map<String,Object> map = new HashMap<String,Object>();  
 		String username = request.getParameter("username");
@@ -77,7 +77,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/ajaxLogin")
 	public @ResponseBody Map<String,Object> ajaxLogin(@RequestParam String username, @RequestParam String password,
-			@RequestParam(required=false) String randomcode, HttpSession session){
+			@RequestParam(required=false) String randomcode, HttpSession session) throws Exception{
 	    
 		Subject currentUser = SecurityUtils.getSubject();
 	    
