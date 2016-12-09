@@ -27,19 +27,19 @@ public class ProcessController {
 	
 	@RequestMapping("/get/{processId}")
 	@ResponseBody
-	public Process getItemById(@PathVariable String processId) {
+	public Process getItemById(@PathVariable String processId) throws Exception{
 		Process process = processService.get(processId);
 		return process;
 	}
 	
 	@RequestMapping("/find")
-	public String find() {
+	public String find() throws Exception{
 		return "process_list";
 	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
-	public Map<String,Object> processAddJudge() {
+	public Map<String,Object> processAddJudge() throws Exception{
 		//从shiro的session中取activeUser
 		Subject subject = SecurityUtils.getSubject();
 		//取身份信息
@@ -58,13 +58,13 @@ public class ProcessController {
 	}
 	
 	@RequestMapping("/add")
-	public String add() {
+	public String add() throws Exception{
 		return "process_add";
 	}
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
-	public Map<String,Object> processEditJudge() {
+	public Map<String,Object> processEditJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -81,13 +81,13 @@ public class ProcessController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit() throws Exception{
 		return "process_edit";
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Process> getData() {
+	public List<Process> getData() throws Exception{
 		List<Process> list = processService.find();
 		return list;
 	}
@@ -95,7 +95,7 @@ public class ProcessController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Process process) {
+	public EUDataGridResult getItemList(Integer page, Integer rows, Process process) throws Exception{
 		EUDataGridResult result = processService.getList(page, rows, process);
 		return result;
 	}
@@ -137,7 +137,7 @@ public class ProcessController {
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
-	public Map<String,Object> processDeleteJudge() {
+	public Map<String,Object> processDeleteJudge() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -169,7 +169,8 @@ public class ProcessController {
 	//搜索
 	@RequestMapping("/search_process_by_processId")
 	@ResponseBody
-	public EUDataGridResult searchProcessByProcessId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchProcessByProcessId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = processService.searchProcessByProcessId(page, rows, searchValue);
 		return result;
 	}
@@ -177,7 +178,8 @@ public class ProcessController {
 	//搜索
 	@RequestMapping("/search_process_by_technologyPlanId")
 	@ResponseBody
-	public EUDataGridResult searchProcessByTechnologyPlanId(Integer page, Integer rows, String searchValue) {
+	public EUDataGridResult searchProcessByTechnologyPlanId(Integer page, Integer rows, String searchValue)
+			throws Exception{
 		EUDataGridResult result = processService.searchProcessByTechnologyPlanId(page, rows, searchValue);
 		return result;
 	}
