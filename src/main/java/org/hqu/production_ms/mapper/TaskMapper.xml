@@ -3,11 +3,64 @@
 <mapper namespace="org.hqu.production_ms.mapper.TaskMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Task" >
     <id column="task_id" property="taskId" jdbcType="VARCHAR" />
-    <result column="manufacture_id" property="manufactureId" jdbcType="VARCHAR" />
+    <result column="manufacture_sn" property="manufactureSn" jdbcType="VARCHAR" />
     <result column="work_id" property="workId" jdbcType="VARCHAR" />
     <result column="task_quantity" property="taskQuantity" jdbcType="INTEGER" />
     <result column="working_hours" property="workingHours" jdbcType="DECIMAL" />
   </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 查询所有记录 -->
+	<select id="find" resultMap="BaseResultMap">
+		SELECT * FROM task
+	</select>
+	
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			task
+		WHERE
+			task_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchTaskByTaskId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			task
+		WHERE
+			task_id LIKE CONCAT(
+				'%',
+				#{taskId},'%' ) 
+	</select>
+	
+	<select id="searchTaskByTaskWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			task
+		WHERE
+			work_id LIKE CONCAT(
+				'%',
+				#{workId},'%' ) 
+	</select>
+	
+	<select id="searchTaskByTaskManufactureSn" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			task
+		WHERE
+			manufacture_sn LIKE CONCAT(
+				'%',
+				#{manufactureSn},'%' ) 
+	</select>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -67,7 +120,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    task_id, manufacture_id, work_id, task_quantity, working_hours
+    task_id, manufacture_sn, work_id, task_quantity, working_hours
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.TaskExample" >
     select
@@ -100,9 +153,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.Task" >
-    insert into task (task_id, manufacture_id, work_id, 
+    insert into task (task_id, manufacture_sn, work_id, 
       task_quantity, working_hours)
-    values (#{taskId,jdbcType=VARCHAR}, #{manufactureId,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
+    values (#{taskId,jdbcType=VARCHAR}, #{manufactureSn,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
       #{taskQuantity,jdbcType=INTEGER}, #{workingHours,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Task" >
@@ -111,8 +164,8 @@
       <if test="taskId != null" >
         task_id,
       </if>
-      <if test="manufactureId != null" >
-        manufacture_id,
+      <if test="manufactureSn != null" >
+        manufacture_sn,
       </if>
       <if test="workId != null" >
         work_id,
@@ -128,8 +181,8 @@
       <if test="taskId != null" >
         #{taskId,jdbcType=VARCHAR},
       </if>
-      <if test="manufactureId != null" >
-        #{manufactureId,jdbcType=VARCHAR},
+      <if test="manufactureSn != null" >
+        #{manufactureSn,jdbcType=VARCHAR},
       </if>
       <if test="workId != null" >
         #{workId,jdbcType=VARCHAR},
@@ -154,8 +207,8 @@
       <if test="record.taskId != null" >
         task_id = #{record.taskId,jdbcType=VARCHAR},
       </if>
-      <if test="record.manufactureId != null" >
-        manufacture_id = #{record.manufactureId,jdbcType=VARCHAR},
+      <if test="record.manufactureSn != null" >
+        manufacture_sn = #{record.manufactureSn,jdbcType=VARCHAR},
       </if>
       <if test="record.workId != null" >
         work_id = #{record.workId,jdbcType=VARCHAR},
@@ -174,7 +227,7 @@
   <update id="updateByExample" parameterType="map" >
     update task
     set task_id = #{record.taskId,jdbcType=VARCHAR},
-      manufacture_id = #{record.manufactureId,jdbcType=VARCHAR},
+      manufacture_sn = #{record.manufactureSn,jdbcType=VARCHAR},
       work_id = #{record.workId,jdbcType=VARCHAR},
       task_quantity = #{record.taskQuantity,jdbcType=INTEGER},
       working_hours = #{record.workingHours,jdbcType=DECIMAL}
@@ -185,8 +238,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.hqu.production_ms.domain.Task" >
     update task
     <set >
-      <if test="manufactureId != null" >
-        manufacture_id = #{manufactureId,jdbcType=VARCHAR},
+      <if test="manufactureSn != null" >
+        manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
       </if>
       <if test="workId != null" >
         work_id = #{workId,jdbcType=VARCHAR},
@@ -202,7 +255,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.Task" >
     update task
-    set manufacture_id = #{manufactureId,jdbcType=VARCHAR},
+    set manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
       work_id = #{workId,jdbcType=VARCHAR},
       task_quantity = #{taskQuantity,jdbcType=INTEGER},
       working_hours = #{workingHours,jdbcType=DECIMAL}
