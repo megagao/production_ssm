@@ -7,6 +7,53 @@
     <result column="sequence" property="sequence" jdbcType="INTEGER" />
     <result column="quota" property="quota" jdbcType="INTEGER" />
   </resultMap>
+  
+  <!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="technologyPlan" resultMap="BaseResultMap">
+	SELECT
+		technology_plan_id
+	FROM
+		technology_plan
+	
+	order by technology_plan_id ASC
+</select>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			process
+		WHERE
+			process_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchProcessByProcessId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			process
+		WHERE
+			process_id LIKE CONCAT(
+				'%',
+				#{processId},'%' ) 
+	</select>
+	
+	<select id="searchProcessByTechnologyPlanId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			process
+		WHERE
+			technology_plan_id LIKE CONCAT(
+				'%',
+				#{technologyPlanId},'%' ) 
+	</select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
