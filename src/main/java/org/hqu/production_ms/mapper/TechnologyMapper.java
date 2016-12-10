@@ -7,6 +7,11 @@ import org.hqu.production_ms.domain.Technology;
 import org.hqu.production_ms.domain.TechnologyExample;
 
 public interface TechnologyMapper {
+	
+	//扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+	
+	//
     int countByExample(TechnologyExample example);
 
     int deleteByExample(TechnologyExample example);
@@ -28,4 +33,8 @@ public interface TechnologyMapper {
     int updateByPrimaryKeySelective(Technology record);
 
     int updateByPrimaryKey(Technology record);
+
+	List<Technology> searchTechnologyByTechnologyId(String technologyId);
+
+	List<Technology> searchTechnologyByTechnologyName(String technologyName);
 }
