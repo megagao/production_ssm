@@ -11,6 +11,89 @@
     <result column="technology_plan_start" property="technologyPlanStart" jdbcType="TIMESTAMP" />
     <result column="technology_plan_end" property="technologyPlanEnd" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.TechnologyPlanPO" extends="BaseResultMap">
+    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="technologyPlan" resultMap="AddResultMap">
+	SELECT
+		technology_plan_id,
+		technology_plan.technology_id,
+		technology_name,
+		batch_amount,
+		start_plan,
+		end_plan,
+		commit_plan,
+		technology_plan_start,
+		technology_plan_end
+	FROM
+		technology_plan
+	LEFT JOIN technology ON technology.technology_id = technology_plan.technology_id
+	ORDER BY
+		technology_plan_id ASC
+</select>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			technology_plan
+		WHERE
+			technology_plan_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchTechnologyPlanByTechnologyPlanId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_plan_id,
+			technology_plan.technology_id,
+			technology_name,
+			batch_amount,
+			start_plan,
+			end_plan,
+			commit_plan,
+			technology_plan_start,
+			technology_plan_end
+		FROM
+			technology_plan
+		LEFT JOIN technology ON technology.technology_id = technology_plan.technology_id
+		WHERE
+			technology_plan_id LIKE CONCAT(
+				'%',
+				#{technologyPlanId},'%' ) 
+		ORDER BY
+			technology_plan_id ASC
+	</select>
+	
+	<select id="searchTechnologyPlanByTechnologyName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_plan_id,
+			technology_plan.technology_id,
+			technology_name,
+			batch_amount,
+			start_plan,
+			end_plan,
+			commit_plan,
+			technology_plan_start,
+			technology_plan_end
+		FROM
+			technology_plan
+		LEFT JOIN technology ON technology.technology_id = technology_plan.technology_id
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+		ORDER BY
+			technology_plan_id ASC
+	</select>
+	
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
