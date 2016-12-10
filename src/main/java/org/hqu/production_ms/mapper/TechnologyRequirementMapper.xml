@@ -8,6 +8,88 @@
     <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
     <result column="revise_time" property="reviseTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.TechnologyRequirementPO" extends="BaseResultMap">
+    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="technologyRequirement" resultMap="AddResultMap">
+	SELECT
+		technology_requirement_id,
+		technology_requirement.technology_id,
+		technology_name,
+		requirement,
+		add_time,
+		revise_time
+	FROM
+		technology_requirement
+	LEFT JOIN technology ON technology.technology_id = technology_requirement.technology_id
+	ORDER BY
+		technology_requirement_id ASC
+</select>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			technology_requirement
+		WHERE
+			technology_requirement_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 修改备注-->
+	<update id="updateRequirement" parameterType="org.hqu.production_ms.domain.TechnologyRequirement" >
+		UPDATE technology_requirement
+		SET requirement = #{requirement}
+		WHERE
+			technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="searchTechnologyRequirementByTechnologyRequirementId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_requirement_id,
+			technology_requirement.technology_id,
+			technology_name,
+			requirement,
+			add_time,
+			revise_time
+		FROM
+			technology_requirement
+		LEFT JOIN technology ON technology.technology_id = technology_requirement.technology_id
+		WHERE
+			technology_requirement_id LIKE CONCAT(
+				'%',
+				#{technologyRequirementId},'%' ) 
+		ORDER BY
+			technology_requirement_id ASC
+	</select>
+	
+	<select id="searchTechnologyRequirementByTechnologyName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_requirement_id,
+			technology_requirement.technology_id,
+			technology_name,
+			requirement,
+			add_time,
+			revise_time
+		FROM
+			technology_requirement
+		LEFT JOIN technology ON technology.technology_id = technology_requirement.technology_id
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+		ORDER BY
+			technology_requirement_id ASC
+	</select>
+	
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
