@@ -12,6 +12,43 @@
     <result column="double_capacity" property="doubleCapacity" jdbcType="INTEGER" />
     <result column="overfulfil_capacity" property="overfulfilCapacity" jdbcType="INTEGER" />
   </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			technology
+		WHERE
+			technology_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchTechnologyByTechnologyId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			technology
+		WHERE
+			technology_id LIKE CONCAT(
+				'%',
+				#{technologyId},'%' ) 
+	</select>
+	
+	<select id="searchTechnologyByTechnologyName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			technology
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+	</select>
+	
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
