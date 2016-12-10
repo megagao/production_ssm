@@ -15,6 +15,12 @@ public interface ProductMapper {
 	
 	int updateNote(Product record);
 	
+	List<Product> searchProductByProductName(String productName);
+	
+	List<Product> searchProductByProductId(String productId);
+	
+	List<Product> searchProductByProductType(String productType);
+	
 	
     int countByExample(ProductExample example);
 
