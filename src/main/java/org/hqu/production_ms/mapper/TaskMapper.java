@@ -7,6 +7,11 @@ import org.hqu.production_ms.domain.Task;
 import org.hqu.production_ms.domain.TaskExample;
 
 public interface TaskMapper {
+	//扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+	
+	List<Task> find();
+	
     int countByExample(TaskExample example);
 
     int deleteByExample(TaskExample example);
@@ -28,4 +33,10 @@ public interface TaskMapper {
     int updateByPrimaryKeySelective(Task record);
 
     int updateByPrimaryKey(Task record);
+
+	List<Task> searchTaskByTaskId(String taskId);
+
+	List<Task> searchTaskByTaskWorkId(String taskWorkId);
+
+	List<Task> searchTaskByTaskManufactureSn(String taskManufactureSn);
 }
