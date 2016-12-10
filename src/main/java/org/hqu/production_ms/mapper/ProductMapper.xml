@@ -35,12 +35,45 @@
 	</update>
 	
 	<!-- 修改备注-->
-	<update id="updateNote" parameterType="org.hqu.production_ms.domain.Custom" >
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.Product" >
 		UPDATE product
 		SET note = #{note}
 		WHERE
 			product_id = #{productId,jdbcType=VARCHAR}
 	</update>
+	
+	<select id="searchProductByProductId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			product
+		WHERE
+			product_id LIKE CONCAT(
+				'%',
+				#{productId},'%' ) 
+	</select>
+	
+	<select id="searchProductByProductName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			product
+		WHERE
+			product_name LIKE CONCAT(
+				'%',
+				#{productName},'%' ) 
+	</select>
+	
+	<select id="searchProductByProductType" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			product
+		WHERE
+			product_type LIKE CONCAT(
+				'%',
+				#{productType},'%' ) 
+	</select>
 	
 	
   <sql id="Example_Where_Clause" >
