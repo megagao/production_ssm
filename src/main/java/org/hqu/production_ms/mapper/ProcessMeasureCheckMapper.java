@@ -7,6 +7,14 @@ import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.ProcessMeasureCheckExample;
 
 public interface ProcessMeasureCheckMapper {
+	int updateNote(ProcessMeasureCheck processMeasureCheck);
+	
+	List<ProcessMeasureCheck> searchPMeasureCheckByPMeasureCheckId(String processMeasureCheckId);
+	
+	List<ProcessMeasureCheck> find(ProcessMeasureCheck processMeasureCheck);
+	
+	int deleteBatch(String[] ids);
+	
     int countByExample(ProcessMeasureCheckExample example);
 
     int deleteByExample(ProcessMeasureCheckExample example);
