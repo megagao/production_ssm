@@ -11,6 +11,70 @@
     <result column="result" property="result" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  <!-- 修改备注-->
+	<update id="updateNote" parameterType="processMeasureCheck" >
+		UPDATE process_measure_check
+		SET note = #{note}
+		WHERE
+			p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+	</update>
+  
+  
+  
+  
+  
+  <select id="searchPMeasureCheckByPMeasureCheckId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			p_measure_check_id ,
+			process_measure_check.process_id,
+			check_item,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			process_measure_check.note
+		FROM
+			process_measure_check
+		where p_measure_check_id like CONCAT('%',#{pMeasureCheckId},'%' ) 
+	</select>
+	
+  
+    <!-- 查询所有记录 -->
+	<select id="find" parameterType="processMeasureCheck" resultMap="BaseResultMap">
+		SELECT
+			p_measure_check_id ,
+			process_measure_check.process_id,
+			check_item,
+			cdate,
+			measure_data,
+			emp_id,
+			result,
+			process_measure_check.note
+		FROM
+			process_measure_check,
+			process
+		WHERE
+			process_measure_check.process_id = process.process_id
+		
+		
+	</select>
+	
+	
+		<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			process_measure_check
+		WHERE
+			p_measure_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
