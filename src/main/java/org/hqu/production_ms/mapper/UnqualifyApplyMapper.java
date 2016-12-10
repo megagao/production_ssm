@@ -7,6 +7,16 @@ import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.UnqualifyApplyExample;
 
 public interface UnqualifyApplyMapper {
+	
+	//扩展的mapper接口方法
+	List<UnqualifyApply> find(UnqualifyApply unqualifyApply);
+	
+	int updateNote(UnqualifyApply unqualifyApply);
+	
+	int deleteBatch(String[] ids);
+	
+	List<UnqualifyApply> searchUnqualifyByUnqualifyId(String orderId);
+	
     int countByExample(UnqualifyApplyExample example);
 
     int deleteByExample(UnqualifyApplyExample example);
