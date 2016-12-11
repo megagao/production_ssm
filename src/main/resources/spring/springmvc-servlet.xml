@@ -18,7 +18,7 @@
 	
 	<mvc:annotation-driven  conversion-service="conversionService" validator="validator">
         <!-- json解析时间格式设置 -->
-        <mvc:message-converters>
+        <!-- <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
                     <bean class="com.fasterxml.jackson.databind.ObjectMapper">
@@ -30,7 +30,7 @@
                     </bean>
                 </property>
             </bean>
-        </mvc:message-converters>
+        </mvc:message-converters> -->
     </mvc:annotation-driven>
     
 	<!-- 开启aop，对类代理 -->
