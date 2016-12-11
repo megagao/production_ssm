@@ -3,17 +3,17 @@ package org.hqu.production_ms.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.hqu.production_ms.service.SysService;
-import org.hqu.production_ms.mapper.authority.SysPermissionMapper;
-import org.hqu.production_ms.mapper.authority.SysUserMapper;
-import org.hqu.production_ms.mapper.authority.SysPermissionMapperCustom;
-import org.hqu.production_ms.domain.ActiveUser;
 import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysPermissionExample;
 import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.domain.authority.SysUserExample;
+import org.hqu.production_ms.domain.custom.ActiveUser;
+import org.hqu.production_ms.mapper.authority.SysPermissionMapper;
+import org.hqu.production_ms.mapper.authority.SysPermissionMapperCustom;
+import org.hqu.production_ms.mapper.authority.SysUserMapper;
+import org.hqu.production_ms.service.SysService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * created on 2016年9月6日 
