@@ -4,11 +4,152 @@
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Work" >
     <id column="work_id" property="workId" jdbcType="VARCHAR" />
     <result column="process_number" property="processNumber" jdbcType="VARCHAR" />
-    <result column="product_id" property="productId" jdbcType="VARCHAR" />
-    <result column="process_id" property="processId" jdbcType="VARCHAR" />
-    <result column="equipment_id" property="equipmentId" jdbcType="VARCHAR" />
     <result column="rating" property="rating" jdbcType="INTEGER" />
+    <association property="product" javaType="product">
+		<id column="product_id" property="productId" jdbcType="VARCHAR" />
+	    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+	    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+	    <result column="image" property="image" jdbcType="VARCHAR" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	</association>
+	<association property="process" javaType="process">
+		<id column="process_id" property="processId" jdbcType="VARCHAR" />
+	    <result column="technology_plan_id" property="technologyPlanId" jdbcType="VARCHAR" />
+	    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+	    <result column="quota" property="quota" jdbcType="INTEGER" />
+	</association>
+	<association property="device" javaType="device">
+		<id column="device_id" property="deviceId" jdbcType="VARCHAR" />
+	    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+	    <result column="device_type_id" property="deviceTypeId" jdbcType="VARCHAR" />
+	    <result column="device_status_id" property="deviceStatusId" jdbcType="VARCHAR" />
+	    <result column="device_status" property="deviceStatus" jdbcType="VARCHAR" />
+	    <result column="device_purchase_date" property="devicePurchaseDate" jdbcType="TIMESTAMP" />
+	    <result column="device_purchase_price" property="devicePurchasePrice" jdbcType="DECIMAL" />
+	    <result column="device_manufacture_date" property="deviceManufactureDate" jdbcType="TIMESTAMP" />
+	    <result column="device_service_life" property="deviceServiceLife" jdbcType="TIMESTAMP" />
+	    <result column="device_keeper_id" property="deviceKeeperId" jdbcType="VARCHAR" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	</association>
   </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 查询所有记录 -->
+	<select id="find" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			process_number,
+			work.product_id,
+			product_name,
+			work.process_id,
+			work.device_id,
+			device_name,
+			rating
+		FROM
+			work
+		LEFT JOIN product ON work.product_id = product.product_id
+		LEFT JOIN device ON work.device_id = device.device_id
+		LEFT JOIN process ON work.process_id = process.process_id
+	</select>
+	
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			work
+		WHERE
+			work_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchWorkByWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			process_number,
+			work.product_id,
+			product_name,
+			work.process_id,
+			work.device_id,
+			device_name,
+			rating
+		FROM
+			work
+		LEFT JOIN product ON work.product_id = product.product_id
+		LEFT JOIN device ON work.device_id = device.device_id
+		LEFT JOIN process ON work.process_id = process.process_id
+		WHERE
+			work_id LIKE CONCAT(
+				'%',
+				#{workId},'%' ) 
+	</select>
+	
+	<select id="searchWorkByWorkProduct" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			process_number,
+			work.product_id,
+			product_name,
+			work.process_id,
+			work.device_id,
+			device_name,
+			rating
+		FROM
+			work
+		LEFT JOIN product ON work.product_id = product.product_id
+		LEFT JOIN device ON work.device_id = device.device_id
+		LEFT JOIN process ON work.process_id = process.process_id
+		WHERE
+			product_name LIKE CONCAT(
+				'%',
+				#{productName},'%' ) 
+	</select>
+	
+	<select id="searchWorkByWorkDevice" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			process_number,
+			work.product_id,
+			product_name,
+			work.process_id,
+			work.device_id,
+			device_name,
+			rating
+		FROM
+			work
+		LEFT JOIN product ON work.product_id = product.product_id
+		LEFT JOIN device ON work.device_id = device.device_id
+		LEFT JOIN process ON work.process_id = process.process_id
+		WHERE
+			device_name LIKE CONCAT(
+				'%',
+				#{deviceName},'%' ) 
+	</select>
+	
+	<select id="searchWorkByWorkProcess" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			process_number,
+			work.product_id,
+			product_name,
+			work.process_id,
+			work.device_id,
+			device_name,
+			rating
+		FROM
+			work
+		LEFT JOIN product ON work.product_id = product.product_id
+		LEFT JOIN device ON work.device_id = device.device_id
+		LEFT JOIN process ON work.process_id = process.process_id
+		WHERE
+			work.process_id LIKE CONCAT(
+				'%',
+				#{processId},'%' ) 
+	</select>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -68,7 +209,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    work_id, process_number, product_id, process_id, equipment_id, rating
+    work_id, process_number, product_id, process_id, device_id, rating
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.WorkExample" >
     select
@@ -102,10 +243,10 @@
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.Work" >
     insert into work (work_id, process_number, product_id, 
-      process_id, equipment_id, rating
+      process_id, device_id, rating
       )
     values (#{workId,jdbcType=VARCHAR}, #{processNumber,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
-      #{processId,jdbcType=VARCHAR}, #{equipmentId,jdbcType=VARCHAR}, #{rating,jdbcType=INTEGER}
+      #{processId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{rating,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.Work" >
@@ -123,8 +264,8 @@
       <if test="processId != null" >
         process_id,
       </if>
-      <if test="equipmentId != null" >
-        equipment_id,
+      <if test="deviceId != null" >
+        device_id,
       </if>
       <if test="rating != null" >
         rating,
@@ -143,8 +284,8 @@
       <if test="processId != null" >
         #{processId,jdbcType=VARCHAR},
       </if>
-      <if test="equipmentId != null" >
-        #{equipmentId,jdbcType=VARCHAR},
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
       </if>
       <if test="rating != null" >
         #{rating,jdbcType=INTEGER},
@@ -172,8 +313,8 @@
       <if test="record.processId != null" >
         process_id = #{record.processId,jdbcType=VARCHAR},
       </if>
-      <if test="record.equipmentId != null" >
-        equipment_id = #{record.equipmentId,jdbcType=VARCHAR},
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
       </if>
       <if test="record.rating != null" >
         rating = #{record.rating,jdbcType=INTEGER},
@@ -189,7 +330,7 @@
       process_number = #{record.processNumber,jdbcType=VARCHAR},
       product_id = #{record.productId,jdbcType=VARCHAR},
       process_id = #{record.processId,jdbcType=VARCHAR},
-      equipment_id = #{record.equipmentId,jdbcType=VARCHAR},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
       rating = #{record.rating,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,8 +348,8 @@
       <if test="processId != null" >
         process_id = #{processId,jdbcType=VARCHAR},
       </if>
-      <if test="equipmentId != null" >
-        equipment_id = #{equipmentId,jdbcType=VARCHAR},
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
       </if>
       <if test="rating != null" >
         rating = #{rating,jdbcType=INTEGER},
@@ -221,7 +362,7 @@
     set process_number = #{processNumber,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=VARCHAR},
       process_id = #{processId,jdbcType=VARCHAR},
-      equipment_id = #{equipmentId,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
