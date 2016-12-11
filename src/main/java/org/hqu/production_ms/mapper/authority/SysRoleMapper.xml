@@ -31,6 +31,27 @@
 		</foreach>
 	</update>
 	
+	<select id="searchRoleByRoleId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			sys_role
+		WHERE
+			role_id LIKE CONCAT(
+				'%',
+				#{roleId},'%' ) 
+	</select>
+	
+	<select id="searchRoleByRoleName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			sys_role
+		WHERE
+			role_name LIKE CONCAT(
+				'%',
+				#{roleName},'%' ) 
+	</select>
 	
   <sql id="Example_Where_Clause" >
     <where >
