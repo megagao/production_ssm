@@ -1,18 +1,17 @@
 package org.hqu.production_ms.util;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.ArrayList;
-import java.text.DecimalFormat;
-
-import java.net.URLEncoder;
-import java.net.URLDecoder;
-import java.util.Date;
 
 
 /** UtilFuns is a JavaBean.  */
