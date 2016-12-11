@@ -5,17 +5,24 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.Work;
 import org.hqu.production_ms.domain.WorkExample;
+import org.hqu.production_ms.domain.po.WorkPO;
 
 public interface WorkMapper {
+	//扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+	
+	List<Work> find();
+	
+	
     int countByExample(WorkExample example);
 
     int deleteByExample(WorkExample example);
 
     int deleteByPrimaryKey(String workId);
 
-    int insert(Work record);
+    int insert(WorkPO record);
 
-    int insertSelective(Work record);
+    int insertSelective(WorkPO record);
 
     List<Work> selectByExample(WorkExample example);
 
@@ -25,7 +32,15 @@ public interface WorkMapper {
 
     int updateByExample(@Param("record") Work record, @Param("example") WorkExample example);
 
-    int updateByPrimaryKeySelective(Work record);
+    int updateByPrimaryKeySelective(WorkPO record);
 
-    int updateByPrimaryKey(Work record);
+    int updateByPrimaryKey(WorkPO record);
+
+	List<Work> searchWorkByWorkId(String workId);
+
+	List<Work> searchWorkByWorkProduct(String workProduct);
+
+	List<Work> searchWorkByWorkDevice(String workDevice);
+
+	List<Work> searchWorkByWorkProcess(String workProcess);
 }
