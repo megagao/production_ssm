@@ -36,4 +36,8 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(RolePO role);
 
     int updateByPrimaryKey(RolePO role);
+
+	List<SysRole> searchRoleByRoleId(String roleId);
+
+	List<SysRole> searchRoleByRoleName(String roleName);
 }
