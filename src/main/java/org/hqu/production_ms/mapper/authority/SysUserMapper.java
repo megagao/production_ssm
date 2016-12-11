@@ -37,4 +37,10 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(UserPO userPO);
 
     int updateByPrimaryKey(UserPO userPO);
+
+	List<UserPO> searchUserByUserId(String userId);
+
+	List<UserPO> searchUserByUserName(String userName);
+
+	List<UserPO> searchUserByRoleName(String roleName);
 }
