@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Device;
@@ -13,6 +15,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,10 +37,10 @@ public class DeviceListController {
 	}
 	
 	
-	@RequestMapping("/get/{orderId}")
+	@RequestMapping("/get/{deviceId}")
 	@ResponseBody
-	public Device getItemById(@PathVariable String orderId) throws Exception{
-		Device device = deviceService.get(orderId);
+	public Device getItemById(@PathVariable String deviceId) throws Exception{
+		Device device = deviceService.get(deviceId);
 		return device;
 	}
 	
@@ -64,7 +68,7 @@ public class DeviceListController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("custom:add")){
+			if(!subject.isPermitted("device:add")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -88,7 +92,7 @@ public class DeviceListController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("custom:edit")){
+			if(!subject.isPermitted("device:edit")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -105,7 +109,7 @@ public class DeviceListController {
 			map.put("msg", "您的账户已被锁定，请切换账户登录！");
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-			if(!subject.isPermitted("custom:delete")){
+			if(!subject.isPermitted("device:delete")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -114,8 +118,12 @@ public class DeviceListController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(Device device) throws Exception {
+	private CustomResult insert(@Valid Device device, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(deviceService.get(device.getDeviceId()) != null){
 			result = new CustomResult(0, "该设备编号已经存在，请更换设备编号！", null);
 		}else{
@@ -126,9 +134,12 @@ public class DeviceListController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(Device device) throws Exception {
-		CustomResult result = deviceService.update(device);
-		return result;
+	private CustomResult update(@Valid Device device, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceService.update(device);
 	}
 	
 	@RequestMapping(value="/delete_batch")
@@ -140,16 +151,22 @@ public class DeviceListController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(Device device) throws Exception {
-		CustomResult result = deviceService.updateNote(device);
-		return result;
+	private CustomResult updateNote(@Valid Device device, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceService.updateNote(device);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(Device device) throws Exception {
-		CustomResult result = deviceService.updateAll(device);
-		return result;
+	private CustomResult updateAll(@Valid Device device, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceService.updateAll(device);
 	}
 	
 }
