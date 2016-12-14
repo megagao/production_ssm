@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
+
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.DeviceType;
@@ -14,6 +19,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +72,7 @@ public class DeviceTypeController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("custom:add")){
+			if(!subject.isPermitted("deviceType:add")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -88,7 +95,7 @@ public class DeviceTypeController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("process:edit")){
+			if(!subject.isPermitted("deviceType:edit")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -105,7 +112,7 @@ public class DeviceTypeController {
 			map.put("msg", "您的账户已被锁定，请切换账户登录！");
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-			if(!subject.isPermitted("custom:delete")){
+			if(!subject.isPermitted("deviceType:delete")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -120,20 +127,17 @@ public class DeviceTypeController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(DeviceType deviceType) throws Exception {
+	private CustomResult insert(@Valid DeviceType deviceType, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(deviceTypeService.get(deviceType.getDeviceTypeId()) != null){
 			result = new CustomResult(0, "该设备种类编号已经存在，请更换设备种类编号！", null);
 		}else{
 			result = deviceTypeService.insert(deviceType);
 		}
-		return result;
-	}
-	
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(DeviceType deviceType) throws Exception {
-		CustomResult result = deviceTypeService.update(deviceType);
 		return result;
 	}
 
@@ -144,11 +148,23 @@ public class DeviceTypeController {
 		return result;
 	}
 	
+	@RequestMapping(value="/update")
+	@ResponseBody
+	private CustomResult update(@Valid DeviceType deviceType, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceTypeService.update(deviceType);
+	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(DeviceType deviceType) throws Exception {
-		CustomResult result = deviceTypeService.updateAll(deviceType);
-		return result;
+	private CustomResult updateAll(@Valid DeviceType deviceType, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceTypeService.updateAll(deviceType);
 	}
 }
