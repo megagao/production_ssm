@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.DeviceFault;
@@ -13,6 +15,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.DeviceFaultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,7 +68,7 @@ public class DeviceFaultController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("custom:add")){
+			if(!subject.isPermitted("deviceFault:add")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -87,7 +91,7 @@ public class DeviceFaultController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("process:edit")){
+			if(!subject.isPermitted("deviceFault:edit")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -104,7 +108,7 @@ public class DeviceFaultController {
 			map.put("msg", "您的账户已被锁定，请切换账户登录！");
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-			if(!subject.isPermitted("custom:delete")){
+			if(!subject.isPermitted("deviceFault:delete")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -119,8 +123,12 @@ public class DeviceFaultController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(DeviceFault deviceFault) throws Exception {
+	private CustomResult insert(@Valid DeviceFault deviceFault, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(deviceFaultService.get(deviceFault.getDeviceFaultId()) != null){
 			result = new CustomResult(0, "该设备故障编号已经存在，请更换设备故障编号！", null);
 		}else{
@@ -131,9 +139,12 @@ public class DeviceFaultController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(DeviceFault deviceFault) throws Exception {
-		CustomResult result = deviceFaultService.update(deviceFault);
-		return result;
+	private CustomResult update(@Valid DeviceFault deviceFault, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceFaultService.update(deviceFault);
 	}
 	
 	@RequestMapping(value="/delete_batch")
@@ -145,15 +156,21 @@ public class DeviceFaultController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(DeviceFault deviceFault) throws Exception {
-		CustomResult result = deviceFaultService.updateNote(deviceFault);
-		return result;
+	private CustomResult updateNote(@Valid DeviceFault deviceFault, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceFaultService.updateNote(deviceFault);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(DeviceFault deviceFault) throws Exception {
-		CustomResult result = deviceFaultService.updateAll(deviceFault);
-		return result;
+	private CustomResult updateAll(@Valid DeviceFault deviceFault, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceFaultService.updateAll(deviceFault);
 	}
 }
