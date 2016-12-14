@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+
+
+
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.DeviceMaintain;
@@ -13,6 +18,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.DeviceMaintainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,7 +56,7 @@ public class DeviceMaintainController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("custom:add")){
+			if(!subject.isPermitted("deviceMaintain:add")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -72,7 +79,7 @@ public class DeviceMaintainController {
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
 		}else{
-			if(!subject.isPermitted("process:edit")){
+			if(!subject.isPermitted("deviceMaintain:edit")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -89,7 +96,7 @@ public class DeviceMaintainController {
 			map.put("msg", "您的账户已被锁定，请切换账户登录！");
 		}else if(!activeUser.getRoleStatus().equals("1")){
 			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-			if(!subject.isPermitted("custom:delete")){
+			if(!subject.isPermitted("deviceMaintain:delete")){
 				map.put("msg", "您没有权限，请切换用户登录！");
 			}
 		}
@@ -104,8 +111,12 @@ public class DeviceMaintainController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(DeviceMaintain deviceMaintain) throws Exception {
+	private CustomResult insert(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(deviceMaintainService.get(deviceMaintain.getDeviceMaintainId()) != null){
 			result = new CustomResult(0, "该设备维修编号已经存在，请更换设备维修编号！", null);
 		}else{
@@ -116,9 +127,12 @@ public class DeviceMaintainController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(DeviceMaintain deviceMaintain) throws Exception {
-		CustomResult result = deviceMaintainService.update(deviceMaintain);
-		return result;
+	private CustomResult update(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return  deviceMaintainService.update(deviceMaintain);
 	}
 	
 	@RequestMapping(value="/delete_batch")
@@ -130,8 +144,11 @@ public class DeviceMaintainController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(DeviceMaintain deviceMaintain) throws Exception {
-		CustomResult result = deviceMaintainService.updateNote(deviceMaintain);
-		return result;
+	private CustomResult updateNote(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceMaintainService.updateNote(deviceMaintain);
 	}
 }
