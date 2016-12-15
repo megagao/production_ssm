@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.TechnologyPlan;
@@ -14,6 +16,8 @@ import org.hqu.production_ms.domain.po.TechnologyPlanPO;
 import org.hqu.production_ms.service.TechnologyPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,8 +108,12 @@ public class TechnologyPlanController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(TechnologyPlan technologyPlan) throws Exception {
+	private CustomResult insert(@Valid TechnologyPlan technologyPlan, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(technologyPlanService.get(technologyPlan.getTechnologyPlanId()) != null){
 			result = new CustomResult(0, "该工艺计划编号已经存在，请更换工艺计划编号！", null);
 		}else{
@@ -123,9 +131,12 @@ public class TechnologyPlanController {
 	*/
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(TechnologyPlan technologyPlan) throws Exception {
-		CustomResult result = technologyPlanService.updateAll(technologyPlan);
-		return result;
+	private CustomResult updateAll(@Valid TechnologyPlan technologyPlan, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return technologyPlanService.updateAll(technologyPlan);
 	}
 	/*
 	@RequestMapping(value="/update_note")
