@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Technology;
@@ -15,6 +17,8 @@ import org.hqu.production_ms.domain.po.TechnologyRequirementPO;
 import org.hqu.production_ms.service.TechnologyRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -107,8 +111,12 @@ System.out.println(result);
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(TechnologyRequirement technologyRequirement) throws Exception {
+	private CustomResult insert(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(technologyRequirementService.get(technologyRequirement.getTechnologyRequirementId()) != null){
 			result = new CustomResult(0, "该工艺要求编号已经存在，请更换工艺要求编号！", null);
 		}else{
@@ -126,18 +134,22 @@ System.out.println(result);
 	*/
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(TechnologyRequirement technologyRequirement) throws Exception {
-		CustomResult result = technologyRequirementService.updateAll(technologyRequirement);
-		return result;
+	private CustomResult updateAll(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return technologyRequirementService.updateAll(technologyRequirement);
 	}
 
 	@RequestMapping(value="/update_requirement")
 	@ResponseBody
-	private CustomResult updateNote(TechnologyRequirementPO technologyRequirement) throws Exception {
-System.out.println("updateRequirement");
-System.out.println(technologyRequirement.getRequirement());
-		CustomResult result = technologyRequirementService.updateRequirement(technologyRequirement);
-		return result;
+	private CustomResult updateNote(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return technologyRequirementService.updateRequirement(technologyRequirement);
 	}
 	
 	
