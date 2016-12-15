@@ -49,17 +49,12 @@ public class FileController {
 		Iterator<String> iterator = request.getFileNames();
 		String json = null;
 		while (iterator.hasNext()) {
-				String fileName = iterator.next();
-				MultipartFile multipartFile = request.getFile(fileName);
-				/*byte[] file = multipartFile.getBytes();*/
-				Map<String,Object> result = fileService.uploadFile(multipartFile);
-				
-				json = JsonUtils.objectToJson(result);
-				
+			String fileName = iterator.next();
+			MultipartFile multipartFile = request.getFile(fileName);
+			Map<String,Object> result = fileService.uploadFile(multipartFile);
+			json = JsonUtils.objectToJson(result);
 		}
-		
 		return json;
-	
 	}
 	
 	@RequestMapping(value="/file/delete")
