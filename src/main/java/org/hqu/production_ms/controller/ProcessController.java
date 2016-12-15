@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Process;
@@ -13,6 +15,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -102,8 +106,12 @@ public class ProcessController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(Process process) throws Exception {
+	private CustomResult insert(@Valid Process process, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(processService.get(process.getProcessId()) != null){
 			result = new CustomResult(0, "该工序编号已经存在，请更换工序编号！", null);
 		}else{
@@ -121,9 +129,12 @@ public class ProcessController {
 	*/
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(Process process) throws Exception {
-		CustomResult result = processService.updateAll(process);
-		return result;
+	private CustomResult updateAll(@Valid Process process, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return processService.updateAll(process);
 	}
 	
 	/*
