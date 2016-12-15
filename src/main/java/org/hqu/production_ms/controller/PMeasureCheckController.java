@@ -3,6 +3,8 @@ package org.hqu.production_ms.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.COrder;
@@ -14,6 +16,8 @@ import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.service.PMeasureCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -150,14 +154,23 @@ public class PMeasureCheckController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(ProcessMeasureCheck processMeasureCheck) throws Exception {
-		CustomResult result = pMeasureCheckService.insert(processMeasureCheck);
+	private CustomResult insert(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
+		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		if(pMeasureCheckService.get(processMeasureCheck.getpMeasureCheckId()) != null){
+			result = new CustomResult(0, "该工序计量质检编号已经存在，请更换！", null);
+		}else{
+			result = pMeasureCheckService.insert(processMeasureCheck);
+		}
 		return result;
 	}
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(COrderPO cOrder) throws Exception {
+	private CustomResult update(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
 		return null;
 //		CustomResult result = orderService.update(cOrder);
 //		return result;
@@ -165,17 +178,22 @@ public class PMeasureCheckController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(ProcessMeasureCheck processMeasureCheck) throws Exception {
-		CustomResult result = pMeasureCheckService.updateAll(processMeasureCheck);
-		return result;
+	private CustomResult updateAll(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return pMeasureCheckService.updateAll(processMeasureCheck);
 	}
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(ProcessMeasureCheck processMeasureCheck) throws Exception {
-		
-		CustomResult result = pMeasureCheckService.updateNote(processMeasureCheck);
-		return result;
+	private CustomResult updateNote(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return pMeasureCheckService.updateNote(processMeasureCheck);
 	}
 	
 	@RequestMapping(value="/delete")
