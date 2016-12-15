@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Task;
@@ -13,6 +15,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,8 +104,12 @@ public class TaskController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(Task task) throws Exception{
+	private CustomResult insert(@Valid Task task, BindingResult bindingResult) throws Exception{
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(taskService.get(task.getTaskId()) != null){
 			result = new CustomResult(0, "该生产派工编号已经存在，请更换生产派工编号！", null);
 		}else{
@@ -112,16 +120,22 @@ public class TaskController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(Task task) throws Exception {
-		CustomResult result = taskService.update(task);
-		return result;
+	private CustomResult update(@Valid Task task, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return taskService.update(task);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(Task task) throws Exception {
-		CustomResult result = taskService.updateAll(task);
-		return result;
+	private CustomResult updateAll(@Valid Task task, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return taskService.updateAll(task);
 	}
 	
 	@RequestMapping("/delete_judge")
