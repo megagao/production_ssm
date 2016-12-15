@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Manufacture;
@@ -14,6 +16,8 @@ import org.hqu.production_ms.domain.po.ManufacturePO;
 import org.hqu.production_ms.service.ManufactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,8 +105,12 @@ public class ManufactureController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(ManufacturePO manufacture) throws Exception {
+	private CustomResult insert(@Valid ManufacturePO manufacture, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(manufactureService.get(manufacture.getManufactureSn()) != null){
 			result = new CustomResult(0, "该生产批号已经存在，请更换生产批号！", null);
 		}else{
@@ -113,16 +121,22 @@ public class ManufactureController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(ManufacturePO manufacture) throws Exception {
-		CustomResult result = manufactureService.update(manufacture);
-		return result;
+	private CustomResult update(@Valid ManufacturePO manufacture, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return manufactureService.update(manufacture);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(ManufacturePO manufacture) throws Exception {
-		CustomResult result = manufactureService.updateAll(manufacture);
-		return result;
+	private CustomResult updateAll(@Valid ManufacturePO manufacture, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return manufactureService.updateAll(manufacture);
 	}
 	
 	@RequestMapping("/delete_judge")
