@@ -3,6 +3,8 @@ package org.hqu.production_ms.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.authority.SysUser;
@@ -12,6 +14,8 @@ import org.hqu.production_ms.domain.po.UserPO;
 import org.hqu.production_ms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -82,52 +86,45 @@ public class UserController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private Map<String,Object> insert(UserPO user) throws Exception {
-		Map<String,Object> map = new HashMap<String,Object>(); 
-		if(userService.findByUserNameAndId(user.getUsername(), user.getId()).size()>0){
-			map.put("msg", "该用户名已经存在，请更换用户名！");
-			map.put("label", "1");
-		}else if(userService.get(user.getId()) != null){
-			map.put("msg", "该用户编号已经存在，请更换用户编号！");
-			map.put("label", "2");
-		}else{
-			CustomResult result = userService.insert(user);
-			if(result.getStatus() == 200){
-				map.put("msg", "新增用户成功！");
-				map.put("label", "200");
-			}else{
-				map.put("msg", "新增用户失败！");
-				map.put("label", "0");
-			}
+	private CustomResult insert(@Valid UserPO user, BindingResult bindingResult) throws Exception {
+		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
-		return map;
+		if(userService.findByUserNameAndId(user.getUsername(), user.getId()).size()>0){
+			return CustomResult.build(101, "该用户名已经存在，请更换用户名!");
+		}else if(userService.get(user.getId()) != null){
+			return CustomResult.build(101, "该用户编号已经存在，请更换用户编号！");
+		}
+		result = userService.insert(user);
+		return result;
 	}
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(UserPO user) throws Exception {
-		CustomResult result = userService.update(user);
-		return result;
+	private CustomResult update(@Valid UserPO user, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return userService.update(user);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private Map<String,Object> updateAll(UserPO user) throws Exception {
-		Map<String,Object> map = new HashMap<String,Object>(); 
-		if(userService.findByUserNameAndId(user.getUsername(), user.getId()).size()>0){
-			map.put("msg", "该用户名已经存在，请更换用户名！");
-			map.put("label", "1");
-		}else{
-			CustomResult result = userService.updateAll(user);
-			if(result.getStatus() == 200){
-				map.put("msg", "更新用户成功！");
-				map.put("label", "200");
-			}else{
-				map.put("msg", "更新用户失败！");
-				map.put("label", "0");
-			}
+	private CustomResult updateAll(@Valid UserPO user, BindingResult bindingResult) throws Exception {
+		CustomResult result; 
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
-		return map;
+		if(userService.findByUserNameAndId(user.getUsername(), user.getId()).size()>0){
+			return CustomResult.build(101, "该用户名已经存在，请更换用户名！");
+		}
+		
+		result = userService.updateAll(user);
+		return result;
 	}
 	
 	@RequestMapping("/delete_judge")
@@ -151,7 +148,6 @@ public class UserController {
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
-		System.out.println(ids);
 		CustomResult result = userService.deleteBatch(ids);
 		return result;
 	}
