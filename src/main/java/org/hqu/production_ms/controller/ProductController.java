@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Product;
@@ -13,6 +15,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,8 +104,12 @@ public class ProductController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(Product product) throws Exception {
+	private CustomResult insert(@Valid Product product, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(productService.get(product.getProductId()) != null){
 			result = new CustomResult(0, "该产品编号已经存在，请更换产品编号！", null);
 		}else{
@@ -112,23 +120,32 @@ public class ProductController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(Product product) throws Exception {
-		CustomResult result = productService.update(product);
-		return result;
+	private CustomResult update(@Valid Product product, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return productService.update(product);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(Product product) throws Exception {
-		CustomResult result = productService.updateAll(product);
-		return result;
+	private CustomResult updateAll(@Valid Product product, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return productService.updateAll(product);
 	}
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(Product product) throws Exception {
-		CustomResult result = productService.updateNote(product);
-		return result;
+	private CustomResult updateNote(@Valid Product product, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return productService.updateNote(product);
 	}
 	
 	@RequestMapping("/delete_judge")
