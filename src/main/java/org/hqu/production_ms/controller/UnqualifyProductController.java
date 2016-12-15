@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -17,6 +18,8 @@ import org.hqu.production_ms.service.UnqualifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,9 +56,6 @@ public class UnqualifyProductController {
 		return map;
 	}
 	
-	
-	
-	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
 	public Map<String,Object> unqualifyEditJudge() throws Exception{
@@ -73,7 +73,6 @@ public class UnqualifyProductController {
 		}
 		return map;
 	}
-	
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
@@ -93,8 +92,6 @@ public class UnqualifyProductController {
 		return map;
 	}
 	
-	
-	
 	@RequestMapping("/search_unqualify_by_unqualifyId")
 	@ResponseBody
 	public EUDataGridResult searchUnqualifyByUnqualifyId(Integer page, Integer rows, String searchValue) 
@@ -102,13 +99,6 @@ public class UnqualifyProductController {
 		EUDataGridResult result = unqualifyService.searchUnqualifyByUnqualifyId(page, rows, searchValue);
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	@InitBinder
     public void InitBinder(HttpServletRequest request,
@@ -160,8 +150,17 @@ public class UnqualifyProductController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(UnqualifyApply unqualifyApply) throws Exception {
-		CustomResult result = unqualifyService.insert(unqualifyApply);
+	private CustomResult insert(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult) throws Exception {
+		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		if(unqualifyService.get(unqualifyApply.getUnqualifyApplyId()) != null){
+			result = new CustomResult(0, "该不合格品申请编号已经存在，请更换！", null);
+		}else{
+			result = unqualifyService.insert(unqualifyApply);
+		}
 		return result;
 	}
 	
@@ -174,16 +173,22 @@ public class UnqualifyProductController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(UnqualifyApply unqualifyApply) throws Exception {
-		CustomResult result = unqualifyService.updateAll(unqualifyApply);
-		return result;
+	private CustomResult updateAll(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return unqualifyService.updateAll(unqualifyApply);
 	}
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(UnqualifyApply unqualifyApply) throws Exception {
-		CustomResult result = unqualifyService.updateNote(unqualifyApply);
-		return result;
+	private CustomResult updateNote(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return unqualifyService.updateNote(unqualifyApply);
 	}
 	
 	@RequestMapping(value="/delete")
