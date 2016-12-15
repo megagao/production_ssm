@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Technology;
@@ -13,6 +15,8 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.service.TechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,8 +108,12 @@ public class TechnologyController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(Technology technology) throws Exception {
+	private CustomResult insert(@Valid Technology technology, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(technologyService.get(technology.getTechnologyId()) != null){
 			result = new CustomResult(0, "该工艺编号已经存在，请更换工艺编号！", null);
 		}else{
@@ -123,9 +131,12 @@ public class TechnologyController {
 	*/
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(Technology technology) throws Exception {
-		CustomResult result = technologyService.updateAll(technology);
-		return result;
+	private CustomResult updateAll(@Valid Technology technology, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return technologyService.updateAll(technology);
 	}
 	/*
 	@RequestMapping(value="/update_note")
