@@ -4,16 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.MaterialConsume;
+import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.domain.po.MaterialConsumePO;
 import org.hqu.production_ms.service.MaterialConsumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -103,8 +108,12 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(MaterialConsumePO materialConsume) throws Exception {
+	private CustomResult insert(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(materialConsumeService.get(materialConsume.getConsumeId()) != null){
 			result = new CustomResult(0, "该订单编号已经存在，请更换订单编号！", null);
 		}else{
@@ -115,23 +124,32 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(MaterialConsumePO materialConsume) throws Exception {
-		CustomResult result = materialConsumeService.update(materialConsume);
-		return result;
+	private CustomResult update(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return materialConsumeService.update(materialConsume);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(MaterialConsumePO materialConsume) throws Exception {
-		CustomResult result = materialConsumeService.updateAll(materialConsume);
-		return result;
+	private CustomResult updateAll(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return materialConsumeService.updateAll(materialConsume);
 	}
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(MaterialConsumePO materialConsume) throws Exception {
-		CustomResult result = materialConsumeService.updateNote(materialConsume);
-		return result;
+	private CustomResult updateNote(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return materialConsumeService.updateNote(materialConsume);
 	}
 	
 	@RequestMapping("/delete_judge")
