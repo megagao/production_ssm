@@ -2,6 +2,8 @@ package org.hqu.production_ms.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.custom.ActiveUser;
@@ -12,6 +14,8 @@ import org.hqu.production_ms.domain.po.MaterialReceivePO;
 import org.hqu.production_ms.service.MaterialReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -98,8 +102,12 @@ public class MaterialReceiveController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(MaterialReceivePO materialReceive) throws Exception {
+	private CustomResult insert(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(materialReceiveService.get(materialReceive.getReceiveId()) != null){
 			result = new CustomResult(0, "该产品编号已经存在，请更换产品编号！", null);
 		}else{
@@ -110,23 +118,32 @@ public class MaterialReceiveController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(MaterialReceivePO materialReceive) throws Exception {
-		CustomResult result = materialReceiveService.update(materialReceive);
-		return result;
+	private CustomResult update(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return materialReceiveService.update(materialReceive);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(MaterialReceivePO materialReceive) throws Exception {
-		CustomResult result = materialReceiveService.updateAll(materialReceive);
-		return result;
+	private CustomResult updateAll(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return materialReceiveService.updateAll(materialReceive);
 	}
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(MaterialReceivePO materialReceive) throws Exception {
-		CustomResult result = materialReceiveService.updateNote(materialReceive);
-		return result;
+	private CustomResult updateNote(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return materialReceiveService.updateNote(materialReceive);
 	}
 	
 	@RequestMapping("/delete_judge")
