@@ -15,7 +15,7 @@
 	            <td>设备名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" value="001"
-    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'" />
+    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
