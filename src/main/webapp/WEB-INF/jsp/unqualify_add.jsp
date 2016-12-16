@@ -96,10 +96,10 @@
 		//$("#unqualifyAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("unqualify/insert",$("#unqualifyAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增订单成功!');
+				$.messager.alert('提示','新增不合格品申请成功!');
 				clearUnqualifyAddForm();
-				$("#unqualifyList").datagrid("reload");
 				$("#unqualifyAddWindow").window('close');
+				$("#unqualifyList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			}
