@@ -33,7 +33,7 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitDepartmentAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearDepartmentAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -61,7 +61,8 @@
 		$.post("department/insert",$("#departmentAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增部门成功!');
-				clearForm();
+				clearDepartmentAddForm();
+				$("#departmentAddWindow").window('close');
 				$("#departmentList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
@@ -69,7 +70,7 @@
 		});
 	}
 	
-	function clearForm(){
+	function clearDepartmentAddForm(){
 		$('#departmentAddForm').form('reset');
 		departmentAddEditor.html('');
 	}
