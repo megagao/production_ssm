@@ -8,37 +8,37 @@
 	         <tr>
 	            <td>物料收入编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="receiveId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="receiveId" data-options="required:true" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="materialId"   
-    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data'" />  
+    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;"/>  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>收入数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="ammount" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="ammount" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>收入日期:</td>
 	            <td><input class="easyui-datetimebox" name="receiveDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:160px"> </td>
 	        </tr>
 	        <tr>
 	            <td>发送者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="sender"></input>
+	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>接收者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="receiver"></input>
+	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
@@ -52,7 +52,7 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitMaterialReceiveAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearMaterialReceiveForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -79,18 +79,16 @@
 		$.post("materialReceive/insert",$("#materialReceiveAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增成功!');
-				clearForm();				
-				updateForm();	
-											
+				clearMaterialReceiveForm();				
+				updateMaterialReceiveForm();	
 			}else{
 				$.messager.alert('提示',data.msg);
 			}  
 		}
-		
 		);
 	}
 	
-	function clearForm(){
+	function clearMaterialReceiveForm(){
 		$('#materialReceiveAddForm').form('reset');
 		materialReceiveAddEditor.html('');
 	}
@@ -98,9 +96,8 @@
 	    required:true,    
 	    multiple:true   
 	});
-	function updateForm(){
-    						$("#materialReceiveAddWindow").window('close');
-    						$("#materialReceiveList").datagrid("reload");
-    						$("#materialReceiveInfoWindow").window('close');
-    				}
+	function updateMaterialReceiveForm(){
+			$("#materialReceiveAddWindow").window('close');
+			$("#materialReceiveList").datagrid("reload");
+	}
 </script>
