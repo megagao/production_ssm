@@ -21,14 +21,14 @@
 	            <td>作业编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="workId"   
-    					data-options="valueField:'workId',textField:'workId',url:'work/get_data', editable:false" />
+    					data-options="valueField:'workId',textField:'workId',url:'work/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>生产批号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="manufactureSn"   
-    					data-options="valueField:'manufactureSn',textField:'manufactureSn',url:'manufacture/get_data', editable:false" />
+    					data-options="valueField:'manufactureSn',textField:'manufactureSn',url:'manufacture/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -67,6 +67,7 @@
 			if(data.status == 200){
 				$.messager.alert('提示','新增生产派工成功!');
 				clearTaskAddForm();
+				$("#taskAddWindow").window('close');
 				$("#taskList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
