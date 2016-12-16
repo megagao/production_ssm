@@ -21,7 +21,7 @@
 	            <td>设备种类:</td>
 	            <td>
 	            	<input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto" value="01"
-    					data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data'" />
+    					data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
