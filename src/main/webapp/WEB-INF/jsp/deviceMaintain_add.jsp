@@ -15,14 +15,14 @@
 	            <td>故障编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceFaultId" panelHeight="auto" value="001"
-    					data-options="editable:false,valueField:'deviceFaultId',textField:'deviceFaultId',url:'deviceFault/get_data'" />
+    					data-options="editable:false,valueField:'deviceFaultId',textField:'deviceFaultId',url:'deviceFault/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>维修人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceMaintainEmpId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceMaintainEmpId',textField:'deviceMaintainEmp',url:'employee/get_data3'" />
+    					data-options="required:true,editable:false,valueField:'deviceMaintainEmpId',textField:'deviceMaintainEmp',url:'employee/get_data3', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
