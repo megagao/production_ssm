@@ -96,10 +96,10 @@
 		//ajax的post方式提交表单
 		$.post("p_measure_check/insert",$("#pMeasureCheckAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增订单成功!');
+				$.messager.alert('提示','新增工序计量质检成功!');
 				clearPMeasureCheckForm();
-				$("#pMeasureCheckList").datagrid("reload");
 				$("#pMeasureCheckAddWindow").window('close');
+				$("#pMeasureCheckList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			}
