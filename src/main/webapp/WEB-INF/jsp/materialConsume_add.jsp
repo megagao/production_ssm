@@ -8,44 +8,44 @@
 	         <tr>
 	            <td>物料消费编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="consumeId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="consumeId" data-options="required:true" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>所属工作:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="workId"   
-    					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'" />  
+    					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'" style="width: 160px;" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="materialId"   
-    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data'" />  
+    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>消费数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="consumeAmount" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="consumeAmount" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>消费日期:</td>
 	            <td><input class="easyui-datetimebox" name="consumeDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:160px"> </td>
 	        </tr>
 	        <tr>
 	            <td>发送者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="sender"></input>
+	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>接收者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="receiver"></input>
+	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
@@ -59,7 +59,7 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitMaterialConsumeAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearMaterialConsumeForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -86,18 +86,17 @@
 		$.post("materialConsume/insert",$("#materialConsumeAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增成功!');
-				clearForm();				
-				updateForm();	
-											
+				clearMaterialConsumeForm();				
+				$("#materialConsumeAddWindow").window('close');
+				$("#materialConsumeList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			}  
 		}
-		
 		);
 	}
 	
-	function clearForm(){
+	function clearMaterialConsumeForm(){
 		$('#materialConsumeAddForm').form('reset');
 		materialConsumeAddEditor.html('');
 	}
@@ -105,9 +104,4 @@
 	    required:true,    
 	    multiple:true   
 	});
-	function updateForm(){
-    						$("#materialConsumeAddWindow").window('close');
-    						$("#materialConsumeList").datagrid("reload");
-    						$("#materialConsumeInfoWindow").window('close');
-    				}
 </script>
