@@ -56,7 +56,7 @@
 	        <tr>
 	            <td>客户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="width:150, editable:false">
 						<option value="1">有效客户</option>
 						<option value="2">无效客户</option>
 					</select>
@@ -73,7 +73,7 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitCustomAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearCustomAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -100,14 +100,16 @@
 		$.post("custom/insert",$("#customAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增客户成功!');
-				clearForm();
+				clearCustomAddForm();
+				$("#customAddWindow").window('close');
+				$("#customList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			}
 		});
 	}
 	
-	function clearForm(){
+	function clearCustomAddForm(){
 		$('#customAddForm').form('reset');
 		customAddEditor.html('');
 	}
