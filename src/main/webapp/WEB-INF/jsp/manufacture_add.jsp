@@ -20,14 +20,14 @@
 	            <td>订单编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="orderId"   
-    					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data'" />  
+    					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyId"   
-    					data-options="valueField:'technologyId',textField:'technologyName',url:'product/get_data'" />
+    					data-options="valueField:'technologyId',textField:'technologyName',url:'technology/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -42,14 +42,14 @@
 	        <tr>
 	            <td>要求日期:</td>
 	            <td><input class="easyui-datetimebox" name="endDate"     
-        			data-options="showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="showSeconds:true"  style="width:150px"> </td>
 	        </tr>
 	    </table>
 	</form>
 	<br><br>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitManufactureAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearManufactureAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -65,9 +65,10 @@
 		//ajax的post方式提交表单
 		//$("#manufactureAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("manufacture/insert",$("#manufactureAddForm").serialize(), function(data){
-			if(data.label == 200){
-				$.messager.alert('提示', data.msg);
-				clearForm();
+			if(data.status == 200){
+				$.messager.alert('提示', '新增生产计划成功!');
+				clearManufactureAddForm();
+				$("#manufactureAddWindow").window('close');
 				$("#manufactureList").datagrid("reload");
 			}else{
 				$.messager.alert('提示', data.msg);
@@ -75,7 +76,7 @@
 		});
 	}
 	
-	function clearForm(){
+	function clearManufactureAddForm(){
 		$('#manufactureAddForm').form('reset');
 	}
 	$('#cc').combo({    
