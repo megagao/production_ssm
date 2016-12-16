@@ -27,21 +27,21 @@
 	            <td>产品:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false" />
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>工序:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="processId"   
-    					data-options="valueField:'processId',textField:'processId',url:'process/get_data', editable:false" />
+    					data-options="valueField:'processId',textField:'processId',url:'process/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>设备:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId"   
-    					data-options="valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', editable:false" />
+    					data-options="valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -74,6 +74,7 @@
 			if(data.status == 200){
 				$.messager.alert('提示','新增作业成功!');
 				clearWorkAddForm();
+				$("#workAddWindow").window('close');
 				$("#workList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
