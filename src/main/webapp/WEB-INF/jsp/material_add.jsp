@@ -8,7 +8,7 @@
 	         <tr>
 	            <td>物料编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="materialId" data-options="required:true" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	     <!--   <tr>
@@ -20,13 +20,13 @@
 	        <tr>
 	            <td>物料类型:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="status" style="width: 160px;" data-options="editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -36,7 +36,7 @@
 	        <tr>
 	            <td>剩余数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="remaining"></input>
+	            	<input class="easyui-textbox" type="text" name="remaining" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        
@@ -51,12 +51,10 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitMaterialAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearMaterialForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
-	
-	
 	var materialAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
@@ -78,10 +76,8 @@
 		$.post("material/insert",$("#materialAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增成功!');
-				clearForm();
-				
-				updateForm();	
-											
+				clearMaterialForm();
+				updateMaterialForm();	
 			}else{
 				$.messager.alert('提示',data.msg);
 			}  
@@ -90,7 +86,7 @@
 		);
 	}
 	
-	function clearForm(){
+	function clearMaterialForm(){
 		$('#materialAddForm').form('reset');
 		materialAddEditor.html('');
 	}
@@ -98,9 +94,8 @@
 	    required:true,    
 	    multiple:true   
 	});
-	function updateForm(){
-    						$("#materialAddWindow").window('close');
-    						$("#materialList").datagrid("reload");
-    						$("#materialInfoWindow").window('close');
-    				}
+	function updateMaterialForm(){
+			$("#materialAddWindow").window('close');
+			$("#materialList").datagrid("reload");
+	}
 </script>
