@@ -26,7 +26,7 @@
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="cc" class="easyui-combobox" name="sex" data-options="required:true,width:150">
+	            	<select id="cc" class="easyui-combobox" name="sex" data-options="required:true,width:150, editable:false">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -36,7 +36,7 @@
 	            <td>所属部门:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="departmentId"   
-    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
+    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -75,7 +75,7 @@
         			value="5/5/2016" style="width:150px"> </td>
 	        </tr>
 	        <tr>
-	            <td>生日:</td>
+	            <td>入职日期:</td>
 	            <td><input class="easyui-datebox" name="joinDate"     
         			value="5/5/2016" style="width:150px"> </td>
 	        </tr>
@@ -90,7 +90,7 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmployeeAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearEmployeeAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -108,7 +108,8 @@
 		$.post("employee/insert",$("#employeeAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增员工成功!');
-				clearForm();
+				clearEmployeeAddForm();
+				$("#employeeAddWindow").window('close');
 				$("#employeeList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
@@ -116,7 +117,7 @@
 		});
 	}
 	
-	function clearForm(){
+	function clearEmployeeAddForm(){
 		$('#employeeAddForm').form('reset');
 		employeeAddEditor.html('');
 	}
