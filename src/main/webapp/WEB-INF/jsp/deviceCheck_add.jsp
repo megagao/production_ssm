@@ -15,14 +15,14 @@
 	            <td>设备名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" value="001"
-    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'" />
+    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>例检人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceCheckEmpId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceCheckEmpId',textField:'deviceCheckEmp',url:'employee/get_data2'" />
+    					data-options="required:true,editable:false,valueField:'deviceCheckEmpId',textField:'deviceCheckEmp',url:'employee/get_data2', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
