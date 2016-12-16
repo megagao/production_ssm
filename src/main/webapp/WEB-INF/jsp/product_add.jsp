@@ -31,7 +31,7 @@
 	        <tr>
 	            <td>产品状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, editable:false">
 						<option value="1">有效产品</option>
 						<option value="2">停产</option>
 					</select>
@@ -54,8 +54,8 @@
 	    <input type="hidden" name="productParams"/>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitProductAddForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearProductAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -63,8 +63,6 @@
 	var productAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
-		//加载文件上传插件
-		initFileUpload();
 		//创建富文本编辑器
 		//productAddEditor = TAOTAO.createEditor("#productAddForm [name=file]");
 		productAddEditor = KindEditor.create("#productAddForm [name=note]", TT.kingEditorParams);
@@ -76,7 +74,7 @@
 	});
 	
 	//提交表单
-	function submitForm(){
+	function submitProductAddForm(){
 		//有效性验证
 		if(!$('#productAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
@@ -90,15 +88,17 @@
 		$.post("product/insert",$("#productAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增产品成功!');
-				clearForm();
+				clearProductAddForm();
+				$("#productAddWindow").window('close');
 				$(".picFileUpload").siblings("div.pics").find("ul > li").remove();
-				$(".ajax-file-upload-container > .ajax-file-upload-statusbar").remove();
-				
+				$("#productList").datagrid("reload");
+			}else{
+				$.messager.alert('提示',data.msg);
 			}
 		});
 	}
 	
-	function clearForm(){
+	function clearProductAddForm(){
 		$('#productAddForm').form('reset');
 		productAddEditor.html('');
 	}
