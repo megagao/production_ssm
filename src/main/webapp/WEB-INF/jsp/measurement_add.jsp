@@ -94,17 +94,12 @@
 		//同步文本框中的订单要求
 		measureAddEditor.sync();
 		
-		//ajax的post方式提交表单
-		//$("#measureAddForm").serialize()将表单序列号为key-value形式的字符串
-console.log(JSON.stringify($("#measureAddForm").serialize()));
 		$.post("measure/insert",$("#measureAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增订单成功!');
-				$("#measureList").datagrid("reload");
-				$("#measureAddWindow").window('close');
+				$.messager.alert('提示','新增成品计量质检成功!');
 				clearMeasureAddForm();
-				$(".picFileUpload").siblings("div.pics").find("ul > li").remove();
-				$(".ajax-file-upload-container > .ajax-file-upload-statusbar").remove();
+				$("#measureAddWindow").window('close');
+				$("#measureList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			} 
