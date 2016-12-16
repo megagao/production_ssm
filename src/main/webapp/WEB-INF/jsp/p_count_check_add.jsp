@@ -121,13 +121,10 @@
 		//$("#pCountCheckAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("p_count_check/insert",$("#pCountCheckAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增订单成功!');
+				$.messager.alert('提示','新增工序计数质检成功!');
 				clearPCountCheckForm();
-				$("#pCountCheckList").datagrid("reload");
 				$("#pCountCheckAddWindow").window('close');
-				$(".picFileUpload").siblings("div.pics").find("ul > li").remove();
-				$(".ajax-file-upload-container > .ajax-file-upload-statusbar").remove();
-				
+				$("#pCountCheckList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			} 
