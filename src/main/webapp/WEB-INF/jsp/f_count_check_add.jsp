@@ -19,8 +19,9 @@
 	        <tr>
 	            <td>订单编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="orderId" ></input>
-    			</td>  
+	            	<input class="easyui-combobox" name="orderId"   
+    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',required:true, editable:false, required:true" />  
+	            </td>
 	        </tr>
 	        <tr>
 	            <td>检验项目:</td>
@@ -48,7 +49,7 @@
 	        </tr>
 	        <tr>
 	            <td>合格率:</td>
-	             <td><input class="easyui-numberbox" type="text" name="qualify" data-options="min:1,max:99999999,precision:2" />
+	             <td><input class="easyui-numberbox" type="text" name="qualify" data-options="max:1,precision:2"/>
 	            	
 	            </td>
 	        </tr>
@@ -87,7 +88,7 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="fCountCheckSubmitForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearFCountCheckAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -114,26 +115,21 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-console.log("1");
-		//同步文本框中的产品要求
-		/* fCountCheckAddEditor.sync(); */
-		console.log("2");		
-		//ajax的post方式提交表单
-		//$("#fCountCheckAddForm").serialize()将表单序列号为key-value形式的字符串
-		//alert($("#fCountCheckAddForm [name=unquality").val())
+		
+		fCountCheckAddEditor.sync(); 
 		$.post("f_count_check/insert",$("#fCountCheckAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增产品成功!');
-				$("#fCountCheckList").datagrid("reload");
+				clearFCountCheckAddForm();
 				$("#fCountCheckAddWindow").window('close');
-				clearForm();
-				
+				$("#fCountCheckList").datagrid("reload");
+			}else{
+				$.messager.alert('提示', data.msg);
 			}
 		});
-		console.log("3");
 	}
 	
-	function clearForm(){
+	function clearFCountCheckAddForm(){
 		$('#fCountCheckAddForm').form('reset');
 		fCountCheckAddEditor.html('');
 	}
