@@ -3,6 +3,7 @@
 
 <link href="css/uploadfile.css" rel="stylesheet"> 
 <script src="js/jquery.uploadfile.js"></script>
+<script src="js/malsup.github.iojquery.form.js"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
@@ -20,14 +21,14 @@
 	            <td>订购客户:</td>
 	            <td>
 	            	<input id="custom" class="easyui-combobox" name="customId"   
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data'" />  
+    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
 	            	<input id="product" class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data'" />
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -47,7 +48,7 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true, width:150, editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>
@@ -76,8 +77,8 @@
 	            <td>附件:</td>
 	            <td>
 	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
-	                 <div id="fileuploader">上传文件</div>
-	                 <input type="hidden" id="file" name="file"/>
+	                 <div id="orderAddFileUploader">上传文件</div>
+	                 <input type="hidden" id="orderAddFile" name="file"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -90,8 +91,8 @@
 	    <input type="hidden" name="orderParams"/>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitOrderAddForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearOrderADDForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -100,7 +101,7 @@
 	//页面初始化完毕后执行此方法
 	$(function(){
 		//加载文件上传插件
-		initFileUpload();
+		initOrderAddFileUpload();
 		//创建富文本编辑器
 		//orderAddEditor = TAOTAO.createEditor("#orderAddForm [name=file]");
 		orderAddEditor = KindEditor.create("#orderAddForm [name=note]", TT.kingEditorParams);
@@ -112,7 +113,7 @@
 	});
 	
 	//提交表单
-	function submitForm(){
+	function submitOrderAddForm(){
 		//有效性验证
 		if(!$('#orderAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
@@ -126,15 +127,18 @@
 		$.post("order/insert",$("#orderAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增订单成功!');
-				clearForm();
+				clearOrderADDForm();
+				$("#orderAddWindow").window('close');
 				$(".picFileUpload").siblings("div.pics").find("ul > li").remove();
 				$(".ajax-file-upload-container > .ajax-file-upload-statusbar").remove();
-				
+				$("#orderList").datagrid("reload");
+			}else{
+				$.messager.alert('提示',data.msg);
 			}
 		});
 	}
 	
-	function clearForm(){
+	function clearOrderADDForm(){
 		$('#orderAddForm').form('reset');
 		orderAddEditor.html('');
 	}
