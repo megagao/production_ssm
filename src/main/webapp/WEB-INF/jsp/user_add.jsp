@@ -32,13 +32,13 @@
 	            <td>角色:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="roleId"   
-    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true" />  
+    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true, editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="locked" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="locked" data-options="width:150, editable:false">
 						<option value="1">有效用户</option>
 						<option value="2">锁定</option>
 					</select>
@@ -49,7 +49,7 @@
 	<br><br>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitUserAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearUserAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -65,9 +65,10 @@
 		//ajax的post方式提交表单
 		//$("#userAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("user/insert",$("#userAddForm").serialize(), function(data){
-			if(data.label == 200){
+			if(data.status == 200){
 				$.messager.alert('提示', data.msg);
-				clearForm();
+				clearUserAddForm();
+				$("#userAddWindow").window('close');
 				$("#userList").datagrid("reload");
 			}else{
 				$.messager.alert('提示', data.msg);
@@ -75,7 +76,7 @@
 		});
 	}
 	
-	function clearForm(){
+	function clearUserAddForm(){
 		$('#userAddForm').form('reset');
 	}
 	$('#cc').combo({    
