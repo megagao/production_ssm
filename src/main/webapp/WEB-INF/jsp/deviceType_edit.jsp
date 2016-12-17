@@ -7,7 +7,7 @@
 	    <input type="hidden" name="deviceTypeId"/>
 	    <table cellpadding="5" >
 	        <tr>
-	            <td>名称:</td>
+	            <td>设备种类名称:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="deviceTypeName" ></input>
 	            </td>
@@ -45,7 +45,7 @@
 	        <tr>
 	            <td>保修期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="deviceTypeWarranty" value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
+	            	<input class="easyui-datebox" name="deviceTypeWarranty" value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
 	            </td>
 	        </tr>
 	    </table>
@@ -72,7 +72,6 @@
     					$.messager.alert('提示','修改设备种类成功!','info',function(){
     						$("#deviceTypeEditWindow").window('close');
     						$("#deviceType").datagrid("reload");
-    						$("#deviceTypeInfoWindow").window('close');
     					});
     				}
     			});
