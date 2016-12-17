@@ -6,13 +6,13 @@
 	<form id="deviceTypeAddForm" class="deviceTypeForm" method="post">
 	    <table cellpadding="5" >
 	        <tr>
-	            <td>编号:</td>
+	            <td>设备种类编号:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="deviceTypeId" data-options="required:true"></input>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>名称:</td>
+	            <td>设备种类名称:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="deviceTypeName" data-options="required:true"></input>
 	            </td>
