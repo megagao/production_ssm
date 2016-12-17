@@ -10,13 +10,13 @@
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'deviceCheckId',width:80,align:'center'">例检编号</th>
+        	<th data-options="field:'deviceCheckId',width:100,align:'center'">设备例检编号</th>
             <th data-options="field:'deviceId',width:100,align:'center'">设备编号</th>
             <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceCheck">设备名称</th>
-            <th data-options="field:'deviceCheckEmp',width:70,align:'center'">例检人</th>
-            <th data-options="field:'deviceCheckDate',width:170,align:'center',formatter:TAOTAO.formatDateTime">例检时间</th>
-            <th data-options="field:'deviceCheckResult',width:80,align:'center',formatter:formatDeviceCheckResult_deviceCheck">例检结果</th>
-            <th data-options="field:'deviceCheckFaultId',width:170,align:'center'">例检故障编号</th>
+            <th data-options="field:'deviceCheckEmp',width:100,align:'center'">例检人</th>
+            <th data-options="field:'deviceCheckDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">例检时间</th>
+            <th data-options="field:'deviceCheckResult',width:100,align:'center',formatter:formatDeviceCheckResult_deviceCheck">例检结果</th>
+            <th data-options="field:'deviceCheckFaultId',width:100,align:'center'">例检故障编号</th>
         </tr>
     </thead>
 </table>
@@ -24,7 +24,7 @@
 <!-- Toolbar -->
 <div  id="toolbar_deviceCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
-	<%-- <c:forEach items="${sessionScope.sysPermissionList}" var="per" > --%>
+	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='deviceCheck:add'}">
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="deviceCheck_add()">新增</a>  
@@ -40,7 +40,7 @@
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="deviceCheck_delete()">删除</a>  
 		    </div>  
 		</c:if>
-	<%-- </c:forEach> --%>
+	</c:forEach>
 	
 	<div class="datagrid-btn-separator"></div>  
 	
@@ -55,7 +55,7 @@
         </input>
         <div id="menu_deviceCheck" style="width:120px"> 
 			<div data-options="name:'deviceCheckId'">设备例检编号</div> 
-			<div data-options="name:'deviceCheckName'">设备例检名称</div>
+			<div data-options="name:'deviceName'">设备名称</div>
 		</div>     
     </div>  
 
@@ -72,7 +72,6 @@
 <!-- 设备信息 -->
 <div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:62%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceCheck" method="post">
-	    
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>设备编号:</td>
@@ -116,7 +115,7 @@
 	        <tr>
 	            <td>保管人:</td>
 	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'employee/get_data'" /></input></td>
+    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'deviceCheck/get_data'" /></input></td>
 	        </tr>
 	        <tr>
 	            <td>备注:</td>
@@ -149,6 +148,41 @@
 </div>
 
 <script>
+
+function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
+	if(value == null || value == ''){
+		$("#deviceCheck").datagrid({
+	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        columns : [ [ 
+	             	{field : 'ck', checkbox:true }, 
+	             	{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
+	             	{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
+	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称', formatter:formatDevice_deviceCheck}, 
+	             	{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center'}, 
+	             	{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',formatter:TAOTAO.formatDateTime}, 
+	            	{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',formatter:formatDeviceCheckResult_deviceCheck}, 
+	             	{field : 'deviceCheckFaultId', width : 100, title : '例检故障编号', align:'center'}, 
+	        ] ],  
+	    });
+	}else{
+		$("#deviceCheck").datagrid({  
+	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/search_deviceCheck_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        columns : [ [ 
+					{field : 'ck', checkbox:true }, 
+					{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
+					{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
+					{field : 'deviceName', width : 100, align : 'center', title : '设备名称', formatter:formatDevice_deviceCheck}, 
+					{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center'}, 
+					{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',formatter:TAOTAO.formatDateTime}, 
+					{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',formatter:formatDeviceCheckResult_deviceCheck}, 
+					{field : 'deviceCheckFaultId', width : 100, title : '例检故障编号', align:'center'}, 
+	        ] ],  
+	    });
+	}
+}
+
 
 	/********************************** Toolbar function ***********************************/
 	function getDeviceCheckSelectionsIds(){
@@ -233,9 +267,6 @@
     	$("#deviceCheck").datagrid("reload");
     }
     
-	function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
-		
-	}	
 	/*********************************** Toolbar function ***********************************/
 	
 	var noteEditor_device_deviceCheck;
