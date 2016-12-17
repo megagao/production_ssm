@@ -10,13 +10,13 @@
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'deviceMaintainId',width:80,align:'center'">维修编号</th>
+        	<th data-options="field:'deviceMaintainId',width:100,align:'center'">设备维修编号</th>
             <th data-options="field:'deviceFaultId',width:100,align:'center',formatter:formatDeviceFault_deviceMaintain">故障编号</th>
-            <th data-options="field:'deviceMaintainEmp',width:80,align:'center'">维修人</th>
+            <th data-options="field:'deviceMaintainEmp',width:100,align:'center'">维修人</th>
             <th data-options="field:'deviceMaintainDate',width:100,align:'center',formatter:TAOTAO.formatDateTime">维修日期</th>
-            <th data-options="field:'deviceMaintainResult',width:70,align:'center'">维修结果</th>
-            <th data-options="field:'deviceMaintainCost',width:70,align:'center'">维修费用</th>
-            <th data-options="field:'note',width:70,align:'center',formatter:formatDeviceMaintainNote">备注</th>
+            <th data-options="field:'deviceMaintainResult',width:100,align:'center'">维修结果</th>
+            <th data-options="field:'deviceMaintainCost',width:100,align:'center'">维修费用</th>
+            <th data-options="field:'note',width:100,align:'center',formatter:formatDeviceMaintainNote">备注</th>
         </tr>
     </thead>
 </table>
@@ -24,8 +24,8 @@
 <!-- Toolbar -->
 <div  id="toolbar_deviceMaintain" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
-	<%-- <c:forEach items="${sessionScope.sysPermissionList}" var="per" > --%>
-		<c:if test=${per=='deviceMaintain:add'}">
+	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
+		<c:if test="${per=='deviceMaintain:add'}">
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="deviceMaintain_add()">新增</a>  
 		    </div>  
@@ -40,7 +40,7 @@
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="deviceMaintain_delete()">删除</a>  
 		    </div>  
 		</c:if>
-	<%-- </c:forEach> --%>
+	</c:forEach>
 	
 	<div class="datagrid-btn-separator"></div>  
 	
@@ -55,7 +55,7 @@
         </input>
         <div id="menu_deviceMaintain" style="width:120px"> 
 			<div data-options="name:'deviceMaintainId'">设备维修编号</div> 
-			<div data-options="name:'deviceMaintainName'">设备维修名称</div>
+			<div data-options="name:'deviceFaultId'">故障编号</div>
 		</div>     
     </div>  
 
@@ -136,6 +136,41 @@
 </div>
 
 <script>
+
+function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜素,触发此函数  
+	if(value == null || value == ''){
+		
+		$("#deviceMaintain").datagrid({
+	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        columns : [ [ 
+	             	{field : 'ck', checkbox:true }, 
+	             	{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
+	             	{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',formatter:formatDeviceFault_deviceMaintain},
+	             	{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'}, 
+	             	{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:formatDepartment}, 
+	             	{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'}, 
+	            	{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'}, 
+	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote} 
+	        ] ],  
+	    });
+	}else{
+		$("#deviceMaintain").datagrid({  
+	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/search_deviceMaintain_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        columns : [ [ 
+					{field : 'ck', checkbox:true }, 
+					{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
+					{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',formatter:formatDeviceFault_deviceMaintain},
+					{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'}, 
+					{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:formatDepartment}, 
+					{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'}, 
+					{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'}, 
+					{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote} 
+	        ] ],  
+	    });
+	}
+}
 
 	/********************************** Toolbar function ***********************************/
 	function getDeviceMaintainSelectionsIds(){
@@ -219,9 +254,6 @@
     	$("#deviceMaintain").datagrid("reload");
     }
     
-	function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜素,触发此函数  
-		
-	}	
 	/*********************************** Toolbar function ***********************************/
 	
 	var noteEditor_device_deviceMaintain;
