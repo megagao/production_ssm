@@ -10,7 +10,7 @@
 	            <td>设备名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto"
-    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'" />
+    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
@@ -68,7 +68,6 @@
     					$.messager.alert('提示','修改设备故障成功!','info',function(){
     						$("#deviceFaultEditWindow").window('close');
     						$("#deviceFault").datagrid("reload");
-    						$("#deviceFaultInfoWindow").window('close');
     					});
     				}
     			});
