@@ -10,16 +10,16 @@
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'deviceId',width:80,align:'center'">设备编号</th>
+        	<th data-options="field:'deviceId',width:100,align:'center'">设备编号</th>
             <th data-options="field:'deviceName',width:100,align:'center'">设备名称</th>
             <th data-options="field:'deviceTypeName',width:100,align:'center',formatter:formatDeviceType_deviceList">设备种类</th>
-            <th data-options="field:'deviceStatusId',width:70,align:'center',formatter:TAOTAO.formatDeviceStatus">设备状态</th>
-            <th data-options="field:'devicePurchaseDate',width:170,align:'center',formatter:TAOTAO.formatDateTime">购买日期</th>
+            <th data-options="field:'deviceStatusId',width:100,align:'center',formatter:TAOTAO.formatDeviceStatus">设备状态</th>
+            <th data-options="field:'devicePurchaseDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">购买日期</th>
             <th data-options="field:'devicePurchasePrice',width:80,align:'center'">购买价格</th>
-            <th data-options="field:'deviceManufactureDate',width:170,align:'center',formatter:TAOTAO.formatDateTime">出厂日期</th>
-            <th data-options="field:'deviceServiceLife',width:170,align:'center',formatter:TAOTAO.formatDateTime">使用年限</th>
-            <th data-options="field:'deviceKeeper',width:120,align:'center',formatter:formatDeviceKeeper_deviceList">保管人</th>
-            <th data-options="field:'note',width:80,align:'center',formatter:formatDeviceNote">备注</th>
+            <th data-options="field:'deviceManufactureDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">出厂日期</th>
+            <th data-options="field:'deviceServiceLife',width:130,align:'center',formatter:TAOTAO.formatDate">使用年限</th>
+            <th data-options="field:'deviceKeeper',width:100,align:'center',formatter:formatDeviceKeeper_deviceList">保管人</th>
+            <th data-options="field:'note',width:100,align:'center',formatter:formatDeviceNote">备注</th>
         </tr>
     </thead>
 </table>
@@ -27,7 +27,7 @@
 <!-- Toolbar -->
 <div  id="toolbar_device" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
-	<%-- <c:forEach items="${sessionScope.sysPermissionList}" var="per" > --%>
+	<c:forEach items="${sessionScope.sysPermissionList}" var="per" > 
 		<c:if test="${per=='device:add'}">
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="device_add()">新增</a>  
@@ -43,7 +43,7 @@
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="device_delete()">删除</a>  
 		    </div>  
 		</c:if>
-	<%-- </c:forEach> --%>
+	</c:forEach>
 	
 	<div class="datagrid-btn-separator"></div>  
 	
@@ -59,6 +59,7 @@
         <div id="menu_device" style="width:120px"> 
 			<div data-options="name:'deviceId'">设备编号</div> 
 			<div data-options="name:'deviceName'">设备名称</div>
+			<div data-options="name:'deviceTypeName'">设备名称</div>
 		</div>     
     </div>  
 
@@ -196,6 +197,45 @@
 </div>
 
 <script>
+function doSearch_device(value,name){ //用户输入用户名,点击搜素,触发此函数  
+	if(value == null || value == ''){
+		$("#deviceList").datagrid({
+	        title:'设备列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        toolbar:"toolbar_device", url:'deviceList/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        columns : [ [ 
+	             	{field : 'ck', checkbox:true }, 
+	             	{field : 'deviceId', width : 100, align:'center', title : '设备编号'},
+	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
+	             	{field : 'deviceTypeName', width : 100, align : 'center', title : '设备种类', formatter:formatDeviceType_deviceList}, 
+	             	{field : 'deviceStatusId', width : 100, title : '设备状态', align:'center',formatter:TAOTAO.formatDeviceStatus}, 
+	             	{field : 'devicePurchaseDate', width : 130, title : '购买日期', align:',formatter:TAOTAO.formatDateTime'}, 
+	            	{field : 'devicePurchasePrice', width : 80, title : '购买价格', align:'center'}, 
+	             	{field : 'deviceManufactureDate', width : 130, title : '出厂日期', align:'center',formatter:TAOTAO.formatDateTime}, 
+	             	{field : 'deviceServiceLife', width : 130, title : '使用年限', align:'center',formatter:TAOTAO.formatDate}, 
+	             	{field : 'deviceKeeper', width : 100, title : '保管人', align:'center',formatter:formatDeviceKeeper_deviceList}, 
+	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatDeviceNote}
+	        ] ],  
+	    });
+	}else{
+		$("#deviceList").datagrid({  
+	        title:'设备列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        toolbar:"toolbar_device", url:'deviceList/search_device_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        columns : [ [ 
+					{field : 'ck', checkbox:true }, 
+					{field : 'deviceId', width : 100, align:'center', title : '设备编号'},
+					{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
+					{field : 'deviceTypeName', width : 100, align : 'center', title : '设备种类', formatter:formatDeviceType_deviceList}, 
+					{field : 'deviceStatusId', width : 100, title : '设备状态', align:'center',formatter:TAOTAO.formatDeviceStatus}, 
+					{field : 'devicePurchaseDate', width : 130, title : '购买日期', align:',formatter:TAOTAO.formatDateTime'}, 
+					{field : 'devicePurchasePrice', width : 80, title : '购买价格', align:'center'}, 
+					{field : 'deviceManufactureDate', width : 130, title : '出厂日期', align:'center',formatter:TAOTAO.formatDateTime}, 
+					{field : 'deviceServiceLife', width : 130, title : '使用年限', align:'center',formatter:TAOTAO.formatDate}, 
+					{field : 'deviceKeeper', width : 100, title : '保管人', align:'center',formatter:formatDeviceKeeper_deviceList}, 
+					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatDeviceNote}
+	        ] ],  
+	    });
+	}
+}
 
 	/*********************************** Toolbar function ***********************************/
 	function getDeviceSelectionsIds(){
@@ -280,9 +320,6 @@
     	$("#deviceList").datagrid("reload");
     }
     
-	function doSearch_device(value,name){ //用户输入用户名,点击搜素,触发此函数  
-		
-	}	
 	/*********************************** Toolbar function ***********************************/
 	
 	var deviceNoteEditor ;
@@ -344,7 +381,7 @@
 	
 	//提交设备种类信息
 	function submitDeviceKeeperEditForm_deviceList(){
-		$.get("employee/edit_judge",'',function(data){
+		$.get("device/edit_judge",'',function(data){
     		/* if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{ */
@@ -352,7 +389,7 @@
     				$.messager.alert('提示','表单还未填写完成!');
     				return ;
     			}
-    			$.post("employee/update_all",$("#deviceKeeperEditForm_deviceList").serialize(), function(data){
+    			$.post("device/update_all",$("#deviceKeeperEditForm_deviceList").serialize(), function(data){
     				if(data.status == 200){
     					$.messager.alert('提示','修改保管人信息成功!','info',function(){
     						$("#deviceKeeperInfo_deviceList").dialog("close");
@@ -381,7 +418,7 @@
 		var row = onDeviceClickRow(index);
 		$("#deviceKeeperInfo_deviceList").dialog({
     		onOpen :function(){
-    			$.get("employee/get/"+row.deviceKeeperId,'',function(data){
+    			$.get("device/get/"+row.deviceKeeperId,'',function(data){
 		    		//回显数据
 					data.birthday = TAOTAO.formatDateTime(data.birthday);
 					data.joinDate = TAOTAO.formatDateTime(data.joinDate);
