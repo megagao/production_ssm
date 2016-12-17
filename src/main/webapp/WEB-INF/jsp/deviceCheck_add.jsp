@@ -22,7 +22,7 @@
 	            <td>例检人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceCheckEmpId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceCheckEmpId',textField:'deviceCheckEmp',url:'employee/get_data2', required:true" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
