@@ -54,10 +54,9 @@
     					$.messager.alert('提示','修改部门成功!','info',function(){
     						$("#departmentEditWindow").window('close');
     						$("#departmentList").datagrid("reload");
-    						$("#departmentInfoWindow").window('close');
     					});
     				}else{
-    					$.messager.alert('错误','修改部门失败!');
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
