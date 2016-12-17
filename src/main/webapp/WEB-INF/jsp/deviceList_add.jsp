@@ -63,7 +63,7 @@
 	            <td>保管人:</td>
 	            <td>
 		            <input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'employee/get_data'" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
 				</td>
 	        </tr>
 	        <tr>
