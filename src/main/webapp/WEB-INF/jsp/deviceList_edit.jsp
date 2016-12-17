@@ -16,7 +16,7 @@
 	            <td>设备种类:</td>
 	            <td>
 	            	<input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto"
-    					data-options="required:true,editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data'" />
+    					data-options="required:true,editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
@@ -59,7 +59,7 @@
 	            <td>保管人:</td>
 	            <td>
 		            <input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto"
-    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'employee/get_data'" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
 				</td>
 	        </tr>
 	        <tr>
@@ -99,7 +99,6 @@
     					$.messager.alert('提示','修改设备成功!','info',function(){
     						$("#deviceEditWindow").window('close');
     						$("#deviceList").datagrid("reload");
-    						$("#deviceInfoWindow").window('close');
     					});
     				}
     			});
