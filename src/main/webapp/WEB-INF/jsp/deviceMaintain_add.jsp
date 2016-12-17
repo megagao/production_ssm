@@ -6,7 +6,7 @@
 	<form id="deviceMaintainAddEmp" class="deviceMaintainForm" method="post">
 	    <table cellpadding="5" >
 	        <tr>
-	            <td>维修编号:</td>
+	            <td>设备维修编号:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="deviceMaintainId" data-options="required:true"></input>
 	            </td>
@@ -22,7 +22,7 @@
 	            <td>维修人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceMaintainEmpId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceMaintainEmpId',textField:'deviceMaintainEmp',url:'employee/get_data3', required:true" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
