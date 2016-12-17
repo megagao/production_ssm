@@ -68,7 +68,7 @@
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
-	    </table><span style="color:green;font-size: 12;font-family: Microsoft YaHei;margin-left: 20px">已完成</span>
+	    </table>
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateDepartmentNote()">保存</a>
@@ -79,7 +79,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 	if(value == null || value == ''){
 		
 		$("#departmentList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_department", url:'department/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -90,7 +90,7 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 	    });
 	}else{
 		$("#departmentList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_department", url:'department/search_department_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
