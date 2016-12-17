@@ -10,14 +10,14 @@
 	            <td>设备名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" 
-    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'" />
+    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>例检人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceCheckEmpId" panelHeight="auto" 
-    					data-options="required:true,editable:false,valueField:'deviceCheckEmpId',textField:'deviceCheckEmp',url:'employee/get_data2'" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
@@ -69,7 +69,6 @@
     					$.messager.alert('提示','修改设备例检成功!','info',function(){
     						$("#deviceCheckEditWindow").window('close');
     						$("#deviceCheck").datagrid("reload");
-    						$("#deviceCheckInfoWindow").window('close');
     					});
     				}
     			});
