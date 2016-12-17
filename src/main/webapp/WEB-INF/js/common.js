@@ -49,6 +49,20 @@ var TT = TAOTAO = {
         	return '<span style="color:#E5B717;">未知</span>';
         }
 	},
+	//格式化设备的状态
+	formatDeviceStatus : function formatStatus(val,row){
+        if (val == 1){
+            return '良好';
+        }else if(val == 2){
+        	return '故障';
+        } else if(val == 3){
+        	return '维修';
+        } else if(val == 4){
+        	return '报废';
+        }else {
+        	return '<span style="color:#ff0000;">未知</span>'
+        }
+    },
 	// 格式化连接
 	formatUrl : function(val,row){
 		if(val){
@@ -297,7 +311,7 @@ function formatFile(value, row, index){
 
 //加载文件上传插件
 function initOrderAddFileUpload(){
-	$("#fileuploader").uploadFile({
+	$("#orderAddFileUploader").uploadFile({
 		url:"file/upload",
 		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
@@ -336,6 +350,7 @@ function initOrderAddFileUpload(){
 	    },
 	    onSuccess: function(files,data,xhr,pd)
 	    {
+	    	alert("111")
 	        //上传成功后的回调方法。本例中是将返回的文件名保到一个hidden类开的input中，以便后期数据处理
 	        if(data&&data.error==0){
 	        	$.messager.alert('提示','上传完成!');
@@ -352,7 +367,7 @@ function initOrderAddFileUpload(){
 
 //加载文件上传插件
 function initOrderEditFileUpload(){
-	$("#fileuploader").uploadFile({
+	$("#orderEditFileUploader").uploadFile({
 		url:"file/upload",
 		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
@@ -420,7 +435,7 @@ function removeFile(i){
             	$('#img'+i);
             	$('#file'+i).remove();		//删除成功后在页面上删除该文件的显示
             	$('#delFile'+i).remove();        
-                var urls = $('#file').val().split(",");  //将删除的文件url从urls中移除
+                var urls = $('#orderEditFile').val().split(",");  //将删除的文件url从urls中移除
                 var deletedUrls = [];
                 tempDelFileName = fileName.substring(0,fileName.lastIndexOf("/"));
                 delFileName = tempDelFileName.substring(tempDelFileName.lastIndexOf("/"))+fileName.substring(fileName.lastIndexOf("/"));
@@ -430,7 +445,7 @@ function removeFile(i){
             		}
             	}
             	deletedUrls = deletedUrls.join(",");
-            	$('#file').val(deletedUrls);
+            	$('#orderEditFile').val(deletedUrls);
              }else{
                     console.log(data.message);  //打印服务器返回的错误信息
              }
@@ -440,11 +455,11 @@ function removeFile(i){
 
 //加载上传过的文件
 function initUploadedFile(){
-	var _ele = $("#fileuploader");
+	var _ele = $("#orderEditFileUploader");
 	_ele.after('\
 			<table class="file">\
 			</table>');
-	var files = $('#file').val().split(","); 
+	var files = $('#orderEditFile').val().split(","); 
 	for(var i in files){
 		if(files[i] !=null && files[i] != ''){
 			_ele.siblings(".file").append("<tr><td><a id='file"+i+"' href='file/download?fileName="+files[i]+"'>" +
