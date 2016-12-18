@@ -14,8 +14,9 @@
 	        <tr>
 	            <td>订单编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="orderId" ></input>
-    			</td>  
+	            	<input class="easyui-combobox" name="orderId"   
+    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',required:true, editable:false" />  
+	            </td>
 	        </tr>
 	        <tr>
 	            <td>检验项目:</td>
@@ -36,7 +37,7 @@
     			</td>   
 	        </tr>
 	        <tr>
-	            <td>检验人员编号:</td>
+	            <td>检验人:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="empId" ></input>
     			</td>  
@@ -74,20 +75,17 @@
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		console.log("1");
 		measureEditEditor.sync();
-		console.log("2");
 		$.post("measure/update_all",$("#measureEditForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','修改表单成功!','info',function(){
+				$.messager.alert('提示','修改成品计量质检成功!','info',function(){
 					$("#measureEditWindow").window('close');
 					$("#measureList").datagrid("reload");
 				});
 			}else{
-				$.messager.alert('错误','修改表单失败!');
-			}
+				$.messager.alert('提示',data.msg);
+			} 
 		});
-		console.log("3");
 	}
 	
 </script>
