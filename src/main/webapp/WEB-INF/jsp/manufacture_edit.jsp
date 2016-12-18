@@ -20,14 +20,14 @@
 	            <td>订单编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="orderId"   
-    					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data'" />  
+    					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyId"   
-    					data-options="valueField:'technologyId',textField:'technologyName',url:'product/get_data'" />
+    					data-options="valueField:'technologyId',textField:'technologyName',url:'technology/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -58,8 +58,8 @@
 			return ;
 		}
 		$.post("manufacture/update_all",$("#manufactureEditForm").serialize(), function(data){
-			if(data.label == 200){
-				$.messager.alert('提示', data.msg);
+			if(data.status == 200){
+				$.messager.alert('提示', '修改生产计划成功!');
 				$("#manufactureEditWindow").window('close');
 				$("#manufactureList").datagrid("reload");
 			}else{
@@ -67,5 +67,4 @@
 			}
 		});
 	}
-	
 </script>
