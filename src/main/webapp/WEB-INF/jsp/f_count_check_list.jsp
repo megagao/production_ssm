@@ -4,7 +4,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
-<table  id="fCountCheckList" title="成品计数质检	" class="easyui-datagrid"
+<table  id="fCountCheckList" title="成品计数质检" class="easyui-datagrid"
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'f_count_check/list',method:'get',fitColumns:true,pageSize:10,toolbar:toolbar_fCountCheck">
     <thead>
         <tr>
@@ -18,17 +18,14 @@
             <th data-options="field:'qualify',align:'center',width:100">合格率</th>
             <th data-options="field:'cdate',align:'center',width:130,formatter:TAOTAO.formatDateTime">检验时间</th>
             <th data-options="field:'measureData',align:'center',width:100">实际测量数据</th>
-            <th data-options="field:'empId',align:'center',width:100">检验人员编号</th>
+            <th data-options="field:'empId',align:'center',width:100">检验人</th>
             <th data-options="field:'result',align:'center',width:100">检验结果</th>
-            <th data-options="field:'note',align:'center',width:100,formatter:formatNote">备注</th>
+            <th data-options="field:'note',align:'center',width:100,formatter:formatFCountCheckNote">备注</th>
             
             
         </tr>
     </thead>
 </table>
-
-
-
 
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
@@ -72,12 +69,6 @@
 </div>  
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-
-
-
-
-
-
 <div id="fCountCheckEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:80%;height:95%;padding:10px;">
 </div>
 <div id="fCountCheckAddWindow" class="easyui-window" title="添加订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:80%;height:95%;padding:10px;">
@@ -91,14 +82,14 @@
 	            <td>订购客户:</td>
 	            <td>
 	            	<input id="custom" class="easyui-combobox" name="customId"   
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data'" />  
+    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
 	            	<input id="product" class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data'" />
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -118,7 +109,7 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>
@@ -165,8 +156,8 @@
 
 <!-- ********************************************************************* -->
 
-<div id="noteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
-	<form id="noteForm" class="itemForm" method="post">
+<div id="fCountCheckNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+	<form id="fCountCheckNoteForm" method="post">
 		<input type="hidden" name="fCountCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
@@ -175,16 +166,17 @@
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
+	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateNote()">保存</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateFCountCheckNote()">保存</a>
 	</div>
 </div>
 <script>
 function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#fCountCheckList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_fCountCheck", url:'f_count_check/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -197,14 +189,14 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 	             	{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
 	             	{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
 	             	{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-	            	{field : 'empId', width : 100, title : '检验人员编号', align:'center'}, 
+	            	{field : 'empId', width : 100, title : '检验人', align:'center'}, 
 	             	{field : 'result', width : 100, title : '检验结果', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatNote} 
+	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote} 
 	        ] ],  
 	    });
 	}else{
 		$("#fCountCheckList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_fCountCheck", url:'f_count_check/search_fCountCheck_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
@@ -217,19 +209,17 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 					{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
 					{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
 					{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-					{field : 'empId', width : 100, title : '检验人员编号', align:'center'}, 
+					{field : 'empId', width : 100, title : '检验人', align:'center'}, 
 					{field : 'result', width : 100, title : '检验结果', align:'center'}, 
-					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatNote} 
+					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote} 
 	        ] ],  
 	    });
 	}
 }
 
-	var noteEditor ;
+	var fCountNoteEditor ;
 	
 	var fCountCheckOrderEditor;
-	
-	
 	
 	//格式化订单信息
 	function formatOrder(value, row, index){
@@ -299,32 +289,6 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 		$("#fCountCheckFileSpan").html('');
 	}
 	
-	//8989898989898989898989898989898989898989898989898989898989898989898989898989898989
-	
-	
-	//打开产品信息对话框
-	function  openFCountOrder1(index){ 
-		var row = onFCountClickRow(index);
-		$("#fCountOrderInfo").dialog({
-    		onOpen :function(){
-    			$.get("order/get/"+row.orderId,'',function(data){
-    				fCountCheckOrderEditor = TAOTAO.createEditor("#fCountOrderEditForm [name=note]");	
-		    		//回显数据
-		    		$("#fCountOrderEditForm").form("load", data);
-		    		fCountCheckOrderEditor.html(data.note);
-		    		
-		    		TAOTAO.init({
-        				"pics" : data.image,
-        			});
-    	    	});
-    		},
-			onBeforeClose: function (event, ui) {
-				// 关闭Dialog前移除编辑器
-			   	KindEditor.remove("#fCountOrderEditForm [name=note]");
-			}
-    	}).dialog("open");
-	};
-	
 	function submitfCountOrderEditForm(){
 		$.get("order/edit_judge",'',function(data){
     		if(data.msg != null){
@@ -342,164 +306,70 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
     						$("#fCountOrderInfo").dialog("close");
     					});
     				}else{
-    					$.messager.alert('错误','修改产品失败!');
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
     	});
 	}
 	
-	//打开订单要求富文本编辑器对话框
+	//格式化备注
+	function formatFCountCheckNote(value, row, index){ 
+		if(value !=null && value != ''){
+			return "<a href=javascript:openFCountNote("+index+")>"+"备注"+"</a>";
+		}else{
+			return "无";
+		}
+	}
+	
+	//打开备注对话框
 	function  openFCountNote(index){ 
 		var row = onFCountClickRow(index);
-		$("#fCountNoteDialog").dialog({
+		$("#fCountCheckNoteDialog").dialog({
     		onOpen :function(){
-    			$("#fCountNoteForm [name=orderId]").val(row.orderId);
-    			fCountNoteEditor = TAOTAO.createEditor("#fCountNoteForm [name=note]");
+    			$("#fCountCheckNoteForm [name=fCountCheckId]").val(row.fCountCheckId);
+    			fCountNoteEditor = TAOTAO.createEditor("#fCountCheckNoteForm [name=note]");
     			fCountNoteEditor.html(row.note);
     		},
 		
 			onBeforeClose: function (event, ui) {
 				// 关闭Dialog前移除编辑器
-			   	KindEditor.remove("#fCountNoteForm [name=note]");
+			   	KindEditor.remove("#fCountCheckNoteForm [name=note]");
 			}
     	}).dialog("open");
-		
-	};
-	
-	//更新订单要求
-	function updateFCountNote(){
-		$.get("order/edit_judge",'',function(data){
-    		if(data.msg != null){
-    			$.messager.alert('提示', data.msg);
-    		}else{
-    			fCountNoteEditor.sync();
-    			$.post("order/update_note",$("#fCountNoteForm").serialize(), function(data){
-    				if(data.status == 200){
-    					$("#fCountNoteDialog").dialog("close");
-    					$("#fCountCheckList").datagrid("reload");
-    					$.messager.alert("操作提示", "更新订单要求成功！");
-    				}else{
-    					$.messager.alert("操作提示", "更新订单要求失败！");
-    				}
-    			});
-    		}
-    	});
 	}
 	
-	
-	
-	
-	
-	///////////////////////////////////////////////////////////////////////
-	
-	//格式化客户信息
-	function formatCus(value){ 
-//console.log(value);
-	    return value.customName;
-	};  
-	
-	//格式化产品信息
-	function  formatPro(value){ 
-/* console.log(value); */
-	    return value.productName;
-	};
-	
-	//格式化订单要求
-	function formatNote(value, row, index){ 
-		if(value !=null && value != ''){
-			return "<a href=javascript:openNote("+index+")>"+"订单要求"+"</a>";
-		}else{
-			return "无";
-		}
-	}
-
-	//根据index拿到该行值
-	function onClickRow(index) {
-		var rows = $('#fCountCheckList').datagrid('getRows');
-		return rows[index];
-		
-	}
-	
-	//打开订单要求富文本编辑器对话框
-	function  openNote(index){ 
-		var row = onClickRow(index);
-		$("#noteDialog").dialog({
-    		onOpen :function(){
-    			$("#noteForm [name=fCountCheckId]").val(row.fCountCheckId);
-    			noteEditor = TAOTAO.createEditor("#noteForm [name=note]");
-    			noteEditor.html(row.note);
-    		},
-		
-			onBeforeClose: function (event, ui) {
-				// 关闭Dialog前移除编辑器
-			   	KindEditor.remove("#noteForm [name=note]");
-			}
-    	}).dialog("open");
-		
-	};
-	/*
-	//更新订单要求
-	function updateNote(){
-		noteEditor.sync();
-		$.post("f_count_check/update_note",$("#noteForm").serialize(), function(data){
-			if(data.status == 200){
-				$("#noteDialog").dialog("close");
-				$("#fCountCheckList").datagrid("reload");
-				$.messager.alert("操作提示", "更新订单要求成功！");
-			}else{
-				$.messager.alert("操作提示", "更新订单要求失败！");
-			}
-		});
-	}
-	
-	*/
-	
-	
-	
-	//更新订单要求
-	function updateNote(){
+	//更新备注
+	function updateFCountCheckNote(){
 		$.get("f_count_check/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
-    			noteEditor.sync();
-    			$.post("f_count_check/update_note",$("#noteForm").serialize(), function(data){
+    			fCountNoteEditor.sync();
+    			$.post("f_count_check/update_note",$("#fCountCheckNoteForm").serialize(), function(data){
     				if(data.status == 200){
-    					$("#noteDialog").dialog("close");
+    					$("#fCountCheckNoteDialog").dialog("close");
     					$("#fCountCheckList").datagrid("reload");
     					$.messager.alert("操作提示", "更新订单要求成功！");
     				}else{
-    					$.messager.alert("操作提示", "更新订单要求失败！");
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
     	});
 	}
 	
-function getSelectionsIds(){
-    	
+	function getFCountSelectionsIds(){
     	var sels = $("#fCountCheckList").datagrid("getSelections");
     	var ids = [];
     	for(var i in sels){
     		ids.push(sels[i].fCountCheckId);
-console.log(sels[i].fCountCheckId);   		
     	}
     	ids = ids.join(","); 
     	return ids;
     }
     
-    
-    
-    
-    
-    
-    
-    
 //////////////////////////////////////////////////////////////////////////
-
-
-
 
 function fCountCheck_add(){
 	$.get("f_count_check/add_judge",'',function(data){
@@ -516,7 +386,7 @@ function fCountCheck_edit(){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{
-   			var ids = getSelectionsIds();
+   			var ids = getFCountSelectionsIds();
         	if(ids.length == 0){
         		$.messager.alert('提示','必须选择一个产品才能编辑!');
         		return ;
@@ -545,7 +415,7 @@ function fCountCheck_delete(){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{
-   			var ids = getSelectionsIds();
+   			var ids = getFCountSelectionsIds();
            	if(ids.length == 0){
            		$.messager.alert('提示','未选中订单!');
            		return ;
@@ -569,105 +439,4 @@ function fCountCheck_delete(){
 function fCountCheck_reload(){
 	$("#fCountCheckList").datagrid("reload");
 }
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    
-    var toolbar = [{
-        text:'新增',
-        iconCls:'icon-add',
-        handler:function(){
-        	$("#fCountCheckAddWindow").window("open");
-        }
-    },{
-        text:'编辑',
-        iconCls:'icon-edit',
-        handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个产品才能编辑!');
-        		return ;
-        	}
-        	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个产品!');
-        		return ;
-        	}
-        	
-        	$("#fCountCheckEditWindow").window({
-        		onLoad :function(){
-        			//回显数据
-        			var data = $("#fCountCheckList").datagrid("getSelections")[0];
-        			data.cdate = TAOTAO.formatDateTime(data.cdate);
-        			$("#fCountCheckEditForm").form("load", data);
-        			fCountCheckEditEditor.html(data.note);
-        			
-        		}
-        	}).window("open");
-        }
-    },{
-        text:'删除',
-        iconCls:'icon-cancel',
-        handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','未选中订单!');
-        		return ;
-        	}
-        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
-        	    if (r){
-        	    	var params = {"ids":ids};
-                	$.post("f_count_check/delete_batch",params, function(data){
-            			if(data.status == 200){
-            				$.messager.alert('提示','删除订单成功!',undefined,function(){
-            					$("#fCountCheckList").datagrid("reload");
-            				});
-            			}
-            		});
-        	    }
-        	});
-        }
-    },'-',{
-        text:'刷新',
-        iconCls:'icon-reload',
-        handler:function(){
-        	$("#fCountCheckList").datagrid("reload");
-        }
-    }];*/
 </script>
-
-
-<%------------------------------------- JQuery Easy UI Filter -------------------------------------%>
-<!-- 
-<style>
-.icon-filter {
-	background: url('image/filter.png') no-repeat center center;
-}
-</style>
-
-<script>
-	$(function() {
-		var dg = $('#fCountCheckList').datagrid({
-			filterBtnIconCls : 'icon-filter'
-		});
-
-		dg.datagrid('enableFilter');
-
-	});
-</script>
- -->
-<%------------------------------------- JQuery Easy UI Filter -------------------------------------%>
