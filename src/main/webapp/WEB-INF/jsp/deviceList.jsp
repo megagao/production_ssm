@@ -74,7 +74,7 @@
 </div>
 
 <!-- 设备种类信息 -->
-<div id="deviceTypeInfo_deviceList" class="easyui-dialog" title="设备种类信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:80%;padding:10px;">
+<div id="deviceTypeInfo_deviceList" class="easyui-dialog" title="设备种类信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:55%;padding:10px;">
 	<form id="deviceTypeEditForm_deviceList" method="post">
 	    <input type="hidden" name="deviceTypeId"/>
 	    <table cellpadding="5">
@@ -114,7 +114,7 @@
 </div>
 
 <!-- 设备保管人信息 -->
-<div id="deviceKeeperInfo_deviceList" class="easyui-dialog" title="设备保管人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:80%;padding:10px;">
+<div id="deviceKeeperInfo_deviceList" class="easyui-dialog" title="设备保管人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
 	<form id="deviceKeeperEditForm_deviceList" method="post">
 		<input type="hidden" name="empId"/>
 	    <table cellpadding="5">
@@ -379,17 +379,17 @@ function doSearch_device(value,name){ //用户输入用户名,点击搜素,触�
     	});
 	}
 	
-	//提交设备种类信息
+	//提交设备保管人信息
 	function submitDeviceKeeperEditForm_deviceList(){
-		$.get("device/edit_judge",'',function(data){
-    		/* if(data.msg != null){
+		$.get("employee/edit_judge",'',function(data){
+    		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
-    		}else{ */
+    		}else{ 
     			if(!$('#deviceKeeperEditForm_deviceList').form('validate')){
     				$.messager.alert('提示','表单还未填写完成!');
     				return ;
     			}
-    			$.post("device/update_all",$("#deviceKeeperEditForm_deviceList").serialize(), function(data){
+    			$.post("employee/update_all",$("#deviceKeeperEditForm_deviceList").serialize(), function(data){
     				if(data.status == 200){
     					$.messager.alert('提示','修改保管人信息成功!','info',function(){
     						$("#deviceKeeperInfo_deviceList").dialog("close");
@@ -398,7 +398,7 @@ function doSearch_device(value,name){ //用户输入用户名,点击搜素,触�
     					$.messager.alert('错误','修改保管人信息失败!');
     				}
     			});
-    		//}
+    		}
     	});
 	}
 	/************************************ DeviceType Relative Object ************************************/
@@ -418,7 +418,7 @@ function doSearch_device(value,name){ //用户输入用户名,点击搜素,触�
 		var row = onDeviceClickRow(index);
 		$("#deviceKeeperInfo_deviceList").dialog({
     		onOpen :function(){
-    			$.get("device/get/"+row.deviceKeeperId,'',function(data){
+    			$.get("employee/get/"+row.deviceKeeperId,'',function(data){
 		    		//回显数据
 					data.birthday = TAOTAO.formatDateTime(data.birthday);
 					data.joinDate = TAOTAO.formatDateTime(data.joinDate);
