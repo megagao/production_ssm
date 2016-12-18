@@ -100,15 +100,18 @@ public class SysServiceImpl implements SysService {
 			throws Exception {
 		
 		String permission = this.sysPermissionMapperCustom.findPermissionByUserId(userid);
-		String[] permissionIds = permission.split(",");
-		List<Long> ids = new ArrayList<Long>();
-		for(int i=0;i<permissionIds.length;i++){
-			ids.add(Long.valueOf(permissionIds[i]));
+		if(permission != null){
+			String[] permissionIds = permission.split(",");
+			List<Long> ids = new ArrayList<Long>();
+			for(int i=0;i<permissionIds.length;i++){
+				ids.add(Long.valueOf(permissionIds[i]));
+			}
+			SysPermissionExample example = new SysPermissionExample();
+			SysPermissionExample.Criteria criteria = example.createCriteria();
+			criteria.andIdIn(ids);
+			return sysPermissionMapper.selectByExample(example);
 		}
-		SysPermissionExample example = new SysPermissionExample();
-		SysPermissionExample.Criteria criteria = example.createCriteria();
-		criteria.andIdIn(ids);
-		return sysPermissionMapper.selectByExample(example);
+		return null;
 	}
 
 	@Override
