@@ -3,18 +3,18 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="materialConsumeList" title="物料消费" 
+<table class="easyui-datagrid" id="materialConsumeList" title="物料消耗列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'materialConsume/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_materialConsume">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'consumeId',align:'center',width:100">物料消费编号</th>
+        	<th data-options="field:'consumeId',align:'center',width:100">物料消耗编号</th>
             <th data-options="field:'work',align:'center',width:100,formatter:formatWork">所属作业</th>
             <th data-options="field:'material',align:'center',width:100,formatter:formatMaterial">物料</th>
             <th data-options="field:'consumeAmount',align:'center',width:100">消耗数量</th>
             <th data-options="field:'consumeDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">消耗日期</th>
-            <th data-options="field:'sender',width:70,align:'center'">发送者</th>
-            <th data-options="field:'receiver',width:60,align:'center'">接收者</th>           
+            <th data-options="field:'sender',width:100,align:'center'">发送者</th>
+            <th data-options="field:'receiver',width:100,align:'center'">接收者</th>           
             <th data-options="field:'note',width:100,align:'center', formatter:formatMaterialConsumeNote">备注</th>            
         </tr>
     </thead>
@@ -95,7 +95,7 @@
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150, editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -169,11 +169,11 @@
     function doSearch_materialConsume(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#materialConsumeList").datagrid({
-	        title:'物料消费列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'物料消耗列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_materialConsume", url:'materialConsume/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 	      	        
 	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'consumeId', width : 100, title : '物料消费编号', align:'center'},
+	             	{field : 'consumeId', width : 100, title : '物料消耗编号', align:'center'},
 	             	{field : 'work', width : 100, align : 'center', title : '所属作业', formatter:formatWork},
 	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial}, 
 	             	{field : 'consumeAmount', width : 100, title : '消耗数量', align:'center'}, 	            	
@@ -185,11 +185,11 @@
 	    });
 	}else{
 		$("#materialConsumeList").datagrid({  
-	        title:'物料消费列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'物料消耗列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_materialConsume", url:'materialConsume/search_materialConsume_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'consumeId', width : 100, title : '物料消费编号', align:'center'},
+	             	{field : 'consumeId', width : 100, title : '物料消耗编号', align:'center'},
 	             	{field : 'work', width : 100, align : 'center', title : '所属作业', formatter:formatWork},
 	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial}, 
 	             	{field : 'consumeAmount', width : 100, title : '消耗数量', align:'center'}, 	            	
@@ -274,7 +274,9 @@
     					$.messager.alert('提示','修改成功!','info',function(){
     						$("#materialConsumeWorkInfo").dialog('close');
     					});
-    				}
+    				}else{
+    					$.messager.alert('提示',data.msg);
+    				}  
     			});
     		}
     	});	
@@ -317,7 +319,9 @@
     					$.messager.alert('提示','修改成功!','info',function(){
     						$("#materialConsumeMaterialInfo").dialog('close');
     					});
-    				}
+    				}else{
+    					$.messager.alert('提示',data.msg);
+    				}  
     			});
     		}
     	});	
@@ -354,8 +358,8 @@
     					$("#materialConsumeList").datagrid("reload");
     					$.messager.alert("操作提示", "更新成功！");
     				}else{
-    					$.messager.alert("操作提示", "更新失败！");
-    				}
+    					$.messager.alert('提示',data.msg);
+    				}  
     			});
     		}
     	});
@@ -411,7 +415,6 @@
                 				data.materialId = data.material.materialId;
                 			}
                 			data.consumeDate = TAOTAO.formatDateTime(data.consumeDate);
-                			data.requestDate = TAOTAO.formatDateTime(data.requestDate);
                 			$("#materialConsumeEditForm").form("load", data);
                 			materialConsumeEditEditor.html(data.note);              		
                 		}
