@@ -82,7 +82,7 @@
 function doSearch_material(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#materialList").datagrid({
-	        title:'物料列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'物料信息', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_material", url:'material/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 	       
 	             	{field : 'ck', checkbox:true }, 
@@ -95,7 +95,7 @@ function doSearch_material(value,name){ //用户输入用户名,点击搜素,触
 	    });
 	}else{
 		$("#materialList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'物料信息', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_material", url:'material/search_material_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -157,7 +157,7 @@ function doSearch_material(value,name){ //用户输入用户名,点击搜素,触
     					$("#materialList").datagrid("reload");
     					$.messager.alert("操作提示", "更新成功！");
     				}else{
-    					$.messager.alert("操作提示", "更新失败！","error");
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
@@ -244,6 +244,4 @@ function doSearch_material(value,name){ //用户输入用户名,点击搜素,触
     function material_reload(){
     	$("#materialList").datagrid("reload");
     }
-    
-	
 </script>
