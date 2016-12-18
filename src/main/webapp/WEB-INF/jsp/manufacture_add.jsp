@@ -37,12 +37,12 @@
 	        <tr>
 	            <td>订购日期:</td>
 	            <td><input class="easyui-datetimebox" name="beginDate"     
-        			data-options="showSeconds:true"  style="width:150px"> </td>
+        			data-options="showSeconds:true"  value="5/5/2016 00:00:00" style="width:150px"> </td>
 	        </tr>
 	        <tr>
 	            <td>要求日期:</td>
 	            <td><input class="easyui-datetimebox" name="endDate"     
-        			data-options="showSeconds:true"  style="width:150px"> </td>
+        			data-options="showSeconds:true"  value="5/5/2016 00:00:00" style="width:150px"> </td>
 	        </tr>
 	    </table>
 	</form>
