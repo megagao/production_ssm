@@ -13,7 +13,7 @@
         	<th data-options="field:'deviceCheckId',width:100,align:'center'">设备例检编号</th>
             <th data-options="field:'deviceId',width:100,align:'center'">设备编号</th>
             <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceCheck">设备名称</th>
-            <th data-options="field:'deviceCheckEmp',width:100,align:'center'">例检人</th>
+            <th data-options="field:'deviceCheckEmp',width:100,align:'center',formatter:formatEmp_deviceCheck">例检人</th>
             <th data-options="field:'deviceCheckDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">例检时间</th>
             <th data-options="field:'deviceCheckResult',width:100,align:'center',formatter:formatDeviceCheckResult_deviceCheck">例检结果</th>
             <th data-options="field:'deviceCheckFaultId',width:100,align:'center'">例检故障编号</th>
@@ -130,7 +130,72 @@
 	</div>
 </div>
 
-<!-- 设备备注信息-->
+<!-- 设备例检人信息 -->
+<div id="empInfo_deviceCheck" class="easyui-dialog" title="设备例检人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+	<form id="empEditForm_deviceCheck" method="post">
+		<input type="hidden" name="empId"/>
+	    <table cellpadding="5">
+	        <tr>
+	           	<td>姓名:</td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	        </tr>
+	        <tr>
+	            <td>性别:</td>
+	            <td>
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</td>
+	        </tr>
+	        <tr>
+	            <td>所属部门:</td>
+	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
+	            <td>
+	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
+    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
+    			</td> 
+	        </tr>
+	        <tr>
+	            <td>身份证号:</td>
+	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学历:</td>
+	            <td><input class="easyui-textbox" name="education"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学位:</td>
+	            <td><input class="easyui-textbox" name="degree"></input></td>
+	        </tr>
+	        <tr>
+	            <td>专业:</td>
+	            <td><input class="easyui-textbox" name="major" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>受教育形式:</td>
+	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>生日:</td>
+	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>入职日期:</td>
+	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>员工状态:</td>
+	            <td><input class="easyui-textbox" name="status" ></input></td>
+	        </tr>
+	    </table>
+	</form>
+	<div style="padding:5px">
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmpEditForm_deviceCheck()">提交</a>
+	</div>
+</div>
+
+<!-- 设备例检备注信息-->
 <div id="deviceCheckResultDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
 	<form id="deviceCheckResultForm" class="itemForm" method="post">
 	    <table cellpadding="5" >
@@ -159,7 +224,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 	             	{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
 	             	{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
 	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称', formatter:formatDevice_deviceCheck}, 
-	             	{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center'}, 
+	             	{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',formatter:formatEmp_deviceCheck}, 
 	             	{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',formatter:TAOTAO.formatDateTime}, 
 	            	{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',formatter:formatDeviceCheckResult_deviceCheck}, 
 	             	{field : 'deviceCheckFaultId', width : 100, title : '例检故障编号', align:'center'}, 
@@ -174,7 +239,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 					{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
 					{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
 					{field : 'deviceName', width : 100, align : 'center', title : '设备名称', formatter:formatDevice_deviceCheck}, 
-					{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center'}, 
+					{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',formatter:formatEmp_deviceCheck}, 
 					{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',formatter:TAOTAO.formatDateTime}, 
 					{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',formatter:formatDeviceCheckResult_deviceCheck}, 
 					{field : 'deviceCheckFaultId', width : 100, title : '例检故障编号', align:'center'}, 
@@ -340,6 +405,54 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     	});
 	}
 	/************************************ DeviceCheckType Relative Object ************************************/
+	//格式化例检人信息
+	function formatEmp_deviceCheck(value, row, index){ 
+		if(value !=null && value != ''){
+			return "<a href=javascript:openEmp_deviceCheck("+index+")>"+row.deviceCheckEmp+"</a>";
+		}else{
+			return "无";
+		}
+	};
+	
+	//打开例检人信息对话框
+	function  openEmp_deviceCheck(index){ 
+		var row = onDeviceCheckClickRow(index);
+		$("#empInfo_deviceCheck").dialog({
+    		onOpen :function(){
+    			$.get("employee/get/"+row.deviceCheckEmpId,'',function(data){
+		    		//回显数据
+					data.birthday = TAOTAO.formatDateTime(data.birthday);
+					data.joinDate = TAOTAO.formatDateTime(data.joinDate);
+					data.departmentId=data.department.departmentId;
+					data.departmentName=data.department.departmentName;
+		    		$("#empInfo_deviceCheck").form("load", data);
+    	    	});
+    		}
+    	}).dialog("open");
+	};
+	
+	//提交设备例检人信息
+	function submitEmpEditForm_deviceCheck(){
+		$.get("employee/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{ 
+    			if(!$('#empEditForm_deviceCheck').form('validate')){
+    				$.messager.alert('提示','表单还未填写完成!');
+    				return ;
+    			}
+    			$.post("employee/update_all",$("#empEditForm_deviceCheck").serialize(), function(data){
+    				if(data.status == 200){
+    					$.messager.alert('提示','修改例检人信息成功!','info',function(){
+    						$("#empInfo_deviceCheck").dialog("close");
+    					});
+    				}else{
+    					$.messager.alert('错误', data.msg);
+    				}
+    			});
+    		}
+    	});
+	}
 	
 	/************************************ NoteRelative Object ************************************/
 	//格式化设备例检结果
