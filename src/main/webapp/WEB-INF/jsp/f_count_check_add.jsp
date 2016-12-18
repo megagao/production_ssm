@@ -66,7 +66,7 @@
     			</td>  
 	        </tr>
 	          <tr>
-	            <td>检验人员编号:</td>
+	            <td>检验人:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="empId" ></input>
     			</td>  
