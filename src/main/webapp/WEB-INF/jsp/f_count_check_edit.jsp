@@ -10,13 +10,12 @@
 	<form id="fCountCheckEditForm" class="fCountCheckForm" method="post">
 		<input type="hidden" name="fCountCheckId"/>
 	    <table cellpadding="5">
-	        
-	          
 	        <tr>
 	            <td>订单编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="orderId" ></input>
-    			</td>  
+	            	<input class="easyui-combobox" name="orderId"   
+    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',required:true, editable:false, required:true" />  
+	            </td>
 	        </tr>
 	        <tr>
 	            <td>检验项目:</td>
@@ -44,7 +43,7 @@
 	        </tr>
 	        <tr>
 	            <td>合格率:</td>
-	            <td><input class="easyui-numberbox" type="text" name="qualify" data-options="min:1,max:99999999,precision:0" /></td>
+	            <td><input class="easyui-numberbox" type="text" name="qualify" data-options="max:1,precision:2"/></td>
 	        </tr>
 	          <tr>
 	            <td>检验时间:</td>
@@ -59,7 +58,7 @@
     			</td>  
 	        </tr>
 	          <tr>
-	            <td>检验人员编号:</td>
+	            <td>检验人:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="empId" ></input>
     			</td>  
@@ -91,27 +90,21 @@
 	});
 	//同步kindeditor中的内容
 	fCountCheckEditEditor.sync();
-	
 	function fCountCheckEditForm(){
 		if(!$('#fCountCheckEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
-		console.log("1");
 		fCountCheckEditEditor.sync();
-		console.log("2");
 		$.post("f_count_check/update_all",$("#fCountCheckEditForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','修改表单成功!','info',function(){
 					$("#fCountCheckList").datagrid("reload");
 					$("#fCountCheckEditWindow").window('close');
-					//$("#fCountCheckList").datagrid("reload");
 				});
 			}else{
-				$.messager.alert('错误','修改表单失败!');
+				$.messager.alert('提示', data.msg);
 			}
 		});
-		console.log("3");
 	}
-	
 </script>
