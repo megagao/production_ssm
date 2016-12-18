@@ -98,7 +98,7 @@ function doSearch_employee(value,name){ //用户输入用户名,点击搜素,触
 	if(value == null || value == ''){
 		
 		$("#employeeList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'员工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_employee", url:'employee/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -118,7 +118,7 @@ function doSearch_employee(value,name){ //用户输入用户名,点击搜素,触
 	    });
 	}else{
 		$("#employeeList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'员工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_employee", url:'employee/search_employee_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -186,9 +186,10 @@ var empDepartmentEditor;
     				if(data.status == 200){
     					$.messager.alert('提示','修改部门成功!','info',function(){
     						$("#empDepartmentInfo").dialog("close");
+    						$("#employeeList").datagrid("reload");
     					});
     				}else{
-    					$.messager.alert('错误','修改部门失败!');
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
