@@ -55,9 +55,12 @@ public class FirstController {
 		}
 		
 		List<String> sysPermissionList = new ArrayList<String>();
-		for(int i=0;i<permissionList.size();i++){
-			sysPermissionList.add(permissionList.get(i).getPercode());
+		if(permissionList != null){
+			for(int i=0;i<permissionList.size();i++){
+				sysPermissionList.add(permissionList.get(i).getPercode());
+			}
 		}
+		
 
 		/*String sysPermissionsList = JsonUtils.objectToJson(sysPermissionList);*/
 
