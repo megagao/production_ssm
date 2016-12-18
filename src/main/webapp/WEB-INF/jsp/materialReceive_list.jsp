@@ -3,18 +3,18 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="materialReceiveList" title="物料收入" 
+<table class="easyui-datagrid" id="materialReceiveList" title="物料收入列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'materialReceive/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_materialReceive">
     <thead>
          <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'receiveId',align:'center',width:150">物料收入编号</th>
+        	<th data-options="field:'receiveId',align:'center',width:100">物料收入编号</th>
             <th data-options="field:'material',width:100,align:'center',formatter:formatMaterial">物料</th>
-            <th data-options="field:'ammount',align:'center',width:150">收入数量</th>
+            <th data-options="field:'ammount',align:'center',width:100">收入数量</th>
             <th data-options="field:'receiveDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">收入日期</th>
-            <th data-options="field:'sender',align:'center',width:150">发送者</th>
-            <th data-options="field:'receiver',align:'center',width:150">接收者</th>
-            <th data-options="field:'note',width:150,align:'center', formatter:formatMaterialReceiveNote">备注</th>        
+            <th data-options="field:'sender',align:'center',width:100">发送者</th>
+            <th data-options="field:'receiver',align:'center',width:100">接收者</th>
+            <th data-options="field:'note',width:100,align:'center', formatter:formatMaterialReceiveNote">备注</th>        
         </tr>
     </thead>
 </table>
@@ -94,7 +94,7 @@
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150, editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -134,9 +134,9 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
 	             	{field : 'receiveId', width : 100, title : '物料收入编号', align:'center'},
 	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
 	             	{field : 'ammount', width : 100, align : 'center', title : '收入数量'}, 
-	             	{field : 'receiveDate', width : 100, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'sender', width : 70, title : '发送者', align:'center'}, 
-	            	{field : 'receiver', width : 70, title : '接收者', align:'center'}, 	           
+	             	{field : 'receiveDate', width : 130, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime}, 
+	             	{field : 'sender', width : 100, title : '发送者', align:'center'}, 
+	            	{field : 'receiver', width : 100, title : '接收者', align:'center'}, 	           
 	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialReceiveNote}	            	
 	        ] ],  
 	    });
@@ -149,15 +149,14 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
 	             	{field : 'receiveId', width : 100, title : '物料收入编号', align:'center'},
 	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
 	             	{field : 'ammount', width : 100, align : 'center', title : '收入数量'}, 
-	             	{field : 'receiveDate', width : 100, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'sender', width : 70, title : '发送者', align:'center'}, 
-	            	{field : 'receiver', width : 70, title : '接收者', align:'center'}, 	           
+	             	{field : 'receiveDate', width : 130, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime}, 
+	             	{field : 'sender', width : 100, title : '发送者', align:'center'}, 
+	            	{field : 'receiver', width : 100, title : '接收者', align:'center'}, 	           
 	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialReceiveNote}	
 	        ] ],  
 	    });
 	}
 }
-
 
 	var materialReceiveNoteEditor ;
 	
@@ -179,28 +178,7 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
 		}
 	};  
 	
-	function submitMaterialReceiveMaterialEditForm(){
-		$.get("material/edit_judge",'',function(data){
-    		if(data.msg != null){
-    			$.messager.alert('提示', data.msg);
-    		}else{
-    			if(!$('#materialReceiveMaterialEditForm').form('validate')){
-    				$.messager.alert('提示','表单还未填写完成!');
-    				return ;
-    			}
-    			//同步文本框中的备注
-    			materialReceiveMaterialEditor.sync();
-    			$.post("material/update_all",$("#materialReceiveMaterialEditForm").serialize(), function(data){
-    				if(data.status == 200){
-    					$.messager.alert('提示','修改成功!','info',function(){
-    						$("#materialInfo").dialog('close');
-    					});
-    				}
-    			});
-    		}
-    	});	
-	}
-	
+
 	//打开物料信息对话框
 	function  openMaterialReceiveMaterial(index){ 
 		var row = onMaterialReceiveClickRow(index);
@@ -220,6 +198,29 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
     	}).dialog("open");
 	};
 	
+	function submitMaterialReceiveMaterialEditForm(){
+		$.get("material/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{
+    			if(!$('#materialReceiveMaterialEditForm').form('validate')){
+    				$.messager.alert('提示','表单还未填写完成!');
+    				return ;
+    			}
+    			//同步文本框中的备注
+    			materialReceiveMaterialEditor.sync();
+    			$.post("material/update_all",$("#materialReceiveMaterialEditForm").serialize(), function(data){
+    				if(data.status == 200){
+    					$.messager.alert('提示','修改成功!','info',function(){
+    						$("#materialInfo").dialog('close');
+    					});
+    				}else{
+    					$.messager.alert('提示',data.msg);
+    				} 
+    			});
+    		}
+    	});	
+	}
 	
 	function formatMaterialReceiveNote(value, row, index){ 
 		if(value !=null && value != ''){
@@ -258,8 +259,8 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
     					$("#materialReceiveList").datagrid("reload");
     					$.messager.alert("操作提示", "更新成功！");
     				}else{
-    					$.messager.alert("操作提示", "更新失败！","error");
-    				}
+    					$.messager.alert('提示',data.msg);
+    				} 
     			});
     		}
     	});
@@ -307,6 +308,10 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
         	    		onLoad :function(){
         	    			//回显数据
         	    			var data = $("#materialReceiveList").datagrid("getSelections")[0];
+        	    			if(data.material.materialId !=null && data.material.materialId != ''){
+                				data.materialId = data.material.materialId;
+                			}
+        	    			data.receiveDate = TAOTAO.formatDateTime(data.receiveDate);
         	    			$("#materialReceiveEditForm").form("load", data);
         	    			materialReceiveEditEditor.html(data.note);
         	    		}
