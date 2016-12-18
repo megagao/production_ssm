@@ -16,13 +16,13 @@
 	        <tr>
 	            <td>物料类型:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
+		            <select id="cc" class="easyui-combobox" name="status" style="width:160px;" data-options="width:160, editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -32,7 +32,7 @@
 	        <tr>
 	            <td>剩余数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="remaining"></input>
+	            	<input class="easyui-textbox" type="text" name="remaining" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        
@@ -71,8 +71,9 @@
     					$.messager.alert('提示','修改成功!','info',function(){
     						$("#materialEditWindow").window('close');
     						$("#materialList").datagrid("reload");
-    						$("#materialInfoWindow").window('close');
     					});
+    				}else{
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
