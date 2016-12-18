@@ -4,7 +4,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
-<table  id="measureList" title="成品计量质检	" class="easyui-datagrid"
+<table  id="measureList" title="成品计量质检" class="easyui-datagrid"
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'measure/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_fMeasureCheck">
     <thead>
         <tr>
@@ -14,7 +14,7 @@
             <th data-options="field:'checkItem',align:'center',width:100">检验项目</th>
             <th data-options="field:'cdate',align:'center',width:100,formatter:TAOTAO.formatDateTime">检验时间</th>
             <th data-options="field:'measureData',align:'center',width:100">实际测量数据</th>
-            <th data-options="field:'empId',align:'center',width:100">检验人员编号</th>
+            <th data-options="field:'empId',align:'center',width:100">检验人</th>
             <th data-options="field:'result',align:'center',width:100">检验结果</th>
             <th data-options="field:'note',align:'center',width:100,formatter:formatFMeasureNote">备注</th>
         </tr>
@@ -171,7 +171,7 @@
 function doSearch_fMeasureCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#measureList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'成品计量质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_fMeasureCheck", url:'measure/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -180,14 +180,14 @@ function doSearch_fMeasureCheck(value,name){ //用户输入用户名,点击搜�
 	             	{field : 'checkItem', width : 100, align : 'center', title : '检验项目'}, 
 	             	{field : 'cdate', width : 100, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime}, 
 	             	{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-	            	{field : 'empId', width : 100, title : '检验人员编号', align:'center'}, 
+	            	{field : 'empId', width : 100, title : '检验人', align:'center'}, 
 	             	{field : 'result', width : 100, title : '检验结果', align:'center'}, 
 	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFMeasureNote} 
 	        ] ],  
 	    });
 	}else{
 		$("#measureList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'成品计量质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_fMeasureCheck", url:'measure/search_fMeasureCheck_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	                 	{field : 'ck', checkbox:true }, 
@@ -196,7 +196,7 @@ function doSearch_fMeasureCheck(value,name){ //用户输入用户名,点击搜�
 		             	{field : 'checkItem', width : 100, align : 'center', title : '检验项目'}, 
 		             	{field : 'cdate', width : 100, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime}, 
 		             	{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-		            	{field : 'empId', width : 100, title : '检验人员编号', align:'center'}, 
+		            	{field : 'empId', width : 100, title : '检验人', align:'center'}, 
 		             	{field : 'result', width : 100, title : '检验结果', align:'center'}, 
 		             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFMeasureNote} 
 	        ] ],  
