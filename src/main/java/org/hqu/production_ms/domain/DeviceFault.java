@@ -2,17 +2,24 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class DeviceFault {
+	
+	@Size(max=40, message="{id.length.error}")
     private String deviceFaultId;
 
     private String deviceId;
 
+    @Size(max=5000, message="故障原因长度请限制在5000个字符内")
     private String deviceFaultCause;
 
+    @Size(max=5000, message="故障描述长度请限制在5000个字符内")
     private String deviceFaultDetail;
 
     private Date deviceFaultDate;
 
+    @Size(max=500, message="维修方式长度请限制在500个字符内")
     private String deviceFaultMaintenance;
 
     public String getDeviceFaultId() {
