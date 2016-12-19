@@ -2,7 +2,11 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class DeviceCheck {
+	
+	@Size(max=40, message="{id.length.error}")
     private String deviceCheckId;
 
     private String deviceId;
@@ -11,6 +15,7 @@ public class DeviceCheck {
 
     private Date deviceCheckDate;
 
+    @Size(max=5000, message="例检结果长度请限制在5000个字符内")
     private String deviceCheckResult;
 
     private String deviceCheckFaultId;
