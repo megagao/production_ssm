@@ -3,9 +3,15 @@ package org.hqu.production_ms.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class Device {
+	
+	@Size(max=40, message="{id.length.error}")
     private String deviceId;
 
+	@Size(max=100, message="{name.length.error}")
     private String deviceName;
 
     private String deviceTypeId;
@@ -16,6 +22,7 @@ public class Device {
 
     private Date devicePurchaseDate;
 
+    @Max(value=999999999, message="单价的长度限制在10个字符之内")
     private BigDecimal devicePurchasePrice;
 
     private Date deviceManufactureDate;
@@ -24,6 +31,7 @@ public class Device {
 
     private String deviceKeeperId;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getDeviceId() {
