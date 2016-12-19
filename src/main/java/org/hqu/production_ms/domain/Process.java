@@ -1,12 +1,19 @@
 package org.hqu.production_ms.domain;
 
-public class Process {
-    private String processId;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
+public class Process {
+	
+	@Size(max=40, message="{id.length.error}")
+    private String processId;
+	
     private String technologyPlanId;
 
+	@Max(value=999999999, message="工序顺序不能超过999999999")
     private Integer sequence;
 
+	@Max(value=999999999, message="单件定额工时不能超过999999999")
     private Integer quota;
 
     public String getProcessId() {
