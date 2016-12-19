@@ -1,14 +1,21 @@
 package org.hqu.production_ms.domain;
 
+import javax.validation.constraints.Size;
+
 public class Product {
+	
+	@Size(max=40, message="{id.length.error}")
     private String productId;
 
+	@Size(max=100, message="{name.length.error}")
     private String productName;
 
+	@Size(max=100, message="产品种类的长度限制在100个字符之内")
     private String productType;
 
     private String image;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     private Integer status;
