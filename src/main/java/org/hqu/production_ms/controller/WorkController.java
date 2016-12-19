@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Work;
@@ -14,6 +16,8 @@ import org.hqu.production_ms.domain.po.WorkPO;
 import org.hqu.production_ms.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -101,8 +105,12 @@ public class WorkController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(WorkPO work) throws Exception {
+	private CustomResult insert(@Valid WorkPO work, BindingResult bindingResult) throws Exception {
 		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
 		if(workService.get(work.getWorkId()) != null){
 			result = new CustomResult(0, "该作业编号已经存在，请更换作业编号！", null);
 		}else{
@@ -113,16 +121,22 @@ public class WorkController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(WorkPO work) throws Exception {
-		CustomResult result = workService.update(work);
-		return result;
+	private CustomResult update(@Valid WorkPO work, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return workService.update(work);
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(WorkPO work) throws Exception {
-		CustomResult result = workService.updateAll(work);
-		return result;
+	private CustomResult updateAll(@Valid WorkPO work, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return workService.updateAll(work);
 	}
 	
 	@RequestMapping("/delete_judge")
