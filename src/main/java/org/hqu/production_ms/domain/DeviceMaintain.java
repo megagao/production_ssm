@@ -3,7 +3,12 @@ package org.hqu.production_ms.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class DeviceMaintain {
+	
+	@Size(max=40, message="{id.length.error}")
     private String deviceMaintainId;
 
     private String deviceFaultId;
@@ -12,8 +17,10 @@ public class DeviceMaintain {
 
     private Date deviceMaintainDate;
 
+    @Size(max=5000, message="维修结果长度请限制在5000个字符内")
     private String deviceMaintainResult;
 
+    @Max(value=999999999, message="维修费用的长度限制在10个字符之内")
     private BigDecimal deviceMaintainCost;
 
     private String note;
