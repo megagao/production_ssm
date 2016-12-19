@@ -2,7 +2,11 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class Manufacture {
+	
     private String manufactureSn;
 
     private Integer launchQuantity;
