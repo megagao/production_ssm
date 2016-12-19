@@ -2,21 +2,29 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class ProcessMeasureCheck {
+	
+	@Size(max=40, message="{id.length.error}")
     private String pMeasureCheckId;
 
     private String processId;
 
+    @Size(max=40, message="检验项目的长度限制在40个字符之内")
     private String checkItem;
 
     private Date cdate;
 
+    @Size(max=2000, message="实际测量数据的长度限制在2000个字符之内")
     private String measureData;
 
     private String empId;
 
+    @Size(max=2000, message="校验结果的长度限制在2000个字符之内")
     private String result;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getpMeasureCheckId() {
