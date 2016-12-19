@@ -2,19 +2,30 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class DeviceType {
+	
+	@Size(max=40, message="{id.length.error}")
     private String deviceTypeId;
 
+	@Size(max=100, message="{name.length.error}")
     private String deviceTypeName;
-
+	
+	@Size(max=200, message="型号的长度限制在200个字符之内")
     private String deviceTypeModel;
 
+	@Size(max=200, message="规格的长度限制在200个字符之内")
     private String deviceTypeSpec;
 
+	@Size(max=100, message="供应商的长度限制在200个字符之内")
     private String deviceTypeSupplier;
 
+	@Size(max=100, message="生产商的长度限制在200个字符之内")
     private String deviceTypeProducer;
 
+	@Max(value=999999999, message="台数的长度限制在10个字符之内")
     private Integer deviceTypeQuantity;
 
     private Date deviceTypeWarranty;
