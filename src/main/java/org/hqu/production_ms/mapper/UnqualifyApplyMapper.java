@@ -5,17 +5,18 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.UnqualifyApplyExample;
+import org.hqu.production_ms.domain.po.UnqualifyApplyPO;
 
 public interface UnqualifyApplyMapper {
 	
 	//扩展的mapper接口方法
-	List<UnqualifyApply> find(UnqualifyApply unqualifyApply);
+	List<UnqualifyApplyPO> find(UnqualifyApply unqualifyApply);
 	
 	int updateNote(UnqualifyApply unqualifyApply);
 	
 	int deleteBatch(String[] ids);
 	
-	List<UnqualifyApply> searchUnqualifyByUnqualifyId(String orderId);
+	List<UnqualifyApplyPO> searchUnqualifyByUnqualifyId(String orderId);
 	
     int countByExample(UnqualifyApplyExample example);
 
@@ -38,4 +39,6 @@ public interface UnqualifyApplyMapper {
     int updateByPrimaryKeySelective(UnqualifyApply record);
 
     int updateByPrimaryKey(UnqualifyApply record);
+
+	List<UnqualifyApplyPO> searchUnqualifyByProductName(String productName);
 }
