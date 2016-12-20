@@ -91,6 +91,13 @@ public class UnqualifyApplyController {
 		return result;
 	}
 	
+	@RequestMapping("/search_unqualify_by_productName")
+	@ResponseBody
+	public EUDataGridResult searchUnqualifyByProductName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = unqualifyService.searchUnqualifyByProductName(page, rows, searchValue);
+		return result;
+	}
 	
 //	@RequestMapping("/get/{productId}")
 //	@ResponseBody
