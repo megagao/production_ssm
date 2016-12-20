@@ -56,7 +56,7 @@
         </input>
         <div id="menu_unqualify" style="width:120px"> 
 			<div data-options="name:'unqualifyId'">不合格产品编号</div> 
-			
+			<div data-options="name:'productName'">产品名称</div> 
 		</div>     
     </div>  
 
@@ -132,7 +132,7 @@
 function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#unqualifyList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'不合格品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_unqualify", url:'unqualify/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -140,15 +140,15 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 	             	{field : 'productId', width : 100, align : 'center', title : '产品编号', formatter:formatProduct},
 	             	{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'}, 
 	             	{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'}, 
-	             	{field : 'assemblyDate', width : 70, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'empId', width : 70, title : '申请人', align:'center'}, 
-	             	{field : 'applyDate', width : 60, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'note', width : 130, title : '备注', align:'center',formatter:formatUnqualifyNote}
+	             	{field : 'assemblyDate', width : 100, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
+	            	{field : 'empId', width : 100, title : '申请人', align:'center'}, 
+	             	{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
+	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
 	        ] ],  
 	    });
 	}else{
 		$("#unqualifyList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'不合格品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_unqualify", url:'unqualify/search_unqualify_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -156,16 +156,14 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 	             	{field : 'productId', width : 100, align : 'center', title : '产品编号', formatter:formatProduct},
 	             	{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'}, 
 	             	{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'}, 
-	             	{field : 'assemblyDate', width : 70, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'empId', width : 70, title : '申请人', align:'center'}, 
-	             	{field : 'applyDate', width : 60, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'note', width : 130, title : '备注', align:'center',formatter:formatUnqualifyNote}
+	             	{field : 'assemblyDate', width : 100, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
+	            	{field : 'empId', width : 100, title : '申请人', align:'center'}, 
+	             	{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
+	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
 	        ] ],  
 	    });
 	}
 }
-
-
 
 	var unqualifyNoteEditor ;
 	
@@ -173,8 +171,8 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 	
 	//格式化产品信息
 	function  formatProduct(value, row, index){ 
-		if(value !=null && value != ''){
-			return "<a href=javascript:openUnqualifyProduct("+index+")>产品信息</a>";
+		if(row.productName !=null && row.productName != ''){
+			return "<a href=javascript:openUnqualifyProduct("+index+")>"+row.productName+"</a>";
 		}else{
 			return "无";
 		}
