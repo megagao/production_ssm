@@ -12,7 +12,7 @@
 	    <table cellpadding="5">
 	        
 	        <tr>
-	            <td>产品编号:</td>
+	            <td>产品名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="productId"   
     					data-options="valueField:'productId',textField:'productName',url:'product/get_data',required:true, editable:false" />  
@@ -33,12 +33,13 @@
 	        <tr>
 	            <td>加工时间:</td>
 	             <td><input class="easyui-datetimebox" name="assemblyDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>  
+        			data-options="required:true,showSeconds:true" style="width:150px"> </td>  
 	        </tr>
 	        <tr>
 	            <td>申请人:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="empId" ></input>
+	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'"/>
     			</td>  
 	        </tr>
 	        <tr>
@@ -77,9 +78,9 @@
 		unqualifyApplyEditEditor.sync();
 		$.post("unqualify/update_all",$("#unqualifyApplyEditForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','修改表单成功!','info',function(){
-					$("#unqualifyList").datagrid("reload");
+				$.messager.alert('提示','修改不合格品申请成功!','info',function(){
 					$("#unqualifyEditWindow").window('close');
+					$("#unqualifyList").datagrid("reload");
 				});
 			}else{
 				$.messager.alert('提示',data.msg);
