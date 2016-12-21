@@ -29,7 +29,7 @@
 	         <tr>
 	            <td>消耗日期:</td>
 	            <td><input class="easyui-datetimebox" name="consumeDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:160px"> </td>
+        			data-options="required:true,showSeconds:true" style="width:160px"> </td>
 	        </tr>  	        
 	        <tr>
 	            <td>发送者:</td>
