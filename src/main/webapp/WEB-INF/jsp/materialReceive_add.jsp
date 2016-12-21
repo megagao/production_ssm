@@ -27,7 +27,7 @@
 	        <tr>
 	            <td>收入日期:</td>
 	            <td><input class="easyui-datetimebox" name="receiveDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:160px"> </td>
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:160px"> </td>
 	        </tr>
 	        <tr>
 	            <td>发送者:</td>
