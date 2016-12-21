@@ -10,11 +10,11 @@
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'unqualifyApplyId',align:'center',width:100">不合格品申请编号</th>
-            <th data-options="field:'productId',align:'center',width:100,formatter:formatProduct">产品编号</th>
+            <th data-options="field:'productId',align:'center',width:100,formatter:formatProduct">产品名称</th>
             <th data-options="field:'unqualifyItem',align:'center',width:100">不合格项目</th>
             <th data-options="field:'unqualifyCount',align:'center',width:100">不合格数量</th>
             <th data-options="field:'assemblyDate',align:'center',width:100,formatter:TAOTAO.formatDateTime">加工时间</th>
-            <th data-options="field:'empId',align:'center',width:100">申请人</th>
+            <th data-options="field:'empName',align:'center',width:100,formatter:formatEmp_unqualify">申请人</th>
             <th data-options="field:'applyDate',align:'center',width:100,formatter:TAOTAO.formatDateTime">申请时间</th>
             <th data-options="field:'note',align:'center',width:100,formatter:formatUnqualifyNote">备注</th>
         
@@ -65,12 +65,12 @@
 
 <!-- 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="unqualifyEditWindow" class="easyui-window" title="编辑列表" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'unqualify/edit'" style="width:85%;height:90%;padding:10px;">
+<div id="unqualifyEditWindow" class="easyui-window" title="编辑不合格品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'unqualify/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="unqualifyAddWindow" class="easyui-window" title="编辑列表" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'unqualify/add'" style="width:85%;height:90%;padding:10px;">
+<div id="unqualifyAddWindow" class="easyui-window" title="添加不合格品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'unqualify/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
-<div id="unqualifyProductInfo" class="easyui-dialog" title="客户信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="unqualifyProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="unqualifyProductEditForm" method="post">
 		<input type="hidden" name="productId"/>
 	    <table cellpadding="5">
@@ -94,8 +94,8 @@
 	        <tr>
 	            <td>相关图片:</td>
 	            <td>
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" id="image" name="image"/>
+	            	<div style="padding-top: 12px"><span id="unqualifyProductPicSpan"></span></div>
+	                <input type="hidden" class="easyui-linkbutton unqualifyProductPic" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -110,7 +110,73 @@
 </div>
 
 
-<div id="unqualifyNoteDialog" class="easyui-dialog" title="产品介绍" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<!-- 申请人信息 -->
+<div id="empInfo_unqualify" class="easyui-dialog" title="申请人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+	<form id="empEditForm_unqualify" method="post">
+		<input type="hidden" name="empId"/>
+	    <table cellpadding="5">
+	        <tr>
+	           	<td>姓名:</td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	        </tr>
+	        <tr>
+	            <td>性别:</td>
+	            <td>
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</td>
+	        </tr>
+	        <tr>
+	            <td>所属部门:</td>
+	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
+	            <td>
+	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
+    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
+    			</td> 
+	        </tr>
+	        <tr>
+	            <td>身份证号:</td>
+	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学历:</td>
+	            <td><input class="easyui-textbox" name="education"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学位:</td>
+	            <td><input class="easyui-textbox" name="degree"></input></td>
+	        </tr>
+	        <tr>
+	            <td>专业:</td>
+	            <td><input class="easyui-textbox" name="major" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>受教育形式:</td>
+	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>生日:</td>
+	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>入职日期:</td>
+	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>员工状态:</td>
+	            <td><input class="easyui-textbox" name="status" ></input></td>
+	        </tr>
+	    </table>
+	</form>
+	<div style="padding:5px">
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmpEditForm_unqualify()">提交</a>
+	</div>
+</div>
+
+
+<div id="unqualifyNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
 	<form id="unqualifyNoteForm" method="post">
 		<input type="hidden" name="unqualifyApplyId"/>
 	    <table cellpadding="5" >
@@ -141,7 +207,7 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 	             	{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'}, 
 	             	{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'}, 
 	             	{field : 'assemblyDate', width : 100, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'empId', width : 100, title : '申请人', align:'center'}, 
+	            	{field : 'empName', width : 100, title : '申请人', align:'center',formatter:formatEmp_unqualify}, 
 	             	{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
 	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
 	        ] ],  
@@ -157,7 +223,7 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 	             	{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'}, 
 	             	{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'}, 
 	             	{field : 'assemblyDate', width : 100, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'empId', width : 100, title : '申请人', align:'center'}, 
+	            	{field : 'empName', width : 100, title : '申请人', align:'center',formatter:formatEmp_unqualify}, 
 	             	{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
 	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
 	        ] ],  
@@ -190,7 +256,7 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 		    		$("#unqualifyProductEditForm").form("load", data);
 		    		unqualifyProductEditor.html(data.note);
 		    		
-		    		TAOTAO.init({
+		    		initUnqualifyProduct({
         				"pics" : data.image,
         			});
     	    	});
@@ -198,10 +264,86 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
 			onBeforeClose: function (event, ui) {
 				// 关闭Dialog前移除编辑器
 			   	KindEditor.remove("#unqualifyProductEditForm [name=note]");
+			   	$("#unqualifyProductPicSpan").html('');
 			}
     	}).dialog("open");
 	};
 	
+	// 加载图片
+    function initUnqualifyProduct(data){
+    	$(".unqualifyProductPic").each(function(i,e){
+    		var _ele = $(e);
+    		_ele.siblings("div.pics").remove();
+    		_ele.after('\
+    			<div class="pics">\
+        			<ul></ul>\
+        		</div>');
+    		// 回显图片
+    		var j = false;
+        	if(data && data.pics){
+        		var imgs = data.pics.split(",");
+        		for(var i in imgs){
+        			if($.trim(imgs[i]).length > 0){
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
+        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				j = true;
+        			}
+        		}
+        	}
+        	if(!j){
+    			$("#unqualifyProductPicSpan").html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
+    		}
+    	});
+    }
+	
+  //格式化申请人信息
+	function formatEmp_unqualify(value, row, index){ 
+		if(value !=null && value != ''){
+			return "<a href=javascript:openEmp_unqualify("+index+")>"+value+"</a>";
+		}else{
+			return "无";
+		}
+	};
+	
+	//打开申请人信息对话框
+	function  openEmp_unqualify(index){ 
+		var row = onUnqualifyClickRow(index);
+		$("#empInfo_unqualify").dialog({
+    		onOpen :function(){
+    			$.get("employee/get/"+row.empId,'',function(data){
+		    		//回显数据
+					data.birthday = TAOTAO.formatDateTime(data.birthday);
+					data.joinDate = TAOTAO.formatDateTime(data.joinDate);
+					data.departmentId=data.department.departmentId;
+					data.departmentName=data.department.departmentName;
+		    		$("#empInfo_unqualify").form("load", data);
+    	    	});
+    		}
+    	}).dialog("open");
+	};
+	
+	//提交申请人信息
+	function submitEmpEditForm_unqualify(){
+		$.get("employee/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{ 
+    			if(!$('#empEditForm_unqualify').form('validate')){
+    				$.messager.alert('提示','表单还未填写完成!');
+    				return ;
+    			}
+    			$.post("employee/update_all",$("#empEditForm_unqualify").serialize(), function(data){
+    				if(data.status == 200){
+    					$.messager.alert('提示','修改检验人信息成功!','info',function(){
+    						$("#empInfo_unqualify").dialog("close");
+    					});
+    				}else{
+    					$.messager.alert('错误', data.msg);
+    				}
+    			});
+    		}
+    	});
+	}
 	
 	//根据index拿到该行值
 	function onUnqualifyClickRow(index) {
@@ -319,11 +461,11 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
        			var ids = getSelectionsIds();
                	
                	if(ids.length == 0){
-               		$.messager.alert('提示','必须选择一个订单才能编辑!');
+               		$.messager.alert('提示','必须选择一个不合格品才能编辑!');
                		return ;
                	}
                	if(ids.indexOf(',') > 0){
-               		$.messager.alert('提示','只能选择一个订单!');
+               		$.messager.alert('提示','只能选择一个不合格品!');
                		return ;
                	}
                	
@@ -354,15 +496,15 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
        		}else{
        			var ids = getSelectionsIds();
                	if(ids.length == 0){
-               		$.messager.alert('提示','未选中订单!');
+               		$.messager.alert('提示','未选中不合格品!');
                		return ;
                	}
-               	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
+               	$.messager.confirm('确认','确定删除ID为 '+ids+' 的不合格品吗？',function(r){
                	    if (r){
                	    	var params = {"ids":ids};
                        	$.post("unqualify/delete_batch",params, function(data){
                    			if(data.status == 200){
-                   				$.messager.alert('提示','删除订单成功!',undefined,function(){
+                   				$.messager.alert('提示','删除不合格品成功!',undefined,function(){
                    					$("#unqualifyList").datagrid("reload");
                    				});
                    			}
