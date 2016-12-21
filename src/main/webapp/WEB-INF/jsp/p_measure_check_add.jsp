@@ -32,7 +32,7 @@
 	        <tr>
 	            <td>检验时间:</td>
 	            <td><input class="easyui-datetimebox" name="cdate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> 
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> 
         		</td>
 	        </tr>
 	        <tr>
@@ -42,8 +42,11 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>检验人员编号:</td>
-	            <td><input class="easyui-textbox" type="text" name="empId"></input></td>
+	            <td>检验人:</td>
+	            <td>
+	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'"/>
+	            </td>
 	        </tr>
 	        <tr>
 	            <td>检验结果:</td>
@@ -110,8 +113,4 @@
 		$('#pMeasureCheckAddForm').form('reset');
 		pMeasureCheckAddEditor .html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
