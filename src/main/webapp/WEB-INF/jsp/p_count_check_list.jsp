@@ -4,7 +4,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
-<table  id="pCountCheckList" title="工序计数质检列表" class="easyui-datagrid"
+<table  id="pCountCheckList" title="工序计数质检" class="easyui-datagrid"
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'p_count_check/list',method:'get',fitColumns:true,pageSize:10,toolbar:toolbar_pCountCheck">
     <thead>
         <tr>
@@ -13,14 +13,14 @@
             <th data-options="field:'processId',align:'center',width:100,formatter:formatPCountCheckProcess">工序编号</th>
             <th data-options="field:'checkItem',align:'center',width:100">检验项目</th>
             <th data-options="field:'sample',align:'center',width:100">样本总数</th>
-            <th data-options="field:'checkNumber',width:70,align:'center'">抽检数</th>
-            <th data-options="field:'unqualify',width:70,align:'center'">不合格数</th>
-            <th data-options="field:'qualify',width:60,align:'center'">合格率</th>
+            <th data-options="field:'checkNumber',width:100,align:'center'">抽检数</th>
+            <th data-options="field:'unqualify',width:100,align:'center'">不合格数</th>
+            <th data-options="field:'qualify',width:100,align:'center'">合格率</th>
             <th data-options="field:'cdate',width:130,align:'center',formatter:TAOTAO.formatDateTime">检验时间</th>
-            <th data-options="field:'measureData',width:130,align:'center'">实际测量数据</th>
-            <th data-options="field:'empId',width:100,align:'center'">检验人员编号</th>
+            <th data-options="field:'measureData',width:100,align:'center'">实际测量数据</th>
+            <th data-options="field:'empName',width:100,align:'center',formatter:formatEmp_pCount">检验人</th>
             <th data-options="field:'result',width:100,align:'center'">检验结果</th>
-            <th data-options="field:'note',width:180,align:'center', formatter:formatPCountCheckNote">备注</th>
+            <th data-options="field:'note',width:100,align:'center', formatter:formatPCountCheckNote">备注</th>
         </tr>
     </thead>
 </table>
@@ -67,9 +67,9 @@
 </div>  
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="pCountCheckEditWindow" class="easyui-window" title="编辑工序计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'p_count_check/edit'" style="width:85%;height:90%;padding:10px;">
+<div id="pCountCheckEditWindow" class="easyui-window" title="编辑工序计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'p_count_check/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="pCountCheckAddWindow" class="easyui-window" title="添加工序计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'p_count_check/add'" style="width:85%;height:90%;padding:10px;">
+<div id="pCountCheckAddWindow" class="easyui-window" title="添加工序计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'p_count_check/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- ********************************************************************************** -->
@@ -104,6 +104,71 @@
 	</div>
 </div>
 
+<!-- 检验人信息 -->
+<div id="empInfo_pCount" class="easyui-dialog" title="检验人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+	<form id="empEditForm_pCount" method="post">
+		<input type="hidden" name="empId"/>
+	    <table cellpadding="5">
+	        <tr>
+	           	<td>姓名:</td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	        </tr>
+	        <tr>
+	            <td>性别:</td>
+	            <td>
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</td>
+	        </tr>
+	        <tr>
+	            <td>所属部门:</td>
+	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
+	            <td>
+	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
+    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
+    			</td> 
+	        </tr>
+	        <tr>
+	            <td>身份证号:</td>
+	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学历:</td>
+	            <td><input class="easyui-textbox" name="education"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学位:</td>
+	            <td><input class="easyui-textbox" name="degree"></input></td>
+	        </tr>
+	        <tr>
+	            <td>专业:</td>
+	            <td><input class="easyui-textbox" name="major" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>受教育形式:</td>
+	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>生日:</td>
+	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>入职日期:</td>
+	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>员工状态:</td>
+	            <td><input class="easyui-textbox" name="status" ></input></td>
+	        </tr>
+	    </table>
+	</form>
+	<div style="padding:5px">
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmpEditForm_pCount()">提交</a>
+	</div>
+</div>
+
 <!-- ********************************************************************************** -->
 
 <div id="pCountCheckNoteDialog" class="easyui-dialog" title="工序计数质检备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
@@ -126,7 +191,7 @@
 function doSearch_pCountCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#pCountCheckList").datagrid({
-	        title:'工序计数质检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工序计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_pCountCheck", url:'p_count_check/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -134,19 +199,19 @@ function doSearch_pCountCheck(value,name){ //用户输入用户名,点击搜素,
 	             	{field : 'processId', width : 100, align : 'center', title : '工序编号'},
 	             	{field : 'checkItem', width : 100, align : 'center', title : '检验项目'}, 
 	             	{field : 'sample', width : 100, title : '样本总数', align:'center'}, 
-	             	{field : 'checkNumber', width : 70, title : '抽检数', align:'center'}, 
-	            	{field : 'unqualify', width : 70, title : '不合格数', align:'center'}, 
-	             	{field : 'qualify', width : 60, title : '合格率', align:'center'}, 
+	             	{field : 'checkNumber', width : 100, title : '抽检数', align:'center'}, 
+	            	{field : 'unqualify', width : 100, title : '不合格数', align:'center'}, 
+	             	{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
 	             	{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
-	             	{field : 'measureData', width : 70, title : '实际测量数据', align:'center'}, 
-	            	{field : 'empId', width : 70, title : '检验人员编号', align:'center'}, 
-	             	{field : 'result', width : 60, title : '检验结果', align:'center'}, 
-	             	{field : 'note', width : 130, title : '备注', align:'center', formatter:formatPCountCheckNote} 
+	             	{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
+	            	{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_pCount}, 
+	             	{field : 'result', width : 100, title : '检验结果', align:'center'}, 
+	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatPCountCheckNote} 
 	        ] ],  
 	    });
 	}else{
 		$("#pCountCheckList").datagrid({  
-	        title:'工序计数质检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工序计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_pCountCheck", url:'p_count_check/search_pCountCheck_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
@@ -154,14 +219,14 @@ function doSearch_pCountCheck(value,name){ //用户输入用户名,点击搜素,
 					{field : 'processId', width : 100, align : 'center', title : '工序编号'},
 					{field : 'checkItem', width : 100, align : 'center', title : '检验项目'}, 
 					{field : 'sample', width : 100, title : '样本总数', align:'center'}, 
-					{field : 'checkNumber', width : 70, title : '抽检数', align:'center'}, 
-					{field : 'unqualify', width : 70, title : '不合格数', align:'center'}, 
-					{field : 'qualify', width : 60, title : '合格率', align:'center'}, 
+					{field : 'checkNumber', width : 100, title : '抽检数', align:'center'}, 
+					{field : 'unqualify', width : 100, title : '不合格数', align:'center'}, 
+					{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
 					{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
-					{field : 'measureData', width : 70, title : '实际测量数据', align:'center'}, 
-					{field : 'empId', width : 70, title : '检验人员编号', align:'center'}, 
-					{field : 'result', width : 60, title : '检验结果', align:'center'}, 
-					{field : 'note', width : 130, title : '备注', align:'center', formatter:formatPCountCheckNote} 
+					{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
+					{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_pCount}, 
+					{field : 'result', width : 100, title : '检验结果', align:'center'}, 
+					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatPCountCheckNote} 
 	        ] ],  
 	    });
 	}
@@ -197,18 +262,67 @@ function submitp2pCountEditForm(){
 		if(data.msg != null){
 			$.messager.alert('提示', data.msg);
 		}else{
-			if(!$('#p2pEditForm').form('validate')){
+			if(!$('#p2pCountEditForm').form('validate')){
 				$.messager.alert('提示','表单还未填写完成!');
 				return ;
 			}
 			//此处写工序信息
-			$.post("process/update_all",$("#p2pEditForm").serialize(), function(data){
+			$.post("process/update_all",$("#p2pCountEditForm").serialize(), function(data){
 				if(data.status == 200){
 					$.messager.alert('提示','修改工序成功!','info',function(){
 						$("#p2pCountInfo").dialog("close");
 					});
 				}else{
 					$.messager.alert('错误','修改工序失败!');
+				}
+			});
+		}
+	});
+}
+
+//格式化检验人信息
+function formatEmp_pCount(value, row, index){ 
+	if(value !=null && value != ''){
+		return "<a href=javascript:openEmp_pCount("+index+")>"+value+"</a>";
+	}else{
+		return "无";
+	}
+};
+
+//打开检验人信息对话框
+function  openEmp_pCount(index){ 
+	var row = onPCountCheckClickRow(index);
+	$("#empInfo_pCount").dialog({
+		onOpen :function(){
+			$.get("employee/get/"+row.empId,'',function(data){
+	    		//回显数据
+				data.birthday = TAOTAO.formatDateTime(data.birthday);
+				data.joinDate = TAOTAO.formatDateTime(data.joinDate);
+				data.departmentId=data.department.departmentId;
+				data.departmentName=data.department.departmentName;
+	    		$("#empInfo_pCount").form("load", data);
+	    	});
+		}
+	}).dialog("open");
+};
+
+//提交检验人信息
+function submitEmpEditForm_pCount(){
+	$.get("employee/edit_judge",'',function(data){
+		if(data.msg != null){
+			$.messager.alert('提示', data.msg);
+		}else{ 
+			if(!$('#empEditForm_pCount').form('validate')){
+				$.messager.alert('提示','表单还未填写完成!');
+				return ;
+			}
+			$.post("employee/update_all",$("#empEditForm_pCount").serialize(), function(data){
+				if(data.status == 200){
+					$.messager.alert('提示','修改检验人信息成功!','info',function(){
+						$("#empInfo_pCount").dialog("close");
+					});
+				}else{
+					$.messager.alert('错误', data.msg);
 				}
 			});
 		}
