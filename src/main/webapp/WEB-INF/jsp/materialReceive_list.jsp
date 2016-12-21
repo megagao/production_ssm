@@ -257,7 +257,7 @@ function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜
     				if(data.status == 200){
     					$("#materialReceiveNoteDialog").dialog("close");
     					$("#materialReceiveList").datagrid("reload");
-    					$.messager.alert("操作提示", "更新成功！");
+    					$.messager.alert("操作提示", "更新物料收入详情成功！");
     				}else{
     					$.messager.alert('提示',data.msg);
     				} 
