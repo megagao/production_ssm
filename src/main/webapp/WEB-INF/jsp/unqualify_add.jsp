@@ -17,7 +17,7 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>产品编号:</td>
+	            <td>产品名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="productId"   
     					data-options="valueField:'productId',textField:'productName',url:'product/get_data',required:true, editable:false" />  
@@ -38,13 +38,14 @@
 	        <tr>
 	            <td>加工时间:</td>
 	             <td><input class="easyui-datetimebox" name="assemblyDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> 
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> 
         		</td>  
 	        </tr>
 	        <tr>
 	            <td>申请人:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="empId" ></input>
+	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -110,8 +111,4 @@
 		$('#unqualifyAddForm').form('reset');
 		unqualifyAddForm.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
