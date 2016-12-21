@@ -27,7 +27,7 @@
 	        <tr>
 	            <td>检验时间:</td>
 	            <td><input class="easyui-datetimebox" name="cdate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> 
+        			data-options="required:true,showSeconds:true" style="width:150px"> 
         		</td> 
 	        </tr>
 	        <tr>
@@ -39,7 +39,8 @@
 	        <tr>
 	            <td>检验人:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="empId" ></input>
+	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'"/>
     			</td>  
 	        </tr>
 	        <tr>
@@ -87,5 +88,4 @@
 			} 
 		});
 	}
-	
 </script>
