@@ -356,7 +356,7 @@
     				if(data.status == 200){
     					$("#materialConsumeNoteDialog").dialog("close");
     					$("#materialConsumeList").datagrid("reload");
-    					$.messager.alert("操作提示", "更新成功！");
+    					$.messager.alert("操作提示", "更新物料消耗详情成功！");
     				}else{
     					$.messager.alert('提示',data.msg);
     				}  
