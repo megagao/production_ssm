@@ -18,11 +18,9 @@
             <th data-options="field:'qualify',align:'center',width:100">合格率</th>
             <th data-options="field:'cdate',align:'center',width:130,formatter:TAOTAO.formatDateTime">检验时间</th>
             <th data-options="field:'measureData',align:'center',width:100">实际测量数据</th>
-            <th data-options="field:'empId',align:'center',width:100">检验人</th>
+            <th data-options="field:'empName',align:'center',width:100,formatter:formatEmp_fCount">检验人</th>
             <th data-options="field:'result',align:'center',width:100">检验结果</th>
             <th data-options="field:'note',align:'center',width:100,formatter:formatFCountCheckNote">备注</th>
-            
-            
         </tr>
     </thead>
 </table>
@@ -69,9 +67,9 @@
 </div>  
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="fCountCheckEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:80%;height:95%;padding:10px;">
+<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="fCountCheckAddWindow" class="easyui-window" title="添加订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:80%;height:95%;padding:10px;">
+<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 <!-- ********************************************************************* -->
 <div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
@@ -130,8 +128,8 @@
 	        <tr>
 	            <td>合同扫描件:</td>
 	            <td>
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" id="image" name="image"/>
+	            	 <div style="padding-top: 12px"><span id="fCountCheckPicSpan"></span></div>
+	                 <input type="hidden" class="easyui-linkbutton fCountCheckPic" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -151,6 +149,72 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitfCountOrderEditForm()">提交</a>
+	</div>
+</div>
+
+
+<!-- 检验人信息 -->
+<div id="empInfo_fCount" class="easyui-dialog" title="检验人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+	<form id="empEditForm_fCount" method="post">
+		<input type="hidden" name="empId"/>
+	    <table cellpadding="5">
+	        <tr>
+	           	<td>姓名:</td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	        </tr>
+	        <tr>
+	            <td>性别:</td>
+	            <td>
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</td>
+	        </tr>
+	        <tr>
+	            <td>所属部门:</td>
+	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
+	            <td>
+	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
+    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
+    			</td> 
+	        </tr>
+	        <tr>
+	            <td>身份证号:</td>
+	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学历:</td>
+	            <td><input class="easyui-textbox" name="education"></input></td>
+	        </tr>
+	        <tr>
+	            <td>学位:</td>
+	            <td><input class="easyui-textbox" name="degree"></input></td>
+	        </tr>
+	        <tr>
+	            <td>专业:</td>
+	            <td><input class="easyui-textbox" name="major" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>受教育形式:</td>
+	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>生日:</td>
+	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>入职日期:</td>
+	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	        </tr>
+	        <tr>
+	            <td>员工状态:</td>
+	            <td><input class="easyui-textbox" name="status" ></input></td>
+	        </tr>
+	    </table>
+	</form>
+	<div style="padding:5px">
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmpEditForm_fCount()">提交</a>
 	</div>
 </div>
 
@@ -189,7 +253,7 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 	             	{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
 	             	{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
 	             	{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-	            	{field : 'empId', width : 100, title : '检验人', align:'center'}, 
+	            	{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_fCount}, 
 	             	{field : 'result', width : 100, title : '检验结果', align:'center'}, 
 	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote} 
 	        ] ],  
@@ -209,7 +273,7 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 					{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
 					{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
 					{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-					{field : 'empId', width : 100, title : '检验人', align:'center'}, 
+					{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_fCount}, 
 					{field : 'result', width : 100, title : '检验结果', align:'center'}, 
 					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote} 
 	        ] ],  
@@ -252,7 +316,7 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
  	        		$("#fCountOrderEditForm").form("load", data);
  	        		fCountCheckOrderEditor.html(data.note);
  	        			
- 	        		TAOTAO.init({
+ 	        		initFCountCheckPic({
  	        			"pics" : data.image,
  	        		});
  	        			
@@ -264,10 +328,38 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 			onBeforeClose: function (event, ui) {
 				// 关闭Dialog前移除编辑器
 			   	KindEditor.remove("#fCountOrderEditForm [name=note]");
-			   	clearFCountCheckUploadedFile();
+			   	$("#fCountCheckFileSpan").html('');
+			   	$("#fCountCheckPicSpan").html('');
 			}
     	}).dialog("open");
 	};
+	
+	// 加载图片
+    function initFCountCheckPic(data){
+    	$(".fCountCheckPic").each(function(i,e){
+    		var _ele = $(e);
+    		_ele.siblings("div.pics").remove();
+    		_ele.after('\
+    			<div class="pics">\
+        			<ul></ul>\
+        		</div>');
+    		// 回显图片
+    		var j = false;
+        	if(data && data.pics){
+        		var imgs = data.pics.split(",");
+        		for(var i in imgs){
+        			if($.trim(imgs[i]).length > 0){
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
+        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				j = true;
+        			}
+        		}
+        	}
+        	if(!j){
+    			$("#fCountCheckPicSpan").html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
+    		}
+    	});
+    }
 	
 	//加载上传过的文件
 	function initFCountCheckUploadedFile(){
@@ -285,9 +377,6 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 			$("#fCountCheckFileSpan").html("<span style='font-size: 16px;font-family: Microsoft YaHei;'>无</span>");
 		}
 	}
-	function clearFCountCheckUploadedFile(){
-		$("#fCountCheckFileSpan").html('');
-	}
 	
 	function submitfCountOrderEditForm(){
 		$.get("order/edit_judge",'',function(data){
@@ -302,11 +391,60 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
     			
     			$.post("order/update_all",$("#fCountOrderEditForm").serialize(), function(data){
     				if(data.status == 200){
-    					$.messager.alert('提示','修改产品成功!','info',function(){
+    					$.messager.alert('提示','修改订单信息成功!','info',function(){
     						$("#fCountOrderInfo").dialog("close");
     					});
     				}else{
     					$.messager.alert('提示', data.msg);
+    				}
+    			});
+    		}
+    	});
+	}
+	
+	//格式化检验人信息
+	function formatEmp_fCount(value, row, index){ 
+		if(value !=null && value != ''){
+			return "<a href=javascript:openEmp_fCount("+index+")>"+value+"</a>";
+		}else{
+			return "无";
+		}
+	};
+	
+	//打开检验人信息对话框
+	function  openEmp_fCount(index){ 
+		var row = onFCountClickRow(index);
+		$("#empInfo_fCount").dialog({
+    		onOpen :function(){
+    			$.get("employee/get/"+row.empId,'',function(data){
+		    		//回显数据
+					data.birthday = TAOTAO.formatDateTime(data.birthday);
+					data.joinDate = TAOTAO.formatDateTime(data.joinDate);
+					data.departmentId=data.department.departmentId;
+					data.departmentName=data.department.departmentName;
+		    		$("#empInfo_fCount").form("load", data);
+    	    	});
+    		}
+    	}).dialog("open");
+	};
+	
+	//提交检验人信息
+	function submitEmpEditForm_fCount(){
+		$.get("employee/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{ 
+    			if(!$('#empEditForm_fCount').form('validate')){
+    				$.messager.alert('提示','表单还未填写完成!');
+    				return ;
+    			}
+    			$.post("employee/update_all",$("#empEditForm_fCount").serialize(), function(data){
+    				if(data.status == 200){
+    					$.messager.alert('提示','修改检验人信息成功!','info',function(){
+    						$("#empInfo_fCount").dialog("close");
+    					});
+    				}else{
+    					$.messager.alert('错误', data.msg);
     				}
     			});
     		}
@@ -350,9 +488,9 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
     				if(data.status == 200){
     					$("#fCountCheckNoteDialog").dialog("close");
     					$("#fCountCheckList").datagrid("reload");
-    					$.messager.alert("操作提示", "更新订单要求成功！");
+    					$.messager.alert("操作提示", "更新备注成功！");
     				}else{
-    					$.messager.alert('提示', data.msg);
+    					$.messager.alert("操作提示", "更新备注失败！");
     				}
     			});
     		}
@@ -388,11 +526,11 @@ function fCountCheck_edit(){
    		}else{
    			var ids = getFCountSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个产品才能编辑!');
+        		$.messager.alert('提示','必须选择一个成品计数质检才能编辑!');
         		return ;
         	}
         	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个产品!');
+        		$.messager.alert('提示','只能选择一个成品计数质检!');
         		return ;
         	}
         	
@@ -417,15 +555,15 @@ function fCountCheck_delete(){
    		}else{
    			var ids = getFCountSelectionsIds();
            	if(ids.length == 0){
-           		$.messager.alert('提示','未选中订单!');
+           		$.messager.alert('提示','未选中成品计数质检!');
            		return ;
            	}
-           	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
+           	$.messager.confirm('确认','确定删除ID为 '+ids+' 的成品计数质检吗？',function(r){
            	    if (r){
            	    	var params = {"ids":ids};
                    	$.post("f_count_check/delete_batch",params, function(data){
                			if(data.status == 200){
-               				$.messager.alert('提示','删除订单成功!',undefined,function(){
+               				$.messager.alert('提示','删除成品计数质检成功!',undefined,function(){
                					$("#fCountCheckList").datagrid("reload");
                				});
                			}
