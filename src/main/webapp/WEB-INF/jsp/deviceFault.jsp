@@ -11,7 +11,7 @@
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'deviceFaultId',width:100,align:'center'">故障编号</th>
-            <th data-options="field:'deviceName',width:100,align:'center'">设备名称</th>
+            <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceFault">设备名称</th>
             <th data-options="field:'deviceFaultDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">故障日期</th>
             <th data-options="field:'deviceFaultCause',width:100,align:'center'">故障原因</th>
             <th data-options="field:'deviceFaultMaintenance',width:100,align:'center'">维修方式</th>
@@ -61,15 +61,15 @@
 </div>
 
 <!-- deviceFaultAddWindow -->
-<div id="deviceFaultAddWindow" class="easyui-window" title="添加设备故障" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceFaultAddWindow" class="easyui-window" title="添加设备故障" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/add'" style="width:55%;height:75%;padding:10px;">
 </div>
 
 <!-- deviceFaultEditWindow -->
-<div id="deviceFaultEditWindow" class="easyui-window" title="编辑设备故障" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceFaultEditWindow" class="easyui-window" title="编辑设备故障" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/edit'" style="width:55%;height:75%;padding:10px;">
 </div>
 
 <!-- 设备信息 -->
-<div id="deviceInfo_deviceFault" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:62%;height:80%;padding:10px;">
+<div id="deviceInfo_deviceFault" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceFault" method="post">
 	    
 	    <table cellpadding="5">
@@ -131,14 +131,14 @@
 </div>
 
 <!-- 设备故障原因-->
-<div id="deviceFaultDetailDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceFaultDetailDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceFaultDetailForm" class="itemForm" method="post">
 	    <input type="hidden" name="deviceFaultId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>例检结果:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="deviceFaultDetail"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="deviceFaultDetail"></textarea>
 	            </td>
 	        </tr>
 	    </table>
@@ -158,7 +158,7 @@ function doSearch_deviceFault(value,name){ //用户输入用户名,点击搜素,
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'deviceFaultId', width : 100, align:'center', title : '故障编号'},
-	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
+	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称',formatter:formatDevice_deviceFault},
 	             	{field : 'deviceFaultDate', width : 130, align : 'center', title : '故障日期', formatter:TAOTAO.formatDateTime}, 
 	             	{field : 'deviceFaultCause', width : 100, title : '故障原因', align:'center'}, 
 	             	{field : 'deviceFaultMaintenance', width : 100, title : '维修方式', align:'center'}, 
@@ -172,7 +172,7 @@ function doSearch_deviceFault(value,name){ //用户输入用户名,点击搜素,
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
 					{field : 'deviceFaultId', width : 100, align:'center', title : '故障编号'},
-					{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
+					{field : 'deviceName', width : 100, align : 'center', title : '设备名称',formatter:formatDevice_deviceFault},
 					{field : 'deviceFaultDate', width : 130, align : 'center', title : '故障日期', formatter:TAOTAO.formatDateTime}, 
 					{field : 'deviceFaultCause', width : 100, title : '故障原因', align:'center'}, 
 					{field : 'deviceFaultMaintenance', width : 100, title : '维修方式', align:'center'}, 
