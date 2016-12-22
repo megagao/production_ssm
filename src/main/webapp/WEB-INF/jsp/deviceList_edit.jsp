@@ -100,6 +100,8 @@
     						$("#deviceEditWindow").window('close');
     						$("#deviceList").datagrid("reload");
     					});
+    				}else{
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
