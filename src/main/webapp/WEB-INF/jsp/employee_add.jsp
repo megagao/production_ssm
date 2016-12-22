@@ -26,7 +26,7 @@
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="cc" class="easyui-combobox" name="sex" data-options="required:true,width:150, editable:false">
+	            	<select id="cc" class="easyui-combobox" name="sex" panelHeight="auto" data-options="required:true,width:150, editable:false">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -119,10 +119,5 @@
 	
 	function clearEmployeeAddForm(){
 		$('#employeeAddForm').form('reset');
-		employeeAddEditor.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
