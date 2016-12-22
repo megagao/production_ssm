@@ -62,15 +62,15 @@
 </div>
 
 <!-- deviceCheckAddWindow -->
-<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:55%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceCheckEditWindow -->
-<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:55%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备信息 -->
-<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:62%;height:80%;padding:10px;">
+<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceCheck" method="post">
 	    <table cellpadding="5">
 	        <tr>
@@ -114,8 +114,8 @@
 	        </tr>
 	        <tr>
 	            <td>保管人:</td>
-	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'deviceCheck/get_data'" /></input></td>
+	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" 
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" /></input></td>
 	        </tr>
 	        <tr>
 	            <td>备注:</td>
@@ -196,13 +196,14 @@
 </div>
 
 <!-- 设备例检备注信息-->
-<div id="deviceCheckResultDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceCheckResultDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceCheckResultForm" class="itemForm" method="post">
+		<input type="hidden" name="deviceCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>例检结果:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="deviceCheckResult"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="deviceCheckResult"></textarea>
 	            </td>
 	        </tr>
 	    </table>
@@ -398,7 +399,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     						$("#deviceInfo_deviceCheck").dialog("close");
     					});
     				}else{
-    					$.messager.alert('错误','修改设备信息失败!');
+    					$.messager.alert('错误', data.msg);
     				}
     			});
     		}
@@ -468,7 +469,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 		var row = onDeviceCheckClickRow(index);
 		$("#deviceCheckResultDialog").dialog({
 			onOpen :function(){
-				//$("#deviceCheckResultForm [name=deviceCheckId]").val(row.deviceCheckId);
+				$("#deviceCheckResultForm [name=deviceCheckId]").val(row.deviceCheckId);
 				deviceCheckNoteEditor = TAOTAO.createEditor("#deviceCheckResultForm [name=deviceCheckResult]");
 				deviceCheckNoteEditor.html(row.deviceCheckResult);
 			},
@@ -489,9 +490,9 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     				if(data.status == 200){
     					$("#deviceCheckResultDialog").dialog("close");
     					$("#deviceCheck").datagrid("reload");
-    					$.messager.alert("操作提示", "更新设备例检介绍成功！");
+    					$.messager.alert("操作提示", "更新设备例检结果成功！");
     				}else{
-    					$.messager.alert("操作提示", "更新设备例检介绍失败！","error");
+    					$.messager.alert("操作提示",  data.msg);
     				}
     			});
     		}
