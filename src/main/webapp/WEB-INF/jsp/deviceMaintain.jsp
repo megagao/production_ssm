@@ -62,15 +62,15 @@
 </div>
 
 <!-- deviceMaintainAddWindow -->
-<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:55%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceMaintainEditWindow -->
-<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:55%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备故障信息 -->
-<div id="deviceFaultInfo_deviceMaintain" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:62%;height:80%;padding:10px;">
+<div id="deviceFaultInfo_deviceMaintain" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
 	<form id="deviceFaultEditForm_deviceMaintain" method="post">
 	    <table cellpadding="5">
 	        <tr>
@@ -118,14 +118,14 @@
 </div>
 
 <!-- 设备维修原因-->
-<div id="deviceMaintainNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceMaintainNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceMaintainNoteForm" class="itemForm" method="post">
 	    <input type="hidden" name="deviceMaintainId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
@@ -148,7 +148,7 @@ function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜�
 	             	{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
 	             	{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',formatter:formatDeviceFault_deviceMaintain},
 	             	{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'}, 
-	             	{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:formatDepartment}, 
+	             	{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:TAOTAO.formatDateTime}, 
 	             	{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'}, 
 	            	{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'}, 
 	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote} 
@@ -163,7 +163,7 @@ function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜�
 					{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
 					{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',formatter:formatDeviceFault_deviceMaintain},
 					{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'}, 
-					{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:formatDepartment}, 
+					{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:TAOTAO.formatDateTime}, 
 					{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'}, 
 					{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'}, 
 					{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote} 
