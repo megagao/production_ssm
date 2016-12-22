@@ -51,7 +51,7 @@
 	        <tr>
 	            <td>客户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" panelHeight="auto" data-options="width:150, editable:false">
 						<option value="1">有效客户</option>
 						<option value="2">无效客户</option>
 					</select>
@@ -93,10 +93,11 @@
     						$("#customEditWindow").window('close');
     						$("#customList").datagrid("reload");
     					});
+    				}else{
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
     	});
-		
 	}
 </script>
