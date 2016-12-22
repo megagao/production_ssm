@@ -22,13 +22,13 @@
 	            <td>例检人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceCheckEmpId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data', required:true" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>例检时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox"  name="deviceCheckDate" value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
+	            	<input class="easyui-datetimebox"  name="deviceCheckDate" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	        <tr>
