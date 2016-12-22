@@ -17,7 +17,7 @@
 	            <td>例检人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceCheckEmpId" panelHeight="auto" 
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data', required:true" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
 	            </td>
 	        </tr>
 	        <tr>
@@ -70,6 +70,8 @@
     						$("#deviceCheckEditWindow").window('close');
     						$("#deviceCheck").datagrid("reload");
     					});
+    				}else{
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
