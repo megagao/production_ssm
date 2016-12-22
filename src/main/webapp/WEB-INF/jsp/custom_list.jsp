@@ -65,14 +65,14 @@
 </div>
 <div id="customAddWindow" class="easyui-window" title="添加客户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/add'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="customNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="customNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="customNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="customId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
