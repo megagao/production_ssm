@@ -55,19 +55,19 @@
             style="width:250px;vertical-align: middle;">
         </input>
         <div id="menu_deviceType" style="width:120px"> 
-			<div data-options="name:'deviceTypeId'">设备种类种类编号</div> 
-			<div data-options="name:'deviceTypeName'">设备种类种类名称</div>
+			<div data-options="name:'deviceTypeId'">设备种类编号</div> 
+			<div data-options="name:'deviceTypeName'">设备种类名称</div>
 		</div>     
     </div>  
 
 </div>
 
 <!-- deviceTypeAddWindow -->
-<div id="deviceTypeAddWindow" class="easyui-window" title="添加设备种类" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/add'" style="width:38%;height:80%;padding:10px;">
+<div id="deviceTypeAddWindow" class="easyui-window" title="添加设备种类" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/add'" style="width:40%;height:55%;padding:10px;">
 </div>
 
 <!-- deviceTypeEditWindow -->
-<div id="deviceTypeEditWindow" class="easyui-window" title="编辑设备种类" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/edit'" style="width:38%;height:80%;padding:10px;">
+<div id="deviceTypeEditWindow" class="easyui-window" title="编辑设备种类" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
 
 
