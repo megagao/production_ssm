@@ -74,8 +74,4 @@
 		$('#departmentAddForm').form('reset');
 		departmentAddEditor.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
