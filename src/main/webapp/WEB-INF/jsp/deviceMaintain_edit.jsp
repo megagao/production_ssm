@@ -75,6 +75,8 @@
     						$("#deviceMaintainEditWindow").window('close');
     						$("#deviceMaintain").datagrid("reload");
     					});
+    				}else{
+    					$.messager.alert('提示', data.msg);
     				}
     			});
     		}
