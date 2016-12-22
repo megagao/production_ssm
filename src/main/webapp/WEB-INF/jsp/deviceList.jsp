@@ -59,18 +59,18 @@
         <div id="menu_device" style="width:120px"> 
 			<div data-options="name:'deviceId'">设备编号</div> 
 			<div data-options="name:'deviceName'">设备名称</div>
-			<div data-options="name:'deviceTypeName'">设备名称</div>
+			<div data-options="name:'deviceTypeName'">设备种类名称</div>
 		</div>     
     </div>  
 
 </div>
 
 <!-- deviceAddWindow -->
-<div id="deviceAddWindow" class="easyui-window" title="添加设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceAddWindow" class="easyui-window" title="添加设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/add'" style="width:55%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceEditWindow -->
-<div id="deviceEditWindow" class="easyui-window" title="编辑设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceEditWindow" class="easyui-window" title="编辑设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/edit'" style="width:55%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备种类信息 -->
@@ -179,14 +179,14 @@
 </div>
 
 <!-- 设备备注信息-->
-<div id="deviceNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="deviceId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
