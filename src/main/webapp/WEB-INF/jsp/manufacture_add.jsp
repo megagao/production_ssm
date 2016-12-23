@@ -19,14 +19,14 @@
 	        <tr>
 	            <td>订单编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="orderId"   
+	            	<input class="easyui-combobox" name="orderId"  panelHeight="auto"
     					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="technologyId"   
+	            	<input class="easyui-combobox" name="technologyId"  panelHeight="auto"
     					data-options="valueField:'technologyId',textField:'technologyName',url:'technology/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
@@ -37,12 +37,12 @@
 	        <tr>
 	            <td>订购日期:</td>
 	            <td><input class="easyui-datetimebox" name="beginDate"     
-        			data-options="showSeconds:true"  value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="showSeconds:true"  value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> </td>
 	        </tr>
 	        <tr>
 	            <td>要求日期:</td>
 	            <td><input class="easyui-datetimebox" name="endDate"     
-        			data-options="showSeconds:true"  value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> </td>
 	        </tr>
 	    </table>
 	</form>
@@ -79,8 +79,4 @@
 	function clearManufactureAddForm(){
 		$('#manufactureAddForm').form('reset');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
