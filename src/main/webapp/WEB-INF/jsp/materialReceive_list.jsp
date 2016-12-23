@@ -58,20 +58,20 @@
 
 </div>  
 
-<div id="materialReceiveEditWindow" class="easyui-window" title="编辑物料收入" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialReceive/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="materialReceiveEditWindow" class="easyui-window" title="编辑物料收入" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialReceive/edit'" style="width:55%;height:75%;padding:10px;">
 </div>
-<div id="materialReceiveAddWindow" class="easyui-window" title="添加物料收入" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialReceive/add'" style="width:65%;height:80%;padding:10px;">
+<div id="materialReceiveAddWindow" class="easyui-window" title="添加物料收入" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialReceive/add'" style="width:55%;height:75%;padding:10px;">
 </div>
 <div id="materialInfoWindow" class="easyui-window" title="物料信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="materialReceiveNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="materialReceiveNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="materialReceiveNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="receiveId"/>
 	    <table cellpadding="10" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
