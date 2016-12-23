@@ -64,14 +64,12 @@
 
 </div>  
 
-<div id="employeeEditWindow" class="easyui-window" title="编辑员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="employeeEditWindow" class="easyui-window" title="编辑员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/edit'" style="width:40%;height:70%;padding:10px;">
 </div>
-<div id="employeeAddWindow" class="easyui-window" title="添加员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/add'" style="width:65%;height:80%;padding:10px;">
+<div id="employeeAddWindow" class="easyui-window" title="添加员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/add'" style="width:40%;height:70%;padding:10px;">
 </div>
 
-<div id="customInfoWindow" class="easyui-window" title="客户信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/edit'" style="width:65%;height:80%;padding:10px;">
-</div>
-<div id="empDepartmentInfo" class="easyui-dialog" title="部门信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
+<div id="empDepartmentInfo" class="easyui-dialog" title="部门信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="empDepartmentEditForm" method="post">
 		<input type="hidden" name="departmentId"/>
 	    <table cellpadding="5">
