@@ -52,7 +52,7 @@
             style="width:250px;vertical-align: middle;">
         </input>
         <div id="menu_materialConsume" style="width:120px"> 
-			<div data-options="name:'consumeId'">物料消费编号</div> 
+			<div data-options="name:'consumeId'">物料消耗编号</div> 
 			<div data-options="name:'workId'">作业编号</div>
 			<div data-options="name:'materialId'">物料编号</div> 
 		</div>     
@@ -60,19 +60,19 @@
 
 </div>  
 
-<div id="materialConsumeEditWindow" class="easyui-window" title="编辑" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialConsume/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="materialConsumeEditWindow" class="easyui-window" title="编辑" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialConsume/edit'" style="width:55%;height:75%;padding:10px;">
 </div>
-<div id="materialConsumeAddWindow" class="easyui-window" title="添加" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialConsume/add'" style="width:65%;height:80%;padding:10px;">
+<div id="materialConsumeAddWindow" class="easyui-window" title="添加" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialConsume/add'" style="width:55%;height:75%;padding:10px;">
 </div>
 
-<div id="materialConsumeNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<div id="materialConsumeNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="materialConsumeNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="consumeId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table><span style="color:green;font-size: 12;font-family: Microsoft YaHei;margin-left: 20px"></span>
@@ -82,7 +82,7 @@
 	</div>
 </div>
 <!-- 物料对话框内容信息 -->
-<div id="materialConsumeMaterialInfo" class="easyui-dialog" title="物料信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="materialConsumeMaterialInfo" class="easyui-dialog" title="物料信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="materialConsumeMaterialForm" method="post">
 		<input type="hidden" name="materialId"/>
 	    <table cellpadding="5">
@@ -122,7 +122,7 @@
 	</div>
 </div>
 <!-- 工作表对话框信息内容 -->
-<div id="materialConsumeWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="materialConsumeWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 <form id="materialConsumeWorkForm" class="workForm" method="post">
 		<input type="hidden" name="workId"/>
 	    <table cellpadding="5">
