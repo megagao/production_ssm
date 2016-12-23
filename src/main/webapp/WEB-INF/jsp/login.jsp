@@ -9,7 +9,7 @@
 <meta name="Author" content="华侨大学计算机科学与技术学院" />
 <meta name="keywords" content="生产管理系统--生产进度,设备管理,工艺监控,物料监控,人员监控,质量监控" />
 <meta name="description" content="制造装备物联及生产管理中间件/系统登陆页面" />
-<title>制造装备物联及生产管理系统登录页</title>
+<title>制造物联中间件系统登录页面</title>
 <link rel="stylesheet" type="text/css" href="css/login/style.css" />
 <style type="text/css">
 	.download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#e6e6e6;border:1px dashed #df0031;font-size:14px;font-family:Comic Sans MS;font-weight:bolder;color:#555}
