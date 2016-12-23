@@ -55,15 +55,15 @@
         <div id="menu_manufacture" style="width:120px"> 
 			<div data-options="name:'manufactureSn'">生产批号</div> 
 			<div data-options="name:'manufactureOrderId'">订单编号</div> 
-			<div data-options="name:'manufactureTechnologyName'">工艺名称</div>
+			<div data-options="name:'manufactureTechnologyName'">工艺</div>
 		</div>     
     </div>  
 
 </div>  
 
-<div id="manufactureEditWindow" class="easyui-window" title="编辑生产计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'manufacture/edit'" style="width:45%;height:60%;padding:10px;">
+<div id="manufactureEditWindow" class="easyui-window" title="编辑生产计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'manufacture/edit'" style="width:40%;height:60%;padding:10px;">
 </div>
-<div id="manufactureAddWindow" class="easyui-window" title="添加生产计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'manufacture/add'" style="width:45%;height:60%;padding:10px;">
+<div id="manufactureAddWindow" class="easyui-window" title="添加生产计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'manufacture/add'" style="width:40%;height:60%;padding:10px;">
 </div>
 
 <div id="manuOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
@@ -122,14 +122,14 @@
 	        <tr>
 	            <td>合同扫描件:</td>
 	            <td>
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" id="image" name="image"/>
+	            	 <div style="padding-top: 12px"><span id="manuPicSpan"></span></div>
+	                 <input type="hidden" class="easyui-linkbutton manuPic" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>附件:</td>
 	            <td>
-	            	 <div id="manuFileuploader"><span id="manuFileSpan"></</span></div>
+	            	 <div id="manuFileuploader"><span id="manuFileSpan"></span></div>
 	                 <input id="manuFile" type="hidden" name="file"/>
 	            </td>
 	        </tr>
@@ -146,7 +146,7 @@
 	</div>
 </div>
 
-<div id="manuTechnologyInfo" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="manuTechnologyInfo" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="manuTechnologyEditForm" class="technologyForm" method="post">
 		<input type="hidden" name="technologyId"/>
 	    <table cellpadding="5">
@@ -271,10 +271,10 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
  	        		$("#manuOrderEditForm").form("load", data);
  	        		manuOrderEditor.html(data.note);
  	        			
- 	        		TAOTAO.init({
- 	        			"pics" : data.image,
- 	        		});
- 	        			
+ 	        		//加载图片
+ 	        		initManuPic({
+           				"pics" : data.image,
+           			});
  	        		//加载上传过的文件
  	        		initManuUploadedFile();
     	    	});
@@ -283,11 +283,38 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
 			onBeforeClose: function (event, ui) {
 				// 关闭Dialog前移除编辑器
 			   	KindEditor.remove("#manuOrderEditForm [name=note]");
-			   	clearManuUploadedFile();
+			   	clearManuSpan();
 			}
     	}).dialog("open");
 	};
 	
+	// 加载图片
+    function initManuPic(data){
+    	$(".manuPic").each(function(i,e){
+    		var _ele = $(e);
+    		_ele.siblings("div.pics").remove();
+    		_ele.after('\
+    			<div class="pics">\
+        			<ul></ul>\
+        		</div>');
+    		// 回显图片
+    		var j = false;
+        	if(data && data.pics){
+        		var imgs = data.pics.split(",");
+        		for(var i in imgs){
+        			if($.trim(imgs[i]).length > 0){
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
+        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				j = true;
+        			}
+        		}
+        	}
+        	if(!j){
+    			$("#manuPicSpan").html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
+    		}
+    	});
+    }
+    
 	//加载上传过的文件
 	function initManuUploadedFile(){
 		var files = $('#manuFile').val().split(","); 
@@ -304,7 +331,9 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
 			$("#manuFileSpan").html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
 		}
 	}
-	function clearManuUploadedFile(){
+	
+	function clearManuSpan(){
+		$("#manuPicSpan").html('');
 		$("#manuFileSpan").html('');
 	}
 	
@@ -333,7 +362,7 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
 	
 	//格式化工艺信息
 	function formatManuTechnology(value, row, index){ 
-		return "<a href=javascript:ManuTechnology("+index+")>"+row.technology.technologyId+"</a>";
+		return "<a href=javascript:ManuTechnology("+index+")>"+row.technology.technologyName+"</a>";
 	};  
 	
 	function  ManuTechnology(index){ 
