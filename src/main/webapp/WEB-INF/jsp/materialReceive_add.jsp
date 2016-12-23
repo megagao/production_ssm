@@ -4,7 +4,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
 	<form id="materialReceiveAddForm" class="materialReceiveForm" method="post">
-	    <table cellpadding="10" >
+	    <table cellpadding="5" >
 	         <tr>
 	            <td>物料收入编号:</td>
 	            <td>
@@ -14,7 +14,7 @@
 	        <tr>
 	            <td>物料编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="materialId"   
+	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto"
     					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;"/>  
 	            </td>
 	        </tr>
