@@ -7,29 +7,36 @@
 <div style="padding:10px 10px 10px 10px">
 	<form id="materialReceiveEditForm" class="materialReceiveForm" method="post">
 		<input type="hidden" name="receiveId"/>
-	    <table cellpadding="10">	       	     
+	    <table cellpadding="5">	
+	    	<tr>
+	            <td>物料编号:</td>
+	            <td>
+	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto"
+    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;"/>  
+	            </td>
+	        </tr>       	     
 	        <tr>
 	            <td>收入数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="ammount" style="width: 280px;"></input>
+	            	<input class="easyui-numberbox" type="text" name="ammount" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        </tr>
 	         <tr>
-	            <td>订购日期:</td>
-	            <td><input class="easyui-datetimebox" name="receiverDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+	            <td>收入日期:</td>
+	            <td><input class="easyui-datetimebox" name="receiveDate"     
+        			data-options="required:true,showSeconds:true" style="width:160px"> </td>
 	        </tr>  	        
 	        <tr>
 	            <td>发送者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="sender"></input>
+	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>接收者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="receiver"></input>
+	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"></input>
 	            </td>
 	        </tr>
 	        <tr>
@@ -68,7 +75,9 @@
     						$("#materialReceiveEditWindow").window('close');
     						$("#materialReceiveList").datagrid("reload");
     					});
-    				}
+    				}else{
+    					$.messager.alert('提示',data.msg);
+    				} 
     			});
     		}
     	});	
