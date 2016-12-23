@@ -5,7 +5,7 @@
 <div style="padding:10px 10px 10px 10px">
 	<form id="materialEditForm" class="materialForm" method="post">
 		<input type="hidden" name="materialId"/>
-	    <table cellpadding="10">
+	    <table cellpadding="5">
 	        
 	       <!--   <tr>
 	            <td>所属工作号:</td>
@@ -22,7 +22,7 @@
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:160px;" data-options="width:160, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" style="width:160px;" data-options="width:160, editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
