@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>生产管理系统首页</title>
+<title>制造物联中间件系统</title>
 <style type="text/css">
 .content {
 	padding: 10px 10px 10px 10px;
@@ -72,13 +72,13 @@
 						<li id=13 data-options="attributes:{'url':'product/find'}">产品管理</li>
 					</ul>
 					<ul>
-						<li id=13 data-options="attributes:{'url':'work/find'}">作业管理</li>
+						<li id=14 data-options="attributes:{'url':'work/find'}">作业管理</li>
 					</ul>
 					<ul>
-						<li id=14 data-options="attributes:{'url':'manufacture/find'}">生产计划管理</li>
+						<li id=15 data-options="attributes:{'url':'manufacture/find'}">生产计划管理</li>
 					</ul>
 					<ul>
-						<li id=15 data-options="attributes:{'url':'task/find'}">生产派工管理</li>
+						<li id=16 data-options="attributes:{'url':'task/find'}">生产派工管理</li>
 					</ul>
 				</li>
 			</ul>
@@ -182,7 +182,7 @@
 
 		var allItem = [
 						["计划进度","订单管理","客户管理","产品管理","作业管理","生产计划管理","生产派工管理"], 
-						["设备台账","设备台账","设备种类","设备例检","设备故障","设备维修"],
+						["设备管理","设备台账","设备种类","设备例检","设备故障","设备维修"],
 						["工艺监控","工艺","工艺要求","工艺计划","工序"],
 						["物料监控","物料信息","物料收入","物料消耗"],
 						["质量监控","不合格品管理","成品计量质检","成品计数质检","工序计量质检","工序计数质检"],
