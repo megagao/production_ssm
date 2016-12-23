@@ -4,9 +4,9 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <div style="padding:10px 10px 10px 10px">
 	<form id="materialConsumeAddForm" class="materialConsumeForm" method="post">
-	    <table cellpadding="10" >
+	    <table cellpadding="5" >
 	         <tr>
-	            <td>物料消费编号:</td>
+	            <td>物料消耗编号:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="consumeId" data-options="required:true" style="width: 160px;"></input>
 	            </td>
@@ -14,14 +14,14 @@
 	        <tr>
 	            <td>所属工作:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="workId"   
+	            	<input class="easyui-combobox" name="workId"  panelHeight="auto"
     					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'" style="width: 160px;" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="materialId"   
+	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto"
     					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;" />  
 	            </td>
 	        </tr>
@@ -32,9 +32,9 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>消费日期:</td>
+	            <td>消耗日期:</td>
 	            <td><input class="easyui-datetimebox" name="consumeDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:160px"> </td>
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:160px"> </td>
 	        </tr>
 	        <tr>
 	            <td>发送者:</td>
@@ -100,8 +100,4 @@
 		$('#materialConsumeAddForm').form('reset');
 		materialConsumeAddEditor.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
