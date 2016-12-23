@@ -67,12 +67,12 @@
 </div>  
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:55%;height:80%;padding:10px;">
 </div>
-<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:55%;height:80%;padding:10px;">
 </div>
 <!-- ********************************************************************* -->
-<div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
 	<form id="fCountOrderEditForm" method="post">
 			<input type="hidden" name="orderId"/>
 	    <table cellpadding="5">
@@ -220,14 +220,14 @@
 
 <!-- ********************************************************************* -->
 
-<div id="fCountCheckNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<div id="fCountCheckNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="fCountCheckNoteForm" method="post">
 		<input type="hidden" name="fCountCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
