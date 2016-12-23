@@ -11,14 +11,14 @@
 	         <tr>
 	            <td>所属作业:</td>
 	            <td>
-	            	<input id="work" class="easyui-combobox" name="workId"   
+	            	<input id="work" class="easyui-combobox" name="workId"  panelHeight="auto"
     					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'" style="width: 160px;"/>  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料:</td>
 	            <td>
-	            	<input id="material" class="easyui-combobox" name="materialId"   
+	            	<input id="material" class="easyui-combobox" name="materialId"  panelHeight="auto"
     					data-options="valueField:'materialId',textField:'materialId',url:'material/get_data', required:true" style="width: 160px;, editable:false"/>
     			</td>  
 	        </tr>
