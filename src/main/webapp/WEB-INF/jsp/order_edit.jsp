@@ -3,6 +3,7 @@
 
 <link href="css/uploadfile.css" rel="stylesheet"> 
 <script src="js/jquery.uploadfile.js"></script>
+<script src="js/malsup.github.iojquery.form.js"></script>
 
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
@@ -13,15 +14,15 @@
 	         <tr>
 	            <td>订购客户:</td>
 	            <td>
-	            	<input id="custom" class="easyui-combobox" name="customId"   
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data'" />  
+	            	<input id="custom" class="easyui-combobox" name="customId"  panelHeight="auto"
+    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
-	            	<input id="product" class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data'" />
+	            	<input id="product" class="easyui-combobox" name="productId"  panelHeight="auto" 
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -41,7 +42,7 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
+		            <select class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true, width:150, editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>
@@ -52,12 +53,12 @@
 	        <tr>
 	            <td>订购日期:</td>
 	            <td><input class="easyui-datetimebox" name="orderDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="required:true,showSeconds:true" style="width:150px"> </td>
 	        </tr>
 	        <tr>
 	            <td>要求日期:</td>
 	            <td><input class="easyui-datetimebox" name="requestDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="required:true,showSeconds:true" style="width:150px"> </td>
 	        </tr>
 	        <tr>
 	            <td>合同扫描件:</td>
@@ -69,8 +70,8 @@
 	        <tr>
 	            <td>附件:</td>
 	            <td>
-	            	 <div id="fileuploader">上传文件</div>
-	                 <input id="file" type="hidden" name="file"/>
+	            	 <div id="orderEditFileUploader">上传文件</div>
+	                 <input id="orderEditFile" type="hidden" name="file"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -82,7 +83,7 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitOrderEditForm()">提交</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -95,7 +96,7 @@
 	//同步kindeditor中的内容
 	orderEditEditor.sync();
 	
-	function submitForm(){
+	function submitOrderEditForm(){
 		if(!$('#orderEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
@@ -109,9 +110,8 @@
 					$("#orderList").datagrid("reload");
 				});
 			}else{
-				$.messager.alert('错误','修改订单失败!');
+				$.messager.alert('提示',data.msg);
 			}
 		});
 	}
-	
 </script>
