@@ -70,7 +70,7 @@
 <!-- ********************************************************************************** -->
 
 
-<div id="p2pMeasureInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:55%;padding:10px;">
+<div id="p2pMeasureInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:35%;height:40%;padding:10px;">
 	<form id="p2pEditForm" method="post">
 		<input type="hidden" name="processId"/>
 	    <table cellpadding="5">
@@ -168,14 +168,14 @@
 
 <!-- ********************************************************************************** -->
 
-<div id="pMeasureCheckNoteDialog" class="easyui-dialog" title="工序计量质检备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<div id="pMeasureCheckNoteDialog" class="easyui-dialog" title="工序计量质检备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="pMeasureCheckNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="pMeasureCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
