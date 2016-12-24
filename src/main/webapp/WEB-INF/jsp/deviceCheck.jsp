@@ -62,15 +62,15 @@
 </div>
 
 <!-- deviceCheckAddWindow -->
-<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceCheckEditWindow -->
-<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备信息 -->
-<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceCheck" method="post">
 	    <table cellpadding="5">
 	        <tr>
