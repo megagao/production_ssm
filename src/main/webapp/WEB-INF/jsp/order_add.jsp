@@ -20,14 +20,14 @@
 	        <tr>
 	            <td>订购客户:</td>
 	            <td>
-	            	<input id="custom" class="easyui-combobox" name="customId"   
+	            	<input id="custom" class="easyui-combobox" name="customId"  panelHeight="auto"
     					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
-	            	<input id="product" class="easyui-combobox" name="productId"   
+	            	<input id="product" class="easyui-combobox" name="productId"  panelHeight="auto"
     					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
@@ -48,7 +48,7 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true, width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true, width:150, editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>
@@ -59,12 +59,12 @@
 	        <tr>
 	            <td>订购日期:</td>
 	            <td><input class="easyui-datetimebox" name="orderDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> </td>
 	        </tr>
 	        <tr>
 	            <td>要求日期:</td>
 	            <td><input class="easyui-datetimebox" name="requestDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> </td>
 	        </tr>
 	        <tr>
 	            <td>合同扫描件:</td>
@@ -142,8 +142,4 @@
 		$('#orderAddForm').form('reset');
 		orderAddEditor.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>
