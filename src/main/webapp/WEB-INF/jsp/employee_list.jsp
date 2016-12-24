@@ -69,7 +69,7 @@
 <div id="employeeAddWindow" class="easyui-window" title="添加员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/add'" style="width:40%;height:70%;padding:10px;">
 </div>
 
-<div id="empDepartmentInfo" class="easyui-dialog" title="部门信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="empDepartmentInfo" class="easyui-dialog" title="部门信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
 	<form id="empDepartmentEditForm" method="post">
 		<input type="hidden" name="departmentId"/>
 	    <table cellpadding="5">
