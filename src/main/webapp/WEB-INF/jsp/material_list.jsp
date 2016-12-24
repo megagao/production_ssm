@@ -57,9 +57,9 @@
 
 </div>  
 
-<div id="materialEditWindow" class="easyui-window" title="编辑物料" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/edit'" style="width:55%;height:65%;padding:10px;">
+<div id="materialEditWindow" class="easyui-window" title="编辑物料" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/edit'" style="width:65%;height:65%;padding:10px;">
 </div>
-<div id="materialAddWindow" class="easyui-window" title="添加物料" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/add'" style="width:55%;height:65%;padding:10px;">
+<div id="materialAddWindow" class="easyui-window" title="添加物料" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/add'" style="width:65%;height:65%;padding:10px;">
 </div>
 <div id="materialNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="materialNoteForm" class="itemForm" method="post">
