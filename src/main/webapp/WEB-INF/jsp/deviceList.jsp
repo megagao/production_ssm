@@ -66,11 +66,11 @@
 </div>
 
 <!-- deviceAddWindow -->
-<div id="deviceAddWindow" class="easyui-window" title="添加设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/add'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceAddWindow" class="easyui-window" title="添加设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceEditWindow -->
-<div id="deviceEditWindow" class="easyui-window" title="编辑设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/edit'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceEditWindow" class="easyui-window" title="编辑设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备种类信息 -->
