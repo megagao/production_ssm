@@ -62,15 +62,15 @@
 </div>
 
 <!-- deviceMaintainAddWindow -->
-<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceMaintainEditWindow -->
-<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备故障信息 -->
-<div id="deviceFaultInfo_deviceMaintain" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px;">
+<div id="deviceFaultInfo_deviceMaintain" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="deviceFaultEditForm_deviceMaintain" method="post">
 	    <table cellpadding="5">
 	        <tr>
