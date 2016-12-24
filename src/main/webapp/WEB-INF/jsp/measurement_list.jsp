@@ -215,14 +215,14 @@
 
 
 <!-- ********************************************************************* -->
-<div id="fMeasureNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<div id="fMeasureNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="fMeasureNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="fMeasureCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
