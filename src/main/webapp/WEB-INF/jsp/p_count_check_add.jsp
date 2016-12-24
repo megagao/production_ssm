@@ -19,7 +19,7 @@
 	        <tr>
 	            <td>工序编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="processId" panelHeight="auto"  
+	            	<input class="easyui-combobox" name="processId" panelHeight="auto" 
     					data-options="required:true,valueField:'processId',textField:'processId',url:'process/get_data', editable:false" /> 
 	            </td>
 	        </tr>
