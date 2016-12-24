@@ -54,9 +54,9 @@
 
 </div>  
 
-<div id="departmentEditWindow" class="easyui-window" title="编辑部门" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/edit'" style="width:55%;height:65%;padding:10px;">
+<div id="departmentEditWindow" class="easyui-window" title="编辑部门" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/edit'" style="width:65%;height:65%;padding:10px;">
 </div>
-<div id="departmentAddWindow" class="easyui-window" title="添加部门" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/add'" style="width:55%;height:65%;padding:10px;">
+<div id="departmentAddWindow" class="easyui-window" title="添加部门" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/add'" style="width:65%;height:65%;padding:10px;">
 </div>
 <div id="departmentNoteDialog" class="easyui-dialog" title="部门职责" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="departmentNoteForm" class="itemForm" method="post">
