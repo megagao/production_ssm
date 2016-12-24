@@ -59,7 +59,7 @@
             style="width:250px;vertical-align: middle;">
         </input>
         <div id="menu_pCountCheck" style="width:120px"> 
-			<div data-options="name:'pCountCheckId'">工序计量质检编号</div> 
+			<div data-options="name:'pCountCheckId'">工序计数质检编号</div> 
 			 
 		</div>     
     </div>  
@@ -73,7 +73,7 @@
 </div>
 
 <!-- ********************************************************************************** -->
-<div id="p2pCountInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:55%;padding:10px;">
+<div id="p2pCountInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:35%;height:40%;padding:10px;">
 	<form id="p2pCountEditForm" method="post">
 		<input type="hidden" name="processId"/>
 	    <table cellpadding="5">
@@ -171,14 +171,14 @@
 
 <!-- ********************************************************************************** -->
 
-<div id="pCountCheckNoteDialog" class="easyui-dialog" title="工序计数质检备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<div id="pCountCheckNoteDialog" class="easyui-dialog" title="工序计数质检备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="pCountCheckNoteForm" method="post">
 		<input type="hidden" name="pCountCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
