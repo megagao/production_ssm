@@ -6,48 +6,156 @@
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="CHAR" />
     <result column="id_code" property="idCode" jdbcType="VARCHAR" />
-    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
-    <result column="join_date" property="joinDate" jdbcType="TIMESTAMP" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="education" property="education" jdbcType="VARCHAR" />
     <result column="degree" property="degree" jdbcType="VARCHAR" />
     <result column="major" property="major" jdbcType="VARCHAR" />
     <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
     <result column="education_form" property="educationForm" jdbcType="VARCHAR" />
-    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <association property="department" javaType="department">
+		<result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    	<result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    	<result column="note" property="note" jdbcType="VARCHAR" />
+	</association>
   </resultMap>
   
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.EmployeePO" extends="BaseResultMap">
-    <result column="device_keeper_id" property="deviceKeeperId" jdbcType="VARCHAR" />
-    <result column="device_keeper" property="deviceKeeper" jdbcType="VARCHAR" />
-    <result column="device_maintain_emp_id" property="deviceMaintainEmpId" jdbcType="VARCHAR" />
-    <result column="device_maintain_emp" property="deviceMaintainEmp" jdbcType="VARCHAR" />
-  </resultMap>
-  
-<!-- 扩展的sql -->
-<!-- 查询所有员工_保管人记录 -->
- <!-- parameterType=""  -->
-  
-<select id="listKeeper" resultMap="AddResultMap">
-	SELECT
-		emp_id as device_keeper_id,
-		emp_name as device_keeper
-	FROM
-		employee
+  <!-- 扩展的sql -->
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="employee" resultMap="BaseResultMap">
+		SELECT
+			emp_id,
+			emp_name,
+			sex,
+			id_code,
+			birthday,
+			join_date,
+			STATUS,
+			education,
+			degree,
+			major,
+			graduate_school,
+			education_form,
+			department_name,
+			employee.department_id
+		FROM
+			employee
+		LEFT JOIN department ON employee.department_id = department.department_id
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+	</select>
 	
-	order by emp_id ASC
-</select>
-
-<select id="listMaintainEmp" resultMap="AddResultMap">
-	SELECT
-		emp_id as device_maintain_emp_id,
-		emp_name as device_maintain_emp
-	FROM
-		employee
+	<!-- 查询所单个记录 -->
+	<select id="selectSingleEmployee" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			emp_id,
+			emp_name,
+			sex,
+			employee.department_id,
+			department_name,
+			id_code,
+			education,
+			degree,
+			major,
+			education_form,
+			birthday,
+			join_date,
+			status
+		FROM
+			employee,
+			department
+		WHERE employee.department_id = department.department_id AND emp_id = #{empId}
+	</select>
 	
-	order by emp_id ASC
-</select>
-  
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			employee
+		WHERE
+			emp_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchEmployeeByEmployeeId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			emp_id,
+			emp_name,
+			sex,
+			id_code,
+			birthday,
+			join_date,
+			STATUS,
+			education,
+			degree,
+			major,
+			graduate_school,
+			education_form,
+			department_name,
+			employee.department_id
+		FROM
+			employee
+		LEFT JOIN department ON employee.department_id = department.department_id
+		WHERE
+			emp_id LIKE CONCAT(
+				'%',
+				#{employeeId},'%' ) 
+	</select>
+	
+	<select id="searchEmployeeByEmployeeName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			emp_id,
+			emp_name,
+			sex,
+			id_code,
+			birthday,
+			join_date,
+			STATUS,
+			education,
+			degree,
+			major,
+			graduate_school,
+			education_form,
+			department_name,
+			employee.department_id
+		FROM
+			employee
+		LEFT JOIN department ON employee.department_id = department.department_id
+		WHERE
+			emp_name LIKE CONCAT(
+				'%',
+				#{employeeName},'%' ) 
+	</select>
+	
+	<select id="searchEmployeeByDepartmentName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			emp_id,
+			emp_name,
+			sex,
+			id_code,
+			birthday,
+			join_date,
+			STATUS,
+			education,
+			degree,
+			major,
+			graduate_school,
+			education_form,
+			department_name,
+			employee.department_id
+		FROM
+			employee
+		LEFT JOIN department ON employee.department_id = department.department_id
+		WHERE
+			department_name LIKE CONCAT(
+				'%',
+				#{departmentName},'%' ) 
+	</select>
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -147,7 +255,7 @@
       major, graduate_school, education_form, 
       department_id)
     values (#{empId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
-      #{idCode,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{joinDate,jdbcType=TIMESTAMP}, 
+      #{idCode,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{joinDate,jdbcType=DATE}, 
       #{status,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, 
       #{major,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{educationForm,jdbcType=VARCHAR}, 
       #{departmentId,jdbcType=VARCHAR})
@@ -209,10 +317,10 @@
         #{idCode,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
-        #{birthday,jdbcType=TIMESTAMP},
+        #{birthday,jdbcType=DATE},
       </if>
       <if test="joinDate != null" >
-        #{joinDate,jdbcType=TIMESTAMP},
+        #{joinDate,jdbcType=DATE},
       </if>
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
@@ -259,10 +367,10 @@
         id_code = #{record.idCode,jdbcType=VARCHAR},
       </if>
       <if test="record.birthday != null" >
-        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+        birthday = #{record.birthday,jdbcType=DATE},
       </if>
       <if test="record.joinDate != null" >
-        join_date = #{record.joinDate,jdbcType=TIMESTAMP},
+        join_date = #{record.joinDate,jdbcType=DATE},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=VARCHAR},
@@ -296,8 +404,8 @@
       emp_name = #{record.empName,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=CHAR},
       id_code = #{record.idCode,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=TIMESTAMP},
-      join_date = #{record.joinDate,jdbcType=TIMESTAMP},
+      birthday = #{record.birthday,jdbcType=DATE},
+      join_date = #{record.joinDate,jdbcType=DATE},
       status = #{record.status,jdbcType=VARCHAR},
       education = #{record.education,jdbcType=VARCHAR},
       degree = #{record.degree,jdbcType=VARCHAR},
@@ -322,10 +430,10 @@
         id_code = #{idCode,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=TIMESTAMP},
+        birthday = #{birthday,jdbcType=DATE},
       </if>
       <if test="joinDate != null" >
-        join_date = #{joinDate,jdbcType=TIMESTAMP},
+        join_date = #{joinDate,jdbcType=DATE},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
@@ -356,8 +464,8 @@
     set emp_name = #{empName,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
       id_code = #{idCode,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
-      join_date = #{joinDate,jdbcType=TIMESTAMP},
+      birthday = #{birthday,jdbcType=DATE},
+      join_date = #{joinDate,jdbcType=DATE},
       status = #{status,jdbcType=VARCHAR},
       education = #{education,jdbcType=VARCHAR},
       degree = #{degree,jdbcType=VARCHAR},

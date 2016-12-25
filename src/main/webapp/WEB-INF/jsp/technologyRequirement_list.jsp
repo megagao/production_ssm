@@ -12,7 +12,7 @@
             <th data-options="field:'technologyName',width:120,align:'center',
             					formatter:formatTechnology_technologyRequirement">工艺名称</th>
             <th data-options="field:'requirement',width:100,align:'center',formatter:formatRequirement">工艺要求</th>
-            <th data-options="field:'addTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">工艺要求增加时间</th>
+            <th data-options="field:'addTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">工艺要求添加时间</th>
             <th data-options="field:'reviseTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">工艺要求修改时间</th>
         </tr>
     </thead>
@@ -57,13 +57,13 @@
 
 </div> 
 
-<div id="technologyRequirementEditWindow" class="easyui-window" title="编辑工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/edit'" style="width:56%;height:560px;padding:10px;">
+<div id="technologyRequirementEditWindow" class="easyui-window" title="编辑工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/edit'" style="width:65%;height:65%;padding:10px;">
 </div>
-<div id="technologyRequirementAddWindow" class="easyui-window" title="添加工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/add'" style="width:65%;height:80%;padding:10px;">
+<div id="technologyRequirementAddWindow" class="easyui-window" title="添加工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/add'" style="width:65%;height:65%;padding:10px;">
 </div>
 
 <!-- 工艺信息 -->
-<div id="technologyInfo_technologyRequirement" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:80%;padding:10px;">
+<div id="technologyInfo_technologyRequirement" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="technologyEditForm_technologyRequirement" method="post">
 		<input type="hidden" name="technologyId"/>
 	    <table cellpadding="5">
@@ -106,14 +106,14 @@
 	</div>
 </div>
  
-<div id="technologyRequirementNoteDialog" class="easyui-dialog" title="工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
+<div id="technologyRequirementNoteDialog" class="easyui-dialog" title="工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="technologyRequirementNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="technologyRequirementId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>工艺要求:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="requirement"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="requirement"></textarea>
 	            </td>
 	        </tr>
 	    </table>
@@ -129,7 +129,7 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
 	if(value == null || value == ''){
 		
 		$("#technologyRequirementList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工艺要求列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_technologyRequirement", url:'technologyRequirement/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [
 	             	{field : 'ck', checkbox:true }, 
@@ -142,7 +142,7 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
 	    });
 	}else{
 		$("#technologyRequirementList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工艺要求列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_technologyRequirement", url:'technologyRequirement/search_technologyRequirement_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 

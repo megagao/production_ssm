@@ -54,8 +54,8 @@
             data-options="searcher:doSearch_unqualify,prompt:'请输入...',menu:'#menu_unqualify'"  
             style="width:250px;vertical-align: middle;">
         </input>
-        <div id="menu_unqualify" style="width:120px"> 
-			<div data-options="name:'unqualifyId'">不合格产品编号</div> 
+        <div id="menu_unqualify" style="width:140px"> 
+			<div data-options="name:'unqualifyId'">不合格品申请编号</div> 
 			<div data-options="name:'productName'">产品名称</div> 
 		</div>     
     </div>  

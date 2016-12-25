@@ -167,6 +167,61 @@ var TT = TAOTAO = {
     	});
     },
     
+    // 初始化图片上传组件
+    initProductPicUpload : function(data){
+    	$(".productPicFileUpload").each(function(i,e){
+    		var _ele = $(e);
+    		_ele.siblings("div.pics").remove();
+    		_ele.after('\
+    			<div class="pics">\
+        			<ul></ul>\
+        		</div>');
+    		// 回显图片
+        	if(data && data.pics){
+        		var imgs = data.pics.split(",");
+        		for(var i in imgs){
+        			if($.trim(imgs[i]).length > 0){
+        				_ele.siblings(".pics").find("ul").append("<li><a id='productImg"+i+"' href='"+imgs[i]+"' target='_blank'>" +
+        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> " +
+        							"<a id='productDel"+i+"' href='javascript:removeProductImg("+i+");'>" +
+        								"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 16px'>" +
+        								"删除</span></a></li>");
+        			}
+        		}
+        	}
+        	//给“上传图片按钮”绑定click事件.
+        	$(e).click(function(){
+        		var form = $(this).parentsUntil("form").parent("form");
+        		//打开图片上传窗口
+        		KindEditor.editor(TT.kingEditorParams).loadPlugin('multiimage',function(){
+        			var editor = this;
+        			editor.plugin.multiImageDialog({
+						clickFn : function(urlList) {
+							var imgArray = [];
+							KindEditor.each(urlList, function(i, data) {
+								imgArray.push(data.url);
+								form.find(".pics ul").append("<li><a id='productImg"+i+"' href='"+data.url+"' target='_blank'>" +
+										"<img src='"+data.url+"' width='80' height='50' /></a>" +
+											"<a id='productDel"+i+"' href='javascript:removeProductImg("+i+");'>" +
+												"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 16px'>" +
+												"删除</span></a></li>");
+							});
+							var origin = form.find("[name=image]").val();
+							if(origin != null){
+								var originUrls = origin.split(",");  
+								for(var i in originUrls){
+									imgArray.push(originUrls[i]);
+								}
+							}
+							form.find("[name=image]").val(imgArray.join(","));
+							editor.hideDialog();
+						}
+					});
+        		});
+        	});
+    	});
+    },
+    
     createEditor : function(select){
     	return KindEditor.create(select, TT.kingEditorParams);
     },
@@ -287,11 +342,42 @@ function removeImg(i){
             	deletedUrls = deletedUrls.join(",");
             	$('#image').val(deletedUrls);
              }else{
-                    console.log(data.message);  //打印服务器返回的错误信息
+                console.log(data.message);  //打印服务器返回的错误信息
              }
           }
     }); 
 }
+
+//删除图片并删除图片在页面的显示
+function removeProductImg(i){
+	var picName = $('#productImg'+i).attr("href");
+	//alert($('#image').val());
+	$.ajax({
+        cache: false,
+        url: "pic/delete",
+        dataType: "json",
+        data: {picName:picName},
+        success: function(data) 
+        {
+            if(data.data=="success"){
+            	$('#productImg'+i).remove();		//删除成功后在页面上删除该图片的显示
+            	$('#productDel'+i).remove();        
+                var urls = $('#productImage').val().split(",");  //将删除的文件url从urls中移除
+                var deletedUrls = [];
+            	for(var k in urls){
+            		if(urls[k] != picName){
+            			deletedUrls.push(urls[k]);
+            		}
+            	}
+            	deletedUrls = deletedUrls.join(",");
+            	$('#productImage').val(deletedUrls);
+             }else{
+                console.log(data.message);  //打印服务器返回的错误信息
+             }
+          }
+    }); 
+}
+
 
 //格式化文件在datagrid中的显示
 function formatFile(value, row, index){ 
@@ -350,7 +436,6 @@ function initOrderAddFileUpload(){
 	    },
 	    onSuccess: function(files,data,xhr,pd)
 	    {
-	    	alert("111")
 	        //上传成功后的回调方法。本例中是将返回的文件名保到一个hidden类开的input中，以便后期数据处理
 	        if(data&&data.error==0){
 	        	$.messager.alert('提示','上传完成!');

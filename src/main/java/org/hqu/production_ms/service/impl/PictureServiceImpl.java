@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PictureServiceImpl implements PictureService{
 
 	@Override
-	public Map<String,Object> uploadPicture(MultipartFile uploadFile) {
+	public Map<String,Object> uploadPicture(MultipartFile uploadFile) throws Exception{
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		try {
@@ -58,7 +58,7 @@ public class PictureServiceImpl implements PictureService{
 	}
 
 	@Override
-	public boolean deleteFile(String picName) {
+	public boolean deleteFile(String picName) throws Exception{
 		
 		picName = picName.substring(picName.lastIndexOf("/")+1);
 		

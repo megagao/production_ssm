@@ -31,14 +31,14 @@
 	        <tr>
 	            <td>角色:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="roleId"   
+	            	<input class="easyui-combobox" name="roleId"  panelHeight="auto"
     					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true, editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="locked" data-options="width:150, editable:false">
+		            <select class="easyui-combobox" name="locked" panelHeight="auto" data-options="width:150, editable:false">
 						<option value="1">有效用户</option>
 						<option value="2">锁定</option>
 					</select>
@@ -79,8 +79,4 @@
 	function clearUserAddForm(){
 		$('#userAddForm').form('reset');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>

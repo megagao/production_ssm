@@ -20,15 +20,15 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>工艺要求增加时间:</td>
+	            <td>工艺要求添加时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="addTime" ></input>
+	            	<input class="easyui-datetimebox" type="text" name="addTime" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺要求修改时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="reviseTime"></input>
+	            	<input class="easyui-datetimebox" type="text" name="reviseTime" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	         <tr>

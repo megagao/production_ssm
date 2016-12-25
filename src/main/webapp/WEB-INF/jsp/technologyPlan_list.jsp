@@ -60,13 +60,13 @@
 
 </div> 
 
-<div id="technologyPlanEditWindow" class="easyui-window" title="编辑工艺计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyPlan/edit'" style="width:38%;height:80%;padding:10px;">
+<div id="technologyPlanEditWindow" class="easyui-window" title="编辑工艺计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyPlan/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="technologyPlanAddWindow" class="easyui-window" title="添加工艺计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyPlan/add'" style="width:49%;height:80%;padding:10px;">
+<div id="technologyPlanAddWindow" class="easyui-window" title="添加工艺计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyPlan/add'" style="width:40%;height:55%;padding:10px;">
 </div>
  
 <!-- 工艺信息 -->
-<div id="technologyInfo_technologyPlan" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:80%;padding:10px;">
+<div id="technologyInfo_technologyPlan" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="technologyEditForm_technologyPlan" method="post">
 		<input type="hidden" name="technologyId"/>
 	    <table cellpadding="5">
@@ -114,7 +114,7 @@ function doSearch_technologyPlan(value,name){ //用户输入用户名,点击搜�
 	if(value == null || value == ''){
 		
 		$("#technologyPlanList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工艺计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_technologyPlan", url:'technologyPlan/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [
 	             	{field : 'ck', checkbox:true }, 
@@ -130,7 +130,7 @@ function doSearch_technologyPlan(value,name){ //用户输入用户名,点击搜�
 	    });
 	}else{
 		$("#technologyPlanList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工艺计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_technologyPlan", url:'technologyPlan/search_technologyPlan_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 

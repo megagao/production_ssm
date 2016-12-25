@@ -31,7 +31,7 @@
 	        <tr>
 	            <td>产品状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, editable:false">
+		            <select class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true,width:150, editable:false">
 						<option value="1">有效产品</option>
 						<option value="2">停产</option>
 					</select>
@@ -40,8 +40,8 @@
 	        <tr>
 	            <td>相关图片:</td>
 	            <td>
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" id="image" name="image"/>
+	            	 <a href="javascript:void(0)" class="easyui-linkbutton productPicFileUpload">上传图片</a>
+	                 <input type="hidden" id="productImage" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -67,7 +67,7 @@
 		//productAddEditor = TAOTAO.createEditor("#productAddForm [name=file]");
 		productAddEditor = KindEditor.create("#productAddForm [name=note]", TT.kingEditorParams);
 		//初始化类目选择和图片上传器
-		TAOTAO.init({fun:function(node){
+		TAOTAO.initProductPicUpload({fun:function(node){
 			//根据产品的分类id取产品 的规格模板，生成规格信息。第四天内容。
 			TAOTAO.changeItemParam(node, "productAddForm");
 		}});
@@ -90,7 +90,7 @@
 				$.messager.alert('提示','新增产品成功!');
 				clearProductAddForm();
 				$("#productAddWindow").window('close');
-				$(".picFileUpload").siblings("div.pics").find("ul > li").remove();
+				$(".productPicFileUpload").siblings("div.pics").find("ul > li").remove();
 				$("#productList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
@@ -102,8 +102,4 @@
 		$('#productAddForm').form('reset');
 		productAddEditor.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>

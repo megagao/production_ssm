@@ -7,6 +7,7 @@ import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.COrderPO;
+import org.hqu.production_ms.domain.po.ProcessCountCheckPO;
 import org.hqu.production_ms.mapper.ProcessCountCheckMapper;
 import org.hqu.production_ms.service.PCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +23,30 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	ProcessCountCheckMapper processCountCheckMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck) {
+	public EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck) throws Exception{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessCountCheck> list = processCountCheckMapper.find(processCountCheck);
+		List<ProcessCountCheckPO> list = processCountCheckMapper.find(processCountCheck);
 
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessCountCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessCountCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 	@Override
-	public COrder get(String id) {
+	public COrder get(String id) throws Exception{
 		return null;
 		
 //		return cOrderMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public CustomResult delete(String id) {
+	public CustomResult delete(String id) throws Exception{
 		return null;
 //		int i = cOrderMapper.deleteByPrimaryKey(id);
 //		if(i>=0){
@@ -56,9 +57,9 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = processCountCheckMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -66,17 +67,17 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	}
 
 	@Override
-	public CustomResult insert(ProcessCountCheck processCountCheck) {
+	public CustomResult insert(ProcessCountCheck processCountCheck) throws Exception{
 		int i = processCountCheckMapper.insert(processCountCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增工序计数质检信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(COrderPO cOrder) {
+	public CustomResult update(COrderPO cOrder) throws Exception{
 		return null;
 //		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
 //		if(i>=0){
@@ -87,31 +88,31 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	}
 
 	@Override
-	public CustomResult updateAll(ProcessCountCheck processCountCheck) {
+	public CustomResult updateAll(ProcessCountCheck processCountCheck) throws Exception{
 		int i = processCountCheckMapper.updateByPrimaryKey(processCountCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工序计数质检信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateNote(ProcessCountCheck processCountCheck) {
+	public CustomResult updateNote(ProcessCountCheck processCountCheck) throws Exception{
 		
 		int i = processCountCheckMapper.updateNote(processCountCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工序计数质检备注失败");
 		}
 	}
 	
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		return null;
 //		int i = cOrderMapper.changeStatus(ids);
-//		if(i>=0){
+//		if(i>0){
 //			return CustomResult.ok();
 //		}else{
 //			return null;
@@ -120,15 +121,15 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 
 	@Override
 	public EUDataGridResult searchPCountCheckByPCountCheckId(int page,
-			int rows, String pCountCheckId) {
+			int rows, String pCountCheckId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessCountCheck> list = processCountCheckMapper.searchPCountCheckByPCountCheckId(pCountCheckId);
+		List<ProcessCountCheckPO> list = processCountCheckMapper.searchPCountCheckByPCountCheckId(pCountCheckId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessCountCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessCountCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

@@ -21,7 +21,7 @@ public class TaskServiceImpl implements TaskService{
 	TaskMapper taskMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Task task) {
+	public EUDataGridResult getList(int page, int rows, Task task) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Task> list = taskMapper.find();
@@ -35,13 +35,13 @@ public class TaskServiceImpl implements TaskService{
 	}
 
 	@Override
-	public Task get(String string) {
+	public Task get(String string) throws Exception{
 		
 		return taskMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		int i = taskMapper.deleteByPrimaryKey(string);
 		if(i>0){
 			return CustomResult.ok();
@@ -51,7 +51,7 @@ public class TaskServiceImpl implements TaskService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = taskMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
@@ -61,44 +61,44 @@ public class TaskServiceImpl implements TaskService{
 	}
 
 	@Override
-	public CustomResult insert(Task task) {
+	public CustomResult insert(Task task) throws Exception{
 		int i = taskMapper.insert(task);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增生产派工信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(Task task) {
+	public CustomResult update(Task task) throws Exception{
 		int i = taskMapper.updateByPrimaryKeySelective(task);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改生产派工信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateAll(Task task) {
+	public CustomResult updateAll(Task task) throws Exception{
 		int i = taskMapper.updateByPrimaryKey(task);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改生产派工信息失败");
 		}
 	}
 
 	@Override
-	public List<Task> find() {
+	public List<Task> find() throws Exception{
 		TaskExample example = new TaskExample();
 		return taskMapper.selectByExample(example);
 	}
 
 	@Override
 	public EUDataGridResult searchTaskByTaskId(Integer page, Integer rows,
-			String taskId) {
+			String taskId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Task> list = taskMapper.searchTaskByTaskId(taskId);
@@ -113,7 +113,7 @@ public class TaskServiceImpl implements TaskService{
 
 	@Override
 	public EUDataGridResult searchTaskByTaskWorkId(Integer page, Integer rows,
-			String taskWorkId) {
+			String taskWorkId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Task> list = taskMapper.searchTaskByTaskWorkId(taskWorkId);
@@ -128,7 +128,7 @@ public class TaskServiceImpl implements TaskService{
 
 	@Override
 	public EUDataGridResult searchTaskByTaskManufactureSn(Integer page,
-			Integer rows, String taskManufactureSn) {
+			Integer rows, String taskManufactureSn) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Task> list = taskMapper.searchTaskByTaskManufactureSn(taskManufactureSn);

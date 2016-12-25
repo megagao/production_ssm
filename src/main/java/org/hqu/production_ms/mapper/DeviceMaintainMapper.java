@@ -9,6 +9,8 @@ import org.hqu.production_ms.domain.DeviceMaintainExample;
 public interface DeviceMaintainMapper {
 	//扩展的mapper接口方法
 	List<DeviceMaintain> find(DeviceMaintain deviceMaintain);
+
+	int updateNote(DeviceMaintain deviceMaintain);
 	
 	int deleteBatch(String[] DeviceMaintainIds);
     
@@ -34,4 +36,11 @@ public interface DeviceMaintainMapper {
     int updateByPrimaryKeySelective(DeviceMaintain record);
 
     int updateByPrimaryKey(DeviceMaintain record);
+
+	List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(
+			String deviceMaintainId);
+
+	List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(
+			String deviceFaultId);
+
 }

@@ -1,5 +1,6 @@
 package org.hqu.production_ms.domain.po;
 
+
 import org.hqu.production_ms.domain.TechnologyPlan;
 
 public class TechnologyPlanPO extends TechnologyPlan{

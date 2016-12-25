@@ -1,24 +1,37 @@
 package org.hqu.production_ms.domain;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 public class Custom {
+	@Size(max=40, message="{id.length.error}")
     private String customId;
 
+	@Size(max=20, message="客户名称请限制在20个字符内")
     private String customName;
 
+	@Size(max=100, message="客户名称请限制在100个字符内")
     private String fullName;
 
+	@Size(max=100, message="地址请限制在100个字符内")
     private String address;
 
+	@Size(max=20, message="传真请限制在20个字符内")
     private String fax;
 
+	@Email(message="请输入正确的邮箱格式")
     private String email;
 
+	@Size(max=20, message="经理姓名请限制在20个字符内")
     private String ownerName;
 
+	@Size(max=20, message="联系电话请限制在20个字符内")
     private String ownerTel;
 
     private Integer status;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getCustomId() {

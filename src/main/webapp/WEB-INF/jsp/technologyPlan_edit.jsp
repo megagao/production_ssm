@@ -24,7 +24,7 @@
 	            <td>计划开始时间:</td>
 	            <td>
 	            	<input class="easyui-datetimebox" name="startPlan"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" > 
+        			data-options="required:true,showSeconds:true"> 
         		</td>
 	        </tr>
 	          
@@ -76,7 +76,6 @@
     					$.messager.alert('提示','修改工艺计划成功!','info',function(){
     						$("#technologyPlanEditWindow").window('close');
     						$("#technologyPlanList").datagrid("reload");
-    						$("#technologyPlanInfoWindow").window('close');
     					});
     				}else{
     					$.messager.alert('提示',data.msg);

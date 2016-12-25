@@ -91,7 +91,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增物料收入信息失败");
 		}
 	}
 
@@ -102,7 +102,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料收入信息失败");
 		}
 	}
 
@@ -113,7 +113,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料收入信息失败");
 		}
 	}
 
@@ -124,7 +124,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料收入备注失败");
 		}
 	}
 	@Override
@@ -144,7 +144,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	public	EUDataGridResult searchMaterialReceiveByMaterialId(int page, int rows,String materialId){
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialReceive> list = materialReceiveMapper.searchMaterialReceiveByReceiveId(materialId);
+		List<MaterialReceive> list = materialReceiveMapper.searchMaterialReceiveByMaterialId(materialId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);

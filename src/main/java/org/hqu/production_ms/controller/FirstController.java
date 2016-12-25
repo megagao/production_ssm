@@ -31,8 +31,8 @@ public class FirstController {
 	
 	//跳转登录
 	@RequestMapping("/")
-	public String welcome(Model model)throws Exception{
-		
+	public String welcome(Model model, HttpSession session)throws Exception{
+
 		return "login";
 	}
 	

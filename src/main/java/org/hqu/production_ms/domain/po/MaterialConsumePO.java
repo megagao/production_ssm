@@ -2,21 +2,30 @@ package org.hqu.production_ms.domain.po;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class MaterialConsumePO {
+	
+	@Size(max=40, message="{id.length.error}")
     private String consumeId;
 
     private String workId;
 
     private String materialId;
 
+    @Max(value=999999999, message="消耗数量不能超过999999999")
     private Integer consumeAmount;
 
     private Date consumeDate;
 
+    @Size(max=40, message="发送者的长度限制在40个字符之内")
     private String sender;
 
+    @Size(max=40, message="接收者的长度限制在40个字符之内")
     private String receiver;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getConsumeId() {

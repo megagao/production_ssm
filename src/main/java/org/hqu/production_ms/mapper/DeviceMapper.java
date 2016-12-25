@@ -5,18 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.Device;
 import org.hqu.production_ms.domain.DeviceExample;
-import org.hqu.production_ms.domain.DeviceType;
 
 public interface DeviceMapper {
 	
 	//扩展的mapper接口方法
 	List<Device> find(Device device);
 	
-	List<DeviceType> listType();
-	
-	List<Device> listName();
+	List<Device> getData();
 	
 	int deleteBatch(String[] deviceIds);
+	
+	int updateNote(Device device);
     
 	//自动生成的mapper接口方法
 	int countByExample(DeviceExample example);
@@ -40,4 +39,11 @@ public interface DeviceMapper {
     int updateByPrimaryKeySelective(Device record);
 
     int updateByPrimaryKey(Device record);
+
+	List<Device> searchDeviceByDeviceId(String deviceId);
+
+	List<Device> searchDeviceByDeviceName(String deviceName);
+
+	List<Device> searchDeviceByDeviceTypeName(String deviceTypeName);
+
 }

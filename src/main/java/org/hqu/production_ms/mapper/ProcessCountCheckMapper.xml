@@ -15,7 +15,9 @@
     <result column="result" property="result" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
-  
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.ProcessCountCheckPO" extends="BaseResultMap">
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
   
   
   <!-- 修改备注-->
@@ -26,13 +28,10 @@
 			p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
 	</update>
   
-  
-  
-  
-  <select id="searchPCountCheckByPCountCheckId" parameterType="string" resultMap="BaseResultMap">
+  <select id="searchPCountCheckByPCountCheckId" parameterType="string" resultMap="AddResultMap">
 		SELECT
 			p_count_check_id,
-			process_count_check.process_id,
+			process_id,
 			check_item,
 			sample,
 			check_number,
@@ -40,41 +39,39 @@
 			qualify,
 			cdate,
 			measure_data,
-			emp_id,
-			result,
-			note
-		FROM
-			process_count_check
-		
-		where p_count_check_id like CONCAT('%',#{pCountCheckId},'%' ) 
-		
-	</select>
-	
-  
-  
-  
-  <!-- 查询所有记录 -->
-	<select id="find" parameterType="processCountCheck" resultMap="BaseResultMap">
-		SELECT
-			p_count_check_id,
-			process_count_check.process_id,
-			check_item,
-			sample,
-			check_number,
-			unqualify,
-			qualify,
-			cdate,
-			measure_data,
-			emp_id,
+			process_count_check.emp_id,
+			emp_name,
 			result,
 			note
 		FROM
 			process_count_check,
-			process
-		WHERE
-			process.process_id = process_count_check.process_id
-		
-		
+			employee
+		WHERE 
+			process_count_check.emp_id = employee.emp_id
+		AND	p_count_check_id like CONCAT('%',#{pCountCheckId},'%' ) 
+	</select>
+	
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="processCountCheck" resultMap="AddResultMap">
+		SELECT
+			p_count_check_id,
+			process_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			process_count_check.emp_id,
+			emp_name,
+			result,
+			note
+		FROM
+			process_count_check,
+			employee
+		WHERE 
+			process_count_check.emp_id = employee.emp_id
 	</select>
   
   	<!-- 批量删除 -->

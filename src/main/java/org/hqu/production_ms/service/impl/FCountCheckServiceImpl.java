@@ -6,6 +6,7 @@ import org.hqu.production_ms.domain.FinalCountCheck;
 import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.po.FinalCountCheckPO;
 import org.hqu.production_ms.mapper.FinalCountCheckMapper;
 import org.hqu.production_ms.service.FCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,28 +22,28 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	FinalCountCheckMapper finalCountCheckMapper; 
 	
 	@Override
-	public EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck) {
+	public EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck) throws Exception{
 		
 		PageHelper.startPage(page, rows);
-		List<FinalCountCheck> list = finalCountCheckMapper.find(finalCountCheck);
+		List<FinalCountCheckPO> list = finalCountCheckMapper.find(finalCountCheck);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<FinalCountCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<FinalCountCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 	@Override
-	public FinalCountCheck get(String string) {
+	public FinalCountCheck get(String string) throws Exception{
 		return finalCountCheckMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = finalCountCheckMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -50,22 +51,22 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	}
 
 	@Override
-	public CustomResult insert(FinalCountCheck finalCountCheck) {
+	public CustomResult insert(FinalCountCheck finalCountCheck) throws Exception{
 		System.out.println("hahahahahahh");
 		int i = finalCountCheckMapper.insert(finalCountCheck);
 		System.out.println("ddddddddddddd");
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增成品计数质检信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(UnqualifyApply unqualify) {
+	public CustomResult update(UnqualifyApply unqualify) throws Exception{
 		return null;
 //		int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualify);
-//		if(i>=0){
+//		if(i>0){
 //			return CustomResult.ok();
 //		}else{
 //			return null;
@@ -73,31 +74,31 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	}
 
 	@Override
-	public CustomResult updateAll(FinalCountCheck finalCountCheck) {
+	public CustomResult updateAll(FinalCountCheck finalCountCheck) throws Exception{
 		int i = finalCountCheckMapper.updateByPrimaryKey(finalCountCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改成品计数质检信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateNote(FinalCountCheck finalCountCheck) {
+	public CustomResult updateNote(FinalCountCheck finalCountCheck) throws Exception{
 		
 		int i = finalCountCheckMapper.updateNote(finalCountCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改成品计数质检备注失败");
 		}
 	}
 
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		return null;
 //		int i = unqualifyApplyMapper.changeStatus(ids);
-//		if(i>=0){
+//		if(i>0){
 //			return CustomResult.ok();
 //		}else{
 //			return null;
@@ -106,41 +107,32 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 
 	@Override
 	public EUDataGridResult searchFCountCheckByFCountCheckId(int page,
-			int rows, String fCountCheckId) {
+			int rows, String fCountCheckId) throws Exception{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<FinalCountCheck> list = finalCountCheckMapper.searchFCountCheckByFCountCheckId(fCountCheckId);
+		List<FinalCountCheckPO> list = finalCountCheckMapper.searchFCountCheckByFCountCheckId(fCountCheckId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<FinalCountCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<FinalCountCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 	@Override
 	public EUDataGridResult searchFCountCheckByOrderId(Integer page,
-			Integer rows, String orderId) {
+			Integer rows, String orderId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<FinalCountCheck> list = finalCountCheckMapper.searchFCountCheckByOrderId(orderId);
+		List<FinalCountCheckPO> list = finalCountCheckMapper.searchFCountCheckByOrderId(orderId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<FinalCountCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<FinalCountCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
-	
-
-
-
-
-	
-
-
 }

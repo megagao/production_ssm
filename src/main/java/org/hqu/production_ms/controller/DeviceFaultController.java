@@ -173,4 +173,22 @@ public class DeviceFaultController {
 		}
 		return deviceFaultService.updateAll(deviceFault);
 	}
+	
+	//搜索
+	@RequestMapping("/search_deviceFault_by_deviceFaultId")
+	@ResponseBody
+	public EUDataGridResult searchDeviceFaultByDeviceFaultId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceFaultService.searchDeviceFaultByDeviceFaultId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceFault_by_deviceName")
+	@ResponseBody
+	public EUDataGridResult searchDeviceFaultByDeviceName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceFaultService.searchDeviceFaultByDeviceName(page, rows, searchValue);
+		return result;
+	}
 }

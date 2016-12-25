@@ -5,6 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.DeviceFault;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.po.DeviceFaultPO;
 import org.hqu.production_ms.mapper.DeviceFaultMapper;
 import org.hqu.production_ms.service.DeviceFaultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,60 +21,42 @@ public class DeviceFaultServiceImpl implements DeviceFaultService{
 	DeviceFaultMapper deviceFaultMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, DeviceFault deviceFault) {
+	public EUDataGridResult getList(int page, int rows, DeviceFault deviceFault) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<DeviceFault> list = deviceFaultMapper.find(deviceFault);
+		List<DeviceFaultPO> list = deviceFaultMapper.find(deviceFault);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<DeviceFault> pageInfo = new PageInfo<>(list);
+		PageInfo<DeviceFaultPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 	
 	@Override
-	public DeviceFault get(String id) {
+	public DeviceFault get(String id) throws Exception {
 		return deviceFaultMapper.selectByPrimaryKey(id);
 	}
 	
 	@Override
-	public EUDataGridResult getList_FaultId() {
-
-		List<DeviceFault> list = deviceFaultMapper.listFaultId();
-		//创建一个返回值对象
-		EUDataGridResult result = new EUDataGridResult();
-		result.setRows(list);
-		
-		//取记录总条数
-		PageInfo<DeviceFault> pageInfo = new PageInfo<>(list);
-		result.setTotal(pageInfo.getTotal());
-		return result;
+	public List<DeviceFault> find() throws Exception {
+		List<DeviceFault> list = deviceFaultMapper.getData();
+		return list;
 	}
-
 	
 	@Override
-	public CustomResult insert(DeviceFault deviceFault) {
+	public CustomResult insert(DeviceFault deviceFault) throws Exception {
 		int i = deviceFaultMapper.insert(deviceFault);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增设备故障失败");
 		}
 	}
 
 	@Override
-	public CustomResult insertBatch(DeviceFault[] deviceFaults) {
-		for(int i=0;i<deviceFaults.length;i++){
-			CustomResult customResult = this.insert(deviceFaults[i]);
-		}
-		//  ？？ 再改
-		return CustomResult.ok();
-	}
-
-	@Override
-	public CustomResult delete(String deviceFaultId) {
+	public CustomResult delete(String deviceFaultId) throws Exception {
 		int i = deviceFaultMapper.deleteByPrimaryKey(deviceFaultId);
 		if(i>=0){
 			return CustomResult.ok();
@@ -83,7 +66,7 @@ public class DeviceFaultServiceImpl implements DeviceFaultService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] deviceFaultIds) {
+	public CustomResult deleteBatch(String[] deviceFaultIds) throws Exception {
 		int i = deviceFaultMapper.deleteBatch(deviceFaultIds);
 		if(i>=0){
 			return CustomResult.ok();
@@ -93,22 +76,63 @@ public class DeviceFaultServiceImpl implements DeviceFaultService{
 	}
 
 	@Override
-	public CustomResult update(DeviceFault deviceFault) {
+	public CustomResult update(DeviceFault deviceFault) throws Exception {
 		int i = deviceFaultMapper.updateByPrimaryKeySelective(deviceFault);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改设备故障信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateBatch(DeviceFault[] deviceFaults) {
-		for(int i=0;i<deviceFaults.length;i++){
-			CustomResult customResult = this.update(deviceFaults[i]);
+	public CustomResult updateNote(DeviceFault deviceFault) throws Exception {
+		int i = deviceFaultMapper.updateNote(deviceFault);
+		if(i>0){
+			return CustomResult.ok();
+		}else{
+			return CustomResult.build(101, "新增设备故障备注失败");
 		}
-		//  ？？ 再改
-		return CustomResult.ok();
+	}
+
+	@Override
+	public CustomResult updateAll(DeviceFault deviceFault) throws Exception {
+		int i = deviceFaultMapper.updateByPrimaryKey(deviceFault);
+		if(i>0){
+			return CustomResult.ok();
+		}else{
+			return CustomResult.build(101, "修改设备故障信息失败");
+		}
+	}
+
+	@Override
+	public EUDataGridResult searchDeviceFaultByDeviceFaultId(Integer page,
+			Integer rows, String deviceFaultId) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<DeviceFault> list = deviceFaultMapper.searchDeviceFaultByDeviceFaultId(deviceFaultId);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<DeviceFault> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	@Override
+	public EUDataGridResult searchDeviceFaultByDeviceName(Integer page,
+			Integer rows, String deviceName) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<DeviceFault> list = deviceFaultMapper.searchDeviceFaultByDeviceName(deviceName);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<DeviceFault> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
 	}
 
 }

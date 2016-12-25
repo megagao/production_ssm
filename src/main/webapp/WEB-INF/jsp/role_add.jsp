@@ -14,7 +14,7 @@
         <span>角色名&nbsp:</span>
         	<input class="easyui-textbox" type="text" name="roleName" data-options="required:true"></input><br><br>
         <span >状&nbsp态&nbsp:</span>
-            <select class="easyui-combobox" name="available" data-options="width:150, editable:false">
+            <select class="easyui-combobox" name="available" panelHeight="auto" data-options="width:150, editable:false">
 				<option value="1">有效</option>
 				<option value="2">锁定</option>
 			</select><br><br>
@@ -196,8 +196,4 @@
 	function clearRoleAddForm(){
 		$('#roleAddForm').form('reset');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>

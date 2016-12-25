@@ -89,7 +89,7 @@
 		<!-- 资源文件名 -->
 		<property name="basenames">
 			<list>
-				<value>classpath:CustomValidationMessages.properties</value>
+				<value>classpath:CustomValidationMessages</value>
 			</list>
 		</property>
 		<!-- 资源文件编码格式 -->

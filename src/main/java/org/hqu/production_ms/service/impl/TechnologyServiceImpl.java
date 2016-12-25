@@ -21,7 +21,7 @@ public class TechnologyServiceImpl implements TechnologyService{
 	TechnologyMapper technologyMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Technology technology) {
+	public EUDataGridResult getList(int page, int rows, Technology technology) throws Exception{
 		//查询商品列表
 		TechnologyExample example = new TechnologyExample();
 		//分页处理
@@ -37,12 +37,12 @@ public class TechnologyServiceImpl implements TechnologyService{
 	}
 
 	@Override
-	public Technology get(String string) {
+	public Technology get(String string) throws Exception{
 		return technologyMapper.selectByPrimaryKey(string);
 	}
 	/*
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		int i = customMapper.deleteByPrimaryKey(string);
 		if(i>0){
 			return CustomResult.ok();
@@ -53,7 +53,7 @@ public class TechnologyServiceImpl implements TechnologyService{
 	 */
 	
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = technologyMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
@@ -63,17 +63,17 @@ public class TechnologyServiceImpl implements TechnologyService{
 	}
 
 	@Override
-	public CustomResult insert(Technology technology) {
+	public CustomResult insert(Technology technology) throws Exception{
 		int i = technologyMapper.insert(technology);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增工艺信息失败");
 		}
 	}
 /*
 	@Override
-	public CustomResult update(Custom custom) {
+	public CustomResult update(Custom custom) throws Exception{
 		int i = customMapper.updateByPrimaryKeySelective(custom);
 		if(i>0){
 			return CustomResult.ok();
@@ -83,17 +83,17 @@ public class TechnologyServiceImpl implements TechnologyService{
 	}
 	*/
 	@Override
-	public CustomResult updateAll(Technology technology) {
+	public CustomResult updateAll(Technology technology) throws Exception{
 		int i = technologyMapper.updateByPrimaryKey(technology);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工艺信息失败");
 		}
 	}
 /*
 	@Override
-	public CustomResult updateNote(Custom custom) {
+	public CustomResult updateNote(Custom custom) throws Exception{
 		int i = customMapper.updateNote(custom);
 		if(i>0){
 			return CustomResult.ok();
@@ -103,20 +103,20 @@ public class TechnologyServiceImpl implements TechnologyService{
 	}
 
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		customMapper.changeStatus(ids);
 		return CustomResult.ok();
 	}
 */
 	@Override
-	public List<Technology> find() {
+	public List<Technology> find() throws Exception{
 		TechnologyExample example = new TechnologyExample();
 		return technologyMapper.selectByExample(example);
 	}
 
 	@Override
 	public EUDataGridResult searchTechnologyByTechnologyId(Integer page,
-			Integer rows, String technologyId) {
+			Integer rows, String technologyId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Technology> list = technologyMapper.searchTechnologyByTechnologyId(technologyId);
@@ -131,7 +131,7 @@ public class TechnologyServiceImpl implements TechnologyService{
 
 	@Override
 	public EUDataGridResult searchTechnologyByTechnologyName(Integer page,
-			Integer rows, String technologyName) {
+			Integer rows, String technologyName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Technology> list = technologyMapper.searchTechnologyByTechnologyName(technologyName);

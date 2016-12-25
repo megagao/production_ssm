@@ -5,13 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.ProcessMeasureCheckExample;
+import org.hqu.production_ms.domain.po.ProcessMeasureCheckPO;
 
 public interface ProcessMeasureCheckMapper {
 	int updateNote(ProcessMeasureCheck processMeasureCheck);
 	
-	List<ProcessMeasureCheck> searchPMeasureCheckByPMeasureCheckId(String processMeasureCheckId);
+	List<ProcessMeasureCheckPO> searchPMeasureCheckByPMeasureCheckId(String processMeasureCheckId);
 	
-	List<ProcessMeasureCheck> find(ProcessMeasureCheck processMeasureCheck);
+	List<ProcessMeasureCheckPO> find(ProcessMeasureCheck processMeasureCheck);
 	
 	int deleteBatch(String[] ids);
 	

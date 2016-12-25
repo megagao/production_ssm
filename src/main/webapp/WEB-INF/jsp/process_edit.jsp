@@ -16,14 +16,14 @@
 	        <tr>
 	            <td>工序顺序:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="sequence"> </td>
+	            	<input class="easyui-numberbox" name="sequence" data-options="min:1,max:99999999,precision:0"> </td>
 	            </td>
 	        </tr>
 	          
 	        <tr>
 	            <td>单件定额工时:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="quota"></input>
+	            	<input class="easyui-numberbox" name="quota" data-options="min:1,max:99999999,precision:0"></input>
 	            </td>
 	        </tr>
 	    </table>
@@ -50,7 +50,6 @@
     					$.messager.alert('提示','修改工序成功!','info',function(){
     						$("#processEditWindow").window('close');
     						$("#processList").datagrid("reload");
-    						$("#processInfoWindow").window('close');
     					});
     				}else{
     					$.messager.alert('提示',data.msg);

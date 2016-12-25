@@ -3,11 +3,11 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.Device;
-import org.hqu.production_ms.domain.DeviceType;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.mapper.DeviceMapper;
 import org.hqu.production_ms.service.DeviceService;
+import org.hqu.production_ms.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class DeviceServiceImpl implements DeviceService{
 	DeviceMapper deviceMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Device device) {
+	public EUDataGridResult getList(int page, int rows, Device device) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Device> list = deviceMapper.find(device);
@@ -35,70 +35,42 @@ public class DeviceServiceImpl implements DeviceService{
 	}
 	
 	@Override
-	public EUDataGridResult getList_Name() {
-
-		List<Device> list = deviceMapper.listName();
-		//创建一个返回值对象
-		EUDataGridResult result = new EUDataGridResult();
-		result.setRows(list);
-		
-		//取记录总条数
-		PageInfo<Device> pageInfo = new PageInfo<>(list);
-		result.setTotal(pageInfo.getTotal());
-		return result;
+	public List<Device> find() throws Exception {
+		List<Device> deviceList = deviceMapper.getData();
+		return deviceList;
 	}
+
 	
 	@Override
-	public EUDataGridResult getList_Type() {
-
-		List<DeviceType> list = deviceMapper.listType();
-		//创建一个返回值对象
-		EUDataGridResult result = new EUDataGridResult();
-		result.setRows(list);
-		
-		//取记录总条数
-		PageInfo<DeviceType> pageInfo = new PageInfo<>(list);
-		result.setTotal(pageInfo.getTotal());
-		return result;
-	}
-	
-	@Override
-	public Device get(String id) {
+	public Device get(String id) throws Exception {
 		return deviceMapper.selectByPrimaryKey(id);
 	}
+	/*@Override
+	public List<Device> find() throws Exception {
+		DeviceExample example = new DeviceExample();
+		return deviceMapper.selectByExample(example);
+	}
+	
+	
+	@Override
+	public Device get(String id) throws Exception {
+		return deviceMapper.selectByPrimaryKey(id);
+	}*/
 
 	
 	@Override
-	public CustomResult insert(Device device) {
+	public CustomResult insert(Device device) throws Exception {
 		int i = deviceMapper.insert(device);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增设备信息失败");
 		}
 	}
 
-	@Override
-	public CustomResult insertBatch(Device[] devices) {
-		for(int i=0;i<devices.length;i++){
-			CustomResult customResult = this.insert(devices[i]);
-		}
-		//  ？？ 再改
-		return CustomResult.ok();
-	}
 
 	@Override
-	public CustomResult delete(String deviceId) {
-		int i = deviceMapper.deleteByPrimaryKey(deviceId);
-		if(i>=0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-
-	@Override
-	public CustomResult deleteBatch(String[] deviceIds) {
+	public CustomResult deleteBatch(String[] deviceIds) throws Exception {
 		int i = deviceMapper.deleteBatch(deviceIds);
 		if(i>=0){
 			return CustomResult.ok();
@@ -108,22 +80,82 @@ public class DeviceServiceImpl implements DeviceService{
 	}
 
 	@Override
-	public CustomResult update(Device device) {
+	public CustomResult update(Device device) throws Exception {
+		System.out.println("device update service");
+		System.out.println(device.getNote());
+		System.out.println(JsonUtils.objectToJson(device));
 		int i = deviceMapper.updateByPrimaryKeySelective(device);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改设备信息失败");
+		}
+	}
+
+
+	@Override
+	public CustomResult updateNote(Device device) throws Exception {
+		int i = deviceMapper.updateNote(device);
+		if(i>0){
+			return CustomResult.ok();
+		}else{
+			return CustomResult.build(101, "修改设备备注失败");
+		}
+	}
+	
+	@Override
+	public CustomResult updateAll(Device device) throws Exception {
+		int i = deviceMapper.updateByPrimaryKey(device);
+		if(i>0){
+			return CustomResult.ok();
+		}else{
+			return CustomResult.build(101, "修改设备信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateBatch(Device[] devices) {
-		for(int i=0;i<devices.length;i++){
-			CustomResult customResult = this.update(devices[i]);
-		}
-		//  ？？ 再改
-		return CustomResult.ok();
+	public EUDataGridResult searchDeviceByDeviceId(Integer page, Integer rows,
+			String deviceId) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<Device> list = deviceMapper.searchDeviceByDeviceId(deviceId);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<Device> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	@Override
+	public EUDataGridResult searchDeviceByDeviceName(Integer page,
+			Integer rows, String deviceName) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<Device> list = deviceMapper.searchDeviceByDeviceName(deviceName);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<Device> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	@Override
+	public EUDataGridResult searchDeviceByDeviceTypeName(Integer page,
+			Integer rows, String deviceTypeName) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<Device> list = deviceMapper.searchDeviceByDeviceTypeName(deviceTypeName);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<Device> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
 	}
 
 }

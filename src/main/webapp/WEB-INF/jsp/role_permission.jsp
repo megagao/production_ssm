@@ -99,6 +99,31 @@
 			<label><input name="permissionOption" type="checkbox" value="172" />不合格品申请修改 </label> 
 			<label><input name="permissionOption" type="checkbox" value="173" />不合格品申请删除 </label>  
 			<br><br>
+			<span style="font-weight: bold;">设备台账管理：</span>
+			<label><input name="permissionOption" type="checkbox" value="231" />设备台账新增 </label> 
+			<label><input name="permissionOption" type="checkbox" value="232" />设备台账修改 </label> 
+			<label><input name="permissionOption" type="checkbox" value="233" />设备台账删除 </label> 
+			<br><br>
+			<span style="font-weight: bold;">设备种类管理：</span>
+			<label><input name="permissionOption" type="checkbox" value="271" />设备种类新增 </label> 
+			<label><input name="permissionOption" type="checkbox" value="272" />设备种类修改 </label> 
+			<label><input name="permissionOption" type="checkbox" value="273" />设备种类删除 </label> 
+			<br><br>
+			<span style="font-weight: bold;">设备例检管理：</span>
+			<label><input name="permissionOption" type="checkbox" value="241" />设备例检新增 </label> 
+			<label><input name="permissionOption" type="checkbox" value="242" />设备例检修改 </label> 
+			<label><input name="permissionOption" type="checkbox" value="243" />设备例检删除 </label> 
+			<br><br>
+			<span style="font-weight: bold;">设备故障管理：</span>
+			<label><input name="permissionOption" type="checkbox" value="251" />设备故障新增 </label> 
+			<label><input name="permissionOption" type="checkbox" value="252" />设备故障修改 </label> 
+			<label><input name="permissionOption" type="checkbox" value="253" />设备故障删除 </label> 
+			<br><br>
+			<span style="font-weight: bold;">设备维修管理：</span>
+			<label><input name="permissionOption" type="checkbox" value="261" />设备维修新增 </label> 
+			<label><input name="permissionOption" type="checkbox" value="262" />设备维修修改 </label> 
+			<label><input name="permissionOption" type="checkbox" value="263" />设备维修删除 </label> 
+			<br><br>
 			<span style="font-weight: bold;">部门管理：</span>
 			<label><input name="permissionOption" type="checkbox" value="41" />部门新增 </label> 
 			<label><input name="permissionOption" type="checkbox" value="42" />部门修改 </label> 
@@ -143,8 +168,6 @@
 					    var checkValue=$(checkbox).val();
 					    
 					    if(checkArray[i]==checkValue){
-					    	/* alert("checkArray[i] = "+checkArray[i])
-						    alert("checkValue = "+checkValue) */
 					    	$(checkbox).prop("checked",true);
 					    }
 				    });

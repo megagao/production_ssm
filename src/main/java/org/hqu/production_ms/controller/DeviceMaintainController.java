@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 
+
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
@@ -150,5 +151,23 @@ public class DeviceMaintainController {
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return deviceMaintainService.updateNote(deviceMaintain);
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceMaintain_by_deviceMaintainId")
+	@ResponseBody
+	public EUDataGridResult searchDeviceMaintainByDeviceMaintainId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceMaintainService.searchDeviceMaintainByDeviceMaintainId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceMaintain_by_deviceFaultId")
+	@ResponseBody
+	public EUDataGridResult searchDeviceMaintainByDeviceFaultId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceMaintainService.searchDeviceMaintainByDeviceFaultId(page, rows, searchValue);
+		return result;
 	}
 }

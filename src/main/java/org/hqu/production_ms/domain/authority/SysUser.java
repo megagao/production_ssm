@@ -1,6 +1,8 @@
 package org.hqu.production_ms.domain.authority;
 
+
 public class SysUser {
+	
     private String id;
 
     private String username;

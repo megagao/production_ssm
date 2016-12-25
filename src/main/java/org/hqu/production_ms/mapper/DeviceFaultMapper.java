@@ -5,14 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.DeviceFault;
 import org.hqu.production_ms.domain.DeviceFaultExample;
+import org.hqu.production_ms.domain.po.DeviceFaultPO;
 
 public interface DeviceFaultMapper {
 	//扩展的mapper接口方法
-	List<DeviceFault> find(DeviceFault deviceFault);
-	
-	List<DeviceFault> listFaultId();
+	List<DeviceFaultPO> find(DeviceFault deviceFault);
+		
+	List<DeviceFault> getData();
 	
 	int deleteBatch(String[] deviceFaultIds);
+	
+	int updateNote(DeviceFault deviceFault);
     
 	//自动生成的mapper接口方法
     int countByExample(DeviceFaultExample example);
@@ -36,4 +39,9 @@ public interface DeviceFaultMapper {
     int updateByPrimaryKeySelective(DeviceFault record);
 
     int updateByPrimaryKey(DeviceFault record);
+
+	List<DeviceFault> searchDeviceFaultByDeviceFaultId(String deviceFaultId);
+
+	List<DeviceFault> searchDeviceFaultByDeviceName(String deviceName);
+
 }

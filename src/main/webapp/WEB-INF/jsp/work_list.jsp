@@ -53,19 +53,17 @@
 			<div data-options="name:'workId'">作业编号</div> 
 			<div data-options="name:'workProduct'">产品名称</div> 
 			<div data-options="name:'workDevice'">设备名称</div> 
-			<div data-options="name:'workProcess'">工序编号</div> 
+			<div data-options="name:'workProcess'">工序</div> 
 		</div>     
     </div>  
 
 </div>  
 
-<div id="workEditWindow" class="easyui-window" title="编辑作业" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'work/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="workEditWindow" class="easyui-window" title="编辑作业" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'work/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="workAddWindow" class="easyui-window" title="添加作业" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'work/add'" style="width:65%;height:80%;padding:10px;">
+<div id="workAddWindow" class="easyui-window" title="添加作业" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'work/add'" style="width:40%;height:55%;padding:10px;">
 </div>
 
-<div id="workDeviceInfoWindow" class="easyui-window" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'device/edit'" style="width:65%;height:80%;padding:10px;">
-</div>
 <div id="workProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="workProductEditForm" method="post">
 		<input type="hidden" name="productId"/>
@@ -90,8 +88,8 @@
 	        <tr>
 	            <td>相关图片:</td>
 	            <td>
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" id="image" name="image"/>
+	            	 <div style="padding-top: 12px"><span id="workProductPicSpan"></span></div>
+	                 <input type="hidden" class="easyui-linkbutton workProductPic" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -105,7 +103,7 @@
 	</div>
 </div>
 
-<div id="workProcessInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:55%;padding:10px;">
+<div id="workProcessInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:35%;height:40%;padding:10px;">
 	<form id="workProcessForm" method="post">
 		<input type="hidden" name="processId"/>
 	    <table cellpadding="5">
@@ -295,7 +293,7 @@ function doSearch_work(value,name){ //用户输入用户名,点击搜素,触发�
 		    		$("#workProductEditForm").form("load", data);
 		    		workProductEditor.html(data.note);
 		    		
-		    		TAOTAO.init({
+		    		initWorkProductPic({
         				"pics" : data.image,
         			});
     	    	});
@@ -303,9 +301,37 @@ function doSearch_work(value,name){ //用户输入用户名,点击搜素,触发�
 			onBeforeClose: function (event, ui) {
 				// 关闭Dialog前移除编辑器
 			   	KindEditor.remove("#workProductEditForm [name=note]");
+			   	$("#workProductPicSpan").html('');
 			}
     	}).dialog("open");
 	};
+	
+	// 加载图片
+    function initWorkProductPic(data){
+    	$(".workProductPic").each(function(i,e){
+    		var _ele = $(e);
+    		_ele.siblings("div.pics").remove();
+    		_ele.after('\
+    			<div class="pics">\
+        			<ul></ul>\
+        		</div>');
+    		// 回显图片
+    		var j = false;
+        	if(data && data.pics){
+        		var imgs = data.pics.split(",");
+        		for(var i in imgs){
+        			if($.trim(imgs[i]).length > 0){
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
+        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				j = true;
+        			}
+        		}
+        	}
+        	if(!j){
+    			$("#workProductPicSpan").html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
+    		}
+    	});
+    }
 	
 	function submitWorkProductEditForm(){
 		$.get("product/edit_judge",'',function(data){

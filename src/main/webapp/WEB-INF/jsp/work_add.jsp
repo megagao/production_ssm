@@ -26,21 +26,21 @@
 	        <tr>
 	            <td>产品:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="productId"   
+	            	<input class="easyui-combobox" name="productId"   panelHeight="auto"
     					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>工序:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="processId"   
+	            	<input class="easyui-combobox" name="processId"   panelHeight="auto"
     					data-options="valueField:'processId',textField:'processId',url:'process/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>设备:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="deviceId"   
+	            	<input class="easyui-combobox" name="deviceId"   panelHeight="auto"
     					data-options="valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
@@ -84,10 +84,5 @@
 	
 	function clearWorkAddForm(){
 		$('#workAddForm').form('reset');
-		workAddEditor.html('');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileServiceImpl implements FileService{
 
 	@Override
-	public Map<String,Object> uploadFile(MultipartFile uploadFile) {
+	public Map<String,Object> uploadFile(MultipartFile uploadFile) throws Exception{
 		
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		try {
@@ -31,15 +31,18 @@ public class FileServiceImpl implements FileService{
 					
 					String filePath = "D:\\upload\\temp\\file\\";
 					
+					FileUtil fu = new FileUtil();
+					String newName = fu.newFile(filePath, fileName);
+					
 					//新文件
-					File file = new java.io.File(filePath+fileName);
-						
+					File file = new java.io.File(filePath+newName);
+					
 					//将内存中的文件写入磁盘
 					uploadFile.transferTo(file);
 					
 					//图片上传成功后，将图片的地址写回
 					resultMap.put("error", 0);
-					resultMap.put("url", "/file/" + fileName);
+					resultMap.put("url", "/file/" + newName);
 					return resultMap;
 					
 				}else{
@@ -56,7 +59,7 @@ public class FileServiceImpl implements FileService{
 	}
 
 	@Override
-	public boolean deleteFile(String fileName) {
+	public boolean deleteFile(String fileName) throws Exception{
 		
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		

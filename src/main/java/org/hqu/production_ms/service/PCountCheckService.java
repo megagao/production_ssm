@@ -8,25 +8,26 @@ import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface PCountCheckService {
 	
-	EUDataGridResult searchPCountCheckByPCountCheckId(int page, int rows, String pCountCheckId);
+	EUDataGridResult searchPCountCheckByPCountCheckId(int page, int rows, 
+			String pCountCheckId) throws Exception;
 	
-	EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck);
+	EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck) throws Exception;
 	
-	COrder get(String string);
+	COrder get(String string) throws Exception;
 	
-	CustomResult delete(String string);
+	CustomResult delete(String string) throws Exception;
 
-	CustomResult deleteBatch(String[] ids);
+	CustomResult deleteBatch(String[] ids) throws Exception;
 
-	CustomResult insert(ProcessCountCheck processCountCheck);
+	CustomResult insert(ProcessCountCheck processCountCheck) throws Exception;
 
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-    CustomResult update(COrderPO cOrder);
+    CustomResult update(COrderPO cOrder) throws Exception;
     
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(ProcessCountCheck processCountCheck);
+    CustomResult updateAll(ProcessCountCheck processCountCheck) throws Exception;
     
-    CustomResult updateNote(ProcessCountCheck processCountCheck);
+    CustomResult updateNote(ProcessCountCheck processCountCheck) throws Exception;
 
-    CustomResult changeStatus(String[] ids);
+    CustomResult changeStatus(String[] ids) throws Exception;
 }

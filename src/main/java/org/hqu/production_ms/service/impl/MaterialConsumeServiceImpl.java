@@ -24,14 +24,14 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	MaterialConsumeMapper materialConsumeMapper;
 	
 	@Override
-	public List<MaterialConsume> find() {
+	public List<MaterialConsume> find() throws Exception{
 		// TODO Auto-generated method stub
 		MaterialConsumeExample example = new MaterialConsumeExample();
 		return materialConsumeMapper.selectByExample(example);
 	}
 
 	@Override
-	public EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) {
+	public EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -46,13 +46,13 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public MaterialConsume get(String id) {
+	public MaterialConsume get(String id) throws Exception{
 		// TODO Auto-generated method stub
 		return materialConsumeMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public CustomResult delete(String id) {
+	public CustomResult delete(String id) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.deleteByPrimaryKey(id);
 		if(i>0){
@@ -63,7 +63,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.deleteBatch(ids);
 		if(i>0){
@@ -74,51 +74,51 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult insert(MaterialConsumePO materialConsume) {
+	public CustomResult insert(MaterialConsumePO materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.insert(materialConsume);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增物料消耗信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(MaterialConsumePO materialConsume) {
+	public CustomResult update(MaterialConsumePO materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.updateByPrimaryKeySelective(materialConsume);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料消耗信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateAll(MaterialConsumePO materialConsume) {
+	public CustomResult updateAll(MaterialConsumePO materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.updateByPrimaryKey(materialConsume);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料消耗信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateNote(MaterialConsumePO materialConsume) {
+	public CustomResult updateNote(MaterialConsumePO materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.updateNote(materialConsume);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料消耗备注失败");
 		}
 	}
 
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.changeStatus(ids);
 		if(i>0){
@@ -129,7 +129,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 	
 	@Override
-	public EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) {
+	public EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByConsumeId(consumeId);
@@ -143,7 +143,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 	
 	@Override
-	public EUDataGridResult searchMaterialConsumeByMaterialId(int page, int rows, String materialId) {
+	public EUDataGridResult searchMaterialConsumeByMaterialId(int page, int rows, String materialId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByMaterialId(materialId);
@@ -157,7 +157,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public EUDataGridResult searchMaterialConsumeByWorkId(int page, int rows, String workId) {
+	public EUDataGridResult searchMaterialConsumeByWorkId(int page, int rows, String workId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByWorkId(workId);

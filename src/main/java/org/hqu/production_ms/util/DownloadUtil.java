@@ -8,6 +8,8 @@ import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hqu.production_ms.exception.CustomException;
+
 public class DownloadUtil {
 	
 	/**
@@ -16,7 +18,7 @@ public class DownloadUtil {
 	 * @param response HttpServletResponse
 	 * @param delFlag 是否删除文件
 	 */
-	public void download(String filePath,String returnName,HttpServletResponse response,boolean delFlag){
+	public void download(String filePath,String returnName,HttpServletResponse response,boolean delFlag) throws Exception{
 		this.prototypeDownload(new File(filePath), returnName, response, delFlag);
 	}
 
@@ -27,7 +29,7 @@ public class DownloadUtil {
 	 * @param response HttpServletResponse
 	 * @param delFlag 是否删除文件
 	 */
-	protected void download(File file,String returnName,HttpServletResponse response,boolean delFlag){
+	protected void download(File file,String returnName,HttpServletResponse response,boolean delFlag) throws Exception{
 		this.prototypeDownload(file, returnName, response, delFlag);
 	}
 	
@@ -37,12 +39,14 @@ public class DownloadUtil {
 	 * @param response HttpServletResponse
 	 * @param delFlag 是否删除文件
 	 */
-	public void prototypeDownload(File file,String returnName,HttpServletResponse response,boolean delFlag){
+	public void prototypeDownload(File file,String returnName,HttpServletResponse response,boolean delFlag) throws Exception{
 		// 下载文件
 		FileInputStream inputStream = null;
 		ServletOutputStream outputStream = null;
+		if(!file.exists()){
+			throw new CustomException("文件不存在！");
+		}
 		try {
-			if(!file.exists()) return;
 			response.reset();
 			//设置响应类型	PDF文件为"application/pdf"，WORD文件为："application/msword"， EXCEL文件为："application/vnd.ms-excel"。  
 			response.setContentType("application/octet-stream;charset=utf-8");

@@ -3,6 +3,7 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.Manufacture;
+import org.hqu.production_ms.domain.ManufactureExample;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.ManufacturePO;
@@ -21,7 +22,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	ManufactureMapper manufactureMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows) {
+	public EUDataGridResult getList(int page, int rows) throws Exception{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -36,13 +37,13 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public Manufacture get(String id) {
+	public Manufacture get(String id) throws Exception{
 		
 		return manufactureMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public CustomResult delete(String id) {
+	public CustomResult delete(String id) throws Exception{
 		int i = manufactureMapper.deleteByPrimaryKey(id);
 		if(i>0){
 			return CustomResult.ok();
@@ -52,7 +53,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = manufactureMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
@@ -62,33 +63,83 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public CustomResult insert(ManufacturePO manufacture) {
+	public CustomResult insert(ManufacturePO manufacture) throws Exception{
 		int i = manufactureMapper.insert(manufacture);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增生产计划信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(ManufacturePO manufacture) {
+	public CustomResult update(ManufacturePO manufacture) throws Exception{
 		int i = manufactureMapper.updateByPrimaryKeySelective(manufacture);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改生产计划信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateAll(ManufacturePO manufacture) {
+	public CustomResult updateAll(ManufacturePO manufacture) throws Exception{
 		int i = manufactureMapper.updateByPrimaryKey(manufacture);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改生产计划信息失败");
 		}
 	}
 
+	@Override
+	public List<Manufacture> find() throws Exception{
+		ManufactureExample example = new ManufactureExample();
+		return manufactureMapper.selectByExample(example);
+	}
+
+	@Override
+	public EUDataGridResult searchManufactureByManufactureSn(Integer page,
+			Integer rows, String manufactureSn) throws Exception{
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<Manufacture> list = manufactureMapper.searchManufactureByManufactureSn(manufactureSn);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	@Override
+	public EUDataGridResult searchManufactureByManufactureOrderId(Integer page,
+			Integer rows, String manufactureOrderId) throws Exception{
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<Manufacture> list = manufactureMapper.searchManufactureByManufactureOrderId(manufactureOrderId);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	@Override
+	public EUDataGridResult searchManufactureByManufactureTechnologyName(
+			Integer page, Integer rows, String manufactureTechnologyName) throws Exception{
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<Manufacture> list = manufactureMapper.searchManufactureByManufactureTechnologyName(manufactureTechnologyName);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
 }

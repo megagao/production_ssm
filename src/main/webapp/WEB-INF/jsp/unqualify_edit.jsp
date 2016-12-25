@@ -14,7 +14,7 @@
 	        <tr>
 	            <td>产品名称:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="productId"   
+	            	<input class="easyui-combobox" name="productId"  panelHeight="auto"
     					data-options="valueField:'productId',textField:'productName',url:'product/get_data',required:true, editable:false" />  
 	            </td>
 	        </tr>

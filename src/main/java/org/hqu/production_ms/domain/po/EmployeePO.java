@@ -2,13 +2,19 @@ package org.hqu.production_ms.domain.po;
 
 import java.util.Date;
 
-public class EmployeePO {
-    private String empId;
+import javax.validation.constraints.Size;
 
+public class EmployeePO {
+	@Size(max=40, message="{id.length.error}")
+	private String empId;
+	
+	@Size(max=40, message="员工姓名过长！")
     private String empName;
 
+	@Size(max=40, message="员工性别过长！")
     private String sex;
 
+	@Size(min=18, max=18, message="请输入正确身份证号！")
     private String idCode;
 
     private Date birthday;
@@ -17,14 +23,19 @@ public class EmployeePO {
 
     private String status;
 
+    @Size(max=20, message="学历的长度限制在20个字符之内！")
     private String education;
 
+    @Size(max=20, message="学位的长度限制在20个字符之内！")
     private String degree;
 
+    @Size(max=20, message="专业的长度限制在20个字符之内！")
     private String major;
 
+    @Size(max=40, message="毕业院校的长度限制在40个字符之内！")
     private String graduateSchool;
 
+    @Size(max=40, message="受教育形式的长度限制在40个字符之内！")
     private String educationForm;
 
     private String departmentId;

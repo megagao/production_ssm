@@ -28,31 +28,31 @@
 	        <tr>
 	            <td>计划开始时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="startPlan" ></input>
+	            	<input class="easyui-datetimebox" type="text" name="startPlan" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>计划结束时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="endPlan"></input>
+	            	<input class="easyui-datetimebox" type="text" name="endPlan" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>计划提交时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="commitPlan"></input>
+	            	<input class="easyui-datetimebox" type="text" name="commitPlan" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划开始时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="technologyStartPlan"></input>
+	            	<input class="easyui-datetimebox" type="text" name="technologyStartPlan" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划结束时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="technologyEndPlan"></input>
+	            	<input class="easyui-datetimebox" type="text" name="technologyEndPlan" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
 	            </td>
 	        </tr>
 	    </table>

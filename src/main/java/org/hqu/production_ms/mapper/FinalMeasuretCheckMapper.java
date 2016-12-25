@@ -5,11 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.FinalMeasuretCheck;
 import org.hqu.production_ms.domain.FinalMeasuretCheckExample;
+import org.hqu.production_ms.domain.po.FinalMeasuretCheckPO;
 
 public interface FinalMeasuretCheckMapper {
 	
 	//扩展的mapper接口方法
-	List<FinalMeasuretCheck> find(FinalMeasuretCheck finalMeasuretCheck);
+	List<FinalMeasuretCheckPO> find(FinalMeasuretCheck finalMeasuretCheck);
 	
 	int updateNote(FinalMeasuretCheck finalMeasuretCheck);
 	
@@ -37,7 +38,7 @@ public interface FinalMeasuretCheckMapper {
 
     int updateByPrimaryKey(FinalMeasuretCheck record);
 
-	List<FinalMeasuretCheck> searchFMeasureCheckByOrderId(String orderId);
+	List<FinalMeasuretCheckPO> searchFMeasureCheckByOrderId(String orderId);
 	
-	List<FinalMeasuretCheck> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
+	List<FinalMeasuretCheckPO> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
 }

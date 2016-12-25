@@ -36,7 +36,6 @@
 	order by device_maintain_id ASC
 </select>
 
-
 <!-- 批量删除 -->
 <delete id="deleteBatch">
 	DELETE
@@ -48,6 +47,54 @@
 		#{id}
 	</foreach>
 </delete>
+
+<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.DeviceMaintain" >
+		UPDATE device_maintain
+		SET note = #{note}
+		WHERE
+			device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="searchDeviceMaintainByDeviceMaintainId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_maintain_id,
+			device_fault_id,
+			device_maintain_emp_id,
+			emp_name as device_maintain_emp,
+			device_maintain_date,
+			device_maintain_result,
+			device_maintain_cost,
+			note
+		FROM
+			device_maintain,
+			employee
+		WHERE
+			device_maintain.device_maintain_emp_id = employee.emp_id
+		AND	device_maintain_id LIKE CONCAT(
+				'%',
+				#{deviceMaintainId},'%' ) 
+	</select>
+	
+	<select id="searchDeviceMaintainByDeviceFaultId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_maintain_id,
+			device_fault_id,
+			device_maintain_emp_id,
+			emp_name as device_maintain_emp,
+			device_maintain_date,
+			device_maintain_result,
+			device_maintain_cost,
+			note
+		FROM
+			device_maintain,
+			employee
+		WHERE
+			device_maintain.device_maintain_emp_id = employee.emp_id
+		AND	device_fault_id LIKE CONCAT(
+				'%',
+				#{deviceFaultId},'%' ) 
+	</select>
 
   <sql id="Example_Where_Clause" >
     <where >

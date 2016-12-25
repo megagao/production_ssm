@@ -5,13 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.ProcessCountCheckExample;
+import org.hqu.production_ms.domain.po.ProcessCountCheckPO;
 
 public interface ProcessCountCheckMapper {
 	int updateNote(ProcessCountCheck processCountCheck);
 	
-	List<ProcessCountCheck> searchPCountCheckByPCountCheckId(String pCountCheckId);
+	List<ProcessCountCheckPO> searchPCountCheckByPCountCheckId(String pCountCheckId);
 	
-	List<ProcessCountCheck> find(ProcessCountCheck processCountCheck);
+	List<ProcessCountCheckPO> find(ProcessCountCheck processCountCheck);
 	
 	int deleteBatch(String[] ids);
 	

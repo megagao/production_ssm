@@ -25,7 +25,7 @@ public class ProcessServiceImpl implements ProcessService{
 	ProcessMapper processMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Process process) {
+	public EUDataGridResult getList(int page, int rows, Process process) throws Exception{
 		//查询商品列表
 		ProcessExample example = new ProcessExample();
 		//分页处理
@@ -41,12 +41,12 @@ public class ProcessServiceImpl implements ProcessService{
 	}
 
 	@Override
-	public Process get(String string) {
+	public Process get(String string) throws Exception{
 		return processMapper.selectByPrimaryKey(string);
 	}
 	/*
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		int i = customMapper.deleteByPrimaryKey(string);
 		if(i>0){
 			return CustomResult.ok();
@@ -57,7 +57,7 @@ public class ProcessServiceImpl implements ProcessService{
 	 */
 	
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = processMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
@@ -67,17 +67,17 @@ public class ProcessServiceImpl implements ProcessService{
 	}
 
 	@Override
-	public CustomResult insert(Process process) {
+	public CustomResult insert(Process process) throws Exception{
 		int i = processMapper.insert(process);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增工序信息失败");
 		}
 	}
 /*
 	@Override
-	public CustomResult update(Custom custom) {
+	public CustomResult update(Custom custom) throws Exception{
 		int i = customMapper.updateByPrimaryKeySelective(custom);
 		if(i>0){
 			return CustomResult.ok();
@@ -87,31 +87,31 @@ public class ProcessServiceImpl implements ProcessService{
 	}
 	*/
 	@Override
-	public CustomResult updateAll(Process process) {
+	public CustomResult updateAll(Process process) throws Exception{
 		int i = processMapper.updateByPrimaryKey(process);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工序信息失败");
 		}
 	}
 
 	/*
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		customMapper.changeStatus(ids);
 		return CustomResult.ok();
 	}
 */
 	@Override
-	public List<Process> find() {
+	public List<Process> find() throws Exception{
 		ProcessExample example = new ProcessExample();
 		return processMapper.selectByExample(example);
 	}
 
 	@Override
 	public EUDataGridResult searchProcessByProcessId(Integer page,
-			Integer rows, String processId) {
+			Integer rows, String processId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Process> list = processMapper.searchProcessByProcessId(processId);
@@ -126,7 +126,7 @@ public class ProcessServiceImpl implements ProcessService{
 
 	@Override
 	public EUDataGridResult searchProcessByTechnologyPlanId(Integer page,
-			Integer rows, String technologyPlanId) {
+			Integer rows, String technologyPlanId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Process> list = processMapper.searchProcessByTechnologyPlanId(technologyPlanId);

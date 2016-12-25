@@ -79,11 +79,9 @@ public class LoginController {
 	public @ResponseBody Map<String,Object> ajaxLogin(@RequestParam String username, @RequestParam String password,
 			@RequestParam(required=false) String randomcode, HttpSession session) throws Exception{
 	    
-		Subject currentUser = SecurityUtils.getSubject();
-	    
-	    Map<String,Object> map = new HashMap<String,Object>(); 
-	    
-	    if(randomcode !=null && !randomcode.equals("")){
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		if(randomcode !=null && !randomcode.equals("")){
 	    	//取出session的验证码（正确的验证码）
 	    	String validateCode = (String)session.getAttribute("validateCode");
 			//页面中输入的验证和session中的验证进行对比 
@@ -94,6 +92,7 @@ public class LoginController {
 				return map; 
 			}
 	    }
+		Subject currentUser = SecurityUtils.getSubject();
 	    if (!currentUser.isAuthenticated()) {
 	    	
 	    	UsernamePasswordToken token = new UsernamePasswordToken(username, password);

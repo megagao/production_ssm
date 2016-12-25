@@ -77,7 +77,6 @@
     					$.messager.alert('提示','修改工艺成功!','info',function(){
     						$("#technologyEditWindow").window('close');
     						$("#technologyList").datagrid("reload");
-    						$("#technologyInfoWindow").window('close');
     					});
     				}else{
     					$.messager.alert('提示',data.msg);

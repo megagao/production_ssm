@@ -36,4 +36,8 @@ public interface DeviceTypeMapper {
     int updateByPrimaryKeySelective(DeviceType record);
 
     int updateByPrimaryKey(DeviceType record);
+
+	List<DeviceType> searchDeviceTypeByDeviceTypeId(String deviceTypeId);
+
+	List<DeviceType> searchDeviceTypeByDeviceTypeName(String deviceTypeName);
 }

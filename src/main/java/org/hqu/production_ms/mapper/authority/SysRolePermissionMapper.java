@@ -7,6 +7,8 @@ import org.hqu.production_ms.domain.authority.SysRolePermission;
 import org.hqu.production_ms.domain.authority.SysRolePermissionExample;
 
 public interface SysRolePermissionMapper {
+	int updateRolePermission(SysRolePermission sysRolePermission);
+	
     int countByExample(SysRolePermissionExample example);
 
     int deleteByExample(SysRolePermissionExample example);

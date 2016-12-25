@@ -22,10 +22,10 @@
 	        </tr>
 	         -->
 	        <tr>
-	            <td>工艺要求增加时间:</td>
+	            <td>工艺要求添加时间:</td>
 	            <td>
 	            	<input class="easyui-datetimebox" name="addTime"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" > </td>
+        			data-options="required:true,showSeconds:true"> </td>
 	            </td>
 	        </tr>
 	          
@@ -38,7 +38,7 @@
 	        <tr>
 	        <td>工艺要求:</td>
 	            <td>
-	                <textarea style="width:600px;height:300px;visibility:hidden;" name="requirement"></textarea>
+	                <textarea style="width:800px;height:300px;visibility:hidden;" name="requirement"></textarea>
 	            </td>
 	         </tr>
 	    </table>
@@ -74,7 +74,6 @@
     					$.messager.alert('提示','修改工艺要求成功!','info',function(){
     						$("#technologyRequirementEditWindow").window('close');
     						$("#technologyRequirementList").datagrid("reload");
-    						$("#technologyRequirementInfoWindow").window('close');
     					});
     				}else{
     					$.messager.alert('提示',data.msg);

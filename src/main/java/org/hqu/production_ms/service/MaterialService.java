@@ -9,29 +9,29 @@ import org.hqu.production_ms.domain.Material;;
 
 public interface MaterialService {
 
-    List<Material> find();  
+    List<Material> find() throws Exception;  
 	
-	EUDataGridResult getList(int page, int rows, Material material);
+	EUDataGridResult getList(int page, int rows, Material material) throws Exception;
 	
-	Material get(String string);
+	Material get(String string) throws Exception;
 	
-	CustomResult delete(String string);
+	CustomResult delete(String string) throws Exception;
 
-	CustomResult deleteBatch(String[] ids);
+	CustomResult deleteBatch(String[] ids) throws Exception;
 
-	CustomResult insert(Material material);
+	CustomResult insert(Material material) throws Exception;
 
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-    CustomResult update(Material material);
+    CustomResult update(Material material) throws Exception;
     
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(Material material);
+    CustomResult updateAll(Material material) throws Exception;
     
     //更新备注
-    CustomResult updateNote(Material material);
+    CustomResult updateNote(Material material) throws Exception;
     
-    EUDataGridResult searchMaterialByMaterialId(int page, int rows, String materialId);
+    EUDataGridResult searchMaterialByMaterialId(int page, int rows, String materialId) throws Exception;
 
 	EUDataGridResult searchMaterialByMaterialType(Integer page, Integer rows,
-			String materialType);
+			String materialType) throws Exception;
 }

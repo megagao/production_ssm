@@ -87,7 +87,13 @@ public class CustomRealm extends AuthorizingRealm {
 		activeUser.setUsername(sysUser.getUsername());
 		activeUser.setUserStatus(sysUser.getLocked());
 		
-		SysRole sysRole = roleService.findRoleByUserId(sysUser.getId());
+		SysRole sysRole = null;
+		try {
+			sysRole = roleService.findRoleByUserId(sysUser.getId());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		activeUser.setRolename(sysRole.getRoleName());
 		activeUser.setRoleStatus(sysRole.getAvailable());
 		

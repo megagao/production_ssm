@@ -34,4 +34,10 @@ public interface DeviceCheckMapper {
     int updateByPrimaryKeySelective(DeviceCheck record);
 
     int updateByPrimaryKey(DeviceCheck record);
+
+	List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String deviceCheckId);
+
+	List<DeviceCheck> searchDeviceCheckByDeviceName(String deviceName);
+
+	int updateNote(DeviceCheck deviceCheck);
 }

@@ -3,31 +3,39 @@ package org.hqu.production_ms.service;
 import java.util.List;
 
 import org.hqu.production_ms.domain.COrder;
-import org.hqu.production_ms.domain.CustomResult;
-import org.hqu.production_ms.domain.EUDataGridResult;
+import org.hqu.production_ms.domain.custom.CustomResult;
+import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface OrderService {
 	
-	List<COrder> find(); 
+	List<COrder> find() throws Exception; 
 	
-	EUDataGridResult getList(int page, int rows, COrder cOrder);
+	EUDataGridResult getList(int page, int rows, COrder cOrder) throws Exception;
 	
-	COrder get(String string);
+	COrder get(String string) throws Exception;
 	
-	CustomResult delete(String string);
+	CustomResult delete(String string) throws Exception;
 
-	CustomResult deleteBatch(String[] ids);
+	CustomResult deleteBatch(String[] ids) throws Exception;
 
-	CustomResult insert(COrderPO cOrder);
+	CustomResult insert(COrderPO cOrder) throws Exception;
 
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-    CustomResult update(COrderPO cOrder);
+    CustomResult update(COrderPO cOrder) throws Exception;
     
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(COrderPO cOrder);
+    CustomResult updateAll(COrderPO cOrder) throws Exception;
     
-    CustomResult updateNote(COrderPO cOrder);
+    CustomResult updateNote(COrderPO cOrder) throws Exception;
 
-    CustomResult changeStatus(String[] ids);
+    CustomResult changeStatus(String[] ids) throws Exception;
+
+    EUDataGridResult searchOrderByOrderId(int page, int rows, String orderId) throws Exception;
+	
+	EUDataGridResult searchOrderByCustomName(int page, int rows,
+			String customName) throws Exception;
+	
+	EUDataGridResult searchOrderByProductName(int page, int rows,
+			String productName) throws Exception;
 }

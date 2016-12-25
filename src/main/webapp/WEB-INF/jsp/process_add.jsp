@@ -22,13 +22,13 @@
 	        <tr>
 	            <td>工序顺序:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="sequence" ></input>
+	            	<input class="easyui-numberbox" name="sequence" data-options="min:1,max:99999999,precision:0"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>单件定额工时:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="quota"></input>
+	            	<input class="easyui-numberbox" name="quota" data-options="min:1,max:99999999,precision:0"></input>
 	            </td>
 	        </tr>
 	    </table>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.po.UnqualifyApplyPO;
 import org.hqu.production_ms.mapper.UnqualifyApplyMapper;
 import org.hqu.production_ms.service.UnqualifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +21,28 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 	UnqualifyApplyMapper unqualifyApplyMapper; 
 	
 	@Override
-	public EUDataGridResult getList(Integer page, Integer rows, UnqualifyApply unqualifyApply) {
+	public EUDataGridResult getList(Integer page, Integer rows, UnqualifyApply unqualifyApply) throws Exception{
 		
 		PageHelper.startPage(page, rows);
-		List<UnqualifyApply> list = unqualifyApplyMapper.find(unqualifyApply);
+		List<UnqualifyApplyPO> list = unqualifyApplyMapper.find(unqualifyApply);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
+		PageInfo<UnqualifyApplyPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 	@Override
-	public UnqualifyApply get(String string) {
+	public UnqualifyApply get(String string) throws Exception{
 		return unqualifyApplyMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		int i = unqualifyApplyMapper.deleteByPrimaryKey(string);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -49,9 +50,9 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = unqualifyApplyMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -59,65 +60,73 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 	}
 
 	@Override
-	public CustomResult insert(UnqualifyApply unqualify) {
+	public CustomResult insert(UnqualifyApply unqualify) throws Exception{
 		int i = unqualifyApplyMapper.insert(unqualify);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增不合格品申请信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(UnqualifyApply unqualify) {
+	public CustomResult update(UnqualifyApply unqualify) throws Exception{
 		int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualify);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改不合格品申请信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateAll(UnqualifyApply unqualifyApply) {
+	public CustomResult updateAll(UnqualifyApply unqualifyApply) throws Exception{
 		int i = unqualifyApplyMapper.updateByPrimaryKey(unqualifyApply);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改不合格品申请信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateNote(UnqualifyApply unqualify) {
+	public CustomResult updateNote(UnqualifyApply unqualify) throws Exception{
 		
 		int i = unqualifyApplyMapper.updateNote(unqualify);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改不合格品申请备注失败");
 		}
 	}
 
 	@Override
 	public EUDataGridResult searchUnqualifyByUnqualifyId(int page, int rows,
-			String unqualifyId) {
+			String unqualifyId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UnqualifyApply> list = unqualifyApplyMapper.searchUnqualifyByUnqualifyId(unqualifyId);
+		List<UnqualifyApplyPO> list = unqualifyApplyMapper.searchUnqualifyByUnqualifyId(unqualifyId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(list);
+		PageInfo<UnqualifyApplyPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
-	
-
-
-
-
-
+	@Override
+	public EUDataGridResult searchUnqualifyByProductName(Integer page,
+			Integer rows, String productName) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<UnqualifyApplyPO> list = unqualifyApplyMapper.searchUnqualifyByProductName(productName);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<UnqualifyApplyPO> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
 }

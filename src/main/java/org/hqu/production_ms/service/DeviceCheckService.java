@@ -8,19 +8,26 @@ public interface DeviceCheckService {
 
 	
 	//List
-	EUDataGridResult getList(int page, int rows, DeviceCheck deviceCheck);
-	DeviceCheck get(String string);
+	EUDataGridResult getList(int page, int rows, DeviceCheck deviceCheck) throws Exception;
+	
+	//get
+	DeviceCheck get(String string) throws Exception;
 
 	//Insert
-	CustomResult insert(DeviceCheck deviceCheck);
-	CustomResult insertBatch(DeviceCheck[] deviceChecks);
+	CustomResult insert(DeviceCheck deviceCheck) throws Exception;
 	
 	//Delet
-	CustomResult delete(String deviceCheckId);
-	CustomResult deleteBatch(String[] deviceCheckIds);
+	CustomResult delete(String deviceCheckId) throws Exception;
+	CustomResult deleteBatch(String[] deviceCheckIds) throws Exception;
 
 	//Update
-    CustomResult update(DeviceCheck deviceCheck);
-    CustomResult updateBatch(DeviceCheck[] deviceChecks);
+    CustomResult update(DeviceCheck deviceCheck) throws Exception;
+
+    CustomResult updateNote(DeviceCheck deviceCheck) throws Exception;
     
+	EUDataGridResult searchDeviceCheckByDeviceCheckId(Integer page,
+			Integer rows, String deviceCheckId);
+
+	EUDataGridResult searchDeviceCheckByDeviceName(Integer page, Integer rows,
+			String deviceName);
 }

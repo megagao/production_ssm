@@ -36,11 +36,10 @@
 </select>
 
 <!-- 查询所有种类记录 -->
- <!-- parameterType=""  -->
-  
-<select id="listType" resultMap="AddResultMap">
+<!-- parameterType=""  -->
+<select id="listType" resultMap="BaseResultMap">
 	SELECT
-		device_type_id as device_type_idd,
+		device_type_id,
 		device_type_name
 	FROM
 		device_type
@@ -60,8 +59,45 @@
 		#{id}
 	</foreach>
 </delete>
-
   
+  <select id="searchDeviceTypeByDeviceTypeId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_type_id,
+			device_type_id as device_type_idd,
+			device_type_name,
+			device_type_model,
+			device_type_spec,
+			device_type_supplier,
+			device_type_producer,
+			device_type_quantity,
+			device_type_warranty
+		FROM
+			device_type
+		WHERE
+			device_type_id LIKE CONCAT(
+				'%',
+				#{deviceTypeId},'%' ) 
+	</select>
+	
+	<select id="searchDeviceTypeByDeviceTypeName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_type_id,
+			device_type_id as device_type_idd,
+			device_type_name,
+			device_type_model,
+			device_type_spec,
+			device_type_supplier,
+			device_type_producer,
+			device_type_quantity,
+			device_type_warranty
+		FROM
+			device_type
+		WHERE
+			device_type_name LIKE CONCAT(
+				'%',
+				#{deviceTypeName},'%' ) 
+	</select>
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

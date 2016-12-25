@@ -8,7 +8,6 @@ import org.hqu.production_ms.domain.UnqualifyApplyExample;
 import org.hqu.production_ms.domain.po.UnqualifyApplyPO;
 
 public interface UnqualifyApplyMapper {
-	
 	//扩展的mapper接口方法
 	List<UnqualifyApplyPO> find(UnqualifyApply unqualifyApply);
 	
@@ -18,6 +17,9 @@ public interface UnqualifyApplyMapper {
 	
 	List<UnqualifyApplyPO> searchUnqualifyByUnqualifyId(String orderId);
 	
+	List<UnqualifyApplyPO> searchUnqualifyByProductName(String productName);
+	
+		
     int countByExample(UnqualifyApplyExample example);
 
     int deleteByExample(UnqualifyApplyExample example);
@@ -39,6 +41,4 @@ public interface UnqualifyApplyMapper {
     int updateByPrimaryKeySelective(UnqualifyApply record);
 
     int updateByPrimaryKey(UnqualifyApply record);
-
-	List<UnqualifyApplyPO> searchUnqualifyByProductName(String productName);
 }

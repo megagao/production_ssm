@@ -26,7 +26,7 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	TechnologyRequirementMapper technologyRequirementMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, TechnologyRequirement technologyRequirement) {
+	public EUDataGridResult getList(int page, int rows, TechnologyRequirement technologyRequirement) throws Exception{
 		System.out.println("fff");
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -41,12 +41,12 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	}
 
 	@Override
-	public TechnologyRequirement get(String string) {
+	public TechnologyRequirement get(String string) throws Exception{
 		return technologyRequirementMapper.selectByPrimaryKey(string);
 	}
 	/*
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		int i = customMapper.deleteByPrimaryKey(string);
 		if(i>0){
 			return CustomResult.ok();
@@ -57,7 +57,7 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	 */
 	
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = technologyRequirementMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
@@ -67,17 +67,17 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	}
 
 	@Override
-	public CustomResult insert(TechnologyRequirement technologyRequirement) {
+	public CustomResult insert(TechnologyRequirement technologyRequirement) throws Exception{
 		int i = technologyRequirementMapper.insert(technologyRequirement);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增工艺要求信息失败");
 		}
 	}
 /*
 	@Override
-	public CustomResult update(Custom custom) {
+	public CustomResult update(Custom custom) throws Exception{
 		int i = customMapper.updateByPrimaryKeySelective(custom);
 		if(i>0){
 			return CustomResult.ok();
@@ -87,42 +87,42 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	}
 	*/
 	@Override
-	public CustomResult updateAll(TechnologyRequirement technologyRequirement) {
+	public CustomResult updateAll(TechnologyRequirement technologyRequirement) throws Exception{
 		int i = technologyRequirementMapper.updateByPrimaryKey(technologyRequirement);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工艺要求信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateRequirement(TechnologyRequirement technologyRequirement) {
+	public CustomResult updateRequirement(TechnologyRequirement technologyRequirement) throws Exception{
 System.out.println("updateRequirement_service:");
 System.out.println(technologyRequirement.getRequirement());
 		int i = technologyRequirementMapper.updateRequirement(technologyRequirement);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工艺要求失败");
 		}
 	}
 	/*
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		customMapper.changeStatus(ids);
 		return CustomResult.ok();
 	}
 */
 	@Override
-	public List<Technology> find() {
+	public List<Technology> find() throws Exception{
 		TechnologyExample example = new TechnologyExample();
 		return technologyMapper.selectByExample(example);
 	}
 
 	@Override
 	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(
-			Integer page, Integer rows, String technologyRequirementId) {
+			Integer page, Integer rows, String technologyRequirementId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<TechnologyRequirement> list = technologyRequirementMapper.searchTechnologyRequirementByTechnologyRequirementId(technologyRequirementId);
@@ -137,7 +137,7 @@ System.out.println(technologyRequirement.getRequirement());
 
 	@Override
 	public EUDataGridResult searchTechnologyRequirementByTechnologyName(
-			Integer page, Integer rows, String technologyName) {
+			Integer page, Integer rows, String technologyName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<TechnologyRequirement> list = technologyRequirementMapper.searchTechnologyRequirementByTechnologyName(technologyName);

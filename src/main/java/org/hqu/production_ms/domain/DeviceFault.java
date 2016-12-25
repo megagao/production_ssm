@@ -11,7 +11,7 @@ public class DeviceFault {
 
     private String deviceId;
 
-    @Size(max=5000, message="故障原因长度请限制在5000个字符内")
+    @Size(max=100, message="故障原因长度请限制在100个字符内")
     private String deviceFaultCause;
 
     @Size(max=5000, message="故障描述长度请限制在5000个字符内")

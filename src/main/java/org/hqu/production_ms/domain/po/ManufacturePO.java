@@ -2,11 +2,17 @@ package org.hqu.production_ms.domain.po;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class ManufacturePO {
+
+	@Size(max=40, message="{id.length.error}")
     private String manufactureSn;
 
+	@Max(value=999999999, message="投产数量不能超过999999999")
     private Integer launchQuantity;
-
+	
     private Date beginDate;
 
     private Date endDate;

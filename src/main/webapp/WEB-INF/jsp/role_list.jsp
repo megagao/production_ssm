@@ -66,7 +66,7 @@ function doSearch_role(value,name){ //用户输入用户名,点击搜素,触发�
 	if(value == null || value == ''){
 		
 		$("#roleList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'角色列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_role", url:'role/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -78,7 +78,7 @@ function doSearch_role(value,name){ //用户输入用户名,点击搜素,触发�
 	    });
 	}else{
 		$("#roleList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'角色列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_role", url:'role/search_role_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 

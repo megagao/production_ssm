@@ -20,14 +20,14 @@
 	        <tr>
 	            <td>作业编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="workId"   
+	            	<input class="easyui-combobox" name="workId"  panelHeight="auto" 
     					data-options="valueField:'workId',textField:'workId',url:'work/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>生产批号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="manufactureSn"   
+	            	<input class="easyui-combobox" name="manufactureSn"  panelHeight="auto" 
     					data-options="valueField:'manufactureSn',textField:'manufactureSn',url:'manufacture/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
@@ -78,8 +78,4 @@
 	function clearTaskAddForm(){
 		$('#taskAddForm').form('reset');
 	}
-	$('#cc').combo({    
-	    required:true,    
-	    multiple:true   
-	});
 </script>

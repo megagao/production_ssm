@@ -2,16 +2,20 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
-public class UnqualifyApply {
-    private String unqualifyApplyId;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
+public class UnqualifyApply {
+	@Size(max=40, message="{id.length.error}")
+    private String unqualifyApplyId;
+	
     private String productId;
 
+	@Size(max=200, message="不合格项目的长度限制在200个字符之内")
     private String unqualifyItem;
 
+	@Max(value=999999999, message="不合格数量不能超过999999999")
     private Integer unqualifyCount;
-
-    private String equipmentId;
 
     private Date assemblyDate;
 
@@ -19,6 +23,7 @@ public class UnqualifyApply {
 
     private Date applyDate;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getUnqualifyApplyId() {
@@ -51,14 +56,6 @@ public class UnqualifyApply {
 
     public void setUnqualifyCount(Integer unqualifyCount) {
         this.unqualifyCount = unqualifyCount;
-    }
-
-    public String getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId == null ? null : equipmentId.trim();
     }
 
     public Date getAssemblyDate() {

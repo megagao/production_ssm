@@ -22,7 +22,7 @@ public class WorkServiceImpl implements WorkService{
 	WorkMapper workMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Work work) {
+	public EUDataGridResult getList(int page, int rows, Work work) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Work> list = workMapper.find();
@@ -36,13 +36,13 @@ public class WorkServiceImpl implements WorkService{
 	}
 
 	@Override
-	public Work get(String string) {
+	public Work get(String string) throws Exception{
 		
 		return workMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		int i = workMapper.deleteByPrimaryKey(string);
 		if(i>0){
 			return CustomResult.ok();
@@ -52,7 +52,7 @@ public class WorkServiceImpl implements WorkService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = workMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
@@ -62,44 +62,44 @@ public class WorkServiceImpl implements WorkService{
 	}
 
 	@Override
-	public CustomResult insert(WorkPO work) {
+	public CustomResult insert(WorkPO work) throws Exception{
 		int i = workMapper.insert(work);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增作业信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(WorkPO work) {
+	public CustomResult update(WorkPO work) throws Exception{
 		int i = workMapper.updateByPrimaryKeySelective(work);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改作业信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateAll(WorkPO work) {
+	public CustomResult updateAll(WorkPO work) throws Exception{
 		int i = workMapper.updateByPrimaryKey(work);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改作业信息失败");
 		}
 	}
 
 	@Override
-	public List<Work> find() {
+	public List<Work> find() throws Exception{
 		WorkExample example = new WorkExample();
 		return workMapper.selectByExample(example);
 	}
 
 	@Override
 	public EUDataGridResult searchWorkByWorkId(Integer page, Integer rows,
-			String workId) {
+			String workId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Work> list = workMapper.searchWorkByWorkId(workId);
@@ -114,7 +114,7 @@ public class WorkServiceImpl implements WorkService{
 
 	@Override
 	public EUDataGridResult searchWorkByWorkProduct(Integer page, Integer rows,
-			String workProduct) {
+			String workProduct) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Work> list = workMapper.searchWorkByWorkProduct(workProduct);
@@ -129,7 +129,7 @@ public class WorkServiceImpl implements WorkService{
 
 	@Override
 	public EUDataGridResult searchWorkByWorkDevice(Integer page, Integer rows,
-			String workDevice) {
+			String workDevice) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Work> list = workMapper.searchWorkByWorkDevice(workDevice);
@@ -144,7 +144,7 @@ public class WorkServiceImpl implements WorkService{
 
 	@Override
 	public EUDataGridResult searchWorkByWorkProcess(Integer page, Integer rows,
-			String workProcess) {
+			String workProcess) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Work> list = workMapper.searchWorkByWorkProcess(workProcess);

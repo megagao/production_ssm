@@ -3,12 +3,18 @@
 <mapper namespace="org.hqu.production_ms.mapper.MaterialReceiveMapper" >
   <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.MaterialReceive" >
     <id column="receive_id" property="receiveId" jdbcType="VARCHAR" />
-    <result column="material_id" property="materialId" jdbcType="VARCHAR" />
     <result column="ammount" property="ammount" jdbcType="INTEGER" />
     <result column="receive_date" property="receiveDate" jdbcType="TIMESTAMP" />
     <result column="sender" property="sender" jdbcType="VARCHAR" />
-    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
+    <association property="material" javaType="material">
+		<id column="material_id" property="materialId" jdbcType="VARCHAR" />
+	    <result column="material_type" property="materialType" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="VARCHAR" />
+	    <result column="remaining" property="remaining" jdbcType="INTEGER" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	</association>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,8 +74,91 @@
       </foreach>
     </where>
   </sql>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			material_receive
+		WHERE
+			receive_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+<!-- 查询所有记录 -->
+<select id="find" parameterType="MaterialReceive" resultMap="BaseResultMap">
+		SELECT
+		    receive_id,
+		    ammount,
+		    receive_date,
+		    sender,
+		    receiver,
+		    material_receive.note,
+			material.material_id
+		FROM
+			material_receive
+		LEFT JOIN material ON
+			material.material_id=material_receive.material_id		
+		 <!--  order by material_receive.receive_date -->
+	</select>
+<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE material_receive
+		SET status = #{status}
+		WHERE
+			receive_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
+		UPDATE material_receive
+		SET note = #{note}
+		WHERE
+			receive_id = #{receiveId,jdbcType=VARCHAR}
+	</update>
+    <!-- 依据ReceiveId查询 -->
+    <select id="searchMaterialReceiveByReceiveId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+		    receive_id,
+		    ammount,
+		    receive_date,
+		    sender,
+		    receiver,
+		    material_receive.note,
+			material.material_id
+		FROM
+			material_receive,
+			material
+		WHERE
+			material.material_id=material_receive.material_id
+	    AND receive_id like CONCAT('%',#{receiveId},'%' ) 	
+	</select>
+  
+    <!-- 依据materialId查询 -->
+    <select id="searchMaterialReceiveByMaterialId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+		    receive_id,
+		    ammount,
+		    receive_date,
+		    sender,
+		    receiver,
+		    material_receive.note,
+			material.material_id
+		FROM
+			material_receive,
+			material
+		WHERE
+			material.material_id=material_receive.material_id
+	    AND material.material_id like CONCAT('%',#{materialId},'%' ) 	
+	</select>
+  
   <sql id="Base_Column_List" >
-    receive_id, material_id, ammount, receive_date, sender, emp_id, note
+    receive_id, material_id, ammount, receive_date, sender, receiver, note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.MaterialReceiveExample" >
     select
@@ -103,10 +192,10 @@
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
     insert into material_receive (receive_id, material_id, ammount, 
-      receive_date, sender, emp_id, 
+      receive_date, sender, receiver, 
       note)
     values (#{receiveId,jdbcType=VARCHAR}, #{materialId,jdbcType=VARCHAR}, #{ammount,jdbcType=INTEGER}, 
-      #{receiveDate,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
+      #{receiveDate,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
       #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
@@ -127,8 +216,8 @@
       <if test="sender != null" >
         sender,
       </if>
-      <if test="empId != null" >
-        emp_id,
+      <if test="receiver != null" >
+        receiver,
       </if>
       <if test="note != null" >
         note,
@@ -150,8 +239,8 @@
       <if test="sender != null" >
         #{sender,jdbcType=VARCHAR},
       </if>
-      <if test="empId != null" >
-        #{empId,jdbcType=VARCHAR},
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         #{note,jdbcType=VARCHAR},
@@ -182,8 +271,8 @@
       <if test="record.sender != null" >
         sender = #{record.sender,jdbcType=VARCHAR},
       </if>
-      <if test="record.empId != null" >
-        emp_id = #{record.empId,jdbcType=VARCHAR},
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
       </if>
       <if test="record.note != null" >
         note = #{record.note,jdbcType=VARCHAR},
@@ -200,7 +289,7 @@
       ammount = #{record.ammount,jdbcType=INTEGER},
       receive_date = #{record.receiveDate,jdbcType=TIMESTAMP},
       sender = #{record.sender,jdbcType=VARCHAR},
-      emp_id = #{record.empId,jdbcType=VARCHAR},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,8 +310,8 @@
       <if test="sender != null" >
         sender = #{sender,jdbcType=VARCHAR},
       </if>
-      <if test="empId != null" >
-        emp_id = #{empId,jdbcType=VARCHAR},
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
       </if>
       <if test="note != null" >
         note = #{note,jdbcType=VARCHAR},
@@ -236,7 +325,7 @@
       ammount = #{ammount,jdbcType=INTEGER},
       receive_date = #{receiveDate,jdbcType=TIMESTAMP},
       sender = #{sender,jdbcType=VARCHAR},
-      emp_id = #{empId,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR}
     where receive_id = #{receiveId,jdbcType=VARCHAR}
   </update>

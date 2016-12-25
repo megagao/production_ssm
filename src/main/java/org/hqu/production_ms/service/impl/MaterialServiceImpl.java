@@ -22,14 +22,14 @@ public class MaterialServiceImpl implements MaterialService {
 	MaterialMapper materialMapper;
 	
 	@Override
-	public List<Material> find() {
+	public List<Material> find() throws Exception{
 		// TODO Auto-generated method stub
 		MaterialExample example = new MaterialExample();
 		return materialMapper.selectByExample(example);	
 	}
 
 	@Override
-	public EUDataGridResult getList(int page, int rows, Material material) {
+	public EUDataGridResult getList(int page, int rows, Material material) throws Exception{
 		// TODO Auto-generated method stub
 		
 		//查询列表
@@ -47,14 +47,14 @@ public class MaterialServiceImpl implements MaterialService {
 	}
 
 	@Override
-	public Material get(String string) {
+	public Material get(String string) throws Exception{
 		// TODO Auto-generated method stub
 		return materialMapper.selectByPrimaryKey(string);
 		
 	}
 
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialMapper.deleteByPrimaryKey(string);
 		if(i>0){
@@ -66,7 +66,7 @@ public class MaterialServiceImpl implements MaterialService {
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialMapper.deleteBatch(ids);
 		if(i>0){
@@ -78,47 +78,47 @@ public class MaterialServiceImpl implements MaterialService {
 	}
 
 	@Override
-	public CustomResult insert(Material material) {
+	public CustomResult insert(Material material) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialMapper.insert(material);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增物料信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(Material material) {
+	public CustomResult update(Material material) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialMapper.updateByPrimaryKeySelective(material);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料信息失败");
 		}
 		
 	}
 
 	@Override
-	public CustomResult updateAll(Material material) {
+	public CustomResult updateAll(Material material) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialMapper.updateByPrimaryKey(material);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateNote(Material material) {
+	public CustomResult updateNote(Material material) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialMapper.updateNote(material);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改物料备注失败");
 		}
 	}
 	@Override
@@ -137,7 +137,7 @@ public class MaterialServiceImpl implements MaterialService {
 
 	@Override
 	public EUDataGridResult searchMaterialByMaterialType(Integer page,
-			Integer rows, String materialType) {
+			Integer rows, String materialType) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Material> list = materialMapper.searchMaterialByMaterialType(materialType);

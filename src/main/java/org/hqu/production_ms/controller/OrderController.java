@@ -110,6 +110,7 @@ public class OrderController {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
+			System.out.println(fieldError.getDefaultMessage());
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		if(orderService.get(cOrder.getOrderId()) != null){

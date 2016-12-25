@@ -62,9 +62,9 @@
 
 
 
-<div id="technologyEditWindow" class="easyui-window" title="编辑工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="technologyEditWindow" class="easyui-window" title="编辑工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="technologyAddWindow" class="easyui-window" title="添加工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/add'" style="width:49%;height:80%;padding:10px;">
+<div id="technologyAddWindow" class="easyui-window" title="添加工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/add'" style="width:40%;height:55%;padding:10px;">
 </div>
  
 <script>
@@ -72,7 +72,7 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
 	if(value == null || value == ''){
 		
 		$("#technologyList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工艺列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_technology", url:'technology/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -89,7 +89,7 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
 	    });
 	}else{
 		$("#technologyList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工艺列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_technology", url:'technology/search_technology_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
@@ -214,9 +214,9 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
     
     function technology_delete(){
     	$.get("technology/delete_judge",'',function(data){
-       		/* if(data.msg != null){
+       		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
-       		}else{ */
+       		}else{ 
        			var ids = getTechnologySelectionsIds();
        	    	if(ids.length == 0){
        	    		$.messager.alert('提示','未选中工艺!');
@@ -227,14 +227,15 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
        	    	    	var params = {"ids":ids};
        	            	$.post("technology/delete_batch",params, function(data){
        	        			if(data.status == 200){
-       	        				$.messager.alert('提示','删除工艺成功!',undefined,function(){
-       	        					$("#technologyList").datagrid("reload");
-       	        				});
+       	        				$("#technologyList").datagrid("reload");
+       	        				$.messager.alert('提示','删除工艺成功!');
+       	        			}else{ 
+       	        				$.messager.alert('提示', data.msg);
        	        			}
        	        		});
        	    	    }
        	    	});
-       		//}
+       		}
        	});
     }
     

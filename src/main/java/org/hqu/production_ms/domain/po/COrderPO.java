@@ -3,20 +3,28 @@ package org.hqu.production_ms.domain.po;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class COrderPO {
 
+	@Size(max=40, message="{id.length.error}")
 	private String orderId;
 
     private Date orderDate;
 
     private Date requestDate;
-
+    
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
+    @Max(value=999999999, message="订购数量不能超过999999999")
     private Integer quantity;
 
+    @Max(value=999999999, message="单价不能超过999999999")
     private BigDecimal unitPrice;
 
+    @Size(max=10, message="单位的长度限制在10个字符之内")
     private String unit;
     
     private String image;

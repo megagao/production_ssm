@@ -10,9 +10,9 @@
 	<form id="roleEditForm" class="roleForm" method="post">
 		<input id="roleId" type="hidden" name="roleId"/>
 	    <span>角色名:</span>
-	    <input class="easyui-textbox" type="text" name="roleName" ></input><br><br>
+	    <input class="easyui-textbox" type="text" name="roleName" data-options="required:true"></input><br><br>
 	    <span >状&nbsp态:</span>
-		<select class="easyui-combobox" name="available" data-options="width:150">
+		<select class="easyui-combobox" name="available" panelHeight="auto" data-options="width:150, editable:false">
 			<option value="1">有效</option>
 			<option value="2">锁定</option>
 		</select><br><br>
@@ -107,6 +107,31 @@
 		<label><input name="permissionOption1" type="checkbox" value="171" />不合格品申请新增 </label> 
 		<label><input name="permissionOption1" type="checkbox" value="172" />不合格品申请修改 </label> 
 		<label><input name="permissionOption1" type="checkbox" value="173" />不合格品申请删除 </label>  
+		<br><br>
+		<span style="font-weight: bold;">设备台账管理：</span>
+		<label><input name="permissionOption1" type="checkbox" value="231" />设备台账新增 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="232" />设备台账修改 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="233" />设备台账删除 </label> 
+		<br><br>
+		<span style="font-weight: bold;">设备种类管理：</span>
+		<label><input name="permissionOption1" type="checkbox" value="271" />设备种类新增 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="272" />设备种类修改 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="273" />设备种类删除 </label> 
+		<br><br>
+		<span style="font-weight: bold;">设备例检管理：</span>
+		<label><input name="permissionOption1" type="checkbox" value="241" />设备例检新增 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="242" />设备例检修改 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="243" />设备例检删除 </label> 
+		<br><br>
+		<span style="font-weight: bold;">设备故障管理：</span>
+		<label><input name="permissionOption1" type="checkbox" value="251" />设备故障新增 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="252" />设备故障修改 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="253" />设备故障删除 </label> 
+		<br><br>
+		<span style="font-weight: bold;">设备维修管理：</span>
+		<label><input name="permissionOption1" type="checkbox" value="261" />设备维修新增 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="262" />设备维修修改 </label> 
+		<label><input name="permissionOption1" type="checkbox" value="263" />设备维修删除 </label> 
 		<br><br>
 		<span style="font-weight: bold;">部门管理：</span>
 		<label><input name="permissionOption1" type="checkbox" value="41" />部门新增 </label> 

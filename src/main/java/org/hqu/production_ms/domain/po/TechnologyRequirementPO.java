@@ -1,5 +1,6 @@
 package org.hqu.production_ms.domain.po;
 
+
 import org.hqu.production_ms.domain.TechnologyRequirement;
 
 public class TechnologyRequirementPO extends TechnologyRequirement{

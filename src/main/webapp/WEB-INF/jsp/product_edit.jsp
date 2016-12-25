@@ -25,7 +25,7 @@
 	        <tr>
 	            <td>产品状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150">
+		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true,width:150, editable:false">
 						<option value="1">有效产品</option>
 						<option value="2">停产</option>
 					</select>
@@ -34,8 +34,8 @@
 	        <tr>
 	            <td>相关图片:</td>
 	            <td>
-	            	 <a href="javascript:void(0)" class="easyui-linkbutton picFileUpload">上传图片</a>
-	                 <input type="hidden" id="image" name="image"/>
+	            	 <a href="javascript:void(0)" class="easyui-linkbutton productPicFileUpload">上传图片</a>
+	                 <input type="hidden" id="productImage" name="image"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -47,12 +47,12 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitProductEditForm()">提交</a>
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var productEditEditor ;
+	
 	$(function(){
 		//实例化富文本编辑器
 		productEditEditor = TAOTAO.createEditor("#productEditForm [name=note]");
@@ -60,23 +60,28 @@
 	//同步kindeditor中的内容
 	productEditEditor.sync();
 	
-	function submitForm(){
-		if(!$('#productEditForm').form('validate')){
-			$.messager.alert('提示','表单还未填写完成!');
-			return ;
-		}
-		productEditEditor.sync();
-		
-		$.post("product/update_all",$("#productEditForm").serialize(), function(data){
-			if(data.status == 200){
-				$.messager.alert('提示','修改订单成功!','info',function(){
-					$("#productEditWindow").window('close');
-					$("#productList").datagrid("reload");
-				});
-			}else{
-				$.messager.alert('错误','修改订单失败!');
-			}
-		});
+	function submitProductEditForm(){
+		$.get("product/edit_judge",'',function(data){
+    		if(data.msg != null){
+    			$.messager.alert('提示', data.msg);
+    		}else{
+    			if(!$('#productEditForm').form('validate')){
+    				$.messager.alert('提示','表单还未填写完成!');
+    				return ;
+    			}
+    			productEditEditor.sync();
+    			
+    			$.post("product/update_all",$("#productEditForm").serialize(), function(data){
+    				if(data.status == 200){
+    					$.messager.alert('提示','修改产品成功!','info',function(){
+    						$("#productEditWindow").window('close');
+    						$("#productList").datagrid("reload");
+    					});
+    				}else{
+    					$.messager.alert('提示',data.msg);
+    				}
+    			});
+    		}
+    	});
 	}
-	
 </script>

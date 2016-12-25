@@ -15,26 +15,26 @@
   	<!-- 扩展的sql -->
 	<!-- 查询所有记录 -->
 	<select id="find" parameterType="sysUser" resultMap="UserPORM">
-	SELECT
-		sys_user.id,
-		username,
-		password,
-		locked,
-		role_id,
-		role_name
-	FROM
-		sys_user
-	LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
-	LEFT JOIN sys_role ON sys_role_id = sys_role.role_id
+		SELECT
+			sys_user.id,
+			username,
+			password,
+			locked,
+			role_id,
+			role_name
+		FROM
+			sys_user
+		LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
+		LEFT JOIN sys_role ON sys_role_id = sys_role.role_id
 	</select>
 	
 	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
-			c_order
+			sys_user
 		WHERE
-			order_id IN
+			sys_user.id IN
 		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
@@ -51,6 +51,59 @@
 		</foreach>
 	</update>
 	
+	<select id="searchUserByUserId" parameterType="string" resultMap="UserPORM">
+		SELECT
+			sys_user.id,
+			username,
+			password,
+			locked,
+			role_id,
+			role_name
+		FROM
+			sys_user
+		LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
+		LEFT JOIN sys_role ON sys_role_id = sys_role.role_id
+		WHERE
+			sys_user.id LIKE CONCAT(
+				'%',
+				#{userId},'%' ) 
+	</select>
+	
+	<select id="searchUserByUserName" parameterType="string" resultMap="UserPORM">
+		SELECT
+			sys_user.id,
+			username,
+			password,
+			locked,
+			role_id,
+			role_name
+		FROM
+			sys_user
+		LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
+		LEFT JOIN sys_role ON sys_role_id = sys_role.role_id
+		WHERE
+			username LIKE CONCAT(
+				'%',
+				#{userName},'%' ) 
+	</select>
+	
+	<select id="searchUserByRoleName" parameterType="string" resultMap="UserPORM">
+		SELECT
+			sys_user.id,
+			username,
+			password,
+			locked,
+			role_id,
+			role_name
+		FROM
+			sys_user
+		LEFT JOIN sys_user_role ON sys_user_id = sys_user.id
+		LEFT JOIN sys_role ON sys_role_id = sys_role.role_id
+		WHERE
+			role_name LIKE CONCAT(
+				'%',
+				#{roleName},'%' ) 
+	</select>
 	
   <sql id="Example_Where_Clause" >
     <where >

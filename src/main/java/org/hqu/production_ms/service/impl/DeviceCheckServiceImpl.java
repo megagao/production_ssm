@@ -20,7 +20,7 @@ public class DeviceCheckServiceImpl implements DeviceCheckService{
 	DeviceCheckMapper deviceCheckMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, DeviceCheck deviceCheck) {
+	public EUDataGridResult getList(int page, int rows, DeviceCheck deviceCheck) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<DeviceCheck> list = deviceCheckMapper.find(deviceCheck);
@@ -34,32 +34,23 @@ public class DeviceCheckServiceImpl implements DeviceCheckService{
 	}
 	
 	@Override
-	public DeviceCheck get(String id) {
+	public DeviceCheck get(String id) throws Exception {
 		return deviceCheckMapper.selectByPrimaryKey(id);
 	}
 
 	
 	@Override
-	public CustomResult insert(DeviceCheck deviceCheck) {
+	public CustomResult insert(DeviceCheck deviceCheck) throws Exception {
 		int i = deviceCheckMapper.insert(deviceCheck);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增设备例检失败");
 		}
 	}
 
 	@Override
-	public CustomResult insertBatch(DeviceCheck[] deviceChecks) {
-		for(int i=0;i<deviceChecks.length;i++){
-			CustomResult customResult = this.insert(deviceChecks[i]);
-		}
-		//  ？？ 再改
-		return CustomResult.ok();
-	}
-
-	@Override
-	public CustomResult delete(String deviceCheckId) {
+	public CustomResult delete(String deviceCheckId) throws Exception {
 		int i = deviceCheckMapper.deleteByPrimaryKey(deviceCheckId);
 		if(i>=0){
 			return CustomResult.ok();
@@ -69,7 +60,7 @@ public class DeviceCheckServiceImpl implements DeviceCheckService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] deviceCheckIds) {
+	public CustomResult deleteBatch(String[] deviceCheckIds) throws Exception {
 		int i = deviceCheckMapper.deleteBatch(deviceCheckIds);
 		if(i>=0){
 			return CustomResult.ok();
@@ -79,22 +70,52 @@ public class DeviceCheckServiceImpl implements DeviceCheckService{
 	}
 
 	@Override
-	public CustomResult update(DeviceCheck deviceCheck) {
+	public CustomResult update(DeviceCheck deviceCheck) throws Exception {
 		int i = deviceCheckMapper.updateByPrimaryKeySelective(deviceCheck);
 		if(i>=0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改设备例检失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateBatch(DeviceCheck[] deviceChecks) {
-		for(int i=0;i<deviceChecks.length;i++){
-			CustomResult customResult = this.update(deviceChecks[i]);
-		}
-		//  ？？ 再改
-		return CustomResult.ok();
+	public EUDataGridResult searchDeviceCheckByDeviceCheckId(Integer page,
+			Integer rows, String deviceCheckId) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<DeviceCheck> list = deviceCheckMapper.searchDeviceCheckByDeviceCheckId(deviceCheckId);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<DeviceCheck> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
 	}
 
+	@Override
+	public EUDataGridResult searchDeviceCheckByDeviceName(Integer page,
+			Integer rows, String deviceName) {
+		//分页处理
+		PageHelper.startPage(page, rows);
+		List<DeviceCheck> list = deviceCheckMapper.searchDeviceCheckByDeviceName(deviceName);
+		//创建一个返回值对象
+		EUDataGridResult result = new EUDataGridResult();
+		result.setRows(list);
+		//取记录总条数
+		PageInfo<DeviceCheck> pageInfo = new PageInfo<>(list);
+		result.setTotal(pageInfo.getTotal());
+		return result;
+	}
+
+	@Override
+	public CustomResult updateNote(DeviceCheck deviceCheck) throws Exception {
+		int i = deviceCheckMapper.updateNote(deviceCheck);
+		if(i>0){
+			return CustomResult.ok();
+		}else{
+			return CustomResult.build(101, "修改例检结果失败");
+		}
+	}
 }

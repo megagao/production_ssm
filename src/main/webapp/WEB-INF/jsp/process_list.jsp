@@ -38,7 +38,7 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="process_reload()">删除</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="process_reload()">刷新</a>  
 	</div>  
 	
     <div id="search_process" style="float: right;">
@@ -54,13 +54,13 @@
 
 </div> 
 
-<div id="processEditWindow" class="easyui-window" title="编辑工序" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'process/edit'" style="width:38%;height:56%;padding:10px;">
+<div id="processEditWindow" class="easyui-window" title="编辑工序" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'process/edit'" style="width:35%;height:50%;padding:10px;">
 </div>
-<div id="processAddWindow" class="easyui-window" title="添加工序" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'process/add'" style="width:38%;height:56%;padding:10px;">
+<div id="processAddWindow" class="easyui-window" title="添加工序" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'process/add'" style="width:35%;height:50%;padding:10px;">
 </div>
  
 <!-- 工艺计划信息 -->
-<div id="technologyPlanInfo_process" class="easyui-dialog" title="工艺计划信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:80%;padding:10px;">
+<div id="technologyPlanInfo_process" class="easyui-dialog" title="工艺计划信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="technologyPlanEditForm_process" method="post">
 		<input type="hidden" name="technologyPlanId"/>
 	    <table cellpadding="5">
@@ -105,7 +105,7 @@ function doSearch_process(value,name){ //用户输入用户名,点击搜素,触�
 	if(value == null || value == ''){
 		
 		$("#processList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工序列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_process", url:'process/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -117,7 +117,7 @@ function doSearch_process(value,name){ //用户输入用户名,点击搜素,触�
 	    });
 	}else{
 		$("#processList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'工序列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_process", url:'process/search_process_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 

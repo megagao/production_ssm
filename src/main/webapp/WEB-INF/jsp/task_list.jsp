@@ -56,12 +56,12 @@
     </div>  
 
 </div>  
-<div id="taskEditWindow" class="easyui-window" title="编辑生产派工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'task/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="taskEditWindow" class="easyui-window" title="编辑生产派工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'task/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="taskAddWindow" class="easyui-window" title="添加生产派工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'task/add'" style="width:65%;height:80%;padding:10px;">
+<div id="taskAddWindow" class="easyui-window" title="添加生产派工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'task/add'" style="width:40%;height:55%;padding:10px;">
 </div>
 
-<div id="taskWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="taskWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="taskWorkEditForm" method="post">
 		<input type="hidden" name="workId"/>
 	    <table cellpadding="5">
@@ -104,7 +104,7 @@
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTaskWorkEditForm()">提交</a>
 	</div>
 </div>
-<div id="taskManufactureInfo" class="easyui-dialog" title="生产计划信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="taskManufactureInfo" class="easyui-dialog" title="生产计划信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="taskManufactureEditForm" method="post">
 		<input type="hidden" name="id"/>
 	    <table cellpadding="5">
@@ -154,7 +154,7 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 	if(value == null || value == ''){
 		
 		$("#taskList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'生产派工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_task", url:'task/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
@@ -167,7 +167,7 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 	    });
 	}else{
 		$("#taskList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
+	        title:'生产派工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_task", url:'task/search_task_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 

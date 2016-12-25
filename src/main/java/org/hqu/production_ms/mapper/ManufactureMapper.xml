@@ -11,6 +11,7 @@
 	</association>
 	<association property="technology" javaType="technology">
 		<id column="technology_id" property="technologyId" jdbcType="VARCHAR" />
+	    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
 	</association>
   </resultMap>
   
@@ -22,9 +23,9 @@
 			launch_quantity,
 			begin_date,
 			end_date,
-			manufacture.order_id order_id1,
-			manufacture.technology_id technology_id1,
-			c_order.*, technology.*
+			manufacture.order_id,
+			manufacture.technology_id,
+			technology_name
 		FROM
 			manufacture
 		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
@@ -49,9 +50,9 @@
 			launch_quantity,
 			begin_date,
 			end_date,
-			manufacture.order_id order_id1,
-			manufacture.technology_id technology_id1,
-			c_order.*, technology.*
+			manufacture.order_id,
+			manufacture.technology_id,
+			technology_name
 		FROM
 			manufacture
 		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
@@ -68,9 +69,9 @@
 			launch_quantity,
 			begin_date,
 			end_date,
-			manufacture.order_id order_id1,
-			manufacture.technology_id technology_id1,
-			c_order.*, technology.*
+			manufacture.order_id,
+			manufacture.technology_id,
+			technology_name
 		FROM
 			manufacture
 		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id

@@ -9,17 +9,6 @@
   </resultMap>
   
   <!-- 扩展的sql -->
-<!-- 查询所有记录 -->
-<select id="find" parameterType="technologyPlan" resultMap="BaseResultMap">
-	SELECT
-		technology_plan_id
-	FROM
-		technology_plan
-	
-	order by technology_plan_id ASC
-</select>
-  
-  <!-- 扩展的sql -->
   <!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE

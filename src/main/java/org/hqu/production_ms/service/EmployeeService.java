@@ -9,20 +9,33 @@ import org.hqu.production_ms.domain.po.EmployeePO;
 
 public interface EmployeeService {
 	
-	List<Employee> find();  
+	List<Employee> find() throws Exception;  
 	
-	EUDataGridResult getList(int page, int rows, Employee employee);
+	EUDataGridResult getList(int page, int rows, Employee employee) throws Exception;
 	
-	Employee get(String string);
+	Employee get(String string) throws Exception;
 	
-	CustomResult delete(String string);
+	CustomResult delete(String string) throws Exception;
 
-	CustomResult deleteBatch(String[] ids);
+	CustomResult deleteBatch(String[] ids) throws Exception;
 
-	CustomResult insert(EmployeePO employee);
+	CustomResult insert(EmployeePO employee) throws Exception;
 
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(EmployeePO employee);
+    CustomResult updateAll(EmployeePO employee) throws Exception;
     
-    CustomResult update(EmployeePO employee);
+    CustomResult update(EmployeePO employee) throws Exception;
+    
+    List<Employee> searchEmployeeByEmployeeName(String employeeName) throws Exception;
+
+	List<Employee> searchEmployeeByEmployeeId(String employeeId) throws Exception;
+
+	EUDataGridResult searchEmployeeByEmployeeId(Integer page, Integer rows,
+			String employeeId) throws Exception;
+
+	EUDataGridResult searchEmployeeByEmployeeName(Integer page, Integer rows,
+			String employeeName) throws Exception;
+
+	EUDataGridResult searchEmployeeByDepartmentName(Integer page, Integer rows,
+			String departmentName) throws Exception;
 }

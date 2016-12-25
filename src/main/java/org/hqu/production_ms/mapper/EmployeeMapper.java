@@ -5,33 +5,42 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.Employee;
 import org.hqu.production_ms.domain.EmployeeExample;
+import org.hqu.production_ms.domain.po.EmployeePO;
 
 public interface EmployeeMapper {
 	//扩展的mapper接口方法
-	List<Employee> listKeeper();
+	int deleteBatch(String[] ids);
 	
-	List<Employee> listMaintainEmp();
+	List<Employee> find();
 	
-	//自动生成的mapper接口方法
+	Employee selectSingleEmployee(String empId);
+		
     int countByExample(EmployeeExample example);
 
     int deleteByExample(EmployeeExample example);
 
     int deleteByPrimaryKey(String empId);
 
-    int insert(Employee record);
+    int insert(EmployeePO record);
 
-    int insertSelective(Employee record);
+    int insertSelective(EmployeePO record);
 
     List<Employee> selectByExample(EmployeeExample example);
 
     Employee selectByPrimaryKey(String empId);
 
-    int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
+    int updateByExampleSelective(@Param("record") EmployeePO record, @Param("example") EmployeeExample example);
 
-    int updateByExample(@Param("record") Employee record, @Param("example") EmployeeExample example);
+    int updateByExample(@Param("record") EmployeePO record, @Param("example") EmployeeExample example);
 
-    int updateByPrimaryKeySelective(Employee record);
+    int updateByPrimaryKeySelective(EmployeePO record);
 
-    int updateByPrimaryKey(Employee record);
+    int updateByPrimaryKey(EmployeePO record);
+
+	List<Employee> searchEmployeeByEmployeeId(String employeeId);
+
+	List<Employee> searchEmployeeByEmployeeName(String employeeName);
+
+	List<Employee> searchEmployeeByDepartmentName(String departmentName);
+
 }

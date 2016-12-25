@@ -7,6 +7,7 @@ import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.COrderPO;
+import org.hqu.production_ms.domain.po.ProcessMeasureCheckPO;
 import org.hqu.production_ms.mapper.ProcessMeasureCheckMapper;
 import org.hqu.production_ms.service.PMeasureCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +23,33 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 	ProcessMeasureCheckMapper processMeasureCheckMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, ProcessMeasureCheck processMeasureCheck) {
+	public EUDataGridResult getList(int page, int rows, ProcessMeasureCheck processMeasureCheck) throws Exception{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessMeasureCheck> list = processMeasureCheckMapper.find(processMeasureCheck);
+		List<ProcessMeasureCheckPO> list = processMeasureCheckMapper.find(processMeasureCheck);
 
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessMeasureCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessMeasureCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 	@Override
-	public COrder get(String id) {
+	public COrder get(String id) throws Exception{
 		return null;
 		
 //		return cOrderMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public CustomResult delete(String id) {
+	public CustomResult delete(String id) throws Exception{
 		return null;
 //		int i = cOrderMapper.deleteByPrimaryKey(id);
-//		if(i>=0){
+//		if(i>0){
 //			return CustomResult.ok();
 //		}else{
 //			return null;
@@ -56,9 +57,9 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = processMeasureCheckMapper.deleteBatch(ids);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
@@ -66,17 +67,17 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 	}
 
 	@Override
-	public CustomResult insert(ProcessMeasureCheck processMeasureCheck) {
+	public CustomResult insert(ProcessMeasureCheck processMeasureCheck) throws Exception{
 		int i = processMeasureCheckMapper.insert(processMeasureCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "新增工序计量质检信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult update(COrderPO cOrder) {
+	public CustomResult update(COrderPO cOrder) throws Exception{
 		return null;
 //		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
 //		if(i>=0){
@@ -87,31 +88,31 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 	}
 
 	@Override
-	public CustomResult updateAll(ProcessMeasureCheck processMeasureCheck) {
+	public CustomResult updateAll(ProcessMeasureCheck processMeasureCheck) throws Exception{
 		int i = processMeasureCheckMapper.updateByPrimaryKey(processMeasureCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工序计量质检信息失败");
 		}
 	}
 
 	@Override
-	public CustomResult updateNote(ProcessMeasureCheck processMeasureCheck) {
+	public CustomResult updateNote(ProcessMeasureCheck processMeasureCheck) throws Exception{
 		
 		int i = processMeasureCheckMapper.updateNote(processMeasureCheck);
-		if(i>=0){
+		if(i>0){
 			return CustomResult.ok();
 		}else{
-			return null;
+			return CustomResult.build(101, "修改工序计量质检备注失败");
 		}
 	}
 	
 	@Override
-	public CustomResult changeStatus(String[] ids) {
+	public CustomResult changeStatus(String[] ids) throws Exception{
 		return null;
 //		int i = cOrderMapper.changeStatus(ids);
-//		if(i>=0){
+//		if(i>0){
 //			return CustomResult.ok();
 //		}else{
 //			return null;
@@ -120,15 +121,15 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 
 	@Override
 	public EUDataGridResult searchPMeasureCheckByPMeasureCheckId(int page,
-			int rows, String pMeasureCheckId) {
+			int rows, String pMeasureCheckId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessMeasureCheck> list = processMeasureCheckMapper.searchPMeasureCheckByPMeasureCheckId(pMeasureCheckId);
+		List<ProcessMeasureCheckPO> list = processMeasureCheckMapper.searchPMeasureCheckByPMeasureCheckId(pMeasureCheckId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessMeasureCheck> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessMeasureCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

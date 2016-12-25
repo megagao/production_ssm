@@ -1,9 +1,14 @@
 package org.hqu.production_ms.domain.po;
 
+import javax.validation.constraints.Size;
+
 
 public class WorkPO {
-	private String workId;
 
+	@Size(max=40, message="{id.length.error}")
+    private String workId;
+
+	@Size(max=40, message="工序号的长度限制在40个字符之内")
     private String processNumber;
 
     private String productId;

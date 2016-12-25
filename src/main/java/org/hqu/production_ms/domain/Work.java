@@ -1,10 +1,12 @@
 package org.hqu.production_ms.domain;
 
+
 public class Work {
+	
     private String workId;
 
     private String processNumber;
-
+    
     private Product product;
 
     private Process process;

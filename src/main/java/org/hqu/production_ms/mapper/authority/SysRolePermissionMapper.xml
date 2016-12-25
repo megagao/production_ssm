@@ -6,6 +6,15 @@
     <result column="sys_role_id" property="sysRoleId" jdbcType="VARCHAR" />
     <result column="sys_permission_id" property="sysPermissionId" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <!-- 修改备注-->
+	<update id="updateRolePermission" parameterType="org.hqu.production_ms.domain.authority.SysRolePermission" >
+		UPDATE sys_role_permission
+		SET sys_permission_id = #{sysPermissionId}
+		WHERE
+			sys_role_id = #{sysRoleId,jdbcType=VARCHAR}
+	</update>
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

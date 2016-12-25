@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 
+
 import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
@@ -166,5 +167,23 @@ public class DeviceTypeController {
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return deviceTypeService.updateAll(deviceType);
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceType_by_deviceTypeId")
+	@ResponseBody
+	public EUDataGridResult searchDeviceTypeByDeviceTypeId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceTypeService.searchDeviceTypeByDeviceTypeId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceType_by_deviceTypeName")
+	@ResponseBody
+	public EUDataGridResult searchDeviceTypeByDeviceTypeName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceTypeService.searchDeviceTypeByDeviceTypeName(page, rows, searchValue);
+		return result;
 	}
 }

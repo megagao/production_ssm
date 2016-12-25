@@ -169,4 +169,30 @@ public class DeviceListController {
 		return deviceService.updateAll(device);
 	}
 	
+	//搜索
+	@RequestMapping("/search_device_by_deviceId")
+	@ResponseBody
+	public EUDataGridResult searchDeviceByDeviceId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceService.searchDeviceByDeviceId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_device_by_deviceName")
+	@ResponseBody
+	public EUDataGridResult searchDeviceByDeviceName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceService.searchDeviceByDeviceName(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_device_by_deviceTypeName")
+	@ResponseBody
+	public EUDataGridResult searchDeviceByDeviceTypeName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceService.searchDeviceByDeviceTypeName(page, rows, searchValue);
+		return result;
+	}
 }
