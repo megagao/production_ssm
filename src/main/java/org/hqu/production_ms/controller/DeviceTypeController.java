@@ -169,7 +169,7 @@ public class DeviceTypeController {
 		return deviceTypeService.updateAll(deviceType);
 	}
 	
-	//搜索
+	//根据设备种类编号查找设备种类信息
 	@RequestMapping("/search_deviceType_by_deviceTypeId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceTypeByDeviceTypeId(Integer page, Integer rows, String searchValue) 
@@ -178,7 +178,7 @@ public class DeviceTypeController {
 		return result;
 	}
 	
-	//搜索
+	//根据设备种类名称查找设备种类信息
 	@RequestMapping("/search_deviceType_by_deviceTypeName")
 	@ResponseBody
 	public EUDataGridResult searchDeviceTypeByDeviceTypeName(Integer page, Integer rows, String searchValue) 
