@@ -153,7 +153,7 @@ public class DeviceMaintainController {
 		return deviceMaintainService.updateNote(deviceMaintain);
 	}
 	
-	//搜索
+	//根据设备维修编号查找设备维修信息
 	@RequestMapping("/search_deviceMaintain_by_deviceMaintainId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceMaintainByDeviceMaintainId(Integer page, Integer rows, String searchValue) 
@@ -162,7 +162,7 @@ public class DeviceMaintainController {
 		return result;
 	}
 	
-	//搜索
+	//根据设备故障编号查找设备维修信息
 	@RequestMapping("/search_deviceMaintain_by_deviceFaultId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceMaintainByDeviceFaultId(Integer page, Integer rows, String searchValue) 
