@@ -12,7 +12,6 @@ import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.MaterialConsume;
-import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.domain.po.MaterialConsumePO;
 import org.hqu.production_ms.service.MaterialConsumeService;
 import org.springframework.beans.factory.annotation.Autowired;
