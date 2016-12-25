@@ -131,10 +131,38 @@ public class DeviceCheckController {
 		return deviceCheckService.update(deviceCheck);
 	}
 	
+	@RequestMapping(value="/update_note")
+	@ResponseBody
+	private CustomResult updateNote(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
+		}
+		return deviceCheckService.updateNote(deviceCheck);
+	}
+	
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
 		CustomResult result = deviceCheckService.deleteBatch(ids);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceCheck_by_deviceCheckId")
+	@ResponseBody
+	public EUDataGridResult searchDeviceCheckByDeviceCheckId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceCheckService.searchDeviceCheckByDeviceCheckId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_deviceCheck_by_deviceName")
+	@ResponseBody
+	public EUDataGridResult searchDeviceCheckByDeviceName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = deviceCheckService.searchDeviceCheckByDeviceName(page, rows, searchValue);
 		return result;
 	}
 }
