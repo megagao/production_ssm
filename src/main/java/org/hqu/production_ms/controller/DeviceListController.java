@@ -169,7 +169,7 @@ public class DeviceListController {
 		return deviceService.updateAll(device);
 	}
 	
-	//搜索
+	//根据设备编号查找设备
 	@RequestMapping("/search_device_by_deviceId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceByDeviceId(Integer page, Integer rows, String searchValue) 
@@ -178,7 +178,7 @@ public class DeviceListController {
 		return result;
 	}
 	
-	//搜索
+	//根据设备名称查找设备
 	@RequestMapping("/search_device_by_deviceName")
 	@ResponseBody
 	public EUDataGridResult searchDeviceByDeviceName(Integer page, Integer rows, String searchValue) 
@@ -187,7 +187,7 @@ public class DeviceListController {
 		return result;
 	}
 	
-	//搜索
+	//根据设备种类名称查找设备
 	@RequestMapping("/search_device_by_deviceTypeName")
 	@ResponseBody
 	public EUDataGridResult searchDeviceByDeviceTypeName(Integer page, Integer rows, String searchValue) 
