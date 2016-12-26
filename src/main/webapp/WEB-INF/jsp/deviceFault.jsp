@@ -6,7 +6,8 @@
 
 <!-- Table -->
 <table class="easyui-datagrid" id="deviceFault" title="设备故障列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'deviceFault/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceFault">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
+       	url:'deviceFault/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceFault">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -61,15 +62,18 @@
 </div>
 
 <!-- deviceFaultAddWindow -->
-<div id="deviceFaultAddWindow" class="easyui-window" title="添加设备故障" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/add'" style="width:65%;height:75%;padding:10px;">
+<div id="deviceFaultAddWindow" class="easyui-window" title="添加设备故障" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/add'" style="width:65%;height:75%;padding:10px;">
 </div>
 
 <!-- deviceFaultEditWindow -->
-<div id="deviceFaultEditWindow" class="easyui-window" title="编辑设备故障" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/edit'" style="width:65%;height:75%;padding:10px;">
+<div id="deviceFaultEditWindow" class="easyui-window" title="编辑设备故障" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceFault/edit'" style="width:65%;height:75%;padding:10px;">
 </div>
 
 <!-- 设备信息 -->
-<div id="deviceInfo_deviceFault" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceInfo_deviceFault" class="easyui-dialog" title="设备信息" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceFault" method="post">
 	    
 	    <table cellpadding="5">
