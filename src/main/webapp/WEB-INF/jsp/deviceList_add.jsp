@@ -81,7 +81,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var deviceAddEditor ;
 
 	//页面初始化完毕后执行此方法
