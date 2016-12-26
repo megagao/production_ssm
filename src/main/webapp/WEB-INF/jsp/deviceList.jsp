@@ -6,7 +6,8 @@
 
 <!-- Table -->
 <table class="easyui-datagrid" id="deviceList" title="设备列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'deviceList/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_device">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
+       	url:'deviceList/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_device">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -66,15 +67,18 @@
 </div>
 
 <!-- deviceAddWindow -->
-<div id="deviceAddWindow" class="easyui-window" title="添加设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceAddWindow" class="easyui-window" title="添加设备" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceEditWindow -->
-<div id="deviceEditWindow" class="easyui-window" title="编辑设备" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceEditWindow" class="easyui-window" title="编辑设备" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceList/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备种类信息 -->
-<div id="deviceTypeInfo_deviceList" class="easyui-dialog" title="设备种类信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:55%;padding:10px;">
+<div id="deviceTypeInfo_deviceList" class="easyui-dialog" title="设备种类信息" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:55%;padding:10px;">
 	<form id="deviceTypeEditForm_deviceList" method="post">
 	    <input type="hidden" name="deviceTypeId"/>
 	    <table cellpadding="5">
@@ -114,7 +118,8 @@
 </div>
 
 <!-- 设备保管人信息 -->
-<div id="deviceKeeperInfo_deviceList" class="easyui-dialog" title="设备保管人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+<div id="deviceKeeperInfo_deviceList" class="easyui-dialog" title="设备保管人信息" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
 	<form id="deviceKeeperEditForm_deviceList" method="post">
 		<input type="hidden" name="empId"/>
 	    <table cellpadding="5">
@@ -133,7 +138,6 @@
 	        </tr>
 	        <tr>
 	            <td>所属部门:</td>
-	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
 	            <td>
 	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
     					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
