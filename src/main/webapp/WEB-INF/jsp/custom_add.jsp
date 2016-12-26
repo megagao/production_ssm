@@ -77,8 +77,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
-	
 	var customAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
