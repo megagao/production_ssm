@@ -47,6 +47,7 @@
 </div>
 <script type="text/javascript">
 	var deviceCheckEditEditor ;
+	
 	$(function(){
 		//实例化编辑器
 		deviceCheckEditEditor = TAOTAO.createEditor("#deviceCheckEditForm [name=deviceCheckResult]");
