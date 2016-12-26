@@ -249,7 +249,6 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 	}
 }
 
-
 	/********************************** Toolbar function ***********************************/
 	function getDeviceCheckSelectionsIds(){
 		var deviceCheck = $("#deviceCheck");
