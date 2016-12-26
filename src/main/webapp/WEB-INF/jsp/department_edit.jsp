@@ -19,7 +19,7 @@
 	        <tr>
 	            <td>部门职责:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
 	    </table>
