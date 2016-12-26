@@ -37,7 +37,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var departmentAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
