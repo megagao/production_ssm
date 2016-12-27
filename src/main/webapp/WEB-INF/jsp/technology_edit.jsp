@@ -61,7 +61,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-
 	function submitTechnologyEditForm(){
 		$.get("technology/edit_judge",'',function(data){
     		/* if(data.msg != null){
@@ -84,6 +83,5 @@
     			});
     		//}
     	});
-		
 	}
 </script>
