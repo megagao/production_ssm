@@ -12,7 +12,6 @@ import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.service.PMeasureCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,6 @@ public class PMeasureCheckController {
 	
 	@Autowired
 	private PMeasureCheckService pMeasureCheckService;
-	
 	
 	/*
 	 * @responsebody表示该方法的返回结果直接写入HTTP response body中。
@@ -51,8 +49,6 @@ public class PMeasureCheckController {
 	@ResponseBody
 	public COrder getItemById(@PathVariable String orderId) throws Exception{
 		return null;
-//		COrder cOrder = orderService.get(orderId);
-//		return cOrder;
 	}
 	
 	@RequestMapping("/find")
@@ -85,8 +81,6 @@ public class PMeasureCheckController {
 		return map;
 	}
 	
-	
-	
 	@RequestMapping("/edit")
 	public String edit() throws Exception{
 		return "p_measure_check_edit";
@@ -110,7 +104,6 @@ public class PMeasureCheckController {
 		return map;
 	}
 	
-	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
 	public Map<String,Object> pMeasureCheckDeleteJudge() throws Exception{
@@ -129,7 +122,6 @@ public class PMeasureCheckController {
 		return map;
 	}
 	
-	
 	//搜索
 	@RequestMapping("/search_pMeasureCheck_by_pMeasureCheckId")
 	@ResponseBody
@@ -137,7 +129,6 @@ public class PMeasureCheckController {
 		EUDataGridResult result = pMeasureCheckService.searchPMeasureCheckByPMeasureCheckId(page, rows, searchValue);
 		return result;
 	}
-	
 	
 	@RequestMapping("/list")
 	@ResponseBody
