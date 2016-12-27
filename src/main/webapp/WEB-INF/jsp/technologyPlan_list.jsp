@@ -60,13 +60,16 @@
 
 </div> 
 
-<div id="technologyPlanEditWindow" class="easyui-window" title="编辑工艺计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyPlan/edit'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyPlanEditWindow" class="easyui-window" title="编辑工艺计划" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'technologyPlan/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="technologyPlanAddWindow" class="easyui-window" title="添加工艺计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyPlan/add'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyPlanAddWindow" class="easyui-window" title="添加工艺计划" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'technologyPlan/add'" style="width:40%;height:55%;padding:10px;">
 </div>
  
 <!-- 工艺信息 -->
-<div id="technologyInfo_technologyPlan" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyInfo_technologyPlan" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="technologyEditForm_technologyPlan" method="post">
 		<input type="hidden" name="technologyId"/>
 	    <table cellpadding="5">
