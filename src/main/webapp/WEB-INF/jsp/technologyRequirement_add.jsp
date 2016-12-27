@@ -16,7 +16,8 @@
 	            </td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyId" panelHeight="auto" 
-    					data-options="required:true,valueField:'technologyId',textField:'technologyName',url:'technologyRequirement/get_data',editable:false" />  
+    					data-options="required:true,valueField:'technologyId',textField:'technologyName',
+    						url:'technologyRequirement/get_data',editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
@@ -46,7 +47,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var technologyRequirementAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
