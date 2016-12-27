@@ -68,7 +68,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	//提交表单
 	function submitTechnologyAddForm(){
 		//有效性验证
