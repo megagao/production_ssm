@@ -363,5 +363,4 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
     function task_reload(){
     	$("#taskList").datagrid("reload");
     }
-    
 </script>
