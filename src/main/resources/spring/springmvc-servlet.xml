@@ -13,25 +13,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
 	<!-- 注解驱动 -->
-	<!-- <mvc:annotation-driven conversion-service="conversionService" validator="validator"/> -->
-
-	
-	<mvc:annotation-driven  conversion-service="conversionService" validator="validator">
-        <!-- json解析时间格式设置 -->
-        <!-- <mvc:message-converters>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                        <property name="dateFormat">
-                            <bean class="java.text.SimpleDateFormat">
-                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
-                            </bean>
-                        </property>
-                    </bean>
-                </property>
-            </bean>
-        </mvc:message-converters> -->
-    </mvc:annotation-driven>
+	<mvc:annotation-driven  conversion-service="conversionService" validator="validator"/>
     
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
