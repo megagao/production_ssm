@@ -60,10 +60,9 @@
 
 </div>
 
-
-
 <div id="technologyEditWindow" class="easyui-window" title="编辑工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
+
 <div id="technologyAddWindow" class="easyui-window" title="添加工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/add'" style="width:40%;height:55%;padding:10px;">
 </div>
  
@@ -187,9 +186,9 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
     
     function technology_edit(){
     	$.get("technology/edit_judge",'',function(data){
-       		/* if(data.msg != null){
+       		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
-       		}else{ */
+       		}else{ 
        			var ids = getTechnologySelectionsIds();
        	    	
        	    	if(ids.length == 0){
@@ -208,7 +207,7 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
        	    			$("#technologyEditForm").form("load", data);
        	    		}
        	    	}).window("open");
-       		//}
+       		}
        	});
     }
     
