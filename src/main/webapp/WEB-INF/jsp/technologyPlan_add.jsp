@@ -16,7 +16,8 @@
 	            </td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyId" panelHeight="auto" 
-    					data-options="required:true,valueField:'technologyId',textField:'technologyName',url:'technology/get_data',editable:false" />  
+    					data-options="required:true,valueField:'technologyId',textField:'technologyName',
+    						url:'technology/get_data',editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
@@ -64,7 +65,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	//提交表单
 	function submitTechnologyPlanAddForm(){
 		//有效性验证
@@ -73,7 +73,6 @@
 			return ;
 		}
 		//ajax的post方式提交表单
-		//$("#technologyPlanAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("technologyPlan/insert",$("#technologyPlanAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增工艺计划成功!');
