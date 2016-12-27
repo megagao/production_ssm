@@ -15,14 +15,16 @@
 	            <td>作业编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="workId"  panelHeight="auto"
-    					data-options="valueField:'workId',textField:'workId',url:'work/get_data', editable:false, required:true" />
+    					data-options="valueField:'workId',textField:'workId',url:'work/get_data', 
+    						editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>生产批号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="manufactureSn"   panelHeight="auto"
-    					data-options="valueField:'manufactureSn',textField:'manufactureSn',url:'manufacture/get_data', editable:false, required:true" />
+    					data-options="valueField:'manufactureSn',textField:'manufactureSn',url:'manufacture/get_data', 
+    						editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -44,7 +46,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	function submitTaskEditForm(){
 		if(!$('#taskEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
@@ -62,5 +63,4 @@
 			}
 		});
 	}
-	
 </script>
