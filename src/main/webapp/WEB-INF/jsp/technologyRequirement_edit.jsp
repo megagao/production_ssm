@@ -13,14 +13,6 @@
     					data-options="required:true,valueField:'technologyId',textField:'technologyName',url:'technologyRequirement/get_data',editable:false" /> 
 	            </td>
 	        </tr>
-	        <!-- 
-	        <tr>
-	            <td>工艺要求:</td>
-	            <td>
-	            	<input class="easyui-textbox"  name="requirement" ></input>
-	            </td>
-	        </tr>
-	         -->
 	        <tr>
 	            <td>工艺要求添加时间:</td>
 	            <td>
@@ -48,8 +40,8 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var requirementEditEditor ;
+	
 	$(function(){
 		//实例化编辑器
 		requirementEditEditor = TAOTAO.createEditor("#technologyRequirementEditForm [name=requirement]");
@@ -81,6 +73,5 @@
     			});
     		}
     	});
-		
 	}
 </script>
