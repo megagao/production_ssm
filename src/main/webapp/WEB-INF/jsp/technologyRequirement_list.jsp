@@ -106,7 +106,8 @@
 	</div>
 </div>
  
-<div id="technologyRequirementNoteDialog" class="easyui-dialog" title="工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="technologyRequirementNoteDialog" class="easyui-dialog" title="工艺要求" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="technologyRequirementNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="technologyRequirementId"/>
 	    <table cellpadding="5" >
