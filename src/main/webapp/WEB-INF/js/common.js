@@ -63,6 +63,7 @@ var TT = TAOTAO = {
         	return '<span style="color:#ff0000;">未知</span>'
         }
     },
+    
 	// 格式化连接
 	formatUrl : function(val,row){
 		if(val){
@@ -70,10 +71,12 @@ var TT = TAOTAO = {
 		}
 		return "";
 	},
+	
 	// 格式化价格
 	formatPrice : function(val,row){
 		return (val/1000).toFixed(2);
 	},
+	
 	// 格式化订单的状态
 	formatOrderStatus : function formatStatus(val,row){
         if (val == 1){
@@ -505,7 +508,6 @@ function initOrderEditFileUpload(){
 	});
 }	
 
-
 //删除文件并删除文件在页面的显示
 function removeFile(i){
 	var fileName = $('#file'+i).attr("href");
@@ -553,7 +555,5 @@ function initUploadedFile(){
 						+"<a id='delFile"+i+"' href='javascript:removeFile("+i+");'>" 
 						+"<span style='font-size: 16px;font-family: Microsoft YaHei;;margin-left: 30px'>"+"删除</span></a></td></tr>");
 		}
-		
 	}
-	
 }
