@@ -4,7 +4,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <table class="easyui-datagrid" id="userList" title="用户列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'user/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_user">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'user/list',
+       	method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_user">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -57,11 +58,14 @@
 
 </div>  
 
-<div id="userEditWindow" class="easyui-window" title="编辑用户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'user/edit'" style="width:45%;height:60%;padding:10px;">
+<div id="userEditWindow" class="easyui-window" title="编辑用户" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'user/edit'" style="width:45%;height:60%;padding:10px;">
 </div>
-<div id="userAddWindow" class="easyui-window" title="添加用户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'user/add'" style="width:45%;height:60%;padding:10px;">
+<div id="userAddWindow" class="easyui-window" title="添加用户" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'user/add'" style="width:45%;height:60%;padding:10px;">
 </div>
-<div id="userRoleWindow" class="easyui-window" title="添加用户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'user/role'" style="width:45%;height:60%;padding:10px;">
+<div id="userRoleWindow" class="easyui-window" title="添加用户" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'user/role'" style="width:45%;height:60%;padding:10px;">
 </div>
 
 <script>
@@ -69,7 +73,7 @@ function doSearch_user(value,name){ //用户输入用户名,点击搜素,触发�
 	if(value == null || value == ''){
 		$("#userList").datagrid({
 	        title:'用户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_user", url:'user/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        toolbar:"toolbar_user", url:'user/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'id', width : 150, align:'center', title : '用户编号'},
@@ -82,7 +86,7 @@ function doSearch_user(value,name){ //用户输入用户名,点击搜素,触发�
 	}else{
 		$("#userList").datagrid({  
 	        title:'用户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_user", url:'user/search_user_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        toolbar:"toolbar_user", url:'user/search_user_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
 					{field : 'id', width : 150, align:'center', title : '用户编号'},
