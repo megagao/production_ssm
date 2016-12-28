@@ -20,7 +20,8 @@
 	            <td>产品名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="productId"  panelHeight="auto"
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data',required:true, editable:false" />  
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data',
+    						required:true, editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
@@ -45,7 +46,8 @@
 	            <td>申请人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',
+    						url:'employee/get_data'" />
     			</td>  
 	        </tr>
 	        <tr>
@@ -69,8 +71,8 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var unqualifyAddForm ;
+	
 	//页面初始化完毕后执行此方法
 	$(function(){
 		//创建富文本编辑器
