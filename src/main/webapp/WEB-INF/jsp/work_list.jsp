@@ -4,7 +4,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <table class="easyui-datagrid" id="workList" title="作业列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'work/list',method:'get',pageSize:10, fitColumns:true,toolbar:toolbar_work">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'work/list',
+       	method:'get',pageSize:10, fitColumns:true,toolbar:toolbar_work">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -56,15 +57,17 @@
 			<div data-options="name:'workProcess'">工序</div> 
 		</div>     
     </div>  
-
 </div>  
 
-<div id="workEditWindow" class="easyui-window" title="编辑作业" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'work/edit'" style="width:40%;height:55%;padding:10px;">
+<div id="workEditWindow" class="easyui-window" title="编辑作业" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'work/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="workAddWindow" class="easyui-window" title="添加作业" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'work/add'" style="width:40%;height:55%;padding:10px;">
+<div id="workAddWindow" class="easyui-window" title="添加作业" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'work/add'" style="width:40%;height:55%;padding:10px;">
 </div>
 
-<div id="workProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="workProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="workProductEditForm" method="post">
 		<input type="hidden" name="productId"/>
 	    <table cellpadding="5">
@@ -103,7 +106,8 @@
 	</div>
 </div>
 
-<div id="workProcessInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:35%;height:40%;padding:10px;">
+<div id="workProcessInfo" class="easyui-dialog" title="工序信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:35%;height:40%;padding:10px;">
 	<form id="workProcessForm" method="post">
 		<input type="hidden" name="processId"/>
 	    <table cellpadding="5">
@@ -111,7 +115,8 @@
 	            <td>工艺计划编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyPlanId" panelHeight="auto"  
-    					data-options="required:true,valueField:'technologyPlanId',textField:'technologyPlanId',url:'technologyPlan/get_data',editable:false"/> 
+    					data-options="required:true,valueField:'technologyPlanId',textField:'technologyPlanId',
+    					url:'technologyPlan/get_data',editable:false"/> 
 	            </td>
 	        </tr>
 	        <tr>
@@ -133,7 +138,8 @@
 	</div>
 </div>
 
-<div id="workDeviceInfo" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="workDeviceInfo" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="workDeviceEditForm" method="post">
 	    <input type="hidden" name="deviceId"/>
 	    <table cellpadding="5" >
@@ -147,13 +153,15 @@
 	            <td>设备种类:</td>
 	            <td>
 	            	<input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto"
-    					data-options="required:true,editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data'" />
+    					data-options="required:true,editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',
+    						url:'deviceType/get_data'" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>设备状态:</td>
 	            <td>
-	            	<select id="deviceStatusCombobox" class="easyui-combobox" name="deviceStatusId"  style="width:173px" data-options="editable:false" panelHeight="auto">
+	            	<select id="deviceStatusCombobox" class="easyui-combobox" name="deviceStatusId"  style="width:173px" 
+	            		data-options="editable:false" panelHeight="auto">
 						<option value="1">良好</option>
 						<option value="2">故障</option>
 						<option value="3">维修</option>
@@ -190,7 +198,8 @@
 	            <td>保管人:</td>
 	            <td>
 		            <input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto"
-    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'employee/get_data'" />
+    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',
+    						url:'employee/get_data'" />
 				</td>
 	        </tr>
 	        <tr>
@@ -210,7 +219,6 @@
 <script>
 function doSearch_work(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
-		
 		$("#workList").datagrid({
 	        title:'作业列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_work", url:'work/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
