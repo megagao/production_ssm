@@ -12,7 +12,6 @@ import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.custom.ActiveUser;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.service.PCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,8 +50,6 @@ public class PCountCheckController {
 	@ResponseBody
 	public COrder getItemById(@PathVariable String orderId) throws Exception{
 		return null;
-//		COrder cOrder = orderService.get(orderId);
-//		return cOrder;
 	}
 	
 	@RequestMapping("/find")
@@ -67,14 +64,13 @@ public class PCountCheckController {
 	
 	
 	//搜索
-		@RequestMapping("/search_pCountCheck_by_pCountCheckId")
-		@ResponseBody
-		public EUDataGridResult searchpCountCheckBypCountCheckId(Integer page, Integer rows, String searchValue)
-				throws Exception{
-			EUDataGridResult result = pCountCheckService.searchPCountCheckByPCountCheckId(page, rows, searchValue);
-			return result;
-		}
-	
+	@RequestMapping("/search_pCountCheck_by_pCountCheckId")
+	@ResponseBody
+	public EUDataGridResult searchpCountCheckBypCountCheckId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = pCountCheckService.searchPCountCheckByPCountCheckId(page, rows, searchValue);
+		return result;
+	}
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
@@ -121,7 +117,6 @@ public class PCountCheckController {
 		return map;
 	}
 	
-	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
 	public Map<String,Object> pCountCheckDeleteJudge() throws Exception{
@@ -140,8 +135,6 @@ public class PCountCheckController {
 		return map;
 	}
 	
-	
-	
 	@RequestMapping("/list")
 	@ResponseBody
 	public EUDataGridResult getList(Integer page, Integer rows, ProcessCountCheck processCountCheck) 
@@ -150,12 +143,7 @@ public class PCountCheckController {
 		EUDataGridResult result = pCountCheckService.getList(page, rows, processCountCheck);
 		return result;
 	}
-	/*
-	 *此处的method可以取两个值，
-	 *一个是RequestMethod.GET，一个是RequestMethod.POST，
-	 *就是请求该方法使用的模式，是get还是post，即参数提交的方法
-	 *ajax或者form表单提交数据有两种方法，即get和post。
-	 */
+	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	private CustomResult insert(@Valid ProcessCountCheck processCountCheck, BindingResult bindingResult) throws Exception {
@@ -176,8 +164,6 @@ public class PCountCheckController {
 	@ResponseBody
 	private CustomResult update(@Valid ProcessCountCheck processCountCheck, BindingResult bindingResult) throws Exception {
 		return null;
-//		CustomResult result = orderService.update(cOrder);
-//		return result;
 	}
 	
 	@RequestMapping(value="/update_all")
@@ -204,8 +190,6 @@ public class PCountCheckController {
 	@ResponseBody
 	private CustomResult delete(String id) throws Exception {
 		return null;
-//		CustomResult result = orderService.delete(id);
-//		return result;
 	}
 	
 	@RequestMapping(value="/delete_batch")
@@ -220,7 +204,5 @@ public class PCountCheckController {
 	@ResponseBody
 	public CustomResult changeStatus(String[] ids) throws Exception{
 		return null;
-//		CustomResult result = orderService.changeStatus(ids);
-//		return result;
 	}
 }
