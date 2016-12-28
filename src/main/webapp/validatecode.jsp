@@ -8,8 +8,8 @@
 <%@ page import="java.awt.image.BufferedImage"%>
 <%@ page import="javax.imageio.ImageIO"%>
 <%
-	int width = 60;
-	int height = 32;
+	int width = 65;
+	int height = 35;
 	//create the image
 	BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	Graphics g = image.getGraphics();
@@ -29,7 +29,7 @@
 		int y = rdm.nextInt(height);
 		g.drawOval(x, y, 0, 0);
 	}
-	// generate a random code
+	//generate a random code
 	String capstr = hash1.substring(0, 4);
 	//将生成的验证码存入session
 	session.setAttribute("validateCode", capstr);
