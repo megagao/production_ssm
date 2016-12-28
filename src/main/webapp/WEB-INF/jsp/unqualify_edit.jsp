@@ -10,7 +10,6 @@
 	<form id="unqualifyApplyEditForm" class="unqualifyApplyForm" method="post">
 		<input type="hidden" name="unqualifyApplyId"/>
 	    <table cellpadding="5">
-	        
 	        <tr>
 	            <td>产品名称:</td>
 	            <td>
@@ -87,5 +86,4 @@
 			}
 		});
 	}
-	
 </script>
