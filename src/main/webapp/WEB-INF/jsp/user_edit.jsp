@@ -26,13 +26,15 @@
 	            <td>角色:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="roleId"  panelHeight="auto" 
-    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true, editable:false" />  
+    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true,
+    						 editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" panelHeight="auto" name="locked" data-options="width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" panelHeight="auto" name="locked" data-options="width:150, 
+		            	editable:false">
 						<option value="1">有效用户</option>
 						<option value="2">锁定</option>
 					</select>
@@ -61,5 +63,4 @@
 			}
 		});
 	}
-	
 </script>
