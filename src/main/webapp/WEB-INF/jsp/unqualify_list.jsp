@@ -5,7 +5,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
 <table id="unqualifyList" title="不合格品列表" class="easyui-datagrid"
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'unqualify/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_unqualify">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'unqualify/list',
+       	method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_unqualify">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -21,7 +22,6 @@
         </tr>
     </thead>
 </table>
-<!-- 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
 <div  id="toolbar_unqualify" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
@@ -65,12 +65,15 @@
 
 <!-- 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="unqualifyEditWindow" class="easyui-window" title="编辑不合格品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'unqualify/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="unqualifyEditWindow" class="easyui-window" title="编辑不合格品" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'unqualify/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="unqualifyAddWindow" class="easyui-window" title="添加不合格品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'unqualify/add'" style="width:65%;height:80%;padding:10px;">
+<div id="unqualifyAddWindow" class="easyui-window" title="添加不合格品" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'unqualify/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
-<div id="unqualifyProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="unqualifyProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="unqualifyProductEditForm" method="post">
 		<input type="hidden" name="productId"/>
 	    <table cellpadding="5">
@@ -85,7 +88,8 @@
 	        <tr>
 	            <td>产品状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, 
+		            	editable:false">
 						<option value="1">有效产品</option>
 						<option value="2">停产</option>
 					</select>
@@ -111,7 +115,8 @@
 
 
 <!-- 申请人信息 -->
-<div id="empInfo_unqualify" class="easyui-dialog" title="申请人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+<div id="empInfo_unqualify" class="easyui-dialog" title="申请人信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
 	<form id="empEditForm_unqualify" method="post">
 		<input type="hidden" name="empId"/>
 	    <table cellpadding="5">
@@ -122,7 +127,8 @@
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto"
+	            		 data-options="editable:false" style="width:173px">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -130,7 +136,6 @@
 	        </tr>
 	        <tr>
 	            <td>所属部门:</td>
-	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
 	            <td>
 	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
     					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
@@ -176,7 +181,8 @@
 </div>
 
 
-<div id="unqualifyNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
+<div id="unqualifyNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:55%;height:80%;padding:10px">
 	<form id="unqualifyNoteForm" method="post">
 		<input type="hidden" name="unqualifyApplyId"/>
 	    <table cellpadding="5" >
@@ -472,17 +478,11 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
                	$("#unqualifyEditWindow").window({
                		onLoad :function(){
                			//回显数据
-               			
-               			
-               			
                			var data = $("#unqualifyList").datagrid("getSelections")[0];
             			data.assemblyDate = TAOTAO.formatDateTime(data.assemblyDate);
             			data.applyDate = TAOTAO.formatDateTime(data.applyDate);
             			$("#unqualifyApplyEditForm").form("load", data);
             			unqualifyApplyEditEditor.html(data.note);
-               			
-               			
-               			
                		}
                	}).window("open");
        		}
@@ -518,102 +518,4 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
     function unqualify_reload(){
     	$("#unqualifyList").datagrid("reload");
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    
-    var toolbar_unqualify = [{
-        text:'新增',
-        iconCls:'icon-add',
-        handler:function(){
-        	$("#unqualifyAddWindow").window("open");
-        }
-    },{
-        text:'编辑',
-        iconCls:'icon-edit',
-        handler:function(){
-        	var ids = getSelectionsIds();
-        	
-        	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个产品才能编辑!');
-        		return ;
-        	}
-        	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个产品!');
-        		return ;
-        	}
-        	
-        	$("#unqualifyEditWindow").window({
-        		onLoad :function(){
-        			//回显数据
-        			var data = $("#unqualifyList").datagrid("getSelections")[0];
-        			data.assemblyDate = TAOTAO.formatDateTime(data.assemblyDate);
-        			data.applyDate = TAOTAO.formatDateTime(data.applyDate);
-        			$("#unqualifyApplyEditForm").form("load", data);
-        			unqualifyApplyEditEditor.html(data.note);
-        			
-        		}
-        	}).window("open");
-        }
-    },{
-        text:'删除',
-        iconCls:'icon-cancel',
-        handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','未选中订单!');
-        		return ;
-        	}
-        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
-        	    if (r){
-        	    	var params = {"ids":ids};
-                	$.post("unqualify/delete_batch",params, function(data){
-            			if(data.status == 200){
-            				$.messager.alert('提示','删除订单成功!',undefined,function(){
-            					$("#unqualifyList").datagrid("reload");
-            				});
-            			}
-            		});
-        	    }
-        	});
-        }
-    },'-',{
-        text:'刷新',
-        iconCls:'icon-reload',
-        handler:function(){
-        	$("#unqualifyList").datagrid("reload");
-        }
-    }];
-    */
 </script>
-
-<%------------------------------------- JQuery Easy UI Filter -------------------------------------%>
-
-<style>
-.icon-filter {
-	background: url('image/filter.png') no-repeat center center;
-}
-</style>
-
-<script>
-	$(function() {
-		var dg = $('#unqualifyList').datagrid({
-			filterBtnIconCls : 'icon-filter'
-		});
-
-		dg.datagrid('enableFilter');
-
-	});
-</script>
-
-<%------------------------------------- JQuery Easy UI Filter -------------------------------------%>
