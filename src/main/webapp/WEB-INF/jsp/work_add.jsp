@@ -59,7 +59,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	//提交表单
 	function submitWorkAddForm(){
 		//有效性验证
@@ -68,8 +67,6 @@
 			return ;
 		}
 		
-		//ajax的post方式提交表单
-		//$("#workAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("work/insert",$("#workAddForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','新增作业成功!');
