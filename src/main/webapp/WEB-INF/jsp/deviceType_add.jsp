@@ -91,6 +91,7 @@
 	function clearForm_deviceType(){
 		$('#deviceTypeAddForm').form('reset');
 	}
+	
 	$('#deviceTypeStatusCombobox').combo({    
 	    required:true,    
 	    multiple:true   
