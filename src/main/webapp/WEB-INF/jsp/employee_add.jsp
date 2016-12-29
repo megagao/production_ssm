@@ -26,7 +26,8 @@
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="cc" class="easyui-combobox" name="sex" panelHeight="auto" data-options="required:true,width:150, editable:false">
+	            	<select id="cc" class="easyui-combobox" name="sex" panelHeight="auto" 
+	            		data-options="required:true,width:150, editable:false">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -36,7 +37,8 @@
 	            <td>所属部门:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="departmentId"   
-    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data', editable:false, required:true" />
+    					data-options="valueField:'departmentId',textField:'departmentName',
+    						url:'department/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
