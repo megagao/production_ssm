@@ -4,7 +4,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <table class="easyui-datagrid" id="employeeList" title="员工列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'employee/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_employee">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'employee/list',
+       	method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_employee">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -64,12 +65,15 @@
 
 </div>  
 
-<div id="employeeEditWindow" class="easyui-window" title="编辑员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/edit'" style="width:40%;height:70%;padding:10px;">
+<div id="employeeEditWindow" class="easyui-window" title="编辑员工" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'employee/edit'" style="width:40%;height:70%;padding:10px;">
 </div>
-<div id="employeeAddWindow" class="easyui-window" title="添加员工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'employee/add'" style="width:40%;height:70%;padding:10px;">
+<div id="employeeAddWindow" class="easyui-window" title="添加员工" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'employee/add'" style="width:40%;height:70%;padding:10px;">
 </div>
 
-<div id="empDepartmentInfo" class="easyui-dialog" title="部门信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
+<div id="empDepartmentInfo" class="easyui-dialog" title="部门信息" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
 	<form id="empDepartmentEditForm" method="post">
 		<input type="hidden" name="departmentId"/>
 	    <table cellpadding="5">
