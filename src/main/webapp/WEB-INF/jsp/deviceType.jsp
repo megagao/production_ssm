@@ -6,7 +6,8 @@
 
 <!-- Table -->
 <table class="easyui-datagrid" id="deviceType" title="设备种类列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'deviceType/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceType">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
+       	url:'deviceType/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceType">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -63,16 +64,17 @@
 </div>
 
 <!-- deviceTypeAddWindow -->
-<div id="deviceTypeAddWindow" class="easyui-window" title="添加设备种类" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/add'" style="width:40%;height:55%;padding:10px;">
+<div id="deviceTypeAddWindow" class="easyui-window" title="添加设备种类" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/add'" style="width:40%;height:55%;padding:10px;">
 </div>
 
 <!-- deviceTypeEditWindow -->
-<div id="deviceTypeEditWindow" class="easyui-window" title="编辑设备种类" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/edit'" style="width:40%;height:55%;padding:10px;">
+<div id="deviceTypeEditWindow" class="easyui-window" title="编辑设备种类" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceType/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
 
 
 <script>
-
 function doSearch_deviceType(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		
@@ -189,10 +191,7 @@ function doSearch_deviceType(value,name){ //用户输入用户名,点击搜素,�
     function deviceType_reload(){
     	$("#deviceType").datagrid("reload");
     }
-    
 	/*********************************** Toolbar function ***********************************/
-	
-	//var deviceTypeNoteEditor ;
 	
 	//根据index拿到该行值
 	function onDeviceTypeClickRow(index) {
