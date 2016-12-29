@@ -14,7 +14,8 @@
 	            <td>订单编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="orderId"   
-    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',required:true, editable:false, required:true" />  
+    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',
+    						required:true, editable:false, required:true" />  
 	            </td>
 	        </tr>
 	        <tr>
@@ -83,12 +84,13 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	var fCountCheckEditEditor ;
+	
 	$(function(){
 		//实例化富文本编辑器
 		fCountCheckEditEditor = TAOTAO.createEditor("#fCountCheckEditForm [name=note]");
 	});
+	
 	//同步kindeditor中的内容
 	fCountCheckEditEditor.sync();
 	function fCountCheckEditForm(){
