@@ -6,7 +6,8 @@
 
 <!-- Table -->
 <table class="easyui-datagrid" id="deviceMaintain" title="设备维修列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'deviceMaintain/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceMaintain">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
+       	url:'deviceMaintain/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceMaintain">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -62,15 +63,18 @@
 </div>
 
 <!-- deviceMaintainAddWindow -->
-<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceMaintainEditWindow -->
-<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备故障信息 -->
-<div id="deviceFaultInfo_deviceMaintain" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceFaultInfo_deviceMaintain" class="easyui-dialog" title="设备信息" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="deviceFaultEditForm_deviceMaintain" method="post">
 	    <table cellpadding="5">
 	        <tr>
@@ -83,7 +87,8 @@
 	            <td>设备名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" 
-    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'" />
+    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',
+    						url:'deviceList/get_data'" />
 	            </td>
 	        </tr>
 	        <tr>
@@ -118,7 +123,8 @@
 </div>
 
 <!-- 设备维修原因-->
-<div id="deviceMaintainNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="deviceMaintainNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,
+	closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceMaintainNoteForm" class="itemForm" method="post">
 	    <input type="hidden" name="deviceMaintainId"/>
 	    <table cellpadding="5" >
@@ -139,7 +145,6 @@
 
 function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
-		
 		$("#deviceMaintain").datagrid({
 	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
 	        toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
