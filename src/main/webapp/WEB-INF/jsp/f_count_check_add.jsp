@@ -20,7 +20,8 @@
 	            <td>订单编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="orderId"   
-    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',required:true, editable:false, required:true" />  
+    					data-options="valueField:'orderId',textField:'orderId',url:'order/get_data',required:true, 
+    						editable:false, required:true" />  
 	            </td>
 	        </tr>
 	        <tr>
@@ -69,7 +70,8 @@
 	            <td>检验人:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'"/>
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',
+    						url:'employee/get_data'"/>
     			</td>  
 	        </tr>
 	          <tr>
