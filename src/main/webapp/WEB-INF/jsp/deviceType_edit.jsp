@@ -56,7 +56,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
 	function submitDeviceTypeEditForm(){
 		$.get("deviceType/edit_judge",'',function(data){
     		if(data.msg != null){
@@ -79,6 +78,5 @@
     			});
     		}
     	});
-		
 	}
 </script>
