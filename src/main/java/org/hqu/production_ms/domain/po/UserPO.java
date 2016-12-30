@@ -19,7 +19,7 @@ public class UserPO {
 	@Size(max=128, message="角色名过长！")
     private String roleName;
     
-	@Size(max=36, message="角色编号输入非法！")
+	@Size(max=36, message="角色编号非法！")
     private String roleId;
 
 	public String getId() {
