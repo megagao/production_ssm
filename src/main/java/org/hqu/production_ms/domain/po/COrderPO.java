@@ -33,8 +33,10 @@ public class COrderPO {
 
     private Integer status;
     
+    @Size(max=40, message="{id.length.error}")
     private String customId;
 
+    @Size(max=40, message="{id.length.error}")
     private String productId;
 
     public String getOrderId() {
