@@ -1,6 +1,13 @@
 package org.hqu.production_ms.domain.authority;
 
-
+/**
+ * created on 2016年10月30日 
+ *
+ * 系统用户
+ *
+ * @author  megagao
+ * @version  0.0.1
+ */
 public class SysUser {
 	
     private String id;
