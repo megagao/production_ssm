@@ -10,7 +10,7 @@ public class ManufacturePO {
 	@Size(max=40, message="{id.length.error}")
     private String manufactureSn;
 
-	@Max(value=999999999, message="投产数量不能超过999999999")
+	@Max(value=999999999, message="投产数量过大")
     private Integer launchQuantity;
 	
     private Date beginDate;
