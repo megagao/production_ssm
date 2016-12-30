@@ -11,7 +11,7 @@ public class EmployeePO {
 	@Size(max=40, message="员工姓名过长！")
     private String empName;
 
-	@Size(max=40, message="员工性别过长！")
+	@Size(max=2, message="员工性别过长！")
     private String sex;
 
 	@Size(min=18, max=18, message="请输入正确身份证号！")
