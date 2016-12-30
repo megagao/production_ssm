@@ -14,7 +14,7 @@ public class MaterialConsumePO {
 
     private String materialId;
 
-    @Max(value=999999999, message="消耗数量不能超过999999999")
+    @Max(value=999999999, message="消耗数量过大")
     private Integer consumeAmount;
 
     private Date consumeDate;
