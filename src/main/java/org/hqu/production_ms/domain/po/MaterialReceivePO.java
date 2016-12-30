@@ -10,7 +10,7 @@ public class MaterialReceivePO {
 
     private String materialId;
 
-    @Max(value=999999999, message="收入数量不能超过999999999")
+    @Max(value=999999999, message="收入数量过大")
     private Integer ammount;
 
     private Date receiveDate;
