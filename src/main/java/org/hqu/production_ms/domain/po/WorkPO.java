@@ -11,10 +11,13 @@ public class WorkPO {
 	@Size(max=40, message="工序号的长度限制在40个字符之内")
     private String processNumber;
 
+	@Size(max=40, message="{id.length.error}")
     private String productId;
 
+	@Size(max=40, message="{id.length.error}")
     private String processId;
 
+	@Size(max=40, message="{id.length.error}")
     private String deviceId;
 
     private Integer rating;
