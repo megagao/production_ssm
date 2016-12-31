@@ -14,6 +14,13 @@ public interface DeviceMaintainMapper {
 	
 	int deleteBatch(String[] DeviceMaintainIds);
     
+	//根据设备维修id查找设备维修信息
+	List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(String deviceMaintainId);
+
+	//根据设备故障id查找设备维修信息
+	List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String deviceFaultId);
+	
+	
 	//自动生成的mapper接口方法
     int countByExample(DeviceMaintainExample example);
 
@@ -36,11 +43,4 @@ public interface DeviceMaintainMapper {
     int updateByPrimaryKeySelective(DeviceMaintain record);
 
     int updateByPrimaryKey(DeviceMaintain record);
-
-	List<DeviceMaintain> searchDeviceMaintainByDeviceMaintainId(
-			String deviceMaintainId);
-
-	List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(
-			String deviceFaultId);
-
 }
