@@ -16,6 +16,13 @@ public interface DeviceFaultMapper {
 	int deleteBatch(String[] deviceFaultIds);
 	
 	int updateNote(DeviceFault deviceFault);
+	
+	//根据设备故障id查找设备故障信息
+	List<DeviceFault> searchDeviceFaultByDeviceFaultId(String deviceFaultId);
+
+	//根据设备名称查找设备故障信息
+	List<DeviceFault> searchDeviceFaultByDeviceName(String deviceName);
+	
     
 	//自动生成的mapper接口方法
     int countByExample(DeviceFaultExample example);
@@ -39,9 +46,4 @@ public interface DeviceFaultMapper {
     int updateByPrimaryKeySelective(DeviceFault record);
 
     int updateByPrimaryKey(DeviceFault record);
-
-	List<DeviceFault> searchDeviceFaultByDeviceFaultId(String deviceFaultId);
-
-	List<DeviceFault> searchDeviceFaultByDeviceName(String deviceName);
-
 }
