@@ -8,11 +8,19 @@ import org.hqu.production_ms.domain.EmployeeExample;
 import org.hqu.production_ms.domain.po.EmployeePO;
 
 public interface EmployeeMapper {
+	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
 	
 	List<Employee> find();
+
+	List<Employee> searchEmployeeByEmployeeId(String employeeId);
+
+	List<Employee> searchEmployeeByEmployeeName(String employeeName);
+
+	List<Employee> searchEmployeeByDepartmentName(String departmentName);
 	
+	//逆向工程生成的mapper接口
 	Employee selectSingleEmployee(String empId);
 		
     int countByExample(EmployeeExample example);
@@ -36,11 +44,4 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(EmployeePO record);
 
     int updateByPrimaryKey(EmployeePO record);
-
-	List<Employee> searchEmployeeByEmployeeId(String employeeId);
-
-	List<Employee> searchEmployeeByEmployeeName(String employeeName);
-
-	List<Employee> searchEmployeeByDepartmentName(String departmentName);
-
 }
