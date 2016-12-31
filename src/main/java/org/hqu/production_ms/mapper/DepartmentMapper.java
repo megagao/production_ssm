@@ -18,7 +18,7 @@ public interface DepartmentMapper {
 	List<Department> searchDepartmentByDepartmentName(String departmentName);
 	
 		
-	//自动生成的mapper接口方法
+	//逆向工程生成的mapper接口
     int countByExample(DepartmentExample example);
 
     int deleteByExample(DepartmentExample example);
