@@ -19,7 +19,7 @@ public interface CustomMapper {
 	
 	List<Custom> searchCustomByCustomId(String customId);
 	
-	//自动生成的mapper接口方法
+	//逆向工程生成的mapper接口
     int countByExample(CustomExample example);
 
     int deleteByExample(CustomExample example);
