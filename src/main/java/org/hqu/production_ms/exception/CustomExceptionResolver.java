@@ -18,9 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @version  0.0.1
  */
 public class CustomExceptionResolver implements HandlerExceptionResolver  {
-
-	
-	
 	
 	/**
 	 * 前端控制器DispatcherServlet在进行HandlerMapping、调用HandlerAdapter执行Handler过程中，如果遇到异常就会执行此方法
@@ -51,7 +48,6 @@ public class CustomExceptionResolver implements HandlerExceptionResolver  {
 		message = customException.getMessage();
 		
 		request.setAttribute("message", message);
-
 		
 		try {
 			//转向到错误 页面
@@ -66,5 +62,4 @@ public class CustomExceptionResolver implements HandlerExceptionResolver  {
 		
 		return new ModelAndView();
 	}
-
 }
