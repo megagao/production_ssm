@@ -20,7 +20,7 @@ public interface DeviceCheckMapper {
 	List<DeviceCheck> searchDeviceCheckByDeviceName(String deviceName);
 	
     
-	//自动生成的mapper接口方法
+	//逆向工程生成的mapper接口
     int countByExample(DeviceCheckExample example);
 
     int deleteByExample(DeviceCheckExample example);
