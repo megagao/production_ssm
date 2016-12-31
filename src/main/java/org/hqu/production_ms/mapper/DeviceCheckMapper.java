@@ -7,10 +7,18 @@ import org.hqu.production_ms.domain.DeviceCheck;
 import org.hqu.production_ms.domain.DeviceCheckExample;
 
 public interface DeviceCheckMapper {
+	
 	//扩展的mapper接口方法
 	List<DeviceCheck> find(DeviceCheck deviceCheck);
 	
 	int deleteBatch(String[] deviceCheckIds);
+	
+	//根据设备id查找设备例检信息
+	List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String deviceCheckId);
+
+	//根据设备名称查找设备例检信息
+	List<DeviceCheck> searchDeviceCheckByDeviceName(String deviceName);
+	
     
 	//自动生成的mapper接口方法
     int countByExample(DeviceCheckExample example);
@@ -34,10 +42,6 @@ public interface DeviceCheckMapper {
     int updateByPrimaryKeySelective(DeviceCheck record);
 
     int updateByPrimaryKey(DeviceCheck record);
-
-	List<DeviceCheck> searchDeviceCheckByDeviceCheckId(String deviceCheckId);
-
-	List<DeviceCheck> searchDeviceCheckByDeviceName(String deviceName);
 
 	int updateNote(DeviceCheck deviceCheck);
 }
