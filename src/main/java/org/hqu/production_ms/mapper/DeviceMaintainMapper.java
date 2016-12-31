@@ -21,7 +21,7 @@ public interface DeviceMaintainMapper {
 	List<DeviceMaintain> searchDeviceMaintainByDeviceFaultId(String deviceFaultId);
 	
 	
-	//自动生成的mapper接口方法
+	//逆向工程生成的mapper接口
     int countByExample(DeviceMaintainExample example);
 
     int deleteByExample(DeviceMaintainExample example);
