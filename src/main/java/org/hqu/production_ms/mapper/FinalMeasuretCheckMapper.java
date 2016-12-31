@@ -15,7 +15,12 @@ public interface FinalMeasuretCheckMapper {
 	int updateNote(FinalMeasuretCheck finalMeasuretCheck);
 	
 	int deleteBatch(String[] ids);
-		
+
+	List<FinalMeasuretCheckPO> searchFMeasureCheckByOrderId(String orderId);
+	
+	List<FinalMeasuretCheckPO> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
+	
+	//逆向工程生成的mapper接口
     int countByExample(FinalMeasuretCheckExample example);
 
     int deleteByExample(FinalMeasuretCheckExample example);
@@ -37,8 +42,4 @@ public interface FinalMeasuretCheckMapper {
     int updateByPrimaryKeySelective(FinalMeasuretCheck record);
 
     int updateByPrimaryKey(FinalMeasuretCheck record);
-
-	List<FinalMeasuretCheckPO> searchFMeasureCheckByOrderId(String orderId);
-	
-	List<FinalMeasuretCheckPO> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
 }
