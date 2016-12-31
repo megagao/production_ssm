@@ -21,7 +21,7 @@ public interface DeviceTypeMapper {
 	List<DeviceType> searchDeviceTypeByDeviceTypeName(String deviceTypeName);
 	
     
-	//自动生成的mapper接口方法
+	//逆向工程生成的mapper接口
     int countByExample(DeviceTypeExample example);
 
     int deleteByExample(DeviceTypeExample example);
