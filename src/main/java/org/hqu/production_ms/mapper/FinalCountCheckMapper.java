@@ -8,6 +8,7 @@ import org.hqu.production_ms.domain.FinalCountCheckExample;
 import org.hqu.production_ms.domain.po.FinalCountCheckPO;
 
 public interface FinalCountCheckMapper {
+	
 	//扩展的mapper接口方法
 	List<FinalCountCheckPO> find(FinalCountCheck finalCountCheck);
 	
@@ -15,6 +16,11 @@ public interface FinalCountCheckMapper {
 	
 	int deleteBatch(String[] ids);
 	
+    List<FinalCountCheckPO> searchFCountCheckByFCountCheckId(String fCountCheckId);
+    
+	List<FinalCountCheckPO> searchFCountCheckByOrderId(String orderId);
+	
+	//逆向工程生成的mapper接口
     int countByExample(FinalCountCheckExample example);
 
     int deleteByExample(FinalCountCheckExample example);
@@ -36,8 +42,4 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKeySelective(FinalCountCheck record);
 
     int updateByPrimaryKey(FinalCountCheck record);
-
-    List<FinalCountCheckPO> searchFCountCheckByFCountCheckId(String fCountCheckId);
-    
-	List<FinalCountCheckPO> searchFCountCheckByOrderId(String orderId);
 }
