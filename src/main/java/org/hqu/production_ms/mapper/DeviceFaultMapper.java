@@ -24,7 +24,7 @@ public interface DeviceFaultMapper {
 	List<DeviceFault> searchDeviceFaultByDeviceName(String deviceName);
 	
     
-	//自动生成的mapper接口方法
+	//逆向工程生成的mapper接口
     int countByExample(DeviceFaultExample example);
 
     int deleteByExample(DeviceFaultExample example);
