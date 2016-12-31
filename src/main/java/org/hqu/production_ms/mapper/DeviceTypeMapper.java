@@ -13,6 +13,13 @@ public interface DeviceTypeMapper {
 	List<DeviceType> listType();
 	
 	int deleteBatch(String[] deviceTypeIds);
+
+	//根据设备种类id查找设备种类信息
+	List<DeviceType> searchDeviceTypeByDeviceTypeId(String deviceTypeId);
+
+	//根据设备种类名称查找设备种类信息
+	List<DeviceType> searchDeviceTypeByDeviceTypeName(String deviceTypeName);
+	
     
 	//自动生成的mapper接口方法
     int countByExample(DeviceTypeExample example);
@@ -36,8 +43,4 @@ public interface DeviceTypeMapper {
     int updateByPrimaryKeySelective(DeviceType record);
 
     int updateByPrimaryKey(DeviceType record);
-
-	List<DeviceType> searchDeviceTypeByDeviceTypeId(String deviceTypeId);
-
-	List<DeviceType> searchDeviceTypeByDeviceTypeName(String deviceTypeName);
 }
