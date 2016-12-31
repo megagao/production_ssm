@@ -12,6 +12,7 @@ public interface COrderMapper {
 	//扩展的mapper接口方法
 	List<COrder> find(COrder cOrder);
 	
+	//根据订单id查找订单信息
 	List<COrder> searchOrderByOrderId(String orderId);
 	
 	List<COrder> searchOrderByCustomName(String customName);
