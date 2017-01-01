@@ -7,9 +7,15 @@ import org.hqu.production_ms.domain.Process;
 import org.hqu.production_ms.domain.ProcessExample;
 
 public interface ProcessMapper {
+	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
-	//
+
+	List<Process> searchProcessByProcessId(String processId);
+
+	List<Process> searchProcessByTechnologyPlanId(String technologyPlanId);
+	
+	//逆向工程生成的mapper接口
 	int countByExample(ProcessExample example);
 
     int deleteByExample(ProcessExample example);
@@ -31,8 +37,4 @@ public interface ProcessMapper {
     int updateByPrimaryKeySelective(Process record);
 
     int updateByPrimaryKey(Process record);
-
-	List<Process> searchProcessByProcessId(String processId);
-
-	List<Process> searchProcessByTechnologyPlanId(String technologyPlanId);
 }
