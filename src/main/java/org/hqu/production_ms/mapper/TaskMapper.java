@@ -11,7 +11,14 @@ public interface TaskMapper {
 	int deleteBatch(String[] ids);
 	
 	List<Task> find();
+
+	List<Task> searchTaskByTaskId(String taskId);
+
+	List<Task> searchTaskByTaskWorkId(String taskWorkId);
+
+	List<Task> searchTaskByTaskManufactureSn(String taskManufactureSn);
 	
+	//逆向工程生成的mapper接口
     int countByExample(TaskExample example);
 
     int deleteByExample(TaskExample example);
@@ -33,10 +40,4 @@ public interface TaskMapper {
     int updateByPrimaryKeySelective(Task record);
 
     int updateByPrimaryKey(Task record);
-
-	List<Task> searchTaskByTaskId(String taskId);
-
-	List<Task> searchTaskByTaskWorkId(String taskWorkId);
-
-	List<Task> searchTaskByTaskManufactureSn(String taskManufactureSn);
 }
