@@ -21,7 +21,7 @@ public interface ProductMapper {
 	
 	List<Product> searchProductByProductType(String productType);
 	
-	
+	//逆向工程生成的mapper接口
     int countByExample(ProductExample example);
 
     int deleteByExample(ProductExample example);
