@@ -8,12 +8,21 @@ import org.hqu.production_ms.domain.WorkExample;
 import org.hqu.production_ms.domain.po.WorkPO;
 
 public interface WorkMapper {
+	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
 	
 	List<Work> find();
+
+	List<Work> searchWorkByWorkId(String workId);
+
+	List<Work> searchWorkByWorkProduct(String workProduct);
+
+	List<Work> searchWorkByWorkDevice(String workDevice);
+
+	List<Work> searchWorkByWorkProcess(String workProcess);
 	
-	
+	//逆向工程生成的mapper接口
     int countByExample(WorkExample example);
 
     int deleteByExample(WorkExample example);
@@ -35,12 +44,4 @@ public interface WorkMapper {
     int updateByPrimaryKeySelective(WorkPO record);
 
     int updateByPrimaryKey(WorkPO record);
-
-	List<Work> searchWorkByWorkId(String workId);
-
-	List<Work> searchWorkByWorkProduct(String workProduct);
-
-	List<Work> searchWorkByWorkDevice(String workDevice);
-
-	List<Work> searchWorkByWorkProcess(String workProcess);
 }
