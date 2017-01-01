@@ -7,13 +7,21 @@ import org.hqu.production_ms.domain.TechnologyRequirement;
 import org.hqu.production_ms.domain.TechnologyRequirementExample;
 
 public interface TechnologyRequirementMapper {
+	
 	//扩展的mapper接口方法
 	int updateRequirement(TechnologyRequirement technologyRequirement);
 	
 	List<TechnologyRequirement> find(TechnologyRequirement technologyRequirement);
 	
 	int deleteBatch(String[] ids);
-	//
+	
+	List<TechnologyRequirement> searchTechnologyRequirementByTechnologyRequirementId(
+			String technologyRequirementId);
+
+	List<TechnologyRequirement> searchTechnologyRequirementByTechnologyName(
+			String technologyName);
+	
+	//逆向工程生成的mapper接口
 	int countByExample(TechnologyRequirementExample example);
 
     int deleteByExample(TechnologyRequirementExample example);
@@ -35,10 +43,4 @@ public interface TechnologyRequirementMapper {
     int updateByPrimaryKeySelective(TechnologyRequirement record);
 
     int updateByPrimaryKey(TechnologyRequirement record);
-
-	List<TechnologyRequirement> searchTechnologyRequirementByTechnologyRequirementId(
-			String technologyRequirementId);
-
-	List<TechnologyRequirement> searchTechnologyRequirementByTechnologyName(
-			String technologyName);
 }
