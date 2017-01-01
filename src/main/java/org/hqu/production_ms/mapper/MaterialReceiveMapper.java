@@ -22,6 +22,7 @@ public interface MaterialReceiveMapper {
 	
 	List<MaterialReceive> searchMaterialReceiveByMaterialId(String materialId);
 	
+	//逆向工程生成的mapper接口
 	int countByExample(MaterialReceiveExample example);
 
     int deleteByExample(MaterialReceiveExample example);
