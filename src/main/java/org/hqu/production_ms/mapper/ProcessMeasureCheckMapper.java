@@ -8,14 +8,17 @@ import org.hqu.production_ms.domain.ProcessMeasureCheckExample;
 import org.hqu.production_ms.domain.po.ProcessMeasureCheckPO;
 
 public interface ProcessMeasureCheckMapper {
+	
+	//扩展的mapper接口方法
 	int updateNote(ProcessMeasureCheck processMeasureCheck);
+	
+	int deleteBatch(String[] ids);
 	
 	List<ProcessMeasureCheckPO> searchPMeasureCheckByPMeasureCheckId(String processMeasureCheckId);
 	
 	List<ProcessMeasureCheckPO> find(ProcessMeasureCheck processMeasureCheck);
 	
-	int deleteBatch(String[] ids);
-	
+	//逆向工程生成的mapper接口
     int countByExample(ProcessMeasureCheckExample example);
 
     int deleteByExample(ProcessMeasureCheckExample example);
