@@ -10,8 +10,12 @@ public interface TechnologyMapper {
 	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
+
+	List<Technology> searchTechnologyByTechnologyId(String technologyId);
+
+	List<Technology> searchTechnologyByTechnologyName(String technologyName);
 	
-	//
+	//逆向工程生成的mapper接口
     int countByExample(TechnologyExample example);
 
     int deleteByExample(TechnologyExample example);
@@ -33,8 +37,4 @@ public interface TechnologyMapper {
     int updateByPrimaryKeySelective(Technology record);
 
     int updateByPrimaryKey(Technology record);
-
-	List<Technology> searchTechnologyByTechnologyId(String technologyId);
-
-	List<Technology> searchTechnologyByTechnologyName(String technologyName);
 }
