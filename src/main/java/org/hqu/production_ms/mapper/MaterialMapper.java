@@ -16,7 +16,10 @@ public interface MaterialMapper {
 	int updateNote(Material record);
 		
 	List<Material> searchMaterialByMaterialId(String materialId);
+
+	List<Material> searchMaterialByMaterialType(String materialName);
 	
+	//逆向工程生成的mapper接口
     int countByExample(MaterialExample example);
 
     int deleteByExample(MaterialExample example);
@@ -38,6 +41,4 @@ public interface MaterialMapper {
     int updateByPrimaryKeySelective(Material record);
 
     int updateByPrimaryKey(Material record);
-
-	List<Material> searchMaterialByMaterialType(String materialName);
 }
