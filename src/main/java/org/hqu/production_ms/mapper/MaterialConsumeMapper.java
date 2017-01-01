@@ -10,6 +10,11 @@ import org.hqu.production_ms.domain.po.MaterialConsumePO;
 public interface MaterialConsumeMapper {
 	
 	//扩展的mapper接口方法
+	int deleteBatch(String[] ids);
+	
+	int changeStatus(String[] ids);
+		
+	int updateNote(MaterialConsumePO materialConsume);
 	
 	List<MaterialConsume> find(MaterialConsume materialConsume);
 	
@@ -18,16 +23,8 @@ public interface MaterialConsumeMapper {
 	List<MaterialConsume> searchMaterialConsumeByMaterialId(String materialId);
 	
 	List<MaterialConsume> searchMaterialConsumeByWorkId(String workId);
-		
-		
-	int deleteBatch(String[] ids);
-		
-	int changeStatus(String[] ids);
-		
-	int updateNote(MaterialConsumePO materialConsume);
 	
 	//逆向工程生成的mapper接口
-	
     int countByExample(MaterialConsumeExample example);
 
     int deleteByExample(MaterialConsumeExample example);
