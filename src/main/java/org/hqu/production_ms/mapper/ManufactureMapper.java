@@ -8,13 +8,21 @@ import org.hqu.production_ms.domain.ManufactureExample;
 import org.hqu.production_ms.domain.po.ManufacturePO;
 
 public interface ManufactureMapper {
+	
 	//扩展的mapper接口方法
 	List<Manufacture> find();
 	
 	int deleteBatch(String[] ids);
 	
+	List<Manufacture> searchManufactureByManufactureSn(String manufactureSn);
+
+	List<Manufacture> searchManufactureByManufactureOrderId(
+			String manufactureOrderId);
+
+	List<Manufacture> searchManufactureByManufactureTechnologyName(
+			String manufactureTechnologyName);
 	
-		
+	//逆向工程生成的mapper接口
     int countByExample(ManufactureExample example);
 
     int deleteByExample(ManufactureExample example);
@@ -36,12 +44,4 @@ public interface ManufactureMapper {
     int updateByPrimaryKeySelective(ManufacturePO record);
 
     int updateByPrimaryKey(ManufacturePO record);
-
-	List<Manufacture> searchManufactureByManufactureSn(String manufactureSn);
-
-	List<Manufacture> searchManufactureByManufactureOrderId(
-			String manufactureOrderId);
-
-	List<Manufacture> searchManufactureByManufactureTechnologyName(
-			String manufactureTechnologyName);
 }
