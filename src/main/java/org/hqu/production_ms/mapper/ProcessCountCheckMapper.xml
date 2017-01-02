@@ -19,39 +19,7 @@
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
   </resultMap>
   
-  
-  <!-- 修改备注-->
-	<update id="updateNote" parameterType="processCountCheck" >
-		UPDATE process_count_check
-		SET note = #{note}
-		WHERE
-			p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
-	</update>
-  
-  <select id="searchPCountCheckByPCountCheckId" parameterType="string" resultMap="AddResultMap">
-		SELECT
-			p_count_check_id,
-			process_id,
-			check_item,
-			sample,
-			check_number,
-			unqualify,
-			qualify,
-			cdate,
-			measure_data,
-			process_count_check.emp_id,
-			emp_name,
-			result,
-			note
-		FROM
-			process_count_check,
-			employee
-		WHERE 
-			process_count_check.emp_id = employee.emp_id
-		AND	p_count_check_id like CONCAT('%',#{pCountCheckId},'%' ) 
-	</select>
-	
-  <!-- 查询所有记录 -->
+  	<!-- 查询所有记录 -->
 	<select id="find" parameterType="processCountCheck" resultMap="AddResultMap">
 		SELECT
 			p_count_check_id,
@@ -72,6 +40,37 @@
 			employee
 		WHERE 
 			process_count_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
+	<update id="updateNote" parameterType="processCountCheck" >
+		UPDATE process_count_check
+		SET note = #{note}
+		WHERE
+			p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+	</update>
+  
+  	<select id="searchPCountCheckByPCountCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			p_count_check_id,
+			process_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			process_count_check.emp_id,
+			emp_name,
+			result,
+			note
+		FROM
+			process_count_check,
+			employee
+		WHERE 
+			process_count_check.emp_id = employee.emp_id
+		AND	p_count_check_id like CONCAT('%',#{pCountCheckId},'%' ) 
 	</select>
   
   	<!-- 批量删除 -->
