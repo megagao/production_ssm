@@ -60,7 +60,7 @@
 			unqualify_apply,
 			employee,
 			product
-		where 
+		WHERE 
 			unqualify_apply.product_id = product.product_id
 		AND unqualify_apply.emp_id = employee.emp_id
 		AND unqualify_apply_id LIKE CONCAT(
@@ -102,7 +102,7 @@
 			#{id}
 		</foreach>
 	</delete>
-	
+
 	
   <sql id="Example_Where_Clause" >
     <where >
