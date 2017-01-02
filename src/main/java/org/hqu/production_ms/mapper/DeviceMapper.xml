@@ -20,34 +20,34 @@
     <result column="device_keeper" property="deviceKeeper" jdbcType="VARCHAR" />
   </resultMap>
 
-<!-- 扩展的sql -->
-<!-- 查询所有记录 -->
-<select id="find" parameterType="device" resultMap="AddResultMap">
-	SELECT
-		device_id,
-		device_name,
-		device.device_type_id,
-		device_type_name,
-		device_status_id,
-		device_purchase_date,
-		device_purchase_price,
-		device_manufacture_date,
-		device_service_life,
-		device_keeper_id,
-		emp_name as device_keeper,
-		note
-	FROM
-		device,
-		device_type,
-		employee
-	WHERE
-		device.device_type_id = device_type.device_type_id
-	AND device.device_keeper_id = employee.emp_id
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="device" resultMap="AddResultMap">
+		SELECT
+			device_id,
+			device_name,
+			device.device_type_id,
+			device_type_name,
+			device_status_id,
+			device_purchase_date,
+			device_purchase_price,
+			device_manufacture_date,
+			device_service_life,
+			device_keeper_id,
+			emp_name as device_keeper,
+			note
+		FROM
+			device,
+			device_type,
+			employee
+		WHERE
+			device.device_type_id = device_type.device_type_id
+		AND device.device_keeper_id = employee.emp_id
+		
+		order by device_id ASC
+	</select>
 	
-	order by device_id ASC
-</select>
-
-<!-- 查询所有记录 -->
+	<!-- 查询所有记录 -->
 	<select id="getData" resultMap="BaseResultMap">
 		SELECT
 			device_id,
@@ -56,19 +56,19 @@
 			device
 	</select>
 
-<!-- 批量删除 -->
-<delete id="deleteBatch">
-	DELETE
-	FROM
-		device
-	WHERE
-		device_id IN
-	<foreach collection="array" item="id" open="(" close=")" separator=",">
-		#{id}
-	</foreach>
-</delete>
-
-<!-- 修改备注-->
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device
+		WHERE
+			device_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
 	<update id="updateNote" parameterType="org.hqu.production_ms.domain.Device" >
 		UPDATE device
 		SET note = #{note}
