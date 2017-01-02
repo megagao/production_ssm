@@ -15,40 +15,40 @@
     <result column="device_maintain_emp" property="deviceMaintainEmp" jdbcType="VARCHAR" />
   </resultMap>
   
-<!-- 扩展的sql -->
-<!-- 查询所有记录 -->
-<select id="find" parameterType="deviceMaintain" resultMap="AddResultMap">
-	SELECT
-		device_maintain_id,
-		device_fault_id,
-		device_maintain_emp_id,
-		emp_name as device_maintain_emp,
-		device_maintain_date,
-		device_maintain_result,
-		device_maintain_cost,
-		note
-	FROM
-		device_maintain,
-		employee
-	WHERE
-		device_maintain.device_maintain_emp_id = employee.emp_id
-		
-	order by device_maintain_id ASC
-</select>
-
-<!-- 批量删除 -->
-<delete id="deleteBatch">
-	DELETE
-	FROM
-		device_maintain
-	WHERE
-		device_maintain_id IN
-	<foreach collection="array" item="id" open="(" close=")" separator=",">
-		#{id}
-	</foreach>
-</delete>
-
-<!-- 修改备注-->
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="deviceMaintain" resultMap="AddResultMap">
+		SELECT
+			device_maintain_id,
+			device_fault_id,
+			device_maintain_emp_id,
+			emp_name as device_maintain_emp,
+			device_maintain_date,
+			device_maintain_result,
+			device_maintain_cost,
+			note
+		FROM
+			device_maintain,
+			employee
+		WHERE
+			device_maintain.device_maintain_emp_id = employee.emp_id
+			
+		order by device_maintain_id ASC
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device_maintain
+		WHERE
+			device_maintain_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
 	<update id="updateNote" parameterType="org.hqu.production_ms.domain.DeviceMaintain" >
 		UPDATE device_maintain
 		SET note = #{note}
@@ -95,6 +95,7 @@
 				'%',
 				#{deviceFaultId},'%' ) 
 	</select>
+
 
   <sql id="Example_Where_Clause" >
     <where >
