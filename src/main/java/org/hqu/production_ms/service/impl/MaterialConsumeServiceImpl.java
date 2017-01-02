@@ -118,17 +118,6 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		// TODO Auto-generated method stub
-		int i = materialConsumeMapper.changeStatus(ids);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	
-	@Override
 	public EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
