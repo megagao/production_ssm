@@ -14,8 +14,6 @@ public interface MaterialReceiveMapper {
     
 	int deleteBatch(String[] ids);
 			
-	int changeStatus(String[] ids);
-			
 	int updateNote(MaterialReceivePO record);
 	
     List<MaterialReceive> searchMaterialReceiveByReceiveId(String receiveId);
