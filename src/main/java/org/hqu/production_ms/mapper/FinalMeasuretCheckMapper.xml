@@ -15,9 +15,25 @@
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
   </resultMap>
   
-  
-  
-  <!-- 修改备注-->
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="finalMeasuretCheck" resultMap="AddResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			final_measuret_check.emp_id,
+			emp_name,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check,
+			employee
+		where final_measuret_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
 	<update id="updateNote" parameterType="finalMeasuretCheck" >
 		UPDATE final_measuret_check
 		SET note = #{note}
@@ -61,25 +77,7 @@
 		AND final_measuret_check.order_id like CONCAT('%',#{orderId},'%' ) 
 	</select>
   
-   <!-- 查询所有记录 -->
-	<select id="find" parameterType="finalMeasuretCheck" resultMap="AddResultMap">
-		SELECT
-			f_measure_check_id ,
-			final_measuret_check.order_id,
-			check_item,
-			cdate,
-			measure_data,
-			final_measuret_check.emp_id,
-			emp_name,
-			result,
-			final_measuret_check.note
-		FROM
-			final_measuret_check,
-			employee
-		where final_measuret_check.emp_id = employee.emp_id
-	</select>
-  
-  <!-- 批量删除 -->
+  	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
@@ -90,8 +88,6 @@
 			#{id}
 		</foreach>
 	</delete>
-  
-  
   
   
   
