@@ -15,7 +15,7 @@
 	</association>
   </resultMap>
   
-  <!-- 扩展的sql -->
+  	<!-- 扩展的sql -->
 	<!-- 查询所有记录 -->
 	<select id="find" resultMap="BaseResultMap">
 		SELECT
