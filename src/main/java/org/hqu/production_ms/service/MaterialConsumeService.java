@@ -30,8 +30,6 @@ public interface MaterialConsumeService {
     
     CustomResult updateNote(MaterialConsumePO materialConsume) throws Exception;
 
-    CustomResult changeStatus(String[] ids) throws Exception;
-    
     EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) throws Exception;
 	
    	EUDataGridResult searchMaterialConsumeByMaterialId(int page, int rows,
