@@ -16,51 +16,49 @@
     <result column="device_type_idd" property="deviceTypeIdd" jdbcType="VARCHAR" />
   </resultMap>
   
-  
-<!-- 扩展的sql -->
-<!-- 查询所有记录 -->
-<select id="find" parameterType="deviceType" resultMap="AddResultMap">
-	SELECT
-		device_type_id,
-		device_type_id as device_type_idd,
-		device_type_name,
-		device_type_model,
-		device_type_spec,
-		device_type_supplier,
-		device_type_producer,
-		device_type_quantity,
-		device_type_warranty
-	FROM
-		device_type
-	order by device_type_id ASC
-</select>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="deviceType" resultMap="AddResultMap">
+		SELECT
+			device_type_id,
+			device_type_id as device_type_idd,
+			device_type_name,
+			device_type_model,
+			device_type_spec,
+			device_type_supplier,
+			device_type_producer,
+			device_type_quantity,
+			device_type_warranty
+		FROM
+			device_type
+		order by device_type_id ASC
+	</select>
 
-<!-- 查询所有种类记录 -->
-<!-- parameterType=""  -->
-<select id="listType" resultMap="BaseResultMap">
-	SELECT
-		device_type_id,
-		device_type_name
-	FROM
-		device_type
-	
-	order by device_type_id ASC
-</select>
-   
+	<!-- 查询所有种类记录 -->
+	<!-- parameterType=""  -->
+	<select id="listType" resultMap="BaseResultMap">
+		SELECT
+			device_type_id,
+			device_type_name
+		FROM
+			device_type
+		
+		order by device_type_id ASC
+	</select>
 
-<!-- 批量删除 -->
-<delete id="deleteBatch">
-	DELETE
-	FROM
-		device_type
-	WHERE
-		device_type_id IN
-	<foreach collection="array" item="id" open="(" close=")" separator=",">
-		#{id}
-	</foreach>
-</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device_type
+		WHERE
+			device_type_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
   
-  <select id="searchDeviceTypeByDeviceTypeId" parameterType="string" resultMap="AddResultMap">
+	<select id="searchDeviceTypeByDeviceTypeId" parameterType="string" resultMap="AddResultMap">
 		SELECT
 			device_type_id,
 			device_type_id as device_type_idd,
@@ -97,6 +95,7 @@
 				'%',
 				#{deviceTypeName},'%' ) 
 	</select>
+	
 	
   <sql id="Example_Where_Clause" >
     <where >
