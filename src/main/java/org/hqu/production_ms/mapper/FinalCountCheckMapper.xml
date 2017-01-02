@@ -19,17 +19,37 @@
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
   </resultMap>
   
-  
-  <!-- 修改备注-->
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="finalCountCheck" resultMap="AddResultMap">
+		SELECT
+			f_count_check_id ,
+			order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			final_count_check.emp_id,
+			emp_name,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check,
+			employee
+		WHERE 
+			final_count_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
 	<update id="updateNote" parameterType="finalCountCheck" >
 		UPDATE final_count_check
 		SET note = #{note}
 		WHERE
 			f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
 	</update>
-  
-  
-  
+
     <select id="searchFCountCheckByFCountCheckId" parameterType="string" resultMap="AddResultMap">
 		SELECT
 			f_count_check_id ,
@@ -51,8 +71,6 @@
 		WHERE 
 			final_count_check.emp_id = employee.emp_id
 		AND f_count_check_id like CONCAT('%',#{fCountCheckId},'%' ) 
-		
-		
 	</select>
   
   	<select id="searchFCountCheckByOrderId" parameterType="string" resultMap="AddResultMap">
@@ -78,33 +96,8 @@
 		AND final_count_check.order_id like CONCAT('%',#{orderId},'%' ) 
 		
 	</select>
-  
-  
-   <!-- 查询所有记录 -->
-	<select id="find" parameterType="finalCountCheck" resultMap="AddResultMap">
-		SELECT
-			f_count_check_id ,
-			order_id,
-			check_item,
-			sample,
-			check_number,
-			unqualify,
-			qualify,
-			cdate,
-			measure_data,
-			final_count_check.emp_id,
-			emp_name,
-			result,
-			final_count_check.note
-		FROM
-			final_count_check,
-			employee
-		WHERE 
-			final_count_check.emp_id = employee.emp_id
-	</select>
-	
-	
-	  <!-- 批量删除 -->
+
+	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
@@ -115,8 +108,6 @@
 			#{id}
 		</foreach>
 	</delete>
-  
-  
   
   
   <sql id="Example_Where_Clause" >
