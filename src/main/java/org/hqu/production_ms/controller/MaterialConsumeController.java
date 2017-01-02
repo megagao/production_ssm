@@ -107,7 +107,8 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult)
+			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -123,7 +124,8 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -133,7 +135,8 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -143,7 +146,8 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -184,38 +188,31 @@ public class MaterialConsumeController {
 		return result;
 	}
 	
-	@RequestMapping(value="/change_status")
+	//搜索
+	@RequestMapping("/search_materialConsume_by_consumeId")
 	@ResponseBody
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		CustomResult result = materialConsumeService.changeStatus(ids);
+	public EUDataGridResult searchMaterialConsumeByConsumeId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = materialConsumeService.searchMaterialConsumeByConsumeId(page, rows, searchValue);
 		return result;
 	}
 	
 	//搜索
-		@RequestMapping("/search_materialConsume_by_consumeId")
-		@ResponseBody
-		public EUDataGridResult searchMaterialConsumeByConsumeId(Integer page, Integer rows, String searchValue) 
-				throws Exception{
-			EUDataGridResult result = materialConsumeService.searchMaterialConsumeByConsumeId(page, rows, searchValue);
-			return result;
-		}
-		
-		//搜索
-		@RequestMapping("/search_materialConsume_by_materialId")
-		@ResponseBody
-		public EUDataGridResult searchMaterialConsumeByMaterialId(Integer page, Integer rows, String searchValue) 
-				throws Exception{
-			EUDataGridResult result = materialConsumeService.searchMaterialConsumeByMaterialId(page, rows, searchValue);
-			return result;
-		}
-		
-		//搜索
-		@RequestMapping("/search_materialConsume_by_workId")
-		@ResponseBody
-		public EUDataGridResult searchMaterialConsumeByWorkId(Integer page, Integer rows, String searchValue)
-				throws Exception{
-			EUDataGridResult result = materialConsumeService.searchMaterialConsumeByWorkId(page, rows, searchValue);
-			return result;
-		}
+	@RequestMapping("/search_materialConsume_by_materialId")
+	@ResponseBody
+	public EUDataGridResult searchMaterialConsumeByMaterialId(Integer page, Integer rows, String searchValue) 
+			throws Exception{
+		EUDataGridResult result = materialConsumeService.searchMaterialConsumeByMaterialId(page, rows, searchValue);
+		return result;
+	}
+	
+	//搜索
+	@RequestMapping("/search_materialConsume_by_workId")
+	@ResponseBody
+	public EUDataGridResult searchMaterialConsumeByWorkId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = materialConsumeService.searchMaterialConsumeByWorkId(page, rows, searchValue);
+		return result;
+	}
 }
 
