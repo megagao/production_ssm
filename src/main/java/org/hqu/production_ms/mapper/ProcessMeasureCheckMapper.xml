@@ -15,35 +15,7 @@
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
   </resultMap>
   
-  <!-- 修改备注-->
-	<update id="updateNote" parameterType="processMeasureCheck" >
-		UPDATE process_measure_check
-		SET note = #{note}
-		WHERE
-			p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
-	</update>
-  
-  <select id="searchPMeasureCheckByPMeasureCheckId" parameterType="string" resultMap="AddResultMap">
-		SELECT
-			p_measure_check_id ,
-			process_id,
-			check_item,
-			cdate,
-			measure_data,
-			process_measure_check.emp_id,
-			emp_name,
-			result,
-			process_measure_check.note
-		FROM
-			process_measure_check,
-			employee
-		WHERE 
-			process_measure_check.emp_id = employee.emp_id
-		AND p_measure_check_id like CONCAT('%',#{pMeasureCheckId},'%' ) 
-	</select>
-	
-  
-    <!-- 查询所有记录 -->
+   	<!-- 查询所有记录 -->
 	<select id="find" parameterType="processMeasureCheck" resultMap="AddResultMap">
 		SELECT
 			p_measure_check_id ,
@@ -62,8 +34,34 @@
 			process_measure_check.emp_id = employee.emp_id
 	</select>
 	
-	
-		<!-- 批量删除 -->
+  	<!-- 修改备注-->
+	<update id="updateNote" parameterType="processMeasureCheck" >
+		UPDATE process_measure_check
+		SET note = #{note}
+		WHERE
+			p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+	</update>
+  
+  	<select id="searchPMeasureCheckByPMeasureCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			p_measure_check_id ,
+			process_id,
+			check_item,
+			cdate,
+			measure_data,
+			process_measure_check.emp_id,
+			emp_name,
+			result,
+			process_measure_check.note
+		FROM
+			process_measure_check,
+			employee
+		WHERE 
+			process_measure_check.emp_id = employee.emp_id
+		AND p_measure_check_id like CONCAT('%',#{pMeasureCheckId},'%' ) 
+	</select>
+  
+	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
