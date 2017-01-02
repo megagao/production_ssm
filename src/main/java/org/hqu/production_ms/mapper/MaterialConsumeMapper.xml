@@ -24,6 +24,106 @@
 	    <result column="note" property="note" jdbcType="VARCHAR" />
 	</association>
   </resultMap>
+  
+  	<!-- 扩展的sql -->
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="MaterialConsume" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume
+		LEFT JOIN material ON material_consume.material_id = material.material_id
+		LEFT JOIN work ON material_consume.work_id = work.work_id
+	</select>
+	
+  	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			material_consume
+		WHERE
+			consume_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
+		UPDATE material_consume
+		SET note = #{note}
+		WHERE
+			consume_id = #{consumeId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 依据consumeID查询 -->
+	<select id="searchMaterialConsumeByConsumeId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume		
+		LEFT JOIN  material
+			ON	 material_consume.material_id=material.material_id
+		LEFT JOIN  work
+		    ON   material_consume.work_id=work.work_id
+		WHERE  consume_id like CONCAT('%',#{consumeId},'%' ) 
+	</select>
+	
+	<!-- 依据materialID查询 -->
+	<select id="searchMaterialConsumeByMaterialId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume		
+		LEFT JOIN  material
+			ON	 material_consume.material_id=material.material_id
+		LEFT JOIN  work
+		    ON   material_consume.work_id=work.work_id
+		  where  material_consume.material_id like CONCAT('%',#{materialId},'%' ) 
+	  </select>
+	  
+	<!-- 依据workID查询 -->
+	<select id="searchMaterialConsumeByWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+				consume_id,
+				consume_amount,
+				consume_date,
+				sender,
+				receiver,
+				material_consume.note,
+				material.material_id,
+				work.work_id
+		FROM
+				material_consume		
+			LEFT JOIN  material
+				ON	 material_consume.material_id=material.material_id
+			LEFT JOIN  work
+			    ON   material_consume.work_id=work.work_id
+			WHERE material_consume.work_id like CONCAT('%',#{workId},'%' ) 
+   	</select>
+   
+   
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -82,112 +182,6 @@
       </foreach>
     </where>
   </sql>
-  
-   <!-- 扩展的sql -->
-  <!-- 批量删除 -->
-	<delete id="deleteBatch">
-		DELETE
-		FROM
-			material_consume
-		WHERE
-			consume_id IN
-		<foreach collection="array" item="id" open="(" close=")" separator=",">
-			#{id}
-		</foreach>
-	</delete>
-
-<!-- 查询所有记录 -->
-<select id="find" parameterType="MaterialConsume" resultMap="BaseResultMap">
-		SELECT
-			consume_id,
-			consume_amount,
-			consume_date,
-			sender,
-			receiver,
-			material_consume.note,
-			material.material_id,
-			work.work_id
-		FROM
-			material_consume
-		LEFT JOIN material ON material_consume.material_id = material.material_id
-		LEFT JOIN work ON material_consume.work_id = work.work_id
-	</select>
-<!-- 修改状态，批量启用停用-->
-	<update id="changeStatus">
-		UPDATE material_consume
-		SET status = #{status}
-		WHERE
-			consume_id IN
-		<foreach collection="ids" item="id" open="(" close=")" separator=",">
-			#{id}
-		</foreach>
-	</update>
-	<!-- 修改备注-->
-	<update id="updateNote" parameterType="org.hqu.production_ms.domain.MaterialConsume" >
-		UPDATE material_consume
-		SET note = #{note}
-		WHERE
-			consume_id = #{consumeId,jdbcType=VARCHAR}
-	</update>
-	<!-- 依据consumeID查询 -->
-	<select id="searchMaterialConsumeByConsumeId" parameterType="string" resultMap="BaseResultMap">
-		SELECT
-			consume_id,
-			consume_amount,
-			consume_date,
-			sender,
-			receiver,
-			material_consume.note,
-			material.material_id,
-			work.work_id
-		FROM
-			material_consume		
-	LEFT JOIN  material
-		ON	 material_consume.material_id=material.material_id
-	LEFT JOIN  work
-	    ON   material_consume.work_id=work.work_id
-	WHERE  consume_id like CONCAT('%',#{consumeId},'%' ) 
-	</select>
-	<!-- 依据materialID查询 -->
-	<select id="searchMaterialConsumeByMaterialId" parameterType="string" resultMap="BaseResultMap">
-		SELECT
-			consume_id,
-			consume_amount,
-			consume_date,
-			sender,
-			receiver,
-			material_consume.note,
-			material.material_id,
-			work.work_id
-		FROM
-			material_consume		
-	LEFT JOIN  material
-		ON	 material_consume.material_id=material.material_id
-	LEFT JOIN  work
-	    ON   material_consume.work_id=work.work_id
-	  where  material_consume.material_id like CONCAT('%',#{materialId},'%' ) 
-	  </select>
-	<!-- 依据workID查询 -->
-	<select id="searchMaterialConsumeByWorkId" parameterType="string" resultMap="BaseResultMap">
-		SELECT
-				consume_id,
-				consume_amount,
-				consume_date,
-				sender,
-				receiver,
-				material_consume.note,
-				material.material_id,
-				work.work_id
-		FROM
-				material_consume		
-		LEFT JOIN  material
-			ON	 material_consume.material_id=material.material_id
-		LEFT JOIN  work
-		    ON   material_consume.work_id=work.work_id
-		WHERE material_consume.work_id like CONCAT('%',#{workId},'%' ) 
-   </select>
-   
-   
   <sql id="Base_Column_List" >
     consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, 
     note
