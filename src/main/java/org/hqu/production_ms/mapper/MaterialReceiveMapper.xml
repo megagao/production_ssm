@@ -16,6 +16,82 @@
 	    <result column="note" property="note" jdbcType="VARCHAR" />
 	</association>
   </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="MaterialReceive" resultMap="BaseResultMap">
+		SELECT
+		    receive_id,
+		    ammount,
+		    receive_date,
+		    sender,
+		    receiver,
+		    material_receive.note,
+			material.material_id
+		FROM
+			material_receive
+		LEFT JOIN material ON
+			material.material_id=material_receive.material_id		
+		 <!--  order by material_receive.receive_date -->
+	</select>
+	
+  	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			material_receive
+		WHERE
+			receive_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
+		UPDATE material_receive
+		SET note = #{note}
+		WHERE
+			receive_id = #{receiveId,jdbcType=VARCHAR}
+	</update>
+	
+    <!-- 依据ReceiveId查询 -->
+    <select id="searchMaterialReceiveByReceiveId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+		    receive_id,
+		    ammount,
+		    receive_date,
+		    sender,
+		    receiver,
+		    material_receive.note,
+			material.material_id
+		FROM
+			material_receive,
+			material
+		WHERE
+			material.material_id=material_receive.material_id
+	    AND receive_id like CONCAT('%',#{receiveId},'%' ) 	
+	</select>
+  
+    <!-- 依据materialId查询 -->
+    <select id="searchMaterialReceiveByMaterialId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+		    receive_id,
+		    ammount,
+		    receive_date,
+		    sender,
+		    receiver,
+		    material_receive.note,
+			material.material_id
+		FROM
+			material_receive,
+			material
+		WHERE
+			material.material_id=material_receive.material_id
+	    AND material.material_id like CONCAT('%',#{materialId},'%' ) 	
+	</select>
+	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -74,89 +150,6 @@
       </foreach>
     </where>
   </sql>
-  
-  <!-- 扩展的sql -->
-  <!-- 批量删除 -->
-	<delete id="deleteBatch">
-		DELETE
-		FROM
-			material_receive
-		WHERE
-			receive_id IN
-		<foreach collection="array" item="id" open="(" close=")" separator=",">
-			#{id}
-		</foreach>
-	</delete>
-
-<!-- 查询所有记录 -->
-<select id="find" parameterType="MaterialReceive" resultMap="BaseResultMap">
-		SELECT
-		    receive_id,
-		    ammount,
-		    receive_date,
-		    sender,
-		    receiver,
-		    material_receive.note,
-			material.material_id
-		FROM
-			material_receive
-		LEFT JOIN material ON
-			material.material_id=material_receive.material_id		
-		 <!--  order by material_receive.receive_date -->
-	</select>
-<!-- 修改状态，批量启用停用-->
-	<update id="changeStatus">
-		UPDATE material_receive
-		SET status = #{status}
-		WHERE
-			receive_id IN
-		<foreach collection="ids" item="id" open="(" close=")" separator=",">
-			#{id}
-		</foreach>
-	</update>
-	<!-- 修改备注-->
-	<update id="updateNote" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
-		UPDATE material_receive
-		SET note = #{note}
-		WHERE
-			receive_id = #{receiveId,jdbcType=VARCHAR}
-	</update>
-    <!-- 依据ReceiveId查询 -->
-    <select id="searchMaterialReceiveByReceiveId" parameterType="string" resultMap="BaseResultMap">
-		SELECT
-		    receive_id,
-		    ammount,
-		    receive_date,
-		    sender,
-		    receiver,
-		    material_receive.note,
-			material.material_id
-		FROM
-			material_receive,
-			material
-		WHERE
-			material.material_id=material_receive.material_id
-	    AND receive_id like CONCAT('%',#{receiveId},'%' ) 	
-	</select>
-  
-    <!-- 依据materialId查询 -->
-    <select id="searchMaterialReceiveByMaterialId" parameterType="string" resultMap="BaseResultMap">
-		SELECT
-		    receive_id,
-		    ammount,
-		    receive_date,
-		    sender,
-		    receiver,
-		    material_receive.note,
-			material.material_id
-		FROM
-			material_receive,
-			material
-		WHERE
-			material.material_id=material_receive.material_id
-	    AND material.material_id like CONCAT('%',#{materialId},'%' ) 	
-	</select>
-  
   <sql id="Base_Column_List" >
     receive_id, material_id, ammount, receive_date, sender, receiver, note
   </sql>
