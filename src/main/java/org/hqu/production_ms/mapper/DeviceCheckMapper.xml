@@ -15,42 +15,42 @@
     <result column="device_check_emp" property="deviceCheckEmp" jdbcType="VARCHAR" />
   </resultMap>
 
-<!-- 扩展的sql -->
-<!-- 查询所有记录 -->
-<select id="find" parameterType="deviceCheck" resultMap="AddResultMap">
-	SELECT
-		device_check_id,
-		device_check.device_id,
-		device.device_name,
-		emp_id as device_check_emp_id,
-		emp_name as device_check_emp,
-		device_check_date,
-		device_check_result,
-		device_check_fault_id
-	FROM
-		device_check,
-		device,
-		employee
-	WHERE
-		device_check.device_id = device.device_id
-	AND device_check_emp_id = employee.emp_id
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="deviceCheck" resultMap="AddResultMap">
+		SELECT
+			device_check_id,
+			device_check.device_id,
+			device.device_name,
+			emp_id as device_check_emp_id,
+			emp_name as device_check_emp,
+			device_check_date,
+			device_check_result,
+			device_check_fault_id
+		FROM
+			device_check,
+			device,
+			employee
+		WHERE
+			device_check.device_id = device.device_id
+		AND device_check_emp_id = employee.emp_id
+		
+		order by device_check_id ASC
+	</select>
 	
-	order by device_check_id ASC
-</select>
-
-<!-- 批量删除 -->
-<delete id="deleteBatch">
-	DELETE
-	FROM
-		device_check
-	WHERE
-		device_check_id IN
-	<foreach collection="array" item="id" open="(" close=")" separator=",">
-		#{id}
-	</foreach>
-</delete>
-
-<!-- 修改备注-->
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device_check
+		WHERE
+			device_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
 	<update id="updateNote" parameterType="org.hqu.production_ms.domain.DeviceCheck" >
 		UPDATE device_check
 		SET device_check_result = #{deviceCheckResult}
@@ -101,6 +101,7 @@
 				'%',
 				#{deviceName},'%' ) 
 	</select>
+	
 	
   <sql id="Example_Where_Clause" >
     <where >
