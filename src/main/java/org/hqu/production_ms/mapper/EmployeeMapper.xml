@@ -156,6 +156,7 @@
 				#{departmentName},'%' ) 
 	</select>
 	
+	
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
