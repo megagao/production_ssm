@@ -11,8 +11,6 @@ public interface MaterialConsumeMapper {
 	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
-	
-	int changeStatus(String[] ids);
 		
 	int updateNote(MaterialConsumePO materialConsume);
 	
