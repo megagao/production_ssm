@@ -58,7 +58,7 @@
 		<if test="status!=null">
 			and status=#{status}
 		</if>
-		order by c_order.order_date
+		ORDER BY c_order.order_date
 	</select>
 	
 	<select id="searchOrderByOrderId" parameterType="string" resultMap="BaseResultMap">
@@ -81,8 +81,9 @@
 			c_order
 		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
 		LEFT JOIN product ON c_order.product_id = product.product_id
-		where order_id like CONCAT('%',#{orderId},'%' ) 
-		order by c_order.order_date
+		WHERE 
+			order_id like CONCAT('%',#{orderId},'%' ) 
+		ORDER BY c_order.order_date
 	</select>
 	
 	<select id="searchOrderByCustomName" parameterType="string" resultMap="BaseResultMap">
@@ -105,8 +106,9 @@
 			c_order
 		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
 		LEFT JOIN product ON c_order.product_id = product.product_id
-		where custom_name like CONCAT('%',#{customName},'%' ) 
-		order by c_order.order_date
+		WHERE 
+			custom_name like CONCAT('%',#{customName},'%' ) 
+		ORDER BY c_order.order_date
 	</select>
 	
 	<select id="searchOrderByProductName" parameterType="string" resultMap="BaseResultMap">
@@ -129,8 +131,9 @@
 			c_order
 		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
 		LEFT JOIN product ON c_order.product_id = product.product_id
-		where product_name like CONCAT('%',#{productName},'%' ) 
-		order by c_order.order_date
+		WHERE 
+			product_name like CONCAT('%',#{productName},'%' ) 
+		ORDER BY c_order.order_date
 	</select>
 	
 	<!-- 批量删除 -->
