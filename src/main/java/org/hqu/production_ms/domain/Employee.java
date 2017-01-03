@@ -2,10 +2,9 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
-import javax.validation.constraints.Size;
-
 import org.hqu.production_ms.domain.Department;
 import org.hqu.production_ms.domain.Device;
+
 
 public class Employee extends Device{
 	
