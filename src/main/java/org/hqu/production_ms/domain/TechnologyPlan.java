@@ -7,7 +7,6 @@ import javax.validation.constraints.Size;
 
 
 public class TechnologyPlan {
-	
 	@Size(max=40, message="{id.length.error}")
     private String technologyPlanId;
 	
