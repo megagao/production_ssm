@@ -1,14 +1,18 @@
 package org.hqu.production_ms.test;
 
-import java.util.List;
-
+import org.hqu.production_ms.domain.Custom;
+import org.hqu.production_ms.service.CustomService;
 import org.hqu.production_ms.util.FileUtil;
 import org.joda.time.DateTime;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class test {
+	
 	@Test
-	public void test(){
+	public void testFile(){
 		String oldName = "aaa.jpg";
 		String date = new DateTime().toString("yyyy/MM/dd");
 
@@ -19,9 +23,18 @@ public class test {
 	}
 	
 	@Test
-	public void test1(){
+	public void testFile1(){
 		FileUtil.deleteFile("F:\\upload\\temp\\file\\"+"新建文本文档(2016-10-05).txt");
 	}
 	
-
+	@Test
+	public void test1() throws Exception{
+		@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring/applicationContext-*.xml");
+		CustomService customService = (CustomService)context.getBean("customServiceImpl");
+		Custom custom = new Custom();
+		custom.setCustomId("1253");
+		custom.setCustomName("aaa");
+		customService.insert(custom);
+	}
 }
