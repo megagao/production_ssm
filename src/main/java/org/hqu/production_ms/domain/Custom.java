@@ -11,7 +11,7 @@ public class Custom {
 	@Size(max=20, message="客户名称请限制在20个字符内")
     private String customName;
 
-	@Size(max=100, message="客户名称请限制在100个字符内")
+	@Size(max=100, message="客户全称请限制在100个字符内")
     private String fullName;
 
 	@Size(max=100, message="地址请限制在100个字符内")
