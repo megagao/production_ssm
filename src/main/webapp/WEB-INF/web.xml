@@ -14,7 +14,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-
 	<!-- 加载springMVC servlet, 	配置前端控制器 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -82,5 +81,4 @@
 	    <error-code>404</error-code>  
 	    <location>/404.jsp</location>  
 	</error-page>  
-	
 </web-app>
