@@ -11,7 +11,7 @@ public class UnqualifyApply {
 	
     private String productId;
 
-	@Size(max=200, message="不合格项目的长度限制在200个字符之内")
+	@Size(max=200, message="不合格项目长度限制在200个字符之内")
     private String unqualifyItem;
 
 	@Max(value=999999999, message="不合格数量不能超过999999999")
