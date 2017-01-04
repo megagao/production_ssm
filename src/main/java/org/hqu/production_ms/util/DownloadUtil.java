@@ -22,7 +22,6 @@ public class DownloadUtil {
 		this.prototypeDownload(new File(filePath), returnName, response, delFlag);
 	}
 
-
 	/**
 	 * @param file 要下载的文件
 	 * @param returnName 返回的文件名
