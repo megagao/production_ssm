@@ -119,8 +119,6 @@ public class CustomRealm extends AuthorizingRealm {
 		return simpleAuthenticationInfo;
 	}
 	
-	
-
 	// 用于授权
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
@@ -162,6 +160,4 @@ public class CustomRealm extends AuthorizingRealm {
 		PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
 		super.clearCache(principals);
 	}
-
-
 }
