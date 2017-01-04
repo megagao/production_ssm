@@ -25,7 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * created on 2016年9月6日 
  *
- * 自定义realm
+ * 自定义shiro realm
  *
  * @author  megagao
  * @version  0.0.1
