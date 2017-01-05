@@ -8,6 +8,7 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.EmployeePO;
 
 public interface EmployeeService {
+	
 	List<Employee> find() throws Exception;  
 	
 	EUDataGridResult getList(int page, int rows, Employee employee) throws Exception;
