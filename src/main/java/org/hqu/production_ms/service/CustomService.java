@@ -7,6 +7,7 @@ import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface CustomService {
+	
 	List<Custom> find() throws Exception;  
 	
 	EUDataGridResult getList(int page, int rows, Custom custom) throws Exception;
