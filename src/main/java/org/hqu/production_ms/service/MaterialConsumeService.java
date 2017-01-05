@@ -12,7 +12,8 @@ public interface MaterialConsumeService {
     
 	List<MaterialConsume> find() throws Exception; 
 	
-	EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) throws Exception;
+	EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) 
+			throws Exception;
 	
 	MaterialConsume get(String string) throws Exception;
 	
@@ -30,7 +31,8 @@ public interface MaterialConsumeService {
     
     CustomResult updateNote(MaterialConsumePO materialConsume) throws Exception;
 
-    EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) throws Exception;
+    EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) 
+    		throws Exception;
 	
    	EUDataGridResult searchMaterialConsumeByMaterialId(int page, int rows,
    			String materialId) throws Exception;
