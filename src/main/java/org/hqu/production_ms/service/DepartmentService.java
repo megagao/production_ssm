@@ -7,7 +7,6 @@ import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface DepartmentService {
-	
 	List<Department> find() throws Exception;  
 	
 	EUDataGridResult getList(int page, int rows, Department department) throws Exception;
