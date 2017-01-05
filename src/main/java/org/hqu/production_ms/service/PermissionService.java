@@ -7,6 +7,7 @@ import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface PermissionService {
+	
 	List<SysRolePermission> find() throws Exception;  
 	
 	EUDataGridResult getList(int page, int rows, SysRolePermission sysRolePermission) throws Exception;
