@@ -7,9 +7,6 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface FCountCheckService {
 
-	EUDataGridResult searchFCountCheckByFCountCheckId(int page, int rows, String fCountCheckId) 
-			throws Exception;
-	
 	FinalCountCheck get(String string) throws Exception;
 	
 	CustomResult deleteBatch(String[] ids) throws Exception;
@@ -31,4 +28,7 @@ public interface FCountCheckService {
 
 	EUDataGridResult searchFCountCheckByOrderId(Integer page, Integer rows,
 			String orderId) throws Exception;
+	
+	EUDataGridResult searchFCountCheckByFCountCheckId(int page, int rows, String fCountCheckId) 
+			throws Exception;
 }
