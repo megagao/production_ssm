@@ -7,6 +7,7 @@ import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface MeasureService {
+	
 	EUDataGridResult getList(Integer page, Integer rows, FinalMeasuretCheck 
 			finalMeasuretCheck) throws Exception;
 
