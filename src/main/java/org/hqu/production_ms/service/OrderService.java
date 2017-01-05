@@ -31,11 +31,14 @@ public interface OrderService {
 
     CustomResult changeStatus(String[] ids) throws Exception;
 
+    //根据订单id查找订单信息
     EUDataGridResult searchOrderByOrderId(int page, int rows, String orderId) throws Exception;
 	
+    //根据客户名称查找订单信息
 	EUDataGridResult searchOrderByCustomName(int page, int rows,
 			String customName) throws Exception;
 	
+	//根据产品名称查找订单信息
 	EUDataGridResult searchOrderByProductName(int page, int rows,
 			String productName) throws Exception;
 }
