@@ -8,6 +8,7 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.ManufacturePO;
 
 public interface ManufactureService {
+	
 	List<Manufacture> find() throws Exception;  
 	
 	EUDataGridResult getList(int page, int rows) throws Exception;
