@@ -8,9 +8,6 @@ import org.hqu.production_ms.domain.po.COrderPO;
 
 public interface PCountCheckService {
 	
-	EUDataGridResult searchPCountCheckByPCountCheckId(int page, int rows, 
-			String pCountCheckId) throws Exception;
-	
 	EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck) throws Exception;
 	
 	COrder get(String string) throws Exception;
@@ -30,4 +27,7 @@ public interface PCountCheckService {
     CustomResult updateNote(ProcessCountCheck processCountCheck) throws Exception;
 
     CustomResult changeStatus(String[] ids) throws Exception;
+    
+    EUDataGridResult searchPCountCheckByPCountCheckId(int page, int rows, 
+			String pCountCheckId) throws Exception;
 }
