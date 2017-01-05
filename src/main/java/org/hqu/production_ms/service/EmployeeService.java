@@ -30,12 +30,15 @@ public interface EmployeeService {
 
 	List<Employee> searchEmployeeByEmployeeId(String employeeId) throws Exception;
 
+	//根据员工id查找员工信息
 	EUDataGridResult searchEmployeeByEmployeeId(Integer page, Integer rows,
 			String employeeId) throws Exception;
 
+	//根据员工姓名查找员工信息
 	EUDataGridResult searchEmployeeByEmployeeName(Integer page, Integer rows,
 			String employeeName) throws Exception;
 
+	//根据部门名称查找员工信息
 	EUDataGridResult searchEmployeeByDepartmentName(Integer page, Integer rows,
 			String departmentName) throws Exception;
 }
