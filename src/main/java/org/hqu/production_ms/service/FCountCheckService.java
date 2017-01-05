@@ -6,6 +6,9 @@ import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface FCountCheckService {
+	
+	EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck)
+    		throws Exception;
 
 	FinalCountCheck get(String string) throws Exception;
 	
@@ -23,9 +26,6 @@ public interface FCountCheckService {
 
     CustomResult changeStatus(String[] ids) throws Exception;
     
-    EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck)
-    		throws Exception;
-
 	EUDataGridResult searchFCountCheckByOrderId(Integer page, Integer rows,
 			String orderId) throws Exception;
 	
