@@ -9,32 +9,32 @@ import org.hqu.production_ms.domain.po.WorkPO;
 
 public interface WorkService {
 	
-	List<Work> find();  
+	List<Work> find() throws Exception;  
 	
-	EUDataGridResult getList(int page, int rows, Work work);
+	EUDataGridResult getList(int page, int rows, Work work) throws Exception;
 	
-	Work get(String string);
+	Work get(String string) throws Exception;
 	
-	CustomResult delete(String string);
+	CustomResult delete(String string) throws Exception;
 
-	CustomResult deleteBatch(String[] ids);
+	CustomResult deleteBatch(String[] ids) throws Exception;
 
-	CustomResult insert(WorkPO work);
+	CustomResult insert(WorkPO work) throws Exception;
 
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(WorkPO work);
+    CustomResult updateAll(WorkPO work) throws Exception;
     
-    CustomResult update(WorkPO work);
+    CustomResult update(WorkPO work) throws Exception;
     
 	EUDataGridResult searchWorkByWorkId(Integer page, Integer rows,
-			String workId);
+			String workId) throws Exception;
 
 	EUDataGridResult searchWorkByWorkProduct(Integer page, Integer rows,
-			String workProduct);
+			String workProduct) throws Exception;
 
 	EUDataGridResult searchWorkByWorkDevice(Integer page, Integer rows,
-			String workDevice);
+			String workDevice) throws Exception;
 
 	EUDataGridResult searchWorkByWorkProcess(Integer page, Integer rows,
-			String workProcess);
+			String workProcess) throws Exception;
 }
