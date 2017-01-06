@@ -11,7 +11,8 @@ public interface PMeasureCheckService {
 	EUDataGridResult searchPMeasureCheckByPMeasureCheckId(int page, int rows, 
 			String pMeasureCheckId) throws Exception;
 	
-	EUDataGridResult getList(int page, int rows, ProcessMeasureCheck processMeasureCheck) throws Exception;
+	EUDataGridResult getList(int page, int rows, ProcessMeasureCheck processMeasureCheck) 
+			throws Exception;
 	
 	COrder get(String string) throws Exception;
 	
