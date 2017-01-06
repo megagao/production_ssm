@@ -8,33 +8,33 @@ import org.hqu.production_ms.domain.custom.EUDataGridResult;
 
 public interface ProductService {
 	
-	List<Product> find() throws Exception;  
+	List<Product> find();  
 	
-	EUDataGridResult getList(int page, int rows, Product product) throws Exception;
+	EUDataGridResult getList(int page, int rows, Product product);
 	
-	Product get(String string) throws Exception;
+	Product get(String string);
 	
-	CustomResult delete(String string) throws Exception;
+	CustomResult delete(String string);
 
-	CustomResult deleteBatch(String[] ids) throws Exception;
+	CustomResult deleteBatch(String[] ids);
 
-	CustomResult insert(Product product) throws Exception;
+	CustomResult insert(Product product);
 
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-    CustomResult update(Product product) throws Exception;
+    CustomResult update(Product product);
     
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(Product product) throws Exception;
+    CustomResult updateAll(Product product);
     
     //更新备注
-    CustomResult updateNote(Product product) throws Exception;
+    CustomResult updateNote(Product product);
     
     EUDataGridResult searchProductByProductName(int page, int rows, 
-    		String productName) throws Exception;
+    		String productName);
 
     EUDataGridResult searchProductByProductId(int page, int rows, 
-    		String productId) throws Exception;
+    		String productId);
     
     EUDataGridResult searchProductByProductType(int page, int rows, 
-    		String productType) throws Exception;
+    		String productType);
 }

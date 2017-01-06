@@ -9,36 +9,36 @@ import org.hqu.production_ms.domain.po.UserPO;
 
 public interface UserService {
 	
-	EUDataGridResult getList(int page, int rows, SysUser sysUser) throws Exception;
+	EUDataGridResult getList(int page, int rows, SysUser sysUser);
 	
-	SysUser get(String string) throws Exception;
+	SysUser get(String string);
 	
-	List<SysUser> findByUserNameAndId(String username, String id) throws Exception;
+	List<SysUser> findByUserNameAndId(String username, String id);
 	
-	CustomResult delete(String string) throws Exception;
+	CustomResult delete(String string);
 
-	CustomResult deleteBatch(String[] ids) throws Exception;
+	CustomResult deleteBatch(String[] ids);
 
-	CustomResult insert(UserPO userPO) throws Exception;
+	CustomResult insert(UserPO userPO);
 
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-    CustomResult update(UserPO userPO) throws Exception;
+    CustomResult update(UserPO userPO);
     
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(UserPO userPO) throws Exception;
+    CustomResult updateAll(UserPO userPO);
     
-    CustomResult changeStatus(String[] ids) throws Exception;
+    CustomResult changeStatus(String[] ids);
     
-    List<SysUser> searchSysUserBySysUserName(String sysUserName) throws Exception;
+    List<SysUser> searchSysUserBySysUserName(String sysUserName);
 
-	List<SysUser> searchSysUserBySysUserId(String sysUserId) throws Exception;
+	List<SysUser> searchSysUserBySysUserId(String sysUserId);
 
 	EUDataGridResult searchUserByUserId(Integer page, Integer rows,
-			String userId) throws Exception;
+			String userId);
 
 	EUDataGridResult searchUserByUserName(Integer page, Integer rows,
-			String userName) throws Exception;
+			String userName);
 
 	EUDataGridResult searchUserByRoleName(Integer page, Integer rows,
-			String roleName) throws Exception;
+			String roleName);
 }
