@@ -14,29 +14,13 @@ public interface ProcessService {
 
 	Process get(String string) throws Exception;
 	
-	/*
-	CustomResult delete(String string);
-	
-	*/
-
 	CustomResult deleteBatch(String[] ids) throws Exception;
 
 	
 	CustomResult insert(Process process) throws Exception;
 	
-	/*
-	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-    CustomResult update(Custom custom);
-    */
     //更新全部字段，不判断非空，直接进行更新
     CustomResult updateAll(Process process) throws Exception;
-    /*
-    //更新要求
-    CustomResult updateRequirement(Process process);
-
-   
-    CustomResult changeStatus(String[] ids);
-    */
 
 	EUDataGridResult searchProcessByProcessId(Integer page, Integer rows,
 			String processId) throws Exception;
