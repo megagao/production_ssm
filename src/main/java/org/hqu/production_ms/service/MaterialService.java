@@ -30,7 +30,8 @@ public interface MaterialService {
     //更新备注
     CustomResult updateNote(Material material) throws Exception;
     
-    EUDataGridResult searchMaterialByMaterialId(int page, int rows, String materialId) throws Exception;
+    EUDataGridResult searchMaterialByMaterialId(int page, int rows, String materialId) 
+    		throws Exception;
 
 	EUDataGridResult searchMaterialByMaterialType(Integer page, Integer rows,
 			String materialType) throws Exception;
