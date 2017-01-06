@@ -15,7 +15,6 @@ public interface ProcessService {
 	Process get(String string) throws Exception;
 	
 	CustomResult deleteBatch(String[] ids) throws Exception;
-
 	
 	CustomResult insert(Process process) throws Exception;
 	
