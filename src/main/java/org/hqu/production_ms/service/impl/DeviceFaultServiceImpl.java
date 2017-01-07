@@ -134,5 +134,4 @@ public class DeviceFaultServiceImpl implements DeviceFaultService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
 }
