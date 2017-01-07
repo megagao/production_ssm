@@ -85,7 +85,6 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	@Override
 	public EUDataGridResult searchFCountCheckByFCountCheckId(int page,
 			int rows, String fCountCheckId) throws Exception{
-		
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<FinalCountCheckPO> list = finalCountCheckMapper.searchFCountCheckByFCountCheckId(fCountCheckId);
