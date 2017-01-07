@@ -117,5 +117,4 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
 }
