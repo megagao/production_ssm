@@ -45,18 +45,6 @@ public class DeviceServiceImpl implements DeviceService{
 	public Device get(String id) throws Exception {
 		return deviceMapper.selectByPrimaryKey(id);
 	}
-	/*@Override
-	public List<Device> find() throws Exception {
-		DeviceExample example = new DeviceExample();
-		return deviceMapper.selectByExample(example);
-	}
-	
-	
-	@Override
-	public Device get(String id) throws Exception {
-		return deviceMapper.selectByPrimaryKey(id);
-	}*/
-
 	
 	@Override
 	public CustomResult insert(Device device) throws Exception {
@@ -67,7 +55,6 @@ public class DeviceServiceImpl implements DeviceService{
 			return CustomResult.build(101, "新增设备信息失败");
 		}
 	}
-
 
 	@Override
 	public CustomResult deleteBatch(String[] deviceIds) throws Exception {
@@ -91,7 +78,6 @@ public class DeviceServiceImpl implements DeviceService{
 			return CustomResult.build(101, "修改设备信息失败");
 		}
 	}
-
 
 	@Override
 	public CustomResult updateNote(Device device) throws Exception {
@@ -157,5 +143,4 @@ public class DeviceServiceImpl implements DeviceService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
 }
