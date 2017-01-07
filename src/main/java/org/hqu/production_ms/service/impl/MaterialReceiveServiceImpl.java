@@ -12,37 +12,15 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 @Service
 public class MaterialReceiveServiceImpl implements MaterialReceiveService {
+	
 	@Autowired
 	MaterialReceiveMapper materialReceiveMapper;
-	//@Override
-/*	public List<MaterialReceive> find() {
-		// TODO Auto-generated method stub
-		MaterialReceiveExample example = new MaterialReceiveExample();
-		return materialReceiveMapper.selectByExample(example);	
-	}
-*/
-	/*@Override
-	public EUDataGridResult getList(int page, int rows,
-		MaterialReceive materialReceive) {
-		// TODO Auto-generated method stub
-		//查询列表
-		MaterialReceiveExample example = new MaterialReceiveExample();
-		//分页处理
-		PageHelper.startPage(page, rows);
-		List<MaterialReceive> list = materialReceiveMapper.selectByExample(example);
-		//创建一个返回值对象
-		EUDataGridResult result = new EUDataGridResult();
-		result.setRows(list);
-		//取记录总条数
-		PageInfo<MaterialReceive> pageInfo = new PageInfo<>(list);
-		result.setTotal(pageInfo.getTotal());
-		return result;		
-	}*/
 
 	@Override
-	public EUDataGridResult getList(int page, int rows) {
+	public EUDataGridResult getList(int page, int rows) throws Exception{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -57,13 +35,13 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 	
 	@Override
-	public MaterialReceive get(String string) {
+	public MaterialReceive get(String string) throws Exception{
 		// TODO Auto-generated method stub
 		return materialReceiveMapper.selectByPrimaryKey(string);
 	}
 
 	@Override
-	public CustomResult delete(String string) {
+	public CustomResult delete(String string) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.deleteByPrimaryKey(string);
 		if(i>0){
@@ -74,7 +52,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult deleteBatch(String[] ids) {
+	public CustomResult deleteBatch(String[] ids) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.deleteBatch(ids);
 		if(i>0){
@@ -85,7 +63,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult insert(MaterialReceivePO materialReceive) {
+	public CustomResult insert(MaterialReceivePO materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.insert(materialReceive);
 		if(i>0){
@@ -96,7 +74,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult update(MaterialReceivePO materialReceive) {
+	public CustomResult update(MaterialReceivePO materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.updateByPrimaryKeySelective(materialReceive);
 		if(i>0){
@@ -107,7 +85,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult updateAll(MaterialReceivePO materialReceive) {
+	public CustomResult updateAll(MaterialReceivePO materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.updateByPrimaryKey(materialReceive);
 		if(i>0){
@@ -118,7 +96,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult updateNote(MaterialReceivePO materialReceive) {
+	public CustomResult updateNote(MaterialReceivePO materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.updateNote(materialReceive);
 		if(i>0){
@@ -127,8 +105,10 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 			return CustomResult.build(101, "修改物料收入备注失败");
 		}
 	}
+	
 	@Override
-	public EUDataGridResult searchMaterialReceiveByReceiveId(int page, int rows, String receiveId){
+	public EUDataGridResult searchMaterialReceiveByReceiveId(int page, int rows, String receiveId)
+			throws Exception{
         //分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialReceive> list = materialReceiveMapper.searchMaterialReceiveByReceiveId(receiveId);
@@ -140,8 +120,10 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	 }
+	
 	@Override	
-	public	EUDataGridResult searchMaterialReceiveByMaterialId(int page, int rows,String materialId){
+	public	EUDataGridResult searchMaterialReceiveByMaterialId(int page, int rows,String materialId)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialReceive> list = materialReceiveMapper.searchMaterialReceiveByMaterialId(materialId);
@@ -152,7 +134,5 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		PageInfo<MaterialReceive> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
-		}
-	
-	
+	}
 }
