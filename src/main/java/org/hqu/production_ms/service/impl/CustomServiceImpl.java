@@ -22,7 +22,7 @@ public class CustomServiceImpl implements CustomService{
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, Custom custom) throws Exception{
-		//查询商品列表
+		//查询客户列表
 		CustomExample example = new CustomExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
