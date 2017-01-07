@@ -3,7 +3,6 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.FinalCountCheck;
-import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.FinalCountCheckPO;
@@ -22,8 +21,8 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	FinalCountCheckMapper finalCountCheckMapper; 
 	
 	@Override
-	public EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck) throws Exception{
-		
+	public EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck)
+			throws Exception{
 		PageHelper.startPage(page, rows);
 		List<FinalCountCheckPO> list = finalCountCheckMapper.find(finalCountCheck);
 		//创建一个返回值对象
@@ -63,17 +62,6 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	}
 
 	@Override
-	public CustomResult update(UnqualifyApply unqualify) throws Exception{
-		return null;
-//		int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualify);
-//		if(i>0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
-	}
-
-	@Override
 	public CustomResult updateAll(FinalCountCheck finalCountCheck) throws Exception{
 		int i = finalCountCheckMapper.updateByPrimaryKey(finalCountCheck);
 		if(i>0){
@@ -92,17 +80,6 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 		}else{
 			return CustomResult.build(101, "修改成品计数质检备注失败");
 		}
-	}
-
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		return null;
-//		int i = unqualifyApplyMapper.changeStatus(ids);
-//		if(i>0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
 	}
 
 	@Override
