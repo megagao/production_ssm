@@ -37,7 +37,6 @@ public class DeviceCheckServiceImpl implements DeviceCheckService{
 	public DeviceCheck get(String id) throws Exception {
 		return deviceCheckMapper.selectByPrimaryKey(id);
 	}
-
 	
 	@Override
 	public CustomResult insert(DeviceCheck deviceCheck) throws Exception {
