@@ -133,7 +133,8 @@ public class ManufactureServiceImpl implements ManufactureService{
 			Integer page, Integer rows, String manufactureTechnologyName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Manufacture> list = manufactureMapper.searchManufactureByManufactureTechnologyName(manufactureTechnologyName);
+		List<Manufacture> list = manufactureMapper
+				.searchManufactureByManufactureTechnologyName(manufactureTechnologyName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
