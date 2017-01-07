@@ -22,7 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	EmployeeMapper employeeMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Employee employee)  {
+	public EUDataGridResult getList(int page, int rows, Employee employee) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Employee> list = employeeMapper.find();
