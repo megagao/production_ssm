@@ -23,15 +23,12 @@ public class MaterialServiceImpl implements MaterialService {
 	
 	@Override
 	public List<Material> find() throws Exception{
-		// TODO Auto-generated method stub
 		MaterialExample example = new MaterialExample();
 		return materialMapper.selectByExample(example);	
 	}
 
 	@Override
 	public EUDataGridResult getList(int page, int rows, Material material) throws Exception{
-		// TODO Auto-generated method stub
-		
 		//查询列表
 		MaterialExample example = new MaterialExample();
 		//分页处理
@@ -48,38 +45,32 @@ public class MaterialServiceImpl implements MaterialService {
 
 	@Override
 	public Material get(String string) throws Exception{
-		// TODO Auto-generated method stub
 		return materialMapper.selectByPrimaryKey(string);
 		
 	}
 
 	@Override
 	public CustomResult delete(String string) throws Exception{
-		// TODO Auto-generated method stub
 		int i = materialMapper.deleteByPrimaryKey(string);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
 		}
-		
 	}
 
 	@Override
 	public CustomResult deleteBatch(String[] ids) throws Exception{
-		// TODO Auto-generated method stub
 		int i = materialMapper.deleteBatch(ids);
 		if(i>0){
 			return CustomResult.ok();
 		}else{
 			return null;
 		}
-		
 	}
 
 	@Override
 	public CustomResult insert(Material material) throws Exception{
-		// TODO Auto-generated method stub
 		int i = materialMapper.insert(material);
 		if(i>0){
 			return CustomResult.ok();
@@ -90,7 +81,6 @@ public class MaterialServiceImpl implements MaterialService {
 
 	@Override
 	public CustomResult update(Material material) throws Exception{
-		// TODO Auto-generated method stub
 		int i = materialMapper.updateByPrimaryKeySelective(material);
 		if(i>0){
 			return CustomResult.ok();
@@ -102,7 +92,6 @@ public class MaterialServiceImpl implements MaterialService {
 
 	@Override
 	public CustomResult updateAll(Material material) throws Exception{
-		// TODO Auto-generated method stub
 		int i = materialMapper.updateByPrimaryKey(material);
 		if(i>0){
 			return CustomResult.ok();
@@ -113,7 +102,6 @@ public class MaterialServiceImpl implements MaterialService {
 
 	@Override
 	public CustomResult updateNote(Material material) throws Exception{
-		// TODO Auto-generated method stub
 		int i = materialMapper.updateNote(material);
 		if(i>0){
 			return CustomResult.ok();
@@ -121,8 +109,10 @@ public class MaterialServiceImpl implements MaterialService {
 			return CustomResult.build(101, "修改物料备注失败");
 		}
 	}
+	
 	@Override
-	public EUDataGridResult searchMaterialByMaterialId(int page, int rows, String materialId){
+	public EUDataGridResult searchMaterialByMaterialId(int page, int rows, String materialId)
+			throws Exception{
         //分页处理
 		PageHelper.startPage(page, rows);
 		List<Material> list = materialMapper.searchMaterialByMaterialId(materialId);
@@ -149,5 +139,4 @@ public class MaterialServiceImpl implements MaterialService {
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-	
 }
