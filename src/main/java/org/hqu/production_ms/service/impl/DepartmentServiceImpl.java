@@ -22,7 +22,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, Department department) throws Exception{
-		//查询商品列表
+		//查询部门列表
 		DepartmentExample example = new DepartmentExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
