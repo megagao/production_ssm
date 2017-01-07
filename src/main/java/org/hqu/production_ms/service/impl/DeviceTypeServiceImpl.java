@@ -113,5 +113,4 @@ public class DeviceTypeServiceImpl implements DeviceTypeService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
 }
