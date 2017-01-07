@@ -31,7 +31,8 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) throws Exception{
+	public EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) 
+			throws Exception{
 		// TODO Auto-generated method stub
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -118,7 +119,8 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId) throws Exception{
+	public EUDataGridResult searchMaterialConsumeByConsumeId(int page, int rows, String consumeId)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByConsumeId(consumeId);
@@ -132,7 +134,8 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 	
 	@Override
-	public EUDataGridResult searchMaterialConsumeByMaterialId(int page, int rows, String materialId) throws Exception{
+	public EUDataGridResult searchMaterialConsumeByMaterialId(int page, int rows, String materialId)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByMaterialId(materialId);
@@ -146,7 +149,8 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public EUDataGridResult searchMaterialConsumeByWorkId(int page, int rows, String workId) throws Exception{
+	public EUDataGridResult searchMaterialConsumeByWorkId(int page, int rows, String workId)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByWorkId(workId);
@@ -158,6 +162,4 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-	
-
 }
