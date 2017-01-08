@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, Product product) throws Exception{
-		//查询商品列表
+		//查询产品列表
 		ProductExample example = new ProductExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
