@@ -28,7 +28,6 @@ public class FMeasurementController {
 	@Autowired
 	private MeasureService measureService;
 	
-	
 	/*
 	 * @responsebody表示该方法的返回结果直接写入HTTP response body中。
 	 * 一般在异步获取数据时使用，在使用@RequestMapping后，返回值通常解析为跳转路径，
@@ -157,7 +156,8 @@ public class FMeasurementController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) 
+			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -171,17 +171,10 @@ public class FMeasurementController {
 		return result;
 	}
 	
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) throws Exception {
-		return null;
-//		CustomResult result = orderService.update(finalMeasuretCheck);
-//		return result;
-	}
-	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult)
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -191,20 +184,13 @@ public class FMeasurementController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return measureService.updateNote(finalMeasuretCheck);
-	}
-	
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		return null;
-//		CustomResult result = orderService.delete(id);
-//		return result;
 	}
 	
 	@RequestMapping(value="/delete_batch")
@@ -214,6 +200,4 @@ public class FMeasurementController {
 		CustomResult result = measureService.deleteBatch(ids);
 		return result;
 	}
-	
-	
 }
