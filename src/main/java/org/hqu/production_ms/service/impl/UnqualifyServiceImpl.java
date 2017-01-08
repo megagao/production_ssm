@@ -21,8 +21,8 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 	UnqualifyApplyMapper unqualifyApplyMapper; 
 	
 	@Override
-	public EUDataGridResult getList(Integer page, Integer rows, UnqualifyApply unqualifyApply) throws Exception{
-		
+	public EUDataGridResult getList(Integer page, Integer rows, UnqualifyApply unqualifyApply)
+			throws Exception{
 		PageHelper.startPage(page, rows);
 		List<UnqualifyApplyPO> list = unqualifyApplyMapper.find(unqualifyApply);
 		//创建一个返回值对象
