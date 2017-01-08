@@ -198,5 +198,4 @@ public class RoleServiceImpl implements RoleService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
 }
