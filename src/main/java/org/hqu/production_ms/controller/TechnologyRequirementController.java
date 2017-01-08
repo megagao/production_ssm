@@ -33,8 +33,10 @@ public class TechnologyRequirementController {
 	
 	@RequestMapping("/get/{technologyRequirementId}")
 	@ResponseBody
-	public TechnologyRequirement getItemById(@PathVariable String technologyRequirementId) throws Exception{
-		TechnologyRequirement technologyRequirement = technologyRequirementService.get(technologyRequirementId);
+	public TechnologyRequirement getItemById(@PathVariable String technologyRequirementId)
+			throws Exception{
+		TechnologyRequirement technologyRequirement = technologyRequirementService
+				.get(technologyRequirementId);
 		return technologyRequirement;
 	}
 	
@@ -102,16 +104,19 @@ public class TechnologyRequirementController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, TechnologyRequirementPO technologyRequirementPO) 
+	public EUDataGridResult getItemList(Integer page, Integer rows,
+			TechnologyRequirementPO technologyRequirementPO) 
 			throws Exception{
-		EUDataGridResult result = technologyRequirementService.getList(page, rows, technologyRequirementPO);
-System.out.println(result);
+		EUDataGridResult result = technologyRequirementService.getList(page, rows,
+				technologyRequirementPO);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid TechnologyRequirement technologyRequirement, 
+			BindingResult bindingResult)
+			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -124,17 +129,12 @@ System.out.println(result);
 		}
 		return result;
 	}
-	/*
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(TechnologyRequirement technologyRequirement) throws Exception {
-		CustomResult result = technologyRequirementService.update(technologyRequirement);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid TechnologyRequirement technologyRequirement,
+			BindingResult bindingResult)
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -144,7 +144,9 @@ System.out.println(result);
 
 	@RequestMapping(value="/update_requirement")
 	@ResponseBody
-	private CustomResult updateNote(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid TechnologyRequirement technologyRequirement, 
+			BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -169,14 +171,7 @@ System.out.println(result);
 		}
 		return map;
 	}
-	/*
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		CustomResult result = technologyRequirementService.delete(id);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
@@ -187,18 +182,21 @@ System.out.println(result);
 	//搜索
 	@RequestMapping("/search_technologyRequirement_by_technologyRequirementId")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(Integer page, Integer rows, String searchValue) 
+	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(Integer page,
+			Integer rows, String searchValue) 
 			throws Exception{
-		EUDataGridResult result = technologyRequirementService.searchTechnologyRequirementByTechnologyRequirementId(page, rows, searchValue);
+		EUDataGridResult result = technologyRequirementService
+				.searchTechnologyRequirementByTechnologyRequirementId(page, rows, searchValue);
 		return result;
 	}
 	
 	//搜索
 	@RequestMapping("/search_technologyRequirement_by_technologyName")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyRequirementByTechnologyName(Integer page, Integer rows, String searchValue) 
-			throws Exception{
-		EUDataGridResult result = technologyRequirementService.searchTechnologyRequirementByTechnologyName(page, rows, searchValue);
+	public EUDataGridResult searchTechnologyRequirementByTechnologyName(Integer page, Integer rows,
+			String searchValue) throws Exception{
+		EUDataGridResult result = technologyRequirementService
+				.searchTechnologyRequirementByTechnologyName(page, rows, searchValue);
 		return result;
 	}
 }
