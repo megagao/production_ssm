@@ -141,7 +141,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public EUDataGridResult searchOrderByCustomName(int page, int rows, String custonName) throws Exception{
+	public EUDataGridResult searchOrderByCustomName(int page, int rows, String custonName)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<COrder> list = cOrderMapper.searchOrderByCustomName(custonName);
@@ -155,7 +156,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public EUDataGridResult searchOrderByProductName(int page, int rows, String productName) throws Exception{
+	public EUDataGridResult searchOrderByProductName(int page, int rows, String productName)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<COrder> list = cOrderMapper.searchOrderByProductName(productName);
