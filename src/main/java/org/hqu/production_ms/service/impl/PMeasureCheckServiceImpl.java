@@ -2,11 +2,9 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.domain.po.ProcessMeasureCheckPO;
 import org.hqu.production_ms.mapper.ProcessMeasureCheckMapper;
 import org.hqu.production_ms.service.PMeasureCheckService;
@@ -39,24 +37,6 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 	}
 
 	@Override
-	public COrder get(String id) throws Exception{
-		return null;
-		
-//		return cOrderMapper.selectByPrimaryKey(id);
-	}
-
-	@Override
-	public CustomResult delete(String id) throws Exception{
-		return null;
-//		int i = cOrderMapper.deleteByPrimaryKey(id);
-//		if(i>0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
-	}
-
-	@Override
 	public CustomResult deleteBatch(String[] ids) throws Exception{
 		int i = processMeasureCheckMapper.deleteBatch(ids);
 		if(i>0){
@@ -74,17 +54,6 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 		}else{
 			return CustomResult.build(101, "新增工序计量质检信息失败");
 		}
-	}
-
-	@Override
-	public CustomResult update(COrderPO cOrder) throws Exception{
-		return null;
-//		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
-//		if(i>=0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
 	}
 
 	@Override
@@ -106,17 +75,6 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 		}else{
 			return CustomResult.build(101, "修改工序计量质检备注失败");
 		}
-	}
-	
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		return null;
-//		int i = cOrderMapper.changeStatus(ids);
-//		if(i>0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
 	}
 
 	@Override
