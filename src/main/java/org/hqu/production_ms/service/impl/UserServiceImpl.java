@@ -21,7 +21,6 @@ import com.github.pagehelper.PageInfo;
 
 @Service
 public class UserServiceImpl implements UserService{
-
 	@Autowired
 	SysUserMapper sysUserMapper;
 	
