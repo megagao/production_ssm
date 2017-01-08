@@ -19,7 +19,8 @@ public class PictureServiceImpl implements PictureService{
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		try {
 			
-			if(uploadFile!=null && uploadFile.getOriginalFilename()!=null && uploadFile.getOriginalFilename().length()>0){
+			if(uploadFile!=null && uploadFile.getOriginalFilename()
+					!=null && uploadFile.getOriginalFilename().length()>0){
 			
 					//生成一个新的文件名
 					//取原始文件名
@@ -68,5 +69,4 @@ public class PictureServiceImpl implements PictureService{
 		
 		return true;
 	}
-
 }
