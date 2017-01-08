@@ -26,7 +26,8 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	TechnologyRequirementMapper technologyRequirementMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, TechnologyRequirement technologyRequirement) throws Exception{
+	public EUDataGridResult getList(int page, int rows, TechnologyRequirement technologyRequirement) 
+			throws Exception{
 		System.out.println("fff");
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -97,7 +98,8 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	}
 
 	@Override
-	public CustomResult updateRequirement(TechnologyRequirement technologyRequirement) throws Exception{
+	public CustomResult updateRequirement(TechnologyRequirement technologyRequirement) 
+			throws Exception{
 System.out.println("updateRequirement_service:");
 System.out.println(technologyRequirement.getRequirement());
 		int i = technologyRequirementMapper.updateRequirement(technologyRequirement);
@@ -125,7 +127,8 @@ System.out.println(technologyRequirement.getRequirement());
 			Integer page, Integer rows, String technologyRequirementId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TechnologyRequirement> list = technologyRequirementMapper.searchTechnologyRequirementByTechnologyRequirementId(technologyRequirementId);
+		List<TechnologyRequirement> list = technologyRequirementMapper
+				.searchTechnologyRequirementByTechnologyRequirementId(technologyRequirementId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -140,7 +143,8 @@ System.out.println(technologyRequirement.getRequirement());
 			Integer page, Integer rows, String technologyName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TechnologyRequirement> list = technologyRequirementMapper.searchTechnologyRequirementByTechnologyName(technologyName);
+		List<TechnologyRequirement> list = technologyRequirementMapper
+				.searchTechnologyRequirementByTechnologyName(technologyName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
