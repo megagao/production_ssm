@@ -73,23 +73,7 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
 			return CustomResult.build(101, "修改工艺计划信息失败");
 		}
 	}
-/*
-	@Override
-	public CustomResult updateNote(Custom custom) throws Exception{
-		int i = customMapper.updateNote(custom);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
 
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		customMapper.changeStatus(ids);
-		return CustomResult.ok();
-	}
-*/
 	@Override
 	public List<TechnologyPlan> find() throws Exception{
 		TechnologyPlanExample example = new TechnologyPlanExample();
@@ -127,5 +111,4 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
 				result.setTotal(pageInfo.getTotal());
 				return result;
 	}
-	
 }
