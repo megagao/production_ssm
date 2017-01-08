@@ -29,7 +29,6 @@ public class PCountCheckController {
 	@Autowired
 	private PCountCheckService pCountCheckService;
 	
-	
 	/*
 	 * @responsebody表示该方法的返回结果直接写入HTTP response body中。
 	 * 一般在异步获取数据时使用，在使用@RequestMapping后，返回值通常解析为跳转路径，
@@ -62,7 +61,6 @@ public class PCountCheckController {
 		return "p_count_check_add";
 	}
 	
-	
 	//搜索
 	@RequestMapping("/search_pCountCheck_by_pCountCheckId")
 	@ResponseBody
@@ -92,7 +90,6 @@ public class PCountCheckController {
 		}
 		return map;
 	}
-	
 	
 	@RequestMapping("/edit")
 	public String edit() throws Exception{
@@ -152,11 +149,7 @@ public class PCountCheckController {
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
-		if(pCountCheckService.get(processCountCheck.getpCountCheckId()) != null){
-			result = new CustomResult(0, "该工序计数质检编号已经存在，请更换！", null);
-		}else{
-			result = pCountCheckService.insert(processCountCheck);
-		}
+		result = pCountCheckService.insert(processCountCheck);
 		return result;
 	}
 	
