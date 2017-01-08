@@ -25,7 +25,8 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
 	TechnologyPlanMapper technologyPlanMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, TechnologyPlan technologyPlan) throws Exception{
+	public EUDataGridResult getList(int page, int rows, TechnologyPlan technologyPlan)
+			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<TechnologyPlan> list = technologyPlanMapper.find(technologyPlan);
@@ -100,7 +101,8 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
 			Integer page, Integer rows, String technologyPlanId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TechnologyPlan> list = technologyPlanMapper.searchTechnologyPlanByTechnologyPlanId(technologyPlanId);
+		List<TechnologyPlan> list = technologyPlanMapper
+				.searchTechnologyPlanByTechnologyPlanId(technologyPlanId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -115,7 +117,8 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
 			Integer rows, String technologyName) throws Exception{
 		//分页处理
 				PageHelper.startPage(page, rows);
-				List<TechnologyPlan> list = technologyPlanMapper.searchTechnologyPlanByTechnologyName(technologyName);
+				List<TechnologyPlan> list = technologyPlanMapper
+						.searchTechnologyPlanByTechnologyName(technologyName);
 				//创建一个返回值对象
 				EUDataGridResult result = new EUDataGridResult();
 				result.setRows(list);
