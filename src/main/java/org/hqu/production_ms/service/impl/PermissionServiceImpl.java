@@ -21,7 +21,8 @@ public class PermissionServiceImpl implements PermissionService{
 	SysRolePermissionMapper sysRolePermissionMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, SysRolePermission sysRolePermission) throws Exception{
+	public EUDataGridResult getList(int page, int rows, SysRolePermission sysRolePermission)
+			throws Exception{
 		//查询列表
 		SysRolePermissionExample example = new SysRolePermissionExample();
 		//分页处理
