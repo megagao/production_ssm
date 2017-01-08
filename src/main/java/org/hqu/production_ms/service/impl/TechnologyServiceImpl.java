@@ -22,7 +22,7 @@ public class TechnologyServiceImpl implements TechnologyService{
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, Technology technology) throws Exception{
-		//查询商品列表
+		//查询工艺列表
 		TechnologyExample example = new TechnologyExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
@@ -40,17 +40,6 @@ public class TechnologyServiceImpl implements TechnologyService{
 	public Technology get(String string) throws Exception{
 		return technologyMapper.selectByPrimaryKey(string);
 	}
-	/*
-	@Override
-	public CustomResult delete(String string) throws Exception{
-		int i = customMapper.deleteByPrimaryKey(string);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	 */
 	
 	@Override
 	public CustomResult deleteBatch(String[] ids) throws Exception{
@@ -71,17 +60,7 @@ public class TechnologyServiceImpl implements TechnologyService{
 			return CustomResult.build(101, "新增工艺信息失败");
 		}
 	}
-/*
-	@Override
-	public CustomResult update(Custom custom) throws Exception{
-		int i = customMapper.updateByPrimaryKeySelective(custom);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	*/
+
 	@Override
 	public CustomResult updateAll(Technology technology) throws Exception{
 		int i = technologyMapper.updateByPrimaryKey(technology);
@@ -91,23 +70,7 @@ public class TechnologyServiceImpl implements TechnologyService{
 			return CustomResult.build(101, "修改工艺信息失败");
 		}
 	}
-/*
-	@Override
-	public CustomResult updateNote(Custom custom) throws Exception{
-		int i = customMapper.updateNote(custom);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		customMapper.changeStatus(ids);
-		return CustomResult.ok();
-	}
-*/
+	
 	@Override
 	public List<Technology> find() throws Exception{
 		TechnologyExample example = new TechnologyExample();
@@ -143,5 +106,4 @@ public class TechnologyServiceImpl implements TechnologyService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-	
 }
