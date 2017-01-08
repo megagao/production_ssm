@@ -125,18 +125,21 @@ public class PMeasureCheckController {
 	//搜索
 	@RequestMapping("/search_pMeasureCheck_by_pMeasureCheckId")
 	@ResponseBody
-	public EUDataGridResult searchOrderByOrderId(Integer page, Integer rows, String searchValue) throws Exception{
-		EUDataGridResult result = pMeasureCheckService.searchPMeasureCheckByPMeasureCheckId(page, rows, searchValue);
+	public EUDataGridResult searchOrderByOrderId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = pMeasureCheckService
+				.searchPMeasureCheckByPMeasureCheckId(page, rows, searchValue);
 		return result;
 	}
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, ProcessMeasureCheck processMeasureCheck) throws Exception{
-		
+	public EUDataGridResult getList(Integer page, Integer rows, ProcessMeasureCheck processMeasureCheck) 
+			throws Exception{
 		EUDataGridResult result = pMeasureCheckService.getList(page, rows, processMeasureCheck);
 		return result;
 	}
+	
 	/*
 	 *此处的method可以取两个值，
 	 *一个是RequestMethod.GET，一个是RequestMethod.POST，
@@ -145,31 +148,21 @@ public class PMeasureCheckController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) 
+			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
-		if(pMeasureCheckService.get(processMeasureCheck.getpMeasureCheckId()) != null){
-			result = new CustomResult(0, "该工序计量质检编号已经存在，请更换！", null);
-		}else{
-			result = pMeasureCheckService.insert(processMeasureCheck);
-		}
+		result = pMeasureCheckService.insert(processMeasureCheck);
 		return result;
-	}
-	
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
-		return null;
-//		CustomResult result = orderService.update(cOrder);
-//		return result;
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult)
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -179,20 +172,13 @@ public class PMeasureCheckController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid ProcessMeasureCheck processMeasureCheck, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return pMeasureCheckService.updateNote(processMeasureCheck);
-	}
-	
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		return null;
-//		CustomResult result = orderService.delete(id);
-//		return result;
 	}
 	
 	@RequestMapping(value="/delete_batch")
@@ -201,13 +187,5 @@ public class PMeasureCheckController {
 		System.out.println(ids);
 		CustomResult result = pMeasureCheckService.deleteBatch(ids);
 		return result;
-	}
-	
-	@RequestMapping(value="/change_status")
-	@ResponseBody
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		return null;
-//		CustomResult result = orderService.changeStatus(ids);
-//		return result;
 	}
 }
