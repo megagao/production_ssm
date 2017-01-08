@@ -3,7 +3,6 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.FinalMeasuretCheck;
-import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
 import org.hqu.production_ms.domain.po.FinalMeasuretCheckPO;
@@ -23,11 +22,8 @@ public class MeasureServiceImpl implements MeasureService{
 	
 	@Override
 	public EUDataGridResult getList(Integer page, Integer rows, FinalMeasuretCheck finalMeasuretCheck) throws Exception{
-		
 		PageHelper.startPage(page, rows);
-		
 		List<FinalMeasuretCheckPO> list = finalMeasuretCheckMapper.find(finalMeasuretCheck);
-
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -40,17 +36,6 @@ public class MeasureServiceImpl implements MeasureService{
 	@Override
 	public FinalMeasuretCheck get(String string) throws Exception{
 		return finalMeasuretCheckMapper.selectByPrimaryKey(string);
-	}
-
-	@Override
-	public CustomResult delete(String string) throws Exception{
-		return null;
-//		int i = unqualifyApplyMapper.deleteByPrimaryKey(string);
-//		if(i>=0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
 	}
 
 	@Override
@@ -76,17 +61,6 @@ public class MeasureServiceImpl implements MeasureService{
 	}
 
 	@Override
-	public CustomResult update(UnqualifyApply unqualify) throws Exception{
-		return null;
-//		int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualify);
-//		if(i>=0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
-	}
-
-	@Override
 	public CustomResult updateAll(FinalMeasuretCheck finalMeasuretCheck) throws Exception{
 		int i = finalMeasuretCheckMapper.updateByPrimaryKey(finalMeasuretCheck);
 		if(i>0){
@@ -105,17 +79,6 @@ public class MeasureServiceImpl implements MeasureService{
 		}else{
 			return CustomResult.build(101, "修改成品计量质检备注失败");
 		}
-	}
-
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		return null;
-//		int i = unqualifyApplyMapper.changeStatus(ids);
-//		if(i>=0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
 	}
 
 	@Override
