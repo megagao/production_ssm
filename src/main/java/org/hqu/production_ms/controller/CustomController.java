@@ -36,7 +36,6 @@ public class CustomController {
 		return custom;
 	}
 	
-	
 	@RequestMapping("/find")
 	public String find() throws Exception{
 		return "custom_list";
@@ -191,7 +190,8 @@ public class CustomController {
 	//搜索
 	@RequestMapping("/search_custom_by_customId")
 	@ResponseBody
-	public EUDataGridResult searchCustomByCustomId(Integer page, Integer rows, String searchValue) throws Exception{
+	public EUDataGridResult searchCustomByCustomId(Integer page, Integer rows, String searchValue)
+			throws Exception{
 		EUDataGridResult result = customService.searchCustomByCustomId(page, rows, searchValue);
 		return result;
 	}
@@ -199,7 +199,8 @@ public class CustomController {
 	//搜索
 	@RequestMapping("/search_custom_by_customName")
 	@ResponseBody
-	public EUDataGridResult searchCustomByCustomName(Integer page, Integer rows, String searchValue) throws Exception{
+	public EUDataGridResult searchCustomByCustomName(Integer page, Integer rows, String searchValue) 
+			throws Exception{
 		EUDataGridResult result = customService.searchCustomByCustomName(page, rows, searchValue);
 		return result;
 	}
