@@ -21,7 +21,7 @@ public class TaskServiceImpl implements TaskService{
 	TaskMapper taskMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Task task) throws Exception{
+	public EUDataGridResult getList(int page, int rows, Task task){
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<Task> list = taskMapper.find();
