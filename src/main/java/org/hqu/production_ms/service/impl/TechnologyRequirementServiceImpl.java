@@ -45,17 +45,6 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 	public TechnologyRequirement get(String string) throws Exception{
 		return technologyRequirementMapper.selectByPrimaryKey(string);
 	}
-	/*
-	@Override
-	public CustomResult delete(String string) throws Exception{
-		int i = customMapper.deleteByPrimaryKey(string);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	 */
 	
 	@Override
 	public CustomResult deleteBatch(String[] ids) throws Exception{
@@ -76,17 +65,7 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 			return CustomResult.build(101, "新增工艺要求信息失败");
 		}
 	}
-/*
-	@Override
-	public CustomResult update(Custom custom) throws Exception{
-		int i = customMapper.updateByPrimaryKeySelective(custom);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	*/
+
 	@Override
 	public CustomResult updateAll(TechnologyRequirement technologyRequirement) throws Exception{
 		int i = technologyRequirementMapper.updateByPrimaryKey(technologyRequirement);
@@ -109,13 +88,7 @@ System.out.println(technologyRequirement.getRequirement());
 			return CustomResult.build(101, "修改工艺要求失败");
 		}
 	}
-	/*
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		customMapper.changeStatus(ids);
-		return CustomResult.ok();
-	}
-*/
+
 	@Override
 	public List<Technology> find() throws Exception{
 		TechnologyExample example = new TechnologyExample();
@@ -153,5 +126,4 @@ System.out.println(technologyRequirement.getRequirement());
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-	
 }
