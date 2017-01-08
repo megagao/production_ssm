@@ -44,17 +44,6 @@ public class ProcessServiceImpl implements ProcessService{
 	public Process get(String string) throws Exception{
 		return processMapper.selectByPrimaryKey(string);
 	}
-	/*
-	@Override
-	public CustomResult delete(String string) throws Exception{
-		int i = customMapper.deleteByPrimaryKey(string);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	 */
 	
 	@Override
 	public CustomResult deleteBatch(String[] ids) throws Exception{
@@ -75,17 +64,7 @@ public class ProcessServiceImpl implements ProcessService{
 			return CustomResult.build(101, "新增工序信息失败");
 		}
 	}
-/*
-	@Override
-	public CustomResult update(Custom custom) throws Exception{
-		int i = customMapper.updateByPrimaryKeySelective(custom);
-		if(i>0){
-			return CustomResult.ok();
-		}else{
-			return null;
-		}
-	}
-	*/
+
 	@Override
 	public CustomResult updateAll(Process process) throws Exception{
 		int i = processMapper.updateByPrimaryKey(process);
@@ -96,13 +75,6 @@ public class ProcessServiceImpl implements ProcessService{
 		}
 	}
 
-	/*
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		customMapper.changeStatus(ids);
-		return CustomResult.ok();
-	}
-*/
 	@Override
 	public List<Process> find() throws Exception{
 		ProcessExample example = new ProcessExample();
@@ -138,5 +110,4 @@ public class ProcessServiceImpl implements ProcessService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
 }
