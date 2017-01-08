@@ -2,11 +2,9 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.custom.CustomResult;
 import org.hqu.production_ms.domain.custom.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
 import org.hqu.production_ms.domain.po.ProcessCountCheckPO;
 import org.hqu.production_ms.mapper.ProcessCountCheckMapper;
 import org.hqu.production_ms.service.PCountCheckService;
@@ -24,11 +22,9 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	
 	@Override
 	public EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck) throws Exception{
-		
 		//分页处理
 		PageHelper.startPage(page, rows);
 		List<ProcessCountCheckPO> list = processCountCheckMapper.find(processCountCheck);
-
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
@@ -36,24 +32,6 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 		PageInfo<ProcessCountCheckPO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
-	}
-
-	@Override
-	public COrder get(String id) throws Exception{
-		return null;
-		
-//		return cOrderMapper.selectByPrimaryKey(id);
-	}
-
-	@Override
-	public CustomResult delete(String id) throws Exception{
-		return null;
-//		int i = cOrderMapper.deleteByPrimaryKey(id);
-//		if(i>=0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
 	}
 
 	@Override
@@ -77,17 +55,6 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	}
 
 	@Override
-	public CustomResult update(COrderPO cOrder) throws Exception{
-		return null;
-//		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
-//		if(i>=0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
-	}
-
-	@Override
 	public CustomResult updateAll(ProcessCountCheck processCountCheck) throws Exception{
 		int i = processCountCheckMapper.updateByPrimaryKey(processCountCheck);
 		if(i>0){
@@ -107,17 +74,6 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 			return CustomResult.build(101, "修改工序计数质检备注失败");
 		}
 	}
-	
-	@Override
-	public CustomResult changeStatus(String[] ids) throws Exception{
-		return null;
-//		int i = cOrderMapper.changeStatus(ids);
-//		if(i>0){
-//			return CustomResult.ok();
-//		}else{
-//			return null;
-//		}
-	}
 
 	@Override
 	public EUDataGridResult searchPCountCheckByPCountCheckId(int page,
@@ -133,8 +89,4 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
-
-
-	
 }
