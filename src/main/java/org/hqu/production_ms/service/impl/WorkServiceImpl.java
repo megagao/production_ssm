@@ -156,6 +156,4 @@ public class WorkServiceImpl implements WorkService{
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
-
-
 }
