@@ -59,7 +59,6 @@ public class FileController {
 	@RequestMapping(value="/file/delete")
 	@ResponseBody
 	public String handleFileDelete(@RequestParam String fileName) throws Exception{
-		
 		fileService.deleteFile(fileName);
 		Map<String,Object> result = new HashMap<String,Object>();	
 		result.put("data", "success");
@@ -68,7 +67,8 @@ public class FileController {
 	}
 	
 	@RequestMapping(value="/file/download")
-	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response) throws Exception{
+	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response) 
+			throws Exception{
 		
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 		
