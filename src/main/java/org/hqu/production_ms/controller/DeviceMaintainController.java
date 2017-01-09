@@ -34,7 +34,8 @@ public class DeviceMaintainController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getListType(Integer page, Integer rows, DeviceMaintain deviceMaintain) throws Exception{
+	public EUDataGridResult getListType(Integer page, Integer rows, DeviceMaintain deviceMaintain)
+			throws Exception{
 		EUDataGridResult result = deviceMaintainService.getList(page, rows, deviceMaintain);
 		return result;
 	}
@@ -112,7 +113,8 @@ public class DeviceMaintainController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult)
+			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -128,7 +130,8 @@ public class DeviceMaintainController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult)
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -145,7 +148,8 @@ public class DeviceMaintainController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
