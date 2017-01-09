@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 /**
- * 
  * created on 2016年9月27日 
  *
  * 上传图片处理
