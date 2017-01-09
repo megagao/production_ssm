@@ -35,11 +35,7 @@ public class FCountCheckController {
 	private FCountCheckService fCountCheckService;
 	
 	@InitBinder
-    public void InitBinder(HttpServletRequest request,
-            ServletRequestDataBinder binder) throws Exception{
-        // 不要删除下行注释!!! 将来"yyyy-MM-dd"将配置到properties文件中
-        // SimpleDateFormat dateFormat = new
-        // SimpleDateFormat(getText("date.format", request.getLocale()));
+    public void InitBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception{
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss");
         dateFormat.setLenient(false);
@@ -59,17 +55,10 @@ public class FCountCheckController {
 		return "f_count_check_list";
 	}
 	
-//	@RequestMapping("/get_data")
-//	@ResponseBody
-//	public List<Product> getData() {
-//		return unqualifyService.find();
-//	}
-//	
 	@RequestMapping("/add")
 	public String add() throws Exception{
 		return "f_count_check_add";
 	}
-	
 	
 	@RequestMapping("/add_judge")
 	@ResponseBody
@@ -91,12 +80,10 @@ public class FCountCheckController {
 		return map;
 	}
 	
-	
 	@RequestMapping("/edit")
 	public String edit() throws Exception{
 		return "f_count_check_edit";
 	}
-	
 	
 	@RequestMapping("/edit_judge")
 	@ResponseBody
@@ -126,7 +113,8 @@ public class FCountCheckController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult)
+			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -140,16 +128,10 @@ public class FCountCheckController {
 		return result;
 	}
 	
-//	@RequestMapping(value="/update")
-//	@ResponseBody
-//	private CustomResult update(Product product) throws Exception {
-//		CustomResult result = unqualifyService.update(product);
-//		return result;
-//	}
-	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult)
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -159,20 +141,13 @@ public class FCountCheckController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return fCountCheckService.updateNote(finalCountCheck);
-	}
-	
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		return null;
-//		CustomResult result = unqualifyService.delete(id);
-//		return result;
 	}
 	
 	@RequestMapping("/delete_judge")
@@ -192,7 +167,6 @@ public class FCountCheckController {
 		}
 		return map;
 	}
-	
 	
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
@@ -218,5 +192,4 @@ public class FCountCheckController {
 		EUDataGridResult result = fCountCheckService.searchFCountCheckByOrderId(page, rows, searchValue);
 		return result;
 	}
-	
 }
