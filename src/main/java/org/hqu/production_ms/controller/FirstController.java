@@ -60,7 +60,6 @@ public class FirstController {
 				sysPermissionList.add(permissionList.get(i).getPercode());
 			}
 		}
-		
 
 		/*String sysPermissionsList = JsonUtils.objectToJson(sysPermissionList);*/
 
