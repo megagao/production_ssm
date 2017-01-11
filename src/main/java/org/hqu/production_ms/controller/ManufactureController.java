@@ -193,9 +193,10 @@ public class ManufactureController {
 	//搜索
 	@RequestMapping("/search_manufacture_by_manufactureTechnologyName")
 	@ResponseBody
-	public EUDataGridResult searchManufactureByManufactureTechnologyName(Integer page, Integer rows, String searchValue) 
-			throws Exception{
-		EUDataGridResult result = manufactureService.searchManufactureByManufactureTechnologyName(page, rows, searchValue);
+	public EUDataGridResult searchManufactureByManufactureTechnologyName(Integer page, Integer rows
+			, String searchValue) throws Exception{
+		EUDataGridResult result = manufactureService.searchManufactureByManufactureTechnologyName(page, 
+				rows, searchValue);
 		return result;
 	}
 }
