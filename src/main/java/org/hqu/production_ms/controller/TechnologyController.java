@@ -36,7 +36,6 @@ public class TechnologyController {
 		return technology;
 	}
 	
-	
 	@RequestMapping("/find")
 	public String find() throws Exception{
 		return "technology_list";
@@ -121,14 +120,7 @@ public class TechnologyController {
 		}
 		return result;
 	}
-	/*
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(Technology technology) throws Exception {
-		CustomResult result = technologyService.update(technology);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/update_all")
 	@ResponseBody
 	private CustomResult updateAll(@Valid Technology technology, BindingResult bindingResult) throws Exception {
@@ -163,14 +155,7 @@ public class TechnologyController {
 		}
 		return map;
 	}
-	/*
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		CustomResult result = technologyService.delete(id);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
@@ -181,7 +166,8 @@ public class TechnologyController {
 	//搜索
 	@RequestMapping("/search_technology_by_technologyId")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyByTechnologyId(Integer page, Integer rows, String searchValue) throws Exception{
+	public EUDataGridResult searchTechnologyByTechnologyId(Integer page, Integer rows, String searchValue)
+			throws Exception{
 		EUDataGridResult result = technologyService.searchTechnologyByTechnologyId(page, rows, searchValue);
 		return result;
 	}
@@ -189,7 +175,8 @@ public class TechnologyController {
 	//搜索
 	@RequestMapping("/search_technology_by_technologyName")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyByTechnologyName(Integer page, Integer rows, String searchValue) throws Exception{
+	public EUDataGridResult searchTechnologyByTechnologyName(Integer page, Integer rows, String searchValue)
+			throws Exception{
 		EUDataGridResult result = technologyService.searchTechnologyByTechnologyName(page, rows, searchValue);
 		return result;
 	}
