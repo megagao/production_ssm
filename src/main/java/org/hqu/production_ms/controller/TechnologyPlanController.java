@@ -121,31 +121,17 @@ public class TechnologyPlanController {
 		}
 		return result;
 	}
-	/*
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(TechnologyPlan technologyPlan) throws Exception {
-		CustomResult result = technologyPlanService.update(technologyPlan);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid TechnologyPlan technologyPlan, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid TechnologyPlan technologyPlan, BindingResult bindingResult) 
+			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return technologyPlanService.updateAll(technologyPlan);
 	}
-	/*
-	@RequestMapping(value="/update_note")
-	@ResponseBody
-	private CustomResult updateNote(TechnologyPlan technologyPlan) throws Exception {
-		CustomResult result = technologyPlanService.updateNote(technologyPlan);
-		return result;
-	}
-	*/
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
@@ -163,14 +149,7 @@ public class TechnologyPlanController {
 		}
 		return map;
 	}
-	/*
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		CustomResult result = technologyPlanService.delete(id);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
