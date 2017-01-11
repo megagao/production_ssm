@@ -45,6 +45,5 @@ public class PictureController {
 		result.put("data", "success");
 		String json = JsonUtils.objectToJson(result);
 		return json;
-		
 	}
 }
