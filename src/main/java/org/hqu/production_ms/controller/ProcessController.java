@@ -119,14 +119,7 @@ public class ProcessController {
 		}
 		return result;
 	}
-	/*
-	@RequestMapping(value="/update")
-	@ResponseBody
-	private CustomResult update(Process process) throws Exception {
-		CustomResult result = processService.update(process);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/update_all")
 	@ResponseBody
 	private CustomResult updateAll(@Valid Process process, BindingResult bindingResult) throws Exception {
@@ -136,15 +129,6 @@ public class ProcessController {
 		}
 		return processService.updateAll(process);
 	}
-	
-	/*
-	@RequestMapping(value="/update_requirement")
-	@ResponseBody
-	private CustomResult updateNote(Process process) throws Exception {
-		CustomResult result = processService.updateRequirement(process);
-		return result;
-	}
-	*/
 	
 	@RequestMapping("/delete_judge")
 	@ResponseBody
@@ -162,14 +146,7 @@ public class ProcessController {
 		}
 		return map;
 	}
-	/*
-	@RequestMapping(value="/delete")
-	@ResponseBody
-	private CustomResult delete(String id) throws Exception {
-		CustomResult result = processService.delete(id);
-		return result;
-	}
-	*/
+
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
