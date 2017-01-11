@@ -56,12 +56,10 @@ public class LoginController {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		
 		//调用service校验用户账号和密码的正确性
 		ActiveUser activeUser = sysService.authenticat(username, password);
 		
 		if(activeUser!=null){
-			
 			//如果service校验通过，将用户身份记录到session
 			session.setAttribute("activeUser", activeUser);
 			//重定向到商品查询页面
@@ -107,11 +105,9 @@ public class LoginController {
 	        	map.put("msg", "authentication_error");
 	        }
 	    }
-	     
 	    //返回json数据
 	    return map;
 	}
-	
 	
 	//登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致
 	/*@RequestMapping("/login")
@@ -148,6 +144,4 @@ public class LoginController {
 		return "redirect:/first.action";
 		
 	}*/
-	
-
 }
