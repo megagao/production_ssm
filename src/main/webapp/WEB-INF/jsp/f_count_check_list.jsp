@@ -25,8 +25,6 @@
     </thead>
 </table>
 
-<!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
-
 <div  id="toolbar_fCountCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
