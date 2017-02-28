@@ -12,9 +12,11 @@
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'deviceMaintainId',width:100,align:'center'">设备维修编号</th>
-            <th data-options="field:'deviceFaultId',width:100,align:'center',formatter:formatDeviceFault_deviceMaintain">故障编号</th>
+            <th data-options="field:'deviceFaultId',width:100,align:'center',
+            	formatter:formatDeviceFault_deviceMaintain">故障编号</th>
             <th data-options="field:'deviceMaintainEmp',width:100,align:'center'">维修人</th>
-            <th data-options="field:'deviceMaintainDate',width:100,align:'center',formatter:TAOTAO.formatDateTime">维修日期</th>
+            <th data-options="field:'deviceMaintainDate',width:100,align:'center',
+            	formatter:TAOTAO.formatDateTime">维修日期</th>
             <th data-options="field:'deviceMaintainResult',width:100,align:'center'">维修结果</th>
             <th data-options="field:'deviceMaintainCost',width:100,align:'center'">维修费用</th>
             <th data-options="field:'note',width:100,align:'center',formatter:formatDeviceMaintainNote">备注</th>
@@ -28,17 +30,20 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='deviceMaintain:add'}">
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="deviceMaintain_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" 
+		        	onclick="deviceMaintain_add()">新增</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='deviceMaintain:edit'}">
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="deviceMaintain_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" 
+		        	onclick="deviceMaintain_edit()">编辑</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='deviceMaintain:delete'}">
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="deviceMaintain_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" 
+		        	onclick="deviceMaintain_delete()">删除</a>  
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -46,7 +51,8 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="deviceMaintain_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" 
+			onclick="deviceMaintain_reload()">刷新</a>  
 	</div>  
 	
     <div id="search_deviceMaintain" style="float: right;">
@@ -118,7 +124,8 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitDeviceFaultEditForm_deviceMaintain()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" 
+	    	onclick="submitDeviceFaultEditForm_deviceMaintain()">提交</a>
 	</div>
 </div>
 
