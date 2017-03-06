@@ -20,7 +20,6 @@ public class CustomException extends Exception {
 	public CustomException(String message){
 		super(message);
 		this.message = message;
-		
 	}
 
 	public String getMessage() {
@@ -30,7 +29,4 @@ public class CustomException extends Exception {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
-
 }
