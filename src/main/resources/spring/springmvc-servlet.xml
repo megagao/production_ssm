@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
 	<!-- 注解驱动 -->
-	<mvc:annotation-driven  conversion-service="conversionService" validator="validator"/>
+	<mvc:annotation-driven  conversion-service="conversionService1" validator="validator"/>
     
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
@@ -47,7 +47,7 @@
 	<bean class="org.hqu.production_ms.exception.CustomExceptionResolver"></bean>
 	
 	<!-- 转换器 -->
-	<bean id="conversionService"
+	<bean id="conversionService1"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
