@@ -62,10 +62,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
-	//页面初始化完毕后执行此方法
 	$(function(){
-		//
 		var date=new Date();
 	});
 	
