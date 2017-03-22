@@ -80,7 +80,8 @@ function doSearch_deviceType(value,name){ //用户输入用户名,点击搜素,�
 		
 		$("#deviceType").datagrid({
 	        title:'设备种类列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceType", url:'deviceType/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        toolbar:"toolbar_deviceType", url:'deviceType/list', method:'get', loadMsg:'数据加载中......', 
+	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'deviceTypeId', width : 100, align:'center', title : '设备种类编号'},
@@ -96,7 +97,8 @@ function doSearch_deviceType(value,name){ //用户输入用户名,点击搜素,�
 	}else{
 		$("#deviceType").datagrid({  
 	        title:'设备种类列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceType", url:'deviceType/search_deviceType_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        toolbar:"toolbar_deviceType", url:'deviceType/search_deviceType_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', 
+	        			fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'deviceTypeId', width : 100, align:'center', title : '设备种类编号'},
