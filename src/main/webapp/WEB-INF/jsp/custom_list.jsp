@@ -4,7 +4,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <table class="easyui-datagrid" id="customList" title="客户列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'custom/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_custom">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'custom/list',
+       		method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_custom">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -37,7 +38,8 @@
 		</c:if>
 		<c:if test="${per=='custom:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="custom_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"
+		        	 onclick="custom_delete()">删除</a>  
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -61,13 +63,19 @@
 
 </div>
 
-<div id="customEditWindow" class="easyui-window" title="编辑客户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="customEditWindow" class="easyui-window" title="编辑客户" 
+	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/edit'" 
+	style="width:65%;height:80%;padding:10px;">
 </div>
 
-<div id="customAddWindow" class="easyui-window" title="添加客户" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/add'" style="width:65%;height:80%;padding:10px;">
+<div id="customAddWindow" class="easyui-window" title="添加客户" 
+	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'custom/add'" 
+	style="width:65%;height:80%;padding:10px;">
 </div>
 
-<div id="customNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="customNoteDialog" class="easyui-dialog" title="备注" 
+	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" 
+	style="width:55%;height:65%;padding:10px;">
 	<form id="customNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="customId"/>
 	    <table cellpadding="5" >
@@ -88,8 +96,10 @@
 function doSearch_custom(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#customList").datagrid({
-	        title:'客户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_custom", url:'custom/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'客户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
+	        	method:'get', nowrap:true,  
+	        toolbar:"toolbar_custom", url:'custom/list', method:'get', loadMsg:'数据加载中......',  
+	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'customId', width : 100, title : '客户编号', align:'center'},
@@ -100,14 +110,17 @@ function doSearch_custom(value,name){ //用户输入用户名,点击搜素,触�
 	            	{field : 'email', width : 70, title : '邮箱', align:'center'}, 
 	             	{field : 'ownerName', width : 60, title : '经理姓名', align:'center'}, 
 	             	{field : 'ownerTel', width : 100, title : '联系电话', align:'center'}, 
-	             	{field : 'status', width : 60, title : '客户状态', align:'center', formatter:TAOTAO.formatCustomStatus}, 
+	             	{field : 'status', width : 60, title : '客户状态', align:'center', 
+	             			formatter:TAOTAO.formatCustomStatus}, 
 	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatCustomNote}, 
 	        ] ],  
 	    });
 	}else{
 		$("#customList").datagrid({  
-	        title:'客户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_custom", url:'custom/search_custom_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'客户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
+	        	method:'get', nowrap:true,  
+	        toolbar:"toolbar_custom", url:'custom/search_custom_by_'+name+'?searchValue='+value, 
+	        	loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
 					{field : 'customId', width : 100, title : '客户编号', align:'center'},
@@ -118,7 +131,8 @@ function doSearch_custom(value,name){ //用户输入用户名,点击搜素,触�
 					{field : 'email', width : 70, title : '邮箱', align:'center'}, 
 					{field : 'ownerName', width : 60, title : '经理姓名', align:'center'}, 
 					{field : 'ownerTel', width : 100, title : '联系电话', align:'center'}, 
-					{field : 'status', width : 60, title : '客户状态', align:'center', formatter:TAOTAO.formatCustomStatus}, 
+					{field : 'status', width : 60, title : '客户状态', align:'center', 
+							formatter:TAOTAO.formatCustomStatus}, 
 					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatCustomNote}, 
 	        ] ],  
 	    });
