@@ -5,7 +5,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
 <table  id="fCountCheckList" title="成品计数质检" class="easyui-datagrid"
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'f_count_check/list',method:'get',fitColumns:true,pageSize:10,toolbar:toolbar_fCountCheck">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'f_count_check/list',
+       	method:'get',fitColumns:true,pageSize:10,toolbar:toolbar_fCountCheck">
     <thead>
         <tr>
             <th data-options="field:'ck',checkbox:true"></th>
@@ -65,12 +66,15 @@
 </div>  
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'f_count_check/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'f_count_check/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 <!-- ********************************************************************* -->
-<div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" 
+	style="width:65%;height:80%;padding:10px;">
 	<form id="fCountOrderEditForm" method="post">
 			<input type="hidden" name="orderId"/>
 	    <table cellpadding="5">
@@ -78,7 +82,8 @@
 	            <td>订购客户:</td>
 	            <td>
 	            	<input id="custom" class="easyui-combobox" name="customId"   
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
+    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', 
+    						editable:false" />  
 	            </td>
 	        </tr>
 	        <tr>
@@ -90,11 +95,13 @@
 	        </tr>
 	        <tr>
 	            <td>订购数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
+	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,
+	            	required:true" /></td>
 	        </tr>
 	        <tr>
 	            <td>税前单价:</td>
-	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,
+	            	required:true" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
@@ -105,7 +112,8 @@
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150,
+		            	 editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>
@@ -152,7 +160,8 @@
 
 
 <!-- 检验人信息 -->
-<div id="empInfo_fCount" class="easyui-dialog" title="检验人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+<div id="empInfo_fCount" class="easyui-dialog" title="检验人信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
 	<form id="empEditForm_fCount" method="post">
 		<input type="hidden" name="empId"/>
 	    <table cellpadding="5">
@@ -163,7 +172,8 @@
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false"
+	            		 style="width:173px">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -171,7 +181,6 @@
 	        </tr>
 	        <tr>
 	            <td>所属部门:</td>
-	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
 	            <td>
 	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
     					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
@@ -218,7 +227,8 @@
 
 <!-- ********************************************************************* -->
 
-<div id="fCountCheckNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
+<div id="fCountCheckNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="fCountCheckNoteForm" method="post">
 		<input type="hidden" name="fCountCheckId"/>
 	    <table cellpadding="5" >
@@ -239,7 +249,7 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 	if(value == null || value == ''){
 		$("#fCountCheckList").datagrid({
 	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_fCountCheck", url:'f_count_check/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        toolbar:"toolbar_fCountCheck", url:'f_count_check/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'fCountCheckId', width : 100, title : '成品计数质检编号', align:'center'},
