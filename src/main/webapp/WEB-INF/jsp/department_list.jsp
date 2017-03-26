@@ -4,7 +4,8 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <table class="easyui-datagrid" id="departmentList" title="部门列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'department/list',method:'get',pageSize:20,fitColumns:true,toolbar:toolbar_department">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
+       	url:'department/list',method:'get',pageSize:20,fitColumns:true,toolbar:toolbar_department">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -25,12 +26,14 @@
 		</c:if>
 		<c:if test="${per=='department:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="department_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" 
+		        	onclick="department_edit()">编辑</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='department:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="department_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" 
+		        	onclick="department_delete()">删除</a>  
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -54,13 +57,19 @@
 
 </div>  
 
-<div id="departmentEditWindow" class="easyui-window" title="编辑部门" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/edit'" style="width:65%;height:65%;padding:10px;">
+<div id="departmentEditWindow" class="easyui-window" title="编辑部门" 
+	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/edit'" 
+	style="width:65%;height:65%;padding:10px;">
 </div>
 
-<div id="departmentAddWindow" class="easyui-window" title="添加部门" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/add'" style="width:65%;height:65%;padding:10px;">
+<div id="departmentAddWindow" class="easyui-window" title="添加部门" 
+	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'department/add'" 
+	style="width:65%;height:65%;padding:10px;">
 </div>
 
-<div id="departmentNoteDialog" class="easyui-dialog" title="部门职责" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
+<div id="departmentNoteDialog" class="easyui-dialog" title="部门职责" 
+	data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" 
+	style="width:55%;height:65%;padding:10px">
 	<form id="departmentNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="departmentId"/>
 	    <table cellpadding="5" >
@@ -81,8 +90,10 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 	if(value == null || value == ''){
 		
 		$("#departmentList").datagrid({
-	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_department", url:'department/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
+	        	method:'get', nowrap:true,  
+	        toolbar:"toolbar_department", url:'department/list', method:'get', loadMsg:'数据加载中......', 
+	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'departmentId', width : 150, align:'center', title : '部门编号'},
@@ -92,8 +103,10 @@ function doSearch_department(value,name){ //用户输入用户名,点击搜素,�
 	    });
 	}else{
 		$("#departmentList").datagrid({  
-	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_department", url:'department/search_department_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'部门列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, 
+	        	method:'get', nowrap:true,  
+	        toolbar:"toolbar_department", url:'department/search_department_by_'+name+'?searchValue='+value, 
+	        	loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
 					{field : 'departmentId', width : 150, align:'center', title : '部门编号'},
