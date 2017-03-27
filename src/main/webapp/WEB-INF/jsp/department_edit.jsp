@@ -13,7 +13,8 @@
 	        <tr>
 	            <td>部门名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="departmentName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="departmentName" 
+	            		data-options="required:true"></input>
     			</td>  
 	        </tr>
 	        <tr>
