@@ -6,16 +6,21 @@
 
 <!-- Table -->
 <table class="easyui-datagrid" id="deviceCheck" title="设备例检列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'deviceCheck/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceCheck">
+       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
+       	url:'deviceCheck/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceCheck">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'deviceCheckId',width:100,align:'center'">设备例检编号</th>
             <th data-options="field:'deviceId',width:100,align:'center'">设备编号</th>
-            <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceCheck">设备名称</th>
-            <th data-options="field:'deviceCheckEmp',width:100,align:'center',formatter:formatEmp_deviceCheck">例检人</th>
-            <th data-options="field:'deviceCheckDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">例检时间</th>
-            <th data-options="field:'deviceCheckResult',width:100,align:'center',formatter:formatDeviceCheckResult_deviceCheck">例检结果</th>
+            <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceCheck">
+            	设备名称</th>
+            <th data-options="field:'deviceCheckEmp',width:100,align:'center',formatter:formatEmp_deviceCheck">
+            	例检人</th>
+            <th data-options="field:'deviceCheckDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+            	例检时间</th>
+            <th data-options="field:'deviceCheckResult',width:100,align:'center',
+            	formatter:formatDeviceCheckResult_deviceCheck">例检结果</th>
             <th data-options="field:'deviceCheckFaultId',width:100,align:'center'">例检故障编号</th>
         </tr>
     </thead>
@@ -27,17 +32,20 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='deviceCheck:add'}">
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="deviceCheck_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="deviceCheck_add()">
+		        	新增</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='deviceCheck:edit'}">
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="deviceCheck_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="deviceCheck_edit()">
+		        	编辑</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='deviceCheck:delete'}">
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="deviceCheck_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="deviceCheck_delete()">
+		        	删除</a>  
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -45,7 +53,8 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="deviceCheck_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="deviceCheck_reload()">
+			刷新</a>  
 	</div>  
 	
     <div id="search_deviceCheck" style="float: right;">
@@ -62,15 +71,18 @@
 </div>
 
 <!-- deviceCheckAddWindow -->
-<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceCheckEditWindow -->
-<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备信息 -->
-<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceCheck" method="post">
 	    <table cellpadding="5">
 	        <tr>
@@ -83,13 +95,15 @@
 	        </tr>
 	        <tr>
 	            <td>设备种类:</td>
-	            <td><input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto" value="01"
-    					data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data'" /></td>
+	            <td><input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto" 
+	            	value="01" data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',
+	            	url:'deviceType/get_data'" /></td>
 	        </tr>
 	        <tr>
 	            <td>设备状态:</td>
 	            <td>
-	            	<select class="easyui-combobox" name="deviceStatusId" panelHeight="auto" data-options="required:true" style="width:173px">
+	            	<select class="easyui-combobox" name="deviceStatusId" panelHeight="auto" 
+	            		data-options="required:true" style="width:173px">
 						<option value="1" selected="selected">良好</option>
 						<option value="2">故障</option>
 						<option value="3">维修</option>
@@ -115,7 +129,8 @@
 	        <tr>
 	            <td>保管人:</td>
 	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" 
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" /></input></td>
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',
+    						url:'employee/get_data'" /></input></td>
 	        </tr>
 	        <tr>
 	            <td>备注:</td>
@@ -126,12 +141,14 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitDeviceEditForm_deviceCheck()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitDeviceEditForm_deviceCheck()">
+	    	提交</a>
 	</div>
 </div>
 
 <!-- 设备例检人信息 -->
-<div id="empInfo_deviceCheck" class="easyui-dialog" title="设备例检人信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
+<div id="empInfo_deviceCheck" class="easyui-dialog" title="设备例检人信息" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
 	<form id="empEditForm_deviceCheck" method="post">
 		<input type="hidden" name="empId"/>
 	    <table cellpadding="5">
@@ -142,7 +159,8 @@
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false" style="width:173px">
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" 
+	            		data-options="editable:false" style="width:173px">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -150,10 +168,10 @@
 	        </tr>
 	        <tr>
 	            <td>所属部门:</td>
-	            <!-- <td><input class="easyui-textbox" name="department" data-options="formatter:formatDepartment_test"></input></td> -->
 	            <td>
 	            	<input class="easyui-combobox" name="departmentId" panelHeight="auto"
-    					data-options="valueField:'departmentId',textField:'departmentName',url:'department/get_data'" />
+    					data-options="valueField:'departmentId',textField:'departmentName',
+    						url:'department/get_data'" />
     			</td> 
 	        </tr>
 	        <tr>
@@ -191,19 +209,22 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmpEditForm_deviceCheck()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitEmpEditForm_deviceCheck()">
+	    	提交</a>
 	</div>
 </div>
 
 <!-- 设备例检备注信息-->
-<div id="deviceCheckResultDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="deviceCheckResultDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceCheckResultForm" class="itemForm" method="post">
 		<input type="hidden" name="deviceCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>例检结果:</td>
 	            <td>
-	                <textarea style="width:800px;height:400px;visibility:hidden;" name="deviceCheckResult"></textarea>
+	                <textarea style="width:800px;height:400px;visibility:hidden;" name="deviceCheckResult">
+	                </textarea>
 	            </td>
 	        </tr>
 	    </table>
@@ -218,31 +239,43 @@
 function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#deviceCheck").datagrid({
-	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+	        	nowrap:true,  
+	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/list', method:'get', loadMsg:'数据加载中......', 
+	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
 	             	{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
-	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称', formatter:formatDevice_deviceCheck}, 
-	             	{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',formatter:formatEmp_deviceCheck}, 
-	             	{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',formatter:formatDeviceCheckResult_deviceCheck}, 
+	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称', 
+	             				formatter:formatDevice_deviceCheck}, 
+	             	{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',
+	             				formatter:formatEmp_deviceCheck}, 
+	             	{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',
+	             				formatter:TAOTAO.formatDateTime}, 
+	            	{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',
+	             				formatter:formatDeviceCheckResult_deviceCheck}, 
 	             	{field : 'deviceCheckFaultId', width : 100, title : '例检故障编号', align:'center'}, 
 	        ] ],  
 	    });
 	}else{
 		$("#deviceCheck").datagrid({  
-	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/search_deviceCheck_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', 
+	        	nowrap:true,  
+	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/search_deviceCheck_by_'+name+'?searchValue='+value, 
+	        	loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
 					{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
 					{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
-					{field : 'deviceName', width : 100, align : 'center', title : '设备名称', formatter:formatDevice_deviceCheck}, 
-					{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',formatter:formatEmp_deviceCheck}, 
-					{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',formatter:formatDeviceCheckResult_deviceCheck}, 
+					{field : 'deviceName', width : 100, align : 'center', title : '设备名称', 
+								formatter:formatDevice_deviceCheck}, 
+					{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',
+								formatter:formatEmp_deviceCheck}, 
+					{field : 'deviceCheckDate', width : 130, title : '例检时间', align:'center',
+								formatter:TAOTAO.formatDateTime}, 
+					{field : 'deviceCheckResult', width : 100, title : '例检结果', align:'center',
+								formatter:formatDeviceCheckResult_deviceCheck}, 
 					{field : 'deviceCheckFaultId', width : 100, title : '例检故障编号', align:'center'}, 
 	        ] ],  
 	    });
