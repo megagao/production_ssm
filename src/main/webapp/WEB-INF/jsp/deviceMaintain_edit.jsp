@@ -25,7 +25,8 @@
 	        <tr>
 	            <td>维修日期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox"  name="deviceMaintainDate" value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
+	            	<input class="easyui-datetimebox"  name="deviceMaintainDate" 
+	            		value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
 	            </td>
 	        </tr>
 	        <tr>
