@@ -1,6 +1,20 @@
-/target
+# Maven
+target/
+release.properties
 
-/.settings
-/.classpath
-/.project
-/.springBeans
+# Eclipse
+.classpath
+.project
+.externalToolBuilders/
+.metadata
+.settings
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+# Mac
+.DS_Store
