@@ -144,4 +144,5 @@ public class CustomController {
 		EUDataGridResult result = customService.searchCustomByCustomName(page, rows, searchValue);
 		return result;
 	}
+	
 }

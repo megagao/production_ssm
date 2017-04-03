@@ -1,14 +1,9 @@
 package org.hqu.production_ms.controller;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.hqu.production_ms.domain.custom.ActiveUser;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.MaterialReceive;
 import org.hqu.production_ms.domain.po.MaterialReceivePO;
 import org.hqu.production_ms.service.MaterialReceiveService;
@@ -38,54 +33,16 @@ public class MaterialReceiveController {
 	public String find() throws Exception{
 		return "materialReceive_list";
 	}
-	/*
-	@RequestMapping("/get_data")
+	
+	/*@RequestMapping("/get_data")
 	@ResponseBody
-	/*public List<MaterialReceive> getData() {
+	public List<MaterialReceive> getData() {
 		return materialReceiveService.find();
-	}
-	*/
-	@RequestMapping("/add_judge")
-	@ResponseBody
-	public Map<String,Object> materialReceiveAddJudge() throws Exception{
-		//从shiro的session中取activeUser
-		Subject subject = SecurityUtils.getSubject();
-		//取身份信息
-		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-		Map<String,Object> map = new HashMap<String,Object>(); 
-		if(!activeUser.getUserStatus().equals("1")){
-			map.put("msg", "您的账户已被锁定，请切换账户登录！");
-		}else if(!activeUser.getRoleStatus().equals("1")){
-			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-		}else{
-			if(!subject.isPermitted("materialReceive:add")){
-				map.put("msg", "您没有权限，请切换用户登录！");
-			}
-		}
-		return map;
-	}
+	}*/
 	
 	@RequestMapping("/add")
 	public String add() throws Exception{
 		return "materialReceive_add";
-	}
-	
-	@RequestMapping("/edit_judge")
-	@ResponseBody
-	public Map<String,Object> materialReceiveEditJudge() throws Exception{
-		Subject subject = SecurityUtils.getSubject();
-		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-		Map<String,Object> map = new HashMap<String,Object>();
-		if(!activeUser.getUserStatus().equals("1")){
-			map.put("msg", "您的账户已被锁定，请切换账户登录！");
-		}else if(!activeUser.getRoleStatus().equals("1")){
-			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-		}else{
-			if(!subject.isPermitted("materialReceive:edit")){
-				map.put("msg", "您没有权限，请切换用户登录！");
-			}
-		}
-		return map;
 	}
 	
 	@RequestMapping("/edit")
@@ -148,24 +105,6 @@ public class MaterialReceiveController {
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return materialReceiveService.updateNote(materialReceive);
-	}
-	
-	@RequestMapping("/delete_judge")
-	@ResponseBody
-	public Map<String,Object> materialDeleteJudge() throws Exception{
-		Subject subject = SecurityUtils.getSubject();
-		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-		Map<String,Object> map = new HashMap<String,Object>();
-		if(!activeUser.getUserStatus().equals("1")){
-			map.put("msg", "您的账户已被锁定，请切换账户登录！");
-		}else if(!activeUser.getRoleStatus().equals("1")){
-			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-		}else{
-			if(!subject.isPermitted("materialReceive:delete")){
-				map.put("msg", "您没有权限，请切换用户登录！");
-			}
-		}
-		return map;
 	}
 	
 	@RequestMapping(value="/delete")

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.authority.SysPermission;
-import org.hqu.production_ms.domain.custom.ActiveUser;
+import org.hqu.production_ms.domain.customize.ActiveUser;
 import org.hqu.production_ms.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
