@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.hqu.production_ms.domain.Technology;
 import org.hqu.production_ms.domain.TechnologyRequirement;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 
 public interface TechnologyRequirementService {
 	

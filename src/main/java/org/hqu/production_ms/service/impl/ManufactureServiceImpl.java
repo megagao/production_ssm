@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.hqu.production_ms.domain.Manufacture;
 import org.hqu.production_ms.domain.ManufactureExample;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.po.ManufacturePO;
 import org.hqu.production_ms.mapper.ManufactureMapper;
 import org.hqu.production_ms.service.ManufactureService;

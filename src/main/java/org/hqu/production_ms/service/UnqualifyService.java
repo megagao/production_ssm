@@ -3,8 +3,8 @@ package org.hqu.production_ms.service;
 
 
 import org.hqu.production_ms.domain.UnqualifyApply;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 
 public interface UnqualifyService {
 

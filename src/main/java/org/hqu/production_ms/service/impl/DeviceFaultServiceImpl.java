@@ -3,8 +3,8 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.DeviceFault;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.po.DeviceFaultPO;
 import org.hqu.production_ms.mapper.DeviceFaultMapper;
 import org.hqu.production_ms.service.DeviceFaultService;

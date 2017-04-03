@@ -7,7 +7,7 @@ import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysPermissionExample;
 import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.domain.authority.SysUserExample;
-import org.hqu.production_ms.domain.custom.ActiveUser;
+import org.hqu.production_ms.domain.customize.ActiveUser;
 import org.hqu.production_ms.mapper.authority.SysPermissionMapper;
 import org.hqu.production_ms.mapper.authority.SysPermissionMapperCustom;
 import org.hqu.production_ms.mapper.authority.SysUserMapper;

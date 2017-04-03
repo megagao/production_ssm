@@ -3,8 +3,8 @@ package org.hqu.production_ms.service.impl;
 import java.util.List;
 
 import org.hqu.production_ms.domain.DeviceType;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.mapper.DeviceTypeMapper;
 import org.hqu.production_ms.service.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

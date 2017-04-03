@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysUser;
-import org.hqu.production_ms.domain.custom.ActiveUser;
+import org.hqu.production_ms.domain.customize.ActiveUser;
 
 /**
  * created on 2016年9月6日 

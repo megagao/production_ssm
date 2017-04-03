@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.hqu.production_ms.domain.Product;
 import org.hqu.production_ms.domain.ProductExample;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.mapper.ProductMapper;
 import org.hqu.production_ms.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
