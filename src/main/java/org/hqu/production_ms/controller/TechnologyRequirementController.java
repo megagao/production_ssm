@@ -1,18 +1,13 @@
 package org.hqu.production_ms.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.Technology;
 import org.hqu.production_ms.domain.TechnologyRequirement;
-import org.hqu.production_ms.domain.custom.ActiveUser;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.po.TechnologyRequirementPO;
 import org.hqu.production_ms.service.TechnologyRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,53 +35,14 @@ public class TechnologyRequirementController {
 		return technologyRequirement;
 	}
 	
-	
 	@RequestMapping("/find")
 	public String find() throws Exception{
 		return "technologyRequirement_list";
 	}
 	
-	@RequestMapping("/add_judge")
-	@ResponseBody
-	public Map<String,Object> technologyRequirementAddJudge() throws Exception{
-		//从shiro的session中取activeUser
-		Subject subject = SecurityUtils.getSubject();
-		//取身份信息
-		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-		Map<String,Object> map = new HashMap<String,Object>(); 
-		if(!activeUser.getUserStatus().equals("1")){
-			map.put("msg", "您的账户已被锁定，请切换账户登录！");
-		}else if(!activeUser.getRoleStatus().equals("1")){
-			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-		}else{
-			if(!subject.isPermitted("technologyRequirement:add")){
-				map.put("msg", "您没有权限，请切换用户登录！");
-			}
-		}
-		return map;
-	}
-	
 	@RequestMapping("/add")
 	public String add() throws Exception{
 		return "technologyRequirement_add";
-	}
-	
-	@RequestMapping("/edit_judge")
-	@ResponseBody
-	public Map<String,Object> technologyRequirementEditJudge() throws Exception{
-		Subject subject = SecurityUtils.getSubject();
-		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-		Map<String,Object> map = new HashMap<String,Object>();
-		if(!activeUser.getUserStatus().equals("1")){
-			map.put("msg", "您的账户已被锁定，请切换账户登录！");
-		}else if(!activeUser.getRoleStatus().equals("1")){
-			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-		}else{
-			if(!subject.isPermitted("technologyRequirement:edit")){
-				map.put("msg", "您没有权限，请切换用户登录！");
-			}
-		}
-		return map;
 	}
 	
 	@RequestMapping("/edit")
@@ -100,7 +56,6 @@ public class TechnologyRequirementController {
 		List<Technology> list = technologyRequirementService.find();
 		return list;
 	}
-	
 	
 	@RequestMapping("/list")
 	@ResponseBody
@@ -152,24 +107,6 @@ public class TechnologyRequirementController {
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		return technologyRequirementService.updateRequirement(technologyRequirement);
-	}
-	
-	
-	@RequestMapping("/delete_judge")
-	@ResponseBody
-	public Map<String,Object> technologyRequirementDeleteJudge() throws Exception{
-		Subject subject = SecurityUtils.getSubject();
-		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-		Map<String,Object> map = new HashMap<String,Object>();
-		if(!activeUser.getUserStatus().equals("1")){
-			map.put("msg", "您的账户已被锁定，请切换账户登录！");
-		}else if(!activeUser.getRoleStatus().equals("1")){
-			map.put("msg", "当前角色已被锁定，请切换账户登录！");
-			if(!subject.isPermitted("technologyRequirement:delete")){
-				map.put("msg", "您没有权限，请切换用户登录！");
-			}
-		}
-		return map;
 	}
 
 	@RequestMapping(value="/delete_batch")

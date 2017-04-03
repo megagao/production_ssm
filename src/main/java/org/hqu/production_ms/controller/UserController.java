@@ -1,15 +1,10 @@
 package org.hqu.production_ms.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.validation.Valid;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.hqu.production_ms.domain.authority.SysUser;
-import org.hqu.production_ms.domain.custom.CustomResult;
-import org.hqu.production_ms.domain.custom.EUDataGridResult;
+import org.hqu.production_ms.domain.customize.CustomResult;
+import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.po.UserPO;
 import org.hqu.production_ms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,31 +40,9 @@ public class UserController {
 		return "user_role_edit";
 	}
 	
-	@RequestMapping("/add_judge")
-	@ResponseBody
-	public Map<String,Object> userAddJudge() throws Exception{
-		Map<String,Object> map = new HashMap<String,Object>();  
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isPermitted("user:add")){
-			map.put("msg", "您没有权限，请切换用户登录！");
-		}
-		return map;
-	}
-	
 	@RequestMapping("/add")
 	public String add() throws Exception{
 		return "user_add";
-	}
-	
-	@RequestMapping("/edit_judge")
-	@ResponseBody
-	public Map<String,Object> userEditJudge() throws Exception{
-		Map<String,Object> map = new HashMap<String,Object>();  
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isPermitted("user:edit")){
-			map.put("msg", "您没有权限，请切换用户登录！");
-		}
-		return map;
 	}
 	
 	@RequestMapping("/edit")
@@ -125,17 +98,6 @@ public class UserController {
 		
 		result = userService.updateAll(user);
 		return result;
-	}
-	
-	@RequestMapping("/delete_judge")
-	@ResponseBody
-	public Map<String,Object> userDeleteJudge() throws Exception{
-		Map<String,Object> map = new HashMap<String,Object>();  
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isPermitted("user:delete")){
-			map.put("msg", "您没有权限，请切换用户登录！");
-		}
-		return map;
 	}
 	
 	@RequestMapping(value="/delete")
