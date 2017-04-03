@@ -33,6 +33,16 @@
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/> 
 	<mvc:resources location="/WEB-INF/image/" mapping="/image/**"/> 
+	
+	<!--配置拦截器, 多个拦截器,则顺序执行 -->  
+	<!-- <mvc:interceptors>    
+	    <mvc:interceptor>    
+	        匹配的是url路径， 如果不配置或/**,将拦截所有的Controller  
+	        <mvc:mapping path="**/*_judge" />  
+	        <bean class="org.hqu.production_ms.interceptor.AuthorityInterceptor"></bean>    
+	    </mvc:interceptor>  
+	    当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法  
+	</mvc:interceptors>   -->
 
 	<!-- 定义文件上传解析器 -->
 	<bean id="multipartResolver"
