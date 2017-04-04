@@ -5,7 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.ProcessMeasureCheckPO;
+import org.hqu.production_ms.domain.vo.ProcessMeasureCheckVO;
 import org.hqu.production_ms.mapper.ProcessMeasureCheckMapper;
 import org.hqu.production_ms.service.PMeasureCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,13 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessMeasureCheckPO> list = processMeasureCheckMapper.find(processMeasureCheck);
+		List<ProcessMeasureCheckVO> list = processMeasureCheckMapper.find(processMeasureCheck);
 
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessMeasureCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessMeasureCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -82,12 +82,12 @@ public class PMeasureCheckServiceImpl implements PMeasureCheckService{
 			int rows, String pMeasureCheckId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessMeasureCheckPO> list = processMeasureCheckMapper.searchPMeasureCheckByPMeasureCheckId(pMeasureCheckId);
+		List<ProcessMeasureCheckVO> list = processMeasureCheckMapper.searchPMeasureCheckByPMeasureCheckId(pMeasureCheckId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessMeasureCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessMeasureCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

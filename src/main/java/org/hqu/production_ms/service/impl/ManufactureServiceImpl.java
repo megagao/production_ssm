@@ -2,11 +2,11 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.Manufacture;
+import org.hqu.production_ms.domain.vo.ManufactureVO;
 import org.hqu.production_ms.domain.ManufactureExample;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.ManufacturePO;
+import org.hqu.production_ms.domain.Manufacture;
 import org.hqu.production_ms.mapper.ManufactureMapper;
 import org.hqu.production_ms.service.ManufactureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class ManufactureServiceImpl implements ManufactureService{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Manufacture> list = manufactureMapper.find();
+		List<ManufactureVO> list = manufactureMapper.find();
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		PageInfo<ManufactureVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -63,7 +63,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public CustomResult insert(ManufacturePO manufacture) throws Exception{
+	public CustomResult insert(Manufacture manufacture) throws Exception{
 		int i = manufactureMapper.insert(manufacture);
 		if(i>0){
 			return CustomResult.ok();
@@ -73,7 +73,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public CustomResult update(ManufacturePO manufacture) throws Exception{
+	public CustomResult update(Manufacture manufacture) throws Exception{
 		int i = manufactureMapper.updateByPrimaryKeySelective(manufacture);
 		if(i>0){
 			return CustomResult.ok();
@@ -83,7 +83,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public CustomResult updateAll(ManufacturePO manufacture) throws Exception{
+	public CustomResult updateAll(Manufacture manufacture) throws Exception{
 		int i = manufactureMapper.updateByPrimaryKey(manufacture);
 		if(i>0){
 			return CustomResult.ok();
@@ -103,12 +103,12 @@ public class ManufactureServiceImpl implements ManufactureService{
 			Integer rows, String manufactureSn) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Manufacture> list = manufactureMapper.searchManufactureByManufactureSn(manufactureSn);
+		List<ManufactureVO> list = manufactureMapper.searchManufactureByManufactureSn(manufactureSn);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		PageInfo<ManufactureVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -118,12 +118,12 @@ public class ManufactureServiceImpl implements ManufactureService{
 			Integer rows, String manufactureOrderId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Manufacture> list = manufactureMapper.searchManufactureByManufactureOrderId(manufactureOrderId);
+		List<ManufactureVO> list = manufactureMapper.searchManufactureByManufactureOrderId(manufactureOrderId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		PageInfo<ManufactureVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -133,13 +133,13 @@ public class ManufactureServiceImpl implements ManufactureService{
 			Integer page, Integer rows, String manufactureTechnologyName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Manufacture> list = manufactureMapper
+		List<ManufactureVO> list = manufactureMapper
 				.searchManufactureByManufactureTechnologyName(manufactureTechnologyName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Manufacture> pageInfo = new PageInfo<>(list);
+		PageInfo<ManufactureVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

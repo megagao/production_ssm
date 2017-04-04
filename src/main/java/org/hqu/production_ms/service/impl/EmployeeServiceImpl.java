@@ -2,11 +2,11 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.Employee;
+import org.hqu.production_ms.domain.vo.EmployeeVO;
 import org.hqu.production_ms.domain.EmployeeExample;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.EmployeePO;
+import org.hqu.production_ms.domain.Employee;
 import org.hqu.production_ms.mapper.EmployeeMapper;
 import org.hqu.production_ms.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +22,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 	EmployeeMapper employeeMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, Employee employee) throws Exception {
+	public EUDataGridResult getList(int page, int rows, EmployeeVO employee) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Employee> list = employeeMapper.find();
+		List<EmployeeVO> list = employeeMapper.find();
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Employee> pageInfo = new PageInfo<>(list);
+		PageInfo<EmployeeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 	@Override
-	public Employee get(String empId) throws Exception {
+	public EmployeeVO get(String empId) throws Exception {
 		return employeeMapper.selectSingleEmployee(empId);
 	}
 
@@ -61,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public CustomResult insert(EmployeePO employee) throws Exception {
+	public CustomResult insert(Employee employee) throws Exception {
 		int i = employeeMapper.insert(employee);
 		if(i>0){
 			return CustomResult.ok();
@@ -71,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public CustomResult update(EmployeePO employee) throws Exception {
+	public CustomResult update(Employee employee) throws Exception {
 		int i = employeeMapper.updateByPrimaryKeySelective(employee);
 		if(i>0){
 			return CustomResult.ok();
@@ -81,7 +81,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public CustomResult updateAll(EmployeePO employee) throws Exception {
+	public CustomResult updateAll(Employee employee) throws Exception {
 		int i = employeeMapper.updateByPrimaryKey(employee);
 		if(i>0){
 			return CustomResult.ok();
@@ -117,12 +117,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 			Integer rows, String employeeId) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Employee> list = employeeMapper.searchEmployeeByEmployeeId(employeeId);
+		List<EmployeeVO> list = employeeMapper.searchEmployeeByEmployeeId(employeeId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Employee> pageInfo = new PageInfo<>(list);
+		PageInfo<EmployeeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -132,12 +132,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 			Integer rows, String employeeName) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Employee> list = employeeMapper.searchEmployeeByEmployeeName(employeeName);
+		List<EmployeeVO> list = employeeMapper.searchEmployeeByEmployeeName(employeeName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Employee> pageInfo = new PageInfo<>(list);
+		PageInfo<EmployeeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -147,12 +147,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 			Integer rows, String departmentName) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<Employee> list = employeeMapper.searchEmployeeByDepartmentName(departmentName);
+		List<EmployeeVO> list = employeeMapper.searchEmployeeByDepartmentName(departmentName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<Employee> pageInfo = new PageInfo<>(list);
+		PageInfo<EmployeeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

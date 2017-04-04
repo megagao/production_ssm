@@ -7,6 +7,7 @@ import org.hqu.production_ms.domain.TechnologyExample;
 import org.hqu.production_ms.domain.TechnologyRequirement;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
+import org.hqu.production_ms.domain.vo.TechnologyRequirementVO;
 import org.hqu.production_ms.mapper.TechnologyMapper;
 import org.hqu.production_ms.mapper.TechnologyRequirementMapper;
 import org.hqu.production_ms.service.TechnologyRequirementService;
@@ -31,12 +32,12 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
 		System.out.println("fff");
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TechnologyRequirement> list = technologyRequirementMapper.find(technologyRequirement);
+		List<TechnologyRequirementVO> list = technologyRequirementMapper.find(technologyRequirement);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<TechnologyRequirement> pageInfo = new PageInfo<>(list);
+		PageInfo<TechnologyRequirementVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -100,13 +101,13 @@ System.out.println(technologyRequirement.getRequirement());
 			Integer page, Integer rows, String technologyRequirementId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TechnologyRequirement> list = technologyRequirementMapper
+		List<TechnologyRequirementVO> list = technologyRequirementMapper
 				.searchTechnologyRequirementByTechnologyRequirementId(technologyRequirementId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<TechnologyRequirement> pageInfo = new PageInfo<>(list);
+		PageInfo<TechnologyRequirementVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -116,13 +117,13 @@ System.out.println(technologyRequirement.getRequirement());
 			Integer page, Integer rows, String technologyName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<TechnologyRequirement> list = technologyRequirementMapper
+		List<TechnologyRequirementVO> list = technologyRequirementMapper
 				.searchTechnologyRequirementByTechnologyName(technologyName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<TechnologyRequirement> pageInfo = new PageInfo<>(list);
+		PageInfo<TechnologyRequirementVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

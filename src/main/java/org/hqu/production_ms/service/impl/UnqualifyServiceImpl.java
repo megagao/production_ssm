@@ -5,7 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.UnqualifyApplyPO;
+import org.hqu.production_ms.domain.vo.UnqualifyApplyVO;
 import org.hqu.production_ms.mapper.UnqualifyApplyMapper;
 import org.hqu.production_ms.service.UnqualifyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,12 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 	public EUDataGridResult getList(Integer page, Integer rows, UnqualifyApply unqualifyApply)
 			throws Exception{
 		PageHelper.startPage(page, rows);
-		List<UnqualifyApplyPO> list = unqualifyApplyMapper.find(unqualifyApply);
+		List<UnqualifyApplyVO> list = unqualifyApplyMapper.find(unqualifyApply);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UnqualifyApplyPO> pageInfo = new PageInfo<>(list);
+		PageInfo<UnqualifyApplyVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -105,12 +105,12 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 			String unqualifyId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UnqualifyApplyPO> list = unqualifyApplyMapper.searchUnqualifyByUnqualifyId(unqualifyId);
+		List<UnqualifyApplyVO> list = unqualifyApplyMapper.searchUnqualifyByUnqualifyId(unqualifyId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UnqualifyApplyPO> pageInfo = new PageInfo<>(list);
+		PageInfo<UnqualifyApplyVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -120,12 +120,12 @@ public class UnqualifyServiceImpl implements UnqualifyService{
 			Integer rows, String productName) {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UnqualifyApplyPO> list = unqualifyApplyMapper.searchUnqualifyByProductName(productName);
+		List<UnqualifyApplyVO> list = unqualifyApplyMapper.searchUnqualifyByProductName(productName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UnqualifyApplyPO> pageInfo = new PageInfo<>(list);
+		PageInfo<UnqualifyApplyVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.DeviceFault;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.DeviceFaultPO;
+import org.hqu.production_ms.domain.vo.DeviceFaultVO;
 import org.hqu.production_ms.mapper.DeviceFaultMapper;
 import org.hqu.production_ms.service.DeviceFaultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,12 @@ public class DeviceFaultServiceImpl implements DeviceFaultService{
 	public EUDataGridResult getList(int page, int rows, DeviceFault deviceFault) throws Exception {
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<DeviceFaultPO> list = deviceFaultMapper.find(deviceFault);
+		List<DeviceFaultVO> list = deviceFaultMapper.find(deviceFault);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<DeviceFaultPO> pageInfo = new PageInfo<>(list);
+		PageInfo<DeviceFaultVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.DeviceFault;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
+import org.hqu.production_ms.domain.vo.DeviceFaultVO;
 
 public interface DeviceFaultService {
 

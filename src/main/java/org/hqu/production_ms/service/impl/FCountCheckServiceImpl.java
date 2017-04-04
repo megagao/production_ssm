@@ -5,7 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.FinalCountCheck;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.FinalCountCheckPO;
+import org.hqu.production_ms.domain.vo.FinalCountCheckVO;
 import org.hqu.production_ms.mapper.FinalCountCheckMapper;
 import org.hqu.production_ms.service.FCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,12 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 	public EUDataGridResult getList(Integer page, Integer rows, FinalCountCheck finalCountCheck)
 			throws Exception{
 		PageHelper.startPage(page, rows);
-		List<FinalCountCheckPO> list = finalCountCheckMapper.find(finalCountCheck);
+		List<FinalCountCheckVO> list = finalCountCheckMapper.find(finalCountCheck);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<FinalCountCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<FinalCountCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -87,12 +87,12 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 			int rows, String fCountCheckId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<FinalCountCheckPO> list = finalCountCheckMapper.searchFCountCheckByFCountCheckId(fCountCheckId);
+		List<FinalCountCheckVO> list = finalCountCheckMapper.searchFCountCheckByFCountCheckId(fCountCheckId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<FinalCountCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<FinalCountCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -102,12 +102,12 @@ public class FCountCheckServiceImpl implements FCountCheckService{
 			Integer rows, String orderId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<FinalCountCheckPO> list = finalCountCheckMapper.searchFCountCheckByOrderId(orderId);
+		List<FinalCountCheckVO> list = finalCountCheckMapper.searchFCountCheckByOrderId(orderId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<FinalCountCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<FinalCountCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

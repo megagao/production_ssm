@@ -3,7 +3,6 @@ package org.hqu.production_ms.service;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.MaterialReceive;
-import org.hqu.production_ms.domain.po.MaterialReceivePO;
 
 public interface MaterialReceiveService {
 		
@@ -15,16 +14,16 @@ public interface MaterialReceiveService {
 	
 	CustomResult deleteBatch(String[] ids) throws Exception;
 	
-	CustomResult insert(MaterialReceivePO materialReceive) throws Exception;
+	CustomResult insert(MaterialReceive materialReceive) throws Exception;
 	
 	//更新部分字段，用的是updateSelective判断非空的字段进行更新
-	CustomResult update(MaterialReceivePO materialReceive) throws Exception;
+	CustomResult update(MaterialReceive materialReceive) throws Exception;
 	
 	//更新全部字段，不判断非空，直接进行更新
-	CustomResult updateAll(MaterialReceivePO materialReceive) throws Exception;
+	CustomResult updateAll(MaterialReceive materialReceive) throws Exception;
 	
 	//更新备注
-	CustomResult updateNote(MaterialReceivePO materialReceive) throws Exception;
+	CustomResult updateNote(MaterialReceive materialReceive) throws Exception;
 	
 	EUDataGridResult searchMaterialReceiveByReceiveId(int page, int rows, String receiveId) throws Exception;
 	

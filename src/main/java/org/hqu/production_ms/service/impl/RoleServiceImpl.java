@@ -2,14 +2,14 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.authority.SysRole;
+import org.hqu.production_ms.domain.vo.RoleVO;
 import org.hqu.production_ms.domain.authority.SysRoleExample;
 import org.hqu.production_ms.domain.authority.SysRolePermission;
 import org.hqu.production_ms.domain.authority.SysUserRole;
 import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.RolePO;
+import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.mapper.authority.SysRoleMapper;
 import org.hqu.production_ms.mapper.authority.SysRolePermissionMapper;
 import org.hqu.production_ms.mapper.authority.SysUserRoleMapper;
@@ -34,48 +34,48 @@ public class RoleServiceImpl implements RoleService{
 	SysRolePermissionMapper sysRolePermissionMapper;
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, SysRole sysRole) throws Exception{
+	public EUDataGridResult getList(int page, int rows, RoleVO sysRole) throws Exception{
 		//查询列表
 		SysRoleExample example = new SysRoleExample();
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<SysRole> list = sysRoleMapper.selectByExample(example);
+		List<RoleVO> list = sysRoleMapper.selectByExample(example);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<SysRole> pageInfo = new PageInfo<>(list);
+		PageInfo<RoleVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
 
 
 	@Override
-	public List<SysRole> findByRoleNameAndId(String rolename, String id) throws Exception{
+	public List<RoleVO> findByRoleNameAndId(String rolename, String id) throws Exception{
 		SysRoleExample example = new SysRoleExample();
 		SysRoleExample.Criteria criteria = example.createCriteria();
 		criteria.andRoleNameEqualTo(rolename);
 		if(id != null){
 			criteria.andRoleIdNotEqualTo(id);
 		}
-		List<SysRole> sysRoleList = sysRoleMapper.selectByExample(example);
+		List<RoleVO> sysRoleList = sysRoleMapper.selectByExample(example);
 		return sysRoleList;
 	}
 
 	
 	@Override
-	public SysRole get(String string) throws Exception{
+	public RoleVO get(String string) throws Exception{
 		return sysRoleMapper.selectByPrimaryKey(string);
 	}
 
 
 	@Override
-	public SysRole findRoleByUserId(String userId) throws Exception{
+	public RoleVO findRoleByUserId(String userId) throws Exception{
 		SysUserRoleExample example = new SysUserRoleExample();
 		SysUserRoleExample.Criteria criteria = example.createCriteria();
 		criteria.andSysUserIdEqualTo(userId);
 		SysUserRole sysUserRole = sysUserRoleMapper.selectByExample(example).get(0);
-		SysRole sysRole = sysRoleMapper.selectByPrimaryKey(sysUserRole.getSysRoleId());
+		RoleVO sysRole = sysRoleMapper.selectByPrimaryKey(sysUserRole.getSysRoleId());
 		return sysRole;
 	}
 	
@@ -100,7 +100,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public CustomResult insert(RolePO role) throws Exception{
+	public CustomResult insert(SysRole role) throws Exception{
 		//在业务层整合
 		SysRolePermission sysRolePermission = new SysRolePermission();
 		sysRolePermission.setId(IDUtils.genStringId());
@@ -118,7 +118,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public CustomResult update(RolePO role) throws Exception{
+	public CustomResult update(SysRole role) throws Exception{
 		int i = sysRoleMapper.updateByPrimaryKeySelective(role);
 		if(i>0){
 			return CustomResult.ok();
@@ -128,7 +128,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public CustomResult updateAll(RolePO role) throws Exception{
+	public CustomResult updateAll(SysRole role) throws Exception{
 		//在业务层整合处理
 		SysRolePermission sysRolePermission = new SysRolePermission();
 		sysRolePermission.setSysRoleId(role.getRoleId());
@@ -145,14 +145,14 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public List<SysRole> find() throws Exception{
+	public List<RoleVO> find() throws Exception{
 		SysRoleExample example = new SysRoleExample();
 		return sysRoleMapper.selectByExample(example);
 	}
 
 
 	@Override
-	public List<SysRole> searchSysRoleBySysRoleName(String sysRoleName) throws Exception{
+	public List<RoleVO> searchSysRoleBySysRoleName(String sysRoleName) throws Exception{
 		SysRoleExample example = new SysRoleExample();
 		SysRoleExample.Criteria criteria = example.createCriteria();
 		criteria.andRoleNameLike(sysRoleName);
@@ -160,7 +160,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 	
 	@Override
-	public List<SysRole> searchSysRoleBySysRoleId(String sysRoleId) throws Exception{
+	public List<RoleVO> searchSysRoleBySysRoleId(String sysRoleId) throws Exception{
 		SysRoleExample example = new SysRoleExample();
 		SysRoleExample.Criteria criteria = example.createCriteria();
 		criteria.andRoleIdLike(sysRoleId);
@@ -173,12 +173,12 @@ public class RoleServiceImpl implements RoleService{
 			String roleId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<SysRole> list = sysRoleMapper.searchRoleByRoleId(roleId);
+		List<RoleVO> list = sysRoleMapper.searchRoleByRoleId(roleId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<SysRole> pageInfo = new PageInfo<>(list);
+		PageInfo<RoleVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -189,12 +189,12 @@ public class RoleServiceImpl implements RoleService{
 			String roleName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<SysRole> list = sysRoleMapper.searchRoleByRoleName(roleName);
+		List<RoleVO> list = sysRoleMapper.searchRoleByRoleName(roleName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<SysRole> pageInfo = new PageInfo<>(list);
+		PageInfo<RoleVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
