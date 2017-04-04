@@ -3,7 +3,7 @@ package org.hqu.production_ms.controller;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.vo.COrderVO;
 import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
@@ -42,7 +42,7 @@ public class PCountCheckController {
 	 */
 	@RequestMapping("/get/{orderId}")
 	@ResponseBody
-	public COrder getItemById(@PathVariable String orderId) throws Exception{
+	public COrderVO getItemById(@PathVariable String orderId) throws Exception{
 		return null;
 	}
 	
@@ -55,16 +55,7 @@ public class PCountCheckController {
 	public String add() throws Exception{
 		return "p_count_check_add";
 	}
-	
-	//搜索
-	@RequestMapping("/search_pCountCheck_by_pCountCheckId")
-	@ResponseBody
-	public EUDataGridResult searchpCountCheckBypCountCheckId(Integer page, Integer rows, String searchValue)
-			throws Exception{
-		EUDataGridResult result = pCountCheckService.searchPCountCheckByPCountCheckId(page, rows, searchValue);
-		return result;
-	}
-	
+
 	@RequestMapping("/edit")
 	public String edit() throws Exception{
 		return "p_count_check_edit";
@@ -139,5 +130,14 @@ public class PCountCheckController {
 	@ResponseBody
 	public CustomResult changeStatus(String[] ids) throws Exception{
 		return null;
+	}
+
+	//根据工序计数质检id查找
+	@RequestMapping("/search_pCountCheck_by_pCountCheckId")
+	@ResponseBody
+	public EUDataGridResult searchpCountCheckBypCountCheckId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = pCountCheckService.searchPCountCheckByPCountCheckId(page, rows, searchValue);
+		return result;
 	}
 }
