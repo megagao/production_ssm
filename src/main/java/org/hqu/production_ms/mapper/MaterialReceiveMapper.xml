@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.MaterialReceiveMapper" >
-  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.MaterialReceive" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.vo.MaterialReceiveVO" >
     <id column="receive_id" property="receiveId" jdbcType="VARCHAR" />
-    <result column="ammount" property="ammount" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
     <result column="receive_date" property="receiveDate" jdbcType="TIMESTAMP" />
     <result column="sender" property="sender" jdbcType="VARCHAR" />
     <result column="receiver" property="receiver" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
 	<select id="find" parameterType="MaterialReceive" resultMap="BaseResultMap">
 		SELECT
 		    receive_id,
-		    ammount,
+            amount,
 		    receive_date,
 		    sender,
 		    receiver,
@@ -59,7 +59,7 @@
     <select id="searchMaterialReceiveByReceiveId" parameterType="string" resultMap="BaseResultMap">
 		SELECT
 		    receive_id,
-		    ammount,
+		    amount,
 		    receive_date,
 		    sender,
 		    receiver,
@@ -77,7 +77,7 @@
     <select id="searchMaterialReceiveByMaterialId" parameterType="string" resultMap="BaseResultMap">
 		SELECT
 		    receive_id,
-		    ammount,
+		    amount,
 		    receive_date,
 		    sender,
 		    receiver,
@@ -151,7 +151,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    receive_id, material_id, ammount, receive_date, sender, receiver, note
+    receive_id, material_id, amount, receive_date, sender, receiver, note
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.hqu.production_ms.domain.MaterialReceiveExample" >
     select
@@ -184,10 +184,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
-    insert into material_receive (receive_id, material_id, ammount, 
+    insert into material_receive (receive_id, material_id, amount,
       receive_date, sender, receiver, 
       note)
-    values (#{receiveId,jdbcType=VARCHAR}, #{materialId,jdbcType=VARCHAR}, #{ammount,jdbcType=INTEGER}, 
+    values (#{receiveId,jdbcType=VARCHAR}, #{materialId,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER},
       #{receiveDate,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
       #{note,jdbcType=VARCHAR})
   </insert>
@@ -200,8 +200,8 @@
       <if test="materialId != null" >
         material_id,
       </if>
-      <if test="ammount != null" >
-        ammount,
+      <if test="amount != null" >
+          amount,
       </if>
       <if test="receiveDate != null" >
         receive_date,
@@ -223,8 +223,8 @@
       <if test="materialId != null" >
         #{materialId,jdbcType=VARCHAR},
       </if>
-      <if test="ammount != null" >
-        #{ammount,jdbcType=INTEGER},
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
       </if>
       <if test="receiveDate != null" >
         #{receiveDate,jdbcType=TIMESTAMP},
@@ -255,8 +255,8 @@
       <if test="record.materialId != null" >
         material_id = #{record.materialId,jdbcType=VARCHAR},
       </if>
-      <if test="record.ammount != null" >
-        ammount = #{record.ammount,jdbcType=INTEGER},
+      <if test="record.amount != null" >
+          amount = #{record.amount,jdbcType=INTEGER},
       </if>
       <if test="record.receiveDate != null" >
         receive_date = #{record.receiveDate,jdbcType=TIMESTAMP},
@@ -279,7 +279,7 @@
     update material_receive
     set receive_id = #{record.receiveId,jdbcType=VARCHAR},
       material_id = #{record.materialId,jdbcType=VARCHAR},
-      ammount = #{record.ammount,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=INTEGER},
       receive_date = #{record.receiveDate,jdbcType=TIMESTAMP},
       sender = #{record.sender,jdbcType=VARCHAR},
       receiver = #{record.receiver,jdbcType=VARCHAR},
@@ -294,8 +294,8 @@
       <if test="materialId != null" >
         material_id = #{materialId,jdbcType=VARCHAR},
       </if>
-      <if test="ammount != null" >
-        ammount = #{ammount,jdbcType=INTEGER},
+      <if test="amount != null" >
+          amount = #{amount,jdbcType=INTEGER},
       </if>
       <if test="receiveDate != null" >
         receive_date = #{receiveDate,jdbcType=TIMESTAMP},
@@ -315,7 +315,7 @@
   <update id="updateByPrimaryKey" parameterType="org.hqu.production_ms.domain.MaterialReceive" >
     update material_receive
     set material_id = #{materialId,jdbcType=VARCHAR},
-      ammount = #{ammount,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER},
       receive_date = #{receiveDate,jdbcType=TIMESTAMP},
       sender = #{sender,jdbcType=VARCHAR},
       receiver = #{receiver,jdbcType=VARCHAR},

@@ -11,7 +11,7 @@
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
   
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.DeviceMaintainPO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.DeviceMaintainVO" extends="BaseResultMap">
     <result column="device_maintain_emp" property="deviceMaintainEmp" jdbcType="VARCHAR" />
   </resultMap>
   

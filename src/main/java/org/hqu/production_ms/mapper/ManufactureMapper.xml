@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.ManufactureMapper" >
-  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Manufacture" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.vo.ManufactureVO" >
     <id column="manufacture_sn" property="manufactureSn" jdbcType="VARCHAR" />
     <result column="launch_quantity" property="launchQuantity" jdbcType="INTEGER" />
     <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />

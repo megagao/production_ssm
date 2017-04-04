@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.WorkMapper" >
-  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.Work" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.vo.WorkVO" >
     <id column="work_id" property="workId" jdbcType="VARCHAR" />
     <result column="process_number" property="processNumber" jdbcType="VARCHAR" />
     <result column="rating" property="rating" jdbcType="INTEGER" />

@@ -11,7 +11,7 @@
     <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.UnqualifyApplyPO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.UnqualifyApplyVO" extends="BaseResultMap">
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
   </resultMap>

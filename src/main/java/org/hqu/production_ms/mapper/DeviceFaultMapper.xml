@@ -10,7 +10,7 @@
     <result column="device_fault_maintenance" property="deviceFaultMaintenance" jdbcType="VARCHAR" />
   </resultMap>
   
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.DeviceFaultPO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.DeviceFaultVO" extends="BaseResultMap">
     <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
   </resultMap>
   

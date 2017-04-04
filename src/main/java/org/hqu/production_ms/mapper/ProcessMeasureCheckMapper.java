@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.ProcessMeasureCheckExample;
-import org.hqu.production_ms.domain.po.ProcessMeasureCheckPO;
+import org.hqu.production_ms.domain.vo.ProcessMeasureCheckVO;
 
 public interface ProcessMeasureCheckMapper {
 	
@@ -14,9 +14,9 @@ public interface ProcessMeasureCheckMapper {
 	
 	int deleteBatch(String[] ids);
 	
-	List<ProcessMeasureCheckPO> searchPMeasureCheckByPMeasureCheckId(String processMeasureCheckId);
+	List<ProcessMeasureCheckVO> searchPMeasureCheckByPMeasureCheckId(String processMeasureCheckId);
 	
-	List<ProcessMeasureCheckPO> find(ProcessMeasureCheck processMeasureCheck);
+	List<ProcessMeasureCheckVO> find(ProcessMeasureCheck processMeasureCheck);
 	
 	//逆向工程生成的mapper接口
     int countByExample(ProcessMeasureCheckExample example);

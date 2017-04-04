@@ -11,7 +11,7 @@
     <result column="result" property="result" jdbcType="VARCHAR" />
     <result column="note" property="note" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.ProcessMeasureCheckPO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.ProcessMeasureCheckVO" extends="BaseResultMap">
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
   </resultMap>
   

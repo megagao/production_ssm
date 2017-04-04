@@ -3,27 +3,27 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.vo.COrderVO;
 import org.hqu.production_ms.domain.COrderExample;
-import org.hqu.production_ms.domain.po.COrderPO;
+import org.hqu.production_ms.domain.COrder;
 
 public interface COrderMapper {
 	
 	//扩展的mapper接口方法
-	List<COrder> find(COrder cOrder);
+	List<COrderVO> find(COrderVO cOrder);
 	
 	//根据订单id查找订单信息
-	List<COrder> searchOrderByOrderId(String orderId);
+	List<COrderVO> searchOrderByOrderId(String orderId);
 	
-	List<COrder> searchOrderByCustomName(String customName);
+	List<COrderVO> searchOrderByCustomName(String customName);
 	
-	List<COrder> searchOrderByProductName(String productName);
+	List<COrderVO> searchOrderByProductName(String productName);
 	
 	int deleteBatch(String[] ids);
 	
 	int changeStatus(String[] ids);
 	
-	int updateNote(COrderPO cOrder);
+	int updateNote(COrder cOrder);
 	
 	//逆向工程生成的mapper接口
     int countByExample(COrderExample example);
@@ -32,9 +32,9 @@ public interface COrderMapper {
 
     int deleteByPrimaryKey(String orderId);
 
-    int insert(COrderPO record);
+    int insert(COrder record);
 
-    int insertSelective(COrderPO record);
+    int insertSelective(COrder record);
 
     List<COrder> selectByExample(COrderExample example);
 
@@ -44,7 +44,7 @@ public interface COrderMapper {
 
     int updateByExample(@Param("record") COrder record, @Param("example") COrderExample example);
 
-    int updateByPrimaryKeySelective(COrderPO record);
+    int updateByPrimaryKeySelective(COrder record);
 
-    int updateByPrimaryKey(COrderPO cOrder);
+    int updateByPrimaryKey(COrder cOrder);
 }

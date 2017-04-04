@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.ProcessCountCheckExample;
-import org.hqu.production_ms.domain.po.ProcessCountCheckPO;
+import org.hqu.production_ms.domain.vo.ProcessCountCheckVO;
 
 public interface ProcessCountCheckMapper {
 	
@@ -14,9 +14,9 @@ public interface ProcessCountCheckMapper {
 	
 	int deleteBatch(String[] ids);
 	
-	List<ProcessCountCheckPO> searchPCountCheckByPCountCheckId(String pCountCheckId);
+	List<ProcessCountCheckVO> searchPCountCheckByPCountCheckId(String pCountCheckId);
 	
-	List<ProcessCountCheckPO> find(ProcessCountCheck processCountCheck);
+	List<ProcessCountCheckVO> find(ProcessCountCheck processCountCheck);
 	
 	//逆向工程生成的mapper接口
     int countByExample(ProcessCountCheckExample example);

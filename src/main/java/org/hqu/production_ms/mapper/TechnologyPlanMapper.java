@@ -14,10 +14,10 @@ public interface TechnologyPlanMapper {
 	int deleteBatch(String[] ids);
 
 	List<TechnologyPlan> searchTechnologyPlanByTechnologyPlanId(
-			String technologyPlanId);
+            String technologyPlanId);
 
 	List<TechnologyPlan> searchTechnologyPlanByTechnologyName(
-			String technologyName);
+            String technologyName);
 	
 	//逆向工程生成的mapper接口
 	int countByExample(TechnologyPlanExample example);

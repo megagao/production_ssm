@@ -12,7 +12,7 @@
     <result column="device_type_warranty" property="deviceTypeWarranty" jdbcType="TIMESTAMP" />
   </resultMap>
   
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.DeviceTypePO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.DeviceTypeVO" extends="BaseResultMap">
     <result column="device_type_idd" property="deviceTypeIdd" jdbcType="VARCHAR" />
   </resultMap>
   
