@@ -3,14 +3,17 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="materialList" title="物料信息" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'material/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_material">
+<table class="easyui-datagrid" id="materialList" title="物料信息" data-options="singleSelect:false,collapsible:true,
+	pagination:true,rownumbers:true,url:'material/list',method:'get',pageSize:10,fitColumns:true,
+	toolbar:toolbar_material">
     <thead>
          <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'materialId',align:'center',width:100">物料编号</th>
             <th data-options="field:'materialType',align:'center',width:100">物料类型</th>
-            <th data-options="field:'status',width:100,align:'center',formatter:TAOTAO.formatMaterialStatus">物料状态</th>
+            <th data-options="field:'status',width:100,align:'center',formatter:TAOTAO.formatMaterialStatus">
+				物料状态
+			</th>
             <th data-options="field:'remaining',align:'center',width:100">剩余数量</th>
             <th data-options="field:'note',width:100,align:'center', formatter:formatMaterialNote">备注</th>
           
@@ -33,7 +36,9 @@
 		</c:if>
 		<c:if test="${per=='material:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="material_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="material_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -57,11 +62,14 @@
 
 </div>  
 
-<div id="materialEditWindow" class="easyui-window" title="编辑物料" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/edit'" style="width:65%;height:65%;padding:10px;">
+<div id="materialEditWindow" class="easyui-window" title="编辑物料" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'material/edit'" style="width:65%;height:65%;padding:10px;">
 </div>
-<div id="materialAddWindow" class="easyui-window" title="添加物料" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'material/add'" style="width:65%;height:65%;padding:10px;">
+<div id="materialAddWindow" class="easyui-window" title="添加物料" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'material/add'" style="width:65%;height:65%;padding:10px;">
 </div>
-<div id="materialNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="materialNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="materialNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="materialId"/>
 	    <table cellpadding="10" >
@@ -82,28 +90,30 @@
 function doSearch_material(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#materialList").datagrid({
-	        title:'物料信息', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_material", url:'material/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'物料信息', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_material", url:'material/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 	       
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'materialId', width : 100, title : '物料编号', align:'center'},
-	             	{field : 'materialType', width : 100, align : 'center', title : '物料类型'},
-	             	{field : 'status', width : 100, align : 'center', title : '物料状态'}, 
-	             	{field : 'remaining', width : 100, title : '剩余数量', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatMaterialNote}	            	
+				{field : 'ck', checkbox:true },
+				{field : 'materialId', width : 100, title : '物料编号', align:'center'},
+				{field : 'materialType', width : 100, align : 'center', title : '物料类型'},
+				{field : 'status', width : 100, align : 'center', title : '物料状态'},
+				{field : 'remaining', width : 100, title : '剩余数量', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center',formatter:formatMaterialNote}
 	        ] ],  
 	    });
 	}else{
 		$("#materialList").datagrid({  
-	        title:'物料信息', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_material", url:'material/search_material_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'物料信息', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_material", url:'material/search_material_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'materialId', width : 100, title : '物料编号', align:'center'},
-	             	{field : 'materialType', width : 100, align : 'center', title : '物料类型'},
-	             	{field : 'status', width : 100, align : 'center', title : '物料状态'}, 
-	             	{field : 'remaining', width : 100, title : '剩余数量', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatMaterialNote}	            	
+				{field : 'ck', checkbox:true },
+				{field : 'materialId', width : 100, title : '物料编号', align:'center'},
+				{field : 'materialType', width : 100, align : 'center', title : '物料类型'},
+				{field : 'status', width : 100, align : 'center', title : '物料状态'},
+				{field : 'remaining', width : 100, title : '剩余数量', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center',formatter:formatMaterialNote}
 	        ] ],  
 	    });
 	}

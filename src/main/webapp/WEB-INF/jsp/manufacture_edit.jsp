@@ -19,25 +19,31 @@
 	        <tr>
 	            <td>订单编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="orderId"  panelHeight="auto"
-    					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data', editable:false" />  
+	            	<input class="easyui-combobox" name="orderId"  panelHeight="auto" data-options="required:true,
+	            		valueField:'orderId',textField:'orderId',url:'order/get_data', editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyId"  panelHeight="auto"
-    					data-options="valueField:'technologyId',textField:'technologyName',url:'technology/get_data', editable:false, required:true" />
+						   data-options="valueField:'technologyId',textField:'technologyName',url:'technology/get_data',
+						   editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>投产数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="launchQuantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="launchQuantity"
+						   data-options="min:1,max:99999999,precision:0,required:true" />
+				</td>
 	        </tr>
 	        <tr>
 	            <td>订购日期:</td>
-	            <td><input class="easyui-datetimebox" name="beginDate"     
-        			data-options="showSeconds:true" style="width:150px"> </td>
+	            <td>
+					<input class="easyui-datetimebox" name="beginDate"
+        			data-options="showSeconds:true" style="width:150px">
+				</td>
 	        </tr>
 	        <tr>
 	            <td>要求日期:</td>

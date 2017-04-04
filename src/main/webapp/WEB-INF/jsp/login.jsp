@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ include file="/WEB-INF/jsp/common_js.jsp"%>
+<%@ include file="/WEB-INF/jsp/commons/common_js.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +12,9 @@
 <title>制造物联中间件系统登录页面</title>
 <link rel="stylesheet" type="text/css" href="css/login/style.css" />
 <style type="text/css">
-	.download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;background:#e6e6e6;border:1px dashed #df0031;font-size:14px;font-family:Comic Sans MS;font-weight:bolder;color:#555}
+	.download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;
+		-moz-border-radius:3px;background:#e6e6e6;border:1px dashed #df0031;font-size:14px;font-family:Comic Sans MS;
+		font-weight:bolder;color:#555}
 	.download a{padding-left:5px;font-size:14px;font-weight:normal;color:#555;text-decoration:none;letter-spacing:1px}
 	.download a:hover{text-decoration:underline;color:#36F}
 	.download span{float:right}
@@ -30,7 +32,9 @@
 					<!--USERNAME -->
 					<div>
 						<div class="input">
-							<input class="input_all name" name="name" id="username" placeholder="用户名" type="text" onFocus="this.className='input_all name_now';" onBlur="this.className='input_all name'" maxLength="24" />
+							<input class="input_all name" name="name" id="username" placeholder="用户名" type="text"
+								   onFocus="this.className='input_all name_now';"
+								   onBlur="this.className='input_all name'" maxLength="24" />
 						</div>
 						<div id="username_span"style="display:none;padding-bottom:7px;">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="userspan"></span>
@@ -41,7 +45,9 @@
 					<!-- PASSWORD -->
 					<div>
 						<div class="input">
-							<input class="input_all password" name="password" id="password" type="password" placeholder="密码" onFocus="this.className='input_all password_now';" onBlur="this.className='input_all password'" maxLength="24" />
+							<input class="input_all password" name="password" id="password" type="password"
+								   placeholder="密码" onFocus="this.className='input_all password_now';"
+								   onBlur="this.className='input_all password'" maxLength="24" />
 						</div>
 						
 						<div id="password_span"style="display:none;margin:0 0 0 0;padding:0 0 0 0;">
@@ -64,7 +70,10 @@
 					
 					<!-- REMEMBERME -->					
 					<div class="checkbox">
-						<input type="checkbox" name="remember" id="remember" checked="checked"/><label for="remember"><span>记住密码</span></label>
+						<input type="checkbox" name="remember" id="remember" checked="checked"/>
+						<label for="remember">
+							<span>记住密码</span>
+						</label>
 						<span id="errorspan" style="margin-left:88px;"></span>
 					</div>
 

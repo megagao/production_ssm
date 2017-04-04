@@ -9,43 +9,43 @@
 	        <tr>
 	            <td>设备种类名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceTypeName" ></input>
+	            	<input class="easyui-textbox" type="text" name="deviceTypeName"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>型号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceTypeModel" ></input>
+	            	<input class="easyui-textbox" type="text" name="deviceTypeModel"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>规格:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceTypeSpec" ></input>
+	            	<input class="easyui-textbox" type="text" name="deviceTypeSpec"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>供应商:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceTypeSupplier" ></input>
+	            	<input class="easyui-textbox" type="text" name="deviceTypeSupplier"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>生产商:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceTypeProducer"></input>
+	            	<input class="easyui-textbox" type="text" name="deviceTypeProducer"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>台数:</td>
 	            <td>
-	            	<input class="easyui-numberbox" name="deviceTypeQuantity"></input>
+	            	<input class="easyui-numberbox" name="deviceTypeQuantity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>保修期:</td>
 	            <td>
-	            	<input class="easyui-datebox" name="deviceTypeWarranty" value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
+	            	<input class="easyui-datebox" name="deviceTypeWarranty" value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>
 	    </table>

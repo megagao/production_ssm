@@ -9,22 +9,23 @@
 	        <tr>
 	            <td>工艺名称:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="technologyId" panelHeight="auto"  
-    					data-options="required:true,valueField:'technologyId',textField:'technologyName',url:'technologyRequirement/get_data',editable:false" /> 
+	            	<input class="easyui-combobox" name="technologyId" panelHeight="auto" data-options="required:true,
+	            		valueField:'technologyId',textField:'technologyName',url:'technologyRequirement/get_data',
+	            		editable:false"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺要求添加时间:</td>
 	            <td>
 	            	<input class="easyui-datetimebox" name="addTime"     
-        			data-options="required:true,showSeconds:true"> </td>
+        			data-options="required:true,showSeconds:true">
 	            </td>
 	        </tr>
 	          
 	        <tr>
 	            <td>工艺要求修改时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="reviseTime"></input>
+	            	<input class="easyui-datetimebox" name="reviseTime"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -36,7 +37,9 @@
 	    </table>
 	</form>
 	<div style="padding-top:20px;">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyRequirementEditForm()">&nbsp;&nbsp;提交&nbsp;&nbsp;</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyRequirementEditForm()">
+			&nbsp;&nbsp;提交&nbsp;&nbsp;
+		</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -61,7 +64,8 @@
     			
     			requirementEditEditor.sync();
     			
-    			$.post("technologyRequirement/update_all",$("#technologyRequirementEditForm").serialize(), function(data){
+    			$.post("technologyRequirement/update_all",$("#technologyRequirementEditForm").serialize(),
+						function(data){
     				if(data.status == 200){
     					$.messager.alert('提示','修改工艺要求成功!','info',function(){
     						$("#technologyRequirementEditWindow").window('close');

@@ -25,7 +25,8 @@
 	        <tr>
 	            <td>产品状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true,width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto"
+							data-options="required:true,width:150, editable:false">
 						<option value="1">有效产品</option>
 						<option value="2">停产</option>
 					</select>

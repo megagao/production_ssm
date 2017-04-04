@@ -11,14 +11,15 @@
 	    	<tr>
 	            <td>物料编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto"
-    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;"/>  
+	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto" data-options="required:true,
+	            		valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false"
+						style="width: 160px;"/>
 	            </td>
 	        </tr>       	     
 	        <tr>
 	            <td>收入数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="ammount" style="width: 160px;"></input>
+	            	<input class="easyui-numberbox" type="text" name="ammount" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        </tr>
@@ -30,13 +31,13 @@
 	        <tr>
 	            <td>发送者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>接收者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>

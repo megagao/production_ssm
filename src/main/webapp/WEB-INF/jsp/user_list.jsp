@@ -72,28 +72,30 @@
 function doSearch_user(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#userList").datagrid({
-	        title:'用户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_user", url:'user/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,
+	        title:'用户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_user", url:'user/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'id', width : 150, align:'center', title : '用户编号'},
-	             	{field : 'username', width : 150, align : 'center', title : '用户名'},
-	             	{field : 'password', width : 150, align : 'center', title : '密码'}, 
-	             	{field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole}, 
-	             	{field : 'locked', width : 150, title : '状态', align:'center', formatter:formatUserStatus}, 
+				{field : 'ck', checkbox:true },
+				{field : 'id', width : 150, align:'center', title : '用户编号'},
+				{field : 'username', width : 150, align : 'center', title : '用户名'},
+				{field : 'password', width : 150, align : 'center', title : '密码'},
+				{field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole},
+				{field : 'locked', width : 150, title : '状态', align:'center', formatter:formatUserStatus}
 	        ] ],  
 	    });
 	}else{
 		$("#userList").datagrid({  
-	        title:'用户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_user", url:'user/search_user_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,  
+	        title:'用户列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_user", url:'user/search_user_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'id', width : 150, align:'center', title : '用户编号'},
-					{field : 'username', width : 150, align : 'center', title : '用户名'},
-					{field : 'password', width : 150, align : 'center', title : '密码'}, 
-					{field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole}, 
-					{field : 'locked', width : 150, title : '状态', align:'center', formatter:formatUserStatus}, 
+				{field : 'ck', checkbox:true },
+				{field : 'id', width : 150, align:'center', title : '用户编号'},
+				{field : 'username', width : 150, align : 'center', title : '用户名'},
+				{field : 'password', width : 150, align : 'center', title : '密码'},
+				{field : 'roleName', width : 150, title : '角色', align:'center',formatter:formatRole},
+				{field : 'locked', width : 150, title : '状态', align:'center', formatter:formatUserStatus}
 	        ] ],  
 	    });
 	}

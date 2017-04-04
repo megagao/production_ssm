@@ -3,20 +3,35 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="technologyPlanList" title="工艺计划列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'technologyPlan/list',method:'get',pageSize:30,fitColumns:true,toolbar:toolbar_technologyPlan">
+<table class="easyui-datagrid" id="technologyPlanList" title="工艺计划列表" data-options="singleSelect:false,
+		collapsible:true,pagination:true,rownumbers:true,url:'technologyPlan/list',method:'get',pageSize:30,
+		fitColumns:true,toolbar:toolbar_technologyPlan">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'technologyPlanId',width:80,align:'center'">工艺计划编号</th>
+        	<th data-options="field:'technologyPlanId',width:80,align:'center'">
+				工艺计划编号
+			</th>
             <th data-options="field:'technologyName',width:100,align:'center',
-            					formatter:formatTechnology_technologyPlan">工艺名称</th>
+            		formatter:formatTechnology_technologyPlan">
+				工艺名称
+			</th>
             <th data-options="field:'batchAmount',width:80,align:'center'">批次数量</th>
-            <th data-options="field:'startPlan',width:140,align:'center',formatter:TAOTAO.formatDateTime">计划开始时间</th>
-            <th data-options="field:'endPlan',width:140,align:'center',formatter:TAOTAO.formatDateTime">计划结束时间</th>
-            <th data-options="field:'commitPlan',width:140,align:'center',formatter:TAOTAO.formatDateTime">计划提交时间</th>
-            <th data-options="field:'technologyPlanStart',width:140,align:'center',formatter:TAOTAO.formatDateTime">工艺计划开始时间</th>
-            <th data-options="field:'technologyPlanEnd',width:140,align:'center',formatter:TAOTAO.formatDateTime">工艺计划结束时间</th>
+            <th data-options="field:'startPlan',width:140,align:'center',formatter:TAOTAO.formatDateTime">
+				计划开始时间
+			</th>
+            <th data-options="field:'endPlan',width:140,align:'center',formatter:TAOTAO.formatDateTime">
+				计划结束时间
+			</th>
+            <th data-options="field:'commitPlan',width:140,align:'center',formatter:TAOTAO.formatDateTime">
+				计划提交时间
+			</th>
+            <th data-options="field:'technologyPlanStart',width:140,align:'center',formatter:TAOTAO.formatDateTime">
+				工艺计划开始时间
+			</th>
+            <th data-options="field:'technologyPlanEnd',width:140,align:'center',formatter:TAOTAO.formatDateTime">
+				工艺计划结束时间
+			</th>
         </tr>
     </thead>
 </table>
@@ -26,17 +41,23 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='technologyPlan:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="technologyPlan_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="technologyPlan_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='technologyPlan:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="technologyPlan_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="technologyPlan_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='technologyPlan:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="technologyPlan_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="technologyPlan_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -75,40 +96,42 @@
 	    <table cellpadding="5">
 	        <tr>
 	            <td>工艺名称:</td>
-	            <td><input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>外协价格:</td>
-	            <td><input class="easyui-numberbox" precision="2" maxlength="10" name="price" ></input></td>
+	            <td><input class="easyui-numberbox" precision="2" maxlength="10" name="price"/></td>
 	        </tr>
 	        <tr>
 	            <td>瓶颈工序工期:</td>
-	            <td><input class="easyui-textbox" type="text" name="vitalProcessPeriod"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="vitalProcessPeriod"/></td>
 	        </tr>
 	        <tr>
 	            <td>标准加工能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="standardCapacity"></input></td>
+	            <td><input class="easyui-numberbox" maxlength="11" name="standardCapacity"/></td>
 	        </tr>
 	        <tr>
 	            <td>加班标准加工能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"></input></td>
+	            <td><input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"/></td>
 	        </tr>
 	        <tr>
 	            <td>加班超额加工能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"></input></td>
+	            <td><input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"/></td>
 	        </tr>
 	        <tr>
 	            <td>二班工序能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="doubleCapacity"></input></td>
+	            <td><input class="easyui-numberbox" maxlength="11" name="doubleCapacity"/></td>
 	        </tr>
 	        <tr>
 	            <td>超负荷工序能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"></input></td>
+	            <td><input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"/></td>
 	        </tr>
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyEditForm_technologyPlan()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyEditForm_technologyPlan()">
+			提交
+		</a>
 	</div>
 </div>
  
@@ -117,34 +140,48 @@ function doSearch_technologyPlan(value,name){ //用户输入用户名,点击搜�
 	if(value == null || value == ''){
 		
 		$("#technologyPlanList").datagrid({
-	        title:'工艺计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_technologyPlan", url:'technologyPlan/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工艺计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_technologyPlan", url:'technologyPlan/list', method:'get',
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'technologyPlanId', width : 100, align:'center', title : '工艺计划编号'},
-	             	{field : 'technologyName', width : 100, align : 'center', title : '工艺名称',formatter:formatTechnology_technologyPlan},
-	             	{field : 'batchAmount', width : 100, align : 'center', title : '批次数量'}, 
-	             	{field : 'startPlan', width : 130, title : '计划开始时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'endPlan', width : 130, title : '计划结束时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'commitPlan', width : 130, title : '计划提交时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'technologyPlanStart', width : 130, title : '工艺计划开始时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'technologyPlanEnd', width : 130, title : '工艺计划结束时间', align:'center', formatter:TAOTAO.formatDateTime}, 
+				{field : 'ck', checkbox:true },
+				{field : 'technologyPlanId', width : 100, align:'center', title : '工艺计划编号'},
+				{field : 'technologyName', width : 100, align : 'center', title : '工艺名称',
+					formatter:formatTechnology_technologyPlan},
+				{field : 'batchAmount', width : 100, align : 'center', title : '批次数量'},
+				{field : 'startPlan', width : 130, title : '计划开始时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'endPlan', width : 130, title : '计划结束时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'commitPlan', width : 130, title : '计划提交时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'technologyPlanStart', width : 130, title : '工艺计划开始时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'technologyPlanEnd', width : 130, title : '工艺计划结束时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
 	        ] ],  
 	    });
 	}else{
 		$("#technologyPlanList").datagrid({  
-	        title:'工艺计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_technologyPlan", url:'technologyPlan/search_technologyPlan_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工艺计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_technologyPlan", url:'technologyPlan/search_technologyPlan_by_'+name
+				+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'technologyPlanId', width : 100, align:'center', title : '工艺计划编号'},
-					{field : 'technologyName', width : 100, align : 'center', title : '工艺名称',formatter:formatTechnology_technologyPlan},
-					{field : 'batchAmount', width : 100, align : 'center', title : '批次数量'}, 
-					{field : 'startPlan', width : 130, title : '计划开始时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'endPlan', width : 130, title : '计划结束时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'commitPlan', width : 130, title : '计划提交时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'technologyPlanStart', width : 130, title : '工艺计划开始时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'technologyPlanEnd', width : 130, title : '工艺计划结束时间', align:'center', formatter:TAOTAO.formatDateTime}, 
+				{field : 'ck', checkbox:true },
+				{field : 'technologyPlanId', width : 100, align:'center', title : '工艺计划编号'},
+				{field : 'technologyName', width : 100, align : 'center', title : '工艺名称',
+					formatter:formatTechnology_technologyPlan},
+				{field : 'batchAmount', width : 100, align : 'center', title : '批次数量'},
+				{field : 'startPlan', width : 130, title : '计划开始时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'endPlan', width : 130, title : '计划结束时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'commitPlan', width : 130, title : '计划提交时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'technologyPlanStart', width : 130, title : '工艺计划开始时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'technologyPlanEnd', width : 130, title : '工艺计划结束时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
 	        ] ],  
 	    });
 	}

@@ -3,14 +3,24 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="processList" title="工序列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'process/list',method:'get',pageSize:30,fitColumns:true,toolbar:toolbar_process">    <thead>
+<table class="easyui-datagrid" id="processList" title="工序列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'process/list',method:'get',pageSize:30,fitColumns:true,
+		toolbar:toolbar_process">
+	<thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'processId',width:100,align:'center'">工序编号</th>
-            <th data-options="field:'technologyPlanId',width:100,align:'center',formatter:formatTechnologyPlan_process">工艺计划编号</th>
-            <th data-options="field:'sequence',width:100,align:'center'">工序顺序</th>
-            <th data-options="field:'quota',width:100,align:'center'">单件定额工时</th>
+        	<th data-options="field:'processId',width:100,align:'center'">
+				工序编号
+			</th>
+            <th data-options="field:'technologyPlanId',width:100,align:'center',formatter:formatTechnologyPlan_process">
+				工艺计划编号
+			</th>
+            <th data-options="field:'sequence',width:100,align:'center'">
+				工序顺序
+			</th>
+            <th data-options="field:'quota',width:100,align:'center'">
+				单件定额工时
+			</th>
         </tr>
     </thead>
 </table>
@@ -20,17 +30,23 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='process:add'}" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="process_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="process_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='process:edit'}" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="process_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="process_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='process:delete'}" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="process_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="process_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -38,7 +54,9 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="process_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="process_reload()">
+			刷新
+		</a>
 	</div>  
 	
     <div id="search_process" style="float: right;">
@@ -54,49 +72,56 @@
 
 </div> 
 
-<div id="processEditWindow" class="easyui-window" title="编辑工序" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'process/edit'" style="width:35%;height:50%;padding:10px;">
+<div id="processEditWindow" class="easyui-window" title="编辑工序" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'process/edit'" style="width:35%;height:50%;padding:10px;">
 </div>
-<div id="processAddWindow" class="easyui-window" title="添加工序" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'process/add'" style="width:35%;height:50%;padding:10px;">
+<div id="processAddWindow" class="easyui-window" title="添加工序" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'process/add'" style="width:35%;height:50%;padding:10px;">
 </div>
  
 <!-- 工艺计划信息 -->
-<div id="technologyPlanInfo_process" class="easyui-dialog" title="工艺计划信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyPlanInfo_process" class="easyui-dialog" title="工艺计划信息" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="technologyPlanEditForm_process" method="post">
 		<input type="hidden" name="technologyPlanId"/>
 	    <table cellpadding="5">
 	        <tr>
 	            <td>工艺名称:</td>
-	            <td><input class="easyui-combobox" name="technologyId" panelHeight="auto" 
-	            		data-options="required:true,valueField:'technologyId',textField:'technologyName',url:'technology/get_data',editable:false"></input></td>
+	            <td>
+					<input class="easyui-combobox" name="technologyId" panelHeight="auto" data-options="required:true,
+	            		valueField:'technologyId',textField:'technologyName',url:'technology/get_data',editable:false"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>批次数量:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="batchAmount" ></input></td>
+	            <td><input class="easyui-numberbox" maxlength="11" name="batchAmount"/></td>
 	        </tr>
 	        <tr>
 	            <td>计划开始时间:</td>
-	            <td><input class="easyui-datetimebox" name="startPlan" value="5/5/2016 00:00:00" ></input></td>
+	            <td><input class="easyui-datetimebox" name="startPlan" value="5/5/2016 00:00:00"/></td>
 	        </tr>
 	        <tr>
 	            <td>计划结束时间:</td>
-	            <td><input class="easyui-datetimebox" name="endPlan"></input></td>
+	            <td><input class="easyui-datetimebox" name="endPlan"/></td>
 	        </tr>
 	        <tr>
 	            <td>计划提交时间:</td>
-	            <td><input class="easyui-datetimebox" name="commitPlan"></input></td>
+	            <td><input class="easyui-datetimebox" name="commitPlan"/></td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划开始时间:</td>
-	            <td><input class="easyui-datetimebox" name="technologyStartPlan"></input></td>
+	            <td><input class="easyui-datetimebox" name="technologyStartPlan"/></td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划结束时间:</td>
-	            <td><input class="easyui-datetimebox" name="technologyEndPlan""></input></td>
+	            <td><input class="easyui-datetimebox" name="technologyEndPlan"/></td>
 	        </tr>
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyPlanEditForm_process()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyPlanEditForm_process()">
+			提交
+		</a>
 	</div>
 </div>
  
@@ -105,26 +130,30 @@ function doSearch_process(value,name){ //用户输入用户名,点击搜素,触�
 	if(value == null || value == ''){
 		
 		$("#processList").datagrid({
-	        title:'工序列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_process", url:'process/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工序列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_process", url:'process/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'processId', width : 100, align:'center', title : '工序编号'},
-	             	{field : 'technologyPlanId', width : 100, align : 'center', title : '工艺计划编号', formatter:formatTechnologyPlan_process},
-	             	{field : 'sequence', width : 100, align : 'center', title : '工序顺序'}, 
-	             	{field : 'quota', width : 100, title : '单件定额工时', align:'center'}
+				{field : 'ck', checkbox:true },
+				{field : 'processId', width : 100, align:'center', title : '工序编号'},
+				{field : 'technologyPlanId', width : 100, align : 'center', title : '工艺计划编号',
+					formatter:formatTechnologyPlan_process},
+				{field : 'sequence', width : 100, align : 'center', title : '工序顺序'},
+				{field : 'quota', width : 100, title : '单件定额工时', align:'center'}
 	        ] ],  
 	    });
 	}else{
 		$("#processList").datagrid({  
-	        title:'工序列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_process", url:'process/search_process_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
-	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'processId', width : 100, align:'center', title : '工序编号'},
-	             	{field : 'technologyPlanId', width : 100, align : 'center', title : '工艺计划编号', formatter:formatTechnologyPlan_process},
-	             	{field : 'sequence', width : 100, align : 'center', title : '工序顺序'}, 
-	             	{field : 'quota', width : 100, title : '单件定额工时', align:'center'}
+	        title:'工序列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_process", url:'process/search_process_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
+	        columns : [ [
+				{field : 'ck', checkbox:true },
+				{field : 'processId', width : 100, align:'center', title : '工序编号'},
+				{field : 'technologyPlanId', width : 100, align : 'center', title : '工艺计划编号',
+					formatter:formatTechnologyPlan_process},
+				{field : 'sequence', width : 100, align : 'center', title : '工序顺序'},
+				{field : 'quota', width : 100, title : '单件定额工时', align:'center'}
 	        ] ],  
 	    });
 	}

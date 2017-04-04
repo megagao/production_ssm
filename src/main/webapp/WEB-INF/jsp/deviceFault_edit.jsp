@@ -9,26 +9,26 @@
 	        <tr>
 	            <td>设备名称:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto"
-    					data-options="editable:false,valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', required:true" />
+	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" data-options="editable:false,
+	            			valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>故障日期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="deviceFaultDate" ></input>
+	            	<input class="easyui-datetimebox" name="deviceFaultDate"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>故障原因:</td>
 	            <td>
-	            	<input class="easyui-textbox"  name="deviceFaultCause"></input>
+	            	<input class="easyui-textbox"  name="deviceFaultCause"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>维修方式:</td>
 	            <td>
-	            	<input class="easyui-textbox" name="deviceFaultMaintenance"></input>
+	            	<input class="easyui-textbox" name="deviceFaultMaintenance"/>
 	            </td>
 	        </tr>
 	        <tr>

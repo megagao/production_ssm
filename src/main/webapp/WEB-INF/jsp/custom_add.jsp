@@ -8,49 +8,49 @@
 	        <tr>
 	            <td>客户编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="customId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="customId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>客户名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="customName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="customName" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>客户全称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="fullName" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="fullName" style="width: 280px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>地址:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="address" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="address" style="width: 280px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>传真:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="fax"></input>
+	            	<input class="easyui-textbox" type="text" name="fax"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>邮箱:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="email"></input>
+	            	<input class="easyui-textbox" type="text" name="email"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>经理姓名:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="ownerName"></input>
+	            	<input class="easyui-textbox" type="text" name="ownerName"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>联系电话:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="ownerTel"></input>
+	            	<input class="easyui-textbox" type="text" name="ownerTel"/>
 	            </td>
 	        </tr>
 	        <tr>

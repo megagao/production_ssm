@@ -87,11 +87,11 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>设备编号:</td>
-	           	<td><input class="easyui-textbox" name="deviceId" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="deviceId" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备名称:</td>
-	            <td><input class="easyui-textbox" name="deviceName" data-options="editable:false"></input></td>
+	            <td><input class="easyui-textbox" name="deviceName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备种类:</td>
@@ -112,25 +112,25 @@
 	        </tr>
 	        <tr>
 	            <td>设备购买日期:</td>
-	            <td><input class="easyui-datetimebox" name="devicePurchaseDate"></input></td>
+	            <td><input class="easyui-datetimebox" name="devicePurchaseDate"/></td>
 	        </tr>
 	        <tr>
 	            <td>购买价格:</td>
-	            <td><input class="easyui-numberbox" name="devicePurchasePrice"></input></td>
+	            <td><input class="easyui-numberbox" name="devicePurchasePrice"/></td>
 	        </tr>
 	        <tr>
 	            <td>出厂日期:</td>
-	            <td><input class="easyui-datetimebox" name="deviceManufactureDate" ></input></td>
+	            <td><input class="easyui-datetimebox" name="deviceManufactureDate" /></td>
 	        </tr>
 	        <tr>
 	            <td>使用年限:</td>
-	            <td><input class="easyui-datetimebox" name="deviceServiceLife" ></input></td>
+	            <td><input class="easyui-datetimebox" name="deviceServiceLife" /></td>
 	        </tr>
 	        <tr>
 	            <td>保管人:</td>
 	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" 
     					data-options="required:true,editable:false,valueField:'empId',textField:'empName',
-    						url:'employee/get_data'" /></input></td>
+    						url:'employee/get_data'" /></td>
 	        </tr>
 	        <tr>
 	            <td>备注:</td>
@@ -154,7 +154,7 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>姓名:</td>
-	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>性别:</td>
@@ -176,35 +176,35 @@
 	        </tr>
 	        <tr>
 	            <td>身份证号:</td>
-	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	            <td><input class="easyui-textbox" name="idCode"/></td>
 	        </tr>
 	        <tr>
 	            <td>学历:</td>
-	            <td><input class="easyui-textbox" name="education"></input></td>
+	            <td><input class="easyui-textbox" name="education"/></td>
 	        </tr>
 	        <tr>
 	            <td>学位:</td>
-	            <td><input class="easyui-textbox" name="degree"></input></td>
+	            <td><input class="easyui-textbox" name="degree"/></td>
 	        </tr>
 	        <tr>
 	            <td>专业:</td>
-	            <td><input class="easyui-textbox" name="major" ></input></td>
+	            <td><input class="easyui-textbox" name="major" /></td>
 	        </tr>
 	        <tr>
 	            <td>受教育形式:</td>
-	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	            <td><input class="easyui-textbox" name="educationForm" /></td>
 	        </tr>
 	        <tr>
 	            <td>生日:</td>
-	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	            <td><input class="easyui-datetimebox" name="birthday" /></td>
 	        </tr>
 	        <tr>
 	            <td>入职日期:</td>
-	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	            <td><input class="easyui-datetimebox" name="joinDate" /></td>
 	        </tr>
 	        <tr>
 	            <td>员工状态:</td>
-	            <td><input class="easyui-textbox" name="status" ></input></td>
+	            <td><input class="easyui-textbox" name="status" /></td>
 	        </tr>
 	    </table>
 	</form>

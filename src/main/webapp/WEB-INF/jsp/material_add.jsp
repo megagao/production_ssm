@@ -8,7 +8,8 @@
 	         <tr>
 	            <td>物料编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialId" data-options="required:true" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="materialId" data-options="required:true"
+						   style="width: 160px;"/>
 	            </td>
 	        </tr>
 	     <!--   <tr>
@@ -20,13 +21,14 @@
 	        <tr>
 	            <td>物料类型:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" style="width: 160px;" data-options="editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" style="width: 160px;"
+							data-options="editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -36,7 +38,7 @@
 	        <tr>
 	            <td>剩余数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="remaining" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="remaining" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        

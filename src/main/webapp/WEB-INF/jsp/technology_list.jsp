@@ -3,8 +3,9 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="technologyList" title="工艺列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'technology/list',method:'get',pageSize:30,fitColumns:true,toolbar:toolbar_technology">
+<table class="easyui-datagrid" id="technologyList" title="工艺列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'technology/list',method:'get',pageSize:30,fitColumns:true,
+		toolbar:toolbar_technology">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -26,17 +27,23 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per == 'technology:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="technology_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="technology_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='technology:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="technology_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="technology_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='technology:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="technology_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="technology_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -44,7 +51,9 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="technology_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="technology_reload()">
+			刷新
+		</a>
 	</div>  
 	
     <div id="search_technology" style="float: right;">
@@ -60,10 +69,12 @@
 
 </div>
 
-<div id="technologyEditWindow" class="easyui-window" title="编辑工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/edit'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyEditWindow" class="easyui-window" title="编辑工艺" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'technology/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
 
-<div id="technologyAddWindow" class="easyui-window" title="添加工艺" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technology/add'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyAddWindow" class="easyui-window" title="添加工艺" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'technology/add'" style="width:40%;height:55%;padding:10px;">
 </div>
  
 <script>
@@ -71,36 +82,38 @@ function doSearch_technology(value,name){ //用户输入用户名,点击搜素,�
 	if(value == null || value == ''){
 		
 		$("#technologyList").datagrid({
-	        title:'工艺列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_technology", url:'technology/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工艺列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_technology", url:'technology/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'technologyId', width : 100, align:'center', title : '工艺编号'},
-	             	{field : 'technologyName', width : 100, align : 'center', title : '工艺名称'},
-	             	{field : 'price', width : 100, align : 'center', title : '外协价格'}, 
-	             	{field : 'vitalProcessPeriod', width : 140, title : '瓶颈工序工期', align:'center'}, 
-	             	{field : 'standardCapacity', width : 140, title : '标准加工能力', align:'center'}, 
-	            	{field : 'overtimeStandardCapacity', width : 160, title : '加班标准加工能力', align:'center'}, 
-	             	{field : 'overtimeOverfulfilCapacity', width : 160, title : '加班超额加工能力', align:'center'}, 
-	             	{field : 'doubleCapacity', width : 140, title : '二倍工序能力', align:'center'}, 
-	             	{field : 'overfulfilCapacity', width : 160, title : '超负荷工序能力', align:'center'}, 
+				{field : 'ck', checkbox:true },
+				{field : 'technologyId', width : 100, align:'center', title : '工艺编号'},
+				{field : 'technologyName', width : 100, align : 'center', title : '工艺名称'},
+				{field : 'price', width : 100, align : 'center', title : '外协价格'},
+				{field : 'vitalProcessPeriod', width : 140, title : '瓶颈工序工期', align:'center'},
+				{field : 'standardCapacity', width : 140, title : '标准加工能力', align:'center'},
+				{field : 'overtimeStandardCapacity', width : 160, title : '加班标准加工能力', align:'center'},
+				{field : 'overtimeOverfulfilCapacity', width : 160, title : '加班超额加工能力', align:'center'},
+				{field : 'doubleCapacity', width : 140, title : '二倍工序能力', align:'center'},
+				{field : 'overfulfilCapacity', width : 160, title : '超负荷工序能力', align:'center'},
 	        ] ],  
 	    });
 	}else{
 		$("#technologyList").datagrid({  
-	        title:'工艺列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_technology", url:'technology/search_technology_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工艺列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_technology", url:'technology/search_technology_by_'+name+'?searchValue='
+				+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'technologyId', width : 100, align:'center', title : '工艺编号'},
-					{field : 'technologyName', width : 100, align : 'center', title : '工艺名称'},
-					{field : 'price', width : 100, align : 'center', title : '外协价格'}, 
-					{field : 'vitalProcessPeriod', width : 140, title : '瓶颈工序工期', align:'center'}, 
-					{field : 'standardCapacity', width : 140, title : '标准加工能力', align:'center'}, 
-					{field : 'overtimeStandardCapacity', width : 160, title : '加班标准加工能力', align:'center'}, 
-					{field : 'overtimeOverfulfilCapacity', width : 160, title : '加班超额加工能力', align:'center'}, 
-					{field : 'doubleCapacity', width : 140, title : '二倍工序能力', align:'center'}, 
-					{field : 'overfulfilCapacity', width : 160, title : '超负荷工序能力', align:'center'}, 
+				{field : 'ck', checkbox:true },
+				{field : 'technologyId', width : 100, align:'center', title : '工艺编号'},
+				{field : 'technologyName', width : 100, align : 'center', title : '工艺名称'},
+				{field : 'price', width : 100, align : 'center', title : '外协价格'},
+				{field : 'vitalProcessPeriod', width : 140, title : '瓶颈工序工期', align:'center'},
+				{field : 'standardCapacity', width : 140, title : '标准加工能力', align:'center'},
+				{field : 'overtimeStandardCapacity', width : 160, title : '加班标准加工能力', align:'center'},
+				{field : 'overtimeOverfulfilCapacity', width : 160, title : '加班超额加工能力', align:'center'},
+				{field : 'doubleCapacity', width : 140, title : '二倍工序能力', align:'center'},
+				{field : 'overfulfilCapacity', width : 160, title : '超负荷工序能力', align:'center'},
 	        ] ],  
 	    });
 	}

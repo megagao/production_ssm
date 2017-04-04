@@ -10,16 +10,17 @@
 <div style="padding:10px 10px 10px 10px">
 	<form id="roleAddForm" class="roleForm" method="post">
 		<span>角色编号:</span>
-        	<input class="easyui-textbox" type="text" name="roleId" data-options="required:true"></input><br><br>
+        	<input class="easyui-textbox" type="text" name="roleId" data-options="required:true"/><br><br>
         <span>角色名&nbsp:</span>
-        	<input class="easyui-textbox" type="text" name="roleName" data-options="required:true"></input><br><br>
+        	<input class="easyui-textbox" type="text" name="roleName" data-options="required:true"/><br><br>
         <span >状&nbsp态&nbsp:</span>
-            <select class="easyui-combobox" name="available" panelHeight="auto" data-options="width:150, editable:false">
+            <select class="easyui-combobox" name="available" panelHeight="auto" data-options="width:150,
+            		editable:false">
 				<option value="1">有效</option>
 				<option value="2">锁定</option>
 			</select><br><br>
         <span >权&nbsp限&nbsp:</span><br><br>
-	        <input type="hidden" name="permission" ></input>
+	        <input type="hidden" name="permission"/>
            	<span style="font-weight: bold;">订单管理：</span>
 			<label><input name="permissionOption2" type="checkbox" value="11" />订单新增 </label> 
 			<label><input name="permissionOption2" type="checkbox" value="12" />订单修改 </label> 
@@ -177,18 +178,19 @@
 			$("input[name='permissionOption2']:checked").each(function(){
 				permission += $(this).val()+',';
 			}); 
-			$("#roleEditForm [name=permission]").val(permission);
+			$("#roleAddForm [name=permission]").val(permission);
 		}
+
 		//ajax的post方式提交表单
 		//$("#roleAddForm").serialize()将表单序列号为key-value形式的字符串
 		$.post("role/insert",$("#roleAddForm").serialize(), function(data){
-			if(data.label == 200){
-				$.messager.alert('提示', data.msg);
+			if(data.status == 200){
+				$.messager.alert('提示',data.msg);
 				clearRoleAddForm();
 				$("#roleAddWindow").window('close');
 				$("#roleList").datagrid("reload");
 			}else{
-				$.messager.alert('提示', data.msg);
+				$.messager.alert('提示',data.msg);
 			}
 		});
 	}

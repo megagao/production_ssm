@@ -18,7 +18,7 @@
 	        <tr>
 	            <td>批次数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="batchAmount" ></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="batchAmount"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -32,32 +32,34 @@
 	        <tr>
 	            <td>计划结束时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="endPlan"></input>
+	            	<input class="easyui-datetimebox" name="endPlan"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>计划提交时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox"  name="commitPlan"></input>
+	            	<input class="easyui-datetimebox"  name="commitPlan"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划开始时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="technologyStartPlan"></input>
+	            	<input class="easyui-datetimebox" name="technologyStartPlan"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划结束时间:</td>
 	            <td>
-		            <input class="easyui-datetimebox" name="technologyEndPlan"></input>
+		            <input class="easyui-datetimebox" name="technologyEndPlan"/>
 				</td>
 	        </tr>
 	         
 	    </table>
 	</form>
 	<div style="padding-top:20px;">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyPlanEditForm()">&nbsp;&nbsp;提交&nbsp;&nbsp;</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyPlanEditForm()">
+			&nbsp;&nbsp;提交&nbsp;&nbsp;
+		</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -82,7 +84,6 @@
     					$.messager.alert('提示',data.msg);
     				}
     			});
-    		//}
     	});
 	}
 </script>

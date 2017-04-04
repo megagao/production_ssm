@@ -36,12 +36,16 @@
 		</c:if>
 		<c:if test="${per=='fCountCheck:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="fCountCheck_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="fCountCheck_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='fCountCheck:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="fCountCheck_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="fCountCheck_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -66,48 +70,50 @@
 </div>  
 <!-- 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
 
-<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,resizable:true,
-	iconCls:'icon-save',href:'f_count_check/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountCheckEditWindow" class="easyui-window" title="编辑成品计数质检" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'f_count_check/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,resizable:true,
-	iconCls:'icon-save',href:'f_count_check/add'" style="width:65%;height:80%;padding:10px;">
+<div id="fCountCheckAddWindow" class="easyui-window" title="添加成品计数质检" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'f_count_check/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 <!-- ********************************************************************* -->
-<div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" 
-	style="width:65%;height:80%;padding:10px;">
+<div id="fCountOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="fCountOrderEditForm" method="post">
 			<input type="hidden" name="orderId"/>
 	    <table cellpadding="5">
 	         <tr>
 	            <td>订购客户:</td>
 	            <td>
-	            	<input id="custom" class="easyui-combobox" name="customId"   
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', 
-    						editable:false" />  
+	            	<input id="custom" class="easyui-combobox" name="customId" data-options="required:true,
+	            		valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
-	            	<input id="product" class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false" />
+	            	<input id="product" class="easyui-combobox" name="productId" data-options="valueField:'productId',
+	            		textField:'productName',url:'product/get_data', editable:false" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>订购数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,
-	            	required:true" /></td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="quantity"
+						   data-options="min:1,max:99999999,precision:0,required:true" />
+				</td>
 	        </tr>
 	        <tr>
 	            <td>税前单价:</td>
-	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,
-	            	required:true" />
+	            <td>
+					<input class="easyui-numberbox" type="text" name="unitPrice"
+						   data-options="min:1,max:99999999,precision:2,required:true" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>单位:</td>
-	            <td><input  class="easyui-textbox" type="text" name="unit"></input></td>
+	            <td><input  class="easyui-textbox" type="text" name="unit"/></td>
 	        </tr>
 	        <tr>
 	            <td>订单状态:</td>
@@ -123,13 +129,17 @@
 	        </tr>
 	        <tr>
 	            <td>订购日期:</td>
-	            <td><input class="easyui-datetimebox" name="orderDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+	            <td>
+					<input class="easyui-datetimebox" name="orderDate"
+        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px">
+				</td>
 	        </tr>
 	        <tr>
 	            <td>要求日期:</td>
-	            <td><input class="easyui-datetimebox" name="requestDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>
+	            <td>
+					<input class="easyui-datetimebox" name="requestDate"
+        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px">
+				</td>
 	        </tr>
 	        <tr>
 	            <td>合同扫描件:</td>
@@ -167,13 +177,13 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>姓名:</td>
-	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>性别:</td>
 	            <td>
-	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto" data-options="editable:false"
-	            		 style="width:173px">
+	            	<select id="sexCombobox" class="easyui-combobox" name="sex" panelHeight="auto"
+							data-options="editable:false" style="width:173px">
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select>
@@ -188,35 +198,35 @@
 	        </tr>
 	        <tr>
 	            <td>身份证号:</td>
-	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	            <td><input class="easyui-textbox" name="idCode"/></td>
 	        </tr>
 	        <tr>
 	            <td>学历:</td>
-	            <td><input class="easyui-textbox" name="education"></input></td>
+	            <td><input class="easyui-textbox" name="education"/></td>
 	        </tr>
 	        <tr>
 	            <td>学位:</td>
-	            <td><input class="easyui-textbox" name="degree"></input></td>
+	            <td><input class="easyui-textbox" name="degree"/></td>
 	        </tr>
 	        <tr>
 	            <td>专业:</td>
-	            <td><input class="easyui-textbox" name="major" ></input></td>
+	            <td><input class="easyui-textbox" name="major"/></td>
 	        </tr>
 	        <tr>
 	            <td>受教育形式:</td>
-	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	            <td><input class="easyui-textbox" name="educationForm"/></td>
 	        </tr>
 	        <tr>
 	            <td>生日:</td>
-	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	            <td><input class="easyui-datetimebox" name="birthday"/></td>
 	        </tr>
 	        <tr>
 	            <td>入职日期:</td>
-	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	            <td><input class="easyui-datetimebox" name="joinDate"/></td>
 	        </tr>
 	        <tr>
 	            <td>员工状态:</td>
-	            <td><input class="easyui-textbox" name="status" ></input></td>
+	            <td><input class="easyui-textbox" name="status"/></td>
 	        </tr>
 	    </table>
 	</form>
@@ -248,42 +258,44 @@
 function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#fCountCheckList").datagrid({
-	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_fCountCheck", url:'f_count_check/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,
+	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_fCountCheck", url:'f_count_check/list', method:'get',
+			loadMsg:'数据加载中......',  fitColumns:true,
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'fCountCheckId', width : 100, title : '成品计数质检编号', align:'center'},
-	             	{field : 'orderId', width : 100, align : 'center', title : '订单编号',formatter:formatOrder},
-	             	{field : 'checkItem', width : 100, align : 'center', title : '检验项目'}, 
-	             	{field : 'sample', width : 100, title : '样本总数', align:'center'}, 
-	             	{field : 'checkNumber', width : 100, title : '抽检数', align:'center'}, 
-	            	{field : 'unqualify', width : 100, title : '不合格数', align:'center'}, 
-	             	{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
-	             	{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
-	             	{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-	            	{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_fCount}, 
-	             	{field : 'result', width : 100, title : '检验结果', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote} 
+				{field : 'ck', checkbox:true },
+				{field : 'fCountCheckId', width : 100, title : '成品计数质检编号', align:'center'},
+				{field : 'orderId', width : 100, align : 'center', title : '订单编号',formatter:formatOrder},
+				{field : 'checkItem', width : 100, align : 'center', title : '检验项目'},
+				{field : 'sample', width : 100, title : '样本总数', align:'center'},
+				{field : 'checkNumber', width : 100, title : '抽检数', align:'center'},
+				{field : 'unqualify', width : 100, title : '不合格数', align:'center'},
+				{field : 'qualify', width : 100, title : '合格率', align:'center'},
+				{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime},
+				{field : 'measureData', width : 100, title : '实际测量数据', align:'center'},
+				{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_fCount},
+				{field : 'result', width : 100, title : '检验结果', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote}
 	        ] ],  
 	    });
 	}else{
 		$("#fCountCheckList").datagrid({  
-	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_fCountCheck", url:'f_count_check/search_fCountCheck_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'成品计数质检', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_fCountCheck", url:'f_count_check/search_fCountCheck_by_'
+			+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'fCountCheckId', width : 100, title : '成品计数质检编号', align:'center'},
-					{field : 'orderId', width : 100, align : 'center', title : '订单编号',formatter:formatOrder},
-					{field : 'checkItem', width : 100, align : 'center', title : '检验项目'}, 
-					{field : 'sample', width : 100, title : '样本总数', align:'center'}, 
-					{field : 'checkNumber', width : 100, title : '抽检数', align:'center'}, 
-					{field : 'unqualify', width : 100, title : '不合格数', align:'center'}, 
-					{field : 'qualify', width : 100, title : '合格率', align:'center'}, 
-					{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
-					{field : 'measureData', width : 100, title : '实际测量数据', align:'center'}, 
-					{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_fCount}, 
-					{field : 'result', width : 100, title : '检验结果', align:'center'}, 
-					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote} 
+				{field : 'ck', checkbox:true },
+				{field : 'fCountCheckId', width : 100, title : '成品计数质检编号', align:'center'},
+				{field : 'orderId', width : 100, align : 'center', title : '订单编号',formatter:formatOrder},
+				{field : 'checkItem', width : 100, align : 'center', title : '检验项目'},
+				{field : 'sample', width : 100, title : '样本总数', align:'center'},
+				{field : 'checkNumber', width : 100, title : '抽检数', align:'center'},
+				{field : 'unqualify', width : 100, title : '不合格数', align:'center'},
+				{field : 'qualify', width : 100, title : '合格率', align:'center'},
+				{field : 'cdate', width : 130, title : '检验时间', align:'center',formatter:TAOTAO.formatDateTime} ,
+				{field : 'measureData', width : 100, title : '实际测量数据', align:'center'},
+				{field : 'empName', width : 100, title : '检验人', align:'center',formatter:formatEmp_fCount},
+				{field : 'result', width : 100, title : '检验结果', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatFCountCheckNote}
 	        ] ],  
 	    });
 	}
@@ -357,8 +369,8 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
         		var imgs = data.pics.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
-        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
-        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' " +
+								"target='_blank'>" + "<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
         				j = true;
         			}
         		}

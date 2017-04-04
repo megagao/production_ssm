@@ -3,17 +3,30 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="productList" title="产品列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'product/list',method:'get',pageSize:20, fitColumns:true,toolbar:toolbar_product">
+<table class="easyui-datagrid" id="productList" title="产品列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'product/list',method:'get',pageSize:20, fitColumns:true,
+		toolbar:toolbar_product">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'productId',align:'center',width:150">产品编号</th>
-            <th data-options="field:'productName',align:'center',width:150">产品名称</th>
-            <th data-options="field:'productType',align:'center',width:150">产品种类</th>
-            <th data-options="field:'status',width:100,align:'center',formatter:TAOTAO.formatProductStatus">状态</th>
-            <th data-options="field:'note',width:150,align:'center', formatter:formatProductNote">产品介绍</th>
-            <th data-options="field:'image',width:150,align:'center', formatter:formatImg">相关图片</th>
+        	<th data-options="field:'productId',align:'center',width:150">
+				产品编号
+			</th>
+            <th data-options="field:'productName',align:'center',width:150">
+				产品名称
+			</th>
+            <th data-options="field:'productType',align:'center',width:150">
+				产品种类
+			</th>
+            <th data-options="field:'status',width:100,align:'center',formatter:TAOTAO.formatProductStatus">
+				状态
+			</th>
+            <th data-options="field:'note',width:150,align:'center', formatter:formatProductNote">
+				产品介绍
+			</th>
+            <th data-options="field:'image',width:150,align:'center', formatter:formatImg">
+				相关图片
+			</th>
         </tr>
     </thead>
 </table>
@@ -23,17 +36,23 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='product:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="product_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="product_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='product:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="product_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="product_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='product:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="product_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="product_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -41,7 +60,9 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="product_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="product_reload()">
+			刷新
+		</a>
 	</div>  
 	
     <div id="search_product" style="float: right;">
@@ -58,11 +79,14 @@
 
 </div> 
 
-<div id="productEditWindow" class="easyui-window" title="编辑产品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="productEditWindow" class="easyui-window" title="编辑产品" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'product/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="productAddWindow" class="easyui-window" title="添加产品" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'product/add'" style="width:65%;height:80%;padding:10px;">
+<div id="productAddWindow" class="easyui-window" title="添加产品" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'product/add'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="productNoteDialog" class="easyui-dialog" title="产品介绍" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
+<div id="productNoteDialog" class="easyui-dialog" title="产品介绍" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="productNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="productId"/>
 	    <table cellpadding="5" >
@@ -82,30 +106,32 @@
 function doSearch_product(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#productList").datagrid({
-	        title:'产品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_product", url:'product/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'产品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_product", url:'product/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'productId', width : 150, title : '产品编号', align:'center'},
-	             	{field : 'productName', width : 150, align : 'center', title : '产品名称'},
-	             	{field : 'productType', width : 150, align : 'center', title : '产品种类'}, 
-	             	{field : 'status', width : 100, title : '状态', align:'center', formatter:TAOTAO.formatProductStatus}, 
-	             	{field : 'note', width : 150, title : '产品介绍', align:'center', formatter:formatProductNote}, 
-	             	{field : 'image', width : 150, title : '相关图片', align:'center',formatter:formatImg}, 
+				{field : 'ck', checkbox:true },
+				{field : 'productId', width : 150, title : '产品编号', align:'center'},
+				{field : 'productName', width : 150, align : 'center', title : '产品名称'},
+				{field : 'productType', width : 150, align : 'center', title : '产品种类'},
+				{field : 'status', width : 100, title : '状态', align:'center', formatter:TAOTAO.formatProductStatus},
+				{field : 'note', width : 150, title : '产品介绍', align:'center', formatter:formatProductNote},
+				{field : 'image', width : 150, title : '相关图片', align:'center',formatter:formatImg},
 	        ] ],  
 	    });
 	}else{
 		$("#productList").datagrid({  
-	        title:'产品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_product", url:'product/search_product_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'产品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_product", url:'product/search_product_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'productId', width : 150, title : '产品编号', align:'center'},
-					{field : 'productName', width : 150, align : 'center', title : '产品名称'},
-					{field : 'productType', width : 150, align : 'center', title : '产品种类'}, 
-					{field : 'status', width : 100, title : '状态', align:'center', formatter:TAOTAO.formatProductStatus}, 
-					{field : 'note', width : 150, title : '产品介绍', align:'center', formatter:formatProductNote}, 
-					{field : 'image', width : 150, title : '相关图片', align:'center',formatter:formatImg}, 
+				{field : 'ck', checkbox:true },
+				{field : 'productId', width : 150, title : '产品编号', align:'center'},
+				{field : 'productName', width : 150, align : 'center', title : '产品名称'},
+				{field : 'productType', width : 150, align : 'center', title : '产品种类'},
+				{field : 'status', width : 100, title : '状态', align:'center', formatter:TAOTAO.formatProductStatus},
+				{field : 'note', width : 150, title : '产品介绍', align:'center', formatter:formatProductNote},
+				{field : 'image', width : 150, title : '相关图片', align:'center',formatter:formatImg},
 	        ] ],  
 	    });
 	}

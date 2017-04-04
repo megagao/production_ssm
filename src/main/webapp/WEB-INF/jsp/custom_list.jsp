@@ -3,9 +3,9 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="customList" title="客户列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'custom/list',
-       		method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_custom">
+<table class="easyui-datagrid" id="customList" title="客户列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'custom/list', method:'get',pageSize:30, fitColumns:true,
+		toolbar:toolbar_custom">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>

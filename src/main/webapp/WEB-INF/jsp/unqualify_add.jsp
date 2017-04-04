@@ -13,7 +13,7 @@
 	        <tr>
 	            <td>不合格产品申请编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="unqualifyApplyId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="unqualifyApplyId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -27,19 +27,19 @@
 	        <tr>
 	            <td>不合格项目:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="unqualifyItem" ></input>
+	            	<input class="easyui-textbox" type="text" name="unqualifyItem"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>不合格数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="unqualifyCount" ></input>
+	            	<input class="easyui-numberbox" type="text" name="unqualifyCount"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>加工时间:</td>
-	             <td><input class="easyui-datetimebox" name="assemblyDate"     
-        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px"> 
+	             <td><input class="easyui-datetimebox" name="assemblyDate" data-options="required:true,showSeconds:true"
+							value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px">
         		</td>  
 	        </tr>
 	        <tr>
@@ -52,8 +52,10 @@
 	        </tr>
 	        <tr>
 	            <td>申请时间:</td>
-	             <td><input class="easyui-datetimebox" name="applyDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>  
+	             <td>
+					 <input class="easyui-datetimebox" name="applyDate" data-options="required:true,showSeconds:true"
+							value="5/5/2016 00:00:00" style="width:150px">
+				 </td>
 				
 	        </tr>
 	        <tr>

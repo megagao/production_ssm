@@ -13,14 +13,14 @@
 	        <tr>
 	            <td>部门编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="departmentId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="departmentId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>部门名称:</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="departmentName" 
-	            		data-options="required:true"></input>
+	            		data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>

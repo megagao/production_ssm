@@ -26,19 +26,19 @@
 	            <td>维修日期:</td>
 	            <td>
 	            	<input class="easyui-datetimebox"  name="deviceMaintainDate" 
-	            		value="date.format("yyyy-MM-dd hh:mm:ss")"></input>
+	            		value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>维修结果:</td>
 	            <td>
-	            	<input class="easyui-textbox" name="deviceMaintainResult"></input>
+	            	<input class="easyui-textbox" name="deviceMaintainResult"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>维修费用:</td>
 	            <td>
-	            	<input class="easyui-numberbox" precision="2" maxlength="10" name="deviceMaintainCost"></input>
+	            	<input class="easyui-numberbox" precision="2" maxlength="10" name="deviceMaintainCost"/>
 	            </td>
 	        </tr>
 	        <tr>

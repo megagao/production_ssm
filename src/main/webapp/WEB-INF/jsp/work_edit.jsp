@@ -14,7 +14,7 @@
 	    	<tr>
 	            <td>工序号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="processNumber" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="processNumber" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
@@ -44,7 +44,7 @@
 	        <tr>
 	            <td>班产定额:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="rating"></input>
+	            	<input class="easyui-numberbox" type="text" name="rating"/>
     			</td>  
 	        </tr>
 	    </table>

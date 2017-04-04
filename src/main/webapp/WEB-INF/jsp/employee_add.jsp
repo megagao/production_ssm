@@ -14,13 +14,13 @@
 	        <tr>
 	            <td>员工编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="empId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="empId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>员工姓名:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="empName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="empName" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
@@ -44,31 +44,31 @@
 	        <tr>
 	            <td>身份证号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="idCode"></input>
+	            	<input class="easyui-textbox" type="text" name="idCode"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>学历:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="education"></input>
+	            	<input class="easyui-textbox" type="text" name="education"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>学位:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="degree"></input>
+	            	<input class="easyui-textbox" type="text" name="degree"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>专业:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="major"></input>
+	            	<input class="easyui-textbox" type="text" name="major"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>受教育形式:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="educationForm"></input>
+	            	<input class="easyui-textbox" type="text" name="educationForm"/>
     			</td>  
 	        </tr>
 	        <tr>
@@ -84,7 +84,7 @@
 	        <tr>
 	            <td>员工状态:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="status"></input>
+	            	<input class="easyui-textbox" type="text" name="status"/>
     			</td>  
 	        </tr>
 	    </table>

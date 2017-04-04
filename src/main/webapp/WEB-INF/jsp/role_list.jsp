@@ -3,8 +3,8 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="roleList" title="角色列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'role/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_role">
+<table class="easyui-datagrid" id="roleList" title="角色列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'role/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_role">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -54,38 +54,43 @@
     </div>  
 </div>  
 
-<div id="roleEditWindow" class="easyui-window" title="编辑角色" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'role/edit'" style="width:45%;height:60%;padding:10px;">
+<div id="roleEditWindow" class="easyui-window" title="编辑角色" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'role/edit'" style="width:45%;height:60%;padding:10px;">
 </div>
-<div id="roleAddWindow" class="easyui-window" title="添加角色" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'role/add'" style="width:45%;height:60%;padding:10px;">
+<div id="roleAddWindow" class="easyui-window" title="添加角色" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'role/add'" style="width:45%;height:60%;padding:10px;">
 </div>
 
-<div id="permissionWindow" class="easyui-window" title="权限管理" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'role/permission'" style="width:45%;height:60%;padding:10px;">
+<div id="permissionWindow" class="easyui-window" title="权限管理" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'role/permission'" style="width:45%;height:60%;padding:10px;">
 </div>
 <script>
 function doSearch_role(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		
 		$("#roleList").datagrid({
-	        title:'角色列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_role", url:'role/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'角色列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_role", url:'role/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'roleId', width : 150, align:'center', title : '角色编号'},
-	             	{field : 'roleName', width : 150, align : 'center', title : '角色名'},
-	             	{field : 'permission', width : 150, align : 'center', title : '权限', formatter:formatPermission}, 
-	             	{field : 'available', width : 150, title : '状态', align:'center', formatter:formatRoleStatus}, 
+				{field : 'ck', checkbox:true },
+				{field : 'roleId', width : 150, align:'center', title : '角色编号'},
+				{field : 'roleName', width : 150, align : 'center', title : '角色名'},
+				{field : 'permission', width : 150, align : 'center', title : '权限', formatter:formatPermission},
+				{field : 'available', width : 150, title : '状态', align:'center', formatter:formatRoleStatus},
 	        ] ],  
 	    });
 	}else{
 		$("#roleList").datagrid({  
-	        title:'角色列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_role", url:'role/search_role_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'角色列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_role", url:'role/search_role_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'roleId', width : 150, align:'center', title : '角色编号'},
-					{field : 'roleName', width : 150, align : 'center', title : '角色名'},
-					{field : 'permission', width : 150, align : 'center', title : '权限', formatter:formatPermission}, 
-					{field : 'available', width : 150, title : '状态', align:'center', formatter:formatRoleStatus}, 
+				{field : 'ck', checkbox:true },
+				{field : 'roleId', width : 150, align:'center', title : '角色编号'},
+				{field : 'roleName', width : 150, align : 'center', title : '角色名'},
+				{field : 'permission', width : 150, align : 'center', title : '权限', formatter:formatPermission},
+				{field : 'available', width : 150, title : '状态', align:'center', formatter:formatRoleStatus},
 	        ] ],  
 	    });
 	}

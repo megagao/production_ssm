@@ -12,19 +12,24 @@
 	            <td>所属作业:</td>
 	            <td>
 	            	<input id="work" class="easyui-combobox" name="workId"  panelHeight="auto"
-    					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'" style="width: 160px;"/>  
+						   data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'"
+						   style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料:</td>
 	            <td>
 	            	<input id="material" class="easyui-combobox" name="materialId"  panelHeight="auto"
-    					data-options="valueField:'materialId',textField:'materialId',url:'material/get_data', required:true" style="width: 160px;, editable:false"/>
+    					data-options="valueField:'materialId',textField:'materialId',url:'material/get_data',
+    					required:true" style="width: 160px;, editable:false"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>消耗数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="consumeAmount" data-options="min:1,max:99999999,precision:0,required:true" style="width: 160px;"/></td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="consumeAmount"
+						   data-options="min:1,max:99999999,precision:0,required:true" style="width: 160px;"/>
+				</td>
 	        </tr>
 	         <tr>
 	            <td>消耗日期:</td>
@@ -33,12 +38,16 @@
 	        </tr>  	        
 	        <tr>
 	            <td>发送者:</td>
-	            <td><input class="easyui-textbox" type="text" name="sender" data-options="min:1,max:99999999,precision:2,required:true" style="width: 160px;"/>	            
+	            <td>
+					<input class="easyui-textbox" type="text" name="sender"
+						   data-options="min:1,max:99999999,precision:2,required:true" style="width: 160px;"/>
 	            </td>	
 	         </tr>   
 	         <tr>
 	            <td>接收者:</td>
-	            <td><input class="easyui-textbox" type="text" name="receiver" data-options="min:1,max:99999999,precision:2,required:true" style="width: 160px;"/>	            
+	            <td>
+					<input class="easyui-textbox" type="text" name="receiver"
+						   data-options="min:1,max:99999999,precision:2,required:true" style="width: 160px;"/>
 	            </td>	
 	         </tr>        	         
 	        <tr>
@@ -81,5 +90,4 @@
 			}  
 		});
 	}
-	
 </script>

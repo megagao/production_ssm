@@ -10,14 +10,14 @@
 	<form id="roleEditForm" class="roleForm" method="post">
 		<input id="roleId" type="hidden" name="roleId"/>
 	    <span>角色名:</span>
-	    <input class="easyui-textbox" type="text" name="roleName" data-options="required:true"></input><br><br>
+	    <input class="easyui-textbox" type="text" name="roleName" data-options="required:true"/><br><br>
 	    <span >状&nbsp态:</span>
 		<select class="easyui-combobox" name="available" panelHeight="auto" data-options="width:150, editable:false">
 			<option value="1">有效</option>
 			<option value="2">锁定</option>
 		</select><br><br>
         <span >权限:</span><br><br>
-        <input type="hidden" name="permission" ></input>
+        <input type="hidden" name="permission" />
         <span style="font-weight: bold;">订单管理：</span>
 		<label><input name="permissionOption1" type="checkbox" value="11" />订单新增 </label> 
 		<label><input name="permissionOption1" type="checkbox" value="12" />订单修改 </label> 
@@ -202,14 +202,13 @@
 			$("#roleEditForm [name=permission]").val(permission);
 		}
 		$.post("role/update_all",$("#roleEditForm").serialize(), function(data){
-			if(data.label == 200){
+			if(data.status == 200){
 				$.messager.alert('提示', data.msg);
 				$("#roleEditWindow").window('close');
 				$("#roleList").datagrid("reload");
 			}else{
-				$.messager.alert('提示', data.msg);
+				$.messager.alert('提示',data.msg);
 			}
 		});
 	}
-	
 </script>

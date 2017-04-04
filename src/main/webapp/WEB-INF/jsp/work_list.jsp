@@ -3,9 +3,8 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="workList" title="作业列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'work/list',
-       	method:'get',pageSize:10, fitColumns:true,toolbar:toolbar_work">
+<table class="easyui-datagrid" id="workList" title="作业列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'work/list',method:'get',pageSize:10, fitColumns:true,toolbar:toolbar_work">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -73,11 +72,11 @@
 	    <table cellpadding="5">
 	        <tr>
 	            <td>产品名称:</td>
-	            <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true"></input></td>  
+	            <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>产品种类:</td>
-	            <td><input class="easyui-textbox" type="text" name="productType" data-options="required:true"></input></td>  
+	            <td><input class="easyui-textbox" type="text" name="productType" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>产品状态:</td>
@@ -122,13 +121,13 @@
 	        <tr>
 	            <td>工序顺序:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="sequence" ></input>
+	            	<input class="easyui-numberbox" type="text" name="sequence"/>
     			</td>  
 	        </tr>
 	         <tr>
 	            <td>单件定额工时:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="quota" ></input>
+	            	<input class="easyui-numberbox" type="text" name="quota"/>
     			</td>  
 	        </tr>
 	    </table>
@@ -146,7 +145,7 @@
 	        <tr>
 	            <td>设备名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="deviceName" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -172,26 +171,27 @@
 	        <tr>
 	            <td>购买日期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox"  data-options="formatter:TAOTAO.formatDatetime" name="devicePurchaseDate"></input>
+	            	<input class="easyui-datetimebox"  data-options="formatter:TAOTAO.formatDatetime"
+						   name="devicePurchaseDate"/>
 	            </td>
 	        </tr>
 	        
 	        <tr>
 	            <td>购买价格:</td>
 	            <td>
-	            	<input class="easyui-numberbox" precision="2" maxlength="11" name="devicePurchasePrice"></input>
+	            	<input class="easyui-numberbox" precision="2" maxlength="11" name="devicePurchasePrice"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>出厂日期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="deviceManufactureDate"></input>
+	            	<input class="easyui-datetimebox" name="deviceManufactureDate"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>使用年限:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="deviceServiceLife"></input>
+	            	<input class="easyui-datetimebox" name="deviceServiceLife"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -220,30 +220,32 @@
 function doSearch_work(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#workList").datagrid({
-	        title:'作业列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_work", url:'work/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'作业列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_work", url:'work/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'workId', width : 100, title : '作业编号', align:'center'},
-	             	{field : 'processNumber', width : 100, align : 'center', title : '工序号'},
-	             	{field : 'product', width : 100, align : 'center', title : '产品', formatter:formatWorkProduct}, 
-	             	{field : 'process', width : 100, title : '工序', align:'center', formatter:formatWorkProcess}, 
-	             	{field : 'device', width : 100, title : '设备', align:'center',formatter:formatWorkDevice}, 
-	            	{field : 'rating', width : 100, title : '班产定额', align:'center'}, 
-	        ] ],  
+				{field : 'ck', checkbox:true },
+				{field : 'workId', width : 100, title : '作业编号', align:'center'},
+				{field : 'processNumber', width : 100, align : 'center', title : '工序号'},
+				{field : 'product', width : 100, align : 'center', title : '产品', formatter:formatWorkProduct},
+				{field : 'process', width : 100, title : '工序', align:'center', formatter:formatWorkProcess},
+				{field : 'device', width : 100, title : '设备', align:'center',formatter:formatWorkDevice},
+				{field : 'rating', width : 100, title : '班产定额', align:'center'}
+	        ] ],
 	    });
 	}else{
 		$("#workList").datagrid({  
-	        title:'作业列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_work", url:'work/search_work_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'作业列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_work", url:'work/search_work_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'workId', width : 100, title : '作业编号', align:'center'},
-					{field : 'processNumber', width : 100, align : 'center', title : '工序号'},
-					{field : 'product', width : 100, align : 'center', title : '产品', formatter:formatWorkProduct}, 
-					{field : 'process', width : 100, title : '工序', align:'center', formatter:formatWorkProcess}, 
-					{field : 'device', width : 100, title : '设备', align:'center',formatter:formatWorkDevice}, 
-					{field : 'rating', width : 100, title : '班产定额', align:'center'}, 
+				{field : 'ck', checkbox:true },
+				{field : 'workId', width : 100, title : '作业编号', align:'center'},
+				{field : 'processNumber', width : 100, align : 'center', title : '工序号'},
+				{field : 'product', width : 100, align : 'center', title : '产品', formatter:formatWorkProduct},
+				{field : 'process', width : 100, title : '工序', align:'center', formatter:formatWorkProcess},
+				{field : 'device', width : 100, title : '设备', align:'center',formatter:formatWorkDevice},
+				{field : 'rating', width : 100, title : '班产定额', align:'center'}
 	        ] ],  
 	    });
 	}

@@ -9,20 +9,22 @@
 	        <tr>
 	            <td>设备名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="deviceName" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>设备种类:</td>
 	            <td>
 	            	<input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto"
-    					data-options="required:true,editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data', required:true" />
+    					data-options="required:true,editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',
+    					url:'deviceType/get_data', required:true" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>设备状态:</td>
 	            <td>
-	            	<select id="deviceStatusCombobox" class="easyui-combobox" name="deviceStatusId" panelHeight="auto" style="width:173px" editable=false>
+	            	<select id="deviceStatusCombobox" class="easyui-combobox" name="deviceStatusId" panelHeight="auto"
+							style="width:173px" editable=false>
 						<option value="1">良好</option>
 						<option value="2">故障</option>
 						<option value="3">维修</option>
@@ -33,14 +35,15 @@
 	        <tr>
 	            <td>购买日期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox"  data-options="formatter:TAOTAO.formatDatetime" name="devicePurchaseDate"></input>
+	            	<input class="easyui-datetimebox"  data-options="formatter:TAOTAO.formatDatetime"
+						   name="devicePurchaseDate"/>
 	            </td>
 	        </tr>
 	        
 	        <tr>
 	            <td>购买价格:</td>
 	            <td>
-	            	<input class="easyui-numberbox" precision="2" maxlength="11" name="devicePurchasePrice"></input>
+	            	<input class="easyui-numberbox" precision="2" maxlength="11" name="devicePurchasePrice"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -59,7 +62,8 @@
 	            <td>保管人:</td>
 	            <td>
 		            <input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto"
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'" />
+    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',
+    					url:'employee/get_data'" />
 				</td>
 	        </tr>
 	        <tr>

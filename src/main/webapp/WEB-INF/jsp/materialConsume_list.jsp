@@ -3,8 +3,9 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="materialConsumeList" title="物料消耗列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'materialConsume/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_materialConsume">
+<table class="easyui-datagrid" id="materialConsumeList" title="物料消耗列表" data-options="singleSelect:false,
+		collapsible:true,pagination:true,rownumbers:true,url:'materialConsume/list',method:'get',pageSize:10,fitColumns:true,
+		toolbar:toolbar_materialConsume">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -12,7 +13,9 @@
             <th data-options="field:'work',align:'center',width:100,formatter:formatWork">所属作业</th>
             <th data-options="field:'material',align:'center',width:100,formatter:formatMaterial">物料</th>
             <th data-options="field:'consumeAmount',align:'center',width:100">消耗数量</th>
-            <th data-options="field:'consumeDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">消耗日期</th>
+            <th data-options="field:'consumeDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				消耗日期
+			</th>
             <th data-options="field:'sender',width:100,align:'center'">发送者</th>
             <th data-options="field:'receiver',width:100,align:'center'">接收者</th>           
             <th data-options="field:'note',width:100,align:'center', formatter:formatMaterialConsumeNote">备注</th>            
@@ -25,17 +28,22 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='materialConsume:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="materialConsume_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="materialConsume_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='materialConsume:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="materialConsume_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="materialConsume_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='materialConsume:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="materialConsume_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"
+				   onclick="materialConsume_delete()">删除</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -43,7 +51,9 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="materialConsume_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="materialConsume_reload()">
+			刷新
+		</a>
 	</div>  
 	
     <div id="search_materialConsume" style="float: right;">
@@ -60,12 +70,15 @@
 
 </div>  
 
-<div id="materialConsumeEditWindow" class="easyui-window" title="编辑" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialConsume/edit'" style="width:65%;height:75%;padding:10px;">
+<div id="materialConsumeEditWindow" class="easyui-window" title="编辑" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'materialConsume/edit'" style="width:65%;height:75%;padding:10px;">
 </div>
-<div id="materialConsumeAddWindow" class="easyui-window" title="添加" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialConsume/add'" style="width:65%;height:75%;padding:10px;">
+<div id="materialConsumeAddWindow" class="easyui-window" title="添加" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'materialConsume/add'" style="width:65%;height:75%;padding:10px;">
 </div>
 
-<div id="materialConsumeNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
+<div id="materialConsumeNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,
+		resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="materialConsumeNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="consumeId"/>
 	    <table cellpadding="5" >
@@ -75,27 +88,29 @@
 	                <textarea style="width:800px;height:450px;visibility:hidden;" name="note"></textarea>
 	            </td>
 	        </tr>
-	    </table><span style="color:green;font-size: 12;font-family: Microsoft YaHei;margin-left: 20px"></span>
+	    </table><span style="color:green;font-size: 12px;font-family: Microsoft YaHei;margin-left: 20px"></span>
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateMaterialConsumeNote()">保存</a>
 	</div>
 </div>
 <!-- 物料对话框内容信息 -->
-<div id="materialConsumeMaterialInfo" class="easyui-dialog" title="物料信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
+<div id="materialConsumeMaterialInfo" class="easyui-dialog" title="物料信息" data-options="modal:true,closed:true,
+		resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
 	<form id="materialConsumeMaterialForm" method="post">
 		<input type="hidden" name="materialId"/>
 	    <table cellpadding="5">
 	          <tr>
 	            <td>物料类型:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 280px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150,
+		            		editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -105,7 +120,7 @@
 	        <tr>
 	            <td>剩余数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="remaining"></input>
+	            	<input class="easyui-numberbox" type="text" name="remaining"/>
 	            </td>
 	        </tr>
 	        
@@ -118,45 +133,48 @@
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitMaterialConsumeMaterialEditForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitMaterialConsumeMaterialEditForm()">
+			提交
+		</a>
 	</div>
 </div>
 <!-- 工作表对话框信息内容 -->
-<div id="materialConsumeWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="materialConsumeWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,
+		resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 <form id="materialConsumeWorkForm" class="workForm" method="post">
 		<input type="hidden" name="workId"/>
 	    <table cellpadding="5">
 	    	<tr>
 	            <td>工序号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="processNumber" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="processNumber" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>产品:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data'" />
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data'"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>工序:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="processId"   
-    					data-options="valueField:'processId',textField:'processId',url:'process/get_data'" />
+    					data-options="valueField:'processId',textField:'processId',url:'process/get_data'"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>设备:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId"   
-    					data-options="valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'" />
+    					data-options="valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data'"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>班产定额:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="rating"></input>
+	            	<input class="easyui-numberbox" type="text" name="rating"/>
     			</td>  
 	        </tr>
 	    </table>
@@ -169,34 +187,38 @@
     function doSearch_materialConsume(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#materialConsumeList").datagrid({
-	        title:'物料消耗列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_materialConsume", url:'materialConsume/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'物料消耗列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_materialConsume", url:'materialConsume/list', method:'get',
+			loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 	      	        
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'consumeId', width : 100, title : '物料消耗编号', align:'center'},
-	             	{field : 'work', width : 100, align : 'center', title : '所属作业', formatter:formatWork},
-	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial}, 
-	             	{field : 'consumeAmount', width : 100, title : '消耗数量', align:'center'}, 	            	
-	             	{field : 'consumeDate', width : 130, title : '消耗日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'sender', width : 100, title : '发送者', align:'center'}, 
-	             	{field : 'receiver', width : 100, title : '接收者', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialConsumeNote}	             	
+				{field : 'ck', checkbox:true },
+				{field : 'consumeId', width : 100, title : '物料消耗编号', align:'center'},
+				{field : 'work', width : 100, align : 'center', title : '所属作业', formatter:formatWork},
+				{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
+				{field : 'consumeAmount', width : 100, title : '消耗数量', align:'center'},
+				{field : 'consumeDate', width : 130, title : '消耗日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'sender', width : 100, title : '发送者', align:'center'},
+				{field : 'receiver', width : 100, title : '接收者', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialConsumeNote}
 	        ] ],  
 	    });
 	}else{
 		$("#materialConsumeList").datagrid({  
-	        title:'物料消耗列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_materialConsume", url:'materialConsume/search_materialConsume_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'物料消耗列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_materialConsume", url:'materialConsume/search_materialConsume_by_'
+			+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'consumeId', width : 100, title : '物料消耗编号', align:'center'},
-	             	{field : 'work', width : 100, align : 'center', title : '所属作业', formatter:formatWork},
-	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial}, 
-	             	{field : 'consumeAmount', width : 100, title : '消耗数量', align:'center'}, 	            	
-	             	{field : 'consumeDate', width : 130, title : '消耗日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'sender', width : 100, title : '发送者', align:'center'}, 
-	             	{field : 'receiver', width : 100, title : '接收者', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialConsumeNote}	             	
+				{field : 'ck', checkbox:true },
+				{field : 'consumeId', width : 100, title : '物料消耗编号', align:'center'},
+				{field : 'work', width : 100, align : 'center', title : '所属作业', formatter:formatWork},
+				{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
+				{field : 'consumeAmount', width : 100, title : '消耗数量', align:'center'},
+				{field : 'consumeDate', width : 130, title : '消耗日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'sender', width : 100, title : '发送者', align:'center'},
+				{field : 'receiver', width : 100, title : '接收者', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialConsumeNote}
 	        ] ],  
 	    });
 	}

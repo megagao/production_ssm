@@ -13,32 +13,34 @@
 	        <tr>
 	            <td>用户编号:</td>
 	            <td>
-	            	<input id="id" class="easyui-textbox" type="text" name="id" data-options="required:true"></input>
+	            	<input id="id" class="easyui-textbox" type="text" name="id" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户名:</td>
 	            <td>
-	            	<input id="username" class="easyui-textbox" type="text" name="username" data-options="required:true"></input>
+	            	<input id="username" class="easyui-textbox" type="text" name="username"
+						   data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>密码:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="password" ></input>
+	            	<input class="easyui-textbox" type="text" name="password" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>角色:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="roleId"  panelHeight="auto"
-    					data-options="valueField:'roleId',textField:'roleName',url:'role/get_data',required:true, editable:false" />  
+	            	<input class="easyui-combobox" name="roleId"  panelHeight="auto" data-options="valueField:'roleId',
+	            		textField:'roleName',url:'role/get_data',required:true, editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>用户状态:</td>
 	            <td>
-		            <select class="easyui-combobox" name="locked" panelHeight="auto" data-options="width:150, editable:false">
+		            <select class="easyui-combobox" name="locked" panelHeight="auto" data-options="width:150,
+		            		editable:false">
 						<option value="1">有效用户</option>
 						<option value="2">锁定</option>
 					</select>
