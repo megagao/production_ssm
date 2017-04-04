@@ -2,8 +2,6 @@ package org.hqu.production_ms.domain.vo;
 
 import org.hqu.production_ms.domain.Material;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class MaterialReceiveVO {

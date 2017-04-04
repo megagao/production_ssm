@@ -1,7 +1,5 @@
 package org.hqu.production_ms.domain.vo;
 
-import javax.validation.constraints.Size;
-
 import org.hqu.production_ms.domain.DeviceCheck;
 
 public class DeviceCheckVO extends DeviceCheck{

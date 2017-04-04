@@ -2,7 +2,6 @@ package org.hqu.production_ms.controller;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.authority.SysUser;

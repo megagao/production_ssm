@@ -1,8 +1,6 @@
 package org.hqu.production_ms.domain.vo;
 
 
-import javax.validation.constraints.Size;
-
 import org.hqu.production_ms.domain.TechnologyRequirement;
 
 public class TechnologyRequirementVO extends TechnologyRequirement{

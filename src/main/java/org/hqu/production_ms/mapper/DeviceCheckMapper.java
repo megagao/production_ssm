@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.DeviceCheck;
 import org.hqu.production_ms.domain.DeviceCheckExample;
-import org.hqu.production_ms.domain.vo.DeviceCheckVO;
 
 public interface DeviceCheckMapper {
 	

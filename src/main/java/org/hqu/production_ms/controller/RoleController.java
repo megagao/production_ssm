@@ -1,8 +1,6 @@
 package org.hqu.production_ms.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.hqu.production_ms.domain.vo.RoleVO;
 import org.hqu.production_ms.domain.customize.CustomResult;

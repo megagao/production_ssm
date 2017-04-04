@@ -2,7 +2,6 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.authority.SysUserExample;
 import org.hqu.production_ms.domain.authority.SysUserRole;
 import org.hqu.production_ms.domain.authority.SysUserRoleExample;

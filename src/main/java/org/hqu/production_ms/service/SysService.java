@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysUser;
-import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.customize.ActiveUser;
 
 /**

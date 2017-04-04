@@ -2,7 +2,6 @@ package org.hqu.production_ms.service;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.vo.ManufactureVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.Manufacture;

@@ -15,7 +15,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.hqu.production_ms.domain.authority.SysPermission;
 import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.domain.vo.RoleVO;
-import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.customize.ActiveUser;
 import org.hqu.production_ms.service.RoleService;
 import org.hqu.production_ms.service.SysService;
