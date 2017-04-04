@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * created on 2017年3月25日 
  *
- * 权限判断
+ * 权限判断controller
  *
  * @author  megagao
  * @version  0.0.1
