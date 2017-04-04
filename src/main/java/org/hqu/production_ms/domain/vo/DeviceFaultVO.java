@@ -1,8 +1,8 @@
-package org.hqu.production_ms.domain.po;
+package org.hqu.production_ms.domain.vo;
 
 import org.hqu.production_ms.domain.DeviceFault;
 
-public class DeviceFaultPO extends DeviceFault{
+public class DeviceFaultVO extends DeviceFault{
 	
 	private String deviceName;
 	

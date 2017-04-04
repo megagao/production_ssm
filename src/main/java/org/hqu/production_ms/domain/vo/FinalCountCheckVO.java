@@ -1,8 +1,8 @@
-package org.hqu.production_ms.domain.po;
+package org.hqu.production_ms.domain.vo;
 
 import org.hqu.production_ms.domain.FinalCountCheck;
 
-public class FinalCountCheckPO extends FinalCountCheck{
+public class FinalCountCheckVO extends FinalCountCheck{
 	private String empName;
 
 	public String getEmpName() {

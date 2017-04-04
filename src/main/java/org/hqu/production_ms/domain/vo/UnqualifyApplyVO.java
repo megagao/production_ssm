@@ -1,8 +1,8 @@
-package org.hqu.production_ms.domain.po;
+package org.hqu.production_ms.domain.vo;
 
 import org.hqu.production_ms.domain.UnqualifyApply;
 
-public class UnqualifyApplyPO extends UnqualifyApply{
+public class UnqualifyApplyVO extends UnqualifyApply{
 	private String productName;
 
 	private String empName;

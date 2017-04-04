@@ -1,8 +1,8 @@
-package org.hqu.production_ms.domain.po;
+package org.hqu.production_ms.domain.vo;
 
 import org.hqu.production_ms.domain.DeviceType;
 
-public class DeviceTypePO extends DeviceType{
+public class DeviceTypeVO extends DeviceType{
 	
 	private String deviceTypeIdd;
 

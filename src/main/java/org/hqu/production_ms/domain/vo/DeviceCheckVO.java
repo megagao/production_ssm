@@ -1,12 +1,11 @@
-package org.hqu.production_ms.domain.po;
+package org.hqu.production_ms.domain.vo;
 
 import javax.validation.constraints.Size;
 
 import org.hqu.production_ms.domain.DeviceCheck;
 
-public class DeviceCheckPO extends DeviceCheck{
+public class DeviceCheckVO extends DeviceCheck{
 	
-	@Size(max=20, message="设备名称请限制在20个字符内")
 	private String deviceName;
 	
 	private String deviceCheckEmp;

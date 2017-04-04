@@ -1,8 +1,8 @@
-package org.hqu.production_ms.domain.po;
+package org.hqu.production_ms.domain.vo;
 
 import org.hqu.production_ms.domain.DeviceMaintain;
 
-public class DeviceMaintainPO extends DeviceMaintain{
+public class DeviceMaintainVO extends DeviceMaintain{
 	
 	private String deviceMaintainEmp;
 
