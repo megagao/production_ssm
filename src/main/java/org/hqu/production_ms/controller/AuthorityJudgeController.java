@@ -48,4 +48,5 @@ public class AuthorityJudgeController {
 		}
 		return map;
 	}
+	
 }	

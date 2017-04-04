@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/task")
 public class TaskController {
-	
 	@Autowired
 	private TaskService taskService;
 	

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/manufacture")
 public class ManufactureController {
-	
 	@Autowired
 	private ManufactureService manufactureService;
 	

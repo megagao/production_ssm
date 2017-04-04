@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/materialConsume")
 public class MaterialConsumeController {
-	
 	@Autowired
 	private MaterialConsumeService materialConsumeService;
 	

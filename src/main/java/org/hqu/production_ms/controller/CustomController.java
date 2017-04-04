@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/custom")
 public class CustomController {
-	
 	@Autowired
 	private CustomService customService;
 	

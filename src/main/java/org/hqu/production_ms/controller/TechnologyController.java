@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/technology")
 public class TechnologyController {
-	
 	@Autowired
 	private TechnologyService technologyService;
 	

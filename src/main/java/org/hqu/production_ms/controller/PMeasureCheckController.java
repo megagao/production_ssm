@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/p_measure_check")
 public class PMeasureCheckController {
-	
 	@Autowired
 	private PMeasureCheckService pMeasureCheckService;
 	

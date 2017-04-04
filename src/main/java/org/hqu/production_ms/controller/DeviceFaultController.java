@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/deviceFault")
 public class DeviceFaultController {
-	
 	@Autowired
 	private DeviceFaultService deviceFaultService;
 	

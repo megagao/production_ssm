@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/deviceType")
 public class DeviceTypeController {
-	
 	@Autowired
 	private DeviceTypeService deviceTypeService;
 	

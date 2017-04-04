@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FirstController {
-	
 	@Autowired
 	private SysService sysService;
 	

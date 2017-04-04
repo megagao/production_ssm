@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/materialReceive")
 public class MaterialReceiveController {
-
 	@Autowired
 	private MaterialReceiveService materialReceiveService;
 	

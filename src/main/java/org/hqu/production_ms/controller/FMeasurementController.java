@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/measure")
 public class FMeasurementController {
-	
 	@Autowired
 	private MeasureService measureService;
 	
