@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.Employee;
+import org.hqu.production_ms.domain.vo.EmployeeVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.EmployeePO;
+import org.hqu.production_ms.domain.Employee;
 import org.hqu.production_ms.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +27,8 @@ public class EmployeeController {
 	
 	@RequestMapping("/get/{empId}")
 	@ResponseBody
-	public Employee getItemById(@PathVariable String empId) throws Exception{
-		Employee employee = employeeService.get(empId);
+	public EmployeeVO getItemById(@PathVariable String empId) throws Exception{
+		EmployeeVO employee = employeeService.get(empId);
 		return employee;
 	}
 	
@@ -55,14 +55,14 @@ public class EmployeeController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Employee employee) throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, EmployeeVO employee) throws Exception{
 		EUDataGridResult result = employeeService.getList(page, rows, employee);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid EmployeePO employee, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid Employee employee, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -78,7 +78,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid EmployeePO employee, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid Employee employee, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -88,7 +88,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid EmployeePO employee, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid Employee employee, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -110,25 +110,25 @@ public class EmployeeController {
 		return result;
 	}
 	
-	//搜索
+	//根据员工id查找
 	@RequestMapping("/search_employee_by_employeeId")
 	@ResponseBody
-	public EUDataGridResult searchEmployeeByEmployeeId(Integer page, Integer rows, String searchValue) 
+	public EUDataGridResult searchEmployeeByEmployeeId(Integer page, Integer rows, String searchValue)
 			throws Exception{
 		EUDataGridResult result = employeeService.searchEmployeeByEmployeeId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据员工姓名查找
 	@RequestMapping("/search_employee_by_employeeName")
 	@ResponseBody
-	public EUDataGridResult searchEmployeeByEmployeeName(Integer page, Integer rows, String searchValue) 
+	public EUDataGridResult searchEmployeeByEmployeeName(Integer page, Integer rows, String searchValue)
 			throws Exception{
 		EUDataGridResult result = employeeService.searchEmployeeByEmployeeName(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据部门名称查找
 	@RequestMapping("/search_employee_by_departmentName")
 	@ResponseBody
 	public EUDataGridResult searchEmployeeByDepartmentName(Integer page, Integer rows, String searchValue) 

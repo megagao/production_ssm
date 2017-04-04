@@ -127,7 +127,7 @@ public class CustomController {
 		return result;
 	}
 	
-	//搜索
+	//根据客户id查找
 	@RequestMapping("/search_custom_by_customId")
 	@ResponseBody
 	public EUDataGridResult searchCustomByCustomId(Integer page, Integer rows, String searchValue)
@@ -136,7 +136,7 @@ public class CustomController {
 		return result;
 	}
 	
-	//搜索
+	//根据客户名查找
 	@RequestMapping("/search_custom_by_customName")
 	@ResponseBody
 	public EUDataGridResult searchCustomByCustomName(Integer page, Integer rows, String searchValue) 

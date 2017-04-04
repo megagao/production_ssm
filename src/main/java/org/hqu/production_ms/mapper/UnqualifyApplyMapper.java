@@ -5,20 +5,20 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.UnqualifyApply;
 import org.hqu.production_ms.domain.UnqualifyApplyExample;
-import org.hqu.production_ms.domain.po.UnqualifyApplyPO;
+import org.hqu.production_ms.domain.vo.UnqualifyApplyVO;
 
 public interface UnqualifyApplyMapper {
 	
 	//扩展的mapper接口方法
-	List<UnqualifyApplyPO> find(UnqualifyApply unqualifyApply);
+	List<UnqualifyApplyVO> find(UnqualifyApply unqualifyApply);
 	
 	int updateNote(UnqualifyApply unqualifyApply);
 	
 	int deleteBatch(String[] ids);
 	
-	List<UnqualifyApplyPO> searchUnqualifyByUnqualifyId(String orderId);
+	List<UnqualifyApplyVO> searchUnqualifyByUnqualifyId(String orderId);
 	
-	List<UnqualifyApplyPO> searchUnqualifyByProductName(String productName);
+	List<UnqualifyApplyVO> searchUnqualifyByProductName(String productName);
 	
 	//逆向工程生成的mapper接口	
     int countByExample(UnqualifyApplyExample example);

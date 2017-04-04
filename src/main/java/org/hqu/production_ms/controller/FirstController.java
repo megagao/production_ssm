@@ -25,14 +25,12 @@ public class FirstController {
 	//跳转登录
 	@RequestMapping("/first")
 	public String first(Model model)throws Exception{
-		
 		return "login";
 	}
 	
 	//跳转登录
 	@RequestMapping("/")
 	public String welcome(Model model, HttpSession session)throws Exception{
-
 		return "login";
 	}
 	
@@ -60,8 +58,6 @@ public class FirstController {
 				sysPermissionList.add(permissionList.get(i).getPercode());
 			}
 		}
-
-		/*String sysPermissionsList = JsonUtils.objectToJson(sysPermissionList);*/
 
 		//通过model传到页面
 		model.addAttribute("activeUser", activeUser);

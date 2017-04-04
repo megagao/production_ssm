@@ -10,16 +10,33 @@
        	url:'deviceList/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_device">
     <thead>
         <tr>
-        	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'deviceId',width:100,align:'center'">设备编号</th>
-            <th data-options="field:'deviceName',width:100,align:'center'">设备名称</th>
-            <th data-options="field:'deviceTypeName',width:100,align:'center',formatter:formatDeviceType_deviceList">设备种类</th>
-            <th data-options="field:'deviceStatusId',width:100,align:'center',formatter:TAOTAO.formatDeviceStatus">设备状态</th>
-            <th data-options="field:'devicePurchaseDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">购买日期</th>
+        	<th data-options="field:'ck',checkbox:true">
+			</th>
+        	<th data-options="field:'deviceId',width:100,align:'center'">
+				设备编号
+			</th>
+            <th data-options="field:'deviceName',width:100,align:'center'">
+				设备名称
+			</th>
+            <th data-options="field:'deviceTypeName',width:100,align:'center',formatter:formatDeviceType_deviceList">
+				设备种类
+			</th>
+            <th data-options="field:'deviceStatusId',width:100,align:'center',formatter:TAOTAO.formatDeviceStatus">
+				设备状态
+			</th>
+            <th data-options="field:'devicePurchaseDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				购买日期
+			</th>
             <th data-options="field:'devicePurchasePrice',width:80,align:'center'">购买价格</th>
-            <th data-options="field:'deviceManufactureDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">出厂日期</th>
-            <th data-options="field:'deviceServiceLife',width:130,align:'center',formatter:TAOTAO.formatDate">使用年限</th>
-            <th data-options="field:'deviceKeeper',width:100,align:'center',formatter:formatDeviceKeeper_deviceList">保管人</th>
+            <th data-options="field:'deviceManufactureDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				出厂日期
+			</th>
+            <th data-options="field:'deviceServiceLife',width:130,align:'center',formatter:TAOTAO.formatDate">
+				使用年限
+			</th>
+            <th data-options="field:'deviceKeeper',width:100,align:'center',formatter:formatDeviceKeeper_deviceList">
+				保管人
+			</th>
             <th data-options="field:'note',width:100,align:'center',formatter:formatDeviceNote">备注</th>
         </tr>
     </thead>
@@ -84,31 +101,31 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>设备种类:</td>
-	           	<td><input class="easyui-textbox" name="deviceTypeName" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="deviceTypeName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备型号:</td>
-	            <td><input class="easyui-textbox" name="deviceTypeModel" ></input></td>
+	            <td><input class="easyui-textbox" name="deviceTypeModel"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备规格:</td>
-	            <td><input class="easyui-textbox" name="deviceTypeSpec" ></input></td>
+	            <td><input class="easyui-textbox" name="deviceTypeSpec"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备供应商:</td>
-	            <td><input class="easyui-textbox" name="deviceTypeSupplier"></input></td>
+	            <td><input class="easyui-textbox" name="deviceTypeSupplier"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备生产商:</td>
-	            <td><input class="easyui-textbox" name="deviceTypeProducer"></input></td>
+	            <td><input class="easyui-textbox" name="deviceTypeProducer"/></td>
 	        </tr>
 	        <tr>
 	            <td>台数:</td>
-	            <td><input class="easyui-numberbox" name="deviceTypeQuantity"></input></td>
+	            <td><input class="easyui-numberbox" name="deviceTypeQuantity"/></td>
 	        </tr>
 	        <tr>
 	            <td>保修期:</td>
-	            <td><input class="easyui-datetimebox" name="deviceTypeWarranty" ></input></td>
+	            <td><input class="easyui-datetimebox" name="deviceTypeWarranty"/></td>
 	        </tr>
 	    </table>
 	</form>
@@ -125,7 +142,7 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>姓名:</td>
-	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>性别:</td>
@@ -145,35 +162,35 @@
 	        </tr>
 	        <tr>
 	            <td>身份证号:</td>
-	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	            <td><input class="easyui-textbox" name="idCode"/></td>
 	        </tr>
 	        <tr>
 	            <td>学历:</td>
-	            <td><input class="easyui-textbox" name="education"></input></td>
+	            <td><input class="easyui-textbox" name="education"/></td>
 	        </tr>
 	        <tr>
 	            <td>学位:</td>
-	            <td><input class="easyui-textbox" name="degree"></input></td>
+	            <td><input class="easyui-textbox" name="degree"/></td>
 	        </tr>
 	        <tr>
 	            <td>专业:</td>
-	            <td><input class="easyui-textbox" name="major" ></input></td>
+	            <td><input class="easyui-textbox" name="major"/></td>
 	        </tr>
 	        <tr>
 	            <td>受教育形式:</td>
-	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	            <td><input class="easyui-textbox" name="educationForm"/></td>
 	        </tr>
 	        <tr>
 	            <td>生日:</td>
-	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	            <td><input class="easyui-datetimebox" name="birthday"/></td>
 	        </tr>
 	        <tr>
 	            <td>入职日期:</td>
-	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	            <td><input class="easyui-datetimebox" name="joinDate"/></td>
 	        </tr>
 	        <tr>
 	            <td>员工状态:</td>
-	            <td><input class="easyui-textbox" name="status" ></input></td>
+	            <td><input class="easyui-textbox" name="status"/></td>
 	        </tr>
 	    </table>
 	</form>
@@ -183,7 +200,8 @@
 </div>
 
 <!-- 设备备注信息-->
-<div id="deviceNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="deviceNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="deviceId"/>
 	    <table cellpadding="5" >
@@ -204,37 +222,51 @@
 function doSearch_device(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#deviceList").datagrid({
-	        title:'设备列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_device", url:'deviceList/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_device", url:'deviceList/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'deviceId', width : 100, align:'center', title : '设备编号'},
-	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
-	             	{field : 'deviceTypeName', width : 100, align : 'center', title : '设备种类', formatter:formatDeviceType_deviceList}, 
-	             	{field : 'deviceStatusId', width : 100, title : '设备状态', align:'center',formatter:TAOTAO.formatDeviceStatus}, 
-	             	{field : 'devicePurchaseDate', width : 130, title : '购买日期', align:',formatter:TAOTAO.formatDateTime'}, 
-	            	{field : 'devicePurchasePrice', width : 80, title : '购买价格', align:'center'}, 
-	             	{field : 'deviceManufactureDate', width : 130, title : '出厂日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'deviceServiceLife', width : 130, title : '使用年限', align:'center',formatter:TAOTAO.formatDate}, 
-	             	{field : 'deviceKeeper', width : 100, title : '保管人', align:'center',formatter:formatDeviceKeeper_deviceList}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatDeviceNote}
+				{field : 'ck', checkbox:true },
+				{field : 'deviceId', width : 100, align:'center', title : '设备编号'},
+				{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
+				{field : 'deviceTypeName', width : 100, align : 'center', title : '设备种类',
+					formatter:formatDeviceType_deviceList},
+				{field : 'deviceStatusId', width : 100, title : '设备状态', align:'center',
+					formatter:TAOTAO.formatDeviceStatus},
+				{field : 'devicePurchaseDate', width : 130, title : '购买日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'devicePurchasePrice', width : 80, title : '购买价格', align:'center'},
+				{field : 'deviceManufactureDate', width : 130, title : '出厂日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'deviceServiceLife', width : 130, title : '使用年限', align:'center',
+					formatter:TAOTAO.formatDate},
+				{field : 'deviceKeeper', width : 100, title : '保管人', align:'center',
+					formatter:formatDeviceKeeper_deviceList},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatDeviceNote}
 	        ] ],  
 	    });
 	}else{
 		$("#deviceList").datagrid({  
-	        title:'设备列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_device", url:'deviceList/search_device_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_device", url:'deviceList/search_device_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
 					{field : 'deviceId', width : 100, align:'center', title : '设备编号'},
 					{field : 'deviceName', width : 100, align : 'center', title : '设备名称'},
-					{field : 'deviceTypeName', width : 100, align : 'center', title : '设备种类', formatter:formatDeviceType_deviceList}, 
-					{field : 'deviceStatusId', width : 100, title : '设备状态', align:'center',formatter:TAOTAO.formatDeviceStatus}, 
-					{field : 'devicePurchaseDate', width : 130, title : '购买日期', align:',formatter:TAOTAO.formatDateTime'}, 
+					{field : 'deviceTypeName', width : 100, align : 'center', title : '设备种类',
+						formatter:formatDeviceType_deviceList},
+					{field : 'deviceStatusId', width : 100, title : '设备状态', align:'center',
+						formatter:TAOTAO.formatDeviceStatus},
+					{field : 'devicePurchaseDate', width : 130, title : '购买日期', align:'center',
+						formatter:TAOTAO.formatDateTime},
 					{field : 'devicePurchasePrice', width : 80, title : '购买价格', align:'center'}, 
-					{field : 'deviceManufactureDate', width : 130, title : '出厂日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'deviceServiceLife', width : 130, title : '使用年限', align:'center',formatter:TAOTAO.formatDate}, 
-					{field : 'deviceKeeper', width : 100, title : '保管人', align:'center',formatter:formatDeviceKeeper_deviceList}, 
+					{field : 'deviceManufactureDate', width : 130, title : '出厂日期', align:'center',
+						formatter:TAOTAO.formatDateTime},
+					{field : 'deviceServiceLife', width : 130, title : '使用年限', align:'center',
+						formatter:TAOTAO.formatDate},
+					{field : 'deviceKeeper', width : 100, title : '保管人', align:'center',
+						formatter:formatDeviceKeeper_deviceList},
 					{field : 'note', width : 100, title : '备注', align:'center', formatter:formatDeviceNote}
 	        ] ],  
 	    });

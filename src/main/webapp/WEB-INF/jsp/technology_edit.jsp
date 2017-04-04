@@ -9,49 +9,49 @@
 	        <tr>
 	            <td>工艺名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>外协价格:</td>
 	            <td>
-	            	<input class="easyui-numberbox" precision="2" maxlength="10" name="price" ></input>
+	            	<input class="easyui-numberbox" precision="2" maxlength="10" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>瓶颈工序工期:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="vitalProcessPeriod"  ></input>
+	            	<input class="easyui-textbox" type="text" name="vitalProcessPeriod"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>标准加工能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox"  maxlength="11" name="standardCapacity"></input>
+	            	<input class="easyui-numberbox"  maxlength="11" name="standardCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>加班标准加工能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>加班超额教工能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>二班工序能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="doubleCapacity"></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="doubleCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>超负荷工序能力:</td>
 	            <td>
-		            <input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"></input>
+		            <input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"/>
 				</td>
 	        </tr>
 	    </table>

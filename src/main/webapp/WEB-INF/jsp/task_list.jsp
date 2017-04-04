@@ -3,16 +3,26 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="taskList" title="生产派工列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'task/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_task">
+<table class="easyui-datagrid" id="taskList" title="生产派工列表" data-options="singleSelect:false,collapsible:true,
+		pagination:true,rownumbers:true,url:'task/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_task">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'taskId',align:'center',width:100">生产派工编号</th>
-            <th data-options="field:'workId',align:'center',width:100,formatter:formatTaskWork">作业编号</th>
-            <th data-options="field:'manufactureSn',align:'center',width:100,formatter:formatTaskManufacture">生产批号</th>
-            <th data-options="field:'taskQuantity',align:'center',width:100">派工数量</th>
-            <th data-options="field:'workingHours',width:100,align:'center'">派工工时</th>
+        	<th data-options="field:'taskId',align:'center',width:100">
+				生产派工编号
+			</th>
+            <th data-options="field:'workId',align:'center',width:100,formatter:formatTaskWork">
+				作业编号
+			</th>
+            <th data-options="field:'manufactureSn',align:'center',width:100,formatter:formatTaskManufacture">
+				生产批号
+			</th>
+            <th data-options="field:'taskQuantity',align:'center',width:100">
+				派工数量
+			</th>
+            <th data-options="field:'workingHours',width:100,align:'center'">
+				派工工时
+			</th>
         </tr>
     </thead>
 </table>
@@ -56,46 +66,49 @@
     </div>  
 
 </div>  
-<div id="taskEditWindow" class="easyui-window" title="编辑生产派工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'task/edit'" style="width:40%;height:55%;padding:10px;">
+<div id="taskEditWindow" class="easyui-window" title="编辑生产派工" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'task/edit'" style="width:40%;height:55%;padding:10px;">
 </div>
-<div id="taskAddWindow" class="easyui-window" title="添加生产派工" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'task/add'" style="width:40%;height:55%;padding:10px;">
+<div id="taskAddWindow" class="easyui-window" title="添加生产派工" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'task/add'" style="width:40%;height:55%;padding:10px;">
 </div>
 
-<div id="taskWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="taskWorkInfo" class="easyui-dialog" title="作业信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="taskWorkEditForm" method="post">
 		<input type="hidden" name="workId"/>
 	    <table cellpadding="5">
 	    	<tr>
 	            <td>工序号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="processNumber" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="processNumber" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>产品:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false" />
+	            	<input class="easyui-combobox" name="productId" data-options="valueField:'productId',
+	            		textField:'productName',url:'product/get_data', editable:false"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>工序:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="processId"   
-    					data-options="valueField:'processId',textField:'processId',url:'process/get_data', editable:false" />
+	            	<input class="easyui-combobox" name="processId" data-options="valueField:'processId',
+	            		textField:'processId',url:'process/get_data', editable:false"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>设备:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="deviceId"   
-    					data-options="valueField:'deviceId',textField:'deviceName',url:'deviceList/get_data', editable:false" />
+	            	<input class="easyui-combobox" name="deviceId" data-options="valueField:'deviceId',
+	            		textField:'deviceName',url:'deviceList/get_data', editable:false"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>班产定额:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="rating"></input>
+	            	<input class="easyui-numberbox" type="text" name="rating"/>
     			</td>  
 	        </tr>
 	    </table>
@@ -104,33 +117,37 @@
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTaskWorkEditForm()">提交</a>
 	</div>
 </div>
-<div id="taskManufactureInfo" class="easyui-dialog" title="生产计划信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="taskManufactureInfo" class="easyui-dialog" title="生产计划信息" data-options="modal:true,closed:true,
+		resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="taskManufactureEditForm" method="post">
 		<input type="hidden" name="id"/>
 	    <table cellpadding="5">
 	        <tr>
 	            <td>生产批号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="manufactureSn" ></input>
+	            	<input class="easyui-textbox" type="text" name="manufactureSn"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订单编号:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="orderId"   
-    					data-options="required:true,valueField:'orderId',textField:'orderId',url:'order/get_data', editable:false" />  
+	            	<input class="easyui-combobox" name="orderId" data-options="required:true,valueField:'orderId',
+	            		textField:'orderId',url:'order/get_data', editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="technologyId"   
-    					data-options="valueField:'technologyId',textField:'technologyName',url:'product/get_data', editable:false" />
+	            	<input class="easyui-combobox" name="technologyId" data-options="valueField:'technologyId',
+	            		textField:'technologyName',url:'product/get_data', editable:false"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>投产数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="launchQuantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="launchQuantity"
+						   data-options="min:1,max:99999999,precision:0,required:true"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>订购日期:</td>
@@ -154,28 +171,32 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 	if(value == null || value == ''){
 		
 		$("#taskList").datagrid({
-	        title:'生产派工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_task", url:'task/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'生产派工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_task", url:'task/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'taskId', width : 100, title : '生产派工编号', align:'center'},
-	             	{field : 'workId', width : 100, align : 'center', title : '作业编号', formatter:formatTaskWork},
-	             	{field : 'manufactureSn', width : 100, align : 'center', title : '生产批号', formatter:formatTaskManufacture}, 
-	             	{field : 'workingHours', width : 100, title : '派工数量', align:'center'}, 
-	             	{field : 'unitPrice', width : 100, title : '派工工时', align:'center'}, 
+				{field : 'ck', checkbox:true },
+				{field : 'taskId', width : 100, title : '生产派工编号', align:'center'},
+				{field : 'workId', width : 100, align : 'center', title : '作业编号', formatter:formatTaskWork},
+				{field : 'manufactureSn', width : 100, align : 'center', title : '生产批号',
+					formatter:formatTaskManufacture},
+				{field : 'workingHours', width : 100, title : '派工数量', align:'center'},
+				{field : 'unitPrice', width : 100, title : '派工工时', align:'center'},
 	        ] ],  
 	    });
 	}else{
 		$("#taskList").datagrid({  
-	        title:'生产派工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_task", url:'task/search_task_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'生产派工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_task", url:'task/search_task_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'taskId', width : 100, title : '生产派工编号', align:'center'},
-					{field : 'workId', width : 100, align : 'center', title : '作业编号', formatter:formatTaskWork},
-					{field : 'manufactureSn', width : 100, align : 'center', title : '生产批号', formatter:formatTaskManufacture}, 
-					{field : 'workingHours', width : 100, title : '派工数量', align:'center'}, 
-					{field : 'unitPrice', width : 100, title : '派工工时', align:'center'}, 
+				{field : 'ck', checkbox:true },
+				{field : 'taskId', width : 100, title : '生产派工编号', align:'center'},
+				{field : 'workId', width : 100, align : 'center', title : '作业编号', formatter:formatTaskWork},
+				{field : 'manufactureSn', width : 100, align : 'center', title : '生产批号',
+					formatter:formatTaskManufacture},
+				{field : 'workingHours', width : 100, title : '派工数量', align:'center'},
+				{field : 'unitPrice', width : 100, title : '派工工时', align:'center'},
 	        ] ],  
 	    });
 	}

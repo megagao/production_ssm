@@ -3,8 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ include file="/WEB-INF/jsp/common_js.jsp"%>
-<%@ include file="/WEB-INF/jsp/common_css.jsp"%>
+<%@ include file="/WEB-INF/jsp/commons/common_js.jsp"%>
+<%@ include file="/WEB-INF/jsp/commons/common_css.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,7 +14,7 @@
 	padding: 10px 10px 10px 10px;
 }
 .divNorth{
-	background:url('image/TitleBackground.jpg') no-repeat center center;
+	background:url('../image/TitleBackground.jpg') no-repeat center center;
 	background-size:100% 100%;
 }
 </style>
@@ -30,10 +30,14 @@
 				<td valign="top">
 					<div style="position:relative;">
 						<div style="text-align:right;font-size:15px;margin:2px 0 0 0;">
-							<span style="display:inline-block;font-size:20px;color:#c1dff7;margin:0 0 8px 0;">计算机科学与技术学院</span>
-							<br />
+							<span style="display:inline-block;font-size:20px;color:#c1dff7;margin:0 0 8px 0;">
+								计算机科学与技术学院
+							</span><br/>
 							
-							</span><span style="color:#c1dff7;">${activeUser.rolename}:</span><span style="color:#c1dff7;">${activeUser.username}</span>
+							<span style="color:#c1dff7;">${activeUser.rolename}:</span>
+							<span style="color:#c1dff7;">
+								${activeUser.username}
+							</span>
 						    &nbsp;<a href="logout" style="text-decoration:none;color:#A9C3D6;"> 退出</a>&nbsp;  &nbsp; 
 						</div>
 					</div>

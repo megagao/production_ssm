@@ -9,7 +9,7 @@
     <result column="revise_time" property="reviseTime" jdbcType="TIMESTAMP" />
   </resultMap>
   
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.TechnologyRequirementPO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.TechnologyRequirementVO" extends="BaseResultMap">
     <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
   </resultMap>
 

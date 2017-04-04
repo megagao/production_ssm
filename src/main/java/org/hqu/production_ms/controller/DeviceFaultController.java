@@ -114,7 +114,7 @@ public class DeviceFaultController {
 		return deviceFaultService.updateAll(deviceFault);
 	}
 	
-	//搜索
+	//根据设备故障id查找
 	@RequestMapping("/search_deviceFault_by_deviceFaultId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceFaultByDeviceFaultId(Integer page, Integer rows, String searchValue) 
@@ -123,7 +123,7 @@ public class DeviceFaultController {
 		return result;
 	}
 	
-	//搜索
+	//根据设备名查找
 	@RequestMapping("/search_deviceFault_by_deviceName")
 	@ResponseBody
 	public EUDataGridResult searchDeviceFaultByDeviceName(Integer page, Integer rows, String searchValue) 

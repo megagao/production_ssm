@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/device")
 public class DeviceController {
-	/*************************  Left Menu  *************************/
-	
+
 	@RequestMapping("/deviceList")
 	public String deviceList() throws Exception{
 		return "deviceList";
@@ -34,5 +33,4 @@ public class DeviceController {
 		return "deviceMaintain";
 	}
 	
-	/*************************  Left Menu  *************************/
 }

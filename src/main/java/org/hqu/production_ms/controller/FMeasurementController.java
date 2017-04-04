@@ -60,39 +60,15 @@ public class FMeasurementController {
 	public String edit() throws Exception{
 		return "measurement_edit";
 	}
-	
-	//搜索
-	@RequestMapping("/search_fMeasureCheck_by_fMeasureCheckId")
-	@ResponseBody
-	public EUDataGridResult searchFMeasureCheckByFMeasureCheckId(Integer page, Integer rows, String searchValue)
-			throws Exception{
-		EUDataGridResult result = measureService.searchFMeasureCheckByFMeasureCheckId(page, rows, searchValue);
-		return result;
-	}
-	
-	//搜索
-	@RequestMapping("/search_fMeasureCheck_by_orderId")
-	@ResponseBody
-	public EUDataGridResult searchFMeasureCheckByOrderId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
-		EUDataGridResult result = measureService.searchFMeasureCheckByOrderId(page, rows, searchValue);
-		return result;
-	}
-	
+
 	@RequestMapping("/list")
 	@ResponseBody
 	public EUDataGridResult getList(Integer page, Integer rows, FinalMeasuretCheck finalMeasuretCheck) 
 			throws Exception{
-		
 		EUDataGridResult result = measureService.getList(page, rows, finalMeasuretCheck);
 		return result;
 	}
-	/*
-	 *此处的method可以取两个值，
-	 *一个是RequestMethod.GET，一个是RequestMethod.POST，
-	 *就是请求该方法使用的模式，是get还是post，即参数提交的方法
-	 *ajax或者form表单提交数据有两种方法，即get和post。
-	 */
+
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
 	private CustomResult insert(@Valid FinalMeasuretCheck finalMeasuretCheck, BindingResult bindingResult) 
@@ -135,8 +111,25 @@ public class FMeasurementController {
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
-		System.out.println(ids);
 		CustomResult result = measureService.deleteBatch(ids);
+		return result;
+	}
+
+	//根据成品计量质检id查找
+	@RequestMapping("/search_fMeasureCheck_by_fMeasureCheckId")
+	@ResponseBody
+	public EUDataGridResult searchFMeasureCheckByFMeasureCheckId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = measureService.searchFMeasureCheckByFMeasureCheckId(page, rows, searchValue);
+		return result;
+	}
+
+	//根据订单id查找
+	@RequestMapping("/search_fMeasureCheck_by_orderId")
+	@ResponseBody
+	public EUDataGridResult searchFMeasureCheckByOrderId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = measureService.searchFMeasureCheckByOrderId(page, rows, searchValue);
 		return result;
 	}
 }

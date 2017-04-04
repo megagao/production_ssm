@@ -6,8 +6,9 @@
 <script src="js/malsup.github.iojquery.form.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="manufactureList" title="生产计划列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'manufacture/list',method:'get',pageSize:10, fitColumns:true,toolbar:toolbar_manufacture">
+<table class="easyui-datagrid" id="manufactureList" title="生产计划列表" data-options="singleSelect:false,
+		collapsible:true,pagination:true,rownumbers:true,url:'manufacture/list',method:'get',pageSize:10,
+		fitColumns:true,toolbar:toolbar_manufacture">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
@@ -31,12 +32,16 @@
 		</c:if>
 		<c:if test="${per=='manufacture:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="manufacture_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="manufacture_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='manufacture:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="manufacture_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="manufacture_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -61,47 +66,58 @@
 
 </div>  
 
-<div id="manufactureEditWindow" class="easyui-window" title="编辑生产计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'manufacture/edit'" style="width:40%;height:60%;padding:10px;">
+<div id="manufactureEditWindow" class="easyui-window" title="编辑生产计划" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'manufacture/edit'" style="width:40%;height:60%;padding:10px;">
 </div>
-<div id="manufactureAddWindow" class="easyui-window" title="添加生产计划" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'manufacture/add'" style="width:40%;height:60%;padding:10px;">
+<div id="manufactureAddWindow" class="easyui-window" title="添加生产计划" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'manufacture/add'" style="width:40%;height:60%;padding:10px;">
 </div>
 
-<div id="manuOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="manuOrderInfo" class="easyui-dialog" title="订单信息" data-options="modal:true,closed:true,
+		resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="manuOrderEditForm" method="post">
 		<input type="hidden" name="orderId"/>
 	    <table cellpadding="5">
 	         <tr>
 	            <td>订购客户:</td>
 	            <td>
-	            	<input id="custom" class="easyui-combobox" name="customId"   
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
+	            	<input id="custom" class="easyui-combobox" name="customId" data-options="required:true,
+	            		valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
-	            	<input id="product" class="easyui-combobox" name="productId"   
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false" />
+	            	<input id="product" class="easyui-combobox" name="productId" data-options="valueField:'productId',
+	            		textField:'productName',url:'product/get_data', editable:false" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>订购数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="quantity"
+						   data-options="min:1,max:99999999,precision:0,required:true" />
+				</td>
 	        </tr>
 	        <tr>
 	            <td>税前单价:</td>
-	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td>
+					<input class="easyui-numberbox" type="text" name="unitPrice"
+						   data-options="min:1,max:99999999,precision:2,required:true"/>
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>单位:</td>
-	            <td><input  class="easyui-textbox" type="text" name="unit"></input></td>
+	            <td>
+					<input  class="easyui-textbox" type="text" name="unit"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" data-options="required:true,width:150,
+		            	editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>
@@ -146,56 +162,57 @@
 	</div>
 </div>
 
-<div id="manuTechnologyInfo" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="manuTechnologyInfo" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,
+		iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
 	<form id="manuTechnologyEditForm" class="technologyForm" method="post">
 		<input type="hidden" name="technologyId"/>
 	    <table cellpadding="5">
 	        <tr>
 	            <td>工艺名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>外协价格:</td>
 	            <td>
-	            	<input class="easyui-numberbox" precision="2" maxlength="10" name="price" ></input>
+	            	<input class="easyui-numberbox" precision="2" maxlength="10" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>瓶颈工序工期:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="vitalProcessPeriod"  ></input>
+	            	<input class="easyui-textbox" type="text" name="vitalProcessPeriod" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>标准加工能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox"  maxlength="11" name="standardCapacity"></input>
+	            	<input class="easyui-numberbox"  maxlength="11" name="standardCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>加班标准加工能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>加班超额教工能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>二班工序能力:</td>
 	            <td>
-	            	<input class="easyui-numberbox" maxlength="11" name="doubleCapacity"></input>
+	            	<input class="easyui-numberbox" maxlength="11" name="doubleCapacity"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>超负荷工序能力:</td>
 	            <td>
-		            <input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"></input>
+		            <input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"/>
 				</td>
 	        </tr>
 	    </table>
@@ -210,30 +227,32 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
 	if(value == null || value == ''){
 		
 		$("#manufactureList").datagrid({
-	        title:'生产计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_manufacture", url:'manufacture/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'生产计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_manufacture", url:'manufacture/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'manufactureSn', width : 150, title : '生产批号', align:'center'},
-	             	{field : 'cOrder', width : 100, align : 'center', title : '订单', formatter:formatManuOrder},
-	             	{field : 'technology', width : 100, align : 'center', title : '工艺', formatter:formatManuTechnology}, 
-	             	{field : 'launchQuantity', width : 100, title : '投产数量', align:'center'}, 
-	             	{field : 'beginDate', width : 130, title : '开始日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'endDate', width : 130, title : '结束日期', align:'center', formatter:TAOTAO.formatDateTime}, 
+				{field : 'ck', checkbox:true },
+				{field : 'manufactureSn', width : 150, title : '生产批号', align:'center'},
+				{field : 'cOrder', width : 100, align : 'center', title : '订单', formatter:formatManuOrder},
+				{field : 'technology', width : 100, align : 'center', title : '工艺', formatter:formatManuTechnology},
+				{field : 'launchQuantity', width : 100, title : '投产数量', align:'center'},
+				{field : 'beginDate', width : 130, title : '开始日期', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'endDate', width : 130, title : '结束日期', align:'center', formatter:TAOTAO.formatDateTime},
 	        ] ],  
 	    });
 	}else{
 		$("#manufactureList").datagrid({  
-	        title:'生产计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_manufacture", url:'manufacture/search_manufacture_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'生产计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_manufacture", url:'manufacture/search_manufacture_by_'
+			+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'manufactureSn', width : 150, title : '生产批号', align:'center'},
-					{field : 'cOrder', width : 100, align : 'center', title : '订单', formatter:formatManuOrder},
-					{field : 'technology', width : 100, align : 'center', title : '工艺', formatter:formatManuTechnology}, 
-					{field : 'launchQuantity', width : 100, title : '投产数量', align:'center'}, 
-					{field : 'beginDate', width : 130, title : '开始日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-					{field : 'endDate', width : 130, title : '结束日期', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'ck', checkbox:true },
+				{field : 'manufactureSn', width : 150, title : '生产批号', align:'center'},
+				{field : 'cOrder', width : 100, align : 'center', title : '订单', formatter:formatManuOrder},
+				{field : 'technology', width : 100, align : 'center', title : '工艺', formatter:formatManuTechnology},
+				{field : 'launchQuantity', width : 100, title : '投产数量', align:'center'},
+				{field : 'beginDate', width : 130, title : '开始日期', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'endDate', width : 130, title : '结束日期', align:'center', formatter:TAOTAO.formatDateTime},
 	        ] ],  
 	    });
 	}
@@ -303,8 +322,8 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
         		var imgs = data.pics.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
-        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
-        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' " +
+								"target='_blank'>" + "<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
         				j = true;
         			}
         		}

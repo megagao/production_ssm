@@ -8,44 +8,50 @@
 	         <tr>
 	            <td>物料消耗编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="consumeId" data-options="required:true" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="consumeId" data-options="required:true"
+						   style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>所属工作:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="workId"  panelHeight="auto"
-    					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'" style="width: 160px;" />  
+    					data-options="required:true,valueField:'workId',textField:'workId',url:'work/get_data'"
+						   style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto"
-    					data-options="required:true,valueField:'materialId',textField:'materialId',url:'material/get_data', editable:false" style="width: 160px;" />  
+	            	<input class="easyui-combobox" name="materialId"  panelHeight="auto" data-options="required:true,
+	            	valueField:'materialId',textField:'materialId',url:'material/get_data',
+	            	editable:false" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>消耗数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="consumeAmount" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="consumeAmount" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>消耗日期:</td>
-	            <td><input class="easyui-datetimebox" name="consumeDate"     
-        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:160px"> </td>
+	            <td>
+					<input class="easyui-datetimebox" name="consumeDate"
+        			data-options="required:true,showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')"
+						   style="width:160px">
+				</td>
 	        </tr>
 	        <tr>
 	            <td>发送者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="sender" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>接收者:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"></input>
+	            	<input class="easyui-textbox" type="text" name="receiver" style="width: 160px;"/>
 	            </td>
 	        </tr>
 	        <tr>

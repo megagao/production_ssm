@@ -2,20 +2,24 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 public class Manufacture {
-	
+
+	@Size(max=40, message="{id.length.error}")
     private String manufactureSn;
 
+	@Max(value=999999999, message="投产数量过大")
     private Integer launchQuantity;
-
+	
     private Date beginDate;
 
     private Date endDate;
 
-    private COrder cOrder;
+    private String orderId;
 
-    private Technology technology;
+    private String technologyId;
     
     public String getManufactureSn() {
         return manufactureSn;
@@ -49,20 +53,20 @@ public class Manufacture {
         this.endDate = endDate;
     }
 
-	public COrder getcOrder() {
-		return cOrder;
+	public String getOrderId() {
+		return orderId;
 	}
 
-	public void setcOrder(COrder cOrder) {
-		this.cOrder = cOrder;
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 
-	public Technology getTechnology() {
-		return technology;
+	public String getTechnologyId() {
+		return technologyId;
 	}
 
-	public void setTechnology(Technology technology) {
-		this.technology = technology;
+	public void setTechnologyId(String technologyId) {
+		this.technologyId = technologyId;
 	}
     
 }

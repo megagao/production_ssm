@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.hqu.production_ms.domain.TechnologyPlan;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.TechnologyPlanPO;
+import org.hqu.production_ms.domain.vo.TechnologyPlanVO;
 import org.hqu.production_ms.service.TechnologyPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +57,7 @@ public class TechnologyPlanController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, TechnologyPlanPO technologyPlanPO)
+	public EUDataGridResult getItemList(Integer page, Integer rows, TechnologyPlanVO technologyPlanPO)
 			throws Exception{
 		EUDataGridResult result = technologyPlanService.getList(page, rows, technologyPlanPO);
 		return result;
@@ -81,8 +81,7 @@ public class TechnologyPlanController {
 
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid TechnologyPlan technologyPlan, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult updateAll(@Valid TechnologyPlan technologyPlan, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -97,7 +96,7 @@ public class TechnologyPlanController {
 		return result;
 	}
 	
-	//搜索
+	//根据工艺计划id查找
 	@RequestMapping("/search_technologyPlan_by_technologyPlanId")
 	@ResponseBody
 	public EUDataGridResult searchTechnologyPlanByTechnologyPlanId(Integer page, Integer rows, String searchValue) 
@@ -106,7 +105,7 @@ public class TechnologyPlanController {
 		return result;
 	}
 	
-	//搜索
+	//根据工艺名称查找
 	@RequestMapping("/search_technologyPlan_by_technologyName")
 	@ResponseBody
 	public EUDataGridResult searchTechnologyPlanByTechnologyName(Integer page, Integer rows, String searchValue)

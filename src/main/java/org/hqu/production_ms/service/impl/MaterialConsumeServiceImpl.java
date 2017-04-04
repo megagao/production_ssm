@@ -9,9 +9,9 @@ import java.util.List;
 
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.MaterialConsume;
+import org.hqu.production_ms.domain.vo.MaterialConsumeVO;
 import org.hqu.production_ms.domain.MaterialConsumeExample;
-import org.hqu.production_ms.domain.po.MaterialConsumePO;
+import org.hqu.production_ms.domain.MaterialConsume;
 import org.hqu.production_ms.mapper.MaterialConsumeMapper;
 import org.hqu.production_ms.service.MaterialConsumeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +34,17 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public EUDataGridResult getList(int page, int rows, MaterialConsume materialConsume) 
+	public EUDataGridResult getList(int page, int rows, MaterialConsumeVO materialConsume)
 			throws Exception{
 		// TODO Auto-generated method stub
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialConsume> list = materialConsumeMapper.find(materialConsume);
+		List<MaterialConsumeVO> list = materialConsumeMapper.find(materialConsume);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialConsume> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialConsumeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -78,7 +78,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult insert(MaterialConsumePO materialConsume) throws Exception{
+	public CustomResult insert(MaterialConsume materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.insert(materialConsume);
 		if(i>0){
@@ -89,7 +89,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult update(MaterialConsumePO materialConsume) throws Exception{
+	public CustomResult update(MaterialConsume materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.updateByPrimaryKeySelective(materialConsume);
 		if(i>0){
@@ -100,7 +100,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult updateAll(MaterialConsumePO materialConsume) throws Exception{
+	public CustomResult updateAll(MaterialConsume materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.updateByPrimaryKey(materialConsume);
 		if(i>0){
@@ -111,7 +111,7 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 	}
 
 	@Override
-	public CustomResult updateNote(MaterialConsumePO materialConsume) throws Exception{
+	public CustomResult updateNote(MaterialConsume materialConsume) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialConsumeMapper.updateNote(materialConsume);
 		if(i>0){
@@ -126,12 +126,12 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByConsumeId(consumeId);
+		List<MaterialConsumeVO> list = materialConsumeMapper.searchMaterialConsumeByConsumeId(consumeId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialConsume> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialConsumeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -141,12 +141,12 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByMaterialId(materialId);
+		List<MaterialConsumeVO> list = materialConsumeMapper.searchMaterialConsumeByMaterialId(materialId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialConsume> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialConsumeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -156,12 +156,12 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
 			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialConsume> list = materialConsumeMapper.searchMaterialConsumeByWorkId(workId);
+		List<MaterialConsumeVO> list = materialConsumeMapper.searchMaterialConsumeByWorkId(workId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialConsume> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialConsumeVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

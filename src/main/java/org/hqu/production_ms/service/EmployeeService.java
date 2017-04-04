@@ -2,29 +2,29 @@ package org.hqu.production_ms.service;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.Employee;
+import org.hqu.production_ms.domain.vo.EmployeeVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.EmployeePO;
+import org.hqu.production_ms.domain.Employee;
 
 public interface EmployeeService {
 	
-	List<Employee> find() throws Exception;  
+	List<Employee> find() throws Exception;
 	
-	EUDataGridResult getList(int page, int rows, Employee employee) throws Exception;
+	EUDataGridResult getList(int page, int rows, EmployeeVO employee) throws Exception;
 	
-	Employee get(String string) throws Exception;
+	EmployeeVO get(String string) throws Exception;
 	
 	CustomResult delete(String string) throws Exception;
 
 	CustomResult deleteBatch(String[] ids) throws Exception;
 
-	CustomResult insert(EmployeePO employee) throws Exception;
+	CustomResult insert(Employee employee) throws Exception;
 
     //更新全部字段，不判断非空，直接进行更新
-    CustomResult updateAll(EmployeePO employee) throws Exception;
+    CustomResult updateAll(Employee employee) throws Exception;
     
-    CustomResult update(EmployeePO employee) throws Exception;
+    CustomResult update(Employee employee) throws Exception;
     
     List<Employee> searchEmployeeByEmployeeName(String employeeName) throws Exception;
 

@@ -3,25 +3,25 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.Employee;
+import org.hqu.production_ms.domain.vo.EmployeeVO;
 import org.hqu.production_ms.domain.EmployeeExample;
-import org.hqu.production_ms.domain.po.EmployeePO;
+import org.hqu.production_ms.domain.Employee;
 
 public interface EmployeeMapper {
 	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
 	
-	List<Employee> find();
+	List<EmployeeVO> find();
 
-	List<Employee> searchEmployeeByEmployeeId(String employeeId);
+	List<EmployeeVO> searchEmployeeByEmployeeId(String employeeId);
 
-	List<Employee> searchEmployeeByEmployeeName(String employeeName);
+	List<EmployeeVO> searchEmployeeByEmployeeName(String employeeName);
 
-	List<Employee> searchEmployeeByDepartmentName(String departmentName);
+	List<EmployeeVO> searchEmployeeByDepartmentName(String departmentName);
 	
 	//逆向工程生成的mapper接口
-	Employee selectSingleEmployee(String empId);
+	EmployeeVO selectSingleEmployee(String empId);
 		
     int countByExample(EmployeeExample example);
 
@@ -29,19 +29,19 @@ public interface EmployeeMapper {
 
     int deleteByPrimaryKey(String empId);
 
-    int insert(EmployeePO record);
+    int insert(Employee record);
 
-    int insertSelective(EmployeePO record);
+    int insertSelective(Employee record);
 
     List<Employee> selectByExample(EmployeeExample example);
 
     Employee selectByPrimaryKey(String empId);
 
-    int updateByExampleSelective(@Param("record") EmployeePO record, @Param("example") EmployeeExample example);
+    int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
 
-    int updateByExample(@Param("record") EmployeePO record, @Param("example") EmployeeExample example);
+    int updateByExample(@Param("record") Employee record, @Param("example") EmployeeExample example);
 
-    int updateByPrimaryKeySelective(EmployeePO record);
+    int updateByPrimaryKeySelective(Employee record);
 
-    int updateByPrimaryKey(EmployeePO record);
+    int updateByPrimaryKey(Employee record);
 }

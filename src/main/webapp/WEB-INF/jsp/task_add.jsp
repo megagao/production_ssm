@@ -14,7 +14,7 @@
 	        <tr>
 	            <td>生产派工编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="taskId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="taskId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -36,13 +36,13 @@
 	        <tr>
 	            <td>派工数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="taskQuantity"></input>
+	            	<input class="easyui-numberbox" type="text" name="taskQuantity"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>派工工时:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="workingHours"></input>
+	            	<input class="easyui-numberbox" type="text" name="workingHours"/>
     			</td>  
 	        </tr>
 	    </table>

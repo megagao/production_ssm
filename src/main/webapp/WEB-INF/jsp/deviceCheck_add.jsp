@@ -8,7 +8,7 @@
 	        <tr>
 	            <td>例检编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="deviceCheckId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="deviceCheckId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -31,7 +31,7 @@
 	            <td>例检时间:</td>
 	            <td>
 	            	<input class="easyui-datetimebox"  name="deviceCheckDate" 
-	            		value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
+	            		value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>
 	        <tr>

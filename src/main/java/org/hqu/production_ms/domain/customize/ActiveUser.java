@@ -14,9 +14,6 @@ import org.hqu.production_ms.domain.authority.SysPermission;
  * @version  0.0.1
  */
 public class ActiveUser implements java.io.Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String userid;//用户id（主键）
 	private String username;// 用户名称

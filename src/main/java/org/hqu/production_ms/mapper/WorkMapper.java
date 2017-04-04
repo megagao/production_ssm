@@ -3,24 +3,24 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.Work;
+import org.hqu.production_ms.domain.vo.WorkVO;
 import org.hqu.production_ms.domain.WorkExample;
-import org.hqu.production_ms.domain.po.WorkPO;
+import org.hqu.production_ms.domain.Work;
 
 public interface WorkMapper {
 	
 	//扩展的mapper接口方法
 	int deleteBatch(String[] ids);
 	
-	List<Work> find();
+	List<WorkVO> find();
 
-	List<Work> searchWorkByWorkId(String workId);
+	List<WorkVO> searchWorkByWorkId(String workId);
 
-	List<Work> searchWorkByWorkProduct(String workProduct);
+	List<WorkVO> searchWorkByWorkProduct(String workProduct);
 
-	List<Work> searchWorkByWorkDevice(String workDevice);
+	List<WorkVO> searchWorkByWorkDevice(String workDevice);
 
-	List<Work> searchWorkByWorkProcess(String workProcess);
+	List<WorkVO> searchWorkByWorkProcess(String workProcess);
 	
 	//逆向工程生成的mapper接口
     int countByExample(WorkExample example);
@@ -29,9 +29,9 @@ public interface WorkMapper {
 
     int deleteByPrimaryKey(String workId);
 
-    int insert(WorkPO record);
+    int insert(Work record);
 
-    int insertSelective(WorkPO record);
+    int insertSelective(Work record);
 
     List<Work> selectByExample(WorkExample example);
 
@@ -41,7 +41,7 @@ public interface WorkMapper {
 
     int updateByExample(@Param("record") Work record, @Param("example") WorkExample example);
 
-    int updateByPrimaryKeySelective(WorkPO record);
+    int updateByPrimaryKeySelective(Work record);
 
-    int updateByPrimaryKey(WorkPO record);
+    int updateByPrimaryKey(Work record);
 }

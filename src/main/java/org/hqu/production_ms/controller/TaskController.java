@@ -109,7 +109,7 @@ public class TaskController {
 		return result;
 	}
 	
-	//搜索
+	//根据生产派工id查找
 	@RequestMapping("/search_task_by_taskId")
 	@ResponseBody
 	public EUDataGridResult searchTaskByTaskId(Integer page, Integer rows, String searchValue) 
@@ -118,16 +118,15 @@ public class TaskController {
 		return result;
 	}
 	
-	//搜索
+	//根据作业id查找
 	@RequestMapping("/search_task_by_taskWorkId")
 	@ResponseBody
-	public EUDataGridResult searchTaskByTaskWorkId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchTaskByTaskWorkId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = taskService.searchTaskByTaskWorkId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据生产计划id查找
 	@RequestMapping("/search_task_by_taskManufactureSn")
 	@ResponseBody
 	public EUDataGridResult searchTaskByTaskManufactureSn(Integer page, Integer rows, String searchValue) 

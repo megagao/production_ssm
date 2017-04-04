@@ -56,7 +56,7 @@ public class PermissionController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, SysRolePermission sysRolePermission) 
+	public EUDataGridResult getItemList(Integer page, Integer rows, SysRolePermission sysRolePermission)
 			throws Exception{
 		EUDataGridResult result = permissionService.getList(page, rows, sysRolePermission);
 		return result;
@@ -96,4 +96,5 @@ public class PermissionController {
 		CustomResult result = permissionService.delete(id);
 		return result;
 	}
+
 }

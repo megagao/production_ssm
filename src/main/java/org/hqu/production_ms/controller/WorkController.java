@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.Work;
+import org.hqu.production_ms.domain.vo.WorkVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.WorkPO;
+import org.hqu.production_ms.domain.Work;
 import org.hqu.production_ms.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,14 +55,14 @@ public class WorkController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Work work) throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, WorkVO work) throws Exception{
 		EUDataGridResult result = workService.getList(page, rows, work);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid WorkPO work, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid Work work, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -78,7 +78,7 @@ public class WorkController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid WorkPO work, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid Work work, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -88,7 +88,7 @@ public class WorkController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid WorkPO work, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid Work work, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -110,38 +110,34 @@ public class WorkController {
 		return result;
 	}
 	
-	//搜索
+	//根据作业id查找
 	@RequestMapping("/search_work_by_workId")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchWorkByWorkId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据产品名称查找
 	@RequestMapping("/search_work_by_workProduct")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkProduct(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchWorkByWorkProduct(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkProduct(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据设备id查找
 	@RequestMapping("/search_work_by_workDevice")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkDevice(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchWorkByWorkDevice(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkDevice(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据工序id查找
 	@RequestMapping("/search_work_by_workProcess")
 	@ResponseBody
-	public EUDataGridResult searchWorkByWorkProcess(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchWorkByWorkProcess(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = workService.searchWorkByWorkProcess(page, rows, searchValue);
 		return result;
 	}

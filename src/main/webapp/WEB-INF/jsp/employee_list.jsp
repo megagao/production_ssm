@@ -40,7 +40,9 @@
 		</c:if>
 		<c:if test="${per=='employee:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="employee_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="employee_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -80,7 +82,7 @@
 	        <tr>
 	            <td>部门名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="departmentName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="departmentName" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
@@ -100,42 +102,44 @@ function doSearch_employee(value,name){ //用户输入用户名,点击搜素,触
 	if(value == null || value == ''){
 		
 		$("#employeeList").datagrid({
-	        title:'员工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_employee", url:'employee/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'员工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_employee", url:'employee/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'empId', width : 100, align:'center', title : '员工编号'},
-	             	{field : 'empName', width : 100, align : 'center', title : '员工姓名'},
-	             	{field : 'sex', width : 100, align : 'center', title : '性别', formatter:TAOTAO.formatSex}, 
-	             	{field : 'department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment}, 
-	             	{field : 'idCode', width : 150, title : '身份证号', align:'center'}, 
-	            	{field : 'education', width : 100, title : '学历', align:'center'}, 
-	             	{field : 'degree', width : 100, title : '学位', align:'center'}, 
-	             	{field : 'major', width : 100, title : '专业', align:'center'}, 
-	             	{field : 'educationForm', width : 100, title : '受教育形式', align:'center'}, 
-	             	{field : 'birthday', width : 130, title : '生日', align:'center', formatter:TAOTAO.formatDate}, 
-	             	{field : 'joinDate', width : 130, title : '入职日期', align:'center', formatter:TAOTAO.formatDate}, 
-	             	{field : 'status',  width : 100, title : '员工状态', align:'center'}
+				{field : 'ck', checkbox:true },
+				{field : 'empId', width : 100, align:'center', title : '员工编号'},
+				{field : 'empName', width : 100, align : 'center', title : '员工姓名'},
+				{field : 'sex', width : 100, align : 'center', title : '性别', formatter:TAOTAO.formatSex},
+				{field : 'department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment},
+				{field : 'idCode', width : 150, title : '身份证号', align:'center'},
+				{field : 'education', width : 100, title : '学历', align:'center'},
+				{field : 'degree', width : 100, title : '学位', align:'center'},
+				{field : 'major', width : 100, title : '专业', align:'center'},
+				{field : 'educationForm', width : 100, title : '受教育形式', align:'center'},
+				{field : 'birthday', width : 130, title : '生日', align:'center', formatter:TAOTAO.formatDate},
+				{field : 'joinDate', width : 130, title : '入职日期', align:'center', formatter:TAOTAO.formatDate},
+				{field : 'status',  width : 100, title : '员工状态', align:'center'}
 	        ] ],  
 	    });
 	}else{
 		$("#employeeList").datagrid({  
-	        title:'员工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_employee", url:'employee/search_employee_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'员工列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_employee", url:'employee/search_employee_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'empId', width : 100, align:'center', title : '员工编号'},
-	             	{field : 'empName', width : 100, align : 'center', title : '员工姓名'},
-	             	{field : 'sex', width : 100, align : 'center', title : '性别', formatter:TAOTAO.formatSex}, 
-	             	{field : 'department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment}, 
-	             	{field : 'idCode', width : 150, title : '身份证号', align:'center'}, 
-	            	{field : 'education', width : 100, title : '学历', align:'center'}, 
-	             	{field : 'degree', width : 100, title : '学位', align:'center'}, 
-	             	{field : 'major', width : 100, title : '专业', align:'center'}, 
-	             	{field : 'educationForm', width : 100, title : '受教育形式', align:'center'}, 
-	             	{field : 'birthday', width : 130, title : '生日', align:'center', formatter:TAOTAO.formatDate}, 
-	             	{field : 'joinDate', width : 130, title : '入职日期', align:'center', formatter:TAOTAO.formatDate}, 
-	             	{field : 'status',  width : 100, title : '员工状态', align:'center'}
+				{field : 'ck', checkbox:true },
+				{field : 'empId', width : 100, align:'center', title : '员工编号'},
+				{field : 'empName', width : 100, align : 'center', title : '员工姓名'},
+				{field : 'sex', width : 100, align : 'center', title : '性别', formatter:TAOTAO.formatSex},
+				{field : 'department', width : 100, title : '所属部门', align:'center',formatter:formatDepartment},
+				{field : 'idCode', width : 150, title : '身份证号', align:'center'},
+				{field : 'education', width : 100, title : '学历', align:'center'},
+				{field : 'degree', width : 100, title : '学位', align:'center'},
+				{field : 'major', width : 100, title : '专业', align:'center'},
+				{field : 'educationForm', width : 100, title : '受教育形式', align:'center'},
+				{field : 'birthday', width : 130, title : '生日', align:'center', formatter:TAOTAO.formatDate},
+				{field : 'joinDate', width : 130, title : '入职日期', align:'center', formatter:TAOTAO.formatDate},
+				{field : 'status',  width : 100, title : '员工状态', align:'center'}
 	        ] ],  
 	    });
 	}

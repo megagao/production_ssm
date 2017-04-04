@@ -12,7 +12,7 @@
     <result column="technology_plan_end" property="technologyPlanEnd" jdbcType="TIMESTAMP" />
   </resultMap>
   
-  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.po.TechnologyPlanPO" extends="BaseResultMap">
+  <resultMap id="AddResultMap" type="org.hqu.production_ms.domain.vo.TechnologyPlanVO" extends="BaseResultMap">
     <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
   </resultMap>
 

@@ -4,23 +4,23 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
-<table class="easyui-datagrid" id="orderList" title="订单列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'order/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_order">
+<table class="easyui-datagrid" id="orderList" title="订单列表" data-options="singleSelect:false,collapsible:true,
+	pagination:true,rownumbers:true,url:'order/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_order">
     <thead>
         <tr>
-        	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'orderId',align:'center',width:100">订单编号</th>
-            <th data-options="field:'custom',align:'center',width:100,formatter:formatCustom">订购客户</th>
-            <th data-options="field:'product',align:'center',width:100,formatter:formatProduct">订购产品</th>
-            <th data-options="field:'quantity',align:'center',width:100">订购数量</th>
-            <th data-options="field:'unitPrice',width:70,align:'center'">税前单价</th>
-            <th data-options="field:'unit',width:70,align:'center'">单位</th>
-            <th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatOrderStatus">状态</th>
-            <th data-options="field:'orderDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">订购日期</th>
-            <th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
-            <th data-options="field:'note',width:100,align:'center', formatter:formatOrderNote">订单要求</th>
-            <th data-options="field:'image',width:100,align:'center', formatter:formatImg">相关图片</th>
-            <th data-options="field:'file',width:180,align:'center', formatter:formatFile">订单附件</th>
+			<th data-options="field:'ck',checkbox:true"></th>
+			<th data-options="field:'orderId',align:'center',width:100">订单编号</th>
+			<th data-options="field:'custom',align:'center',width:100,formatter:formatCustom">订购客户</th>
+			<th data-options="field:'product',align:'center',width:100,formatter:formatProduct">订购产品</th>
+			<th data-options="field:'quantity',align:'center',width:100">订购数量</th>
+			<th data-options="field:'unitPrice',width:70,align:'center'">税前单价</th>
+			<th data-options="field:'unit',width:70,align:'center'">单位</th>
+			<th data-options="field:'status',width:60,align:'center',formatter:TAOTAO.formatOrderStatus">状态</th>
+			<th data-options="field:'orderDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">订购日期</th>
+			<th data-options="field:'requestDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">要求日期</th>
+			<th data-options="field:'note',width:100,align:'center', formatter:formatOrderNote">订单要求</th>
+			<th data-options="field:'image',width:100,align:'center', formatter:formatImg">相关图片</th>
+			<th data-options="field:'file',width:180,align:'center', formatter:formatFile">订单附件</th>
         </tr>
     </thead>
 </table> 
@@ -64,47 +64,50 @@
     </div>  
 </div>  
 
-<div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'order/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="orderEditWindow" class="easyui-window" title="编辑订单" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'order/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="orderAddWindow" class="easyui-window" title="添加订单" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'order/add'" style="width:65%;height:80%;padding:10px;">
+<div id="orderAddWindow" class="easyui-window" title="添加订单" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'order/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
-<div id="orderCustomInfo" class="easyui-dialog" title="客户信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="orderCustomInfo" class="easyui-dialog" title="客户信息" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="orderCustomEditForm" method="post">
 		<input type="hidden" name="customId"/>
 	    <table cellpadding="5">
 	        <tr>
 	            <td>客户名称:</td>
-	            <td><input class="easyui-textbox" type="text" name="customName" data-options="required:true"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="customName" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>客户全称:</td>
-	            <td><input class="easyui-textbox" type="text" name="fullName" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="fullName" style="width: 280px;"/></td>
 	        </tr>
 	        <tr>
 	            <td>地址:</td>
-	            <td><input class="easyui-textbox" type="text" name="address" style="width: 280px;"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="address" style="width: 280px;"/></td>
 	        </tr>
 	        <tr>
 	            <td>传真:</td>
-	            <td><input class="easyui-textbox" type="text" name="fax"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="fax"/></td>
 	        </tr>
 	        <tr>
 	            <td>邮箱:</td>
-	            <td><input class="easyui-textbox" type="text" name="email"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="email"/></td>
 	        </tr>
 	        <tr>
 	            <td>经理姓名:</td>
-	            <td><input class="easyui-textbox" type="text" name="ownerName"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="ownerName"/></td>
 	        </tr>
 	        <tr>
 	            <td>联系电话:</td>
-	            <td><input class="easyui-textbox" type="text" name="ownerTel"></input></td>
+	            <td><input class="easyui-textbox" type="text" name="ownerTel"/></td>
 	        </tr>
 	        <tr>
 	            <td>客户状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
+		            <select class="easyui-combobox" name="status" style="width:200px;" data-options="width:150">
 						<option value="1">有效客户</option>
 						<option value="2">无效客户</option>
 					</select>
@@ -120,17 +123,18 @@
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitOrderCustomEditForm()">提交</a>
 	</div>
 </div>
-<div id="orderProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
+<div id="orderProductInfo" class="easyui-dialog" title="产品信息" data-options="modal:true,closed:true,resizable:true,
+		iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="orderProductEditForm" method="post">
 		<input type="hidden" name="productId"/>
 	    <table cellpadding="5">
 	        <tr>
 	            <td>产品名称:</td>
-	            <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true"></input></td>  
+	            <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>产品种类:</td>
-	            <td><input class="easyui-textbox" type="text" name="productType" data-options="required:true"></input></td>  
+	            <td><input class="easyui-textbox" type="text" name="productType" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>产品状态:</td>
@@ -158,7 +162,8 @@
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitOrderProductEditForm()">提交</a>
 	</div>
 </div>
-<div id="orderNoteDialog" class="easyui-dialog" title="订单要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
+<div id="orderNoteDialog" class="easyui-dialog" title="订单要求" data-options="modal:true,closed:true,resizable:true,
+		iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
 	<form id="orderNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="orderId"/>
 	    <table cellpadding="5" >
@@ -177,28 +182,31 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
 	if(value == null || value == ''){
 		
 		$("#orderList").datagrid({
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_order", url:'order/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_order", url:'order/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'orderId', width : 100, align:'center', title : '订单编号'},
-	             	{field : 'custom', width : 100, align : 'center', title : '订购客户', formatter:formatCustom},
-	             	{field : 'product', width : 100, align : 'center', title : '订购产品', formatter:formatProduct}, 
-	             	{field : 'quantity', width : 100, title : '订购数量', align:'center'}, 
-	             	{field : 'unitPrice', width : 70, title : '税前单价', align:'center'}, 
-	            	{field : 'unit', width : 70, title : '单位', align:'center'}, 
-	             	{field : 'status', width : 60, title : '状态', align:'center', formatter:TAOTAO.formatOrderStatus}, 
-	             	{field : 'orderDate', width : 130, title : '订购日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'requestDate', width : 130, title : '要求日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'note', width : 100, title : '订单要求', align:'center', formatter:formatOrderNote}, 
-	             	{field : 'image', width : 100, title : '相关图片', align:'center', formatter:formatImg}, 
-	             	{field : 'file',  width : 100, title : '订单附件', align:'center', formatter:formatFile}
+				{field : 'ck', checkbox:true },
+				{field : 'orderId', width : 100, align:'center', title : '订单编号'},
+				{field : 'custom', width : 100, align : 'center', title : '订购客户', formatter:formatCustom},
+				{field : 'product', width : 100, align : 'center', title : '订购产品', formatter:formatProduct},
+				{field : 'quantity', width : 100, title : '订购数量', align:'center'},
+				{field : 'unitPrice', width : 70, title : '税前单价', align:'center'},
+				{field : 'unit', width : 70, title : '单位', align:'center'},
+				{field : 'status', width : 60, title : '状态', align:'center', formatter:TAOTAO.formatOrderStatus},
+				{field : 'orderDate', width : 130, title : '订购日期', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'requestDate', width : 130, title : '要求日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'note', width : 100, title : '订单要求', align:'center', formatter:formatOrderNote},
+				{field : 'image', width : 100, title : '相关图片', align:'center', formatter:formatImg},
+				{field : 'file',  width : 100, title : '订单附件', align:'center', formatter:formatFile}
 	        ] ],  
 	    });
 	}else{
 		$("#orderList").datagrid({  
-	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_order", url:'order/search_order_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'订单列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_order", url:'order/search_order_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
 	             	{field : 'orderId', width : 100, title : '订单编号', align:'center'},
@@ -208,8 +216,10 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
 	             	{field : 'unitPrice', width : 70, title : '税前单价', align:'center'}, 
 	            	{field : 'unit', width : 70, title : '单位', align:'center'}, 
 	             	{field : 'status', width : 60, title : '状态', align:'center', formatter:TAOTAO.formatOrderStatus}, 
-	             	{field : 'orderDate', width : 130, title : '订购日期', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'requestDate', width : 130, title : '要求日期', align:'center', formatter:TAOTAO.formatDateTime}, 
+	             	{field : 'orderDate', width : 130, title : '订购日期', align:'center',
+						formatter:TAOTAO.formatDateTime},
+	             	{field : 'requestDate', width : 130, title : '要求日期', align:'center',
+						formatter:TAOTAO.formatDateTime},
 	             	{field : 'note', width : 100, title : '订单要求', align:'center', formatter:formatOrderNote}, 
 	             	{field : 'image', width : 100, title : '相关图片', align:'center', formatter:formatImg}, 
 	             	{field : 'file',  width : 100, title : '订单附件', align:'center', formatter:formatFile}

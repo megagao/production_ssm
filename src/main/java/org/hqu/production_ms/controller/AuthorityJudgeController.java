@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * created on 2017年3月25日 
  *
- * 权限判断
+ * 权限判断controller
  *
  * @author  megagao
  * @version  0.0.1
@@ -31,7 +31,7 @@ public class AuthorityJudgeController {
 		//取身份信息
 		ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 		
-		//根据uri判断相应权限
+		//根据uri,使用shiro判断相应权限
 		String uri = request.getRequestURI();
 		String[] names = uri.split("/");
 		String featureName = names[2];
@@ -48,5 +48,4 @@ public class AuthorityJudgeController {
 		}
 		return map;
 	}
-	
-}
+}	

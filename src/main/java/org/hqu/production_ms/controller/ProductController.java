@@ -119,25 +119,23 @@ public class ProductController {
 		return result;
 	}
 	
-	//搜索
+	//根据产品id查找
 	@RequestMapping("/search_product_by_productId")
 	@ResponseBody
-	public EUDataGridResult searchProductByProductId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchProductByProductId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = productService.searchProductByProductId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据产品名称查找
 	@RequestMapping("/search_product_by_productName")
 	@ResponseBody
-	public EUDataGridResult searchProductByProductName(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchProductByProductName(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = productService.searchProductByProductName(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据产品类型查找
 	@RequestMapping("/search_product_by_productType")
 	@ResponseBody
 	public EUDataGridResult searchProductByProductType(Integer page, Integer rows, String searchValue) 

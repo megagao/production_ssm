@@ -56,8 +56,7 @@ public class TechnologyController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Technology technology) 
-			throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, Technology technology) throws Exception{
 		EUDataGridResult result = technologyService.getList(page, rows, technology);
 		return result;
 	}
@@ -88,13 +87,6 @@ public class TechnologyController {
 		return technologyService.updateAll(technology);
 	}
 	
-	/*@RequestMapping(value="/update_note")
-	@ResponseBody
-	private CustomResult updateNote(Technology technology) throws Exception {
-		CustomResult result = technologyService.updateNote(technology);
-		return result;
-	}*/
-	
 	@RequestMapping(value="/delete_batch")
 	@ResponseBody
 	private CustomResult deleteBatch(String[] ids) throws Exception {
@@ -102,7 +94,7 @@ public class TechnologyController {
 		return result;
 	}
 	
-	//搜索
+	//根据工艺id查找
 	@RequestMapping("/search_technology_by_technologyId")
 	@ResponseBody
 	public EUDataGridResult searchTechnologyByTechnologyId(Integer page, Integer rows, String searchValue)
@@ -111,7 +103,7 @@ public class TechnologyController {
 		return result;
 	}
 	
-	//搜索
+	//根据工艺名称查找
 	@RequestMapping("/search_technology_by_technologyName")
 	@ResponseBody
 	public EUDataGridResult searchTechnologyByTechnologyName(Integer page, Integer rows, String searchValue)

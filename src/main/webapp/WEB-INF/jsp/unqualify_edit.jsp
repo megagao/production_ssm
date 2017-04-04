@@ -14,37 +14,42 @@
 	            <td>产品名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="productId"  panelHeight="auto"
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data',required:true, editable:false" />  
+						   data-options="valueField:'productId',textField:'productName',url:'product/get_data',
+						   required:true, editable:false"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>不合格项目:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="unqualifyItem" ></input>
+	            	<input class="easyui-textbox" type="text" name="unqualifyItem"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>不合格数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="unqualifyCount" ></input>
+	            	<input class="easyui-numberbox" type="text" name="unqualifyCount"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>加工时间:</td>
-	             <td><input class="easyui-datetimebox" name="assemblyDate"     
-        			data-options="required:true,showSeconds:true" style="width:150px"> </td>  
+	             <td>
+					 <input class="easyui-datetimebox" name="assemblyDate"
+        			data-options="required:true,showSeconds:true" style="width:150px">
+				 </td>
 	        </tr>
 	        <tr>
 	            <td>申请人:</td>
 	            <td>
-	            	<input class="easyui-combobox" name="empId" panelHeight="auto" 
-    					data-options="required:true,editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'"/>
+	            	<input class="easyui-combobox" name="empId" panelHeight="auto" data-options="required:true,
+	            		editable:false,valueField:'empId',textField:'empName',url:'employee/get_data'"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>申请时间:</td>
-	             <td><input class="easyui-datetimebox" name="applyDate"     
-        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px"> </td>  
+	             <td>
+					 <input class="easyui-datetimebox" name="applyDate"
+        			data-options="required:true,showSeconds:true" value="5/5/2016 00:00:00" style="width:150px">
+				 </td>
 				</td>
 	        </tr>
 	        <tr>

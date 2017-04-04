@@ -38,16 +38,14 @@ public class UnqualifyApplyController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, UnqualifyApply unqualifyApply) 
-			throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, UnqualifyApply unqualifyApply) throws Exception{
 		EUDataGridResult result = unqualifyService.getList(page, rows, unqualifyApply);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult)
-			throws Exception {
+	private CustomResult insert(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -63,8 +61,7 @@ public class UnqualifyApplyController {
 
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult)
-			throws Exception {
+	private CustomResult updateAll(@Valid UnqualifyApply unqualifyApply, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -96,7 +93,8 @@ public class UnqualifyApplyController {
 		CustomResult result = unqualifyService.deleteBatch(ids);
 		return result;
 	}
-	
+
+	//根据不合格品id查找
 	@RequestMapping("/search_unqualify_by_unqualifyId")
 	@ResponseBody
 	public EUDataGridResult searchUnqualifyByUnqualifyId(Integer page, Integer rows, String searchValue) 
@@ -104,7 +102,8 @@ public class UnqualifyApplyController {
 		EUDataGridResult result = unqualifyService.searchUnqualifyByUnqualifyId(page, rows, searchValue);
 		return result;
 	}
-	
+
+	//根据产品名称查找
 	@RequestMapping("/search_unqualify_by_productName")
 	@ResponseBody
 	public EUDataGridResult searchUnqualifyByProductName(Integer page, Integer rows, String searchValue) 

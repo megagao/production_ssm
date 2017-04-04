@@ -2,11 +2,11 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.vo.COrderVO;
 import org.hqu.production_ms.domain.COrderExample;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
+import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.mapper.COrderMapper;
 import org.hqu.production_ms.service.CustomService;
 import org.hqu.production_ms.service.OrderService;
@@ -36,16 +36,16 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public EUDataGridResult getList(int page, int rows, COrder cOrder) throws Exception{
+	public EUDataGridResult getList(int page, int rows, COrderVO cOrder) throws Exception{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<COrder> list = cOrderMapper.find(cOrder);
+		List<COrderVO> list = cOrderMapper.find(cOrder);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<COrder> pageInfo = new PageInfo<>(list);
+		PageInfo<COrderVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public CustomResult insert(COrderPO cOrder) throws Exception{
+	public CustomResult insert(COrder cOrder) throws Exception{
 		int i = cOrderMapper.insert(cOrder);
 		if(i>0){
 			return CustomResult.ok();
@@ -87,7 +87,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public CustomResult update(COrderPO cOrder) throws Exception{
+	public CustomResult update(COrder cOrder) throws Exception{
 		int i = cOrderMapper.updateByPrimaryKeySelective(cOrder);
 		if(i>0){
 			return CustomResult.ok();
@@ -97,7 +97,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public CustomResult updateAll(COrderPO cOrder) throws Exception{
+	public CustomResult updateAll(COrder cOrder) throws Exception{
 		int i = cOrderMapper.updateByPrimaryKey(cOrder);
 		if(i>0){
 			return CustomResult.ok();
@@ -107,7 +107,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public CustomResult updateNote(COrderPO cOrder) throws Exception{
+	public CustomResult updateNote(COrder cOrder) throws Exception{
 		int i = cOrderMapper.updateNote(cOrder);
 		if(i>0){
 			return CustomResult.ok();
@@ -130,12 +130,12 @@ public class OrderServiceImpl implements OrderService{
 	public EUDataGridResult searchOrderByOrderId(int page, int rows, String orderId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<COrder> list = cOrderMapper.searchOrderByOrderId(orderId);
+		List<COrderVO> list = cOrderMapper.searchOrderByOrderId(orderId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<COrder> pageInfo = new PageInfo<>(list);
+		PageInfo<COrderVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -145,12 +145,12 @@ public class OrderServiceImpl implements OrderService{
 			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<COrder> list = cOrderMapper.searchOrderByCustomName(custonName);
+		List<COrderVO> list = cOrderMapper.searchOrderByCustomName(custonName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<COrder> pageInfo = new PageInfo<>(list);
+		PageInfo<COrderVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -160,12 +160,12 @@ public class OrderServiceImpl implements OrderService{
 			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<COrder> list = cOrderMapper.searchOrderByProductName(productName);
+		List<COrderVO> list = cOrderMapper.searchOrderByProductName(productName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<COrder> pageInfo = new PageInfo<>(list);
+		PageInfo<COrderVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

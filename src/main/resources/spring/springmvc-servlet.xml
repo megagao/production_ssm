@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
 	<!-- 注解驱动 -->
-	<mvc:annotation-driven  conversion-service="conversionService1" validator="validator"/>
+	<mvc:annotation-driven  conversion-service="conversionService" validator="validator"/>
     
 	<!-- 开启aop，对类代理 -->
 	<aop:config proxy-target-class="true"></aop:config>
@@ -57,13 +57,13 @@
 	<bean class="org.hqu.production_ms.exception.CustomExceptionResolver"></bean>
 	
 	<!-- 转换器 -->
-	<bean id="conversionService1"
+	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
-			<list>
-				<bean class="org.hqu.production_ms.controller.converter.CustomDateConverter" />
-				<bean class="org.hqu.production_ms.controller.converter.StringTrimConverter" />
-			</list>
+			<set>
+				<bean class="org.hqu.production_ms.controller.converter.CustomDateConverter"/>
+				<bean class="org.hqu.production_ms.controller.converter.StringTrimConverter"/>
+			</set>
 		</property>
 	</bean>
 	
@@ -81,7 +81,7 @@
 		<!-- 资源文件名 -->
 		<property name="basenames">
 			<list>
-				<value>classpath:CustomValidationMessages</value>
+				<value>classpath:CustomValidationMessages.properties</value>
 			</list>
 		</property>
 		<!-- 资源文件编码格式 -->

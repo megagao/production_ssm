@@ -24,8 +24,7 @@ public class DeviceCheckController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getListType(Integer page, Integer rows, DeviceCheck deviceCheck) 
-			throws Exception{
+	public EUDataGridResult getListType(Integer page, Integer rows, DeviceCheck deviceCheck) throws Exception{
 		EUDataGridResult result = deviceCheckService.getList(page, rows, deviceCheck);
 		return result;
 	}
@@ -48,8 +47,7 @@ public class DeviceCheckController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult insert(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -65,8 +63,7 @@ public class DeviceCheckController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult update(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -76,8 +73,7 @@ public class DeviceCheckController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult updateNote(@Valid DeviceCheck deviceCheck, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -95,20 +91,18 @@ public class DeviceCheckController {
 	//搜索
 	@RequestMapping("/search_deviceCheck_by_deviceCheckId")
 	@ResponseBody
-	public EUDataGridResult searchDeviceCheckByDeviceCheckId(Integer page, Integer rows, 
-			String searchValue) throws Exception{
-		EUDataGridResult result = deviceCheckService
-				.searchDeviceCheckByDeviceCheckId(page, rows, searchValue);
+	public EUDataGridResult searchDeviceCheckByDeviceCheckId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = deviceCheckService.searchDeviceCheckByDeviceCheckId(page, rows, searchValue);
 		return result;
 	}
 	
 	//搜索
 	@RequestMapping("/search_deviceCheck_by_deviceName")
 	@ResponseBody
-	public EUDataGridResult searchDeviceCheckByDeviceName(Integer page, Integer rows
-			, String searchValue) throws Exception{
-		EUDataGridResult result = deviceCheckService
-				.searchDeviceCheckByDeviceName(page, rows, searchValue);
+	public EUDataGridResult searchDeviceCheckByDeviceName(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = deviceCheckService.searchDeviceCheckByDeviceName(page, rows, searchValue);
 		return result;
 	}
 }

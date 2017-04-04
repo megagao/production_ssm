@@ -1,20 +1,27 @@
 package org.hqu.production_ms.domain;
-
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 public class MaterialReceive {
+	
+	@Size(max=40, message="{id.length.error}")
     private String receiveId;
 
-    private Material material;
+    private String materialId;
 
-    private Integer ammount;
+    @Max(value=999999999, message="收入数量过大")
+    private Integer amount;
 
     private Date receiveDate;
 
+    @Size(max=40, message="发送者的长度限制在40个字符之内")
     private String sender;
 
+    @Size(max=40, message="接收者的长度限制在40个字符之内")
     private String receiver;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getReceiveId() {
@@ -22,24 +29,23 @@ public class MaterialReceive {
     }
 
     public void setReceiveId(String receiveId) {
-       this.receiveId = receiveId == null ? null : receiveId.trim();
-    	//this.receiveId=receiveId;
+        this.receiveId = receiveId == null ? null : receiveId.trim();
     }
 
-    public Material getMaterial() {
-        return material;
+    public String getMaterialId() {
+        return materialId;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId == null ? null : materialId.trim();
     }
 
-    public Integer getAmmount() {
-        return ammount;
+    public Integer getAmount() {
+        return amount;
     }
 
-    public void setAmmount(Integer ammount) {
-        this.ammount = ammount;
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     public Date getReceiveDate() {
@@ -73,6 +79,4 @@ public class MaterialReceive {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
-
-	
-	}
+}

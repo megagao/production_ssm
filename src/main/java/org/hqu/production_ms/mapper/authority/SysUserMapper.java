@@ -3,13 +3,13 @@ package org.hqu.production_ms.mapper.authority;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.authority.SysUserExample;
-import org.hqu.production_ms.domain.po.UserPO;
+import org.hqu.production_ms.domain.authority.SysUser;
 
 public interface SysUserMapper {
 	//扩展的mapper接口方法
-	List<UserPO> find(SysUser record);
+	List<SysUser> find(SysUser record);
 	
 	int deleteBatch(String[] ids);
 	
@@ -22,9 +22,9 @@ public interface SysUserMapper {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(UserPO userPO);
+    int insert(SysUser user);
 
-    int insertSelective(UserPO userPO);
+    int insertSelective(SysUser user);
 
     List<SysUser> selectByExample(SysUserExample example);
 
@@ -34,13 +34,13 @@ public interface SysUserMapper {
 
     int updateByExample(@Param("record") SysUser record, @Param("example") SysUserExample example);
 
-    int updateByPrimaryKeySelective(UserPO userPO);
+    int updateByPrimaryKeySelective(SysUser user);
 
-    int updateByPrimaryKey(UserPO userPO);
+    int updateByPrimaryKey(SysUser user);
 
-	List<UserPO> searchUserByUserId(String userId);
+	List<SysUser> searchUserByUserId(String userId);
 
-	List<UserPO> searchUserByUserName(String userName);
+	List<SysUser> searchUserByUserName(String userName);
 
-	List<UserPO> searchUserByRoleName(String roleName);
+	List<SysUser> searchUserByRoleName(String roleName);
 }

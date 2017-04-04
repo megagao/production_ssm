@@ -8,12 +8,22 @@
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'technologyRequirementId',width:100,align:'center'">工艺要求编号</th>
+        	<th data-options="field:'technologyRequirementId',width:100,align:'center'">
+				工艺要求编号
+			</th>
             <th data-options="field:'technologyName',width:120,align:'center',
-            					formatter:formatTechnology_technologyRequirement">工艺名称</th>
-            <th data-options="field:'requirement',width:100,align:'center',formatter:formatRequirement">工艺要求</th>
-            <th data-options="field:'addTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">工艺要求添加时间</th>
-            <th data-options="field:'reviseTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">工艺要求修改时间</th>
+            		formatter:formatTechnology_technologyRequirement">
+				工艺名称
+			</th>
+            <th data-options="field:'requirement',width:100,align:'center',formatter:formatRequirement">
+				工艺要求
+			</th>
+            <th data-options="field:'addTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				工艺要求添加时间
+			</th>
+            <th data-options="field:'reviseTime',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				工艺要求修改时间
+			</th>
         </tr>
     </thead>
 </table>
@@ -23,17 +33,20 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='technologyRequirement:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="technologyRequirement_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add"
+				   onclick="technologyRequirement_add()">新增</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='technologyRequirement:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="technologyRequirement_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit"
+				   onclick="technologyRequirement_edit()">编辑</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='technologyRequirement:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="technologyRequirement_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"
+				   onclick="technologyRequirement_delete()">删除</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -41,7 +54,8 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="technologyRequirement_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload"
+		   onclick="technologyRequirement_reload()">刷新</a>
 	</div>  
 	
     <div id="search_technologyRequirement" style="float: right;">
@@ -57,52 +71,75 @@
 
 </div> 
 
-<div id="technologyRequirementEditWindow" class="easyui-window" title="编辑工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/edit'" style="width:65%;height:65%;padding:10px;">
+<div id="technologyRequirementEditWindow" class="easyui-window" title="编辑工艺要求"
+	 data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/edit'"
+	 style="width:65%;height:65%;padding:10px;">
 </div>
-<div id="technologyRequirementAddWindow" class="easyui-window" title="添加工艺要求" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/add'" style="width:65%;height:65%;padding:10px;">
+<div id="technologyRequirementAddWindow" class="easyui-window" title="添加工艺要求"
+	 data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'technologyRequirement/add'"
+	 style="width:65%;height:65%;padding:10px;">
 </div>
 
 <!-- 工艺信息 -->
-<div id="technologyInfo_technologyRequirement" class="easyui-dialog" title="工艺信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:40%;height:55%;padding:10px;">
+<div id="technologyInfo_technologyRequirement" class="easyui-dialog" title="工艺信息"
+	 data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'"
+	 style="width:40%;height:55%;padding:10px;">
 	<form id="technologyEditForm_technologyRequirement" method="post">
 		<input type="hidden" name="technologyId"/>
 	    <table cellpadding="5">
 	        <tr>
 	            <td>工艺名称:</td>
-	            <td><input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"></input></td>
+	            <td>
+					<input class="easyui-textbox" type="text" name="technologyName" data-options="required:true"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>外协价格:</td>
-	            <td><input class="easyui-numberbox" precision="2" maxlength="10" name="price" ></input></td>
+	            <td>
+					<input class="easyui-numberbox" precision="2" maxlength="10" name="price"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>瓶颈工序工期:</td>
-	            <td><input class="easyui-textbox" type="text" name="vitalProcessPeriod"></input></td>
+	            <td>
+					<input class="easyui-textbox" type="text" name="vitalProcessPeriod"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>标准加工能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="standardCapacity"></input></td>
+	            <td>
+					<input class="easyui-numberbox" maxlength="11" name="standardCapacity"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>加班标准加工能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"></input></td>
+	            <td>
+					<input class="easyui-numberbox" maxlength="11" name="overtimeStandardCapacity"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>加班超额加工能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"></input></td>
+	            <td>
+					<input class="easyui-numberbox" maxlength="11" name="overtimeOverfulfilCapacity"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>二班工序能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="doubleCapacity"></input></td>
+	            <td>
+					<input class="easyui-numberbox" maxlength="11" name="doubleCapacity"/>
+				</td>
 	        </tr>
 	        <tr>
 	            <td>超负荷工序能力:</td>
-	            <td><input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"></input></td>
+	            <td>
+					<input class="easyui-numberbox" maxlength="11" name="overfulfilCapacity"/>
+				</td>
 	        </tr>
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitTechnologyEditForm_technologyRequirement()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton"
+		   onclick="submitTechnologyEditForm_technologyRequirement()">提交</a>
 	</div>
 </div>
  
@@ -130,28 +167,39 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
 	if(value == null || value == ''){
 		
 		$("#technologyRequirementList").datagrid({
-	        title:'工艺要求列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_technologyRequirement", url:'technologyRequirement/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工艺要求列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_technologyRequirement", url:'technologyRequirement/list', method:'get',
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'technologyRequirementId', width : 100, align:'center', title : '工艺要求编号'},
-	             	{field : 'technologyName', width : 120, align : 'center', title : '工艺名称', formatter:formatTechnology_technologyRequirement},
-	             	{field : 'requirement', width : 100, align : 'center', title : '工艺要求', formatter:formatRequirement}, 
-	             	{field : 'addTime', width : 130, title : '工艺要求增加时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'reviseTime', width : 130, title : '工艺要求修改时间', align:'center',formatter:TAOTAO.formatDateTime} 
+				{field : 'ck', checkbox:true },
+				{field : 'technologyRequirementId', width : 100, align:'center', title : '工艺要求编号'},
+				{field : 'technologyName', width : 120, align : 'center', title : '工艺名称',
+					formatter:formatTechnology_technologyRequirement},
+				{field : 'requirement', width : 100, align : 'center', title : '工艺要求',
+					formatter:formatRequirement},
+				{field : 'addTime', width : 130, title : '工艺要求增加时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'reviseTime', width : 130, title : '工艺要求修改时间', align:'center',
+					formatter:TAOTAO.formatDateTime}
 	        ] ],  
 	    });
 	}else{
 		$("#technologyRequirementList").datagrid({  
-	        title:'工艺要求列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_technologyRequirement", url:'technologyRequirement/search_technologyRequirement_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'工艺要求列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_technologyRequirement",
+			url:'technologyRequirement/search_technologyRequirement_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'technologyRequirementId', width : 100, align:'center', title : '工艺要求编号'},
-					{field : 'technologyName', width : 120, align : 'center', title : '工艺名称', formatter:formatTechnology_technologyRequirement},
-					{field : 'requirement', width : 100, align : 'center', title : '工艺要求', formatter:formatRequirement}, 
-					{field : 'addTime', width : 130, title : '工艺要求增加时间', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'reviseTime', width : 130, title : '工艺要求修改时间', align:'center',formatter:TAOTAO.formatDateTime}
+				{field : 'ck', checkbox:true },
+				{field : 'technologyRequirementId', width : 100, align:'center', title : '工艺要求编号'},
+				{field : 'technologyName', width : 120, align : 'center', title : '工艺名称',
+					formatter:formatTechnology_technologyRequirement},
+				{field : 'requirement', width : 100, align : 'center', title : '工艺要求',
+					formatter:formatRequirement},
+				{field : 'addTime', width : 130, title : '工艺要求增加时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'reviseTime', width : 130, title : '工艺要求修改时间', align:'center',
+					formatter:TAOTAO.formatDateTime}
 	        ] ],  
 	    });
 	}
@@ -208,7 +256,8 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
     				return ;
     			}
 
-    			$.post("technology/update_all",$("#technologyEditForm_technologyRequirement").serialize(), function(data){
+    			$.post("technology/update_all",$("#technologyEditForm_technologyRequirement").serialize(),
+						function(data){
     				if(data.status == 200){
     					$.messager.alert('提示','修改工艺成功!','info',function(){
     						$("#technologyInfo_technologyRequirement").dialog("close");
@@ -228,7 +277,8 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
 		$("#technologyRequirementNoteDialog").dialog({
 			onOpen :function(){
 				$("#technologyRequirementNoteForm [name=technologyRequirementId]").val(row.technologyRequirementId);
-				technologyRequirementNoteEditor = TAOTAO.createEditor("#technologyRequirementNoteForm [name=requirement]");
+				technologyRequirementNoteEditor =
+						TAOTAO.createEditor("#technologyRequirementNoteForm [name=requirement]");
 				technologyRequirementNoteEditor.html(row.requirement);
 				
 			},
@@ -246,7 +296,8 @@ function doSearch_technologyRequirement(value,name){ //用户输入用户名,点
     			$.messager.alert('提示', data.msg);
     		}else{ 
     			technologyRequirementNoteEditor.sync();
-    			$.post("technologyRequirement/update_requirement",$("#technologyRequirementNoteForm").serialize(), function(data){
+    			$.post("technologyRequirement/update_requirement",$("#technologyRequirementNoteForm").serialize(),
+						function(data){
     				if(data.status == 200){
     					$("#technologyRequirementNoteDialog").dialog("close");
     					$("#technologyRequirementList").datagrid("reload");

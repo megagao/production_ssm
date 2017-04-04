@@ -10,14 +10,30 @@
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'unqualifyApplyId',align:'center',width:100">不合格品申请编号</th>
-            <th data-options="field:'productId',align:'center',width:100,formatter:formatProduct">产品名称</th>
-            <th data-options="field:'unqualifyItem',align:'center',width:100">不合格项目</th>
-            <th data-options="field:'unqualifyCount',align:'center',width:100">不合格数量</th>
-            <th data-options="field:'assemblyDate',align:'center',width:100,formatter:TAOTAO.formatDateTime">加工时间</th>
-            <th data-options="field:'empName',align:'center',width:100,formatter:formatEmp_unqualify">申请人</th>
-            <th data-options="field:'applyDate',align:'center',width:100,formatter:TAOTAO.formatDateTime">申请时间</th>
-            <th data-options="field:'note',align:'center',width:100,formatter:formatUnqualifyNote">备注</th>
+        	<th data-options="field:'unqualifyApplyId',align:'center',width:100">
+				不合格品申请编号
+			</th>
+            <th data-options="field:'productId',align:'center',width:100,formatter:formatProduct">
+				产品名称
+			</th>
+            <th data-options="field:'unqualifyItem',align:'center',width:100">
+				不合格项目
+			</th>
+            <th data-options="field:'unqualifyCount',align:'center',width:100">
+				不合格数量
+			</th>
+            <th data-options="field:'assemblyDate',align:'center',width:100,formatter:TAOTAO.formatDateTime">
+				加工时间
+			</th>
+            <th data-options="field:'empName',align:'center',width:100,formatter:formatEmp_unqualify">
+				申请人
+			</th>
+            <th data-options="field:'applyDate',align:'center',width:100,formatter:TAOTAO.formatDateTime">
+				申请时间
+			</th>
+            <th data-options="field:'note',align:'center',width:100,formatter:formatUnqualifyNote">
+				备注
+			</th>
         
         </tr>
     </thead>
@@ -28,17 +44,23 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='unqualify:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="unqualify_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="unqualify_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='unqualify:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="unqualify_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="unqualify_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='unqualify:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="unqualify_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="unqualify_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -46,7 +68,9 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="unqualify_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="unqualify_reload()">
+			刷新
+		</a>
 	</div>  
 	
     <div id="search_unqualify" style="float: right;">
@@ -79,11 +103,11 @@
 	    <table cellpadding="5">
 	        <tr>
 	            <td>产品名称:</td>
-	            <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true"></input></td>  
+	            <td><input class="easyui-textbox" type="text" name="productName" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>产品种类:</td>
-	            <td><input class="easyui-textbox" type="text" name="productType" data-options="required:true"></input></td>  
+	            <td><input class="easyui-textbox" type="text" name="productType" data-options="required:true"/></td>
 	        </tr>
 	        <tr>
 	            <td>产品状态:</td>
@@ -122,7 +146,7 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>姓名:</td>
-	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="empName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>性别:</td>
@@ -143,35 +167,35 @@
 	        </tr>
 	        <tr>
 	            <td>身份证号:</td>
-	            <td><input class="easyui-textbox" name="idCode"></input></td>
+	            <td><input class="easyui-textbox" name="idCode"/></td>
 	        </tr>
 	        <tr>
 	            <td>学历:</td>
-	            <td><input class="easyui-textbox" name="education"></input></td>
+	            <td><input class="easyui-textbox" name="education"/></td>
 	        </tr>
 	        <tr>
 	            <td>学位:</td>
-	            <td><input class="easyui-textbox" name="degree"></input></td>
+	            <td><input class="easyui-textbox" name="degree"/></td>
 	        </tr>
 	        <tr>
 	            <td>专业:</td>
-	            <td><input class="easyui-textbox" name="major" ></input></td>
+	            <td><input class="easyui-textbox" name="major"/></td>
 	        </tr>
 	        <tr>
 	            <td>受教育形式:</td>
-	            <td><input class="easyui-textbox" name="educationForm" ></input></td>
+	            <td><input class="easyui-textbox" name="educationForm"/></td>
 	        </tr>
 	        <tr>
 	            <td>生日:</td>
-	            <td><input class="easyui-datetimebox" name="birthday" ></input></td>
+	            <td><input class="easyui-datetimebox" name="birthday"/></td>
 	        </tr>
 	        <tr>
 	            <td>入职日期:</td>
-	            <td><input class="easyui-datetimebox" name="joinDate" ></input></td>
+	            <td><input class="easyui-datetimebox" name="joinDate"/></td>
 	        </tr>
 	        <tr>
 	            <td>员工状态:</td>
-	            <td><input class="easyui-textbox" name="status" ></input></td>
+	            <td><input class="easyui-textbox" name="status"/></td>
 	        </tr>
 	    </table>
 	</form>
@@ -204,34 +228,38 @@
 function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#unqualifyList").datagrid({
-	        title:'不合格品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_unqualify", url:'unqualify/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'不合格品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_unqualify", url:'unqualify/list', method:'get', loadMsg:'数据加载中......',
+			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'unqualifyApplyId', width : 100, title : '不合格品申请编号', align:'center'},
-	             	{field : 'productId', width : 100, align : 'center', title : '产品编号', formatter:formatProduct},
-	             	{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'}, 
-	             	{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'}, 
-	             	{field : 'assemblyDate', width : 100, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'empName', width : 100, title : '申请人', align:'center',formatter:formatEmp_unqualify}, 
-	             	{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
+				{field : 'ck', checkbox:true },
+				{field : 'unqualifyApplyId', width : 100, title : '不合格品申请编号', align:'center'},
+				{field : 'productId', width : 100, align : 'center', title : '产品编号', formatter:formatProduct},
+				{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'},
+				{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'},
+				{field : 'assemblyDate', width : 100, title : '加工时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'empName', width : 100, title : '申请人', align:'center',formatter:formatEmp_unqualify},
+				{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
 	        ] ],  
 	    });
 	}else{
 		$("#unqualifyList").datagrid({  
-	        title:'不合格品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_unqualify", url:'unqualify/search_unqualify_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'不合格品列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_unqualify", url:'unqualify/search_unqualify_by_'+name+'?searchValue='+value,
+			loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'unqualifyApplyId', width : 100, title : '不合格品申请编号', align:'center'},
-	             	{field : 'productId', width : 100, align : 'center', title : '产品编号', formatter:formatProduct},
-	             	{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'}, 
-	             	{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'}, 
-	             	{field : 'assemblyDate', width : 100, title : '加工时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	            	{field : 'empName', width : 100, title : '申请人', align:'center',formatter:formatEmp_unqualify}, 
-	             	{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
+				{field : 'ck', checkbox:true },
+				{field : 'unqualifyApplyId', width : 100, title : '不合格品申请编号', align:'center'},
+				{field : 'productId', width : 100, align : 'center', title : '产品编号', formatter:formatProduct},
+				{field : 'unqualifyItem', width : 100, align : 'center', title : '不合格项目'},
+				{field : 'unqualifyCount', width : 100, title : '不合格数量', align:'center'},
+				{field : 'assemblyDate', width : 100, title : '加工时间', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'empName', width : 100, title : '申请人', align:'center',formatter:formatEmp_unqualify},
+				{field : 'applyDate', width : 100, title : '申请时间', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'note', width : 100, title : '备注', align:'center',formatter:formatUnqualifyNote}
 	        ] ],  
 	    });
 	}
@@ -290,14 +318,15 @@ function doSearch_unqualify(value,name){ //用户输入用户名,点击搜素,�
         		var imgs = data.pics.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
-        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"' target='_blank'>" +
-        						"<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
+        				_ele.siblings(".pics").find("ul").append("<li><a id='img"+i+"' href='"+imgs[i]+"'" +
+								" target='_blank'>" + "<img src='"+imgs[i]+"' width='80' height='50' /></a> ");
         				j = true;
         			}
         		}
         	}
         	if(!j){
-    			$("#unqualifyProductPicSpan").html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
+    			$("#unqualifyProductPicSpan")
+						.html("<span style='font-size: 12px;font-family: Microsoft YaHei;'>无</span>");
     		}
     	});
     }

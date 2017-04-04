@@ -7,14 +7,14 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="locked" property="locked" jdbcType="CHAR" />
   </resultMap>
-  <resultMap id="UserPORM" type="userPO"  extends="BaseResultMap">
+  <resultMap id="UserVORM" type="org.hqu.production_ms.domain.vo.UserVO"  extends="BaseResultMap">
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
     <result column="role_id" property="roleId" jdbcType="VARCHAR" />
   </resultMap>
   
   	<!-- 扩展的sql -->
 	<!-- 查询所有记录 -->
-	<select id="find" parameterType="sysUser" resultMap="UserPORM">
+	<select id="find" parameterType="sysUser" resultMap="UserVORM">
 		SELECT
 			sys_user.id,
 			username,
@@ -51,7 +51,7 @@
 		</foreach>
 	</update>
 	
-	<select id="searchUserByUserId" parameterType="string" resultMap="UserPORM">
+	<select id="searchUserByUserId" parameterType="string" resultMap="UserVORM">
 		SELECT
 			sys_user.id,
 			username,
@@ -69,7 +69,7 @@
 				#{userId},'%' ) 
 	</select>
 	
-	<select id="searchUserByUserName" parameterType="string" resultMap="UserPORM">
+	<select id="searchUserByUserName" parameterType="string" resultMap="UserVORM">
 		SELECT
 			sys_user.id,
 			username,
@@ -87,7 +87,7 @@
 				#{userName},'%' ) 
 	</select>
 	
-	<select id="searchUserByRoleName" parameterType="string" resultMap="UserPORM">
+	<select id="searchUserByRoleName" parameterType="string" resultMap="UserVORM">
 		SELECT
 			sys_user.id,
 			username,

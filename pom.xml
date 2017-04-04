@@ -203,7 +203,25 @@
   
   <build>
   	<finalName>${project.artifactId}</finalName>
+	<!--  idea不会编译src的java目录的xml文件,将IDEA maven项目中src源代码下的xml等资源文件编译进classes文件夹 -->
+	<resources>
+	  <resource>
+		  <directory>src/main/java</directory>
+		  <includes>
+			  <include>**/*.xml</include>
+		  </includes>
+	  </resource>
+	</resources>
 	<plugins>
+		<!-- 资源文件拷贝插件 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>2.7</version>
+			<configuration>
+				<encoding>UTF-8</encoding>
+			</configuration>
+		</plugin>
 		<!-- java编译插件 -->
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -215,12 +233,6 @@
 				<encoding>UTF-8</encoding>
 			</configuration>
 		</plugin>
-  		<plugin>
-  			<artifactId>maven-war-plugin</artifactId>
-  			<configuration>
-  				<version>3.0</version>
-  			</configuration>
-  		</plugin>
   	</plugins>
   </build>
 </project>

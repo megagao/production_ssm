@@ -2,7 +2,7 @@ package org.hqu.production_ms.controller;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.vo.COrderVO;
 import org.hqu.production_ms.domain.ProcessMeasureCheck;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
@@ -41,7 +41,7 @@ public class PMeasureCheckController {
 	 */
 	@RequestMapping("/get/{orderId}")
 	@ResponseBody
-	public COrder getItemById(@PathVariable String orderId) throws Exception{
+	public COrderVO getItemById(@PathVariable String orderId) throws Exception{
 		return null;
 	}
 	
@@ -60,19 +60,9 @@ public class PMeasureCheckController {
 		return "p_measure_check_edit";
 	}
 	
-	//搜索
-	@RequestMapping("/search_pMeasureCheck_by_pMeasureCheckId")
-	@ResponseBody
-	public EUDataGridResult searchOrderByOrderId(Integer page, Integer rows, String searchValue)
-			throws Exception{
-		EUDataGridResult result = pMeasureCheckService
-				.searchPMeasureCheckByPMeasureCheckId(page, rows, searchValue);
-		return result;
-	}
-	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, ProcessMeasureCheck processMeasureCheck) 
+	public EUDataGridResult getList(Integer page, Integer rows, ProcessMeasureCheck processMeasureCheck)
 			throws Exception{
 		EUDataGridResult result = pMeasureCheckService.getList(page, rows, processMeasureCheck);
 		return result;
@@ -124,6 +114,15 @@ public class PMeasureCheckController {
 	private CustomResult deleteBatch(String[] ids) throws Exception {
 		System.out.println(ids);
 		CustomResult result = pMeasureCheckService.deleteBatch(ids);
+		return result;
+	}
+
+	//根据工序计量质检id查找
+	@RequestMapping("/search_pMeasureCheck_by_pMeasureCheckId")
+	@ResponseBody
+	public EUDataGridResult searchOrderByOrderId(Integer page, Integer rows, String searchValue) throws Exception{
+		EUDataGridResult result = pMeasureCheckService
+				.searchPMeasureCheckByPMeasureCheckId(page, rows, searchValue);
 		return result;
 	}
 }

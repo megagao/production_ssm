@@ -15,34 +15,41 @@
 	            <td>订购客户:</td>
 	            <td>
 	            	<input id="custom" class="easyui-combobox" name="customId"  panelHeight="auto"
-    					data-options="required:true,valueField:'customId',textField:'customName',url:'custom/get_data', editable:false" />  
+						   data-options="required:true,valueField:'customId',textField:'customName',
+						   url:'custom/get_data', editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>订购产品:</td>
 	            <td>
 	            	<input id="product" class="easyui-combobox" name="productId"  panelHeight="auto" 
-    					data-options="valueField:'productId',textField:'productName',url:'product/get_data', editable:false, required:true" />
+    					data-options="valueField:'productId',textField:'productName',url:'product/get_data',
+    					editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>订购数量:</td>
-	            <td><input class="easyui-numberbox" type="text" name="quantity" data-options="min:1,max:99999999,precision:0,required:true" /></td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="quantity"
+						   data-options="min:1,max:99999999,precision:0,required:true" />
+				</td>
 	        </tr>
 	        <tr>
 	            <td>税前单价:</td>
-	            <td><input class="easyui-numberbox" type="text" name="unitPrice" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td><input class="easyui-numberbox" type="text" name="unitPrice"
+						   data-options="min:1,max:99999999,precision:2,required:true" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>单位:</td>
-	            <td><input  class="easyui-textbox" type="text" name="unit"></input></td>
+	            <td><input  class="easyui-textbox" type="text" name="unit"/></td>
 	        </tr>
 	        <tr>
 	            <td>订单状态:</td>
 	            <td>
-		            <select class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true, width:150, editable:false">
+		            <select class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true,
+		            		width:150, editable:false">
 						<option value="1">未开始</option>
 						<option value="2">已开始</option>
 						<option value="3">已完成</option>

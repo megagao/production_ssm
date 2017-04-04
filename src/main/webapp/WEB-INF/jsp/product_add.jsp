@@ -13,25 +13,26 @@
 	        <tr>
 	            <td>产品编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="productId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="productId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>产品名称:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="productName" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="productName" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>产品种类:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="productType" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="productType" data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>产品状态:</td>
 	            <td>
-		            <select class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true,width:150, editable:false">
+		            <select class="easyui-combobox" name="status" panelHeight="auto" data-options="required:true,
+		            		width:150, editable:false">
 						<option value="1">有效产品</option>
 						<option value="2">停产</option>
 					</select>

@@ -2,10 +2,10 @@ package org.hqu.production_ms.controller;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.UserPO;
+import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +59,7 @@ public class UserController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid UserPO user, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid SysUser user, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -76,7 +76,7 @@ public class UserController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid UserPO user, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid SysUser user, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -86,7 +86,7 @@ public class UserController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid UserPO user, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid SysUser user, BindingResult bindingResult) throws Exception {
 		CustomResult result; 
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -121,7 +121,7 @@ public class UserController {
 		return result;
 	}
 	
-	//搜索
+	//根据用户id查找
 	@RequestMapping("/search_user_by_userId")
 	@ResponseBody
 	public EUDataGridResult searchUserByUserId(Integer page, Integer rows, String searchValue) 
@@ -130,7 +130,7 @@ public class UserController {
 		return result;
 	}
 	
-	//搜索
+	//根据用户名查找
 	@RequestMapping("/search_user_by_userName")
 	@ResponseBody
 	public EUDataGridResult searchUserByUserName(Integer page, Integer rows, String searchValue) 
@@ -139,7 +139,7 @@ public class UserController {
 		return result;
 	}
 	
-	//搜索
+	//搜根据角色名查找
 	@RequestMapping("/search_user_by_roleName")
 	@ResponseBody
 	public EUDataGridResult searchUserByRoleName(Integer page, Integer rows, String searchValue) 

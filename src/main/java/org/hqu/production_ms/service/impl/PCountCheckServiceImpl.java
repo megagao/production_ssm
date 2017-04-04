@@ -5,7 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.ProcessCountCheck;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.ProcessCountCheckPO;
+import org.hqu.production_ms.domain.vo.ProcessCountCheckVO;
 import org.hqu.production_ms.mapper.ProcessCountCheckMapper;
 import org.hqu.production_ms.service.PCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +24,12 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 	public EUDataGridResult getList(int page, int rows, ProcessCountCheck processCountCheck) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessCountCheckPO> list = processCountCheckMapper.find(processCountCheck);
+		List<ProcessCountCheckVO> list = processCountCheckMapper.find(processCountCheck);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessCountCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessCountCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -80,12 +80,12 @@ public class PCountCheckServiceImpl implements PCountCheckService{
 			int rows, String pCountCheckId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<ProcessCountCheckPO> list = processCountCheckMapper.searchPCountCheckByPCountCheckId(pCountCheckId);
+		List<ProcessCountCheckVO> list = processCountCheckMapper.searchPCountCheckByPCountCheckId(pCountCheckId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<ProcessCountCheckPO> pageInfo = new PageInfo<>(list);
+		PageInfo<ProcessCountCheckVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

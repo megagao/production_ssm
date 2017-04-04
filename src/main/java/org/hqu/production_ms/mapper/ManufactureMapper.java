@@ -3,24 +3,24 @@ package org.hqu.production_ms.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.hqu.production_ms.domain.Manufacture;
+import org.hqu.production_ms.domain.vo.ManufactureVO;
 import org.hqu.production_ms.domain.ManufactureExample;
-import org.hqu.production_ms.domain.po.ManufacturePO;
+import org.hqu.production_ms.domain.Manufacture;
 
 public interface ManufactureMapper {
 	
 	//扩展的mapper接口方法
-	List<Manufacture> find();
+	List<ManufactureVO> find();
 	
 	int deleteBatch(String[] ids);
 	
-	List<Manufacture> searchManufactureByManufactureSn(String manufactureSn);
+	List<ManufactureVO> searchManufactureByManufactureSn(String manufactureSn);
 
-	List<Manufacture> searchManufactureByManufactureOrderId(
-			String manufactureOrderId);
+	List<ManufactureVO> searchManufactureByManufactureOrderId(
+            String manufactureOrderId);
 
-	List<Manufacture> searchManufactureByManufactureTechnologyName(
-			String manufactureTechnologyName);
+	List<ManufactureVO> searchManufactureByManufactureTechnologyName(
+            String manufactureTechnologyName);
 	
 	//逆向工程生成的mapper接口
     int countByExample(ManufactureExample example);
@@ -29,9 +29,9 @@ public interface ManufactureMapper {
 
     int deleteByPrimaryKey(String manufactureSn);
 
-    int insert(ManufacturePO record);
+    int insert(Manufacture record);
 
-    int insertSelective(ManufacturePO record);
+    int insertSelective(Manufacture record);
 
     List<Manufacture> selectByExample(ManufactureExample example);
 
@@ -41,7 +41,7 @@ public interface ManufactureMapper {
 
     int updateByExample(@Param("record") Manufacture record, @Param("example") ManufactureExample example);
 
-    int updateByPrimaryKeySelective(ManufacturePO record);
+    int updateByPrimaryKeySelective(Manufacture record);
 
-    int updateByPrimaryKey(ManufacturePO record);
+    int updateByPrimaryKey(Manufacture record);
 }

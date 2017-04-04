@@ -8,7 +8,8 @@
 	        <tr>
 	            <td>工艺要求编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="technologyRequirementId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="technologyRequirementId"
+						   data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -23,13 +24,15 @@
 	        <tr>
 	            <td>工艺要求添加时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="addTime" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
+	            	<input class="easyui-datetimebox" type="text" name="addTime"
+						   value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺要求修改时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="reviseTime" value="date.format('yyyy-MM-dd hh:mm:ss')"></input>
+	            	<input class="easyui-datetimebox" type="text" name="reviseTime"
+						   value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>
 	         <tr>
@@ -51,7 +54,8 @@
 	//页面初始化完毕后执行此方法
 	$(function(){
 		//创建富文本编辑器
-		technologyRequirementAddEditor = KindEditor.create("#technologyRequirementAddForm [name=requirement]", TT.kingEditorParams);
+		technologyRequirementAddEditor = KindEditor.create("#technologyRequirementAddForm [name=requirement]",
+				TT.kingEditorParams);
 	});
 	
 	//提交表单

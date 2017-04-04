@@ -2,13 +2,13 @@ package org.hqu.production_ms.service.impl;
 
 import java.util.List;
 
-import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.authority.SysUserExample;
 import org.hqu.production_ms.domain.authority.SysUserRole;
 import org.hqu.production_ms.domain.authority.SysUserRoleExample;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.UserPO;
+import org.hqu.production_ms.domain.authority.SysUser;
 import org.hqu.production_ms.mapper.authority.SysUserMapper;
 import org.hqu.production_ms.mapper.authority.SysUserRoleMapper;
 import org.hqu.production_ms.service.UserService;
@@ -33,12 +33,12 @@ public class UserServiceImpl implements UserService{
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UserPO> list = sysUserMapper.find(sysUser);
+		List<SysUser> list = sysUserMapper.find(sysUser);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UserPO> pageInfo = new PageInfo<>(list);
+		PageInfo<SysUser> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public CustomResult insert(UserPO userPO) throws Exception{
+	public CustomResult insert(SysUser userPO) throws Exception{
 		//在业务层整合处理
 		SysUserRole sysUserRole = new SysUserRole();
 		//补全字段
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public CustomResult update(UserPO userPO) throws Exception{
+	public CustomResult update(SysUser userPO) throws Exception{
 		int i = sysUserMapper.updateByPrimaryKeySelective(userPO);
 		if(i>0){
 			return CustomResult.build(200, "修改用户信息成功");
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public CustomResult updateAll(UserPO userPO) throws Exception{
+	public CustomResult updateAll(SysUser userPO) throws Exception{
 		//在业务层整合处理
 		SysUserRole sysUserRole = new SysUserRole();
 		//补全字段
@@ -162,12 +162,12 @@ public class UserServiceImpl implements UserService{
 			String userId) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UserPO> list = sysUserMapper.searchUserByUserId(userId);
+		List<SysUser> list = sysUserMapper.searchUserByUserId(userId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UserPO> pageInfo = new PageInfo<>(list);
+		PageInfo<SysUser> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -177,12 +177,12 @@ public class UserServiceImpl implements UserService{
 			String userName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UserPO> list = sysUserMapper.searchUserByUserName(userName);
+		List<SysUser> list = sysUserMapper.searchUserByUserName(userName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UserPO> pageInfo = new PageInfo<>(list);
+		PageInfo<SysUser> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -192,12 +192,12 @@ public class UserServiceImpl implements UserService{
 			String roleName) throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<UserPO> list = sysUserMapper.searchUserByRoleName(roleName);
+		List<SysUser> list = sysUserMapper.searchUserByRoleName(roleName);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<UserPO> pageInfo = new PageInfo<>(list);
+		PageInfo<SysUser> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

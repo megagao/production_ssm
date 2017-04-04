@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hqu.production_ms.mapper.authority.SysRoleMapper" >
-  <resultMap id="BaseResultMap" type="sysRole" >
+  <resultMap id="BaseResultMap" type="org.hqu.production_ms.domain.vo.RoleVO" >
     <id column="role_id" property="roleId" jdbcType="VARCHAR" />
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
     <result column="available" property="available" jdbcType="CHAR" />

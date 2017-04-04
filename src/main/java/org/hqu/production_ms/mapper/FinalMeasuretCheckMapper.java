@@ -5,20 +5,20 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.FinalMeasuretCheck;
 import org.hqu.production_ms.domain.FinalMeasuretCheckExample;
-import org.hqu.production_ms.domain.po.FinalMeasuretCheckPO;
+import org.hqu.production_ms.domain.vo.FinalMeasuretCheckVO;
 
 public interface FinalMeasuretCheckMapper {
 	
 	//扩展的mapper接口方法
-	List<FinalMeasuretCheckPO> find(FinalMeasuretCheck finalMeasuretCheck);
+	List<FinalMeasuretCheckVO> find(FinalMeasuretCheck finalMeasuretCheck);
 	
 	int updateNote(FinalMeasuretCheck finalMeasuretCheck);
 	
 	int deleteBatch(String[] ids);
 
-	List<FinalMeasuretCheckPO> searchFMeasureCheckByOrderId(String orderId);
+	List<FinalMeasuretCheckVO> searchFMeasureCheckByOrderId(String orderId);
 	
-	List<FinalMeasuretCheckPO> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
+	List<FinalMeasuretCheckVO> searchFMeasureCheckByFMeasureCheckId(String finalMeasuretCheckId);
 	
 	//逆向工程生成的mapper接口
     int countByExample(FinalMeasuretCheckExample example);

@@ -25,13 +25,13 @@
 	        <tr>
 	            <td>例检时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox"  name="deviceCheckDate" ></input>
+	            	<input class="easyui-datetimebox"  name="deviceCheckDate" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>例检故障编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" name="deviceCheckFaultId"></input>
+	            	<input class="easyui-textbox" name="deviceCheckFaultId"/>
 	            </td>
 	        </tr>
 	        <tr>

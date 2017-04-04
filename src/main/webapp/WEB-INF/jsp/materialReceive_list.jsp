@@ -3,15 +3,18 @@
 <link href="js/kindeditor-4.1.10/themes/default/default.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
-<table class="easyui-datagrid" id="materialReceiveList" title="物料收入列表" 
-       data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,url:'materialReceive/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_materialReceive">
+<table class="easyui-datagrid" id="materialReceiveList" title="物料收入列表" data-options="singleSelect:false,
+		collapsible:true,pagination:true,rownumbers:true,url:'materialReceive/list',method:'get',pageSize:10,
+		fitColumns:true,toolbar:toolbar_materialReceive">
     <thead>
          <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'receiveId',align:'center',width:100">物料收入编号</th>
             <th data-options="field:'material',width:100,align:'center',formatter:formatMaterial">物料</th>
             <th data-options="field:'ammount',align:'center',width:100">收入数量</th>
-            <th data-options="field:'receiveDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">收入日期</th>
+            <th data-options="field:'receiveDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				收入日期
+			</th>
             <th data-options="field:'sender',align:'center',width:100">发送者</th>
             <th data-options="field:'receiver',align:'center',width:100">接收者</th>
             <th data-options="field:'note',width:100,align:'center', formatter:formatMaterialReceiveNote">备注</th>        
@@ -24,17 +27,23 @@
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='materialReceive:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="materialReceive_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="materialReceive_add()">
+					新增
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='materialReceive:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="materialReceive_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="materialReceive_edit()">
+					编辑
+				</a>
 		    </div>  
 		</c:if>
 		<c:if test="${per=='materialReceive:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="materialReceive_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="materialReceive_delete()">
+					删除
+				</a>
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -42,7 +51,9 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="materialReceive_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="materialReceive_reload()">
+			刷新
+		</a>
 	</div>  
 	
     <div id="search_materialReceive" style="float: right;">
@@ -58,11 +69,14 @@
 
 </div>  
 
-<div id="materialReceiveEditWindow" class="easyui-window" title="编辑物料收入" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialReceive/edit'" style="width:65%;height:75%;padding:10px;">
+<div id="materialReceiveEditWindow" class="easyui-window" title="编辑物料收入" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'materialReceive/edit'" style="width:65%;height:75%;padding:10px;">
 </div>
-<div id="materialReceiveAddWindow" class="easyui-window" title="添加物料收入" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save',href:'materialReceive/add'" style="width:65%;height:75%;padding:10px;">
+<div id="materialReceiveAddWindow" class="easyui-window" title="添加物料收入" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'materialReceive/add'" style="width:65%;height:75%;padding:10px;">
 </div>
-<div id="materialReceiveNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="materialReceiveNoteDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="materialReceiveNoteForm" class="itemForm" method="post">
 		<input type="hidden" name="receiveId"/>
 	    <table cellpadding="10" >
@@ -79,20 +93,22 @@
 	</div>
 </div>
 
-<div id="materialInfo" class="easyui-dialog" title="物料信息" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
+<div id="materialInfo" class="easyui-dialog" title="物料信息" data-options="modal:true,closed:true,resizable:true,
+		iconCls:'icon-save'" style="width:65%;height:65%;padding:10px;">
 	<form id="materialReceiveMaterialEditForm" method="post">
 		<input type="hidden" name="materialId"/>
 	    <table cellpadding="5">
 	          <tr>
 	            <td>物料类型:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 280px;"></input>
+	            	<input class="easyui-textbox" type="text" name="materialType" style="width: 280px;"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>物料状态:</td>
 	            <td>
-		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150, editable:false">
+		            <select id="cc" class="easyui-combobox" name="status" style="width:200px;" data-options="width:150,
+		            		editable:false">
 						<option value="充足">充足</option>
 						<option value="正常">正常</option>
 						<option value="短缺">短缺</option>
@@ -102,7 +118,7 @@
 	        <tr>
 	            <td>剩余数量:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="remaining"></input>
+	            	<input class="easyui-textbox" type="text" name="remaining"/>
 	            </td>
 	        </tr>
 	        
@@ -125,32 +141,34 @@
 function doSearch_materialReceive(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#materialReceiveList").datagrid({
-	        title:'物料收入列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_materialReceive", url:'materialReceive/list', method:'get', loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'物料收入列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_materialReceive", url:'materialReceive/list', method:'get',
+			loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 	       
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'receiveId', width : 100, title : '物料收入编号', align:'center'},
-	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
-	             	{field : 'ammount', width : 100, align : 'center', title : '收入数量'}, 
-	             	{field : 'receiveDate', width : 130, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'sender', width : 100, title : '发送者', align:'center'}, 
-	            	{field : 'receiver', width : 100, title : '接收者', align:'center'}, 	           
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialReceiveNote}	            	
+				{field : 'ck', checkbox:true },
+				{field : 'receiveId', width : 100, title : '物料收入编号', align:'center'},
+				{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
+				{field : 'ammount', width : 100, align : 'center', title : '收入数量'},
+				{field : 'receiveDate', width : 130, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime},
+				{field : 'sender', width : 100, title : '发送者', align:'center'},
+				{field : 'receiver', width : 100, title : '接收者', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialReceiveNote}
 	        ] ],  
 	    });
 	}else{
 		$("#materialReceiveList").datagrid({  
-	        title:'物料收入列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_materialReceive", url:'materialReceive/search_materialReceive_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'物料收入列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_materialReceive", url:'materialReceive/search_materialReceive_by_'
+			+name+'?searchValue='+value, loadMsg:'数据加载中......',  fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'receiveId', width : 100, title : '物料收入编号', align:'center'},
-	             	{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
-	             	{field : 'ammount', width : 100, align : 'center', title : '收入数量'}, 
-	             	{field : 'receiveDate', width : 130, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'sender', width : 100, title : '发送者', align:'center'}, 
-	            	{field : 'receiver', width : 100, title : '接收者', align:'center'}, 	           
-	             	{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialReceiveNote}	
+				{field : 'ck', checkbox:true },
+				{field : 'receiveId', width : 100, title : '物料收入编号', align:'center'},
+				{field : 'material', width : 100, align : 'center', title : '物料', formatter:formatMaterial},
+				{field : 'ammount', width : 100, align : 'center', title : '收入数量'},
+				{field : 'receiveDate', width : 130, title : '收入日期', align:'center',formatter:TAOTAO.formatDateTime},
+				{field : 'sender', width : 100, title : '发送者', align:'center'},
+				{field : 'receiver', width : 100, title : '接收者', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center', formatter:formatMaterialReceiveNote}
 	        ] ],  
 	    });
 	}

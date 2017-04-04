@@ -7,6 +7,6 @@
 <title>错误信息</title>
 </head>
 <body>
-<span style="font-size:20px; font-weight:bold">${message}</span>  
+<span style="font-size:18px; font-weight:bold">${message}</span>
 </body>
 </html>

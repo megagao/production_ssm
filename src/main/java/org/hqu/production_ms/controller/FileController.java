@@ -67,15 +67,10 @@ public class FileController {
 	}
 	
 	@RequestMapping(value="/file/download")
-	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response) 
-			throws Exception{
-		
+	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response) throws Exception{
 		fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-		
 		String filePath = "D:\\upload\\temp\\file\\"+fileName;
-		
 		DownloadUtil du = new DownloadUtil();
-		
 		du.download(filePath, fileName, response, false);
 	}
 }

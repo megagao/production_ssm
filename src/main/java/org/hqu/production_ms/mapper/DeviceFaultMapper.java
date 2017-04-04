@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.hqu.production_ms.domain.DeviceFault;
 import org.hqu.production_ms.domain.DeviceFaultExample;
-import org.hqu.production_ms.domain.po.DeviceFaultPO;
+import org.hqu.production_ms.domain.vo.DeviceFaultVO;
 
 public interface DeviceFaultMapper {
 	//扩展的mapper接口方法
-	List<DeviceFaultPO> find(DeviceFault deviceFault);
+	List<DeviceFaultVO> find(DeviceFault deviceFault);
 		
 	List<DeviceFault> getData();
 	

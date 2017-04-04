@@ -5,7 +5,7 @@ import java.util.List;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.MaterialReceive;
-import org.hqu.production_ms.domain.po.MaterialReceivePO;
+import org.hqu.production_ms.domain.vo.MaterialReceiveVO;
 import org.hqu.production_ms.mapper.MaterialReceiveMapper;
 import org.hqu.production_ms.service.MaterialReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 		
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialReceive> list = materialReceiveMapper.find();
+		List<MaterialReceiveVO> list = materialReceiveMapper.find();
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialReceive> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialReceiveVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}
@@ -64,7 +64,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult insert(MaterialReceivePO materialReceive) throws Exception{
+	public CustomResult insert(MaterialReceive materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.insert(materialReceive);
 		if(i>0){
@@ -75,7 +75,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult update(MaterialReceivePO materialReceive) throws Exception{
+	public CustomResult update(MaterialReceive materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.updateByPrimaryKeySelective(materialReceive);
 		if(i>0){
@@ -86,7 +86,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult updateAll(MaterialReceivePO materialReceive) throws Exception{
+	public CustomResult updateAll(MaterialReceive materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.updateByPrimaryKey(materialReceive);
 		if(i>0){
@@ -97,7 +97,7 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 	}
 
 	@Override
-	public CustomResult updateNote(MaterialReceivePO materialReceive) throws Exception{
+	public CustomResult updateNote(MaterialReceive materialReceive) throws Exception{
 		// TODO Auto-generated method stub
 		int i = materialReceiveMapper.updateNote(materialReceive);
 		if(i>0){
@@ -112,12 +112,12 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 			throws Exception{
         //分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialReceive> list = materialReceiveMapper.searchMaterialReceiveByReceiveId(receiveId);
+		List<MaterialReceiveVO> list = materialReceiveMapper.searchMaterialReceiveByReceiveId(receiveId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialReceive> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialReceiveVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	 }
@@ -127,12 +127,12 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
 			throws Exception{
 		//分页处理
 		PageHelper.startPage(page, rows);
-		List<MaterialReceive> list = materialReceiveMapper.searchMaterialReceiveByMaterialId(materialId);
+		List<MaterialReceiveVO> list = materialReceiveMapper.searchMaterialReceiveByMaterialId(materialId);
 		//创建一个返回值对象
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
 		//取记录总条数
-		PageInfo<MaterialReceive> pageInfo = new PageInfo<>(list);
+		PageInfo<MaterialReceiveVO> pageInfo = new PageInfo<>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;
 	}

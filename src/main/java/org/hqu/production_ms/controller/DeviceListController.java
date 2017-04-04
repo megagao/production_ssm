@@ -31,7 +31,6 @@ public class DeviceListController {
 		return result;
 	}
 	
-	
 	@RequestMapping("/get/{deviceId}")
 	@ResponseBody
 	public Device getItemById(@PathVariable String deviceId) throws Exception{
@@ -111,8 +110,7 @@ public class DeviceListController {
 	//根据设备编号查找设备
 	@RequestMapping("/search_device_by_deviceId")
 	@ResponseBody
-	public EUDataGridResult searchDeviceByDeviceId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchDeviceByDeviceId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = deviceService.searchDeviceByDeviceId(page, rows, searchValue);
 		return result;
 	}
@@ -120,8 +118,7 @@ public class DeviceListController {
 	//根据设备名称查找设备
 	@RequestMapping("/search_device_by_deviceName")
 	@ResponseBody
-	public EUDataGridResult searchDeviceByDeviceName(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchDeviceByDeviceName(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = deviceService.searchDeviceByDeviceName(page, rows, searchValue);
 		return result;
 	}
@@ -129,7 +126,7 @@ public class DeviceListController {
 	//根据设备种类名称查找设备
 	@RequestMapping("/search_device_by_deviceTypeName")
 	@ResponseBody
-	public EUDataGridResult searchDeviceByDeviceTypeName(Integer page, Integer rows, String searchValue) 
+	public EUDataGridResult searchDeviceByDeviceTypeName(Integer page, Integer rows, String searchValue)
 			throws Exception{
 		EUDataGridResult result = deviceService.searchDeviceByDeviceTypeName(page, rows, searchValue);
 		return result;

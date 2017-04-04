@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  /**
   * created on 2016年9月6日 
   *
-  * 登陆和退出
+  * 登录和退出
   *
   * @author  megagao
   * @version  0.0.1

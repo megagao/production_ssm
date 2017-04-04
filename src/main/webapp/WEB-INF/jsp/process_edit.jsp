@@ -10,26 +10,29 @@
 	            <td>工艺计划编号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="technologyPlanId" panelHeight="auto"  
-    					data-options="required:true,valueField:'technologyPlanId',textField:'technologyPlanId',url:'technologyPlan/get_data',editable:false" /> 
+    					data-options="required:true,valueField:'technologyPlanId',textField:'technologyPlanId',
+    					url:'technologyPlan/get_data',editable:false" />
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工序顺序:</td>
 	            <td>
-	            	<input class="easyui-numberbox" name="sequence" data-options="min:1,max:99999999,precision:0"> </td>
+	            	<input class="easyui-numberbox" name="sequence" data-options="min:1,max:99999999,precision:0">
 	            </td>
 	        </tr>
 	          
 	        <tr>
 	            <td>单件定额工时:</td>
 	            <td>
-	            	<input class="easyui-numberbox" name="quota" data-options="min:1,max:99999999,precision:0"></input>
+	            	<input class="easyui-numberbox" name="quota" data-options="min:1,max:99999999,precision:0"/>
 	            </td>
 	        </tr>
 	    </table>
 	</form>
 	<div style="padding-top:20px;">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitProcessEditForm()">&nbsp;&nbsp;提交&nbsp;&nbsp;</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitProcessEditForm()">
+			&nbsp;&nbsp;提交&nbsp;&nbsp;
+		</a>
 	</div>
 </div>
 

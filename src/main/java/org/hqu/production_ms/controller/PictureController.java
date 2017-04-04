@@ -39,7 +39,6 @@ public class PictureController {
 	@RequestMapping("/pic/delete")
 	@ResponseBody
 	public String pictureDelete(@RequestParam String picName) throws Exception{
-		
 		pictureService.deleteFile(picName);
 		Map<String,Object> result = new HashMap<String,Object>();	
 		result.put("data", "success");

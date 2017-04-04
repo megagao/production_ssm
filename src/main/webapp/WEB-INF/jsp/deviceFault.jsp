@@ -12,11 +12,14 @@
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
         	<th data-options="field:'deviceFaultId',width:100,align:'center'">故障编号</th>
-            <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceFault">设备名称</th>
-            <th data-options="field:'deviceFaultDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">故障日期</th>
+            <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceFault">
+				设备名称</th>
+            <th data-options="field:'deviceFaultDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
+				故障日期</th>
             <th data-options="field:'deviceFaultCause',width:100,align:'center'">故障原因</th>
             <th data-options="field:'deviceFaultMaintenance',width:100,align:'center'">维修方式</th>
-            <th data-options="field:'deviceFaultDetail',width:100,align:'center',formatter:formatDeviceFaultDetail">故障描述</th>
+            <th data-options="field:'deviceFaultDetail',width:100,align:'center',formatter:formatDeviceFaultDetail">
+				故障描述</th>
         </tr>
     </thead>
 </table>
@@ -79,21 +82,23 @@
 	    <table cellpadding="5">
 	        <tr>
 	           	<td>设备编号:</td>
-	           	<td><input class="easyui-textbox" name="deviceId" data-options="editable:false"></input></td>
+	           	<td><input class="easyui-textbox" name="deviceId" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备名称:</td>
-	            <td><input class="easyui-textbox" name="deviceName" data-options="editable:false"></input></td>
+	            <td><input class="easyui-textbox" name="deviceName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
 	            <td>设备种类:</td>
 	            <td><input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto" value="01"
-    					data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',url:'deviceType/get_data'" /></td>
+    					data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',
+    					url:'deviceType/get_data'" /></td>
 	        </tr>
 	        <tr>
 	            <td>设备状态:</td>
 	            <td>
-	            	<select class="easyui-combobox" name="deviceStatusId" panelHeight="auto" data-options="required:true" style="width:173px">
+	            	<select class="easyui-combobox" name="deviceStatusId" panelHeight="auto"
+							data-options="required:true" style="width:173px">
 						<option value="1" selected="selected">良好</option>
 						<option value="2">故障</option>
 						<option value="3">维修</option>
@@ -102,24 +107,25 @@
 	        </tr>
 	        <tr>
 	            <td>设备购买日期:</td>
-	            <td><input class="easyui-datetimebox" name="devicePurchaseDate"></input></td>
+	            <td><input class="easyui-datetimebox" name="devicePurchaseDate"/></td>
 	        </tr>
 	        <tr>
 	            <td>购买价格:</td>
-	            <td><input class="easyui-numberbox" name="devicePurchasePrice"></input></td>
+	            <td><input class="easyui-numberbox" name="devicePurchasePrice"/></td>
 	        </tr>
 	        <tr>
 	            <td>出厂日期:</td>
-	            <td><input class="easyui-datetimebox" name="deviceManufactureDate" ></input></td>
+	            <td><input class="easyui-datetimebox" name="deviceManufactureDate"/></td>
 	        </tr>
 	        <tr>
 	            <td>使用年限:</td>
-	            <td><input class="easyui-datetimebox" name="deviceServiceLife" ></input></td>
+	            <td><input class="easyui-datetimebox" name="deviceServiceLife"/></td>
 	        </tr>
 	        <tr>
 	            <td>保管人:</td>
-	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto" value="001"
-    					data-options="required:true,editable:false,valueField:'deviceKeeperId',textField:'deviceKeeper',url:'deviceFault/get_data'" /></input></td>
+	            <td><input id="deviceKeeper" class="easyui-combobox" name="deviceKeeperId" panelHeight="auto"
+						   value="001" data-options="required:true,editable:false,valueField:'deviceKeeperId',
+						   textField:'deviceKeeper',url:'deviceFault/get_data'"/></td>
 	        </tr>
 	        <tr>
 	            <td>备注:</td>
@@ -135,7 +141,8 @@
 </div>
 
 <!-- 设备故障原因-->
-<div id="deviceFaultDetailDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
+<div id="deviceFaultDetailDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,
+		resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceFaultDetailForm" class="itemForm" method="post">
 	    <input type="hidden" name="deviceFaultId"/>
 	    <table cellpadding="5" >
@@ -157,30 +164,38 @@
 function doSearch_deviceFault(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#deviceFault").datagrid({
-	        title:'设备故障列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceFault", url:'deviceFault/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备故障列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+				nowrap:true, toolbar:"toolbar_deviceFault", url:'deviceFault/list', method:'get',
+				loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'deviceFaultId', width : 100, align:'center', title : '故障编号'},
-	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称',formatter:formatDevice_deviceFault},
-	             	{field : 'deviceFaultDate', width : 130, align : 'center', title : '故障日期', formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'deviceFaultCause', width : 100, title : '故障原因', align:'center'}, 
-	             	{field : 'deviceFaultMaintenance', width : 100, title : '维修方式', align:'center'}, 
-	            	{field : 'deviceFaultDetail', width : 100, title : '故障描述', align:'center',formatter:formatDeviceFaultDetail}
+				{field : 'ck', checkbox:true },
+				{field : 'deviceFaultId', width : 100, align:'center', title : '故障编号'},
+				{field : 'deviceName', width : 100, align : 'center', title : '设备名称',
+					formatter:formatDevice_deviceFault},
+				{field : 'deviceFaultDate', width : 130, align : 'center', title : '故障日期',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'deviceFaultCause', width : 100, title : '故障原因', align:'center'},
+				{field : 'deviceFaultMaintenance', width : 100, title : '维修方式', align:'center'},
+				{field : 'deviceFaultDetail', width : 100, title : '故障描述', align:'center',
+					formatter:formatDeviceFaultDetail}
 	        ] ],  
 	    });
 	}else{
 		$("#deviceFault").datagrid({  
-	        title:'设备故障列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceFault", url:'deviceFault/search_deviceFault_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备故障列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+				nowrap:true, toolbar:"toolbar_deviceFault", url:'deviceFault/search_deviceFault_by_'+name
+				+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'deviceFaultId', width : 100, align:'center', title : '故障编号'},
-					{field : 'deviceName', width : 100, align : 'center', title : '设备名称',formatter:formatDevice_deviceFault},
-					{field : 'deviceFaultDate', width : 130, align : 'center', title : '故障日期', formatter:TAOTAO.formatDateTime}, 
-					{field : 'deviceFaultCause', width : 100, title : '故障原因', align:'center'}, 
-					{field : 'deviceFaultMaintenance', width : 100, title : '维修方式', align:'center'}, 
-					{field : 'deviceFaultDetail', width : 100, title : '故障描述', align:'center',formatter:formatDeviceFaultDetail}
+				{field : 'ck', checkbox:true },
+				{field : 'deviceFaultId', width : 100, align:'center', title : '故障编号'},
+				{field : 'deviceName', width : 100, align : 'center', title : '设备名称',
+					formatter:formatDevice_deviceFault},
+				{field : 'deviceFaultDate', width : 130, align : 'center', title : '故障日期',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'deviceFaultCause', width : 100, title : '故障原因', align:'center'},
+				{field : 'deviceFaultMaintenance', width : 100, title : '维修方式', align:'center'},
+				{field : 'deviceFaultDetail', width : 100, title : '故障描述', align:'center',
+					formatter:formatDeviceFaultDetail}
 	        ] ],  
 	    });
 	}

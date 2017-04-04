@@ -69,7 +69,7 @@ public class MaterialController {
 			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
 		if(materialService.get(material.getMaterialId()) != null){
-			result = new CustomResult(0, "该产品编号已经存在，请更换产品编号！", null);
+			result = new CustomResult(0, "该物料编号已经存在，请更换物料编号！", null);
 		}else{
 			result = materialService.insert(material);
 		}
@@ -120,7 +120,7 @@ public class MaterialController {
 		return result;
 	}
 	
-	//搜索
+	//根据物料id查找
 	@RequestMapping("/search_material_by_materialId")
 	@ResponseBody
 	public EUDataGridResult searchMaterialByMaterialId(Integer page, Integer rows, String searchValue) 
@@ -129,7 +129,7 @@ public class MaterialController {
 		return result;
 	}
 	
-	//搜索
+	//根据物料类型查找
 	@RequestMapping("/search_material_by_materialType")
 	@ResponseBody
 	public EUDataGridResult searchMaterialByMaterialType(Integer page, Integer rows, String searchValue) 

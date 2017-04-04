@@ -69,13 +69,13 @@
 </div>
 
 <!-- deviceMaintainAddWindow -->
-<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,
-	closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceMaintainAddWindow" class="easyui-window" title="添加设备维修" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'deviceMaintain/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceMaintainEditWindow -->
-<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,
-	closed:true,resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="deviceMaintainEditWindow" class="easyui-window" title="编辑设备维修" data-options="modal:true,closed:true,
+	resizable:true,iconCls:'icon-save',href:'deviceMaintain/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- 设备故障信息 -->
@@ -86,7 +86,7 @@
 	        <tr>
 	            <td>故障编号:</td>
 	            <td>
-	            	<input class="easyui-textbox"  name="deviceFaultId" data-options="editable:false"></input>
+	            	<input class="easyui-textbox"  name="deviceFaultId" data-options="editable:false"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -100,19 +100,19 @@
 	        <tr>
 	            <td>故障日期:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="deviceFaultDate" ></input>
+	            	<input class="easyui-datetimebox" name="deviceFaultDate"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>故障原因:</td>
 	            <td>
-	            	<input class="easyui-textbox"  name="deviceFaultCause"></input>
+	            	<input class="easyui-textbox"  name="deviceFaultCause"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>维修方式:</td>
 	            <td>
-	            	<input class="easyui-textbox" name="deviceFaultMaintenance"></input>
+	            	<input class="easyui-textbox" name="deviceFaultMaintenance"/>
 	            </td>
 	        </tr>
 	        <tr>
@@ -153,32 +153,38 @@
 function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#deviceMaintain").datagrid({
-	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/list', method:'get', loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/list', method:'get',
+			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
-	             	{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',formatter:formatDeviceFault_deviceMaintain},
-	             	{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'}, 
-	             	{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-	             	{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'}, 
-	            	{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'}, 
-	             	{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote} 
+				{field : 'ck', checkbox:true },
+				{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
+				{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',
+					formatter:formatDeviceFault_deviceMaintain},
+				{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'},
+				{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'},
+				{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote}
 	        ] ],  
 	    });
 	}else{
 		$("#deviceMaintain").datagrid({  
-	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', nowrap:true,  
-	        toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/search_deviceMaintain_by_'+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
+	        title:'设备维修列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_deviceMaintain", url:'deviceMaintain/search_deviceMaintain_by_'
+			+name+'?searchValue='+value, loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
-					{field : 'ck', checkbox:true }, 
-					{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
-					{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',formatter:formatDeviceFault_deviceMaintain},
-					{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'}, 
-					{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',formatter:TAOTAO.formatDateTime}, 
-					{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'}, 
-					{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'}, 
-					{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote} 
+				{field : 'ck', checkbox:true },
+				{field : 'deviceMaintainId', width : 100, align:'center', title : '维修编号'},
+				{field : 'deviceFaultId', width : 100, align : 'center', title : '故障编号',
+					formatter:formatDeviceFault_deviceMaintain},
+				{field : 'deviceMaintainEmp', width : 100, align : 'center', title : '维修人'},
+				{field : 'deviceMaintainDate', width : 100, title : '维修日期', align:'center',
+					formatter:TAOTAO.formatDateTime},
+				{field : 'deviceMaintainResult', width : 100, title : '维修结果', align:'center'},
+				{field : 'deviceMaintainCost', width : 100, title : '维修费用', align:'center'},
+				{field : 'note', width : 100, title : '备注', align:'center',formatter:formatDeviceMaintainNote}
 	        ] ],  
 	    });
 	}
@@ -296,7 +302,8 @@ function doSearch_deviceMaintain(value,name){ //用户输入用户名,点击搜�
     		onOpen :function(){
     			$.get("deviceFault/get/"+row.deviceFaultId,'',function(data){
 		    		//回显数据
-		    		noteEditor_device_deviceMaintain = TAOTAO.createEditor("#deviceFaultEditForm_deviceMaintain [name=deviceFaultDetail]");
+		    		noteEditor_device_deviceMaintain =
+							TAOTAO.createEditor("#deviceFaultEditForm_deviceMaintain [name=deviceFaultDetail]");
 		    		
 		    		data.deviceFaultDate = TAOTAO.formatDateTime(data.deviceFaultDate);
 		    		$("#deviceFaultInfo_deviceMaintain").form("load", data);

@@ -13,13 +13,13 @@
 	        <tr>
 	            <td>用户名:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="username" ></input>
+	            	<input class="easyui-textbox" type="text" name="username"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>密码:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="password" ></input>
+	            	<input class="easyui-textbox" type="text" name="password"/>
 	            </td>
 	        </tr>
 	        <tr>

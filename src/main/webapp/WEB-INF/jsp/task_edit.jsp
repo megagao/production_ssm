@@ -23,20 +23,20 @@
 	            <td>生产批号:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="manufactureSn"   panelHeight="auto"
-    					data-options="valueField:'manufactureSn',textField:'manufactureSn',url:'manufacture/get_data', 
-    						editable:false, required:true" />
+    						data-options="valueField:'manufactureSn',textField:'manufactureSn',
+    						url:'manufacture/get_data', editable:false, required:true" />
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>派工数量:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="taskQuantity"></input>
+	            	<input class="easyui-numberbox" type="text" name="taskQuantity"/>
     			</td>  
 	        </tr>
 	        <tr>
 	            <td>派工工时:</td>
 	            <td>
-	            	<input class="easyui-numberbox" type="text" name="workingHours"></input>
+	            	<input class="easyui-numberbox" type="text" name="workingHours"/>
     			</td>  
 	        </tr>
 	    </table>
