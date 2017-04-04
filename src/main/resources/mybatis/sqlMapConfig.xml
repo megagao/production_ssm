@@ -12,7 +12,7 @@
       	-->
       	<package name="org.hqu.production_ms.domain"/>
       	<package name="org.hqu.production_ms.domain.authority"/>
-      	<package name="org.hqu.production_ms.domain.po"/>
+      	<package name="org.hqu.production_ms.domain.vo"/>
   	</typeAliases>
   	
   	<!-- 配置分页插件 -->

@@ -21,15 +21,17 @@
 		<!-- 加载springmvc配置 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<!-- 配置文件的地址 如果不配置contextConfigLocation， 默认查找的配置文件名称classpath下的：servlet名称+"-serlvet.xml"即：springmvc-serlvet.xml -->
+			<!-- 配置文件的地址 如果不配置contextConfigLocation，默认查找的配置文件为classpath下的：servlet名称+"-serlvet.xml"
+				即：springmvc-serlvet.xml -->
 			<param-value>classpath:spring/springmvc-servlet.xml</param-value>
 		</init-param>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
-		<!-- 可以配置/ ，此工程 所有请求全部由springmvc解析，此种方式可以实现 RESTful方式，需要特殊处理对静态文件的解析不能由springmvc解析 
-			可以配置*.do或*.action，所有请求的url扩展名为.do或.action由springmvc解析，此种方法常用 不可以/*，如果配置/*，返回jsp也由springmvc解析，这是不对的。 -->
+		<!-- 可以配置/ ，此工程 所有请求全部由springmvc解析，此种方式可以实现 RESTful方式，需要特殊处理对静态文件的解析不能由
+			springmvc解析 可以配置*.do或*.action，所有请求的url扩展名为.do或.action由springmvc解析，此种方法常用 不可以/*，
+			如果配置/*，返回jsp也由springmvc解析，这是不对的。 -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
@@ -44,10 +46,10 @@
 			<param-value>true</param-value>
 		</init-param>
 		<!-- 设置spring容器filter的bean id，如果不设置则找与filter-name一致的bean-->
-		<init-param>
+		<!--<init-param>
 			<param-name>targetBeanName</param-name>
 			<param-value>shiroFilter</param-value>
-		</init-param>
+		</init-param>-->
 	</filter>
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>

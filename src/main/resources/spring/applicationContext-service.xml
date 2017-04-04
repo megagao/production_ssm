@@ -16,4 +16,5 @@
           
 	<!-- service包扫描 -->
 	<context:component-scan base-package="org.hqu.production_ms.service"/>
+
 </beans>

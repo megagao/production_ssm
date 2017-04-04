@@ -7,6 +7,7 @@
 <%@ page import="java.awt.Graphics"%>
 <%@ page import="java.awt.image.BufferedImage"%>
 <%@ page import="javax.imageio.ImageIO"%>
+
 <%
 	int width = 65;
 	int height = 35;

@@ -7,11 +7,11 @@
 <title>错误信息</title>
 </head>
 <body>
-<span style="font-size: 16px; font-weight:bold;">错误描述：</span> <br>
+<span style="font-size: 18px; font-weight:bold;">错误描述：</span> <br>
 <span>服务器异常！</span><br>
 <span>请与管理员联系！</span><br><br>
 
-<span style="font-size: 16px; font-weight:bold;">错误信息：</span> <br>
+<span style="font-size: 18px; font-weight:bold;">错误信息：</span> <br>
 <span>服务器异常！</span><br>
 </body>
 </html>

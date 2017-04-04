@@ -13,8 +13,9 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.hqu.production_ms.domain.authority.SysPermission;
-import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.domain.authority.SysUser;
+import org.hqu.production_ms.domain.vo.RoleVO;
+import org.hqu.production_ms.domain.vo.UserVO;
 import org.hqu.production_ms.domain.customize.ActiveUser;
 import org.hqu.production_ms.service.RoleService;
 import org.hqu.production_ms.service.SysService;
@@ -87,7 +88,7 @@ public class CustomRealm extends AuthorizingRealm {
 		activeUser.setUsername(sysUser.getUsername());
 		activeUser.setUserStatus(sysUser.getLocked());
 		
-		SysRole sysRole = null;
+		RoleVO sysRole = null;
 		try {
 			sysRole = roleService.findRoleByUserId(sysUser.getId());
 		} catch (Exception e1) {
