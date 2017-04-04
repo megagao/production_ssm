@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/deviceCheck")
 public class DeviceCheckController {
+	
 	@Autowired
 	private DeviceCheckService deviceCheckService;
 	

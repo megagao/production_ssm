@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/technologyPlan")
 public class TechnologyPlanController {
+
 	@Autowired
 	private TechnologyPlanService technologyPlanService;
 	

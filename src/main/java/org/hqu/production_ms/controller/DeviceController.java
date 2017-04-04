@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/device")
 public class DeviceController {
+
 	@RequestMapping("/deviceList")
 	public String deviceList() throws Exception{
 		return "deviceList";

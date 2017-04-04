@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/p_count_check")
 public class PCountCheckController {
+
 	@Autowired
 	private PCountCheckService pCountCheckService;
 	

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
+
 	@Autowired
 	private EmployeeService employeeService;
 	

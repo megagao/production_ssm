@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/material")
 public class MaterialController {
+
 	@Autowired
 	private MaterialService materialService;
 	

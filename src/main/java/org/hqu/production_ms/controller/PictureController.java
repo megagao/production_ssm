@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class PictureController {
+
 	@Autowired
 	private PictureService pictureService;
 	

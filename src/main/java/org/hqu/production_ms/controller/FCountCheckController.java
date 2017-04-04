@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/f_count_check")
 public class FCountCheckController {
+
 	@Autowired
 	private FCountCheckService fCountCheckService;
 	

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/deviceMaintain")
 public class DeviceMaintainController {
+
 	@Autowired
 	private DeviceMaintainService deviceMaintainService;
 	
