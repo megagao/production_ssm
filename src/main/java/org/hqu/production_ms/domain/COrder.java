@@ -3,30 +3,41 @@ package org.hqu.production_ms.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class COrder {
-    private String orderId;
+
+	@Size(max=40, message="{id.length.error}")
+	private String orderId;
 
     private Date orderDate;
 
     private Date requestDate;
-
+    
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
+    @Max(value=999999999, message="订购数量不能超过999999999")
     private Integer quantity;
 
+    @Max(value=999999999, message="单价不能超过999999999")
     private BigDecimal unitPrice;
 
+    @Size(max=10, message="单位的长度限制在10个字符之内")
     private String unit;
-
+    
     private String image;
 
     private String file;
 
     private Integer status;
     
-    private Custom custom;
+    @Size(max=40, message="{id.length.error}")
+    private String customId;
 
-    private Product product;
+    @Size(max=40, message="{id.length.error}")
+    private String productId;
 
     public String getOrderId() {
         return orderId;
@@ -84,14 +95,6 @@ public class COrder {
         this.unit = unit == null ? null : unit.trim();
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
-    }
-
     public String getFile() {
         return file;
     }
@@ -108,19 +111,28 @@ public class COrder {
         this.status = status;
     }
 
-	public Custom getCustom() {
-		return custom;
+	public String getCustomId() {
+		return customId;
 	}
 
-	public void setCustom(Custom custom) {
-		this.custom = custom;
+	public void setCustomId(String customId) {
+		this.customId = customId;
 	}
 
-	public Product getProduct() {
-		return product;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 }

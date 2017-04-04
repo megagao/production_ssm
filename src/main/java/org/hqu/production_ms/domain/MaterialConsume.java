@@ -2,21 +2,30 @@ package org.hqu.production_ms.domain;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
+
 public class MaterialConsume {
+	
+	@Size(max=40, message="{id.length.error}")
     private String consumeId;
 
-    private Work work;
+    private String workId;
 
-    private Material material;
+    private String materialId;
 
+    @Max(value=999999999, message="消耗数量过大")
     private Integer consumeAmount;
 
     private Date consumeDate;
 
+    @Size(max=40, message="发送者的长度限制在40个字符之内")
     private String sender;
 
+    @Size(max=40, message="接收者的长度限制在40个字符之内")
     private String receiver;
 
+    @Size(max=5000, message="{note.length.error}")
     private String note;
 
     public String getConsumeId() {
@@ -27,20 +36,20 @@ public class MaterialConsume {
         this.consumeId = consumeId == null ? null : consumeId.trim();
     }
 
-    public Work getWork() {
-        return work;
+    public String getWorkId() {
+        return workId;
     }
 
-    public void setWork(Work work) {
-        this.work = work;
+    public void setWorkId(String workId) {
+        this.workId = workId == null ? null : workId.trim();
     }
 
-    public Material getMaterial() {
-        return material;
+    public String getMaterialId() {
+        return materialId;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId == null ? null : materialId.trim();
     }
 
     public Integer getConsumeAmount() {
