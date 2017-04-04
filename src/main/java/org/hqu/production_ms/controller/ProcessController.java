@@ -52,8 +52,7 @@ public class ProcessController {
 		List<Process> list = processService.find();
 		return list;
 	}
-	
-	
+
 	@RequestMapping("/list")
 	@ResponseBody
 	public EUDataGridResult getItemList(Integer page, Integer rows, Process process) throws Exception{
@@ -94,16 +93,15 @@ public class ProcessController {
 		return result;
 	}
 	
-	//搜索
+	//根据工序id查找
 	@RequestMapping("/search_process_by_processId")
 	@ResponseBody
-	public EUDataGridResult searchProcessByProcessId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchProcessByProcessId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = processService.searchProcessByProcessId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据工序计划id查找
 	@RequestMapping("/search_process_by_technologyPlanId")
 	@ResponseBody
 	public EUDataGridResult searchProcessByTechnologyPlanId(Integer page, Integer rows, String searchValue)

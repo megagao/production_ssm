@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.COrder;
+import org.hqu.production_ms.domain.vo.COrderVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.COrderPO;
+import org.hqu.production_ms.domain.COrder;
 import org.hqu.production_ms.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,14 +56,14 @@ public class OrderController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, COrder cOrder) throws Exception{
+	public EUDataGridResult getList(Integer page, Integer rows, COrderVO cOrder) throws Exception{
 		EUDataGridResult result = orderService.getList(page, rows, cOrder);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid COrderPO cOrder, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid COrder cOrder, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -80,7 +80,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid COrderPO cOrder, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid COrder cOrder, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -90,7 +90,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid COrderPO cOrder, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid COrder cOrder, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -100,7 +100,7 @@ public class OrderController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid COrderPO cOrder, BindingResult bindingResult) throws Exception {
+	private CustomResult updateNote(@Valid COrder cOrder, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -129,29 +129,26 @@ public class OrderController {
 		return result;
 	}
 	
-	//搜索
+	//根据订单id查找
 	@RequestMapping("/search_order_by_orderId")
 	@ResponseBody
-	public EUDataGridResult searchOrderByOrderId(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchOrderByOrderId(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = orderService.searchOrderByOrderId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据客户名称查找
 	@RequestMapping("/search_order_by_orderCustom")
 	@ResponseBody
-	public EUDataGridResult searchOrderByOrderCustom(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchOrderByOrderCustom(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = orderService.searchOrderByCustomName(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据产品名称查找
 	@RequestMapping("/search_order_by_orderProduct")
 	@ResponseBody
-	public EUDataGridResult searchOrderByProductName(Integer page, Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchOrderByProductName(Integer page, Integer rows, String searchValue) throws Exception{
 		EUDataGridResult result = orderService.searchOrderByProductName(page, rows, searchValue);
 		return result;
 	}

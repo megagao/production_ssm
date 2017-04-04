@@ -54,16 +54,14 @@ public class DepartmentController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, Department department) 
-			throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, Department department) throws Exception{
 		EUDataGridResult result = departmentService.getList(page, rows, department);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid Department department, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult insert(@Valid Department department, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -79,8 +77,7 @@ public class DepartmentController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid Department department, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult update(@Valid Department department, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -90,8 +87,7 @@ public class DepartmentController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid Department department, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult updateAll(@Valid Department department, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -101,8 +97,7 @@ public class DepartmentController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid Department department, BindingResult bindingResult) 
-			throws Exception {
+	private CustomResult updateNote(@Valid Department department, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -124,7 +119,7 @@ public class DepartmentController {
 		return result;
 	}
 	
-	//搜索
+	//根据部门id查找
 	@RequestMapping("/search_department_by_departmentId")
 	@ResponseBody
 	public EUDataGridResult searchDepartmentByDepartmentId(Integer page, Integer rows, String searchValue) 
@@ -133,7 +128,7 @@ public class DepartmentController {
 		return result;
 	}
 	
-	//搜索
+	//根据部门名称查找
 	@RequestMapping("/search_department_by_departmentName")
 	@ResponseBody
 	public EUDataGridResult searchDepartmentByDepartmentName(Integer page, Integer rows, String searchValue) 

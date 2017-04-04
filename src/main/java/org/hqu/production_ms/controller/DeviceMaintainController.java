@@ -48,8 +48,7 @@ public class DeviceMaintainController {
 	 */
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult)
-			throws Exception {
+	private CustomResult insert(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -65,8 +64,7 @@ public class DeviceMaintainController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult)
-			throws Exception {
+	private CustomResult update(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -83,7 +81,7 @@ public class DeviceMaintainController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult) 
+	private CustomResult updateNote(@Valid DeviceMaintain deviceMaintain, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -92,7 +90,7 @@ public class DeviceMaintainController {
 		return deviceMaintainService.updateNote(deviceMaintain);
 	}
 	
-	//根据设备维修编号查找设备维修信息
+	//根据设备维修编号查找
 	@RequestMapping("/search_deviceMaintain_by_deviceMaintainId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceMaintainByDeviceMaintainId(Integer page, Integer rows, String searchValue) 
@@ -101,7 +99,7 @@ public class DeviceMaintainController {
 		return result;
 	}
 	
-	//根据设备故障编号查找设备维修信息
+	//根据设备故障编号查找
 	@RequestMapping("/search_deviceMaintain_by_deviceFaultId")
 	@ResponseBody
 	public EUDataGridResult searchDeviceMaintainByDeviceFaultId(Integer page, Integer rows, String searchValue) 

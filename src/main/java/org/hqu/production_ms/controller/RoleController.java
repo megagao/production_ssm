@@ -4,17 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hqu.production_ms.domain.authority.SysRole;
+import org.hqu.production_ms.domain.vo.RoleVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.RolePO;
+import org.hqu.production_ms.domain.authority.SysRole;
 import org.hqu.production_ms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/role")
@@ -25,8 +29,8 @@ public class RoleController {
 	
 	@RequestMapping("/get/{roleId}")
 	@ResponseBody
-	public SysRole getItemById(@PathVariable String roleId) throws Exception{
-		SysRole sysRole = roleService.get(roleId);
+	public RoleVO getItemById(@PathVariable String roleId) throws Exception{
+		RoleVO sysRole = roleService.get(roleId);
 		return sysRole;
 	}
 	
@@ -42,7 +46,7 @@ public class RoleController {
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<SysRole> getData() throws Exception{
+	public List<RoleVO> getData() throws Exception{
 		return roleService.find();
 	}
 	
@@ -58,59 +62,52 @@ public class RoleController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, SysRole role) throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, RoleVO role) throws Exception{
 		EUDataGridResult result = roleService.getList(page, rows, role);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private Map<String,Object> insert(RolePO role) throws Exception {
-		Map<String,Object> map = new HashMap<String,Object>(); 
-		if(roleService.findByRoleNameAndId(role.getRoleName(), role.getRoleId()).size()>0){
-			map.put("msg", "该角色名已经存在，请更换角色名！");
-			map.put("label", "1");
-		}else if(roleService.get(role.getRoleId()) != null){
-			map.put("msg", "该角色编号已经存在，请更换角色编号！");
-			map.put("label", "2");
-		}else{
-			CustomResult result = roleService.insert(role);
-			if(result.getStatus() == 200){
-				map.put("msg", "新增角色成功！");
-				map.put("label", "200");
-			}else{
-				map.put("msg", "新增角色失败！");
-				map.put("label", "0");
-			}
+	private CustomResult insert(@Valid SysRole role, BindingResult bindingResult) throws Exception {
+		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
-		return map;
+		if(roleService.findByRoleNameAndId(role.getRoleName(), role.getRoleId()).size()>0){
+			result = new CustomResult(0, "该角色名已经存在，请更换角色名！", null);
+		}else if(roleService.get(role.getRoleId()) != null){
+			result = new CustomResult(0, "该角色编号已经存在，请更换角色编号！", null);
+		}else{
+			result = roleService.insert(role);
+		}
+		return result;
 	}
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(RolePO role) throws Exception {
+	private CustomResult update(SysRole role) throws Exception {
 		CustomResult result = roleService.update(role);
 		return result;
 	}
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private Map<String,Object> updateAll(RolePO role) throws Exception {
-		Map<String,Object> map = new HashMap<String,Object>(); 
-		if(roleService.findByRoleNameAndId(role.getRoleName(), role.getRoleId()).size()>0){
-			map.put("msg", "该角色名已经存在，请更换角色名！");
-			map.put("label", "1");
-		}else{
-			CustomResult result = roleService.updateAll(role);
-			if(result.getStatus() == 200){
-				map.put("msg", "更新角色成功！");
-				map.put("label", "200");
-			}else{
-				map.put("msg", "更新角色失败！");
-				map.put("label", "0");
-			}
+	private CustomResult updateAll(@Valid SysRole role, BindingResult bindingResult) throws Exception {
+		CustomResult result;
+		if(bindingResult.hasErrors()){
+			FieldError fieldError = bindingResult.getFieldError();
+			return CustomResult.build(100, fieldError.getDefaultMessage());
 		}
-		return map;
+		if(roleService.findByRoleNameAndId(role.getRoleName(), role.getRoleId()).size()>0){
+			result = new CustomResult(0, "该角色名已经存在，请更换角色名！", null);
+		}else if(roleService.get(role.getRoleId()) != null){
+			result = new CustomResult(0, "该角色编号已经存在，请更换角色编号！", null);
+		}else{
+			result = roleService.updateAll(role);
+		}
+		return result;
 	}
 	
 	@RequestMapping(value="/delete")
@@ -127,7 +124,7 @@ public class RoleController {
 		return result;
 	}
 	
-	//搜索
+	//根据角色id查找
 	@RequestMapping("/search_role_by_roleId")
 	@ResponseBody
 	public EUDataGridResult searchRoleByRoleId(Integer page, Integer rows, String searchValue) throws Exception{
@@ -135,7 +132,7 @@ public class RoleController {
 		return result;
 	}
 	
-	//搜索
+	//根据角色名查找
 	@RequestMapping("/search_role_by_roleName")
 	@ResponseBody
 	public EUDataGridResult searchRoleByRoleName(Integer page, Integer rows, String searchValue) throws Exception{

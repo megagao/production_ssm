@@ -5,7 +5,6 @@ import javax.validation.Valid;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
 import org.hqu.production_ms.domain.MaterialReceive;
-import org.hqu.production_ms.domain.po.MaterialReceivePO;
 import org.hqu.production_ms.service.MaterialReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +58,7 @@ public class MaterialReceiveController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult)
+	private CustomResult insert(@Valid MaterialReceive materialReceive, BindingResult bindingResult)
 			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
@@ -76,7 +75,7 @@ public class MaterialReceiveController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult) 
+	private CustomResult update(@Valid MaterialReceive materialReceive, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -87,7 +86,7 @@ public class MaterialReceiveController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult)
+	private CustomResult updateAll(@Valid MaterialReceive materialReceive, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -98,7 +97,7 @@ public class MaterialReceiveController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid MaterialReceivePO materialReceive, BindingResult bindingResult)
+	private CustomResult updateNote(@Valid MaterialReceive materialReceive, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -121,21 +120,21 @@ public class MaterialReceiveController {
 		return result;
 	}
 	
-	   //搜索
-		@RequestMapping("/search_materialReceive_by_receiveId")
-		@ResponseBody
-		public EUDataGridResult searchMaterialReceiveByReceiveId(Integer page, Integer rows, String searchValue) 
-				throws Exception{
-			EUDataGridResult result = materialReceiveService.searchMaterialReceiveByReceiveId(page, rows, searchValue);
-			return result;
-		}
-		
-		//搜索
-		@RequestMapping("/search_materialReceive_by_materialId")
-		@ResponseBody
-		public EUDataGridResult searchMaterialReceiveByMaterialId(Integer page, Integer rows, String searchValue)
-				throws Exception{
-			EUDataGridResult result = materialReceiveService.searchMaterialReceiveByMaterialId(page, rows, searchValue);
-			return result;
-		}
+	//根据物料接收id查找
+	@RequestMapping("/search_materialReceive_by_receiveId")
+	@ResponseBody
+	public EUDataGridResult searchMaterialReceiveByReceiveId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = materialReceiveService.searchMaterialReceiveByReceiveId(page, rows, searchValue);
+		return result;
+	}
+
+	//根据物料id查找
+	@RequestMapping("/search_materialReceive_by_materialId")
+	@ResponseBody
+	public EUDataGridResult searchMaterialReceiveByMaterialId(Integer page, Integer rows, String searchValue)
+			throws Exception{
+		EUDataGridResult result = materialReceiveService.searchMaterialReceiveByMaterialId(page, rows, searchValue);
+		return result;
+	}
 }

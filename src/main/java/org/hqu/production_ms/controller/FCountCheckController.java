@@ -62,16 +62,14 @@ public class FCountCheckController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows, FinalCountCheck finalCountCheck) 
-			throws Exception{
+	public EUDataGridResult getItemList(Integer page, Integer rows, FinalCountCheck finalCountCheck) throws Exception{
 		EUDataGridResult result = fCountCheckService.getList(page, rows, finalCountCheck);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult)
-			throws Exception {
+	private CustomResult insert(@Valid FinalCountCheck finalCountCheck, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -114,7 +112,7 @@ public class FCountCheckController {
 		return result;
 	}
 	
-	//搜索
+	//根据成品计数质检id查找
 	@RequestMapping("/search_fCountCheck_by_fCountCheckId")
 	@ResponseBody
 	public EUDataGridResult searchFCountCheckByFCountCheckId(Integer page, Integer rows, String searchValue) 
@@ -123,7 +121,7 @@ public class FCountCheckController {
 		return result;
 	}
 	
-	//搜索
+	//根据订单id查找
 	@RequestMapping("/search_fCountCheck_by_orderId")
 	@ResponseBody
 	public EUDataGridResult searchFCountCheckByOrderId(Integer page, Integer rows, String searchValue) 

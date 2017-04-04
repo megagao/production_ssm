@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.hqu.production_ms.domain.Manufacture;
+import org.hqu.production_ms.domain.vo.ManufactureVO;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.ManufacturePO;
+import org.hqu.production_ms.domain.Manufacture;
 import org.hqu.production_ms.service.ManufactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +62,7 @@ public class ManufactureController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid ManufacturePO manufacture, BindingResult bindingResult) throws Exception {
+	private CustomResult insert(@Valid Manufacture manufacture, BindingResult bindingResult) throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -78,7 +78,7 @@ public class ManufactureController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid ManufacturePO manufacture, BindingResult bindingResult) throws Exception {
+	private CustomResult update(@Valid Manufacture manufacture, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -88,7 +88,7 @@ public class ManufactureController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid ManufacturePO manufacture, BindingResult bindingResult) throws Exception {
+	private CustomResult updateAll(@Valid Manufacture manufacture, BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
 			return CustomResult.build(100, fieldError.getDefaultMessage());
@@ -111,7 +111,7 @@ public class ManufactureController {
 		return result;
 	}
 	
-	//搜索
+	//根据生产流水号查找
 	@RequestMapping("/search_manufacture_by_manufactureSn")
 	@ResponseBody
 	public EUDataGridResult searchManufactureByManufactureSn(Integer page, Integer rows, String searchValue)
@@ -120,7 +120,7 @@ public class ManufactureController {
 		return result;
 	}
 	
-	//搜索
+	//根据订单id查找
 	@RequestMapping("/search_manufacture_by_manufactureOrderId")
 	@ResponseBody
 	public EUDataGridResult searchManufactureByManufactureOrderId(Integer page, Integer rows, String searchValue) 
@@ -129,7 +129,7 @@ public class ManufactureController {
 		return result;
 	}
 	
-	//搜索
+	//根据工艺名称查找
 	@RequestMapping("/search_manufacture_by_manufactureTechnologyName")
 	@ResponseBody
 	public EUDataGridResult searchManufactureByManufactureTechnologyName(Integer page, Integer rows

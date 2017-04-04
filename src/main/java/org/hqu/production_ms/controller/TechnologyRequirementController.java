@@ -8,7 +8,7 @@ import org.hqu.production_ms.domain.Technology;
 import org.hqu.production_ms.domain.TechnologyRequirement;
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
-import org.hqu.production_ms.domain.po.TechnologyRequirementPO;
+import org.hqu.production_ms.domain.vo.TechnologyRequirementVO;
 import org.hqu.production_ms.service.TechnologyRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,8 +59,7 @@ public class TechnologyRequirementController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getItemList(Integer page, Integer rows,
-			TechnologyRequirementPO technologyRequirementPO) 
+	public EUDataGridResult getItemList(Integer page, Integer rows, TechnologyRequirementVO technologyRequirementPO)
 			throws Exception{
 		EUDataGridResult result = technologyRequirementService.getList(page, rows,
 				technologyRequirementPO);
@@ -69,8 +68,7 @@ public class TechnologyRequirementController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid TechnologyRequirement technologyRequirement, 
-			BindingResult bindingResult)
+	private CustomResult insert(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult)
 			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
@@ -87,8 +85,7 @@ public class TechnologyRequirementController {
 
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid TechnologyRequirement technologyRequirement,
-			BindingResult bindingResult)
+	private CustomResult updateAll(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -99,8 +96,7 @@ public class TechnologyRequirementController {
 
 	@RequestMapping(value="/update_requirement")
 	@ResponseBody
-	private CustomResult updateNote(@Valid TechnologyRequirement technologyRequirement, 
-			BindingResult bindingResult) 
+	private CustomResult updateNote(@Valid TechnologyRequirement technologyRequirement, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -116,18 +112,17 @@ public class TechnologyRequirementController {
 		return result;
 	}
 	
-	//搜索
+	//根据工艺要求id查找
 	@RequestMapping("/search_technologyRequirement_by_technologyRequirementId")
 	@ResponseBody
-	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(Integer page,
-			Integer rows, String searchValue) 
-			throws Exception{
+	public EUDataGridResult searchTechnologyRequirementByTechnologyRequirementId(Integer page, Integer rows,
+			String searchValue) throws Exception{
 		EUDataGridResult result = technologyRequirementService
 				.searchTechnologyRequirementByTechnologyRequirementId(page, rows, searchValue);
 		return result;
 	}
 	
-	//搜索
+	//根据工艺名称查找
 	@RequestMapping("/search_technologyRequirement_by_technologyName")
 	@ResponseBody
 	public EUDataGridResult searchTechnologyRequirementByTechnologyName(Integer page, Integer rows,

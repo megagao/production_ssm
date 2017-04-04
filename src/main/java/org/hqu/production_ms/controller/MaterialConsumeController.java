@@ -6,8 +6,8 @@ import javax.validation.Valid;
 
 import org.hqu.production_ms.domain.customize.CustomResult;
 import org.hqu.production_ms.domain.customize.EUDataGridResult;
+import org.hqu.production_ms.domain.vo.MaterialConsumeVO;
 import org.hqu.production_ms.domain.MaterialConsume;
-import org.hqu.production_ms.domain.po.MaterialConsumePO;
 import org.hqu.production_ms.service.MaterialConsumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,15 +56,14 @@ public class MaterialConsumeController {
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public EUDataGridResult getList(Integer page, Integer rows, MaterialConsume materialConsume) 
-			throws Exception{
+	public EUDataGridResult getList(Integer page, Integer rows, MaterialConsumeVO materialConsume) throws Exception{
 		EUDataGridResult result = materialConsumeService.getList(page, rows, materialConsume);
 		return result;
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	@ResponseBody
-	private CustomResult insert(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult)
+	private CustomResult insert(@Valid MaterialConsume materialConsume, BindingResult bindingResult)
 			throws Exception {
 		CustomResult result;
 		if(bindingResult.hasErrors()){
@@ -81,7 +80,7 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update")
 	@ResponseBody
-	private CustomResult update(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) 
+	private CustomResult update(@Valid MaterialConsume materialConsume, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -92,7 +91,7 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update_all")
 	@ResponseBody
-	private CustomResult updateAll(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) 
+	private CustomResult updateAll(@Valid MaterialConsume materialConsume, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -103,7 +102,7 @@ public class MaterialConsumeController {
 	
 	@RequestMapping(value="/update_note")
 	@ResponseBody
-	private CustomResult updateNote(@Valid MaterialConsumePO materialConsume, BindingResult bindingResult) 
+	private CustomResult updateNote(@Valid MaterialConsume materialConsume, BindingResult bindingResult)
 			throws Exception {
 		if(bindingResult.hasErrors()){
 			FieldError fieldError = bindingResult.getFieldError();
@@ -127,7 +126,7 @@ public class MaterialConsumeController {
 		return result;
 	}
 	
-	//搜索
+	//根据客户id查找
 	@RequestMapping("/search_materialConsume_by_consumeId")
 	@ResponseBody
 	public EUDataGridResult searchMaterialConsumeByConsumeId(Integer page, Integer rows, String searchValue) 
@@ -135,8 +134,8 @@ public class MaterialConsumeController {
 		EUDataGridResult result = materialConsumeService.searchMaterialConsumeByConsumeId(page, rows, searchValue);
 		return result;
 	}
-	
-	//搜索
+
+	//根据物料id查找
 	@RequestMapping("/search_materialConsume_by_materialId")
 	@ResponseBody
 	public EUDataGridResult searchMaterialConsumeByMaterialId(Integer page, Integer rows, String searchValue) 
@@ -144,8 +143,8 @@ public class MaterialConsumeController {
 		EUDataGridResult result = materialConsumeService.searchMaterialConsumeByMaterialId(page, rows, searchValue);
 		return result;
 	}
-	
-	//搜索
+
+	//根据作业id查找
 	@RequestMapping("/search_materialConsume_by_workId")
 	@ResponseBody
 	public EUDataGridResult searchMaterialConsumeByWorkId(Integer page, Integer rows, String searchValue)
