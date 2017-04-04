@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/permission")
 public class PermissionController {
+
 	@Autowired
 	private PermissionService permissionService;
 	

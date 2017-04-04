@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
+	
 	@Autowired
 	private DepartmentService departmentService;
 	

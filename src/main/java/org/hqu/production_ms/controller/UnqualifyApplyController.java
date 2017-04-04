@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/unqualify")
 public class UnqualifyApplyController {
+
 	@Autowired
 	private UnqualifyService unqualifyService;
 	
