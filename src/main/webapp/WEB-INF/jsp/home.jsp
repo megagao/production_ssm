@@ -14,7 +14,7 @@
 	padding: 10px 10px 10px 10px;
 }
 .divNorth{
-	background:url('../image/TitleBackground.jpg') no-repeat center center;
+	background:url('image/TitleBackground.jpg') no-repeat center center;
 	background-size:100% 100%;
 }
 </style>
