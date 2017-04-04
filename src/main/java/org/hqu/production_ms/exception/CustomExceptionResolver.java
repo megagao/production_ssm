@@ -59,7 +59,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return new ModelAndView();
 	}
+
 }
