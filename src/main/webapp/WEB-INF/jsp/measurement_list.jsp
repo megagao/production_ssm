@@ -487,7 +487,7 @@ function doSearch_fMeasureCheck(value,name){ //用户输入用户名,点击搜�
 	
 	//更新备注
 	function updateFMeasureNote(){
-		$.get("measure/edit_judge",'',function(data){
+		$.get("fMeasureCheck/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
@@ -518,7 +518,7 @@ function getFMeasureSelectionsIds(){
     
 //////////////////////////////////////////////////////////////////////////
 function fMeasureCheck_add(){
-	$.get("measure/add_judge",'',function(data){
+	$.get("fMeasureCheck/add_judge",'',function(data){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{
@@ -528,7 +528,7 @@ function fMeasureCheck_add(){
 }
 
 function fMeasureCheck_edit(){
-	$.get("measure/edit_judge",'',function(data){
+	$.get("fMeasureCheck/edit_judge",'',function(data){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{
@@ -557,7 +557,7 @@ function fMeasureCheck_edit(){
 }
 
 function fMeasureCheck_delete(){
-	$.get("measure/delete_judge",'',function(data){
+	$.get("fMeasureCheck/delete_judge",'',function(data){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{
