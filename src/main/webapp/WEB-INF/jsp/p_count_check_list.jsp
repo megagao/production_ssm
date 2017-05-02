@@ -277,7 +277,7 @@ function  openCountP2P(index){
 
 function submitp2pCountEditForm(){
 	//此处写工序信息
-	$.get("process/edit_judge",'',function(data){
+	$.get("pCountCheck/edit_judge",'',function(data){
 		if(data.msg != null){
 			$.messager.alert('提示', data.msg);
 		}else{
@@ -386,7 +386,7 @@ function submitEmpEditForm_pCount(){
 	
 	//更新工序计数质检备注
 	function updatePCountCheckNote(){
-		$.get("p_count_check/edit_judge",'',function(data){
+		$.get("pCountCheck/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
@@ -418,7 +418,7 @@ function submitEmpEditForm_pCount(){
     
 //////////////////////////////////////////////////////////////////////////
     function pCountCheck_add(){
-    	$.get("p_count_check/add_judge",'',function(data){
+    	$.get("pCountCheck/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -428,7 +428,7 @@ function submitEmpEditForm_pCount(){
     }
     
     function pCountCheck_edit(){
-    	$.get("p_count_check/edit_judge",'',function(data){
+    	$.get("pCountCheck/edit_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -457,7 +457,7 @@ function submitEmpEditForm_pCount(){
     }
     
     function pCountCheck_delete(){
-    	$.get("p_count_check/delete_judge",'',function(data){
+    	$.get("pCountCheck/delete_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
