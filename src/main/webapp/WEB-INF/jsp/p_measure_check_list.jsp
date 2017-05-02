@@ -399,7 +399,7 @@ function doSearch_pMeasureCheck(value,name){ //用户输入用户名,点击搜�
 	
 	//更新备注
 	function updatePMeasureCheckNote(){
-		$.get("p_measure_check/edit_judge",'',function(data){
+		$.get("pMeasureCheck/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
@@ -431,7 +431,7 @@ function doSearch_pMeasureCheck(value,name){ //用户输入用户名,点击搜�
     //////////////////////////////////////////////////////////////////////////
     
     function pMeasureCheck_add(){
-    	$.get("p_measure_check/add_judge",'',function(data){
+    	$.get("pMeasureCheck/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -441,7 +441,7 @@ function doSearch_pMeasureCheck(value,name){ //用户输入用户名,点击搜�
     }
     
     function pMeasureCheck_edit(){
-    	$.get("p_measure_check/edit_judge",'',function(data){
+    	$.get("pMeasureCheck/edit_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
@@ -471,7 +471,7 @@ function doSearch_pMeasureCheck(value,name){ //用户输入用户名,点击搜�
     }
     
     function pMeasureCheck_delete(){
-    	$.get("p_measure_check/delete_judge",'',function(data){
+    	$.get("pMeasureCheck/delete_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
