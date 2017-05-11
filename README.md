@@ -57,3 +57,27 @@
 - **动态权限控制**
 
 ![动态权限控制](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%258A%25A8%25E6%2580%2581%25E6%259D%2583%25E9%2599%2590%25E6%258E%25A7%25E5%2588%25B6.png)
+
+## 注：文件上传路径配置 ##
+在本地建立上传图片和文件的文件夹，如我的存放路径是在D:\upload\temp\img，D:\upload\temp\file文件夹下，然后修改tomcat的配置文件server.xml，添加虚拟路径，将对图片和文件的请求url映射到本机硬盘的响应路径，如下：
+	<Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+        <!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+        -->
+
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+		<!-- 在Host标签下添加下面两行，配置虚拟路径到你本机的文件夹 -->
+		<Context path="/pic" docBase="D:\upload\temp\img" crossContext="true" trusted="true" reloadable="true"/>
+		<Context path="/file" docBase="D:\upload\temp\file" crossContext="true" trusted="true" reloadable="true"/>
+
+	</Host>
