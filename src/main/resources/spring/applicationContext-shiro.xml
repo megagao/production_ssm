@@ -90,6 +90,13 @@
         <property name="globalSessionTimeout" value="600000"/>
         <!-- 删除失效的session -->
         <property name="deleteInvalidSessions" value="true"/>
+        <!-- 指定本系统sessionId, 默认为: JSESSIONID 问题: 与Servlet容器名冲突, 如Jetty, Tomcat等默认JSESSIONID,
+        	当跳出shiro Servlet时如Error-page容器会为JSESSIONID重新分配值导致登录会话丢失! -->
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="ycyintang.session.id"/>
     </bean>
 
 	<!-- 自定义form认证过虑器 -->
