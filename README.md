@@ -78,7 +78,7 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
-		<!-- 在Host标签下添加下面两行，配置虚拟路径到你本机的文件夹 -->
-		<Context path="/pic" docBase="D:\upload\temp\img" crossContext="true" trusted="true" reloadable="true"/>
-		<Context path="/file" docBase="D:\upload\temp\file" crossContext="true" trusted="true" reloadable="true"/>
+        <!-- 在Host标签下添加下面两行，配置虚拟路径到你本机的文件夹 -->
+        <Context path="/pic" docBase="D:\upload\temp\img" crossContext="true" trusted="true" reloadable="true"/>
+        <Context path="/file" docBase="D:\upload\temp\file" crossContext="true" trusted="true" reloadable="true"/>
 	</Host>
