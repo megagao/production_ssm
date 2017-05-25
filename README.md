@@ -60,7 +60,7 @@
 
 ![动态权限控制](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%258A%25A8%25E6%2580%2581%25E6%259D%2583%25E9%2599%2590%25E6%258E%25A7%25E5%2588%25B6.png)
 
-## 注：##
+## 注： ##
 
 **文件上传配置**
 
@@ -87,4 +87,5 @@
 	</Host>
 
 **idea classpath配置**
+
 idea引入项目后，resources目录在eclipse中是在classpath下的，而在idea中变成在classpath外，导致项目无法识别配置文件。解决办法是把resources文件夹加入到classpath中，请参照此博文操作：[http://blog.csdn.net/kesarchen/article/details/51193657](http://blog.csdn.net/kesarchen/article/details/51193657)
