@@ -3,8 +3,6 @@ package org.hqu.production_ms.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -13,7 +11,6 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.hqu.production_ms.domain.customize.ActiveUser;
 import org.hqu.production_ms.service.SysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +45,7 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/login")
+	/*@RequestMapping("/login")
 	public @ResponseBody Map<String,Object> login(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) throws Exception{
 		
@@ -68,7 +65,7 @@ public class LoginController {
 			map.put("msg", "用户名或密码错误！");
 		}
 		return map; 
-	}
+	}*/
 	
 	/**
 	 * shiro ajax登录 
