@@ -23,14 +23,8 @@ public class FirstController {
 	private SysService sysService;
 	
 	//跳转登录
-	@RequestMapping("/first")
+	@RequestMapping(value={"/","/first","/login"})
 	public String first(Model model)throws Exception{
-		return "login";
-	}
-	
-	//跳转登录
-	@RequestMapping("/")
-	public String welcome(Model model, HttpSession session)throws Exception{
 		return "login";
 	}
 	
