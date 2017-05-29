@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"  
-		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://java.sun.com/xml/ns/javaee" 
+		xmlns:web="http://java.sun.com/xml/ns/javaee"  
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+		id="WebApp_ID" version="2.5">
+		
   <display-name>production_ssm</display-name>
+  
+  <!-- Spring容器监听器 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring/applicationContext-*.xml</param-value>
@@ -9,21 +15,33 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
+  <!-- 前端控制器 -->
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 加载springmvc配置 -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
+      <!-- 配置文件的地址 如果不配置contextConfigLocation， 默认查找的配置文件名称classpath下的：servlet名称+"-serlvet.xml"
+      		即：springmvc-serlvet.xml -->
       <param-value>classpath:spring/springmvc-servlet.xml</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
+    <!-- 可以配置/ ，此工程 所有请求全部由springmvc解析，此种方式可以实现 RESTful方式，需要特殊处理对静态文件的解析不能由springmvc解析 
+			也可以配置*.do或*.action，所有请求的url扩展名为.do或.action由springmvc解析，此种方法常用 不可以/*，
+			如果配置/*，返回jsp也由springmvc解析，这是不对的。 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <!-- shiro的filter -->
+  <!-- shiro过虑器，DelegatingFilterProxy通过代理模式将spring容器中的bean和filter关联起来 -->
   <filter>
     <filter-name>shiroFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <!-- 设置true由servlet容器控制filter的生命周期 -->
     <init-param>
       <param-name>targetFilterLifecycle</param-name>
       <param-value>true</param-value>
@@ -33,6 +51,18 @@
     <filter-name>shiroFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <!-- sessionFilter -->
+  <filter>
+    <filter-name>sessionFilter</filter-name>
+    <filter-class>org.hqu.production_ms.filter.SessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- post乱码处理 -->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -45,6 +75,8 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <!-- 错误页面 -->
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
     <location>/500.jsp</location>
