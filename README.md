@@ -160,7 +160,7 @@ KindEditor主要特点
 	    }
 	});
 
-关于这部分的详细内容请参考我的一篇博客：
+关于这部分的详细内容请参考我的一篇博客：[http://www.realfond.cn/2017/05/29/%E5%88%A9%E7%94%A8filter%E5%92%8C%E5%85%A8%E5%B1%80ajax%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0shiro%20session%E8%BF%87%E6%9C%9F%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC/](http://www.realfond.cn/2017/05/29/%E5%88%A9%E7%94%A8filter%E5%92%8C%E5%85%A8%E5%B1%80ajax%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0shiro%20session%E8%BF%87%E6%9C%9F%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC/ "博客地址")
 
 ![https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/session%25E8%25BF%2587%25E6%259C%259F%25E8%25B7%25B3%25E8%25BD%25AC%25E7%2599%25BB%25E5%25BD%2595.png](https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/session%25E8%25BF%2587%25E6%259C%259F%25E8%25B7%25B3%25E8%25BD%25AC%25E7%2599%25BB%25E5%25BD%2595.png)
 
