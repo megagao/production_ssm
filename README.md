@@ -1,5 +1,9 @@
 # 欢迎报bug或pull request ~
 
+若图片不能正常显示，请点击博客地址：
+
+[http://www.realfond.cn/2016/12/27/%E5%88%B6%E9%80%A0%E8%A3%85%E5%A4%87%E7%89%A9%E8%81%94%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/](http://www.realfond.cn/2016/12/27/%E5%88%B6%E9%80%A0%E8%A3%85%E5%A4%87%E7%89%A9%E8%81%94%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/ "博客链接")
+
 # production_ssm
 
 这是一个生产管理ERP系统。依托科技计划重点项目“制造装备物联及生产管理系统研发”，主要包括：计划进度、设备管理、工艺监控、物料监控、人员监控、质量监控、系统管理7大模块。
@@ -11,7 +15,7 @@
 - SpringMVC（支持Restful风格）
 - Hibernate Validator（参数校验）
 - Mybatis（最少配置方案）
-- shiro权限控制,结合ajax实现了异步认证与异步授权，同时实现了细粒度的权限动态分配（到按钮级别）
+- shiro权限控制,结合ajax实现了异步认证与异步授权，同时实现了细粒度的权限动态分配（到按钮级别）；添加了shiro session过期的登录跳转
 - jQuery EasyUI开发前端页面，利用jQuery文件上传插件实现拖拽上传的效果并对文件类型、大小、数量进行控制；利用search-box实现查找功能
 - [Druid（数据源配置 sql防注入 sql性能监控)](http://wosyingjun.iteye.com/blog/2306139)
 - 统一的异常处理
@@ -29,34 +33,146 @@
 ## 软件运行截图 ##
 
 - **登录界面**
+- 
+登录可使用用账号：22，密码：22的超级管理员登录，若密码输错，下次登录需输入验证码。
 
 ![登录界面](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E7%2599%25BB%25E5%25BD%2595%25E7%2595%258C%25E9%259D%25A2.png)
 
 - **运行界面**
 
+超级管理员可显示系统管理模块进行系统权限分配与管理，其他角色可查看除系统管理外的剩余模块的信息（包括下载附件、查看图片等），但是只能维护该角色对应权限内的信息。  
+左边功能搜索栏可进行功能模糊查找。
+
 ![运行界面](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E8%25BF%2590%25E8%25A1%258C%25E7%2595%258C%25E9%259D%25A2.png)
 
 - **图片上传**
+
+图片上传的配置请查看文档尾部的注释，图片大小要求不能超过1M，支持jpg、png等多种格式的图片，上传成功后可在相应的展示栏进行回显。
 
 ![图片上传](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%259B%25BE%25E7%2589%2587%25E4%25B8%258A%25E4%25BC%25A0.png)
 
 - **文件上传**
 
+文件上传使用了一个开源的jQuery文件上传插件，可以在common.js里面修改上传文件的参数，包括上传个数，支持的文件类型等，配置信息如下：
+
+	url:"file/upload",
+	maxFileCount: 5,                //上传文件个数（多个时修改此处
+    returnType: 'json',              //服务返回数据
+    allowedTypes: 'doc,docx,excel,sql,txt,ppt,pdf',  //允许上传的文件式
+    showDone: false,                     //是否显示"Done"(完成)按钮
+    showDelete: true,                  //是否显示"Delete"(删除)按钮
+
 ![文件上传](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E6%2596%2587%25E4%25BB%25B6%25E4%25B8%258A%25E4%25BC%25A0.png)
 
 - **富文本编辑**
 
+本系统采用了开源的KindEditor富文本编辑器，它是一套在线HTML编辑器，主要用于让用户在网站上获得所见即所得编辑效果。KindEditor把传统的多行文本输入框(textarea)替换为可视化的富文本输入框。
+
+KindEditor主要特点
+
+- 快速：体积小，加载速度快
+
+
+- 开源：开放源代码，高水平，高品质
+
+
+- 底层：内置自定义 DOM 类库，精确操作 DOM
+
+
+- 扩展：基于插件的设计，所有功能都是插件，可根据需求增减功能
+
+
+- 风格：修改编辑器风格非常容易，只需修改一个 CSS 文件
+
+
+- 兼容：支持大部分主流浏览器，比如 IE、Firefox、Safari、Chrome、Opera
+
 ![富文本编辑](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%25AF%258C%25E6%2596%2587%25E6%259C%25AC%25E7%25BC%2596%25E8%25BE%2591.png)
 
 - **关联信息**
+- 
+关联对象的信息，点击以弹窗的形式显示，若具有该模块对应的修改权限，则也可在此进行信息维护。
 
 ![关联信息](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%2585%25B3%25E8%2581%2594%25E4%25BF%25A1%25E6%2581%25AF.png)
 
 - **search-box查找**
 
+可以在右上角的search-box选择查询条件，输入关键字进行对应信息的模糊查找。
+
 ![search-box查找](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/search-box%25E6%259F%25A5%25E6%2589%25BE.png)
 
+- **session过期跳转登录**
+
+用户登录后，会建立相应的session，系统默认过期时间为10分钟，若需更改，可在applicationContext-shiro.xml配置文件中，更改如下配置。
+
+	<!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <!-- session的失效时长，单位毫秒 ，这里设置为10分钟-->
+        <property name="globalSessionTimeout" value="600000"/>
+        <!-- 删除失效的session -->
+        <property name="deleteInvalidSessions" value="true"/>
+        <!-- 指定本系统sessionId, 默认为: JSESSIONID 问题: 与Servlet容器名冲突, 如Jetty, Tomcat等默认JSESSIONID,
+        	当跳出shiro Servlet时如Error-page容器会为JSESSIONID重新分配值导致登录会话丢失! -->
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+
+若session过期，则应跳转登录界面重新登录。系统采用的方式是设置一个sessionfilter，如下：
+
+	public class SessionFilter implements Filter {
+	
+	    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException,
+	            ServletException {
+	
+	        HttpServletRequest request = (HttpServletRequest) servletRequest;
+	        HttpServletResponse response = (HttpServletResponse) servletResponse;
+	        if (!SecurityUtils.getSubject().isAuthenticated()) {
+	            //判断session里是否有用户信息,且是否为ajax请求，如果是ajax请求响应头会有，x-requested-with
+	            if (request.getHeader("x-requested-with") != null
+	                    && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+	                response.setHeader("session-status", "timeout");//在响应头设置session状态
+	            }
+	        }
+	        filterChain.doFilter(request, servletResponse);
+	    }
+	
+	    @Override
+	    public void destroy() {
+	        // TODO Auto-generated method stub
+	    }
+	
+	    @Override
+	    public void init(FilterConfig arg0) throws ServletException {
+	        // TODO Auto-generated method stub
+	    }
+	}
+
+并在web.xml中配置该filter。当session过期时， 在响应头设置session状态为timeout，然后采用全局的ajax事件对session状态进行判断，跳转到登录页面。该事件定义在common.js中，如下：
+
+	//全局ajax事件，处理session过期跳转登录
+	$.ajaxSetup({
+		complete:function(XMLHttpRequest,sessionStatus){
+			var sessionstatus = XMLHttpRequest.getResponseHeader("session-status");
+			if(sessionstatus=="timeout"){
+			     $.messager.alert('提示信息', "登录超时！请重新登录！", 'info',function(){
+			         window.location.href = 'login';
+			     });
+			} 
+	    }
+	});
+
+关于这部分的详细内容请参考我的一篇博客：
+
+![https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/session%25E8%25BF%2587%25E6%259C%259F%25E8%25B7%25B3%25E8%25BD%25AC%25E7%2599%25BB%25E5%25BD%2595.png](https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/session%25E8%25BF%2587%25E6%259C%259F%25E8%25B7%25B3%25E8%25BD%25AC%25E7%2599%25BB%25E5%25BD%2595.png)
+
 - **动态权限控制**
+
+本系统采用经典的权限模型，即RBAC（Role-Based Access Control ）基于角色的访问控制，即用户通过角色与权限进行关联。模型用到５张表：用户表、角色表、权限表、用户角色表、角色权限表。简单地说，一个用户拥有若干角色，每一个角色拥有若干权限。这样，就构造成“用户-角色-权限”的授权模型。在这种模型中，用户与角色之间，角色与权限之间，一般者是多对多的关系。
+
+该模型可简化表示为下图：
+
+![https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/RBAC%25E6%259D%2583%25E9%2599%2590%25E6%25A8%25A1%25E5%259E%258B.png](https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/RBAC%25E6%259D%2583%25E9%2599%2590%25E6%25A8%25A1%25E5%259E%258B.png "RBAC权限模型")
+
+本系统基于RBAC权限模型，采用shiro框架进行权限控制。只有角色为超级管理员的用户才能进行系统的权限管理，权限级别细化到菜单选项。
 
 ![动态权限控制](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%258A%25A8%25E6%2580%2581%25E6%259D%2583%25E9%2599%2590%25E6%258E%25A7%25E5%2588%25B6.png)
 
