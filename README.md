@@ -33,7 +33,7 @@
 ## 软件运行截图 ##
 
 - **登录界面**
-- 
+
 登录可使用用账号：22，密码：22的超级管理员登录，若密码输错，下次登录需输入验证码。
 
 ![登录界面](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E7%2599%25BB%25E5%25BD%2595%25E7%2595%258C%25E9%259D%25A2.png)
@@ -90,7 +90,7 @@ KindEditor主要特点
 ![富文本编辑](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%25AF%258C%25E6%2596%2587%25E6%259C%25AC%25E7%25BC%2596%25E8%25BE%2591.png)
 
 - **关联信息**
-- 
+
 关联对象的信息，点击以弹窗的形式显示，若具有该模块对应的修改权限，则也可在此进行信息维护。
 
 ![关联信息](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E5%2585%25B3%25E8%2581%2594%25E4%25BF%25A1%25E6%2581%25AF.png)
