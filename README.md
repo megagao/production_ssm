@@ -34,7 +34,7 @@
 
 - **登录界面**
 
-登录可使用用账号：22，密码：22的超级管理员登录，若密码输错，下次登录需输入验证码。
+登录可使用账号：22，密码：22的超级管理员登录，若密码输错，下次登录需输入验证码。
 
 ![登录界面](http://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/%25E7%2599%25BB%25E5%25BD%2595%25E7%2595%258C%25E9%259D%25A2.png)
 
@@ -205,3 +205,64 @@ KindEditor主要特点
 **idea classpath配置**
 
 idea引入项目后，resources目录在eclipse中是在classpath下的，而在idea中变成在classpath外，导致项目无法识别配置文件。解决办法是把resources文件夹加入到classpath中，请参照此博文操作：[http://blog.csdn.net/kesarchen/article/details/51193657](http://blog.csdn.net/kesarchen/article/details/51193657)
+
+**Mybatis逆向工程**
+
+系统使用了Mybatis的逆向工程，依据数据库表自动生成domain和mapper（注：自动生成的代码都是针对单表，若需多表整合，则要手动修改实现），其中，针对每个数据库表，都会生成两个封装对象，可以认为example对象是对其相应的ORM映射对象查询条件的封装。逆向工程的实现--Mybatis Generator的代码托管在[https://github.com/mybatis/generator](https://github.com/mybatis/generator)，代码down下来后，配置generatorConfig.xml文件，如下：
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE generatorConfiguration
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+    <generatorConfiguration>
+    	<context id="testTables" targetRuntime="MyBatis3">
+
+    		<commentGenerator>
+    			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+    			<property name="suppressAllComments" value="true" />
+    		</commentGenerator>
+
+    		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+    		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+    			connectionURL="jdbc:mysql://localhost:3306/production_ms" userId="root"
+    			password="root">
+    		</jdbcConnection>
+
+    		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+    			NUMERIC 类型解析为java.math.BigDecimal -->
+    		<javaTypeResolver>
+    			<property name="forceBigDecimals" value="false" />
+    		</javaTypeResolver>
+    
+    		<!-- targetProject:生成PO类的位置 -->
+    		<javaModelGenerator targetPackage="org.hqu.production_ms.domain"
+    			targetProject=".\src">
+    			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+    			<property name="enableSubPackages" value="false" />
+    			<!-- 从数据库返回的值被清理前后的空格 -->
+    			<property name="trimStrings" value="true" />
+    		</javaModelGenerator>
+
+            <!-- targetProject:mapper映射文件生成的位置 -->
+    		<sqlMapGenerator targetPackage="org.hqu.production_ms.mapper" 
+    			targetProject=".\src">
+    			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+    			<property name="enableSubPackages" value="false" />
+    		</sqlMapGenerator>
+
+    		<!-- targetPackage：mapper接口生成的位置 -->
+    		<javaClientGenerator type="XMLMAPPER"
+    			targetPackage="org.hqu.production_ms.mapper" 
+    			targetProject=".\src">
+    			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+    			<property name="enableSubPackages" value="false" />
+    		</javaClientGenerator>
+
+    		<!-- 指定数据库表 -->
+    		<table schema="" tableName="unqualify_apply"></table>
+
+    	</context>
+    </generatorConfiguration>
+
+修改完成后，执行main方法即可。需要注意的是，若要重新生成，则需把已经生成的文件删除，因为它不会自己覆盖，导致文件混乱。关于Mybatis逆向工程的更多详细信息，读者可以自行上网查阅。
