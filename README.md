@@ -178,6 +178,11 @@ KindEditor主要特点
 
 ## 注： ##
 
+**导入项目到STS**
+
+感谢一位韩国网友给我发的邮件，介绍了将production_ssm导入到STS中，并将详细过程与注意事项完整记录了下来。非常感谢他的文档，也为STS的使用提供了参考。
+[http://www.realfond.cn/2017/06/06/%E5%AF%BC%E5%85%A5production_ssm%E5%88%B0STS/](http://www.realfond.cn/2017/06/06/%E5%AF%BC%E5%85%A5production_ssm%E5%88%B0STS/)
+
 **文件上传配置**
 
 在本地建立上传图片和文件的文件夹，如我的存放路径是在D:\upload\temp\img，D:\upload\temp\file文件夹下，然后修改tomcat的配置文件server.xml，添加虚拟路径，将对图片和文件的请求url映射到本机硬盘的相应路径，如下：
