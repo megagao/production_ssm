@@ -1,8 +1,6 @@
 # 欢迎报bug或pull request ~
 
-若图片不能正常显示，请点击博客地址：
-
-[http://www.realfond.cn/2016/12/27/%E5%88%B6%E9%80%A0%E8%A3%85%E5%A4%87%E7%89%A9%E8%81%94%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/](http://www.realfond.cn/2016/12/27/%E5%88%B6%E9%80%A0%E8%A3%85%E5%A4%87%E7%89%A9%E8%81%94%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/ "博客链接")
+若图片不能正常显示，请点击博客地址：[制造装备物联及生产管理系统](http://www.realfond.cn/2016/12/27/%E5%88%B6%E9%80%A0%E8%A3%85%E5%A4%87%E7%89%A9%E8%81%94%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/)
 
 # production_ssm
 
@@ -160,7 +158,7 @@ KindEditor主要特点
 	    }
 	});
 
-关于这部分的详细内容请参考我的一篇博客：[http://www.realfond.cn/2017/05/29/%E5%88%A9%E7%94%A8filter%E5%92%8C%E5%85%A8%E5%B1%80ajax%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0shiro%20session%E8%BF%87%E6%9C%9F%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC/](http://www.realfond.cn/2017/05/29/%E5%88%A9%E7%94%A8filter%E5%92%8C%E5%85%A8%E5%B1%80ajax%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0shiro%20session%E8%BF%87%E6%9C%9F%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC/ "博客地址")
+关于这部分的详细内容请参考我的一篇博客：[利用filter和全局ajax事件实现shiro session过期登录跳转](http://www.realfond.cn/2017/05/29/%E5%88%A9%E7%94%A8filter%E5%92%8C%E5%85%A8%E5%B1%80ajax%E4%BA%8B%E4%BB%B6%E5%AE%9E%E7%8E%B0shiro%20session%E8%BF%87%E6%9C%9F%E7%99%BB%E5%BD%95%E8%B7%B3%E8%BD%AC/)
 
 ![https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/session%25E8%25BF%2587%25E6%259C%259F%25E8%25B7%25B3%25E8%25BD%25AC%25E7%2599%25BB%25E5%25BD%2595.png](https://coding.net/u/megagao/p/ziyuan/git/raw/master/pm_image/session%25E8%25BF%2587%25E6%259C%259F%25E8%25B7%25B3%25E8%25BD%25AC%25E7%2599%25BB%25E5%25BD%2595.png)
 
@@ -180,8 +178,8 @@ KindEditor主要特点
 
 **导入项目到STS**
 
-感谢一位韩国网友给我发的邮件，介绍了将production_ssm导入到STS中，并将详细过程与注意事项完整记录了下来。非常感谢他的文档，也为STS的使用提供了参考。
-[http://www.realfond.cn/2017/06/06/%E5%AF%BC%E5%85%A5production_ssm%E5%88%B0STS/](http://www.realfond.cn/2017/06/06/%E5%AF%BC%E5%85%A5production_ssm%E5%88%B0STS/)
+感谢一位韩国道友给我发的邮件，介绍了将production_ssm导入到STS中，并将详细过程与注意事项完整记录了下来。非常感谢他的文档，也为STS的使用提供了参考。
+参见：[导入production_ssm到STS](http://www.realfond.cn/2017/06/06/%E5%AF%BC%E5%85%A5production_ssm%E5%88%B0STS/)
 
 **文件上传配置**
 
@@ -209,7 +207,7 @@ KindEditor主要特点
 
 **idea classpath配置**
 
-idea引入项目后，resources目录在eclipse中是在classpath下的，而在idea中变成在classpath外，导致项目无法识别配置文件。解决办法是把resources文件夹加入到classpath中，请参照此博文操作：[http://blog.csdn.net/kesarchen/article/details/51193657](http://blog.csdn.net/kesarchen/article/details/51193657)
+idea引入项目后，resources目录在eclipse中是在classpath下的，而在idea中变成在classpath外，导致项目无法识别配置文件。解决办法是把resources文件夹加入到classpath中，请参照此博文操作：[eclipse与idea中classpath配置路径不同导致迁移项目时的FileNotFoundException问题](http://blog.csdn.net/kesarchen/article/details/51193657)
 
 **Mybatis逆向工程**
 
