@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.FinalCountCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.FinalCountCheck" >
+    <id column="f_count_check_id" property="fCountCheckId" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="check_item" property="checkItem" jdbcType="VARCHAR" />
+    <result column="sample" property="sample" jdbcType="INTEGER" />
+    <result column="check_number" property="checkNumber" jdbcType="INTEGER" />
+    <result column="unqualify" property="unqualify" jdbcType="INTEGER" />
+    <result column="qualify" property="qualify" jdbcType="DECIMAL" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="measure_data" property="measureData" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.FinalCountCheckVO" extends="BaseResultMap">
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="finalCountCheck" resultMap="AddResultMap">
+		SELECT
+			f_count_check_id ,
+			order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			final_count_check.emp_id,
+			emp_name,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check,
+			employee
+		WHERE 
+			final_count_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
+	<update id="updateNote" parameterType="finalCountCheck" >
+		UPDATE final_count_check
+		SET note = #{note}
+		WHERE
+			f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
+	</update>
+
+    <select id="searchFCountCheckByFCountCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			f_count_check_id ,
+			order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			final_count_check.emp_id,
+			emp_name,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check,
+			employee
+		WHERE 
+			final_count_check.emp_id = employee.emp_id
+		AND f_count_check_id like CONCAT('%',#{fCountCheckId},'%' ) 
+	</select>
+  
+  	<select id="searchFCountCheckByOrderId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			f_count_check_id ,
+			order_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			final_count_check.emp_id,
+			emp_name,
+			result,
+			final_count_check.note
+		FROM
+			final_count_check,
+			employee
+		WHERE 
+			final_count_check.emp_id = employee.emp_id
+		AND final_count_check.order_id like CONCAT('%',#{orderId},'%' ) 
+		
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			final_count_check
+		WHERE
+			f_count_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_count_check_id, order_id, check_item, sample, check_number, unqualify, qualify, 
+    cdate, measure_data, emp_id, result, note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.FinalCountCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from final_count_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from final_count_check
+    where f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from final_count_check
+    where f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.FinalCountCheckExample" >
+    delete from final_count_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.FinalCountCheck" >
+    insert into final_count_check (f_count_check_id, order_id, check_item, 
+      sample, check_number, unqualify, 
+      qualify, cdate, measure_data, 
+      emp_id, result, note
+      )
+    values (#{fCountCheckId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{sample,jdbcType=INTEGER}, #{checkNumber,jdbcType=INTEGER}, #{unqualify,jdbcType=INTEGER}, 
+      #{qualify,jdbcType=DECIMAL}, #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, 
+      #{empId,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.FinalCountCheck" >
+    insert into final_count_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fCountCheckId != null" >
+        f_count_check_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="checkItem != null" >
+        check_item,
+      </if>
+      <if test="sample != null" >
+        sample,
+      </if>
+      <if test="checkNumber != null" >
+        check_number,
+      </if>
+      <if test="unqualify != null" >
+        unqualify,
+      </if>
+      <if test="qualify != null" >
+        qualify,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="measureData != null" >
+        measure_data,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fCountCheckId != null" >
+        #{fCountCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="sample != null" >
+        #{sample,jdbcType=INTEGER},
+      </if>
+      <if test="checkNumber != null" >
+        #{checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unqualify != null" >
+        #{unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="qualify != null" >
+        #{qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.FinalCountCheckExample" resultType="java.lang.Integer" >
+    select count(*) from final_count_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update final_count_check
+    <set >
+      <if test="record.fCountCheckId != null" >
+        f_count_check_id = #{record.fCountCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkItem != null" >
+        check_item = #{record.checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sample != null" >
+        sample = #{record.sample,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkNumber != null" >
+        check_number = #{record.checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.unqualify != null" >
+        unqualify = #{record.unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualify != null" >
+        qualify = #{record.qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cdate != null" >
+        cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.measureData != null" >
+        measure_data = #{record.measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update final_count_check
+    set f_count_check_id = #{record.fCountCheckId,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      check_item = #{record.checkItem,jdbcType=VARCHAR},
+      sample = #{record.sample,jdbcType=INTEGER},
+      check_number = #{record.checkNumber,jdbcType=INTEGER},
+      unqualify = #{record.unqualify,jdbcType=INTEGER},
+      qualify = #{record.qualify,jdbcType=DECIMAL},
+      cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      measure_data = #{record.measureData,jdbcType=VARCHAR},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.FinalCountCheck" >
+    update final_count_check
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        check_item = #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="sample != null" >
+        sample = #{sample,jdbcType=INTEGER},
+      </if>
+      <if test="checkNumber != null" >
+        check_number = #{checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unqualify != null" >
+        unqualify = #{unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="qualify != null" >
+        qualify = #{qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        measure_data = #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.FinalCountCheck" >
+    update final_count_check
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      check_item = #{checkItem,jdbcType=VARCHAR},
+      sample = #{sample,jdbcType=INTEGER},
+      check_number = #{checkNumber,jdbcType=INTEGER},
+      unqualify = #{unqualify,jdbcType=INTEGER},
+      qualify = #{qualify,jdbcType=DECIMAL},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      measure_data = #{measureData,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where f_count_check_id = #{fCountCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

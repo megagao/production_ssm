@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.TechnologyPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.TechnologyPlan" >
+    <id column="technology_plan_id" property="technologyPlanId" jdbcType="VARCHAR" />
+    <result column="technology_id" property="technologyId" jdbcType="VARCHAR" />
+    <result column="batch_amount" property="batchAmount" jdbcType="INTEGER" />
+    <result column="start_plan" property="startPlan" jdbcType="TIMESTAMP" />
+    <result column="end_plan" property="endPlan" jdbcType="TIMESTAMP" />
+    <result column="commit_plan" property="commitPlan" jdbcType="TIMESTAMP" />
+    <result column="technology_plan_start" property="technologyPlanStart" jdbcType="TIMESTAMP" />
+    <result column="technology_plan_end" property="technologyPlanEnd" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.TechnologyPlanVO" extends="BaseResultMap">
+    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="technologyPlan" resultMap="AddResultMap">
+	SELECT
+		technology_plan_id,
+		technology_plan.technology_id,
+		technology_name,
+		batch_amount,
+		start_plan,
+		end_plan,
+		commit_plan,
+		technology_plan_start,
+		technology_plan_end
+	FROM
+		technology_plan
+	LEFT JOIN technology ON technology.technology_id = technology_plan.technology_id
+	ORDER BY
+		technology_plan_id ASC
+</select>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			technology_plan
+		WHERE
+			technology_plan_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchTechnologyPlanByTechnologyPlanId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_plan_id,
+			technology_plan.technology_id,
+			technology_name,
+			batch_amount,
+			start_plan,
+			end_plan,
+			commit_plan,
+			technology_plan_start,
+			technology_plan_end
+		FROM
+			technology_plan
+		LEFT JOIN technology ON technology.technology_id = technology_plan.technology_id
+		WHERE
+			technology_plan_id LIKE CONCAT(
+				'%',
+				#{technologyPlanId},'%' ) 
+		ORDER BY
+			technology_plan_id ASC
+	</select>
+	
+	<select id="searchTechnologyPlanByTechnologyName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_plan_id,
+			technology_plan.technology_id,
+			technology_name,
+			batch_amount,
+			start_plan,
+			end_plan,
+			commit_plan,
+			technology_plan_start,
+			technology_plan_end
+		FROM
+			technology_plan
+		LEFT JOIN technology ON technology.technology_id = technology_plan.technology_id
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+		ORDER BY
+			technology_plan_id ASC
+	</select>
+	
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    technology_plan_id, technology_id, batch_amount, start_plan, end_plan, commit_plan, 
+    technology_plan_start, technology_plan_end
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.TechnologyPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from technology_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from technology_plan
+    where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from technology_plan
+    where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.TechnologyPlanExample" >
+    delete from technology_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.TechnologyPlan" >
+    insert into technology_plan (technology_plan_id, technology_id, batch_amount, 
+      start_plan, end_plan, commit_plan, 
+      technology_plan_start, technology_plan_end
+      )
+    values (#{technologyPlanId,jdbcType=VARCHAR}, #{technologyId,jdbcType=VARCHAR}, #{batchAmount,jdbcType=INTEGER}, 
+      #{startPlan,jdbcType=TIMESTAMP}, #{endPlan,jdbcType=TIMESTAMP}, #{commitPlan,jdbcType=TIMESTAMP}, 
+      #{technologyPlanStart,jdbcType=TIMESTAMP}, #{technologyPlanEnd,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.TechnologyPlan" >
+    insert into technology_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="technologyPlanId != null" >
+        technology_plan_id,
+      </if>
+      <if test="technologyId != null" >
+        technology_id,
+      </if>
+      <if test="batchAmount != null" >
+        batch_amount,
+      </if>
+      <if test="startPlan != null" >
+        start_plan,
+      </if>
+      <if test="endPlan != null" >
+        end_plan,
+      </if>
+      <if test="commitPlan != null" >
+        commit_plan,
+      </if>
+      <if test="technologyPlanStart != null" >
+        technology_plan_start,
+      </if>
+      <if test="technologyPlanEnd != null" >
+        technology_plan_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="technologyPlanId != null" >
+        #{technologyPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyId != null" >
+        #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchAmount != null" >
+        #{batchAmount,jdbcType=INTEGER},
+      </if>
+      <if test="startPlan != null" >
+        #{startPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endPlan != null" >
+        #{endPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commitPlan != null" >
+        #{commitPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technologyPlanStart != null" >
+        #{technologyPlanStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technologyPlanEnd != null" >
+        #{technologyPlanEnd,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.TechnologyPlanExample" resultType="java.lang.Integer" >
+    select count(*) from technology_plan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update technology_plan
+    <set >
+      <if test="record.technologyPlanId != null" >
+        technology_plan_id = #{record.technologyPlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyId != null" >
+        technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchAmount != null" >
+        batch_amount = #{record.batchAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.startPlan != null" >
+        start_plan = #{record.startPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endPlan != null" >
+        end_plan = #{record.endPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commitPlan != null" >
+        commit_plan = #{record.commitPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.technologyPlanStart != null" >
+        technology_plan_start = #{record.technologyPlanStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.technologyPlanEnd != null" >
+        technology_plan_end = #{record.technologyPlanEnd,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update technology_plan
+    set technology_plan_id = #{record.technologyPlanId,jdbcType=VARCHAR},
+      technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      batch_amount = #{record.batchAmount,jdbcType=INTEGER},
+      start_plan = #{record.startPlan,jdbcType=TIMESTAMP},
+      end_plan = #{record.endPlan,jdbcType=TIMESTAMP},
+      commit_plan = #{record.commitPlan,jdbcType=TIMESTAMP},
+      technology_plan_start = #{record.technologyPlanStart,jdbcType=TIMESTAMP},
+      technology_plan_end = #{record.technologyPlanEnd,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.TechnologyPlan" >
+    update technology_plan
+    <set >
+      <if test="technologyId != null" >
+        technology_id = #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchAmount != null" >
+        batch_amount = #{batchAmount,jdbcType=INTEGER},
+      </if>
+      <if test="startPlan != null" >
+        start_plan = #{startPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endPlan != null" >
+        end_plan = #{endPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commitPlan != null" >
+        commit_plan = #{commitPlan,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technologyPlanStart != null" >
+        technology_plan_start = #{technologyPlanStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="technologyPlanEnd != null" >
+        technology_plan_end = #{technologyPlanEnd,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.TechnologyPlan" >
+    update technology_plan
+    set technology_id = #{technologyId,jdbcType=VARCHAR},
+      batch_amount = #{batchAmount,jdbcType=INTEGER},
+      start_plan = #{startPlan,jdbcType=TIMESTAMP},
+      end_plan = #{endPlan,jdbcType=TIMESTAMP},
+      commit_plan = #{commitPlan,jdbcType=TIMESTAMP},
+      technology_plan_start = #{technologyPlanStart,jdbcType=TIMESTAMP},
+      technology_plan_end = #{technologyPlanEnd,jdbcType=TIMESTAMP}
+    where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
+  </update>
+</mapper>

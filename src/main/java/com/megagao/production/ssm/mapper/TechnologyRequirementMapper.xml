@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.TechnologyRequirementMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.TechnologyRequirement" >
+    <id column="technology_requirement_id" property="technologyRequirementId" jdbcType="VARCHAR" />
+    <result column="technology_id" property="technologyId" jdbcType="VARCHAR" />
+    <result column="requirement" property="requirement" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="revise_time" property="reviseTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.TechnologyRequirementVO" extends="BaseResultMap">
+    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!-- 扩展的sql -->
+<!-- 查询所有记录 -->
+<select id="find" parameterType="technologyRequirement" resultMap="AddResultMap">
+	SELECT
+		technology_requirement_id,
+		technology_requirement.technology_id,
+		technology_name,
+		requirement,
+		add_time,
+		revise_time
+	FROM
+		technology_requirement
+	LEFT JOIN technology ON technology.technology_id = technology_requirement.technology_id
+	ORDER BY
+		technology_requirement_id ASC
+</select>
+  
+  <!-- 扩展的sql -->
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			technology_requirement
+		WHERE
+			technology_requirement_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 修改备注-->
+	<update id="updateRequirement" parameterType="com.megagao.production.ssm.domain.TechnologyRequirement" >
+		UPDATE technology_requirement
+		SET requirement = #{requirement}
+		WHERE
+			technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="searchTechnologyRequirementByTechnologyRequirementId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_requirement_id,
+			technology_requirement.technology_id,
+			technology_name,
+			requirement,
+			add_time,
+			revise_time
+		FROM
+			technology_requirement
+		LEFT JOIN technology ON technology.technology_id = technology_requirement.technology_id
+		WHERE
+			technology_requirement_id LIKE CONCAT(
+				'%',
+				#{technologyRequirementId},'%' ) 
+		ORDER BY
+			technology_requirement_id ASC
+	</select>
+	
+	<select id="searchTechnologyRequirementByTechnologyName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			technology_requirement_id,
+			technology_requirement.technology_id,
+			technology_name,
+			requirement,
+			add_time,
+			revise_time
+		FROM
+			technology_requirement
+		LEFT JOIN technology ON technology.technology_id = technology_requirement.technology_id
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+		ORDER BY
+			technology_requirement_id ASC
+	</select>
+	
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    technology_requirement_id, technology_id, requirement, add_time, revise_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.TechnologyRequirementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from technology_requirement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from technology_requirement
+    where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from technology_requirement
+    where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.TechnologyRequirementExample" >
+    delete from technology_requirement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.TechnologyRequirement" >
+    insert into technology_requirement (technology_requirement_id, technology_id, 
+      requirement, add_time, revise_time
+      )
+    values (#{technologyRequirementId,jdbcType=VARCHAR}, #{technologyId,jdbcType=VARCHAR}, 
+      #{requirement,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{reviseTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.TechnologyRequirement" >
+    insert into technology_requirement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="technologyRequirementId != null" >
+        technology_requirement_id,
+      </if>
+      <if test="technologyId != null" >
+        technology_id,
+      </if>
+      <if test="requirement != null" >
+        requirement,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="reviseTime != null" >
+        revise_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="technologyRequirementId != null" >
+        #{technologyRequirementId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyId != null" >
+        #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviseTime != null" >
+        #{reviseTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.TechnologyRequirementExample" resultType="java.lang.Integer" >
+    select count(*) from technology_requirement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update technology_requirement
+    <set >
+      <if test="record.technologyRequirementId != null" >
+        technology_requirement_id = #{record.technologyRequirementId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyId != null" >
+        technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requirement != null" >
+        requirement = #{record.requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null" >
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reviseTime != null" >
+        revise_time = #{record.reviseTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update technology_requirement
+    set technology_requirement_id = #{record.technologyRequirementId,jdbcType=VARCHAR},
+      technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      requirement = #{record.requirement,jdbcType=VARCHAR},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      revise_time = #{record.reviseTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.TechnologyRequirement" >
+    update technology_requirement
+    <set >
+      <if test="technologyId != null" >
+        technology_id = #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null" >
+        requirement = #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviseTime != null" >
+        revise_time = #{reviseTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.TechnologyRequirement" >
+    update technology_requirement
+    set technology_id = #{technologyId,jdbcType=VARCHAR},
+      requirement = #{requirement,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      revise_time = #{reviseTime,jdbcType=TIMESTAMP}
+    where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
+  </update>
+</mapper>

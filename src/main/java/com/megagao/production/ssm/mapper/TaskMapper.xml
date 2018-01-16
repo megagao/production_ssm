@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.TaskMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.Task" >
+    <id column="task_id" property="taskId" jdbcType="VARCHAR" />
+    <result column="manufacture_sn" property="manufactureSn" jdbcType="VARCHAR" />
+    <result column="work_id" property="workId" jdbcType="VARCHAR" />
+    <result column="task_quantity" property="taskQuantity" jdbcType="INTEGER" />
+    <result column="working_hours" property="workingHours" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <!-- 扩展的sql -->
+  <!-- 查询所有记录 -->
+	<select id="find" resultMap="BaseResultMap">
+		SELECT * FROM task
+	</select>
+	
+  <!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			task
+		WHERE
+			task_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchTaskByTaskId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			task
+		WHERE
+			task_id LIKE CONCAT(
+				'%',
+				#{taskId},'%' ) 
+	</select>
+	
+	<select id="searchTaskByTaskWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			task
+		WHERE
+			work_id LIKE CONCAT(
+				'%',
+				#{workId},'%' ) 
+	</select>
+	
+	<select id="searchTaskByTaskManufactureSn" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			task
+		WHERE
+			manufacture_sn LIKE CONCAT(
+				'%',
+				#{manufactureSn},'%' ) 
+	</select>
+	
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    task_id, manufacture_sn, work_id, task_quantity, working_hours
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.TaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from task
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.TaskExample" >
+    delete from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.Task" >
+    insert into task (task_id, manufacture_sn, work_id, 
+      task_quantity, working_hours)
+    values (#{taskId,jdbcType=VARCHAR}, #{manufactureSn,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
+      #{taskQuantity,jdbcType=INTEGER}, #{workingHours,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Task" >
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="manufactureSn != null" >
+        manufacture_sn,
+      </if>
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="taskQuantity != null" >
+        task_quantity,
+      </if>
+      <if test="workingHours != null" >
+        working_hours,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="manufactureSn != null" >
+        #{manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQuantity != null" >
+        #{taskQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="workingHours != null" >
+        #{workingHours,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.TaskExample" resultType="java.lang.Integer" >
+    select count(*) from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task
+    <set >
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manufactureSn != null" >
+        manufacture_sn = #{record.manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workId != null" >
+        work_id = #{record.workId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskQuantity != null" >
+        task_quantity = #{record.taskQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.workingHours != null" >
+        working_hours = #{record.workingHours,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task
+    set task_id = #{record.taskId,jdbcType=VARCHAR},
+      manufacture_sn = #{record.manufactureSn,jdbcType=VARCHAR},
+      work_id = #{record.workId,jdbcType=VARCHAR},
+      task_quantity = #{record.taskQuantity,jdbcType=INTEGER},
+      working_hours = #{record.workingHours,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Task" >
+    update task
+    <set >
+      <if test="manufactureSn != null" >
+        manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        work_id = #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQuantity != null" >
+        task_quantity = #{taskQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="workingHours != null" >
+        working_hours = #{workingHours,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Task" >
+    update task
+    set manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
+      work_id = #{workId,jdbcType=VARCHAR},
+      task_quantity = #{taskQuantity,jdbcType=INTEGER},
+      working_hours = #{workingHours,jdbcType=DECIMAL}
+    where task_id = #{taskId,jdbcType=VARCHAR}
+  </update>
+</mapper>

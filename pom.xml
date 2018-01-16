@@ -2,7 +2,7 @@
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.hqu</groupId>
-  <artifactId>production_ms</artifactId>
+  <artifactId>production_ssm</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
@@ -199,8 +199,13 @@
 	    <artifactId>validation-api</artifactId>
 	    <version>1.0.0.GA</version>
 	</dependency>
+	  <dependency>
+		  <groupId>com.google.guava</groupId>
+		  <artifactId>guava</artifactId>
+		  <version>14.0-rc2</version>
+	  </dependency>
   </dependencies>
-  
+
   <build>
   	<finalName>${project.artifactId}</finalName>
 	<!-- idea不会编译src的java目录的xml文件,将IDEA maven项目中src源代码下的xml等资源文件编译进classes文件夹 -->

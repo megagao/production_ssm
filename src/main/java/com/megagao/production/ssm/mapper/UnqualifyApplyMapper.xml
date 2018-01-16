@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.UnqualifyApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.UnqualifyApply" >
+    <id column="unqualify_apply_id" property="unqualifyApplyId" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="unqualify_item" property="unqualifyItem" jdbcType="VARCHAR" />
+    <result column="unqualify_count" property="unqualifyCount" jdbcType="INTEGER" />
+    <result column="assembly_date" property="assemblyDate" jdbcType="TIMESTAMP" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.UnqualifyApplyVO" extends="BaseResultMap">
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询所有记录 -->
+	<select id="find" parameterType="unqualifyApply" resultMap="AddResultMap">
+		SELECT
+			unqualify_apply_id,
+			unqualify_apply.product_id,
+			unqualify_item,
+			product_name,
+			unqualify_apply.emp_id,
+			emp_name,
+			unqualify_count,
+			assembly_date,
+			apply_date,
+			unqualify_apply.note
+		FROM
+			unqualify_apply,
+			employee,
+			product
+		WHERE 
+			unqualify_apply.product_id = product.product_id
+		AND unqualify_apply.emp_id = employee.emp_id
+		ORDER BY unqualify_apply.apply_date
+	</select>
+  <update id="updateNote" parameterType="unqualifyApply" >
+		UPDATE unqualify_apply
+		SET note = #{note}
+		WHERE
+			unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+	</update>
+  
+  <select id="searchUnqualifyByUnqualifyId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			unqualify_apply_id,
+			unqualify_apply.product_id,
+			unqualify_item,
+			product_name,
+			unqualify_count,
+			assembly_date,
+			unqualify_apply.emp_id,
+			apply_date,
+			unqualify_apply.note
+		FROM
+			unqualify_apply,
+			employee,
+			product
+		WHERE 
+			unqualify_apply.product_id = product.product_id
+		AND unqualify_apply.emp_id = employee.emp_id
+		AND unqualify_apply_id LIKE CONCAT(
+				'%',
+				#{unqualifyApplyId},'%' ) 
+	</select>
+  
+  <select id="searchUnqualifyByProductName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			unqualify_apply_id,
+			unqualify_apply.product_id,
+			unqualify_item,
+			product_name,
+			unqualify_count,
+			assembly_date,
+			unqualify_apply.emp_id,
+			apply_date,
+			unqualify_apply.note
+		FROM
+			unqualify_apply,
+			employee,
+			product
+		where 
+			unqualify_apply.product_id = product.product_id
+		AND unqualify_apply.emp_id = employee.emp_id
+		AND product_name LIKE CONCAT(
+				'%',
+				#{productName},'%' ) 
+	</select>
+	
+  	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			unqualify_apply
+		WHERE
+			unqualify_apply_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    unqualify_apply_id, product_id, unqualify_item, unqualify_count, assembly_date, emp_id, 
+    apply_date, note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.UnqualifyApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from unqualify_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from unqualify_apply
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from unqualify_apply
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.UnqualifyApplyExample" >
+    delete from unqualify_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.UnqualifyApply" >
+    insert into unqualify_apply (unqualify_apply_id, product_id, unqualify_item, 
+      unqualify_count, assembly_date, emp_id, 
+      apply_date, note)
+    values (#{unqualifyApplyId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{unqualifyItem,jdbcType=VARCHAR}, 
+      #{unqualifyCount,jdbcType=INTEGER}, #{assemblyDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, 
+      #{applyDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.UnqualifyApply" >
+    insert into unqualify_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unqualifyApplyId != null" >
+        unqualify_apply_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="unqualifyItem != null" >
+        unqualify_item,
+      </if>
+      <if test="unqualifyCount != null" >
+        unqualify_count,
+      </if>
+      <if test="assemblyDate != null" >
+        assembly_date,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unqualifyApplyId != null" >
+        #{unqualifyApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyItem != null" >
+        #{unqualifyItem,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyCount != null" >
+        #{unqualifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="assemblyDate != null" >
+        #{assemblyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.UnqualifyApplyExample" resultType="java.lang.Integer" >
+    select count(*) from unqualify_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update unqualify_apply
+    <set >
+      <if test="record.unqualifyApplyId != null" >
+        unqualify_apply_id = #{record.unqualifyApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unqualifyItem != null" >
+        unqualify_item = #{record.unqualifyItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unqualifyCount != null" >
+        unqualify_count = #{record.unqualifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.assemblyDate != null" >
+        assembly_date = #{record.assemblyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyDate != null" >
+        apply_date = #{record.applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update unqualify_apply
+    set unqualify_apply_id = #{record.unqualifyApplyId,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      unqualify_item = #{record.unqualifyItem,jdbcType=VARCHAR},
+      unqualify_count = #{record.unqualifyCount,jdbcType=INTEGER},
+      assembly_date = #{record.assemblyDate,jdbcType=TIMESTAMP},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      apply_date = #{record.applyDate,jdbcType=TIMESTAMP},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.UnqualifyApply" >
+    update unqualify_apply
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyItem != null" >
+        unqualify_item = #{unqualifyItem,jdbcType=VARCHAR},
+      </if>
+      <if test="unqualifyCount != null" >
+        unqualify_count = #{unqualifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="assemblyDate != null" >
+        assembly_date = #{assemblyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.UnqualifyApply" >
+    update unqualify_apply
+    set product_id = #{productId,jdbcType=VARCHAR},
+      unqualify_item = #{unqualifyItem,jdbcType=VARCHAR},
+      unqualify_count = #{unqualifyCount,jdbcType=INTEGER},
+      assembly_date = #{assemblyDate,jdbcType=TIMESTAMP},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR}
+    where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

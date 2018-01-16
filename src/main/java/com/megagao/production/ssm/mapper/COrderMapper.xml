@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.COrderMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.COrderVO" >
+    <id column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_date" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="request_date" property="requestDate" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="file" property="file" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  	<association property="custom" javaType="custom">
+		<id column="custom_id" property="customId" jdbcType="VARCHAR" />
+		<result column="custom_name" property="customName" jdbcType="VARCHAR" />
+    	<result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    	<result column="address" property="address" jdbcType="VARCHAR" />
+    	<result column="fax" property="fax" jdbcType="VARCHAR" />
+    	<result column="email" property="email" jdbcType="VARCHAR" />
+    	<result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    	<result column="owner_tel" property="ownerTel" jdbcType="VARCHAR" />
+    	<result column="c_state" property="state" jdbcType="INTEGER" />
+    	<result column="manager_tel" property="managerTel" jdbcType="VARCHAR" />
+    	<result column="c_note" property="note" jdbcType="VARCHAR" />
+	</association>
+	<association property="product" javaType="product">
+		<id column="product_id" property="productId" jdbcType="VARCHAR" />
+	    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+	    <result column="product_type" property="productType" jdbcType="VARCHAR" />
+	    <result column="drawing" property="drawing" jdbcType="VARCHAR" />
+	</association>
+	</resultMap>
+	
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="cOrder" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		<if test="status!=null">
+			and status=#{status}
+		</if>
+		ORDER BY c_order.order_date
+	</select>
+	
+	<select id="searchOrderByOrderId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		WHERE 
+			order_id like CONCAT('%',#{orderId},'%' ) 
+		ORDER BY c_order.order_date
+	</select>
+	
+	<select id="searchOrderByCustomName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		WHERE 
+			custom_name like CONCAT('%',#{customName},'%' ) 
+		ORDER BY c_order.order_date
+	</select>
+	
+	<select id="searchOrderByProductName" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			order_id,
+			order_date,
+			request_date,
+			c_order.note,
+			quantity,
+			unit_price,
+			unit,
+			c_order.image,
+			file,
+			c_order.status,
+			custom.custom_id,
+			custom_name,
+			product.product_id,
+			product_name
+		FROM
+			c_order
+		LEFT JOIN custom ON c_order.custom_id = custom.custom_id
+		LEFT JOIN product ON c_order.product_id = product.product_id
+		WHERE 
+			product_name like CONCAT('%',#{productName},'%' ) 
+		ORDER BY c_order.order_date
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			c_order
+		WHERE
+			order_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改状态，批量启用停用-->
+	<update id="changeStatus">
+		UPDATE c_order
+		SET status = #{status}
+		WHERE
+			order_id IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="com.megagao.production.ssm.domain.COrder" >
+		UPDATE c_order
+		SET note = #{note}
+		WHERE
+			order_id = #{orderId,jdbcType=VARCHAR}
+	</update>
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    order_id, custom_id, product_id, order_date, request_date, note, quantity, unit_price, 
+    unit, image, file, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.COrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from c_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.COrderExample" >
+    delete from c_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.COrder" >
+    insert into c_order (order_id, custom_id, product_id, 
+      order_date, request_date, note, 
+      quantity, unit_price, unit, 
+      image, file, status
+      )
+    values (#{orderId,jdbcType=VARCHAR}, #{customId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+      #{orderDate,jdbcType=TIMESTAMP}, #{requestDate,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=INTEGER}, #{unitPrice,jdbcType=DECIMAL}, #{unit,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{file,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.COrder" >
+    insert into c_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="customId != null" >
+        custom_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="orderDate != null" >
+        order_date,
+      </if>
+      <if test="requestDate != null" >
+        request_date,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="file != null" >
+        file,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null" >
+        #{customId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestDate != null" >
+        #{requestDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null" >
+        #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.COrderExample" resultType="java.lang.Integer" >
+    select count(*) from c_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_order
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customId != null" >
+        custom_id = #{record.customId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderDate != null" >
+        order_date = #{record.orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.requestDate != null" >
+        request_date = #{record.requestDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.file != null" >
+        file = #{record.file,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_order
+    set order_id = #{record.orderId,jdbcType=VARCHAR},
+      custom_id = #{record.customId,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      order_date = #{record.orderDate,jdbcType=TIMESTAMP},
+      request_date = #{record.requestDate,jdbcType=TIMESTAMP},
+      note = #{record.note,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      unit_price = #{record.unitPrice,jdbcType=DECIMAL},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      file = #{record.file,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.COrder" >
+    update c_order
+    <set >
+      <if test="customId != null" >
+        custom_id = #{customId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        order_date = #{orderDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestDate != null" >
+        request_date = #{requestDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="file != null" >
+        file = #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.COrder" >
+    update c_order
+    set custom_id = #{customId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=TIMESTAMP},
+      request_date = #{requestDate,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=DECIMAL},
+      unit = #{unit,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      file = #{file,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

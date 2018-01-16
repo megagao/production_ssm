@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ProcessMeasureCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.ProcessMeasureCheck" >
+    <id column="p_measure_check_id" property="pMeasureCheckId" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="check_item" property="checkItem" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="measure_data" property="measureData" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.ProcessMeasureCheckVO" extends="BaseResultMap">
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   	<!-- 查询所有记录 -->
+	<select id="find" parameterType="processMeasureCheck" resultMap="AddResultMap">
+		SELECT
+			p_measure_check_id ,
+			process_id,
+			check_item,
+			cdate,
+			measure_data,
+			process_measure_check.emp_id,
+			emp_name,
+			result,
+			process_measure_check.note
+		FROM
+			process_measure_check,
+			employee
+		WHERE 
+			process_measure_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
+	<update id="updateNote" parameterType="processMeasureCheck" >
+		UPDATE process_measure_check
+		SET note = #{note}
+		WHERE
+			p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+	</update>
+  
+  	<select id="searchPMeasureCheckByPMeasureCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			p_measure_check_id ,
+			process_id,
+			check_item,
+			cdate,
+			measure_data,
+			process_measure_check.emp_id,
+			emp_name,
+			result,
+			process_measure_check.note
+		FROM
+			process_measure_check,
+			employee
+		WHERE 
+			process_measure_check.emp_id = employee.emp_id
+		AND p_measure_check_id like CONCAT('%',#{pMeasureCheckId},'%' ) 
+	</select>
+  
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			process_measure_check
+		WHERE
+			p_measure_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    p_measure_check_id, process_id, check_item, cdate, measure_data, emp_id, result, 
+    note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from process_measure_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from process_measure_check
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from process_measure_check
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheckExample" >
+    delete from process_measure_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheck" >
+    insert into process_measure_check (p_measure_check_id, process_id, check_item, 
+      cdate, measure_data, emp_id, 
+      result, note)
+    values (#{pMeasureCheckId,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheck" >
+    insert into process_measure_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pMeasureCheckId != null" >
+        p_measure_check_id,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="checkItem != null" >
+        check_item,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="measureData != null" >
+        measure_data,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pMeasureCheckId != null" >
+        #{pMeasureCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheckExample" resultType="java.lang.Integer" >
+    select count(*) from process_measure_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update process_measure_check
+    <set >
+      <if test="record.pMeasureCheckId != null" >
+        p_measure_check_id = #{record.pMeasureCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processId != null" >
+        process_id = #{record.processId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkItem != null" >
+        check_item = #{record.checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdate != null" >
+        cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.measureData != null" >
+        measure_data = #{record.measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update process_measure_check
+    set p_measure_check_id = #{record.pMeasureCheckId,jdbcType=VARCHAR},
+      process_id = #{record.processId,jdbcType=VARCHAR},
+      check_item = #{record.checkItem,jdbcType=VARCHAR},
+      cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      measure_data = #{record.measureData,jdbcType=VARCHAR},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheck" >
+    update process_measure_check
+    <set >
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        check_item = #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        measure_data = #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ProcessMeasureCheck" >
+    update process_measure_check
+    set process_id = #{processId,jdbcType=VARCHAR},
+      check_item = #{checkItem,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      measure_data = #{measureData,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where p_measure_check_id = #{pMeasureCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

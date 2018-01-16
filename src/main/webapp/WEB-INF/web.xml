@@ -55,7 +55,7 @@
   <!-- sessionFilter -->
   <filter>
     <filter-name>sessionFilter</filter-name>
-    <filter-class>org.hqu.production_ms.filter.SessionFilter</filter-class>
+    <filter-class>com.megagao.production.ssm.filter.SessionFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>sessionFilter</filter-name>

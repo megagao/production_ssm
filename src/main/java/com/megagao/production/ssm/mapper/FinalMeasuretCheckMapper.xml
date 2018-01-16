@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.FinalMeasuretCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.FinalMeasuretCheck" >
+    <id column="f_measure_check_id" property="fMeasureCheckId" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="check_item" property="checkItem" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="measure_data" property="measureData" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.FinalMeasuretCheckVO" extends="BaseResultMap">
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="finalMeasuretCheck" resultMap="AddResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			final_measuret_check.emp_id,
+			emp_name,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check,
+			employee
+		where final_measuret_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
+	<update id="updateNote" parameterType="finalMeasuretCheck" >
+		UPDATE final_measuret_check
+		SET note = #{note}
+		WHERE
+			f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+	</update>
+  
+    <select id="searchFMeasureCheckByFMeasureCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			final_measuret_check.emp_id,
+			emp_name,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check,
+			employee
+		where final_measuret_check.emp_id = employee.emp_id
+		AND f_measure_check_id like CONCAT('%',#{fMeasureCheckId},'%' ) 
+	</select>
+  
+  	<select id="searchFMeasureCheckByOrderId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			f_measure_check_id ,
+			final_measuret_check.order_id,
+			check_item,
+			cdate,
+			measure_data,
+			final_measuret_check.emp_id,
+			emp_name,
+			result,
+			final_measuret_check.note
+		FROM
+			final_measuret_check,
+			employee
+		where final_measuret_check.emp_id = employee.emp_id
+		AND final_measuret_check.order_id like CONCAT('%',#{orderId},'%' ) 
+	</select>
+  
+  	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			final_measuret_check
+		WHERE
+			f_measure_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_measure_check_id, order_id, check_item, cdate, measure_data, emp_id, result, note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from final_measuret_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from final_measuret_check
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from final_measuret_check
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheckExample" >
+    delete from final_measuret_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheck" >
+    insert into final_measuret_check (f_measure_check_id, order_id, check_item, 
+      cdate, measure_data, emp_id, 
+      result, note)
+    values (#{fMeasureCheckId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheck" >
+    insert into final_measuret_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fMeasureCheckId != null" >
+        f_measure_check_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="checkItem != null" >
+        check_item,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="measureData != null" >
+        measure_data,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fMeasureCheckId != null" >
+        #{fMeasureCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheckExample" resultType="java.lang.Integer" >
+    select count(*) from final_measuret_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update final_measuret_check
+    <set >
+      <if test="record.fMeasureCheckId != null" >
+        f_measure_check_id = #{record.fMeasureCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkItem != null" >
+        check_item = #{record.checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdate != null" >
+        cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.measureData != null" >
+        measure_data = #{record.measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update final_measuret_check
+    set f_measure_check_id = #{record.fMeasureCheckId,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      check_item = #{record.checkItem,jdbcType=VARCHAR},
+      cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      measure_data = #{record.measureData,jdbcType=VARCHAR},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheck" >
+    update final_measuret_check
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        check_item = #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        measure_data = #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.FinalMeasuretCheck" >
+    update final_measuret_check
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      check_item = #{checkItem,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      measure_data = #{measureData,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where f_measure_check_id = #{fMeasureCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

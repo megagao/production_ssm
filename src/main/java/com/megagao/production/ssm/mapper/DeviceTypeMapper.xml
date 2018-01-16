@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.DeviceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.DeviceType" >
+    <id column="device_type_id" property="deviceTypeId" jdbcType="VARCHAR" />
+    <result column="device_type_name" property="deviceTypeName" jdbcType="VARCHAR" />
+    <result column="device_type_model" property="deviceTypeModel" jdbcType="VARCHAR" />
+    <result column="device_type_spec" property="deviceTypeSpec" jdbcType="VARCHAR" />
+    <result column="device_type_supplier" property="deviceTypeSupplier" jdbcType="VARCHAR" />
+    <result column="device_type_producer" property="deviceTypeProducer" jdbcType="VARCHAR" />
+    <result column="device_type_quantity" property="deviceTypeQuantity" jdbcType="INTEGER" />
+    <result column="device_type_warranty" property="deviceTypeWarranty" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.DeviceTypeVO" extends="BaseResultMap">
+    <result column="device_type_idd" property="deviceTypeIdd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="deviceType" resultMap="AddResultMap">
+		SELECT
+			device_type_id,
+			device_type_id as device_type_idd,
+			device_type_name,
+			device_type_model,
+			device_type_spec,
+			device_type_supplier,
+			device_type_producer,
+			device_type_quantity,
+			device_type_warranty
+		FROM
+			device_type
+		order by device_type_id ASC
+	</select>
+
+	<!-- 查询所有种类记录 -->
+	<!-- parameterType=""  -->
+	<select id="listType" resultMap="BaseResultMap">
+		SELECT
+			device_type_id,
+			device_type_name
+		FROM
+			device_type
+		
+		order by device_type_id ASC
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device_type
+		WHERE
+			device_type_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+	<select id="searchDeviceTypeByDeviceTypeId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_type_id,
+			device_type_id as device_type_idd,
+			device_type_name,
+			device_type_model,
+			device_type_spec,
+			device_type_supplier,
+			device_type_producer,
+			device_type_quantity,
+			device_type_warranty
+		FROM
+			device_type
+		WHERE
+			device_type_id LIKE CONCAT(
+				'%',
+				#{deviceTypeId},'%' ) 
+	</select>
+	
+	<select id="searchDeviceTypeByDeviceTypeName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_type_id,
+			device_type_id as device_type_idd,
+			device_type_name,
+			device_type_model,
+			device_type_spec,
+			device_type_supplier,
+			device_type_producer,
+			device_type_quantity,
+			device_type_warranty
+		FROM
+			device_type
+		WHERE
+			device_type_name LIKE CONCAT(
+				'%',
+				#{deviceTypeName},'%' ) 
+	</select>
+	
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    device_type_id, device_type_name, device_type_model, device_type_spec, device_type_supplier, 
+    device_type_producer, device_type_quantity, device_type_warranty
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.DeviceTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_type
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device_type
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.DeviceTypeExample" >
+    delete from device_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.DeviceType" >
+    insert into device_type (device_type_id, device_type_name, device_type_model, 
+      device_type_spec, device_type_supplier, device_type_producer, 
+      device_type_quantity, device_type_warranty
+      )
+    values (#{deviceTypeId,jdbcType=VARCHAR}, #{deviceTypeName,jdbcType=VARCHAR}, #{deviceTypeModel,jdbcType=VARCHAR}, 
+      #{deviceTypeSpec,jdbcType=VARCHAR}, #{deviceTypeSupplier,jdbcType=VARCHAR}, #{deviceTypeProducer,jdbcType=VARCHAR}, 
+      #{deviceTypeQuantity,jdbcType=INTEGER}, #{deviceTypeWarranty,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.DeviceType" >
+    insert into device_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceTypeId != null" >
+        device_type_id,
+      </if>
+      <if test="deviceTypeName != null" >
+        device_type_name,
+      </if>
+      <if test="deviceTypeModel != null" >
+        device_type_model,
+      </if>
+      <if test="deviceTypeSpec != null" >
+        device_type_spec,
+      </if>
+      <if test="deviceTypeSupplier != null" >
+        device_type_supplier,
+      </if>
+      <if test="deviceTypeProducer != null" >
+        device_type_producer,
+      </if>
+      <if test="deviceTypeQuantity != null" >
+        device_type_quantity,
+      </if>
+      <if test="deviceTypeWarranty != null" >
+        device_type_warranty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceTypeId != null" >
+        #{deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeName != null" >
+        #{deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeModel != null" >
+        #{deviceTypeModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSpec != null" >
+        #{deviceTypeSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSupplier != null" >
+        #{deviceTypeSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeProducer != null" >
+        #{deviceTypeProducer,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeQuantity != null" >
+        #{deviceTypeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="deviceTypeWarranty != null" >
+        #{deviceTypeWarranty,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.DeviceTypeExample" resultType="java.lang.Integer" >
+    select count(*) from device_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device_type
+    <set >
+      <if test="record.deviceTypeId != null" >
+        device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeName != null" >
+        device_type_name = #{record.deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeModel != null" >
+        device_type_model = #{record.deviceTypeModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeSpec != null" >
+        device_type_spec = #{record.deviceTypeSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeSupplier != null" >
+        device_type_supplier = #{record.deviceTypeSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeProducer != null" >
+        device_type_producer = #{record.deviceTypeProducer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceTypeQuantity != null" >
+        device_type_quantity = #{record.deviceTypeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceTypeWarranty != null" >
+        device_type_warranty = #{record.deviceTypeWarranty,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device_type
+    set device_type_id = #{record.deviceTypeId,jdbcType=VARCHAR},
+      device_type_name = #{record.deviceTypeName,jdbcType=VARCHAR},
+      device_type_model = #{record.deviceTypeModel,jdbcType=VARCHAR},
+      device_type_spec = #{record.deviceTypeSpec,jdbcType=VARCHAR},
+      device_type_supplier = #{record.deviceTypeSupplier,jdbcType=VARCHAR},
+      device_type_producer = #{record.deviceTypeProducer,jdbcType=VARCHAR},
+      device_type_quantity = #{record.deviceTypeQuantity,jdbcType=INTEGER},
+      device_type_warranty = #{record.deviceTypeWarranty,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.DeviceType" >
+    update device_type
+    <set >
+      <if test="deviceTypeName != null" >
+        device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeModel != null" >
+        device_type_model = #{deviceTypeModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSpec != null" >
+        device_type_spec = #{deviceTypeSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeSupplier != null" >
+        device_type_supplier = #{deviceTypeSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeProducer != null" >
+        device_type_producer = #{deviceTypeProducer,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceTypeQuantity != null" >
+        device_type_quantity = #{deviceTypeQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="deviceTypeWarranty != null" >
+        device_type_warranty = #{deviceTypeWarranty,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.DeviceType" >
+    update device_type
+    set device_type_name = #{deviceTypeName,jdbcType=VARCHAR},
+      device_type_model = #{deviceTypeModel,jdbcType=VARCHAR},
+      device_type_spec = #{deviceTypeSpec,jdbcType=VARCHAR},
+      device_type_supplier = #{deviceTypeSupplier,jdbcType=VARCHAR},
+      device_type_producer = #{deviceTypeProducer,jdbcType=VARCHAR},
+      device_type_quantity = #{deviceTypeQuantity,jdbcType=INTEGER},
+      device_type_warranty = #{deviceTypeWarranty,jdbcType=TIMESTAMP}
+    where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

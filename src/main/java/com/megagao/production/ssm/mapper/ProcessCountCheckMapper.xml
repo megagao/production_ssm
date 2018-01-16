@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ProcessCountCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.ProcessCountCheck" >
+    <id column="p_count_check_id" property="pCountCheckId" jdbcType="VARCHAR" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="check_item" property="checkItem" jdbcType="VARCHAR" />
+    <result column="sample" property="sample" jdbcType="INTEGER" />
+    <result column="check_number" property="checkNumber" jdbcType="INTEGER" />
+    <result column="unqualify" property="unqualify" jdbcType="INTEGER" />
+    <result column="qualify" property="qualify" jdbcType="DECIMAL" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="measure_data" property="measureData" jdbcType="VARCHAR" />
+    <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.ProcessCountCheckVO" extends="BaseResultMap">
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="processCountCheck" resultMap="AddResultMap">
+		SELECT
+			p_count_check_id,
+			process_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			process_count_check.emp_id,
+			emp_name,
+			result,
+			note
+		FROM
+			process_count_check,
+			employee
+		WHERE 
+			process_count_check.emp_id = employee.emp_id
+	</select>
+	
+  	<!-- 修改备注-->
+	<update id="updateNote" parameterType="processCountCheck" >
+		UPDATE process_count_check
+		SET note = #{note}
+		WHERE
+			p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+	</update>
+  
+  	<select id="searchPCountCheckByPCountCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			p_count_check_id,
+			process_id,
+			check_item,
+			sample,
+			check_number,
+			unqualify,
+			qualify,
+			cdate,
+			measure_data,
+			process_count_check.emp_id,
+			emp_name,
+			result,
+			note
+		FROM
+			process_count_check,
+			employee
+		WHERE 
+			process_count_check.emp_id = employee.emp_id
+		AND	p_count_check_id like CONCAT('%',#{pCountCheckId},'%' ) 
+	</select>
+  
+  	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			process_count_check
+		WHERE
+			p_count_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    p_count_check_id, process_id, check_item, sample, check_number, unqualify, qualify, 
+    cdate, measure_data, emp_id, result, note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ProcessCountCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from process_count_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from process_count_check
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from process_count_check
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ProcessCountCheckExample" >
+    delete from process_count_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.ProcessCountCheck" >
+    insert into process_count_check (p_count_check_id, process_id, check_item, 
+      sample, check_number, unqualify, 
+      qualify, cdate, measure_data, 
+      emp_id, result, note
+      )
+    values (#{pCountCheckId,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, #{checkItem,jdbcType=VARCHAR}, 
+      #{sample,jdbcType=INTEGER}, #{checkNumber,jdbcType=INTEGER}, #{unqualify,jdbcType=INTEGER}, 
+      #{qualify,jdbcType=DECIMAL}, #{cdate,jdbcType=TIMESTAMP}, #{measureData,jdbcType=VARCHAR}, 
+      #{empId,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ProcessCountCheck" >
+    insert into process_count_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pCountCheckId != null" >
+        p_count_check_id,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="checkItem != null" >
+        check_item,
+      </if>
+      <if test="sample != null" >
+        sample,
+      </if>
+      <if test="checkNumber != null" >
+        check_number,
+      </if>
+      <if test="unqualify != null" >
+        unqualify,
+      </if>
+      <if test="qualify != null" >
+        qualify,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="measureData != null" >
+        measure_data,
+      </if>
+      <if test="empId != null" >
+        emp_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pCountCheckId != null" >
+        #{pCountCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="sample != null" >
+        #{sample,jdbcType=INTEGER},
+      </if>
+      <if test="checkNumber != null" >
+        #{checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unqualify != null" >
+        #{unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="qualify != null" >
+        #{qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ProcessCountCheckExample" resultType="java.lang.Integer" >
+    select count(*) from process_count_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update process_count_check
+    <set >
+      <if test="record.pCountCheckId != null" >
+        p_count_check_id = #{record.pCountCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processId != null" >
+        process_id = #{record.processId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkItem != null" >
+        check_item = #{record.checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sample != null" >
+        sample = #{record.sample,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkNumber != null" >
+        check_number = #{record.checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.unqualify != null" >
+        unqualify = #{record.unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="record.qualify != null" >
+        qualify = #{record.qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cdate != null" >
+        cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.measureData != null" >
+        measure_data = #{record.measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empId != null" >
+        emp_id = #{record.empId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update process_count_check
+    set p_count_check_id = #{record.pCountCheckId,jdbcType=VARCHAR},
+      process_id = #{record.processId,jdbcType=VARCHAR},
+      check_item = #{record.checkItem,jdbcType=VARCHAR},
+      sample = #{record.sample,jdbcType=INTEGER},
+      check_number = #{record.checkNumber,jdbcType=INTEGER},
+      unqualify = #{record.unqualify,jdbcType=INTEGER},
+      qualify = #{record.qualify,jdbcType=DECIMAL},
+      cdate = #{record.cdate,jdbcType=TIMESTAMP},
+      measure_data = #{record.measureData,jdbcType=VARCHAR},
+      emp_id = #{record.empId,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ProcessCountCheck" >
+    update process_count_check
+    <set >
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkItem != null" >
+        check_item = #{checkItem,jdbcType=VARCHAR},
+      </if>
+      <if test="sample != null" >
+        sample = #{sample,jdbcType=INTEGER},
+      </if>
+      <if test="checkNumber != null" >
+        check_number = #{checkNumber,jdbcType=INTEGER},
+      </if>
+      <if test="unqualify != null" >
+        unqualify = #{unqualify,jdbcType=INTEGER},
+      </if>
+      <if test="qualify != null" >
+        qualify = #{qualify,jdbcType=DECIMAL},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="measureData != null" >
+        measure_data = #{measureData,jdbcType=VARCHAR},
+      </if>
+      <if test="empId != null" >
+        emp_id = #{empId,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ProcessCountCheck" >
+    update process_count_check
+    set process_id = #{processId,jdbcType=VARCHAR},
+      check_item = #{checkItem,jdbcType=VARCHAR},
+      sample = #{sample,jdbcType=INTEGER},
+      check_number = #{checkNumber,jdbcType=INTEGER},
+      unqualify = #{unqualify,jdbcType=INTEGER},
+      qualify = #{qualify,jdbcType=DECIMAL},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      measure_data = #{measureData,jdbcType=VARCHAR},
+      emp_id = #{empId,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

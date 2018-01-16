@@ -19,7 +19,7 @@
 	<aop:config proxy-target-class="true"></aop:config>
 	
 	<!-- 使用spring组件扫描 -->
-	<context:component-scan base-package="org.hqu.production_ms.controller" /> 
+	<context:component-scan base-package="com.megagao.production.ssm.controller" />
 	
 	<!-- 配置内部资源视图解析器，要求将jstl的包加到classpath -->
 	<bean
@@ -54,15 +54,15 @@
 	</bean>
 	
 	<!-- 定义统一异常处理器 -->
-	<bean class="org.hqu.production_ms.exception.CustomExceptionResolver"></bean>
+	<bean class="com.megagao.production.ssm.exception.CustomExceptionResolver"></bean>
 	
 	<!-- 转换器 -->
 	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
-				<bean class="org.hqu.production_ms.controller.converter.CustomDateConverter"/>
-				<bean class="org.hqu.production_ms.controller.converter.StringTrimConverter"/>
+				<bean class="com.megagao.production.ssm.controller.converter.CustomDateConverter"/>
+				<bean class="com.megagao.production.ssm.controller.converter.StringTrimConverter"/>
 			</set>
 		</property>
 	</bean>
@@ -81,7 +81,7 @@
 		<!-- 资源文件名 -->
 		<property name="basenames">
 			<list>
-				<value>classpath:CustomValidationMessages.properties</value>
+				<value>CustomValidationMessages.properties</value>
 			</list>
 		</property>
 		<!-- 资源文件编码格式 -->

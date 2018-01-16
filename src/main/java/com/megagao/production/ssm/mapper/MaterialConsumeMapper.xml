@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.MaterialConsumeMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.MaterialConsumeVO" >
+    <id column="consume_id" property="consumeId" jdbcType="VARCHAR" />
+    <result column="consume_amount" property="consumeAmount" jdbcType="INTEGER" />
+    <result column="consume_date" property="consumeDate" jdbcType="TIMESTAMP" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <association property="work" javaType="work">
+		<id column="work_id" property="workId" jdbcType="VARCHAR" />
+	    <result column="process_number" property="processNumber" jdbcType="VARCHAR" />
+	    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+	    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+	    <result column="equipment_id" property="equipmentId" jdbcType="VARCHAR" />
+	    <result column="rating" property="rating" jdbcType="INTEGER" />
+	</association>
+	<association property="material" javaType="material">
+		<id column="material_id" property="materialId" jdbcType="VARCHAR" />
+	    <result column="material_type" property="materialType" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="VARCHAR" />
+	    <result column="remaining" property="remaining" jdbcType="INTEGER" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  
+  	<!-- 扩展的sql -->
+  	<!-- 查询所有记录 -->
+	<select id="find" parameterType="MaterialConsume" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume
+		LEFT JOIN material ON material_consume.material_id = material.material_id
+		LEFT JOIN work ON material_consume.work_id = work.work_id
+	</select>
+	
+  	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			material_consume
+		WHERE
+			consume_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="com.megagao.production.ssm.domain.MaterialConsume" >
+		UPDATE material_consume
+		SET note = #{note}
+		WHERE
+			consume_id = #{consumeId,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 依据consumeID查询 -->
+	<select id="searchMaterialConsumeByConsumeId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume		
+		LEFT JOIN  material
+			ON	 material_consume.material_id=material.material_id
+		LEFT JOIN  work
+		    ON   material_consume.work_id=work.work_id
+		WHERE  consume_id like CONCAT('%',#{consumeId},'%' ) 
+	</select>
+	
+	<!-- 依据materialID查询 -->
+	<select id="searchMaterialConsumeByMaterialId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			consume_id,
+			consume_amount,
+			consume_date,
+			sender,
+			receiver,
+			material_consume.note,
+			material.material_id,
+			work.work_id
+		FROM
+			material_consume		
+		LEFT JOIN  material
+			ON	 material_consume.material_id=material.material_id
+		LEFT JOIN  work
+		    ON   material_consume.work_id=work.work_id
+		  where  material_consume.material_id like CONCAT('%',#{materialId},'%' ) 
+	  </select>
+	  
+	<!-- 依据workID查询 -->
+	<select id="searchMaterialConsumeByWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+				consume_id,
+				consume_amount,
+				consume_date,
+				sender,
+				receiver,
+				material_consume.note,
+				material.material_id,
+				work.work_id
+		FROM
+				material_consume		
+			LEFT JOIN  material
+				ON	 material_consume.material_id=material.material_id
+			LEFT JOIN  work
+			    ON   material_consume.work_id=work.work_id
+			WHERE material_consume.work_id like CONCAT('%',#{workId},'%' ) 
+   	</select>
+   
+   
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, 
+    note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.MaterialConsumeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from material_consume
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from material_consume
+    where consume_id = #{consumeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from material_consume
+    where consume_id = #{consumeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.MaterialConsumeExample" >
+    delete from material_consume
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.MaterialConsume" >
+    insert into material_consume (consume_id, work_id, material_id, 
+      consume_amount, consume_date, sender, 
+      receiver, note)
+    values (#{consumeId,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, #{materialId,jdbcType=VARCHAR}, 
+      #{consumeAmount,jdbcType=INTEGER}, #{consumeDate,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR}, 
+      #{receiver,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.MaterialConsume" >
+    insert into material_consume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="consumeId != null" >
+        consume_id,
+      </if>
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="materialId != null" >
+        material_id,
+      </if>
+      <if test="consumeAmount != null" >
+        consume_amount,
+      </if>
+      <if test="consumeDate != null" >
+        consume_date,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="consumeId != null" >
+        #{consumeId,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="materialId != null" >
+        #{materialId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeAmount != null" >
+        #{consumeAmount,jdbcType=INTEGER},
+      </if>
+      <if test="consumeDate != null" >
+        #{consumeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.MaterialConsumeExample" resultType="java.lang.Integer" >
+    select count(*) from material_consume
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update material_consume
+    <set >
+      <if test="record.consumeId != null" >
+        consume_id = #{record.consumeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workId != null" >
+        work_id = #{record.workId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialId != null" >
+        material_id = #{record.materialId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumeAmount != null" >
+        consume_amount = #{record.consumeAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.consumeDate != null" >
+        consume_date = #{record.consumeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sender != null" >
+        sender = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update material_consume
+    set consume_id = #{record.consumeId,jdbcType=VARCHAR},
+      work_id = #{record.workId,jdbcType=VARCHAR},
+      material_id = #{record.materialId,jdbcType=VARCHAR},
+      consume_amount = #{record.consumeAmount,jdbcType=INTEGER},
+      consume_date = #{record.consumeDate,jdbcType=TIMESTAMP},
+      sender = #{record.sender,jdbcType=VARCHAR},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.MaterialConsume" >
+    update material_consume
+    <set >
+      <if test="workId != null" >
+        work_id = #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="materialId != null" >
+        material_id = #{materialId,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeAmount != null" >
+        consume_amount = #{consumeAmount,jdbcType=INTEGER},
+      </if>
+      <if test="consumeDate != null" >
+        consume_date = #{consumeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sender != null" >
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where consume_id = #{consumeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.MaterialConsume" >
+    update material_consume
+    set work_id = #{workId,jdbcType=VARCHAR},
+      material_id = #{materialId,jdbcType=VARCHAR},
+      consume_amount = #{consumeAmount,jdbcType=INTEGER},
+      consume_date = #{consumeDate,jdbcType=TIMESTAMP},
+      sender = #{sender,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where consume_id = #{consumeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

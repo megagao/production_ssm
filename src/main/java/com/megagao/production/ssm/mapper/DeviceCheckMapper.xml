@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.DeviceCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.DeviceCheck" >
+    <id column="device_check_id" property="deviceCheckId" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="device_check_emp_id" property="deviceCheckEmpId" jdbcType="VARCHAR" />
+    <result column="device_check_date" property="deviceCheckDate" jdbcType="TIMESTAMP" />
+    <result column="device_check_result" property="deviceCheckResult" jdbcType="VARCHAR" />
+    <result column="device_check_fault_id" property="deviceCheckFaultId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="AddResultMap" type="com.megagao.production.ssm.domain.vo.DeviceCheckVO" extends="BaseResultMap">
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_check_emp" property="deviceCheckEmp" jdbcType="VARCHAR" />
+  </resultMap>
+
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="deviceCheck" resultMap="AddResultMap">
+		SELECT
+			device_check_id,
+			device_check.device_id,
+			device.device_name,
+			emp_id as device_check_emp_id,
+			emp_name as device_check_emp,
+			device_check_date,
+			device_check_result,
+			device_check_fault_id
+		FROM
+			device_check,
+			device,
+			employee
+		WHERE
+			device_check.device_id = device.device_id
+		AND device_check_emp_id = employee.emp_id
+		
+		order by device_check_id ASC
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			device_check
+		WHERE
+			device_check_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateNote" parameterType="com.megagao.production.ssm.domain.DeviceCheck" >
+		UPDATE device_check
+		SET device_check_result = #{deviceCheckResult}
+		WHERE
+			device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="searchDeviceCheckByDeviceCheckId" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_check_id,
+			device_check.device_id,
+			device.device_name,
+			emp_id as device_check_emp_id,
+			emp_name as device_check_emp,
+			device_check_date,
+			device_check_result,
+			device_check_fault_id
+		FROM
+			device_check,
+			device,
+			employee
+		WHERE
+			device_check.device_id = device.device_id
+		AND device_check_emp_id = employee.emp_id
+		AND	device_check_id LIKE CONCAT(
+				'%',
+				#{deviceCheckId},'%' ) 
+	</select>
+  
+  	<select id="searchDeviceCheckByDeviceName" parameterType="string" resultMap="AddResultMap">
+		SELECT
+			device_check_id,
+			device_check.device_id,
+			device.device_name,
+			emp_id as device_check_emp_id,
+			emp_name as device_check_emp,
+			device_check_date,
+			device_check_result,
+			device_check_fault_id
+		FROM
+			device_check,
+			device,
+			employee
+		WHERE
+			device_check.device_id = device.device_id
+		AND device_check_emp_id = employee.emp_id
+		AND	device.device_name LIKE CONCAT(
+				'%',
+				#{deviceName},'%' ) 
+	</select>
+	
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    device_check_id, device_id, device_check_emp_id, device_check_date, device_check_result, 
+    device_check_fault_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.DeviceCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_check
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device_check
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.DeviceCheckExample" >
+    delete from device_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.DeviceCheck" >
+    insert into device_check (device_check_id, device_id, device_check_emp_id, 
+      device_check_date, device_check_result, device_check_fault_id
+      )
+    values (#{deviceCheckId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{deviceCheckEmpId,jdbcType=VARCHAR}, 
+      #{deviceCheckDate,jdbcType=TIMESTAMP}, #{deviceCheckResult,jdbcType=VARCHAR}, #{deviceCheckFaultId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.DeviceCheck" >
+    insert into device_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceCheckId != null" >
+        device_check_id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="deviceCheckEmpId != null" >
+        device_check_emp_id,
+      </if>
+      <if test="deviceCheckDate != null" >
+        device_check_date,
+      </if>
+      <if test="deviceCheckResult != null" >
+        device_check_result,
+      </if>
+      <if test="deviceCheckFaultId != null" >
+        device_check_fault_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceCheckId != null" >
+        #{deviceCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckEmpId != null" >
+        #{deviceCheckEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckDate != null" >
+        #{deviceCheckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceCheckResult != null" >
+        #{deviceCheckResult,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckFaultId != null" >
+        #{deviceCheckFaultId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.DeviceCheckExample" resultType="java.lang.Integer" >
+    select count(*) from device_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device_check
+    <set >
+      <if test="record.deviceCheckId != null" >
+        device_check_id = #{record.deviceCheckId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceCheckEmpId != null" >
+        device_check_emp_id = #{record.deviceCheckEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceCheckDate != null" >
+        device_check_date = #{record.deviceCheckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceCheckResult != null" >
+        device_check_result = #{record.deviceCheckResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceCheckFaultId != null" >
+        device_check_fault_id = #{record.deviceCheckFaultId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device_check
+    set device_check_id = #{record.deviceCheckId,jdbcType=VARCHAR},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      device_check_emp_id = #{record.deviceCheckEmpId,jdbcType=VARCHAR},
+      device_check_date = #{record.deviceCheckDate,jdbcType=TIMESTAMP},
+      device_check_result = #{record.deviceCheckResult,jdbcType=VARCHAR},
+      device_check_fault_id = #{record.deviceCheckFaultId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.DeviceCheck" >
+    update device_check
+    <set >
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckEmpId != null" >
+        device_check_emp_id = #{deviceCheckEmpId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckDate != null" >
+        device_check_date = #{deviceCheckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceCheckResult != null" >
+        device_check_result = #{deviceCheckResult,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCheckFaultId != null" >
+        device_check_fault_id = #{deviceCheckFaultId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.DeviceCheck" >
+    update device_check
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      device_check_emp_id = #{deviceCheckEmpId,jdbcType=VARCHAR},
+      device_check_date = #{deviceCheckDate,jdbcType=TIMESTAMP},
+      device_check_result = #{deviceCheckResult,jdbcType=VARCHAR},
+      device_check_fault_id = #{deviceCheckFaultId,jdbcType=VARCHAR}
+    where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
+  </update>
+</mapper>

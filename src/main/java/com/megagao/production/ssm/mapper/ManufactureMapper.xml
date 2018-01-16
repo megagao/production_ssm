@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ManufactureMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ManufactureVO" >
+    <id column="manufacture_sn" property="manufactureSn" jdbcType="VARCHAR" />
+    <result column="launch_quantity" property="launchQuantity" jdbcType="INTEGER" />
+    <result column="begin_date" property="beginDate" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <association property="cOrder" javaType="cOrder">
+		<id column="order_id" property="orderId" jdbcType="VARCHAR" />
+	</association>
+	<association property="technology" javaType="technology">
+		<id column="technology_id" property="technologyId" jdbcType="VARCHAR" />
+	    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  
+  	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id,
+			manufacture.technology_id,
+			technology_name
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			manufacture
+		WHERE
+			manufacture_sn IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<select id="searchManufactureByManufactureSn" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id,
+			manufacture.technology_id,
+			technology_name
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+		WHERE
+			manufacture_sn LIKE CONCAT(
+				'%',
+				#{manufactureSn},'%' ) 
+	</select>
+	
+	<select id="searchManufactureByManufactureOrderId" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id,
+			manufacture.technology_id,
+			technology_name
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+		WHERE
+			c_order.order_id LIKE CONCAT(
+				'%',
+				#{orderId},'%' ) 
+	</select>
+	
+	<select id="searchManufactureByManufactureTechnologyName" resultMap="BaseResultMap">
+		SELECT
+			manufacture_sn,
+			launch_quantity,
+			begin_date,
+			end_date,
+			manufacture.order_id order_id1,
+			manufacture.technology_id technology_id1,
+			c_order.*, technology.*
+		FROM
+			manufacture
+		LEFT JOIN c_order ON c_order.order_id = manufacture.order_id
+		LEFT JOIN technology ON manufacture.technology_id = technology.technology_id 
+		WHERE
+			technology_name LIKE CONCAT(
+				'%',
+				#{technologyName},'%' ) 
+	</select>
+	
+	
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    manufacture_sn, order_id, technology_id, launch_quantity, begin_date, end_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ManufactureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from manufacture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from manufacture
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from manufacture
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ManufactureExample" >
+    delete from manufacture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.megagao.production.ssm.domain.Manufacture" >
+    insert into manufacture (manufacture_sn, order_id, technology_id, 
+      launch_quantity, begin_date, end_date
+      )
+    values (#{manufactureSn,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{technologyId,jdbcType=VARCHAR}, 
+      #{launchQuantity,jdbcType=INTEGER}, #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Manufacture" >
+    insert into manufacture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="manufactureSn != null" >
+        manufacture_sn,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="technologyId != null" >
+        technology_id,
+      </if>
+      <if test="launchQuantity != null" >
+        launch_quantity,
+      </if>
+      <if test="beginDate != null" >
+        begin_date,
+      </if>
+      <if test="endDate != null" >
+        end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="manufactureSn != null" >
+        #{manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyId != null" >
+        #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="launchQuantity != null" >
+        #{launchQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="beginDate != null" >
+        #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ManufactureExample" resultType="java.lang.Integer" >
+    select count(*) from manufacture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update manufacture
+    <set >
+      <if test="record.manufactureSn != null" >
+        manufacture_sn = #{record.manufactureSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyId != null" >
+        technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.launchQuantity != null" >
+        launch_quantity = #{record.launchQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.beginDate != null" >
+        begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endDate != null" >
+        end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update manufacture
+    set manufacture_sn = #{record.manufactureSn,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      technology_id = #{record.technologyId,jdbcType=VARCHAR},
+      launch_quantity = #{record.launchQuantity,jdbcType=INTEGER},
+      begin_date = #{record.beginDate,jdbcType=TIMESTAMP},
+      end_date = #{record.endDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Manufacture" >
+    update manufacture
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyId != null" >
+        technology_id = #{technologyId,jdbcType=VARCHAR},
+      </if>
+      <if test="launchQuantity != null" >
+        launch_quantity = #{launchQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="beginDate != null" >
+        begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null" >
+        end_date = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Manufacture" >
+    update manufacture
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      technology_id = #{technologyId,jdbcType=VARCHAR},
+      launch_quantity = #{launchQuantity,jdbcType=INTEGER},
+      begin_date = #{beginDate,jdbcType=TIMESTAMP},
+      end_date = #{endDate,jdbcType=TIMESTAMP}
+    where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
+  </update>
+</mapper>

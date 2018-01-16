@@ -15,6 +15,6 @@
 		http://www.springframework.org/schema/util/spring-util-4.0.xsd">
           
 	<!-- service包扫描 -->
-	<context:component-scan base-package="org.hqu.production_ms.service"/>
+	<context:component-scan base-package="com.megagao.production.ssm.service"/>
 
 </beans>
