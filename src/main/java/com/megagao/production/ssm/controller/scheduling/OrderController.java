@@ -27,15 +27,15 @@ public class OrderController {
 	
 	@RequestMapping("/get/{orderId}")
 	@ResponseBody
-	public COrder getItemById(@PathVariable String orderId) throws Exception{
-		COrder cOrder = orderService.get(orderId);
+	public COrderVO getItemById(@PathVariable String orderId) throws Exception{
+		COrderVO cOrder = orderService.get(orderId);
 		return cOrder;
 	}
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<COrder> getData() throws Exception{
-		 List<COrder> list = orderService.find();
+	public List<COrderVO> getData() throws Exception{
+		 List<COrderVO> list = orderService.find();
 		return list;
 	}
 	

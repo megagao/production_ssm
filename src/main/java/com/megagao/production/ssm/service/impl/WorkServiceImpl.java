@@ -36,8 +36,7 @@ public class WorkServiceImpl implements WorkService{
 	}
 
 	@Override
-	public Work get(String string) throws Exception{
-		
+	public WorkVO get(String string) throws Exception{
 		return workMapper.selectByPrimaryKey(string);
 	}
 
@@ -92,7 +91,7 @@ public class WorkServiceImpl implements WorkService{
 	}
 
 	@Override
-	public List<Work> find() throws Exception{
+	public List<WorkVO> find() throws Exception{
 		WorkExample example = new WorkExample();
 		return workMapper.selectByExample(example);
 	}

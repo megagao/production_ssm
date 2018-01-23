@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     ProductService productService;
 	
 	@Override
-	public List<COrder> find() throws Exception{
+	public List<COrderVO> find() throws Exception{
 		COrderExample example = new COrderExample();
 		return cOrderMapper.selectByExample(example);
 	}
@@ -51,8 +51,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public COrder get(String id) throws Exception{
-		
+	public COrderVO get(String id) throws Exception{
 		return cOrderMapper.selectByPrimaryKey(id);
 	}
 

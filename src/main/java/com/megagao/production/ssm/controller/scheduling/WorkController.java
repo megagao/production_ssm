@@ -27,8 +27,8 @@ public class WorkController {
 	
 	@RequestMapping("/get/{workId}")
 	@ResponseBody
-	public Work getItemById(@PathVariable String workId) throws Exception{
-		Work work = workService.get(workId);
+	public WorkVO getItemById(@PathVariable String workId) throws Exception{
+		WorkVO work = workService.get(workId);
 		return work;
 	}
 	
@@ -39,7 +39,7 @@ public class WorkController {
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Work> getData() throws Exception{
+	public List<WorkVO> getData() throws Exception{
 		return workService.find();
 	}
 	

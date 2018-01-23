@@ -9,11 +9,11 @@ import com.megagao.production.ssm.domain.Work;
 
 public interface WorkService {
 	
-	List<Work> find() throws Exception;
+	List<WorkVO> find() throws Exception;
 	
 	EUDataGridResult getList(int page, int rows, WorkVO work) throws Exception;
-	
-	Work get(String string) throws Exception;
+
+	WorkVO get(String string) throws Exception;
 	
 	CustomResult delete(String string) throws Exception;
 

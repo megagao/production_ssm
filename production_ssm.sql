@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-14 20:58:04
+Date: 2018-01-23 22:04:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -653,9 +653,9 @@ INSERT INTO `sys_permission` VALUES ('221', '物料消耗新增', 'permission', 
 INSERT INTO `sys_permission` VALUES ('222', '物料消耗修改', 'permission', null, 'materialConsume:edit', null, null, null, null);
 INSERT INTO `sys_permission` VALUES ('223', '物料消耗删除', 'permission', null, 'materialConsume:delete', null, null, null, null);
 INSERT INTO `sys_permission` VALUES ('230', '设备管理', 'menu', null, null, null, null, null, null);
-INSERT INTO `sys_permission` VALUES ('231', '设备新增', 'permission', null, 'device:add', null, null, null, null);
-INSERT INTO `sys_permission` VALUES ('232', '设备修改', 'permission', null, 'device:edit', null, null, null, null);
-INSERT INTO `sys_permission` VALUES ('233', '设备删除', 'permission', null, 'device:delete', null, null, null, null);
+INSERT INTO `sys_permission` VALUES ('231', '设备新增', 'permission', null, 'deviceList:add', null, null, null, null);
+INSERT INTO `sys_permission` VALUES ('232', '设备修改', 'permission', null, 'deviceList:edit', null, null, null, null);
+INSERT INTO `sys_permission` VALUES ('233', '设备删除', 'permission', null, 'deviceList:delete', null, null, null, null);
 INSERT INTO `sys_permission` VALUES ('240', '设备例检管理', 'menu', null, null, null, null, null, null);
 INSERT INTO `sys_permission` VALUES ('241', '设备例检新增', 'permission', null, 'deviceCheck:add', null, null, null, null);
 INSERT INTO `sys_permission` VALUES ('242', '设备例检修改', 'permission', null, 'deviceCheck:edit', null, null, null, null);

@@ -33,9 +33,9 @@ public interface ManufactureMapper {
 
     int insertSelective(Manufacture record);
 
-    List<Manufacture> selectByExample(ManufactureExample example);
+    List<ManufactureVO> selectByExample(ManufactureExample example);
 
-    Manufacture selectByPrimaryKey(String manufactureSn);
+    ManufactureVO selectByPrimaryKey(String manufactureSn);
 
     int updateByExampleSelective(@Param("record") Manufacture record, @Param("example") ManufactureExample example);
 

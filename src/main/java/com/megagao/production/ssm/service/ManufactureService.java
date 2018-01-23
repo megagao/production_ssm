@@ -5,14 +5,15 @@ import java.util.List;
 import com.megagao.production.ssm.domain.Manufacture;
 import com.megagao.production.ssm.domain.customize.CustomResult;
 import com.megagao.production.ssm.domain.customize.EUDataGridResult;
+import com.megagao.production.ssm.domain.vo.ManufactureVO;
 
 public interface ManufactureService {
 	
-	List<Manufacture> find() throws Exception;
+	List<ManufactureVO> find() throws Exception;
 	
 	EUDataGridResult getList(int page, int rows) throws Exception;
-	
-	Manufacture get(String string) throws Exception;
+
+	ManufactureVO get(String string) throws Exception;
 	
 	CustomResult delete(String string) throws Exception;
 

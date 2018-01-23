@@ -33,9 +33,9 @@ public interface WorkMapper {
 
     int insertSelective(Work record);
 
-    List<Work> selectByExample(WorkExample example);
+    List<WorkVO> selectByExample(WorkExample example);
 
-    Work selectByPrimaryKey(String workId);
+    WorkVO selectByPrimaryKey(String workId);
 
     int updateByExampleSelective(@Param("record") Work record, @Param("example") WorkExample example);
 

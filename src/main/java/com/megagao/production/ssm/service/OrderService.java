@@ -9,11 +9,11 @@ import com.megagao.production.ssm.domain.customize.EUDataGridResult;
 
 public interface OrderService {
 	
-	List<COrder> find() throws Exception;
+	List<COrderVO> find() throws Exception;
 	
 	EUDataGridResult getList(int page, int rows, COrderVO cOrder) throws Exception;
-	
-	COrder get(String string) throws Exception;
+
+	COrderVO get(String string) throws Exception;
 	
 	CustomResult delete(String string) throws Exception;
 

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.megagao.production.ssm.domain.customize.CustomResult;
 import com.megagao.production.ssm.domain.customize.EUDataGridResult;
 import com.megagao.production.ssm.domain.Manufacture;
+import com.megagao.production.ssm.domain.vo.ManufactureVO;
 import com.megagao.production.ssm.service.ManufactureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,8 @@ public class ManufactureController {
 	
 	@RequestMapping("/get/{manufactureId}")
 	@ResponseBody
-	public Manufacture getItemById(@PathVariable String manufactureId) throws Exception{
-		Manufacture manufacture = manufactureService.get(manufactureId);
+	public ManufactureVO getItemById(@PathVariable String manufactureId) throws Exception{
+		ManufactureVO manufacture = manufactureService.get(manufactureId);
 		return manufacture;
 	}
 	
@@ -38,7 +39,7 @@ public class ManufactureController {
 	
 	@RequestMapping("/get_data")
 	@ResponseBody
-	public List<Manufacture> getData() throws Exception{
+	public List<ManufactureVO> getData() throws Exception{
 		return manufactureService.find();
 	}
 	

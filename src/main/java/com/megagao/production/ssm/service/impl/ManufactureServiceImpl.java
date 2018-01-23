@@ -37,8 +37,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public Manufacture get(String id) throws Exception{
-		
+	public ManufactureVO get(String id) throws Exception{
 		return manufactureMapper.selectByPrimaryKey(id);
 	}
 
@@ -93,7 +92,7 @@ public class ManufactureServiceImpl implements ManufactureService{
 	}
 
 	@Override
-	public List<Manufacture> find() throws Exception{
+	public List<ManufactureVO> find() throws Exception{
 		ManufactureExample example = new ManufactureExample();
 		return manufactureMapper.selectByExample(example);
 	}
