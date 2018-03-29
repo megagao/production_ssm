@@ -1,6 +1,6 @@
 # 欢迎报bug或pull request ~
 
-若图片不能正常显示，请点击博客地址：[制造装备物联及生产管理系统](http://www.realfond.cn/2016/12/27/%E5%88%B6%E9%80%A0%E8%A3%85%E5%A4%87%E7%89%A9%E8%81%94%E5%8F%8A%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/)
+若图片不能正常显示，请点击博客地址：[制造装备物联及生产管理系统](http://www.realfond.cn/2016/12/27/%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86ERP%E7%B3%BB%E7%BB%9F/)
 
 # production_ssm
 
