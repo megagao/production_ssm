@@ -188,7 +188,7 @@
 	   <artifactId>hibernate-validator</artifactId>
 	   <version>4.3.0.Final</version>
 	</dependency>
-	<!-- 其他 -->
+	<!-- 其他 -->	
   	<dependency>
 	    <groupId>org.aspectj</groupId>
 	    <artifactId>aspectjweaver</artifactId>
@@ -207,7 +207,7 @@
   </dependencies>
 
   <build>
-  	<finalName>${project.artifactId}</finalName>
+	<finalName>${project.artifactId}</finalName>
 	<!-- idea不会编译src的java目录的xml文件,将IDEA maven项目中src源代码下的xml等资源文件编译进classes文件夹 -->
 	<resources>
 	  <resource>
@@ -218,7 +218,7 @@
 		  </includes>
 	  </resource>
 	  <resource>
-		  <directory>src/main/resource</directory>
+		  <directory>src/main/resources</directory>
 		  <includes>
 			  <include>**/*.properties</include>
 			  <include>**/*.xml</include>
